@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Termin — BaHaar’s Styling Studio</title>
+<meta name="description" content="Termin im Friseursalon BaHaar’s Styling Studio in München-Giesing: online buchen, anrufen unter 089 692 36 44 oder eine Nachricht schreiben.">
+<meta name="theme-color" content="#0d2b31">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" href="schrift/Marcellus-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="schrift/Archivo.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="stil.css">
+</head>
+
+<body>
+<a class="sprung" href="#inhalt">Zum Inhalt springen</a>
+
+<header class="kopfzeile">
+  <a class="marke" href="index.html">BaHaar’s<span class="zusatz">styling studio</span></a>
+  <button class="menuknopf" type="button" aria-expanded="false" aria-controls="wegweiser" aria-label="Menü öffnen"><span></span></button>
+  <nav class="wegweiser" id="wegweiser" aria-label="Hauptmenü">
+    <ul>
+      <li><a href="index.html">Start</a></li>
+      <li><a href="leistungen.html">Leistungen &amp; Preise</a></li>
+      <li><a href="brautstyling.html">Brautstyling</a></li>
+      <li><a href="salon.html">Der Salon</a></li>
+      <li><a href="termin.html" aria-current="page">Termin</a></li>
+    </ul>
+    <a class="ruf" href="tel:+49896923644">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M6.5 3h3l1.5 4-2 1.5a12 12 0 0 0 6.5 6.5L17 13l4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 3.5 5.2 2 2 0 0 1 5.5 3z"/></svg>
+      089 692 36 44
+    </a>
+  </nav>
+</header>
+
+<main id="inhalt">
+
+<section class="flaeche abschnitt-eng" aria-labelledby="haupttitel">
+  <div class="bild" aria-hidden="true">
+    <picture>
+      <source media="(max-width: 48rem)" srcset="bilder/flaeche-termin-hoch.webp">
+      <img src="bilder/flaeche-termin.webp" alt="" width="768" height="640" fetchpriority="high" decoding="async">
+    </picture>
+  </div>
+  <div class="schleier" aria-hidden="true"></div>
+
+  <div class="bahn mitte">
+    <h1 class="titel" id="haupttitel">Drei Wege,<br>und alle führen hin.</h1>
+    <p class="vorspann" style="margin-top:var(--r3)">
+      Am schnellsten geht der Anruf. Wer lieber selbst im Kalender sucht,
+      nimmt die Online-Buchung.
+    </p>
+    <p class="oeffnungsstand" style="margin-top:var(--r3);font-size:1rem;color:var(--honig)"></p>
+  </div>
+</section>
+
+<!-- ═══ Die drei Wege ══════════════════════════════════════════════════ -->
+<section class="abschnitt-eng bahn">
+  <div class="mitte">
+    <div class="reihe auf">
+      <div class="blatt">
+        <h2 class="titel-klein" style="margin-bottom:var(--r2)">Anrufen</h2>
+        <p style="color:var(--tinte-leise);margin-bottom:var(--r3)">
+          Während der Öffnungszeiten geht jemand ran, der den Kalender vor
+          sich hat. Für Brautstyling und alles, was länger dauert, ist das
+          der richtige Weg.
+        </p>
+        <a class="knopf knopf-voll" href="tel:+49896923644">089 692 36 44</a>
+      </div>
+
+      <div class="blatt">
+        <h2 class="titel-klein" style="margin-bottom:var(--r2)">Online buchen</h2>
+        <p style="color:var(--tinte-leise);margin-bottom:var(--r3)">
+          Der Salon führt seinen Kalender bei Salonized. Dort sehen Sie freie
+          Zeiten und buchen selbst — auch nachts und sonntags.
+        </p>
+        <a class="knopf knopf-leer" href="#buchen">Zum Kalender</a>
+      </div>
+
+      <div class="blatt">
+        <h2 class="titel-klein" style="margin-bottom:var(--r2)">Schreiben</h2>
+        <p style="color:var(--tinte-leise);margin-bottom:var(--r3)">
+          Eine Nachricht mit Wunschtermin und Leistung. Antwort kommt, sobald
+          jemand am Telefon Zeit hat.
+        </p>
+        <a class="knopf knopf-leer" href="mailto:info@bahaarsstylingstudio.de?subject=Terminanfrage">Nachricht schreiben</a>
+      </div>
+    </div>
+
+    <p class="hinweis" style="margin-top:var(--r5)">
+      Sie wissen noch nicht, was Sie brauchen? Auf der
+      <a href="leistungen.html" style="color:var(--honig)">Preisliste</a>
+      können Sie sich Leistungen merken und daraus eine fertige Anfrage
+      bauen lassen.
+    </p>
+  </div>
+</section>
+
+<!-- ═══ Der Kalender ═══════════════════════════════════════════════════ -->
+<section class="abschnitt bahn" style="background:var(--feld)" id="buchen" aria-labelledby="buchen-titel">
+  <div class="mitte">
+    <div class="kopf auf">
+      <h2 class="titel" id="buchen-titel">Online buchen</h2>
+      <p class="lauf">
+        Der Kalender kommt von Salonized, einem Buchungsdienst für Salons.
+        Er kennt die Leistungen, ihre Dauer und wer wann Zeit hat.
+      </p>
+    </div>
+
+    <div class="buchung auf" data-quelle="https://bahaars-styling-studio.salonized.com/widget_bookings/new?widget_id=sNYusRnC1XwjUqnu97LzSfiz">
+      <div class="buchung-tor">
+        <h3 class="titel-klein">Buchungsfenster laden</h3>
+        <p>
+          Solange Sie hier nicht tippen, geht von dieser Seite kein Datum an
+          jemand anderen. Wir laden das Fenster deshalb nicht von selbst.
+        </p>
+        <p class="klein">
+          Beim Laden verbindet sich Ihr Gerät mit <strong>Salonized</strong>
+          und mit den Diensten, die Salonized darin einsetzt — unter anderem
+          Google Analytics, Google Tag Manager, Mixpanel, DoubleClick,
+          Intercom und Datadog. Dabei werden Ihre IP-Adresse und Angaben zu
+          Ihrem Browser übertragen. Wer das nicht möchte, ruft an:
+          <a href="tel:+49896923644" style="color:var(--honig)">089 692 36 44</a>.
+        </p>
+        <button class="knopf knopf-voll buchung-laden" type="button" style="margin-top:var(--r2)">
+          Buchungsfenster laden
+        </button>
+        <p class="klein" style="margin-top:var(--r1)">
+          Oder direkt
+          <a href="https://bahaars-styling-studio.salonized.com/widget_bookings/new?widget_id=sNYusRnC1XwjUqnu97LzSfiz" rel="noopener" style="color:var(--honig)">bei Salonized öffnen</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Vor dem Termin ═════════════════════════════════════════════════ -->
+<section class="abschnitt bahn" aria-labelledby="vorher-titel">
+  <div class="mitte">
+    <div class="kopf auf">
+      <h2 class="titel" id="vorher-titel">Vor dem Termin</h2>
+    </div>
+
+    <dl class="merkliste-lang auf">
+      <div>
+        <dt>Zeit einplanen</dt>
+        <dd>
+          Ein Schnitt mit Föhnen dauert etwa eine Stunde, Farbe mit Schnitt
+          zwei, eine Balayage drei. Die Dauer steht bei jeder Leistung auf
+          der <a href="leistungen.html">Preisliste</a>.
+        </dd>
+      </div>
+      <div>
+        <dt>Ein Foto hilft</dt>
+        <dd>
+          Bringen Sie mit, was Ihnen gefällt, und wenn möglich auch etwas, das
+          Ihnen nicht gefällt. Beides zusammen sagt mehr als jede Beschreibung.
+        </dd>
+      </div>
+      <div>
+        <dt>Absagen</dt>
+        <dd>
+          Wenn etwas dazwischenkommt: kurz anrufen. Ein Termin für eine Balayage
+          blockiert drei Stunden, die jemand anderes gebraucht hätte.
+        </dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
+</main>
+
+<footer class="fusszeile">
+  <div class="bahn mitte">
+    <div class="fusszeile-raster">
+      <div>
+        <p class="marke" style="display:block;margin-bottom:var(--r2)">BaHaar’s<span class="zusatz">styling studio</span></p>
+        <p style="color:var(--tinte-leise);max-width:24rem">
+          Friseursalon in München-Giesing. Inhaberin Fakhria Tokhi,
+          Friseurmeisterin.
+        </p>
+      </div>
+      <div>
+        <h3>Seiten</h3>
+        <ul>
+          <li><a href="index.html">Start</a></li>
+          <li><a href="leistungen.html">Leistungen &amp; Preise</a></li>
+          <li><a href="brautstyling.html">Brautstyling</a></li>
+          <li><a href="salon.html">Der Salon</a></li>
+          <li><a href="termin.html">Termin</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Öffnungszeiten</h3>
+        <ul class="zeiten">
+          <li data-tage="1"><span class="tag">Mo</span> <span class="zahl">10–16</span></li>
+          <li data-tage="2,3,4,5"><span class="tag">Di–Fr</span> <span class="zahl">09–19</span></li>
+          <li data-tage="6"><span class="tag">Sa</span> <span class="zahl">09–16</span></li>
+          <li data-tage="0" class="zu"><span class="tag">So</span> <span>zu</span></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Kontakt</h3>
+        <ul>
+          <li><a href="tel:+49896923644">089 692 36 44</a></li>
+          <li><a href="mailto:info@bahaarsstylingstudio.de">info@bahaarsstylingstudio.de</a></li>
+          <li>Perlacher Straße 2<br>81539 München</li>
+          <li><a href="https://www.instagram.com/bahaarsstylingstudio" rel="noopener">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fusszeile-schluss">
+      <span>© <span class="jahr">2026</span> BaHaar’s Styling Studio</span>
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutz</a>
+      <span class="rechts">Diese Seite lädt nichts von fremden Servern.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="seite.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="12" fill="#0d2b31"/>
+  <!-- Drei Blätter einer Farbkarte, an einer Niete aufgefächert -->
+  <g transform="translate(32 52)">
+    <g transform="rotate(-26)">
+      <rect x="-6" y="-40" width="12" height="40" rx="6" fill="#efe6d4"/>
+      <path d="M-6-40h12v15a6 6 0 0 1-12 0z" fill="#6a5039" transform="translate(0 0)"/>
+      <rect x="-6" y="-40" width="12" height="17" rx="6" fill="#6a5039"/>
+    </g>
+    <g transform="rotate(0)">
+      <rect x="-6" y="-44" width="12" height="44" rx="6" fill="#f6efe0"/>
+      <rect x="-6" y="-44" width="12" height="18" rx="6" fill="#c9975c"/>
+    </g>
+    <g transform="rotate(26)">
+      <rect x="-6" y="-40" width="12" height="40" rx="6" fill="#efe6d4"/>
+      <rect x="-6" y="-40" width="12" height="17" rx="6" fill="#e8c68f"/>
+    </g>
+    <circle cy="-3" r="4.5" fill="#e0b26f"/>
+  </g>
+</svg>

@@ -1,0 +1,1363 @@
+@charset "utf-8";
+
+/* ═══════════════════════════════════════════════════════════════════════
+   BaHaar's Styling Studio — Gestaltung
+
+   Alle Gestaltungswerte stehen in :root. Wer eine Farbe, einen Abstand oder
+   eine Kurve ändern will, ändert sie hier und nirgends sonst.
+
+   Woher die Farben kommen: sie sind aus den Fotos des Ladens gemessen, nicht
+   ausgedacht. werkzeug/farben-messen.mjs und werkzeug/bilder-bauen.mjs geben
+   die Werte aus, die hier stehen.
+
+     · Der Grund ist das Petrol der Moroccanoil-Regale, die im Salon jede
+       Wand belegen — gemessen oklch(61.3% .053 200.8), hier auf Tintendichte
+       gebracht.
+     · Die warme Achse ist Haar. Über alle Arbeitsfotos hinweg liegen die
+       Haartöne im engen Band oklch 53–78° — vom dunklen Ansatz zur hellen
+       Spitze dreht der Ton dabei messbar ins Gelbe (54° → 72°). Genau diesen
+       Weg gehen --bronze → --honig.
+     · Rosé (Farbton 6°, gemessen an der Wand im Brautfoto) ist die zweite
+       Farbe und tritt nur als Ornament auf. Nie als Textfarbe.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── Schrift ───────────────────────────────────────────────────────────
+   Liegt im Projekt, nicht bei Google. Ein deutscher Auftritt, der Schriften
+   von fremden Servern nachlädt, ist abmahnbar (LG München I, 3 O 17493/20).
+   Zugeschnitten auf die Zeichen, die diese Seite braucht: 105 KB gesamt.   */
+
+@font-face {
+  font-family: 'Marcellus';
+  src: url('schrift/Marcellus-Regular.woff2') format('woff2');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Marcellus SC';
+  src: url('schrift/MarcellusSC-Regular.woff2') format('woff2');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Archivo';
+  src: url('schrift/Archivo.woff2') format('woff2');
+  font-weight: 100 900; font-stretch: 62% 125%; font-style: normal; font-display: swap;
+}
+
+:root {
+  /* ── Schriftgrößen unter der Grundgröße. Genau zwei, sonst entsteht eine
+       Treppe ohne Stufen. ────────────────────────────────────────────── */
+  --s-klein: 1rem;      /* Nebentext — abgestuft wird über die Farbe   */
+  --s-mini:  .8rem;      /* nur gesperrte Kapitälchen                    */
+
+  /* Schriftgrößen als Stufen, Werte siehe unten bei den Umbruchpunkten. */
+  --t-body:     1rem;
+  --t-vorspann: 1.15rem;
+  --t-mittel:   1.5rem;
+  --t-titel:    2.1rem;
+  --t-gross:    2.9rem;
+
+  /* ── Grund und Flächen ─────────────────────────────────────────────── */
+  --grund:        oklch(17.5% .028 205);
+  --grund-tief:   oklch(12.5% .022 207);
+  --feld:         oklch(22.5% .032 203);
+  --karte:        oklch(26.5% .030 202);
+  --karte-hoch:   oklch(31%   .030 201);
+
+  /* Der Grund mit Deckung — für Schleier über Fotos. Nicht per relativer
+     Farbe gerechnet, damit sie überall gleich ankommen.                   */
+  --grund-96:     oklch(17.5% .028 205 / .96);
+  --grund-88:     oklch(17.5% .028 205 / .88);
+  --grund-72:     oklch(17.5% .028 205 / .72);
+  --grund-52:     oklch(17.5% .028 205 / .52);
+  --grund-28:     oklch(17.5% .028 205 / .28);
+  --grund-00:     oklch(17.5% .028 205 / 0);
+
+  /* ── Tinte ─────────────────────────────────────────────────────────── */
+  --tinte:        oklch(94.5% .014 78);
+  --tinte-leise:  oklch(79%   .018 76);
+  --tinte-still:  oklch(66%   .018 74);
+
+  /* ── Die warme Achse: Haar, vom Ansatz zur Spitze ──────────────────── */
+  --ansatz:       oklch(34%   .045 55);
+  --bronze:       oklch(48%   .070 58);
+  --karamell:     oklch(64%   .095 64);
+  --honig:        oklch(80%   .115 74);
+  --honig-hell:   oklch(88%   .075 78);
+
+  /* ── Papier: das Kartonblatt der Farbkarte ─────────────────────────── */
+  --papier:       oklch(94%   .016 82);
+  --papier-rand:  oklch(86%   .022 80);
+  --papier-tinte: oklch(28%   .022 60);
+  --papier-leise: oklch(46%   .022 62);
+
+  /* ── Ornament. Zweite Farbe, niemals Text. ─────────────────────────── */
+  --rose:         oklch(80%   .052 8);
+
+  /* ── Linien ────────────────────────────────────────────────────────── */
+  --linie:        oklch(42% .030 200 / .55);
+  --linie-hell:   oklch(62% .040 198 / .34);
+  --linie-honig:  oklch(80% .115 74 / .30);
+
+  /* ── Abstände. Vierer-Raster, eine Reihe für die ganze Seite. ──────── */
+  --r1: .5rem;  --r2: 1rem;   --r3: 1.5rem; --r4: 2.5rem;
+  --r5: 4rem;   --r6: 6rem;   --r7: 9rem;   --r8: 13rem;
+
+  --rand: 1.25rem;                               /* Seitenrand, Stufe 1  */
+  --breite: 76rem;                               /* Satzbreite gesamt    */
+  --breite-text: 38rem;                          /* Lesespalte           */
+
+  /* ── Bewegung. Nur ease-out, kein Federn, kein Zurückschwingen. ────── */
+  --kurve:      cubic-bezier(.22, .61, .36, 1);
+  --kurve-weit: cubic-bezier(.16, .84, .44, 1);
+  --t1: .3s;  --t2: .5s;  --t3: .8s;
+
+  /* ── Kanten ────────────────────────────────────────────────────────── */
+  --bogen-klein: 3px;
+  --bogen:       6px;
+  --bogen-blatt: 30px 30px 3px 3px;              /* Farbkartenblatt      */
+
+  /* ── Muster: feine Strähnen. Sparsam, an zwei Stellen. ─────────────── */
+  --muster-straehne:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34'%3E%3Cpath d='M-4 38 42-8M-4 21 42-25M-4 55 42 9' stroke='%23ffffff' stroke-opacity='.05' stroke-width='1' fill='none'/%3E%3C/svg%3E");
+  /* Gestanztes Loch im Fächerblatt, wie es die Niete hinterlässt. */
+  --muster-raster:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26'%3E%3Ccircle cx='13' cy='13' r='1' fill='%23ffffff' fill-opacity='.07'/%3E%3C/svg%3E");
+}
+
+/* ═══ Grundlagen ═══════════════════════════════════════════════════════ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  /* Android-WebViews (auch der in WhatsApp) blasen Text sonst auf. */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 6.5rem;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+body {
+  margin: 0;
+  background: var(--grund);
+  color: var(--tinte);
+  font-family: 'Archivo', system-ui, sans-serif;
+  font-size: var(--t-body);
+  line-height: 1.62;
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img, picture, svg { max-width: 100%; height: auto; display: block; }
+[hidden] { display: none !important; }
+
+::selection { background: var(--honig); color: var(--grund-tief); }
+
+:focus-visible {
+  outline: 2px solid var(--honig);
+  outline-offset: 3px;
+  border-radius: var(--bogen-klein);
+}
+
+/* ═══ Typografie ═══════════════════════════════════════════════════════ */
+
+h1, h2, h3, h4 {
+  font-family: 'Marcellus', Georgia, serif;
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: -.008em;
+  margin: 0;
+  text-wrap: balance;
+}
+
+.titel-gross {
+  font-size: var(--t-gross);
+  line-height: .95;
+  letter-spacing: -.018em;
+}
+.titel {
+  font-size: var(--t-titel);
+  line-height: 1.02;
+}
+.titel-klein {
+  font-size: var(--t-mittel);
+  line-height: 1.14;
+}
+
+/* Die Stempelzeile: Marcellus Kapitälchen, weit gestellt. Sie sitzt über
+   jedem Abschnitt wie die geprägte Nummer auf einem Farbkartenblatt.       */
+/* impeccable-disable-next-line wide-tracking -- Kapitälchenzeile aus zwei Wörtern, kein Fließtext */
+.stempel {
+  font-family: 'Marcellus SC', Georgia, serif;
+  font-size: var(--s-mini);
+  letter-spacing: .26em;
+  text-transform: lowercase;
+  color: var(--honig);
+  margin: 0 0 var(--r3);
+  display: flex;
+  align-items: center;
+  gap: var(--r2);
+}
+.stempel::before {
+  content: '';
+  width: 2.25rem; height: 1px;
+  background: var(--honig);
+  opacity: .55;
+  flex: none;
+}
+
+p { margin: 0 0 var(--r2); text-wrap: pretty; }
+p:last-child { margin-bottom: 0; }
+
+.vorspann {
+  font-size: var(--t-vorspann);
+  line-height: 1.5;
+  color: var(--tinte-leise);
+  max-width: 34ch;
+}
+.lauf { max-width: var(--breite-text); color: var(--tinte-leise); }
+.lauf strong { color: var(--tinte); font-weight: 600; }
+
+a { color: inherit; }
+.lauf a, .fliess a {
+  color: var(--honig);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .22em;
+  text-decoration-color: var(--linie-honig);
+  transition: text-decoration-color var(--t1) var(--kurve);
+}
+@media (hover: hover) and (pointer: fine) {
+  .lauf a:hover, .fliess a:hover { text-decoration-color: var(--honig); }
+}
+
+/* Zahlen — Preise, Zeiten, Dauern. Immer gleich breit, immer ruhig. */
+.zahl {
+  font-family: 'Archivo', system-ui, sans-serif;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+  letter-spacing: .01em;
+}
+
+/* ═══ Aufbau ═══════════════════════════════════════════════════════════ */
+
+.bahn { padding-left: var(--rand); padding-right: var(--rand); }
+.mitte { max-width: var(--breite); margin-inline: auto; }
+.abschnitt { padding-top: 4.5rem; padding-bottom: 4.5rem; position: relative; }
+.abschnitt-eng { padding-top: 3.5rem; padding-bottom: 3.5rem; position: relative; }
+
+/* Mehr Luft über einer Überschrift als darunter — eine Regel für die
+   ganze Seite.                                                            */
+.kopf { margin-bottom: clamp(2.5rem, 5vw, 6rem); }
+.kopf > .titel, .kopf > .titel-klein { margin-bottom: var(--r3); }
+
+/* ═══ Vollflächige Fotohintergründe ════════════════════════════════════
+
+   Das Bild trägt den ganzen Abschnitt. Darüber liegt ein mehrstufiger
+   Schleier in der Grundfarbe der Seite: von oben und unten in den
+   Abschnittsrand hinein, seitlich dichter dort, wo Text steht.
+
+   Am schmalen Schirm greift der seitliche Verlauf genau in den Text. Dort
+   wird deshalb gleichmäßig überlagert statt seitlich.                     */
+
+.flaeche { position: relative; isolation: isolate; }
+
+.flaeche > .bild {
+  position: absolute; inset: 0;
+  z-index: -2;
+  overflow: hidden;
+}
+.flaeche > .bild img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  /* Die Ausschnitte sind eng ins Haar hinein geschnitten und dadurch
+     kleiner als die Fläche, die sie füllen. Die leichte Unschärfe macht
+     daraus Tiefe statt Matsch. */
+  filter: blur(1.5px) saturate(.92);
+  transform: scale(1.06);
+}
+.flaeche > .schleier {
+  position: absolute; inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(to bottom,
+      var(--grund) 0%, var(--grund-72) 12%, var(--grund-28) 34%,
+      var(--grund-28) 66%, var(--grund-72) 88%, var(--grund) 100%),
+    linear-gradient(to right,
+      var(--grund-96) 0%, var(--grund-88) 26%, var(--grund-52) 48%,
+      var(--grund-00) 78%);
+}
+.flaeche.rechts > .schleier {
+  background:
+    linear-gradient(to bottom,
+      var(--grund) 0%, var(--grund-72) 12%, var(--grund-28) 34%,
+      var(--grund-28) 66%, var(--grund-72) 88%, var(--grund) 100%),
+    linear-gradient(to left,
+      var(--grund-96) 0%, var(--grund-88) 26%, var(--grund-52) 48%,
+      var(--grund-00) 78%);
+}
+
+@media (max-width: 60rem) {
+  .flaeche > .schleier,
+  .flaeche.rechts > .schleier {
+    background:
+      linear-gradient(to bottom,
+        var(--grund) 0%, var(--grund-72) 12%, var(--grund-52) 34%,
+        var(--grund-52) 66%, var(--grund-72) 88%, var(--grund) 100%),
+      var(--grund-28);
+  }
+}
+
+/* ═══ Kopfzeile ════════════════════════════════════════════════════════ */
+
+.kopfzeile {
+  position: sticky; top: 0; z-index: 60;
+  display: flex; align-items: center; gap: var(--r3);
+  padding: var(--r2) var(--rand);
+  transition: background-color var(--t2) var(--kurve),
+              box-shadow var(--t2) var(--kurve);
+}
+.kopfzeile.gesetzt {
+  background: oklch(14% .024 206 / .90);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  backdrop-filter: blur(14px) saturate(1.2);
+  box-shadow: 0 1px 0 var(--linie);
+}
+
+.marke {
+  font-family: 'Marcellus', Georgia, serif;
+  font-size: 1.25rem;
+  letter-spacing: .01em;
+  text-decoration: none;
+  line-height: 1.1;
+  flex: none;
+}
+.marke .zusatz {
+  display: block;
+  font-family: 'Marcellus SC', Georgia, serif;
+  font-size: .72rem;
+  letter-spacing: .22em;
+  color: var(--honig);
+  margin-top: .12em;
+}
+
+.wegweiser { margin-left: auto; display: flex; align-items: center; gap: var(--r3); }
+.wegweiser ul {
+  display: flex; gap: var(--r3);
+  list-style: none; margin: 0; padding: 0;
+}
+.wegweiser a {
+  text-decoration: none;
+  font-size: var(--s-klein);
+  letter-spacing: .04em;
+  color: var(--tinte-leise);
+  padding: .35rem 0;
+  position: relative;
+  transition: color var(--t1) var(--kurve);
+}
+.wegweiser a::after {
+  content: '';
+  position: absolute; left: 0; right: 0; bottom: 0;
+  height: 1px; background: var(--honig);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform var(--t1) var(--kurve);
+}
+.wegweiser a[aria-current='page'] { color: var(--tinte); }
+.wegweiser a[aria-current='page']::after { transform: scaleX(1); }
+@media (hover: hover) and (pointer: fine) {
+  .wegweiser a:hover { color: var(--tinte); }
+  .wegweiser a:hover::after { transform: scaleX(1); }
+}
+
+/* Die Telefonnummer steht auf jedem Bildschirm, auch dem ersten. */
+.ruf {
+  display: inline-flex; align-items: center; gap: .5rem;
+  text-decoration: none;
+  font-size: var(--s-klein); letter-spacing: .03em;
+  padding: .5rem .9rem;
+  border: 1px solid var(--linie-honig);
+  border-radius: 100px;
+  color: var(--honig);
+  white-space: nowrap;
+  transition: background-color var(--t1) var(--kurve),
+              border-color var(--t1) var(--kurve);
+}
+.ruf svg { width: 1em; height: 1em; flex: none; }
+@media (hover: hover) and (pointer: fine) {
+  .ruf:hover { background: oklch(80% .115 74 / .12); border-color: var(--honig); }
+}
+
+/* Schalter fürs Handymenü */
+.menuknopf {
+  display: none;
+  margin-left: auto;
+  width: 2.75rem; height: 2.75rem;
+  align-items: center; justify-content: center;
+  background: none; border: 1px solid var(--linie);
+  border-radius: 100px;
+  color: var(--tinte); cursor: pointer;
+  flex: none;
+}
+.menuknopf span {
+  display: block; width: 1.05rem; height: 1px;
+  background: currentColor; position: relative;
+  transition: transform var(--t1) var(--kurve), opacity var(--t1) var(--kurve);
+}
+.menuknopf span::before, .menuknopf span::after {
+  content: ''; position: absolute; left: 0;
+  width: 100%; height: 1px; background: currentColor;
+  transition: transform var(--t1) var(--kurve);
+}
+.menuknopf span::before { top: -5px; }
+.menuknopf span::after  { top:  5px; }
+.menuknopf[aria-expanded='true'] span { transform: rotate(45deg); }
+.menuknopf[aria-expanded='true'] span::before { transform: translateY(5px) rotate(-90deg); }
+.menuknopf[aria-expanded='true'] span::after  { opacity: 0; }
+
+@media (max-width: 58rem) {
+  .menuknopf { display: inline-flex; }
+  .wegweiser {
+    position: fixed; inset: 0 0 auto;
+    top: 0; padding: 5.5rem var(--rand) 2.5rem;
+    flex-direction: column; align-items: stretch; gap: var(--r3);
+    background: oklch(13% .024 206 / .98);
+    -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--linie);
+    transform: translateY(-100%);
+    transition: transform var(--t2) var(--kurve), visibility var(--t2);
+    visibility: hidden;
+  }
+  .wegweiser.offen { transform: translateY(0); visibility: visible; }
+  .wegweiser ul { flex-direction: column; gap: 0; }
+  .wegweiser li + li { border-top: 1px solid var(--linie); }
+  .wegweiser ul a {
+    display: block; padding: var(--r2) 0;
+    font-family: 'Marcellus', Georgia, serif; font-size: 1.35rem;
+  }
+  .wegweiser a::after { display: none; }
+  .ruf { justify-content: center; padding-block: .8rem; }
+}
+
+/* ═══ Knöpfe ═══════════════════════════════════════════════════════════ */
+
+/* impeccable-disable-next-line wide-tracking -- kurze Versalbeschriftung auf dem Knopf */
+.knopf {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: .6rem;
+  font-family: 'Marcellus SC', Georgia, serif;
+  font-size: 1rem; letter-spacing: .12em;
+  text-decoration: none; text-align: center;
+  padding: .95rem 1.6rem;
+  border-radius: 100px;
+  border: 1px solid transparent;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  transition: transform var(--t1) var(--kurve),
+              background-color var(--t1) var(--kurve),
+              border-color var(--t1) var(--kurve),
+              color var(--t1) var(--kurve);
+}
+.knopf-voll { background: var(--honig); color: oklch(20% .04 60); }
+.knopf-leer { border-color: var(--linie-hell); color: var(--tinte); }
+.knopf svg { width: 1.05em; height: 1.05em; flex: none; }
+@media (hover: hover) and (pointer: fine) {
+  .knopf-voll:hover { background: var(--honig-hell); transform: translateY(-2px); }
+  .knopf-leer:hover { border-color: var(--honig); color: var(--honig); transform: translateY(-2px); }
+}
+.knopf:active { transform: translateY(0); }
+
+.knopfreihe { display: flex; flex-wrap: wrap; gap: var(--r2); }
+
+/* ═══ Das Kartonblatt ══════════════════════════════════════════════════
+   Das durchgehende Bauteil der Seite. Papierweiß, feine Kante, oben ein
+   Farbfeld — genau wie ein Blatt aus der Farbkarte, die im Salon auf jedem
+   Beratungsgespräch liegt.                                                */
+
+.blatt {
+  background: var(--karte);
+  border: 1px solid var(--linie);
+  border-radius: var(--bogen);
+  padding: 1.5rem;
+  position: relative;
+}
+.blatt-papier {
+  background: var(--papier);
+  color: var(--papier-tinte);
+  border-color: var(--papier-rand);
+}
+.blatt-papier .stempel { color: var(--papier-leise); }
+.blatt-papier .stempel::before { background: var(--papier-leise); }
+.blatt-papier h2, .blatt-papier h3 { color: var(--papier-tinte); }
+
+/* ═══ Bewegung beim Auftauchen ═════════════════════════════════════════ */
+
+/* Sichtbar ist der Ausgangszustand. Erst wenn das Skript läuft, setzt es
+   .mitskript auf <html> und die Einblendung wird scharf geschaltet — sonst
+   bliebe bei abgeschaltetem JavaScript die halbe Seite unsichtbar. */
+.mitskript .auf {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity var(--t3) var(--kurve-weit),
+              transform var(--t3) var(--kurve-weit);
+}
+.mitskript .auf.da { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .mitskript .auf { opacity: 1; transform: none; transition: none; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+}
+
+/* ═══ Fußzeile ═════════════════════════════════════════════════════════ */
+
+.fusszeile {
+  background: var(--grund-tief);
+  background-image: var(--muster-straehne);
+  border-top: 1px solid var(--linie);
+  padding-top: var(--r6); padding-bottom: var(--r4);
+}
+.fusszeile-raster {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: var(--r5) var(--r4);
+}
+/* impeccable-disable-next-line wide-tracking -- kurze Kapitälchenüberschrift */
+.fusszeile h3 {
+  font-family: 'Marcellus SC', Georgia, serif;
+  font-size: var(--s-mini); letter-spacing: .24em;
+  color: var(--honig);
+  margin-bottom: var(--r2);
+}
+.fusszeile ul { list-style: none; margin: 0; padding: 0; }
+.fusszeile li { margin-bottom: .45rem; color: var(--tinte-leise); }
+.fusszeile a { color: var(--tinte-leise); text-decoration: none; transition: color var(--t1) var(--kurve); }
+@media (hover: hover) and (pointer: fine) { .fusszeile a:hover { color: var(--honig); } }
+.fusszeile-schluss {
+  margin-top: var(--r5); padding-top: var(--r3);
+  border-top: 1px solid var(--linie);
+  display: flex; flex-wrap: wrap; gap: var(--r2) var(--r3);
+  align-items: baseline;
+  font-size: var(--s-klein); color: var(--tinte-still);
+}
+.fusszeile-schluss .rechts { margin-left: auto; }
+
+/* Öffnungszeiten als Tabelle mit fester Spalte — wie die Zeile auf einer
+   Anzeigetafel: die Spalten wandern nie, nur ihr Inhalt.                   */
+.zeiten { list-style: none; margin: 0; padding: 0; }
+.zeiten li {
+  display: grid; grid-template-columns: 1fr auto;
+  gap: var(--r2);
+  padding: .38rem 0;
+  border-bottom: 1px solid var(--linie);
+  color: var(--tinte-leise);
+}
+.zeiten li:last-child { border-bottom: 0; }
+.zeiten .heute { color: var(--tinte); }
+.zeiten .heute .tag::after {
+  content: 'heute';
+  font-family: 'Marcellus SC', Georgia, serif;
+  font-size: .62em; letter-spacing: .18em;
+  color: var(--honig);
+  margin-left: .7em;
+}
+.zeiten .zu { color: var(--tinte-still); }
+
+/* ═══ Sprungmarke für die Tastatur ═════════════════════════════════════ */
+
+.sprung {
+  position: absolute; left: var(--rand); top: .5rem;
+  z-index: 100;
+  padding: .7rem 1.1rem;
+  background: var(--honig); color: var(--grund-tief);
+  border-radius: var(--bogen);
+  text-decoration: none;
+  transform: translateY(-200%);
+  transition: transform var(--t1) var(--kurve);
+}
+.sprung:focus { transform: translateY(0); }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   DER FARBFÄCHER
+
+   Die eine Idee, die es sonst nirgends gibt, und sie kommt aus diesem Laden:
+   die Farbkarte, die bei jeder Beratung aufgefächert auf dem Tisch liegt.
+
+   Jedes Blatt ist eine Leistung. Die Farbe an der Blattspitze ist aus dem
+   Foto genau dieser Arbeit gemessen — zwei Proben, einmal am Ansatz, einmal
+   in der Länge, Median über die Fläche (siehe werkzeug/bilder-bauen.mjs).
+   Es steht also keine erfundene Farbe auf der Seite.
+
+   Aufbau: alle Blätter sitzen auf derselben Niete am unteren Rand und sind
+   von dort aus aufgefächert. Gedreht wird ausschließlich über transform.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.faecher-seite { min-width: 0; }
+.faecher-feld {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 26rem);
+  gap: clamp(2.5rem, 5vw, 6rem);
+  align-items: center;
+}
+@media (max-width: 64rem) {
+  .faecher-feld { grid-template-columns: minmax(0, 1fr); gap: var(--r4); }
+}
+
+.faecher {
+  --spanne: 112;
+  position: relative;
+  height: clamp(19rem, 44vw, 30rem);
+  margin: 0 0 var(--r3);
+  padding: 0 0 1.5rem;                 /* Platz für die Niete darunter */
+  list-style: none;
+  touch-action: pan-y;
+}
+
+/* Die Niete. Ein Messingnagel, der acht Kartonblätter zusammenhält. */
+.faecher::after {
+  content: '';
+  position: absolute; left: 50%; bottom: 1.5rem;
+  width: 1.75rem; height: 1.75rem;
+  transform: translate(-50%, 50%);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 38% 32%, var(--honig-hell), var(--karamell) 52%, var(--ansatz) 100%);
+  box-shadow: 0 0 0 1px var(--linie-honig), 0 6px 18px oklch(10% .02 205 / .5);
+  z-index: 20;
+}
+
+.blatt-halter {
+  position: absolute;
+  left: 50%; bottom: 1.5rem;
+  width: clamp(2.6rem, 5.4vw, 4.2rem);
+  height: clamp(13.5rem, 34vw, 25rem);
+  transform-origin: 50% 100%;
+  transform: translateX(-50%) rotate(var(--winkel, 0deg));
+  transition: transform var(--t3) var(--kurve-weit);
+}
+
+.blatt-karte {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: stretch;
+  padding: 0 0 2.2rem;
+  border: 0; margin: 0;
+  cursor: pointer;
+  font: inherit; color: var(--papier-tinte);
+  background: var(--papier);
+  border-radius: 2.4rem 2.4rem .25rem .25rem;
+  box-shadow:
+    0 0 0 1px var(--papier-rand),
+    0 10px 26px oklch(9% .02 205 / .42);
+  transform-origin: 50% 100%;
+  transition: transform var(--t2) var(--kurve),
+              box-shadow var(--t2) var(--kurve),
+              filter var(--t2) var(--kurve);
+  overflow: hidden;
+  filter: brightness(.9) saturate(.94);
+}
+
+/* Das Farbfeld an der Spitze — der gemessene Verlauf dieser Arbeit. */
+.blatt-ton {
+  height: 38%;
+  flex: none;
+  background: linear-gradient(to bottom, var(--ton-oben), var(--ton-unten));
+  border-bottom: 1px solid oklch(20% .02 60 / .18);
+}
+
+/* Der Name läuft am Blatt entlang, wie die Bezeichnung auf einer echten
+   Farbkarte.                                                              */
+/* Acht Blätter an einer Niete überdecken einander — genau wie im echten
+   Fächer sieht man nur die Spitzen. Der Name steht deshalb nur auf dem
+   Blatt, das gerade gezogen ist; dort liegt er oben und ist ganz zu lesen.
+   Alle anderen tragen ihn im aria-label, für die Vorlesehilfe.            */
+/* impeccable-disable-next-line wide-tracking -- einzelnes Wort längs auf dem Farbkartenblatt */
+.blatt-name {
+  flex: 1;
+  display: flex; align-items: center; justify-content: center;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: 'Marcellus SC', Georgia, serif;
+  font-size: clamp(.7rem, .62rem + .34vw, .88rem);
+  letter-spacing: .13em;
+  padding-block: .8rem 1.6rem;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity var(--t2) var(--kurve);
+}
+.blatt-halter[data-gewaehlt='true'] .blatt-name { opacity: 1; }
+
+
+
+/* Das gezogene Blatt: es kommt nach vorn und wird hell. */
+.blatt-halter[data-gewaehlt='true'] .blatt-karte {
+  transform: scale(1.05);
+  filter: none;
+  box-shadow:
+    0 0 0 1px var(--honig),
+    0 18px 40px oklch(8% .02 205 / .6);
+}
+.blatt-halter[data-gewaehlt='true'] { z-index: 15; }
+
+@media (hover: hover) and (pointer: fine) {
+  .blatt-halter:not([data-gewaehlt='true']):hover { z-index: 14; }
+  .blatt-halter:not([data-gewaehlt='true']) .blatt-karte:hover {
+    transform: scale(1.03);
+    filter: brightness(1) saturate(1);
+  }
+  .blatt-halter:not([data-gewaehlt='true']) .blatt-karte:hover .blatt-name { opacity: .75; }
+}
+.blatt-halter:focus-within { z-index: 16; }
+.blatt-karte:focus-visible .blatt-name { opacity: 1; }
+
+/* Leise Bedienhilfe unter dem Fächer. */
+@media (max-width: 30rem) { .faecher { --spanne: 84; height: 17rem; } }
+@media (min-width: 30.0625rem) and (max-width: 48rem) { .faecher { --spanne: 96; } }
+
+/* impeccable-disable-next-line wide-tracking -- kurze Kapitälchenzeile */
+.faecher-hinweis {
+  text-align: center;
+  font-family: 'Marcellus SC', Georgia, serif;
+  font-size: .72rem; letter-spacing: .18em;
+  color: var(--tinte-still);
+  margin: 0;
+}
+.blatt-karte:focus-visible { outline-offset: -3px; }
+
+/* Beim Auftauchen fächert die Karte auf — das ist, was ein Fächer in echt
+   tut. Vorher liegen die Blätter geschlossen aufeinander.                  */
+.faecher:not(.offen) .blatt-halter { transform: translateX(-50%) rotate(0deg); }
+.faecher:not(.offen) .blatt-karte { box-shadow: 0 0 0 1px var(--papier-rand); }
+
+@media (prefers-reduced-motion: reduce) {
+  .faecher .blatt-halter { transform: translateX(-50%) rotate(var(--winkel, 0deg)); }
+}
+
+/* ── Die Tafel neben dem Fächer ────────────────────────────────────────
+   Zeigt die Arbeit, aus der die Farbe des gezogenen Blattes stammt, und
+   was sie kostet.                                                         */
+
+.faecher-tafel {
+  display: grid;
+  grid-template-columns: minmax(0, 8.5rem) minmax(0, 1fr);
+  gap: var(--r3);
+  align-items: start;
+}
+.faecher-tafel .arbeit {
+  border-radius: var(--bogen);
+  overflow: hidden;
+  border: 1px solid var(--linie);
+  aspect-ratio: 3 / 4;
+  background: var(--feld);
+}
+.faecher-tafel .arbeit img { width: 100%; height: 100%; object-fit: cover; }
+.faecher-tafel h3 { margin-bottom: .35rem; }
+.faecher-tafel .gemessen {
+  display: flex; align-items: center; gap: .55rem;
+  font-size: .78rem; letter-spacing: .04em;
+  color: var(--tinte-still);
+  margin-top: var(--r2);
+}
+.faecher-tafel .tonfleck {
+  width: 2.6rem; height: 1rem; border-radius: 2px;
+  border: 1px solid var(--linie-hell);
+  background: linear-gradient(to right, var(--ton-oben), var(--ton-unten));
+  flex: none;
+}
+.faecher-preis {
+  display: flex; flex-wrap: wrap; gap: .35rem var(--r2);
+  align-items: baseline;
+  margin-top: .6rem;
+}
+.faecher-preis .gross {
+  font-family: 'Marcellus', Georgia, serif;
+  font-size: 1.9rem; color: var(--honig); line-height: 1;
+}
+.faecher-preis .dauer { font-size: var(--s-klein); color: var(--tinte-still); }
+
+@media (max-width: 30rem) {
+  .faecher-tafel { grid-template-columns: minmax(0, 7rem) minmax(0, 1fr); }
+}
+
+/* ═══ Arbeiten ═════════════════════════════════════════════════════════
+   Fotos ohne Symbol und ohne Beschriftung auf der Kachel — die Bildunter-
+   schrift steht in der Lupe, nicht im Raster.                             */
+
+.arbeiten-raster {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(clamp(9rem, 22vw, 14rem), 1fr));
+  gap: clamp(.5rem, 1.4vw, 1rem);
+}
+.arbeit-kachel {
+  position: relative;
+  padding: 0; border: 0; margin: 0;
+  background: var(--feld);
+  border-radius: var(--bogen);
+  overflow: hidden;
+  cursor: pointer;
+  aspect-ratio: 3 / 4;
+  transition: transform var(--t2) var(--kurve);
+}
+.arbeit-kachel img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform var(--t3) var(--kurve-weit), filter var(--t2) var(--kurve);
+  filter: saturate(.94);
+}
+.arbeit-kachel.hoch { grid-row: span 2; aspect-ratio: 3 / 8; }
+@media (hover: hover) and (pointer: fine) {
+  .arbeit-kachel:hover img { transform: scale(1.05); filter: saturate(1.04); }
+}
+
+/* Lupe */
+/* Ein <dialog> ist geschlossen von sich aus display:none. Wer hier direkt
+   display:grid schreibt, hebt das auf: die Lupe liegt dann unsichtbar über
+   der ganzen Seite und schluckt jeden Klick darunter. Das Aussehen gehört
+   deshalb an [open], und der Übergang läuft über allow-discrete.          */
+.lupe {
+  position: fixed; inset: 0; z-index: 90;
+  display: none;
+  place-items: center;
+  padding: var(--rand);
+  background: oklch(10% .02 206 / .93);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  border: 0;
+  opacity: 0;
+  transition: opacity var(--t2) var(--kurve),
+              display var(--t2) var(--kurve) allow-discrete,
+              overlay var(--t2) var(--kurve) allow-discrete;
+}
+.lupe[open] { display: grid; opacity: 1; }
+@starting-style { .lupe[open] { opacity: 0; } }
+.lupe::backdrop { background: transparent; }
+.lupe img {
+  max-width: min(100%, 44rem);
+  max-height: 76vh;
+  width: auto; object-fit: contain;
+  border-radius: var(--bogen);
+  box-shadow: 0 30px 80px oklch(5% .02 205 / .7);
+}
+.lupe figcaption {
+  margin-top: var(--r2);
+  text-align: center;
+  color: var(--tinte-leise);
+  font-size: 1rem;
+}
+.lupe figure { margin: 0; display: grid; justify-items: center; }
+.lupe-zu svg, .lupe-blaettern svg { width: 1.15rem; height: 1.15rem; }
+.lupe-zu {
+  position: absolute; top: var(--r2); right: var(--r2);
+  width: 3rem; height: 3rem;
+  display: grid; place-items: center;
+  background: none; border: 1px solid var(--linie-hell);
+  border-radius: 100px; color: var(--tinte); cursor: pointer;
+}
+.lupe-blaettern {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 3rem; height: 3rem;
+  display: grid; place-items: center;
+  background: oklch(20% .03 204 / .7); border: 1px solid var(--linie-hell);
+  border-radius: 100px; color: var(--tinte); cursor: pointer;
+}
+.lupe-blaettern.vor { right: var(--r2); }
+.lupe-blaettern.zurueck { left: var(--r2); }
+@media (hover: hover) and (pointer: fine) {
+  .lupe-zu:hover, .lupe-blaettern:hover { border-color: var(--honig); color: var(--honig); }
+}
+
+/* ═══ Preistafel ═══════════════════════════════════════════════════════
+   Feste Spalten, gezogene Zeilen. Die Spalten wandern nie — nur ihr Inhalt
+   wechselt. Das macht den Vergleich zweier Längen zu einer Augenbewegung
+   statt zu einer Suche.                                                    */
+
+.tafel { margin: 0; }
+.tafel-kopf {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 6.5rem 6.5rem 6rem;
+  gap: var(--r2);
+  padding: 0 0 .7rem;
+  border-bottom: 1px solid var(--linie-honig);
+  font-family: 'Marcellus SC', Georgia, serif;
+  font-size: .74rem; letter-spacing: .2em;
+  color: var(--honig);
+}
+.tafel-kopf span:nth-child(n+2) { text-align: right; }
+.tafel-kopf span:last-child { text-align: right; }
+
+.tafel-zeile {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 6.5rem 6.5rem 6rem;
+  gap: var(--r2);
+  align-items: baseline;
+  padding: .95rem 0;
+  border-bottom: 1px solid var(--linie);
+}
+.tafel-zeile .was { display: flex; flex-direction: column; gap: .18rem; }
+.tafel-zeile .name { color: var(--tinte); }
+.tafel-zeile .dazu { font-size: var(--s-mini); color: var(--tinte-still); line-height: 1.4; }
+.tafel-zeile .preis { text-align: right; color: var(--honig); white-space: nowrap; }
+.tafel-zeile .preis.leer { color: var(--tinte-still); }
+.tafel-zeile .dauer { text-align: right; font-size: var(--s-klein); color: var(--tinte-still); white-space: nowrap; }
+
+/* Der Preis ist der Knopf. Wer 49 € für lang antippt, merkt sich genau
+   diese Länge — ein Merken-Symbol daneben könnte das nicht unterscheiden. */
+.merken {
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: var(--honig);
+  cursor: pointer;
+  padding: .22rem .5rem;
+  margin: -.22rem -.5rem;
+  position: relative;
+  transition: background-color var(--t1) var(--kurve),
+              border-color var(--t1) var(--kurve),
+              color var(--t1) var(--kurve);
+}
+.merken::after {
+  content: '+';
+  position: absolute; top: -.1rem; right: -.15rem;
+  font-size: .7em; line-height: 1;
+  color: var(--tinte-still);
+  opacity: 0;
+  transition: opacity var(--t1) var(--kurve);
+}
+.merken[aria-pressed='true'] {
+  background: var(--honig);
+  border-color: var(--honig);
+  color: oklch(22% .04 60);
+}
+.merken[aria-pressed='true']::after { content: '✓'; opacity: 1; color: var(--honig); }
+@media (hover: hover) and (pointer: fine) {
+  .merken:hover { border-color: var(--linie-honig); }
+  .merken:hover::after { opacity: 1; }
+  .merken[aria-pressed='true']:hover { border-color: var(--honig-hell); }
+}
+.tafel.einfach .tafel-zeile { grid-template-columns: minmax(0, 1fr) 7rem 6rem; }
+.merken.weit { grid-column: 2; }
+
+@media (max-width: 46rem) {
+  .tafel-kopf { display: none; }
+  .tafel-zeile {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: .3rem var(--r2);
+    padding: var(--r2) 0;
+  }
+  .tafel-zeile .was { grid-column: 1 / -1; }
+  .tafel-zeile .preis { text-align: left; }
+  .tafel-zeile .preis::before {
+    content: attr(data-was) ' ';
+    font-family: 'Marcellus SC', Georgia, serif;
+    font-size: .68rem; letter-spacing: .14em;
+    color: var(--tinte-still);
+  }
+  .tafel-zeile .preis + .preis { text-align: right; }
+  .tafel-zeile .dauer { grid-column: 1 / -1; text-align: left; }
+  .tafel-zeile .dauer:empty { display: none; }
+  .merken.weit { grid-column: auto; }
+}
+
+/* ═══ Navigator über den Leistungsgruppen ══════════════════════════════
+   Klebt oben, weicht beim Runterscrollen nach oben aus und kommt zurück,
+   sobald man wieder hochscrollt.                                          */
+
+.navigator-anker { height: 0; }         /* fester Bezugspunkt, siehe seite.js */
+.navigator {
+  position: sticky; top: 0; z-index: 40;
+  margin-inline: calc(var(--rand) * -1);
+  padding: .65rem var(--rand);
+  background: oklch(14% .024 206 / .92);
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--linie);
+  transform: translateY(0);
+  transition: transform var(--t2) var(--kurve);
+}
+.navigator.weg { transform: translateY(-108%); }
+.navigator ol {
+  display: flex; gap: .4rem;
+  list-style: none; margin: 0; padding: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  scroll-snap-type: x proximity;
+}
+.navigator ol::-webkit-scrollbar { display: none; }
+/* impeccable-disable-next-line wide-tracking -- kurze Versalmarke im Navigator */
+.navigator a {
+  display: block; white-space: nowrap;
+  scroll-snap-align: start;
+  text-decoration: none;
+  font-family: 'Marcellus SC', Georgia, serif;
+  font-size: var(--s-mini); letter-spacing: .12em;
+  color: var(--tinte-leise);
+  padding: .45rem .85rem;
+  border: 1px solid transparent;
+  border-radius: 100px;
+  transition: color var(--t1) var(--kurve),
+              border-color var(--t1) var(--kurve),
+              background-color var(--t1) var(--kurve);
+}
+.navigator a[aria-current='true'] {
+  color: var(--honig); border-color: var(--linie-honig);
+  background: oklch(80% .115 74 / .09);
+}
+@media (hover: hover) and (pointer: fine) {
+  .navigator a:hover { color: var(--tinte); border-color: var(--linie-hell); }
+}
+
+/* Bei offenem Merkzettel schiebt sich der Navigator nicht ins Bild. */
+.navigator { top: 0; }
+@media (min-width: 58.0625rem) { .navigator { top: 4.2rem; } }
+
+/* ═══ Merkzettel ═══════════════════════════════════════════════════════
+   Kein Warenkorb. Was hier zusammenkommt, wird zu einem fertigen Text, den
+   die Kundin selbst per WhatsApp schickt oder am Telefon vorliest.        */
+
+.merkzettel {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 55;
+  background: oklch(15% .026 205 / .97);
+  -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px);
+  border-top: 1px solid var(--linie-honig);
+  transform: translateY(101%);
+  transition: transform var(--t2) var(--kurve-weit);
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+.merkzettel.da { transform: translateY(0); }
+.merkzettel-riegel {
+  display: flex; align-items: center; gap: var(--r2);
+  padding: .85rem var(--rand);
+  max-width: var(--breite); margin-inline: auto;
+}
+.merkzettel-zahl {
+  font-family: 'Marcellus', Georgia, serif;
+  font-size: 1.6rem; color: var(--honig); line-height: 1;
+  flex: none;
+}
+.merkzettel-text { flex: 1; min-width: 0; }
+.merkzettel-text .kopf { margin: 0; font-size: 1rem; }
+.merkzettel-text .summe { font-size: var(--s-mini); color: var(--tinte-still); }
+.merkzettel-riegel .knopf { padding: .7rem 1.15rem; font-size: var(--s-klein); }
+
+.merkzettel-blatt {
+  max-width: var(--breite); margin-inline: auto;
+  padding: 0 var(--rand) var(--r3);
+  display: grid; gap: var(--r2);
+}
+.merkzettel-blatt[hidden] { display: none; }
+
+.merkzettel-klappe {
+  display: inline-flex; align-items: center; gap: .45rem;
+  background: none; border: 0; padding: 0;
+  color: var(--tinte-still); cursor: pointer;
+  font: inherit; font-size: var(--s-mini);
+  text-align: left;
+}
+.merkzettel-klappe svg {
+  width: .7rem; height: .7rem;
+  transition: transform var(--t1) var(--kurve);
+}
+.merkzettel-klappe[aria-expanded='true'] svg { transform: rotate(180deg); }
+@media (hover: hover) and (pointer: fine) {
+  .merkzettel-klappe:hover { color: var(--honig); }
+}
+.merkzettel ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .4rem; }
+.merkzettel li {
+  display: grid; grid-template-columns: 1fr auto auto;
+  gap: var(--r2); align-items: baseline;
+  padding: .5rem 0; border-bottom: 1px solid var(--linie);
+  font-size: var(--s-klein);
+}
+.merkzettel li .preis { color: var(--honig); }
+.merkzettel .weg {
+  display: grid; place-items: center;
+  background: none; border: 0; color: var(--tinte-still);
+  cursor: pointer; padding: .25rem;
+}
+.merkzettel .weg svg { width: .8rem; height: .8rem; }
+@media (hover: hover) and (pointer: fine) { .merkzettel .weg:hover { color: var(--honig); } }
+.merkzettel-hinweis { font-size: var(--s-mini); color: var(--tinte-still); }
+
+@media (max-width: 40rem) {
+  .merkzettel-riegel { flex-wrap: wrap; }
+  .merkzettel-riegel .knopf { flex: 1; }
+}
+
+/* ═══ Ablaufleiste — Brautstyling ══════════════════════════════════════
+   Der Weg von der ersten Beratung bis zum Hochzeitsmorgen, an einer Achse.  */
+
+.ablauf { list-style: none; margin: 0; padding: 0; position: relative; }
+.ablauf::before {
+  content: '';
+  position: absolute; left: 0; top: .55rem; bottom: 2.5rem;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--honig), var(--bronze) 55%, transparent);
+}
+.ablauf li { position: relative; padding: 0 0 var(--r5) var(--r4); }
+.ablauf li:last-child { padding-bottom: 0; }
+.ablauf li::before {
+  content: '';
+  position: absolute; left: 0; top: .5rem;
+  width: .5rem; height: .5rem;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: var(--honig);
+  box-shadow: 0 0 0 4px var(--grund);
+}
+/* impeccable-disable-next-line wide-tracking -- kurze Kapitälchen-Zeitmarke */
+.ablauf .wann {
+  font-family: 'Marcellus SC', Georgia, serif;
+  font-size: .76rem; letter-spacing: .18em;
+  color: var(--honig);
+  display: block; margin-bottom: .35rem;
+}
+.ablauf h3 { margin-bottom: .5rem; }
+.ablauf p { color: var(--tinte-leise); max-width: 44ch; }
+
+/* ═══ Kärtchenreihe ════════════════════════════════════════════════════ */
+
+.reihe {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  gap: var(--r3);
+}
+.reihe-zwei { grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); }
+
+/* ═══ Zahl-mit-Bildunterschrift ════════════════════════════════════════ */
+
+.beleg { display: grid; gap: .3rem; }
+.beleg .wert {
+  font-family: 'Marcellus', Georgia, serif;
+  font-size: clamp(2rem, 1.3rem + 2.4vw, 3.2rem);
+  line-height: 1; color: var(--honig);
+}
+.beleg .was { font-size: var(--s-klein); color: var(--tinte-still); line-height: 1.45; }
+
+/* ═══ Buchung: Zwei-Klick-Lösung ═══════════════════════════════════════
+   Das Salonized-Fenster lädt erst nach Zustimmung. Vorher fließt kein
+   Datum an einen fremden Server — Salonized zieht Google Analytics,
+   Tag Manager, Mixpanel, DoubleClick, Intercom und Datadog mit.           */
+
+.buchung {
+  border: 1px solid var(--linie);
+  border-radius: var(--bogen);
+  background: var(--feld);
+  overflow: hidden;
+  min-height: 20rem;
+  display: grid;
+}
+.buchung-tor {
+  display: grid; place-content: center; justify-items: center;
+  gap: var(--r2); text-align: center;
+  padding: 2.5rem 1.5rem;
+}
+.buchung-tor p { max-width: 42ch; color: var(--tinte-leise); }
+.buchung-tor .klein { font-size: var(--s-mini); color: var(--tinte-still); max-width: 48ch; }
+.buchung iframe { width: 100%; height: 100%; min-height: 34rem; border: 0; background: #fff; }
+
+/* ═══ Hinweiszeile ═════════════════════════════════════════════════════ */
+
+.hinweis {
+  border-left: 1px solid var(--linie-honig);
+  padding: .2rem 0 .2rem var(--r2);
+  color: var(--tinte-still);
+  font-size: var(--s-klein);
+  max-width: 52ch;
+}
+
+/* ═══ Rechtstexte ══════════════════════════════════════════════════════ */
+
+.fliess { max-width: 44rem; }
+.fliess h2 { font-size: var(--t-mittel); margin: var(--r5) 0 var(--r2); }
+.fliess h3 { font-size: 1.3rem; margin: var(--r3) 0 .5rem; color: var(--tinte); }
+.fliess h2:first-child { margin-top: 0; }
+.fliess p, .fliess li { color: var(--tinte-leise); }
+.fliess ul { padding-left: 1.1rem; margin: 0 0 var(--r2); }
+.fliess li { margin-bottom: .35rem; }
+.fliess dl { display: grid; grid-template-columns: auto 1fr; gap: .4rem var(--r3); margin: 0 0 var(--r2); }
+.fliess dt { color: var(--tinte-still); }
+.fliess dd { margin: 0; color: var(--tinte-leise); }
+
+/* ── Zwei Hilfsklassen für kleine Schrift. Wer eine dritte Größe braucht,
+      braucht in Wahrheit eine andere Stelle im Layout. ─────────────────── */
+.klein { font-size: var(--s-klein); }
+.mini  { font-size: var(--s-mini); }
+.still { color: var(--tinte-still); }
+.leise { color: var(--tinte-leise); }
+
+/* ── Stufen statt fließender Werte ────────────────────────────────────────
+   Rand, Abschnittshöhe und Kartenpolsterung wachsen in drei Sprüngen mit.
+   Feste Werte, weil jeder Browser und jedes Prüfwerkzeug sie ausrechnen
+   kann — bei clamp() mit verschachtelten Variablen ist das nicht sicher. */
+
+@media (min-width: 40rem) {
+  :root {
+    --rand: 2.5rem;
+    --t-body: 1.0625rem; --t-vorspann: 1.3rem;
+    --t-mittel: 1.85rem; --t-titel: 2.8rem; --t-gross: 4.2rem;
+  }
+  .abschnitt     { padding-top: 6.5rem; padding-bottom: 6.5rem; }
+  .abschnitt-eng { padding-top: 4.5rem; padding-bottom: 4.5rem; }
+  .blatt         { padding: 2rem; }
+}
+@media (min-width: 64rem) {
+  :root {
+    --rand: 4.5rem;
+    --t-body: 1.125rem;  --t-vorspann: 1.4rem;
+    --t-mittel: 2rem;    --t-titel: 3.4rem; --t-gross: 5.2rem;
+  }
+  .abschnitt     { padding-top: 9rem; padding-bottom: 9rem; }
+  .abschnitt-eng { padding-top: 6rem; padding-bottom: 6rem; }
+  .blatt         { padding: 2.25rem; }
+  .buchung-tor   { padding: 4.5rem 2.5rem; }
+}
+@media (min-width: 88rem) {
+  :root { --t-mittel: 2.2rem; --t-titel: 4rem;   --t-gross: 6rem; --t-vorspann: 1.5rem; }
+  .abschnitt     { padding-top: 11rem; padding-bottom: 11rem; }
+  .abschnitt-eng { padding-top: 7rem; padding-bottom: 7rem; }
+}
+
+/* ── Die Zeile unter dem Titel im ersten Bildschirm ──────────────────────
+   Adresse und Öffnungsstand stehen unter der Überschrift, nicht darüber:
+   eine kleine gesperrte Zeile über einer großen Überschrift ist die
+   Vorlage, die jede zweite Seite benutzt, und sie sagt hier nichts, was
+   der Titel nicht schon sagt.                                            */
+
+.hero-marke {
+  display: flex; flex-wrap: wrap;
+  align-items: baseline; gap: .4rem 1.1rem;
+  margin-top: 1.5rem;
+  font-size: var(--s-klein);
+  /* Diese Zeile steht immer über einem Foto. Die leiseste Stufe kam dort
+     gemessen auf 3,98:1 und damit unter den nötigen 4,5:1. */
+  color: var(--tinte-leise);
+}
+.hero-marke .oeffnungsstand { color: var(--honig); }
+.hero-marke .oeffnungsstand:not(:empty)::before {
+  content: '';
+  display: inline-block; vertical-align: middle;
+  width: .4rem; height: .4rem; border-radius: 50%;
+  background: currentColor; margin-right: .5rem;
+  opacity: .8;
+}
+.hero-marke .oeffnungsstand[data-offen='false'] { color: var(--tinte-still); }
+
+/* ── Text über Fotoflächen ───────────────────────────────────────────────
+   Vor einem Foto trägt die leiseste Stufe nicht mehr. Gemessen (siehe
+   werkzeug/kontrast-messen.mjs) lag sie über dem Brautbild bei 3,66:1 statt
+   der nötigen 4,5:1. Innerhalb von .flaeche rückt sie deshalb eine Stufe
+   hoch — überall sonst bleibt sie, wie sie ist.                            */
+
+.flaeche .dauer,
+.flaeche .oeffnungsstand[data-offen='false'],
+.flaeche .still { color: var(--tinte-leise); }
+
+/* ── Bildstreifen ────────────────────────────────────────────────────────
+   Fotos in einer Reihe laufen auf gleiche Breite und gleiches Format.
+   Die Vorlagen sind unterschiedlich groß; ohne diese Regel steht am Ende
+   der Reihe eine ausgefranste Kante.                                      */
+
+.bildstreifen img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--bogen);
+  border: 1px solid var(--linie);
+}
+/* Ein großes Bild oben, zwei kleinere darunter. Das ist nicht nur hübscher
+   als drei gleich große: die kleinste Vorlage hat nur 240 px Breite und
+   würde in voller Spaltenbreite sichtbar weich. */
+.bildstapel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.bildstapel figure { margin: 0; }
+.bildstapel figure:first-of-type { grid-column: 1 / -1; }
+.bildstapel figcaption { grid-column: 1 / -1; }
+.bildstapel img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: var(--bogen);
+  border: 1px solid var(--linie);
+}
+
+/* Leistungsgruppen ohne Dauerspalte brauchen auch keine leere Spalte. */
+.tafel.ohne-dauer .tafel-zeile { grid-template-columns: minmax(0, 1fr) auto; }
+
+/* Die Folgenummer an der Gruppenüberschrift. Die Reihenfolge ist auf der
+   Preisliste eine Aussage: gegliedert wird nach dem, was auf dem Stuhl
+   zuerst passiert, nicht nach dem Alphabet.                               */
+.folge {
+  color: var(--honig);
+  font-size: .62em;
+  letter-spacing: .04em;
+  margin-right: .3em;
+}
+
+/* ── Flächen, die der Browser stellt ─────────────────────────────────────
+   Rollbalken, Textmarke und Auswahl kommen sonst in Systemfarben, die zu
+   keiner Gestaltung gehören.                                              */
+
+html {
+  scrollbar-color: oklch(42% .05 200) var(--grund-tief);
+  scrollbar-width: thin;
+  caret-color: var(--honig);
+  accent-color: var(--honig);
+}
+::-webkit-scrollbar { width: 11px; height: 11px; }
+::-webkit-scrollbar-track { background: var(--grund-tief); }
+::-webkit-scrollbar-thumb {
+  background: oklch(38% .045 200);
+  border-radius: 100px;
+  border: 3px solid var(--grund-tief);
+}
+::-webkit-scrollbar-thumb:hover { background: oklch(50% .06 200); }
+
+/* Das „noch offen"-Schild im Kosmetikkasten: ein Anhänger, keine
+   Auszeichnungszeile über einer Überschrift.                              */
+.schild {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-family: 'Marcellus SC', Georgia, serif;
+  font-size: var(--s-mini);
+  letter-spacing: .16em;
+  color: var(--honig);
+  border: 1px solid var(--linie-honig);
+  border-radius: 100px;
+  padding: .25rem .8rem;
+  margin-bottom: 1rem;
+}
+.schild::before {
+  content: '';
+  width: .4rem; height: .4rem; border-radius: 50%;
+  background: currentColor;
+}
+
+/* Hinweise als gezogene Liste statt als dritte Kartenreihe. Karten sind der
+   bequeme Behälter; drei Sätze brauchen keinen Rahmen um sich herum.      */
+.merkliste-lang { margin: 0; display: grid; gap: 0; }
+.merkliste-lang > div {
+  display: grid;
+  grid-template-columns: minmax(0, 14rem) minmax(0, 1fr);
+  gap: 1rem 2.5rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--linie);
+}
+.merkliste-lang > div:last-child { border-bottom: 1px solid var(--linie); }
+.merkliste-lang dt {
+  font-family: 'Marcellus', Georgia, serif;
+  font-size: var(--t-mittel);
+  line-height: 1.14;
+  color: var(--tinte);
+}
+.merkliste-lang dd { margin: 0; color: var(--tinte-leise); max-width: 52ch; }
+@media (max-width: 44rem) {
+  .merkliste-lang > div { grid-template-columns: minmax(0, 1fr); gap: .5rem; }
+}
