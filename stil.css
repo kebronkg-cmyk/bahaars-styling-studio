@@ -458,6 +458,7 @@ a { color: inherit; }
 .knopf {
   display: inline-flex; align-items: center; justify-content: center;
   gap: .6rem;
+  max-width: 100%;
   font-family: 'Marcellus SC', Georgia, serif;
   font-size: 1rem; letter-spacing: .12em;
   text-decoration: none; text-align: center;
@@ -729,6 +730,7 @@ a { color: inherit; }
 
 /* Leise Bedienhilfe unter dem Fächer. */
 @media (max-width: 30rem) { .faecher { --spanne: 84; height: 17rem; } }
+
 @media (min-width: 30.0625rem) and (max-width: 48rem) { .faecher { --spanne: 96; } }
 
 /* impeccable-disable-next-line wide-tracking -- kurze Kapitälchenzeile */
@@ -789,6 +791,8 @@ a { color: inherit; }
 .faecher-preis .gross {
   font-family: 'Marcellus', Georgia, serif;
   font-size: 1.9rem; color: var(--honig); line-height: 1;
+  /* „390–600 €" darf nicht zwischen Zahl und Zeichen umbrechen. */
+  white-space: nowrap;
 }
 .faecher-preis .dauer { font-size: var(--s-klein); color: var(--tinte-still); }
 
@@ -1398,3 +1402,33 @@ html {
 @media (min-width: 48rem) { .tafel.gruppe { margin-bottom: 7rem; } }
 @media (min-width: 72rem) { .tafel.gruppe { margin-bottom: 9rem; } }
 .tafel.gruppe:last-of-type { margin-bottom: 0; }
+
+/* Karten in einer Reihe: die Handlung steht bei allen auf gleicher Höhe.
+   Ohne das rutscht der Knopf mit der Länge des Textes darüber.            */
+.reihe .blatt { display: flex; flex-direction: column; }
+.reihe .blatt > .knopf { margin-top: auto; align-self: flex-start; }
+
+/* Das Kleingedruckte im Buchungstor läuft linksbündig. Mittig gesetzt ist
+   ein langer Absatz mit lauter unterschiedlichen Zeilenanfängen schwer zu
+   lesen — bei einem Text, der aufzählt, wohin Daten fließen, ist das der
+   falsche Ort zum Sparen.                                                 */
+.buchung-tor .klein {
+  text-align: left;
+  max-width: 46ch;
+  line-height: 1.6;
+}
+
+/* ── Ganz schmale Schirme (bis 360 px) ───────────────────────────────────
+   Steht bewusst am Ende: die Regeln müssen die Umbruchpunkte darüber
+   überschreiben, und bei gleicher Spezifität entscheidet die Reihenfolge.
+   Der Fächer braucht Luft zum Rand, sonst schneidet das gezogene Blatt an
+   der Kante ab; die Tafel daneben hat für zwei Spalten keine Breite mehr. */
+
+@media (max-width: 22.5rem) {
+  .faecher { --spanne: 74; height: 15.5rem; }
+  .blatt-halter { width: 2.4rem; height: 12rem; }
+  .faecher-tafel { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+  .faecher-tafel .arbeit { max-width: 10rem; }
+  .faecher-preis .gross { font-size: 1.5rem; }
+  .reihe, .reihe-zwei { grid-template-columns: minmax(0, 1fr); }
+}
