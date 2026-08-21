@@ -9,6 +9,7 @@
    Setzt voraus, dass im Projektordner ein Server auf Port 8099 läuft:
    python3 -m http.server 8099 &                                        */
 import pw from '/opt/node22/lib/node_modules/playwright/index.js';
+import { readFileSync } from 'node:fs';
 const { chromium } = pw;
 
 const seite = process.argv[2] || 'index.html';
@@ -26,7 +27,11 @@ for (const [name, viewport] of [['desktop', { width: 1440, height: 1000 }],
 
   await page.goto(`http://localhost:8099/${seite}`, { waitUntil: 'networkidle' });
 
-  // Einmal durchscrollen, damit jede Einblendung ausgelöst wird.
+  /* Einmal durchscrollen, damit jede Einblendung ausgelöst wird.
+     Vorher das sanfte Scrollen abschalten: sonst startet jeder Schritt eine
+     Bewegung, die der nächste sofort unterbricht — der Durchlauf kommt dann
+     nie unten an, und auf dem Bild fehlt die halbe Seite. */
+  await page.addStyleTag({ content: 'html { scroll-behavior: auto !important; }' });
   await page.evaluate(async () => {
     const hoehe = document.documentElement.scrollHeight;
     for (let y = 0; y < hoehe; y += Math.round(innerHeight * 0.6)) {
@@ -43,8 +48,24 @@ for (const [name, viewport] of [['desktop', { width: 1440, height: 1000 }],
     await page.evaluate((a) => document.querySelector(a)?.scrollIntoView({ block: 'center' }), anker);
     await page.waitForTimeout(1400);
   }
-  await page.screenshot({ path: `${ziel}-${name}.png`, fullPage: !anker });
-  console.log(`${name}: ${fehler.length ? fehler.join(' | ') : 'keine Konsolenfehler'}`);
+  // Vor dem Auslösen prüfen, ob überhaupt etwas zu sehen ist. Ein Bild, auf
+  // dem ein eingeblendeter Abschnitt fehlt, sieht aus wie ein Gestaltungs-
+  // fehler und führt zu Reparaturen an heilen Stellen.
+  const versteckt = await page.evaluate(() =>
+    [...document.querySelectorAll('.auf')]
+      .filter((el) => Number(getComputedStyle(el).opacity) < 0.5)
+      .map((el) => el.id || el.className));
+  if (versteckt.length) fehler.push(`unsichtbar: ${versteckt.join(', ')}`);
+
+  const datei = `${ziel}-${name}.png`;
+  await page.screenshot({ path: datei, fullPage: !anker });
+
+  // Und nachsehen, ob die Datei die Maße hat, die sie haben soll.
+  const kopf = readFileSync(datei);
+  const [breit, hoch] = [kopf.readUInt32BE(16), kopf.readUInt32BE(20)];
+  if (breit !== viewport.width) fehler.push(`Breite ${breit} statt ${viewport.width}`);
+
+  console.log(`${name}: ${breit}×${hoch} — ${fehler.length ? fehler.join(' | ') : 'keine Beanstandung'}`);
   await page.close();
 }
 await browser.close();

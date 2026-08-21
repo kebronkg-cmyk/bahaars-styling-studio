@@ -147,7 +147,12 @@ body {
   line-height: 1.62;
   font-variant-numeric: tabular-nums;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  /* clip statt hidden. overflow-x:hidden macht aus <body> einen eigenen
+     Rollbereich: klebende Elemente kleben dann am falschen Kasten,
+     window.scrollY meldet nicht mehr die Seitenposition, und der Navigator
+     erfährt nie, dass gescrollt wurde. clip schneidet ab, ohne einen
+     Rollbereich aufzumachen. */
+  overflow-x: clip;
 }
 
 img, picture, svg { max-width: 100%; height: auto; display: block; }
@@ -170,6 +175,13 @@ h1, h2, h3, h4 {
   letter-spacing: -.008em;
   margin: 0;
   text-wrap: balance;
+  /* Deutsche Zusammensetzungen werden lang. „Datenschutzerklärung" ist in
+     Anzeigengröße breiter als ein 320-px-Schirm; die Silbentrennung des
+     Browsers greift, weil am <html> lang="de" steht.                      */
+  overflow-wrap: break-word;
+}
+@media (max-width: 30rem) {
+  h1, h2, h3 { hyphens: auto; }
 }
 
 .titel-gross {
@@ -972,7 +984,9 @@ a { color: inherit; }
 .navigator-anker { height: 0; }         /* fester Bezugspunkt, siehe seite.js */
 .navigator {
   position: sticky; top: 0; z-index: 40;
-  margin-inline: calc(var(--rand) * -1);
+  /* Kein negativer Außenabstand: der Navigator hängt direkt unter <main>
+     und hat damit keinen gepolsterten Kasten, gegen den er ihn aufheben
+     könnte. Er würde die Seite genau um einen Seitenrand breiter machen. */
   padding: .65rem var(--rand);
   background: oklch(14% .024 206 / .92);
   -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
@@ -1026,10 +1040,15 @@ a { color: inherit; }
   -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px);
   border-top: 1px solid var(--linie-honig);
   transform: translateY(101%);
-  transition: transform var(--t2) var(--kurve-weit);
+  /* Aus dem Bild geschoben ist nicht dasselbe wie weg: unsichtbar gestellt
+     lässt er sich weder antippen noch von einer Ganzseiten-Aufnahme
+     einfangen. */
+  visibility: hidden;
+  transition: transform var(--t2) var(--kurve-weit),
+              visibility var(--t2) var(--kurve-weit);
   padding-bottom: env(safe-area-inset-bottom, 0);
 }
-.merkzettel.da { transform: translateY(0); }
+.merkzettel.da { transform: translateY(0); visibility: visible; }
 .merkzettel-riegel {
   display: flex; align-items: center; gap: var(--r2);
   padding: .85rem var(--rand);
@@ -1173,7 +1192,12 @@ a { color: inherit; }
 
 /* ═══ Rechtstexte ══════════════════════════════════════════════════════ */
 
-.fliess { max-width: 44rem; }
+.fliess {
+  max-width: 44rem;
+  /* Adressen wie info@bahaarsstylingstudio.de sind ein einziges Wort und
+     schieben schmale Schirme sonst seitlich auf. */
+  overflow-wrap: anywhere;
+}
 .fliess h2 { font-size: var(--t-mittel); margin: var(--r5) 0 var(--r2); }
 .fliess h3 { font-size: 1.3rem; margin: var(--r3) 0 .5rem; color: var(--tinte); }
 .fliess h2:first-child { margin-top: 0; }
@@ -1181,6 +1205,12 @@ a { color: inherit; }
 .fliess ul { padding-left: 1.1rem; margin: 0 0 var(--r2); }
 .fliess li { margin-bottom: .35rem; }
 .fliess dl { display: grid; grid-template-columns: auto 1fr; gap: .4rem var(--r3); margin: 0 0 var(--r2); }
+@media (max-width: 30rem) {
+  /* „Umsatzsteuer-Identifikationsnummer" ist breiter als ein schmales
+     Telefon. Auf solchen Schirmen stehen Begriff und Angabe untereinander. */
+  .fliess dl { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .fliess dt { margin-top: .8rem; }
+}
 .fliess dt { color: var(--tinte-still); }
 .fliess dd { margin: 0; color: var(--tinte-leise); }
 
@@ -1361,3 +1391,10 @@ html {
 @media (max-width: 44rem) {
   .merkliste-lang > div { grid-template-columns: minmax(0, 1fr); gap: .5rem; }
 }
+
+/* Abstand zwischen den Leistungsgruppen. Am Handy kleiner: 9 rem zwischen
+   zwei Gruppen sind dort ein halber Bildschirm Leerlauf.                  */
+.tafel.gruppe { margin-bottom: 4rem; }
+@media (min-width: 48rem) { .tafel.gruppe { margin-bottom: 7rem; } }
+@media (min-width: 72rem) { .tafel.gruppe { margin-bottom: 9rem; } }
+.tafel.gruppe:last-of-type { margin-bottom: 0; }

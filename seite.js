@@ -50,22 +50,95 @@
     addEventListener('keydown', (e) => { if (e.key === 'Escape') zu(); });
   }
 
-  /* ── Auftauchen beim Scrollen ──────────────────────────────────────── */
+  /* ── Auftauchen beim Scrollen ──────────────────────────────────────────
+     Bewusst über die gemessene Position statt über einen Beobachter. Ein
+     IntersectionObserver hat einen Zustand, in dem er nie auslöst — etwa
+     wenn die Seite in voller Höhe auf einmal gerendert wird oder direkt an
+     einen Anker gesprungen wird. Dann bliebe der Abschnitt für immer auf
+     Deckkraft 0, und aus einer Einblendung würde verschwundener Inhalt.
+
+     Die Prüfung hier kennt diesen Zustand nicht: Sie läuft beim Start, bei
+     jedem Scrollen, bei jeder Größenänderung und ein letztes Mal nach dem
+     vollständigen Laden. Fertige Elemente fallen aus der Liste, am Ende
+     kostet sie nichts mehr.                                               */
 
   const auftauchen = $$('.auf');
   if (auftauchen.length) {
-    if (ruhig() || !('IntersectionObserver' in window)) {
+    if (ruhig()) {
       auftauchen.forEach((el) => el.classList.add('da'));
     } else {
-      const beobachter = new IntersectionObserver((eintraege) => {
-        eintraege.forEach((e) => {
-          if (!e.isIntersecting) return;
-          const verzug = Number(e.target.dataset.verzug || 0);
-          setTimeout(() => e.target.classList.add('da'), verzug);
-          beobachter.unobserve(e.target);
-        });
-      }, { rootMargin: '0px 0px -12% 0px', threshold: 0.08 });
-      auftauchen.forEach((el) => beobachter.observe(el));
+      let offen = auftauchen.slice();
+      let geplant = false;
+
+      const zeigen = (el, verzug) => {
+        if (verzug) setTimeout(() => el.classList.add('da'), verzug);
+        else el.classList.add('da');
+      };
+
+      const pruefen = () => {
+        geplant = false;
+        if (!offen.length) return;
+        const grenze = window.innerHeight * 0.92;
+        const bleibt = [];
+        for (const el of offen) {
+          const k = el.getBoundingClientRect();
+          // Alles, was im Bild ist oder schon darüber liegt, wird gezeigt.
+          if (k.top < grenze) zeigen(el, Number(el.dataset.verzug || 0));
+          else bleibt.push(el);
+        }
+        offen = bleibt;
+        if (!offen.length) abmelden();
+      };
+
+      const anstossen = () => {
+        if (geplant) return;
+        geplant = true;
+        requestAnimationFrame(pruefen);
+      };
+
+      let gescrollt = false;
+      const beiScroll = () => { gescrollt = true; anstossen(); };
+      const abmelden = () => {
+        removeEventListener('scroll', beiScroll);
+        removeEventListener('resize', anstossen);
+      };
+      const alleZeigen = () => {
+        offen.forEach((el) => el.classList.add('da'));
+        offen = [];
+        abmelden();
+      };
+
+      addEventListener('scroll', beiScroll, { passive: true });
+      addEventListener('resize', anstossen, { passive: true });
+      pruefen();
+      // Nach dem vollständigen Laden noch einmal: bis dahin haben Bilder und
+      // Schriften das Layout verschoben.
+      addEventListener('load', anstossen);
+      setTimeout(anstossen, 400);
+
+      /* Wer nach drei Sekunden noch nicht gescrollt hat, sieht ohnehin nur
+         den ersten Bildschirm — für den kostet es nichts, den Rest der Seite
+         einzublenden. Wer gar nicht scrollen kann, gewinnt dabei alles:
+         Ganzseiten-Aufnahmen, Druckansichten und Lesemodi holen sich die
+         Seite in einem Zug und würden sonst leere Abschnitte abbilden. */
+      setTimeout(() => { if (!gescrollt) alleZeigen(); }, 3000);
+      addEventListener('beforeprint', alleZeigen);
+    }
+  }
+
+  /* ── Sprung auf einen Anker beim Laden ────────────────────────────────
+     scroll-behavior: smooth gilt auch für den Sprung, den der Browser beim
+     Laden selbst macht. Der läuft dann als Bewegung ab, während Schriften
+     und Bilder das Layout noch verschieben — und bleibt auf halbem Weg
+     stehen. Beim Laden wird deshalb hart gesprungen, weich bleibt es nur
+     für das, was jemand selbst anklickt.                                 */
+
+  if (location.hash.length > 1) {
+    const ziel = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (ziel) {
+      const hin = () => ziel.scrollIntoView({ block: 'start', behavior: 'instant' });
+      hin();
+      addEventListener('load', () => requestAnimationFrame(hin), { once: true });
     }
   }
 
