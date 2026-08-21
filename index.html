@@ -224,7 +224,21 @@
 
       <div class="faecher-tafel-halter">
         <div class="faecher-tafel" style="--ton-oben:#9b7b54;--ton-unten:#6a5039">
-          <noscript><style>.faecher-tafel [role="tabpanel"]{display:block !important}.faecher .blatt-halter{position:static;transform:none;width:auto;height:auto}</style></noscript>
+          <noscript><style>
+            /* Ohne Skript lässt sich der Fächer nicht bedienen, und acht
+               ungefächerte Blätter übereinander sind kein Bild, sondern
+               Lärm. Dann steht hier, was zählt: die acht Leistungen mit
+               ihren Preisen, untereinander. */
+            .faecher, .faecher-hinweis { display: none; }
+            .faecher-feld, .faecher-tafel { grid-template-columns: minmax(0, 1fr); }
+            .faecher-tafel .arbeit { display: none; }
+            .faecher-tafel [role="tabpanel"] {
+              display: block !important;
+              padding-top: 1.25rem; margin-top: 1.25rem;
+              border-top: 1px solid var(--linie);
+            }
+            .faecher-tafel [role="tabpanel"]:first-of-type { border-top: 0; margin-top: 0; padding-top: 0; }
+          </style></noscript>
 
           <div class="arbeit" aria-hidden="true">
             <img id="tafelbild" src="bilder/arbeit-balayage.webp" alt="" width="820" height="1093" loading="lazy" decoding="async">

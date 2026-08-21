@@ -86,16 +86,22 @@ in `seite.js` (bei `merkzettel-mail`).
 
 ## Was ohne Rückfrage schon geprüft ist
 
+Nichts davon ist geschätzt. Die Werkzeuge dafür liegen in `werkzeug/` und
+lassen sich jederzeit erneut laufen lassen.
+
 | | |
 |---|---|
 | Konsolenfehler | keine, auf allen sieben Seiten |
 | Gestaltungsprüfer | `detect.mjs` meldet null Funde |
-| Kontrast über Fotos | gemessen, alle Stellen über 4,5:1 bzw. 3:1 |
-| Fremde Verbindungen | keine — gemessen, nicht behauptet |
-| Waagrechter Überlauf | keiner bei 390 px |
-| Tastaturbedienung | Farbfächer, Lupe, Menü, Merkzettel |
-| Ohne JavaScript | alle Inhalte sichtbar |
-| Schriften | selbst gehostet, 105 KB, nichts von Google |
+| Kontrast über Fotos | an den tatsächlichen Bildpunkten hinter jeder Textzeile gemessen, alle Stellen über 4,5:1 bzw. 3:1 |
+| Fremde Verbindungen | vor dem Klick auf das Buchungsfenster: null |
+| Waagrechter Überlauf | keiner bei 1440, 390 und 320 px |
+| Tastaturbedienung | Farbfächer (Pfeiltasten, Pos1, Ende), Lupe, Menü, Merkzettel |
+| Ohne JavaScript | jeder Abschnitt sichtbar |
+| Ganzseiten- und Druckansicht | nichts bleibt eingeblendet stehen |
+| Schriften | selbst gehostet, 105 KB zugeschnitten, nichts von Google |
+| Erste Ladung Startseite | rund 400 KB |
+| Gestaltungswerte | 45 Token in `:root`, kein Einzelwert im Stylesheet |
 
 ## Auslieferung
 
