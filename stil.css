@@ -1480,15 +1480,19 @@ html {
   left: 0; right: 0; bottom: 0;
   z-index: 2;
   display: flex;
-  height: 2.6rem;
+  height: 3.4rem;
   text-decoration: none;
-  border-top: 1px solid oklch(20% .02 60 / .3);
   /* Kein Übergang auf die Höhe: das ist eine Layout-Eigenschaft. Die
      Bewegung beim Überfahren macht transform auf den Bändern. */
 }
+/* Jedes Band taucht oben aus dem Grund auf und geht unten in die Farbe des
+   nächsten Abschnitts über. Ohne das steht dort eine harte Waagrechte quer
+   über die Seite, und das Foto endet an einer Kante statt in einem
+   Verlauf — genau das, was der Schleier überall sonst vermeidet.         */
 .tonleiter span {
   flex: 1;
-  background: linear-gradient(to bottom, var(--ton-oben), var(--ton-unten));
+  background: linear-gradient(to bottom,
+    var(--grund) 0%, var(--ton-oben) 26%, var(--ton-unten) 76%, var(--feld) 100%);
   transition: transform var(--t2) var(--kurve);
   transform-origin: bottom;
 }
@@ -1516,7 +1520,7 @@ html {
 }
 .tonleiter:focus-visible { outline-offset: -3px; }
 @media (max-width: 30rem) {
-  .tonleiter { height: 2.1rem; }
+  .tonleiter { height: 2.9rem; }
   .tonleiter::after { font-size: .62rem; letter-spacing: .18em; bottom: .4rem; }
 }
 
@@ -1530,3 +1534,42 @@ html {
 }
 .ablauf.braut li::before { background: var(--rose); }
 .blatt-halter[data-gewaehlt='true'] .blatt-karte.braut { box-shadow: 0 0 0 1px var(--rose), 0 18px 40px oklch(8% .02 205 / .6); }
+
+/* ── Der erste Bildschirm ────────────────────────────────────────────────
+   Die Tonleiter liegt am unteren Rand des Heros. Mit der normalen
+   Abschnittspolsterung war der Abschnitt auf 1440 px 887 px hoch, die
+   Leiste also erst bei y 916 — außerhalb jedes üblichen Fensters. Der
+   Hero bekommt deshalb eine eigene, knappere Höhe.                       */
+
+.flaeche.hero {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  /* Flex statt Grid: ein Grid-Element mit eigener Höchstbreite wird in
+     seiner Spur zentriert, und der Titel rückte damit aus der linken
+     Flucht, in der er auf allen anderen Seiten steht. */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.flaeche.hero > .bahn { width: 100%; }
+@media (min-width: 48rem) {
+  .flaeche.hero {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    min-height: min(42rem, 76svh);
+  }
+}
+
+/* ── Preistafel enger fassen ─────────────────────────────────────────────
+   Zwischen Leistungsname und Preis standen 495 px Leere. Die Tafel fasst
+   sich jetzt an der längsten Zeile statt an der Spaltenbreite.           */
+@media (min-width: 46rem) {
+  .tafel { max-width: 46rem; }
+}
+
+/* Die Etikettenspalte der Zeilenliste war zu schmal: „Online buchen" und
+   „Zeit einplanen" brachen zweizeilig um, während rechts daneben eine
+   leere Spalte stand.                                                    */
+@media (min-width: 44rem) {
+  .zeilenliste > div { grid-template-columns: minmax(0, 18rem) minmax(0, 1fr); }
+}
