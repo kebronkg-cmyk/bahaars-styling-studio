@@ -60,7 +60,6 @@
   --grund-tief:   oklch(12.5% .022 207);
   --feld:         oklch(22.5% .032 203);
   --karte:        oklch(26.5% .030 202);
-  --karte-hoch:   oklch(31%   .030 201);
 
   /* Der Grund mit Deckung — für Schleier über Fotos. Nicht per relativer
      Farbe gerechnet, damit sie überall gleich ankommen.                   */
@@ -87,7 +86,6 @@
   --papier:       oklch(94%   .016 82);
   --papier-rand:  oklch(86%   .022 80);
   --papier-tinte: oklch(28%   .022 60);
-  --papier-leise: oklch(46%   .022 62);
 
   /* ── Ornament. Zweite Farbe, niemals Text. ─────────────────────────── */
   --rose:         oklch(80%   .052 8);
@@ -122,9 +120,6 @@
   /* ── Muster: feine Strähnen. Sparsam, an zwei Stellen. ─────────────── */
   --muster-straehne:
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34'%3E%3Cpath d='M-4 38 42-8M-4 21 42-25M-4 55 42 9' stroke='%23ffffff' stroke-opacity='.05' stroke-width='1' fill='none'/%3E%3C/svg%3E");
-  /* Gestanztes Loch im Fächerblatt, wie es die Niete hinterlässt. */
-  --muster-raster:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26'%3E%3Ccircle cx='13' cy='13' r='1' fill='%23ffffff' fill-opacity='.07'/%3E%3C/svg%3E");
 }
 
 /* ═══ Grundlagen ═══════════════════════════════════════════════════════ */
@@ -202,27 +197,6 @@ h1, h2, h3, h4 {
   line-height: 1.14;
 }
 
-/* Die Stempelzeile: Marcellus Kapitälchen, weit gestellt. Sie sitzt über
-   jedem Abschnitt wie die geprägte Nummer auf einem Farbkartenblatt.       */
-/* impeccable-disable-next-line wide-tracking -- Kapitälchenzeile aus zwei Wörtern, kein Fließtext */
-.stempel {
-  font-family: 'Marcellus SC', Georgia, serif;
-  font-size: var(--s-mini);
-  letter-spacing: .26em;
-  text-transform: lowercase;
-  color: var(--honig);
-  margin: 0 0 var(--r3);
-  display: flex;
-  align-items: center;
-  gap: var(--r2);
-}
-.stempel::before {
-  content: '';
-  width: 2.25rem; height: 1px;
-  background: var(--honig);
-  opacity: .55;
-  flex: none;
-}
 
 p { margin: 0 0 var(--r2); text-wrap: pretty; }
 p:last-child { margin-bottom: 0; }
@@ -503,14 +477,6 @@ a { color: inherit; }
   padding: 1.5rem;
   position: relative;
 }
-.blatt-papier {
-  background: var(--papier);
-  color: var(--papier-tinte);
-  border-color: var(--papier-rand);
-}
-.blatt-papier .stempel { color: var(--papier-leise); }
-.blatt-papier .stempel::before { background: var(--papier-leise); }
-.blatt-papier h2, .blatt-papier h3 { color: var(--papier-tinte); }
 
 /* ═══ Bewegung beim Auftauchen ═════════════════════════════════════════ */
 
@@ -1176,17 +1142,9 @@ a { color: inherit; }
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
   gap: var(--r3);
 }
-.reihe-zwei { grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); }
 
 /* ═══ Zahl-mit-Bildunterschrift ════════════════════════════════════════ */
 
-.beleg { display: grid; gap: .3rem; }
-.beleg .wert {
-  font-family: 'Marcellus', Georgia, serif;
-  font-size: clamp(2rem, 1.3rem + 2.4vw, 3.2rem);
-  line-height: 1; color: var(--honig);
-}
-.beleg .was { font-size: var(--s-klein); color: var(--tinte-still); line-height: 1.45; }
 
 /* ═══ Buchung: Zwei-Klick-Lösung ═══════════════════════════════════════
    Das Salonized-Fenster lädt erst nach Zustimmung. Vorher fließt kein
@@ -1247,9 +1205,7 @@ a { color: inherit; }
 /* ── Zwei Hilfsklassen für kleine Schrift. Wer eine dritte Größe braucht,
       braucht in Wahrheit eine andere Stelle im Layout. ─────────────────── */
 .klein { font-size: var(--s-klein); }
-.mini  { font-size: var(--s-mini); }
 .still { color: var(--tinte-still); }
-.leise { color: var(--tinte-leise); }
 
 /* ── Stufen statt fließender Werte ────────────────────────────────────────
    Rand, Abschnittshöhe und Kartenpolsterung wachsen in drei Sprüngen mit.
@@ -1462,7 +1418,7 @@ html {
   .faecher-tafel { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
   .faecher-tafel .arbeit { max-width: 10rem; }
   .faecher-preis .gross { font-size: 1.5rem; }
-  .reihe, .reihe-zwei { grid-template-columns: minmax(0, 1fr); }
+  .reihe { grid-template-columns: minmax(0, 1fr); }
 }
 
 /* ── Die Tonleiter am Fuß des ersten Bildschirms ─────────────────────────
