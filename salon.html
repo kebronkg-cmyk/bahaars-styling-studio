@@ -61,12 +61,12 @@
 <!-- ═══ Bahar ══════════════════════════════════════════════════════════ -->
 <section class="abschnitt bahn" style="background:var(--feld)" aria-labelledby="bahar-titel">
   <div class="mitte">
-    <div class="kopf auf">
+    <div class="kopf">
       <h2 class="titel" id="bahar-titel">Bahar</h2>
     </div>
 
     <div class="faecher-feld" style="align-items:start">
-      <div class="auf">
+      <div>
         <p class="lauf">
           <strong>Fakhria Tokhi</strong> — im Laden nennen sie alle Bahar —
           ist Friseurmeisterin und arbeitet seit zwanzig Jahren in München.
@@ -85,14 +85,15 @@
           wird BaHaar’s.
         </p>
 
-        <div class="reihe" style="margin-top:var(--r5)">
-          <div class="beleg"><span class="wert zahl">20</span><span class="was">Jahre in München hinter dem Stuhl</span></div>
-          <div class="beleg"><span class="wert">Meisterin</span><span class="was">Handwerkskammer für München und Oberbayern</span></div>
-          <div class="beleg"><span class="wert">Fadentechnik</span><span class="was">Augenbrauen ohne Wachs, ohne Pinzette</span></div>
-        </div>
+        <p class="lauf">
+          Zwanzig Jahre hinter dem Stuhl in München, der Meisterbrief von der
+          Handwerkskammer für München und Oberbayern, und Augenbrauen in
+          Fadentechnik — ohne Wachs, ohne Pinzette, und nicht in jedem Salon
+          in Giesing zu bekommen.
+        </p>
       </div>
 
-      <div class="blatt auf" data-verzug="120">
+      <div class="blatt">
         <h3 class="titel-klein" style="margin-bottom:var(--r2)">Womit gearbeitet wird</h3>
         <p style="color:var(--tinte-leise);margin-bottom:var(--r2)">
           Was im Regal steht und tatsächlich benutzt wird:
@@ -131,7 +132,7 @@
 <!-- ═══ Der Laden ══════════════════════════════════════════════════════ -->
 <section class="abschnitt bahn" aria-labelledby="laden-titel">
   <div class="mitte">
-    <div class="kopf auf">
+    <div class="kopf">
       <h2 class="titel" id="laden-titel">So sieht es aus</h2>
       <p class="lauf">
         Ohne Beschönigung: ein heller, weiß gefliester Laden mit zwei
@@ -140,7 +141,7 @@
       </p>
     </div>
 
-    <div class="reihe bildstreifen auf">
+    <div class="reihe bildstreifen">
       <figure style="margin:0">
         <img src="bilder/salon-raum.webp" alt="Zwei Bedienplätze mit Spiegeln und schwarzen Friseurstühlen, helle Fliesen" width="733" height="547" loading="lazy" decoding="async">
         <figcaption style="margin-top:.6rem;font-size:var(--s-klein);color:var(--tinte-still)">Die Bedienplätze mit den beleuchteten Spiegeln.</figcaption>
@@ -161,13 +162,12 @@
 <section class="abschnitt bahn" style="background:var(--feld)" aria-labelledby="kosmetik-titel">
   <div class="mitte">
     <div style="max-width:44rem">
-      <p class="stempel auf">neu nebenan</p>
-      <h2 class="titel auf" id="kosmetik-titel" style="margin-bottom:var(--r3)">BaHaar’s Kosmetikstudio</h2>
-      <p class="lauf auf">
+      <h2 class="titel" id="kosmetik-titel" style="margin-bottom:var(--r3)">BaHaar’s Kosmetikstudio</h2>
+      <p class="lauf">
         Direkt neben dem Salon ist ein Kosmetikstudio dazugekommen:
         Gesichtsbehandlung, Waxing, Maniküre, Pediküre, Make-up und Wimpern.
       </p>
-      <div class="blatt auf" style="margin-top:var(--r4);border-color:var(--linie-honig)">
+      <div class="blatt" style="margin-top:var(--r4);border-color:var(--linie-honig)">
         <p class="schild">noch offen</p>
         <p style="color:var(--tinte-leise)">
           Für das Kosmetikstudio stehen noch keine Preise fest. Wir schreiben
@@ -186,51 +186,46 @@
 <!-- ═══ Herkommen ══════════════════════════════════════════════════════ -->
 <section class="abschnitt bahn" aria-labelledby="weg-titel">
   <div class="mitte">
-    <div class="kopf auf">
+    <div class="kopf">
       <h2 class="titel" id="weg-titel">Perlacher Straße 2</h2>
     </div>
 
-    <div class="reihe auf">
-      <div class="blatt">
-        <h3 class="titel-klein" style="margin-bottom:var(--r2)">Öffnungszeiten</h3>
-        <p class="oeffnungsstand" style="margin-bottom:var(--r2);font-size:var(--s-klein);color:var(--honig)"></p>
-        <ul class="zeiten">
-          <li data-tage="1"><span class="tag">Montag</span> <span class="zahl">10:00 – 16:00</span></li>
-          <li data-tage="2,3,4,5"><span class="tag">Dienstag bis Freitag</span> <span class="zahl">09:00 – 19:00</span></li>
-          <li data-tage="6"><span class="tag">Samstag</span> <span class="zahl">09:00 – 16:00</span></li>
-          <li data-tage="0" class="zu"><span class="tag">Sonntag</span> <span>geschlossen</span></li>
-        </ul>
+    <dl class="zeilenliste">
+      <div>
+        <dt>Öffnungszeiten</dt>
+        <dd>
+          <p class="oeffnungsstand" style="color:var(--honig);margin-bottom:.6rem"></p>
+          <ul class="zeiten" style="max-width:22rem">
+            <li data-tage="1"><span class="tag">Montag</span> <span class="zahl">10:00 – 16:00</span></li>
+            <li data-tage="2,3,4,5"><span class="tag">Dienstag bis Freitag</span> <span class="zahl">09:00 – 19:00</span></li>
+            <li data-tage="6"><span class="tag">Samstag</span> <span class="zahl">09:00 – 16:00</span></li>
+            <li data-tage="0" class="zu"><span class="tag">Sonntag</span> <span>geschlossen</span></li>
+          </ul>
+        </dd>
       </div>
-
-      <div class="blatt">
-        <h3 class="titel-klein" style="margin-bottom:var(--r2)">Anschrift</h3>
-        <p class="lauf" style="margin-bottom:var(--r2)">
-          BaHaar’s Styling Studio<br>
-          Perlacher Straße 2<br>
-          81539 München-Giesing
-        </p>
-        <p class="lauf">
-          <a href="https://www.openstreetmap.org/?mlat=48.1093&amp;mlon=11.5875#map=17/48.1093/11.5875" rel="noopener">Auf der Karte ansehen</a>
-        </p>
-        <p style="margin-top:var(--r2);font-size:var(--s-klein);color:var(--tinte-still)">
-          Die Karte öffnet sich in einem neuen Fenster bei OpenStreetMap.
-          Eingebettet ist sie nicht: Sonst gäbe diese Seite Daten an einen fremden
-          Server, ohne dass Sie gefragt wurden.
-        </p>
+      <div>
+        <dt>Anschrift</dt>
+        <dd>
+          <p>
+            BaHaar’s Styling Studio<br>
+            Perlacher Straße 2<br>
+            81539 München-Giesing
+          </p>
+          <p><a href="https://www.openstreetmap.org/?mlat=48.1093&amp;mlon=11.5875#map=17/48.1093/11.5875" rel="noopener" style="color:var(--honig)">Auf der Karte ansehen</a></p>
+        </dd>
       </div>
-
-      <div class="blatt">
-        <h3 class="titel-klein" style="margin-bottom:var(--r2)">Erreichen</h3>
-        <ul style="list-style:none;margin:0;padding:0;display:grid;gap:.7rem">
-          <li><a href="tel:+49896923644" style="color:var(--honig);text-decoration:none">089 692 36 44</a></li>
-          <li><a href="mailto:info@bahaarsstylingstudio.de" style="color:var(--honig);text-decoration:none">info@bahaarsstylingstudio.de</a></li>
-          <li><a href="https://www.instagram.com/bahaarsstylingstudio" rel="noopener" style="color:var(--honig);text-decoration:none">@bahaarsstylingstudio</a></li>
-        </ul>
-        <p style="margin-top:var(--r3)">
-          <a class="knopf knopf-voll" href="termin.html" style="padding:.75rem 1.3rem;font-size:var(--s-klein)">Termin buchen</a>
-        </p>
+      <div>
+        <dt>Erreichen</dt>
+        <dd>
+          <p>
+            <a href="tel:+49896923644" style="color:var(--honig);text-decoration:none">089 692 36 44</a><br>
+            <a href="mailto:info@bahaarsstylingstudio.de" style="color:var(--honig);text-decoration:none">info@bahaarsstylingstudio.de</a><br>
+            <a href="https://www.instagram.com/bahaarsstylingstudio" rel="noopener" style="color:var(--honig);text-decoration:none">@bahaarsstylingstudio</a>
+          </p>
+          <a class="knopf knopf-voll" href="termin.html">Termin buchen</a>
+        </dd>
       </div>
-    </div>
+    </dl>
   </div>
 </section>
 

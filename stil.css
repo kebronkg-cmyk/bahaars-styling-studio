@@ -110,10 +110,14 @@
   --kurve-weit: cubic-bezier(.16, .84, .44, 1);
   --t1: .3s;  --t2: .5s;  --t3: .8s;
 
-  /* ── Kanten ────────────────────────────────────────────────────────── */
+  /* ── Kanten ──────────────────────────────────────────────────────────
+     Das Farbkartenblatt ist oben rund und unten scharf. Diese eine Form
+     trägt die ganze Seite: Karten, Bilder, Knöpfe. Ein Knopf liegt dabei
+     auf der Seite — rund an der Spitze, scharf an der Niete.             */
   --bogen-klein: 3px;
   --bogen:       6px;
-  --bogen-blatt: 30px 30px 3px 3px;              /* Farbkartenblatt      */
+  --bogen-blatt:      1.35rem 1.35rem .25rem .25rem;   /* stehendes Blatt */
+  --bogen-blatt-quer: .25rem 100px 100px .25rem;       /* liegendes Blatt */
 
   /* ── Muster: feine Strähnen. Sparsam, an zwei Stellen. ─────────────── */
   --muster-straehne:
@@ -388,9 +392,9 @@ a { color: inherit; }
   display: inline-flex; align-items: center; gap: .5rem;
   text-decoration: none;
   font-size: var(--s-klein); letter-spacing: .03em;
-  padding: .5rem .9rem;
+  padding: .5rem .95rem;
   border: 1px solid var(--linie-honig);
-  border-radius: 100px;
+  border-radius: var(--bogen-blatt-quer);
   color: var(--honig);
   white-space: nowrap;
   transition: background-color var(--t1) var(--kurve),
@@ -462,8 +466,8 @@ a { color: inherit; }
   font-family: 'Marcellus SC', Georgia, serif;
   font-size: 1rem; letter-spacing: .12em;
   text-decoration: none; text-align: center;
-  padding: .95rem 1.6rem;
-  border-radius: 100px;
+  padding: .95rem 1.7rem;
+  border-radius: var(--bogen-blatt-quer);
   border: 1px solid transparent;
   background: none;
   color: inherit;
@@ -492,7 +496,7 @@ a { color: inherit; }
 .blatt {
   background: var(--karte);
   border: 1px solid var(--linie);
-  border-radius: var(--bogen);
+  border-radius: var(--bogen-blatt);
   padding: 1.5rem;
   position: relative;
 }
@@ -763,7 +767,7 @@ a { color: inherit; }
   align-items: start;
 }
 .faecher-tafel .arbeit {
-  border-radius: var(--bogen);
+  border-radius: var(--bogen-blatt);
   overflow: hidden;
   border: 1px solid var(--linie);
   aspect-ratio: 3 / 4;
@@ -804,16 +808,28 @@ a { color: inherit; }
    Fotos ohne Symbol und ohne Beschriftung auf der Kachel — die Bildunter-
    schrift steht in der Lupe, nicht im Raster.                             */
 
+/* Zehn gleich große Kacheln zeigen zehnmal dasselbe Gewicht. Hier tragen
+   zwei Bilder je zwei Felder — dort, wo die Arbeit am meisten hergibt. */
 .arbeiten-raster {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(clamp(9rem, 22vw, 14rem), 1fr));
-  gap: clamp(.5rem, 1.4vw, 1rem);
+  grid-template-columns: repeat(2, 1fr);
+  /* dense: die kleinen Kacheln füllen die Lücken, die die großen lassen.
+     Ohne das reißt das Raster genau dort auf, wo es dichter sein soll. */
+  grid-auto-flow: row dense;
+  gap: .5rem;
 }
+/* Vier Spalten, nicht sechs: zwei große Kacheln zu je vier Feldern und acht
+   kleine ergeben genau sechzehn — ein volles Viereck ohne Loch. Bei sechs
+   Spalten bleiben zwei Felder leer, und das sieht man. */
+@media (min-width: 40rem) { .arbeiten-raster { grid-template-columns: repeat(4, 1fr); gap: .75rem; } }
+@media (min-width: 64rem) { .arbeiten-raster { gap: 1rem; } }
+.arbeit-kachel.gross { grid-column: span 2; grid-row: span 2; aspect-ratio: 1 / 1; }
+@media (min-width: 40rem) { .arbeit-kachel.gross { aspect-ratio: 3 / 4; } }
 .arbeit-kachel {
   position: relative;
   padding: 0; border: 0; margin: 0;
   background: var(--feld);
-  border-radius: var(--bogen);
+  border-radius: var(--bogen-blatt);
   overflow: hidden;
   cursor: pointer;
   aspect-ratio: 3 / 4;
@@ -824,7 +840,7 @@ a { color: inherit; }
   transition: transform var(--t3) var(--kurve-weit), filter var(--t2) var(--kurve);
   filter: saturate(.94);
 }
-.arbeit-kachel.hoch { grid-row: span 2; aspect-ratio: 3 / 8; }
+
 @media (hover: hover) and (pointer: fine) {
   .arbeit-kachel:hover img { transform: scale(1.05); filter: saturate(1.04); }
 }
@@ -854,7 +870,7 @@ a { color: inherit; }
   max-width: min(100%, 44rem);
   max-height: 76vh;
   width: auto; object-fit: contain;
-  border-radius: var(--bogen);
+  border-radius: var(--bogen-blatt);
   box-shadow: 0 30px 80px oklch(5% .02 205 / .7);
 }
 .lupe figcaption {
@@ -890,10 +906,13 @@ a { color: inherit; }
    wechselt. Das macht den Vergleich zweier Längen zu einer Augenbewegung
    statt zu einer Suche.                                                    */
 
-.tafel { margin: 0; }
+/* Auf einem breiten Schirm lief die Zeile über 1220 px, während Name und
+   Preis zusammen 250 px brauchten — das Auge musste 700 px leere Fläche
+   überqueren, um vom Namen zum Preis zu kommen. */
+.tafel { margin: 0; max-width: 58rem; }
 .tafel-kopf {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 6.5rem 6.5rem 6rem;
+  grid-template-columns: minmax(0, 1fr) 6rem 6rem 5.5rem;
   gap: var(--r2);
   padding: 0 0 .7rem;
   border-bottom: 1px solid var(--linie-honig);
@@ -906,7 +925,7 @@ a { color: inherit; }
 
 .tafel-zeile {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 6.5rem 6.5rem 6rem;
+  grid-template-columns: minmax(0, 1fr) 6rem 6rem 5.5rem;
   gap: var(--r2);
   align-items: baseline;
   padding: .95rem 0;
@@ -957,7 +976,7 @@ a { color: inherit; }
   .merken:hover::after { opacity: 1; }
   .merken[aria-pressed='true']:hover { border-color: var(--honig-hell); }
 }
-.tafel.einfach .tafel-zeile { grid-template-columns: minmax(0, 1fr) 7rem 6rem; }
+.tafel.einfach .tafel-zeile { grid-template-columns: minmax(0, 1fr) 6.5rem 5.5rem; }
 .merken.weit { grid-column: 2; }
 
 @media (max-width: 46rem) {
@@ -1017,7 +1036,7 @@ a { color: inherit; }
   color: var(--tinte-leise);
   padding: .45rem .85rem;
   border: 1px solid transparent;
-  border-radius: 100px;
+  border-radius: .2rem .8rem .8rem .2rem;
   transition: color var(--t1) var(--kurve),
               border-color var(--t1) var(--kurve),
               background-color var(--t1) var(--kurve);
@@ -1169,7 +1188,7 @@ a { color: inherit; }
 
 .buchung {
   border: 1px solid var(--linie);
-  border-radius: var(--bogen);
+  border-radius: var(--bogen-blatt);
   background: var(--feld);
   overflow: hidden;
   min-height: 20rem;
@@ -1301,7 +1320,7 @@ a { color: inherit; }
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
-  border-radius: var(--bogen);
+  border-radius: var(--bogen-blatt);
   border: 1px solid var(--linie);
 }
 /* Ein großes Bild oben, zwei kleinere darunter. Das ist nicht nur hübscher
@@ -1319,7 +1338,7 @@ a { color: inherit; }
   width: 100%;
   aspect-ratio: 3 / 4;
   object-fit: cover;
-  border-radius: var(--bogen);
+  border-radius: var(--bogen-blatt);
   border: 1px solid var(--linie);
 }
 
@@ -1374,26 +1393,32 @@ html {
   background: currentColor;
 }
 
-/* Hinweise als gezogene Liste statt als dritte Kartenreihe. Karten sind der
-   bequeme Behälter; drei Sätze brauchen keinen Rahmen um sich herum.      */
-.merkliste-lang { margin: 0; display: grid; gap: 0; }
-.merkliste-lang > div {
+/* ── Zeilenliste ─────────────────────────────────────────────────────────
+   Der Ersatz für die Dreierreihe aus gleich großen Karten. Karten sind der
+   bequeme Behälter: Sie erzwingen gleiche Höhe bei ungleich langem Inhalt
+   und hinterlassen Totfläche. Eine gezogene Zeile hat keine Höhe zu
+   erzwingen und liest sich schneller.                                     */
+.zeilenliste { margin: 0; display: grid; gap: 0; }
+.zeilenliste > div {
   display: grid;
   grid-template-columns: minmax(0, 14rem) minmax(0, 1fr);
   gap: 1rem 2.5rem;
   padding: 1.5rem 0;
   border-top: 1px solid var(--linie);
 }
-.merkliste-lang > div:last-child { border-bottom: 1px solid var(--linie); }
-.merkliste-lang dt {
+.zeilenliste > div:last-child { border-bottom: 1px solid var(--linie); }
+.zeilenliste dt {
   font-family: 'Marcellus', Georgia, serif;
   font-size: var(--t-mittel);
   line-height: 1.14;
   color: var(--tinte);
 }
-.merkliste-lang dd { margin: 0; color: var(--tinte-leise); max-width: 52ch; }
+.zeilenliste dd { margin: 0; color: var(--tinte-leise); max-width: 52ch; }
+.zeilenliste dd > .knopf { margin-top: 1rem; }
+.zeilenliste dd p { margin-bottom: .6rem; }
+.zeilenliste .zeiten li { border-color: var(--linie-hell); }
 @media (max-width: 44rem) {
-  .merkliste-lang > div { grid-template-columns: minmax(0, 1fr); gap: .5rem; }
+  .zeilenliste > div { grid-template-columns: minmax(0, 1fr); gap: .5rem; }
 }
 
 /* Abstand zwischen den Leistungsgruppen. Am Handy kleiner: 9 rem zwischen
@@ -1432,3 +1457,69 @@ html {
   .faecher-preis .gross { font-size: 1.5rem; }
   .reihe, .reihe-zwei { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* ── Die Tonleiter am Fuß des ersten Bildschirms ─────────────────────────
+   Der Fächer steht auf dem zweiten Bildschirm. Ohne ein Zeichen davor ist
+   der erste genau der Hero, den der Richtungsvertrag verweigert: Vollbild,
+   Serife, Gold. Die Tonleiter ist der Fächer im geschlossenen Zustand —
+   acht Blätter von der Kante gesehen, in denselben acht gemessenen Tönen.
+
+   Sie liegt über die ganze Breite am unteren Rand, wie die Kante einer
+   Musterkarte, die unter dem Bild hervorschaut, und führt mit einem
+   Antippen zur Farbkarte.                                                 */
+
+.tonleiter {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  z-index: 2;
+  display: flex;
+  height: 2.6rem;
+  text-decoration: none;
+  border-top: 1px solid oklch(20% .02 60 / .3);
+  /* Kein Übergang auf die Höhe: das ist eine Layout-Eigenschaft. Die
+     Bewegung beim Überfahren macht transform auf den Bändern. */
+}
+.tonleiter span {
+  flex: 1;
+  background: linear-gradient(to bottom, var(--ton-oben), var(--ton-unten));
+  transition: transform var(--t2) var(--kurve);
+  transform-origin: bottom;
+}
+.tonleiter span + span { box-shadow: inset 1px 0 0 oklch(20% .02 60 / .28); }
+/* Die Beschriftung sitzt auf einem gedruckten Schildchen. Ohne das läge sie
+   auf dem Ton, der gerade in der Mitte steht — und der ist mal hell, mal
+   dunkel. Ein Schildchen ist außerdem das, was auf einer Musterkarte an
+   dieser Stelle wirklich klebt.                                          */
+.tonleiter::after {
+  content: 'die farbkarte';
+  position: absolute; left: 50%; bottom: 50%;
+  transform: translate(-50%, 50%);
+  font-family: 'Marcellus SC', Georgia, serif;
+  font-size: .72rem; letter-spacing: .22em;
+  color: var(--papier-tinte);
+  background: var(--papier);
+  padding: .2rem .9rem;
+  border-radius: 100px;
+  box-shadow: 0 1px 4px oklch(15% .02 60 / .35);
+  white-space: nowrap;
+  pointer-events: none;
+}
+@media (hover: hover) and (pointer: fine) {
+  .tonleiter:hover span { transform: scaleY(1.22); }
+}
+.tonleiter:focus-visible { outline-offset: -3px; }
+@media (max-width: 30rem) {
+  .tonleiter { height: 2.1rem; }
+  .tonleiter::after { font-size: .62rem; letter-spacing: .18em; bottom: .4rem; }
+}
+
+/* ── Rosé ────────────────────────────────────────────────────────────────
+   Die zweite Farbe der Welt, gemessen an der Wand im Brautfoto (Farbton 6°).
+   Sie tritt an genau einer Stelle auf und nur als Ornament: an der Achse,
+   die durch das Brautstyling führt. Nie als Textfarbe.                    */
+
+.ablauf.braut::before {
+  background: linear-gradient(to bottom, var(--rose), var(--bronze) 55%, transparent);
+}
+.ablauf.braut li::before { background: var(--rose); }
+.blatt-halter[data-gewaehlt='true'] .blatt-karte.braut { box-shadow: 0 0 0 1px var(--rose), 0 18px 40px oklch(8% .02 205 / .6); }

@@ -113,6 +113,16 @@
     </picture>
   </div>
   <div class="schleier" aria-hidden="true"></div>
+    <a class="tonleiter" href="#faecher-titel" aria-label="Zur Farbkarte: acht Töne, an echten Arbeiten gemessen">
+      <span style="--ton-oben:#866850;--ton-unten:#543823"></span>
+      <span style="--ton-oben:#ae9a7f;--ton-unten:#44321a"></span>
+      <span style="--ton-oben:#9b7b54;--ton-unten:#6a5039"></span>
+      <span style="--ton-oben:#a5a1a2;--ton-unten:#847e82"></span>
+      <span style="--ton-oben:#a27754;--ton-unten:#8a6543"></span>
+      <span style="--ton-oben:#775740;--ton-unten:#694d38"></span>
+      <span style="--ton-oben:#b7a688;--ton-unten:#9b8263"></span>
+      <span style="--ton-oben:#a98c6a;--ton-unten:#a37657"></span>
+    </a>
 
   <div class="bahn mitte">
     <h1 class="titel-gross" id="haupttitel">Ihr Friseur<br>in <span style="color:var(--honig)">Giesing</span>.</h1>
@@ -138,7 +148,7 @@
 <!-- ═══ Der Farbfächer ══════════════════════════════════════════════════ -->
 <section class="abschnitt bahn" aria-labelledby="faecher-titel" style="background:var(--feld)">
   <div class="mitte">
-    <div class="kopf auf">
+    <div class="kopf">
       <h2 class="titel" id="faecher-titel">Acht Blätter.<br>Jede Farbe an einer echten Arbeit gemessen.</h2>
       <p class="lauf">
         Bei der Beratung liegt die Farbkarte auf dem Tisch: auffächern,
@@ -148,7 +158,7 @@
       </p>
     </div>
 
-    <div class="faecher-feld">
+    <div class="faecher-feld auf">
       <div class="faecher-seite">
       <ul class="faecher" role="tablist" aria-label="Leistungen als Farbkarte" aria-orientation="horizontal">
 
@@ -303,7 +313,7 @@
 <!-- ═══ Arbeiten ════════════════════════════════════════════════════════ -->
 <section class="abschnitt bahn" aria-labelledby="arbeiten-titel">
   <div class="mitte">
-    <div class="kopf auf">
+    <div class="kopf">
       <h2 class="titel" id="arbeiten-titel">Aus dem Salon</h2>
       <p class="lauf">
         Aufnahmen aus dem Alltag in der Perlacher Straße, mit dem Telefon
@@ -314,11 +324,8 @@
     </div>
 
     <div class="arbeiten-raster auf">
-      <button class="arbeit-kachel" type="button" data-text="Langes Haar mit weichem Verlauf vom dunkleren Ansatz in helle, warme Spitzen.">
+      <button class="arbeit-kachel gross" type="button" data-text="Langes Haar mit weichem Verlauf vom dunkleren Ansatz in helle, warme Spitzen.">
         <img src="bilder/arbeit-balayage.webp" alt="Langes Haar, Verlauf von dunklem Ansatz in helle warme Spitzen" width="820" height="1093" loading="lazy" decoding="async">
-      </button>
-      <button class="arbeit-kachel" type="button" data-text="Feine helle Strähnen, in dünnen Schichten durch die Länge gezogen.">
-        <img src="bilder/arbeit-straehnen.webp" alt="Feine helle Strähnen in langem Haar" width="820" height="1093" loading="lazy" decoding="async">
       </button>
       <button class="arbeit-kachel" type="button" data-text="Goldblonde Locken, mit dem Rundeisen in Form gelegt.">
         <img src="bilder/arbeit-locken.webp" alt="Goldblonde gelegte Locken" width="820" height="1093" loading="lazy" decoding="async">
@@ -326,8 +333,11 @@
       <button class="arbeit-kachel" type="button" data-text="Kurzer Bob in kühlem Aschblond, die Welle nach außen gelegt.">
         <img src="bilder/arbeit-bob.webp" alt="Kurzer Bob in kühlem Aschblond mit gelegter Welle" width="820" height="1093" loading="lazy" decoding="async">
       </button>
-      <button class="arbeit-kachel" type="button" data-text="Schulterlanges Haar, warmer Farbverlauf, die Spitzen nach innen geföhnt.">
-        <img src="bilder/arbeit-ombre.webp" alt="Schulterlanges Haar mit warmem Farbverlauf" width="820" height="1093" loading="lazy" decoding="async">
+      <button class="arbeit-kachel" type="button" data-text="Feine helle Strähnen, in dünnen Schichten durch die Länge gezogen.">
+        <img src="bilder/arbeit-straehnen.webp" alt="Feine helle Strähnen in langem Haar" width="820" height="1093" loading="lazy" decoding="async">
+      </button>
+      <button class="arbeit-kachel" type="button" data-text="Hochsteckfrisur mit eingearbeiteter Perlen- und Blütenranke.">
+        <img src="bilder/arbeit-perlen.webp" alt="Hochsteckfrisur mit Perlen- und Blütenranke" width="400" height="533" loading="lazy" decoding="async">
       </button>
       <button class="arbeit-kachel" type="button" data-text="Lange Stufen in warmem Karamell, Bewegung in den Spitzen.">
         <img src="bilder/arbeit-lang.webp" alt="Lange Stufen in warmem Karamell" width="820" height="1093" loading="lazy" decoding="async">
@@ -335,14 +345,14 @@
       <button class="arbeit-kachel" type="button" data-text="Helles Blond, kurz geschnitten und in weiche Wellen gelegt.">
         <img src="bilder/arbeit-kurz-blond.webp" alt="Kurzes helles Blond in weichen Wellen" width="740" height="987" loading="lazy" decoding="async">
       </button>
+      <button class="arbeit-kachel gross" type="button" data-text="Brautfrisur: gelegte Locken, durchzogen von einer Perlenranke in Roségold.">
+        <img src="bilder/arbeit-braut-perlen.webp" alt="Brautfrisur mit gelegten Locken und Perlenranke in Roségold" width="420" height="560" loading="lazy" decoding="async">
+      </button>
+      <button class="arbeit-kachel" type="button" data-text="Schulterlanges Haar, warmer Farbverlauf, die Spitzen nach innen geföhnt.">
+        <img src="bilder/arbeit-ombre.webp" alt="Schulterlanges Haar mit warmem Farbverlauf" width="820" height="1093" loading="lazy" decoding="async">
+      </button>
       <button class="arbeit-kachel" type="button" data-text="Glatte Länge mit sauber ausgearbeiteten Stufen.">
         <img src="bilder/arbeit-glatt.webp" alt="Glatte lange Haare mit ausgearbeiteten Stufen" width="820" height="1093" loading="lazy" decoding="async">
-      </button>
-      <button class="arbeit-kachel" type="button" data-text="Hochsteckfrisur mit eingearbeiteter Perlen- und Blütenranke.">
-        <img src="bilder/arbeit-perlen.webp" alt="Hochsteckfrisur mit Perlen- und Blütenranke" width="400" height="533" loading="lazy" decoding="async">
-      </button>
-      <button class="arbeit-kachel" type="button" data-text="Brautfrisur: gelegte Locken, durchzogen von einer Perlenranke in Roségold.">
-        <img src="bilder/arbeit-braut-perlen.webp" alt="Brautfrisur mit gelegten Locken und Perlenranke in Roségold" width="420" height="560" loading="lazy" decoding="async">
       </button>
     </div>
   </div>
@@ -382,7 +392,7 @@
 <section class="abschnitt bahn" aria-labelledby="bahar-titel" style="background:var(--feld)">
   <div class="mitte">
     <div class="faecher-feld" style="align-items:start">
-      <div class="auf">
+      <div>
         <h2 class="titel" id="bahar-titel">Bahar</h2>
         <p class="lauf" style="margin-top:var(--r3)">
           Fakhria Tokhi, im Laden alle nennen sie Bahar, ist
@@ -397,14 +407,14 @@
           Ergebnis fest, steht auch der Preis fest.
         </p>
 
-        <div class="reihe" style="margin-top:var(--r5)">
-          <div class="beleg"><span class="wert zahl">20</span><span class="was">Jahre in München hinter dem Stuhl</span></div>
-          <div class="beleg"><span class="wert">Meisterin</span><span class="was">Handwerkskammer für München und Oberbayern</span></div>
-          <div class="beleg"><span class="wert">Fadentechnik</span><span class="was">Augenbrauen ohne Wachs, ohne Pinzette</span></div>
-        </div>
+        <p class="lauf">
+          Zwanzig Jahre hinter dem Stuhl, der Meisterbrief von der
+          Handwerkskammer für München und Oberbayern, und Augenbrauen in
+          Fadentechnik, die nicht jeder Salon in Giesing anbietet.
+        </p>
       </div>
 
-      <div class="auf" data-verzug="120">
+      <div>
         <figure class="bildstreifen" style="margin:0">
           <img src="bilder/salon-raum.webp" alt="Blick in den Salon: zwei Bedienplätze mit Spiegeln, schwarze Friseurstühle, helle Fliesen" width="733" height="547" loading="lazy" decoding="async">
           <figcaption style="margin-top:.7rem;font-size:var(--s-klein);color:var(--tinte-still)">
@@ -423,46 +433,46 @@
 <!-- ═══ Kontakt ═════════════════════════════════════════════════════════ -->
 <section class="abschnitt bahn" aria-labelledby="kontakt-titel" id="kontakt">
   <div class="mitte">
-    <div class="kopf auf">
+    <div class="kopf">
       <h2 class="titel" id="kontakt-titel">Perlacher Straße 2</h2>
     </div>
 
-    <div class="reihe auf">
-      <div class="blatt">
-        <h3 class="titel-klein" style="margin-bottom:var(--r2)">Öffnungszeiten</h3>
-        <p class="oeffnungsstand" style="margin-bottom:var(--r2);font-size:var(--s-klein);color:var(--honig)"></p>
-        <ul class="zeiten">
-          <li data-tage="1"><span class="tag">Montag</span> <span class="zahl">10:00 – 16:00</span></li>
-          <li data-tage="2,3,4,5"><span class="tag">Dienstag bis Freitag</span> <span class="zahl">09:00 – 19:00</span></li>
-          <li data-tage="6"><span class="tag">Samstag</span> <span class="zahl">09:00 – 16:00</span></li>
-          <li data-tage="0" class="zu"><span class="tag">Sonntag</span> <span>geschlossen</span></li>
-        </ul>
+    <dl class="zeilenliste">
+      <div>
+        <dt>Öffnungszeiten</dt>
+        <dd>
+          <p class="oeffnungsstand" style="color:var(--honig);margin-bottom:.6rem"></p>
+          <ul class="zeiten" style="max-width:22rem">
+            <li data-tage="1"><span class="tag">Montag</span> <span class="zahl">10:00 – 16:00</span></li>
+            <li data-tage="2,3,4,5"><span class="tag">Dienstag bis Freitag</span> <span class="zahl">09:00 – 19:00</span></li>
+            <li data-tage="6"><span class="tag">Samstag</span> <span class="zahl">09:00 – 16:00</span></li>
+            <li data-tage="0" class="zu"><span class="tag">Sonntag</span> <span>geschlossen</span></li>
+          </ul>
+        </dd>
       </div>
-
-      <div class="blatt">
-        <h3 class="titel-klein" style="margin-bottom:var(--r2)">Anschrift</h3>
-        <p class="lauf">
-          BaHaar’s Styling Studio<br>
-          Perlacher Straße 2<br>
-          81539 München-Giesing
-        </p>
-        <p style="margin-top:var(--r2)">
-          <a href="https://www.openstreetmap.org/?mlat=48.1093&amp;mlon=11.5875#map=17/48.1093/11.5875" rel="noopener">Auf der Karte ansehen</a>
-        </p>
+      <div>
+        <dt>Anschrift</dt>
+        <dd>
+          <p>
+            BaHaar’s Styling Studio<br>
+            Perlacher Straße 2<br>
+            81539 München-Giesing
+          </p>
+          <p><a href="https://www.openstreetmap.org/?mlat=48.1093&amp;mlon=11.5875#map=17/48.1093/11.5875" rel="noopener" style="color:var(--honig)">Auf der Karte ansehen</a></p>
+        </dd>
       </div>
-
-      <div class="blatt">
-        <h3 class="titel-klein" style="margin-bottom:var(--r2)">Erreichen</h3>
-        <ul style="list-style:none;margin:0;padding:0;display:grid;gap:.6rem">
-          <li><a href="tel:+49896923644" style="color:var(--honig);text-decoration:none">089 692 36 44</a></li>
-          <li><a href="mailto:info@bahaarsstylingstudio.de" style="color:var(--honig);text-decoration:none">info@bahaarsstylingstudio.de</a></li>
-          <li><a href="https://www.instagram.com/bahaarsstylingstudio" rel="noopener" style="color:var(--honig);text-decoration:none">@bahaarsstylingstudio</a></li>
-        </ul>
-        <p style="margin-top:var(--r3)">
-          <a class="knopf knopf-voll" href="termin.html" style="padding:.75rem 1.3rem;font-size:var(--s-klein)">Termin buchen</a>
-        </p>
+      <div>
+        <dt>Erreichen</dt>
+        <dd>
+          <p>
+            <a href="tel:+49896923644" style="color:var(--honig);text-decoration:none">089 692 36 44</a><br>
+            <a href="mailto:info@bahaarsstylingstudio.de" style="color:var(--honig);text-decoration:none">info@bahaarsstylingstudio.de</a><br>
+            <a href="https://www.instagram.com/bahaarsstylingstudio" rel="noopener" style="color:var(--honig);text-decoration:none">@bahaarsstylingstudio</a>
+          </p>
+          <a class="knopf knopf-voll" href="termin.html">Termin buchen</a>
+        </dd>
       </div>
-    </div>
+    </dl>
   </div>
 </section>
 
