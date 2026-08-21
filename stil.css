@@ -303,7 +303,7 @@ a { color: inherit; }
       var(--grund-28) 66%, var(--grund-72) 88%, var(--grund) 100%),
     linear-gradient(to right,
       var(--grund-96) 0%, var(--grund-88) 26%, var(--grund-52) 48%,
-      var(--grund-00) 78%);
+      var(--grund-00) 68%, var(--grund-72) 100%);
 }
 .flaeche.rechts > .schleier {
   background:
@@ -312,7 +312,7 @@ a { color: inherit; }
       var(--grund-28) 66%, var(--grund-72) 88%, var(--grund) 100%),
     linear-gradient(to left,
       var(--grund-96) 0%, var(--grund-88) 26%, var(--grund-52) 48%,
-      var(--grund-00) 78%);
+      var(--grund-00) 68%, var(--grund-72) 100%);
 }
 
 @media (max-width: 60rem) {
@@ -322,6 +322,9 @@ a { color: inherit; }
       linear-gradient(to bottom,
         var(--grund) 0%, var(--grund-72) 12%, var(--grund-52) 34%,
         var(--grund-52) 66%, var(--grund-72) 88%, var(--grund) 100%),
+      linear-gradient(to right,
+        var(--grund-52) 0%, var(--grund-00) 32%,
+        var(--grund-00) 68%, var(--grund-52) 100%),
       var(--grund-28);
   }
 }
@@ -541,8 +544,12 @@ a { color: inherit; }
 }
 .fusszeile-raster {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-  gap: var(--r5) var(--r4);
+  /* 15 rem waren zu breit: bei 1072 px Innenmaß passten nur drei Spalten,
+     die vierte rutschte in eine zweite Zeile und ließ rechts daneben rund
+     340 px Leerlauf stehen. */
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: var(--r4) var(--r4);
+  align-items: start;
 }
 /* impeccable-disable-next-line wide-tracking -- kurze Kapitälchenüberschrift */
 .fusszeile h3 {
