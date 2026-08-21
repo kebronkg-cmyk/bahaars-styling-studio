@@ -45,8 +45,10 @@
 :root {
   /* ── Schriftgrößen unter der Grundgröße. Genau zwei, sonst entsteht eine
        Treppe ohne Stufen. ────────────────────────────────────────────── */
-  --s-klein: 1rem;      /* Nebentext — abgestuft wird über die Farbe   */
-  --s-mini:  .8rem;      /* nur gesperrte Kapitälchen                    */
+  --s-klein: 1rem;       /* Nebentext — abgestuft wird über die Farbe    */
+  --s-mini:  .8rem;      /* gesperrte Kapitälchen                        */
+  --s-marke: 1.25rem;    /* Wortmarke                                    */
+  --s-preis: 1.9rem;     /* die große Zahl an Fächer und Brautstyling    */
 
   /* Schriftgrößen als Stufen, Werte siehe unten bei den Umbruchpunkten. */
   --t-body:     1rem;
@@ -90,6 +92,19 @@
   /* ── Ornament. Zweite Farbe, niemals Text. ─────────────────────────── */
   --rose:         oklch(80%   .052 8);
 
+  /* ── Tinte auf hellem Grund ────────────────────────────────────────────
+     Auf einer Honigfläche und auf Papier steht dunkle Schrift. Ein Wert,
+     nicht drei ähnliche.                                                 */
+  --tinte-hell:   oklch(21%   .040 60);
+  --kante-hell:   oklch(20%   .020 60 / .22);   /* Trennlinie auf Papier  */
+
+  /* Der Rollbalken. Auch er gehört zur Palette. */
+  --rollbalken:      oklch(38% .045 200);
+  --rollbalken-hoch: oklch(50% .060 200);
+
+  /* Der Grund eines fremden Fensters, das wir nicht gestalten. */
+  --fremd-grund:  #ffffff;
+
   /* ── Linien ────────────────────────────────────────────────────────── */
   --linie:        oklch(42% .030 200 / .55);
   --linie-hell:   oklch(62% .040 198 / .34);
@@ -114,8 +129,10 @@
      auf der Seite — rund an der Spitze, scharf an der Niete.             */
   --bogen-klein: 3px;
   --bogen:       6px;
-  --bogen-blatt:      1.35rem 1.35rem .25rem .25rem;   /* stehendes Blatt */
-  --bogen-blatt-quer: .25rem 100px 100px .25rem;       /* liegendes Blatt */
+  --bogen-blatt:       1.35rem 1.35rem .25rem .25rem;  /* stehendes Blatt */
+  --bogen-blatt-quer:  .25rem 100px 100px .25rem;      /* liegendes Blatt */
+  --bogen-blatt-spitz: 2.4rem 2.4rem .25rem .25rem;    /* Blatt im Fächer */
+  --bogen-marke:       .2rem .8rem .8rem .2rem;        /* kleine Marke    */
 
   /* ── Muster: feine Strähnen. Sparsam, an zwei Stellen. ─────────────── */
   --muster-straehne:
@@ -321,7 +338,7 @@ a { color: inherit; }
 
 .marke {
   font-family: 'Marcellus', Georgia, serif;
-  font-size: 1.25rem;
+  font-size: var(--s-marke);
   letter-spacing: .01em;
   text-decoration: none;
   line-height: 1.1;
@@ -330,7 +347,7 @@ a { color: inherit; }
 .marke .zusatz {
   display: block;
   font-family: 'Marcellus SC', Georgia, serif;
-  font-size: .72rem;
+  font-size: var(--s-mini);
   letter-spacing: .22em;
   color: var(--honig);
   margin-top: .12em;
@@ -427,7 +444,7 @@ a { color: inherit; }
   .wegweiser li + li { border-top: 1px solid var(--linie); }
   .wegweiser ul a {
     display: block; padding: var(--r2) 0;
-    font-family: 'Marcellus', Georgia, serif; font-size: 1.35rem;
+    font-family: 'Marcellus', Georgia, serif; font-size: var(--t-vorspann);
   }
   .wegweiser a::after { display: none; }
   .ruf { justify-content: center; padding-block: .8rem; }
@@ -454,7 +471,7 @@ a { color: inherit; }
               border-color var(--t1) var(--kurve),
               color var(--t1) var(--kurve);
 }
-.knopf-voll { background: var(--honig); color: oklch(20% .04 60); }
+.knopf-voll { background: var(--honig); color: var(--tinte-hell); }
 .knopf-leer { border-color: var(--linie-hell); color: var(--tinte); }
 .knopf svg { width: 1.05em; height: 1.05em; flex: none; }
 @media (hover: hover) and (pointer: fine) {
@@ -640,7 +657,7 @@ a { color: inherit; }
   cursor: pointer;
   font: inherit; color: var(--papier-tinte);
   background: var(--papier);
-  border-radius: 2.4rem 2.4rem .25rem .25rem;
+  border-radius: var(--bogen-blatt-spitz);
   box-shadow:
     0 0 0 1px var(--papier-rand),
     0 10px 26px oklch(9% .02 205 / .42);
@@ -657,7 +674,7 @@ a { color: inherit; }
   height: 38%;
   flex: none;
   background: linear-gradient(to bottom, var(--ton-oben), var(--ton-unten));
-  border-bottom: 1px solid oklch(20% .02 60 / .18);
+  border-bottom: 1px solid var(--kante-hell);
 }
 
 /* Der Name läuft am Blatt entlang, wie die Bezeichnung auf einer echten
@@ -673,7 +690,7 @@ a { color: inherit; }
   writing-mode: vertical-rl;
   transform: rotate(180deg);
   font-family: 'Marcellus SC', Georgia, serif;
-  font-size: clamp(.7rem, .62rem + .34vw, .88rem);
+  font-size: var(--s-mini);
   letter-spacing: .13em;
   padding-block: .8rem 1.6rem;
   white-space: nowrap;
@@ -714,7 +731,7 @@ a { color: inherit; }
 .faecher-hinweis {
   text-align: center;
   font-family: 'Marcellus SC', Georgia, serif;
-  font-size: .72rem; letter-spacing: .18em;
+  font-size: var(--s-mini); letter-spacing: .18em;
   color: var(--tinte-still);
   margin: 0;
 }
@@ -755,7 +772,7 @@ a { color: inherit; }
   margin-top: var(--r2);
 }
 .faecher-tafel .tonfleck {
-  width: 2.6rem; height: 1rem; border-radius: 2px;
+  width: 2.6rem; height: 1rem; border-radius: var(--bogen-klein);
   border: 1px solid var(--linie-hell);
   background: linear-gradient(to right, var(--ton-oben), var(--ton-unten));
   flex: none;
@@ -767,7 +784,7 @@ a { color: inherit; }
 }
 .faecher-preis .gross {
   font-family: 'Marcellus', Georgia, serif;
-  font-size: 1.9rem; color: var(--honig); line-height: 1;
+  font-size: var(--s-preis); color: var(--honig); line-height: 1;
   /* „390–600 €" darf nicht zwischen Zahl und Zeichen umbrechen. */
   white-space: nowrap;
 }
@@ -893,7 +910,7 @@ a { color: inherit; }
   padding: 0 0 .7rem;
   border-bottom: 1px solid var(--linie-honig);
   font-family: 'Marcellus SC', Georgia, serif;
-  font-size: .74rem; letter-spacing: .2em;
+  font-size: var(--s-mini); letter-spacing: .2em;
   color: var(--honig);
 }
 .tafel-kopf span:nth-child(n+2) { text-align: right; }
@@ -944,7 +961,7 @@ a { color: inherit; }
 .merken[aria-pressed='true'] {
   background: var(--honig);
   border-color: var(--honig);
-  color: oklch(22% .04 60);
+  color: var(--tinte-hell);
 }
 .merken[aria-pressed='true']::after { content: '✓'; opacity: 1; color: var(--honig); }
 @media (hover: hover) and (pointer: fine) {
@@ -967,7 +984,7 @@ a { color: inherit; }
   .tafel-zeile .preis::before {
     content: attr(data-was) ' ';
     font-family: 'Marcellus SC', Georgia, serif;
-    font-size: .68rem; letter-spacing: .14em;
+    font-size: var(--s-mini); letter-spacing: .14em;
     color: var(--tinte-still);
   }
   .tafel-zeile .preis + .preis { text-align: right; }
@@ -1012,7 +1029,7 @@ a { color: inherit; }
   color: var(--tinte-leise);
   padding: .45rem .85rem;
   border: 1px solid transparent;
-  border-radius: .2rem .8rem .8rem .2rem;
+  border-radius: var(--bogen-marke);
   transition: color var(--t1) var(--kurve),
               border-color var(--t1) var(--kurve),
               background-color var(--t1) var(--kurve);
@@ -1055,7 +1072,7 @@ a { color: inherit; }
 }
 .merkzettel-zahl {
   font-family: 'Marcellus', Georgia, serif;
-  font-size: 1.6rem; color: var(--honig); line-height: 1;
+  font-size: var(--s-preis); color: var(--honig); line-height: 1;
   flex: none;
 }
 .merkzettel-text { flex: 1; min-width: 0; }
@@ -1131,7 +1148,7 @@ a { color: inherit; }
 /* impeccable-disable-next-line wide-tracking -- kurze Kapitälchen-Zeitmarke */
 .ablauf .wann {
   font-family: 'Marcellus SC', Georgia, serif;
-  font-size: .76rem; letter-spacing: .18em;
+  font-size: var(--s-mini); letter-spacing: .18em;
   color: var(--honig);
   display: block; margin-bottom: .35rem;
 }
@@ -1169,7 +1186,7 @@ a { color: inherit; }
 }
 .buchung-tor p { max-width: 42ch; color: var(--tinte-leise); }
 .buchung-tor .klein { font-size: var(--s-mini); color: var(--tinte-still); max-width: 48ch; }
-.buchung iframe { width: 100%; height: 100%; min-height: 34rem; border: 0; background: #fff; }
+.buchung iframe { width: 100%; height: 100%; min-height: 34rem; border: 0; background: var(--fremd-grund); }
 
 /* ═══ Hinweiszeile ═════════════════════════════════════════════════════ */
 
@@ -1190,7 +1207,7 @@ a { color: inherit; }
   overflow-wrap: anywhere;
 }
 .fliess h2 { font-size: var(--t-mittel); margin: var(--r5) 0 var(--r2); }
-.fliess h3 { font-size: 1.3rem; margin: var(--r3) 0 .5rem; color: var(--tinte); }
+.fliess h3 { font-size: var(--t-vorspann); margin: var(--r3) 0 .5rem; color: var(--tinte); }
 .fliess h2:first-child { margin-top: 0; }
 .fliess p, .fliess li { color: var(--tinte-leise); }
 .fliess ul { padding-left: 1.1rem; margin: 0 0 var(--r2); }
@@ -1334,11 +1351,11 @@ html {
 ::-webkit-scrollbar { width: 11px; height: 11px; }
 ::-webkit-scrollbar-track { background: var(--grund-tief); }
 ::-webkit-scrollbar-thumb {
-  background: oklch(38% .045 200);
+  background: var(--rollbalken);
   border-radius: 100px;
   border: 3px solid var(--grund-tief);
 }
-::-webkit-scrollbar-thumb:hover { background: oklch(50% .06 200); }
+::-webkit-scrollbar-thumb:hover { background: var(--rollbalken-hoch); }
 
 /* Das „noch offen"-Schild im Kosmetikkasten: ein Anhänger, keine
    Auszeichnungszeile über einer Überschrift.                              */
@@ -1420,7 +1437,7 @@ html {
   .blatt-halter { width: 2.4rem; height: 12rem; }
   .faecher-tafel { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
   .faecher-tafel .arbeit { max-width: 10rem; }
-  .faecher-preis .gross { font-size: 1.5rem; }
+  .faecher-preis .gross { font-size: var(--t-vorspann); }
   .reihe { grid-template-columns: minmax(0, 1fr); }
 }
 
@@ -1455,7 +1472,7 @@ html {
   transition: transform var(--t2) var(--kurve);
   transform-origin: bottom;
 }
-.tonleiter span + span { box-shadow: inset 1px 0 0 oklch(20% .02 60 / .28); }
+.tonleiter span + span { box-shadow: inset 1px 0 0 var(--kante-hell); }
 /* Die Beschriftung sitzt auf einem gedruckten Schildchen. Ohne das läge sie
    auf dem Ton, der gerade in der Mitte steht — und der ist mal hell, mal
    dunkel. Ein Schildchen ist außerdem das, was auf einer Musterkarte an
@@ -1465,7 +1482,7 @@ html {
   position: absolute; left: 50%; bottom: 50%;
   transform: translate(-50%, 50%);
   font-family: 'Marcellus SC', Georgia, serif;
-  font-size: .72rem; letter-spacing: .22em;
+  font-size: var(--s-mini); letter-spacing: .22em;
   color: var(--papier-tinte);
   background: var(--papier);
   padding: .2rem .9rem;
@@ -1480,7 +1497,7 @@ html {
 .tonleiter:focus-visible { outline-offset: -3px; }
 @media (max-width: 30rem) {
   .tonleiter { height: 2.9rem; }
-  .tonleiter::after { font-size: .62rem; letter-spacing: .18em; bottom: .4rem; }
+  .tonleiter::after { font-size: var(--s-mini); letter-spacing: .14em; }
 }
 
 /* ── Rosé ────────────────────────────────────────────────────────────────
