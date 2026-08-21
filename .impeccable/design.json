@@ -1,0 +1,221 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-21T00:00:00Z",
+  "title": "Gestaltungssystem: BaHaar's Styling Studio",
+  "extensions": {
+    "colorMeta": {
+      "grund": {
+        "role": "neutral",
+        "displayName": "Petrolgrund",
+        "canonical": "oklch(17.5% .028 205)",
+        "note": "Gemessen an den Moroccanoil-Regalen im Salon: oklch(61.3% .053 200.8), auf Tintendichte gebracht.",
+        "tonalRamp": ["oklch(12.5% .028 205)", "oklch(17.5% .028 205)", "oklch(22.5% .028 205)", "oklch(31% .028 205)", "oklch(45% .028 205)", "oklch(60% .028 205)", "oklch(78% .028 205)", "oklch(95% .028 205)"]
+      },
+      "grund-tief": {
+        "role": "neutral",
+        "displayName": "Petrol tief",
+        "canonical": "oklch(12.5% .022 207)",
+        "tonalRamp": ["oklch(12.5% .022 207)", "oklch(18% .022 207)", "oklch(25% .022 207)", "oklch(35% .022 207)", "oklch(48% .022 207)", "oklch(62% .022 207)", "oklch(79% .022 207)", "oklch(95% .022 207)"]
+      },
+      "feld": { "role": "neutral", "displayName": "Feld", "canonical": "oklch(22.5% .032 203)", "tonalRamp": ["oklch(15% .032 203)", "oklch(22.5% .032 203)", "oklch(30% .032 203)", "oklch(40% .032 203)", "oklch(52% .032 203)", "oklch(65% .032 203)", "oklch(80% .032 203)", "oklch(95% .032 203)"] },
+      "karte": { "role": "neutral", "displayName": "Kartenfläche", "canonical": "oklch(26.5% .030 202)", "tonalRamp": ["oklch(15% .030 202)", "oklch(22% .030 202)", "oklch(26.5% .030 202)", "oklch(38% .030 202)", "oklch(50% .030 202)", "oklch(64% .030 202)", "oklch(80% .030 202)", "oklch(95% .030 202)"] },
+      "karte-hoch": { "role": "neutral", "displayName": "Kartenfläche hoch", "canonical": "oklch(31% .030 201)", "tonalRamp": ["oklch(15% .030 201)", "oklch(23% .030 201)", "oklch(31% .030 201)", "oklch(41% .030 201)", "oklch(53% .030 201)", "oklch(66% .030 201)", "oklch(81% .030 201)", "oklch(95% .030 201)"] },
+      "tinte": { "role": "neutral", "displayName": "Tinte", "canonical": "oklch(94.5% .014 78)", "tonalRamp": ["oklch(15% .014 78)", "oklch(28% .014 78)", "oklch(40% .014 78)", "oklch(52% .014 78)", "oklch(66% .014 78)", "oklch(79% .014 78)", "oklch(88% .014 78)", "oklch(94.5% .014 78)"] },
+      "tinte-leise": { "role": "neutral", "displayName": "Tinte leise", "canonical": "oklch(79% .018 76)", "tonalRamp": ["oklch(15% .018 76)", "oklch(28% .018 76)", "oklch(40% .018 76)", "oklch(53% .018 76)", "oklch(66% .018 76)", "oklch(79% .018 76)", "oklch(88% .018 76)", "oklch(95% .018 76)"] },
+      "tinte-still": { "role": "neutral", "displayName": "Tinte still", "canonical": "oklch(66% .018 74)", "tonalRamp": ["oklch(15% .018 74)", "oklch(28% .018 74)", "oklch(40% .018 74)", "oklch(53% .018 74)", "oklch(66% .018 74)", "oklch(79% .018 74)", "oklch(88% .018 74)", "oklch(95% .018 74)"] },
+      "honig": {
+        "role": "primary",
+        "displayName": "Honig — Haarspitze",
+        "canonical": "oklch(80% .115 74)",
+        "note": "Helles Ende der gemessenen Haarachse (Farbton 53–78° über alle Arbeitsfotos).",
+        "tonalRamp": ["oklch(15% .115 74)", "oklch(28% .115 74)", "oklch(40% .115 74)", "oklch(53% .115 74)", "oklch(66% .115 74)", "oklch(80% .115 74)", "oklch(88% .115 74)", "oklch(95% .115 74)"]
+      },
+      "honig-hell": { "role": "primary", "displayName": "Honig hell", "canonical": "oklch(88% .075 78)", "tonalRamp": ["oklch(15% .075 78)", "oklch(28% .075 78)", "oklch(41% .075 78)", "oklch(54% .075 78)", "oklch(67% .075 78)", "oklch(80% .075 78)", "oklch(88% .075 78)", "oklch(95% .075 78)"] },
+      "karamell": { "role": "primary", "displayName": "Karamell — Haarlänge", "canonical": "oklch(64% .095 64)", "tonalRamp": ["oklch(15% .095 64)", "oklch(28% .095 64)", "oklch(40% .095 64)", "oklch(52% .095 64)", "oklch(64% .095 64)", "oklch(78% .095 64)", "oklch(88% .095 64)", "oklch(95% .095 64)"] },
+      "bronze": { "role": "primary", "displayName": "Bronze", "canonical": "oklch(48% .070 58)", "tonalRamp": ["oklch(15% .070 58)", "oklch(27% .070 58)", "oklch(38% .070 58)", "oklch(48% .070 58)", "oklch(62% .070 58)", "oklch(75% .070 58)", "oklch(87% .070 58)", "oklch(95% .070 58)"] },
+      "ansatz": { "role": "primary", "displayName": "Ansatz — dunkler Haaransatz", "canonical": "oklch(34% .045 55)", "tonalRamp": ["oklch(15% .045 55)", "oklch(24% .045 55)", "oklch(34% .045 55)", "oklch(46% .045 55)", "oklch(58% .045 55)", "oklch(72% .045 55)", "oklch(85% .045 55)", "oklch(95% .045 55)"] },
+      "rose": {
+        "role": "secondary",
+        "displayName": "Rosé — Wand im Brautfoto",
+        "canonical": "oklch(80% .052 8)",
+        "note": "Farbton 6–8°, gemessen. Ausschließlich Ornament auf der Brautachse, nie Textfarbe.",
+        "tonalRamp": ["oklch(15% .052 8)", "oklch(28% .052 8)", "oklch(40% .052 8)", "oklch(53% .052 8)", "oklch(66% .052 8)", "oklch(80% .052 8)", "oklch(88% .052 8)", "oklch(95% .052 8)"]
+      },
+      "papier": { "role": "tertiary", "displayName": "Kartonweiß", "canonical": "oklch(94% .016 82)", "tonalRamp": ["oklch(15% .016 82)", "oklch(28% .016 82)", "oklch(40% .016 82)", "oklch(53% .016 82)", "oklch(66% .016 82)", "oklch(80% .016 82)", "oklch(88% .016 82)", "oklch(94% .016 82)"] },
+      "papier-rand": { "role": "tertiary", "displayName": "Kartonkante", "canonical": "oklch(86% .022 80)", "tonalRamp": ["oklch(15% .022 80)", "oklch(28% .022 80)", "oklch(40% .022 80)", "oklch(53% .022 80)", "oklch(66% .022 80)", "oklch(79% .022 80)", "oklch(86% .022 80)", "oklch(95% .022 80)"] },
+      "papier-tinte": { "role": "tertiary", "displayName": "Karton-Tinte", "canonical": "oklch(28% .022 60)", "tonalRamp": ["oklch(15% .022 60)", "oklch(28% .022 60)", "oklch(40% .022 60)", "oklch(52% .022 60)", "oklch(65% .022 60)", "oklch(78% .022 60)", "oklch(88% .022 60)", "oklch(95% .022 60)"] },
+      "papier-leise": { "role": "tertiary", "displayName": "Karton-Tinte leise", "canonical": "oklch(46% .022 62)", "tonalRamp": ["oklch(15% .022 62)", "oklch(27% .022 62)", "oklch(37% .022 62)", "oklch(46% .022 62)", "oklch(60% .022 62)", "oklch(74% .022 62)", "oklch(86% .022 62)", "oklch(95% .022 62)"] },
+      "linie": { "role": "neutral", "displayName": "Hairline", "canonical": "oklch(42% .030 200 / .55)" },
+      "linie-hell": { "role": "neutral", "displayName": "Hairline hell", "canonical": "oklch(62% .040 198 / .34)" },
+      "linie-honig": { "role": "primary", "displayName": "Hairline Honig", "canonical": "oklch(80% .115 74 / .30)" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Seitentitel", "purpose": "Nur der Titel im ersten Bildschirm, einmal pro Seite. Marcellus, Zeilenhöhe 0,95." },
+      "headline": { "displayName": "Abschnittstitel", "purpose": "Überschrift eines Abschnitts." },
+      "title": { "displayName": "Untertitel", "purpose": "Unterabschnitt, Begriff in der Zeilenliste, h2 in Rechtstexten." },
+      "vorspann": { "displayName": "Vorspann", "purpose": "Der Absatz direkt unter einem Titel, in Tinte leise, höchstens 34ch." },
+      "body": { "displayName": "Fließtext", "purpose": "Archivo mit Tabellenziffern, Lesespalte 38 rem." },
+      "klein": { "displayName": "Nebentext", "purpose": "Eine von genau zwei Größen unterhalb der Grundgröße; weiter abgestuft wird über die Farbe." },
+      "label": { "displayName": "Stempelzeile", "purpose": "Marcellus SC, Kapitälchen, weit gestellt. Knöpfe, Navigatormarken, Tafelkopf, Blattname, Schild. Nie Fließtext." }
+    },
+    "shadows": [
+      { "name": "kante", "value": "0 0 0 1px var(--papier-rand)", "purpose": "Geschlossenes Fächerblatt — ein gezeichneter Blattrand, kein Schatten." },
+      { "name": "blatt-liegend", "value": "0 0 0 1px var(--papier-rand), 0 10px 26px oklch(9% .02 205 / .42)", "purpose": "Fächerblatt im aufgefächerten Ruhezustand." },
+      { "name": "blatt-gezogen", "value": "0 0 0 1px var(--honig), 0 18px 40px oklch(8% .02 205 / .6)", "purpose": "Gewähltes Fächerblatt. Auf der Brautachse steht var(--rose) statt Honig." },
+      { "name": "niete", "value": "0 0 0 1px var(--linie-honig), 0 6px 18px oklch(10% .02 205 / .5)", "purpose": "Der Messingnagel unter dem Fächer." },
+      { "name": "lupe", "value": "0 30px 80px oklch(5% .02 205 / .7)", "purpose": "Das Bild im Lupendialog." },
+      { "name": "klebekante", "value": "0 1px 0 var(--linie)", "purpose": "Die gesetzte Kopfzeile. Eine Linie, kein Schlagschatten." },
+      { "name": "schildchen", "value": "0 1px 4px oklch(15% .02 60 / .35)", "purpose": "Das gedruckte Papierschildchen auf der Tonleiter." }
+    ],
+    "motion": [
+      { "name": "kurve", "value": "cubic-bezier(.22, .61, .36, 1)", "purpose": "Standardkurve für Zustandswechsel. Nur ease-out, kein Federn." },
+      { "name": "kurve-weit", "value": "cubic-bezier(.16, .84, .44, 1)", "purpose": "Für weite Wege: Auffächern, Einblenden, Bildzoom." },
+      { "name": "t1", "value": "0.3s", "purpose": "Farbe, Rand, kleine Verschiebung." },
+      { "name": "t2", "value": "0.5s", "purpose": "Überlagerungen, klebende Leisten, Schatten." },
+      { "name": "t3", "value": "0.8s", "purpose": "Einblendungen und das Auffächern." }
+    ],
+    "breakpoints": [
+      { "name": "hoch-schmal", "value": "22.5rem" },
+      { "name": "handy", "value": "30rem" },
+      { "name": "stufe-1", "value": "40rem" },
+      { "name": "tafel", "value": "46rem" },
+      { "name": "menu", "value": "58rem" },
+      { "name": "schleier", "value": "60rem" },
+      { "name": "stufe-2", "value": "64rem" },
+      { "name": "stufe-3", "value": "88rem" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Knopf voll",
+      "kind": "button",
+      "refersTo": "knopf-voll",
+      "description": "Die Hauptaktion — Anrufen, Termin, Auswahl senden.",
+      "html": "<a class=\"ds-knopf ds-knopf-voll\" href=\"#\">Termin anfragen</a>",
+      "css": ".ds-knopf { display: inline-flex; align-items: center; justify-content: center; gap: .6rem; font-family: 'Marcellus SC', Georgia, serif; font-size: 1rem; letter-spacing: .12em; text-decoration: none; text-align: center; padding: .95rem 1.7rem; border-radius: var(--bogen-blatt-quer, .25rem 100px 100px .25rem); border: 1px solid transparent; background: none; cursor: pointer; transition: transform .3s cubic-bezier(.22,.61,.36,1), background-color .3s cubic-bezier(.22,.61,.36,1), border-color .3s cubic-bezier(.22,.61,.36,1), color .3s cubic-bezier(.22,.61,.36,1); } .ds-knopf-voll { background: var(--honig, oklch(80% .115 74)); color: oklch(20% .04 60); } @media (hover: hover) and (pointer: fine) { .ds-knopf-voll:hover { background: var(--honig-hell, oklch(88% .075 78)); transform: translateY(-2px); } } .ds-knopf-voll:active { transform: translateY(0); } .ds-knopf-voll:focus-visible { outline: 2px solid var(--honig, oklch(80% .115 74)); outline-offset: 3px; border-radius: 3px; }"
+    },
+    {
+      "name": "Knopf leer",
+      "kind": "button",
+      "refersTo": "knopf-leer",
+      "description": "Die zweite Aktion daneben — Preise ansehen, Weg zeigen.",
+      "html": "<a class=\"ds-knopf ds-knopf-leer\" href=\"#\">Leistungen &amp; Preise</a>",
+      "css": ".ds-knopf { display: inline-flex; align-items: center; justify-content: center; gap: .6rem; font-family: 'Marcellus SC', Georgia, serif; font-size: 1rem; letter-spacing: .12em; text-decoration: none; padding: .95rem 1.7rem; border-radius: var(--bogen-blatt-quer, .25rem 100px 100px .25rem); border: 1px solid transparent; background: none; cursor: pointer; transition: transform .3s cubic-bezier(.22,.61,.36,1), border-color .3s cubic-bezier(.22,.61,.36,1), color .3s cubic-bezier(.22,.61,.36,1); } .ds-knopf-leer { border-color: var(--linie-hell, oklch(62% .040 198 / .34)); color: var(--tinte, oklch(94.5% .014 78)); } @media (hover: hover) and (pointer: fine) { .ds-knopf-leer:hover { border-color: var(--honig, oklch(80% .115 74)); color: var(--honig, oklch(80% .115 74)); transform: translateY(-2px); } } .ds-knopf-leer:active { transform: translateY(0); } .ds-knopf-leer:focus-visible { outline: 2px solid var(--honig, oklch(80% .115 74)); outline-offset: 3px; }"
+    },
+    {
+      "name": "Telefonmarke",
+      "kind": "nav",
+      "refersTo": "ruf",
+      "description": "Die Telefonnummer in der Kopfzeile — steht auf jedem Bildschirm, auch dem ersten.",
+      "html": "<a class=\"ds-ruf\" href=\"tel:+49896923644\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" aria-hidden=\"true\"><path d=\"M6.5 3h3l1.5 4-2 1.5a12 12 0 0 0 6.5 6.5L17 13l4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 3.5 5.2 2 2 0 0 1 5.5 3z\"/></svg>089 692 36 44</a>",
+      "css": ".ds-ruf { display: inline-flex; align-items: center; gap: .5rem; text-decoration: none; font-size: 1rem; letter-spacing: .03em; padding: .5rem .95rem; border: 1px solid var(--linie-honig, oklch(80% .115 74 / .30)); border-radius: var(--bogen-blatt-quer, .25rem 100px 100px .25rem); color: var(--honig, oklch(80% .115 74)); white-space: nowrap; font-family: 'Archivo', system-ui, sans-serif; transition: background-color .3s cubic-bezier(.22,.61,.36,1), border-color .3s cubic-bezier(.22,.61,.36,1); } .ds-ruf svg { width: 1em; height: 1em; flex: none; } @media (hover: hover) and (pointer: fine) { .ds-ruf:hover { background: oklch(80% .115 74 / .12); border-color: var(--honig, oklch(80% .115 74)); } } .ds-ruf:focus-visible { outline: 2px solid var(--honig, oklch(80% .115 74)); outline-offset: 3px; }"
+    },
+    {
+      "name": "Karte (Blatt)",
+      "kind": "card",
+      "refersTo": "blatt",
+      "description": "Das durchgehende Bauteil: stehendes Farbkartenblatt, oben rund, unten scharf.",
+      "html": "<div class=\"ds-blatt\"><h3 class=\"ds-blatt-titel\">Balayage</h3><p class=\"ds-blatt-text\">Weiche Übergänge, von Hand gemalt. Der Ansatz darf mitwachsen.</p></div>",
+      "css": ".ds-blatt { background: var(--karte, oklch(26.5% .030 202)); border: 1px solid var(--linie, oklch(42% .030 200 / .55)); border-radius: var(--bogen-blatt, 1.35rem 1.35rem .25rem .25rem); padding: 2rem; position: relative; } .ds-blatt-titel { font-family: 'Marcellus', Georgia, serif; font-weight: 400; font-size: 1.85rem; line-height: 1.14; letter-spacing: -.008em; margin: 0 0 1rem; color: var(--tinte, oklch(94.5% .014 78)); } .ds-blatt-text { font-family: 'Archivo', system-ui, sans-serif; font-size: 1.0625rem; line-height: 1.62; color: var(--tinte-leise, oklch(79% .018 76)); margin: 0; }"
+    },
+    {
+      "name": "Merkmarke (Preis als Schalter)",
+      "kind": "chip",
+      "refersTo": "merken",
+      "description": "Der Preis selbst ist der Schalter. Kein Symbol daneben — wer 49 € für lang antippt, merkt sich genau diese Länge.",
+      "html": "<button class=\"ds-merken\" type=\"button\" aria-pressed=\"false\">49 €</button> <button class=\"ds-merken\" type=\"button\" aria-pressed=\"true\">69 €</button>",
+      "css": ".ds-merken { font-family: 'Archivo', system-ui, sans-serif; font-size: 1.0625rem; font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; background: none; border: 1px solid transparent; border-radius: 4px; color: var(--honig, oklch(80% .115 74)); cursor: pointer; padding: .22rem .5rem; position: relative; transition: background-color .3s cubic-bezier(.22,.61,.36,1), border-color .3s cubic-bezier(.22,.61,.36,1), color .3s cubic-bezier(.22,.61,.36,1); } .ds-merken::after { content: '+'; position: absolute; top: -.1rem; right: -.15rem; font-size: .7em; line-height: 1; color: var(--tinte-still, oklch(66% .018 74)); opacity: 0; transition: opacity .3s cubic-bezier(.22,.61,.36,1); } .ds-merken[aria-pressed='true'] { background: var(--honig, oklch(80% .115 74)); border-color: var(--honig, oklch(80% .115 74)); color: oklch(22% .04 60); } .ds-merken[aria-pressed='true']::after { content: '✓'; opacity: 1; color: var(--honig, oklch(80% .115 74)); } @media (hover: hover) and (pointer: fine) { .ds-merken:hover { border-color: var(--linie-honig, oklch(80% .115 74 / .30)); } .ds-merken:hover::after { opacity: 1; } } .ds-merken:focus-visible { outline: 2px solid var(--honig, oklch(80% .115 74)); outline-offset: 3px; }"
+    },
+    {
+      "name": "Navigatormarke",
+      "kind": "nav",
+      "refersTo": "navigator-marke",
+      "description": "Die klebende Leiste über den Leistungsgruppen: liegendes Blatt in klein, waagrecht rollbar.",
+      "html": "<nav class=\"ds-navigator\"><ol><li><a href=\"#\" aria-current=\"true\">beratung</a></li><li><a href=\"#\">farbe</a></li><li><a href=\"#\">schnitt</a></li><li><a href=\"#\">hochsteckfrisur</a></li></ol></nav>",
+      "css": ".ds-navigator { padding: .65rem 1.25rem; background: oklch(14% .024 206 / .92); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--linie, oklch(42% .030 200 / .55)); } .ds-navigator ol { display: flex; gap: .4rem; list-style: none; margin: 0; padding: 0; overflow-x: auto; scrollbar-width: none; } .ds-navigator ol::-webkit-scrollbar { display: none; } .ds-navigator a { display: block; white-space: nowrap; text-decoration: none; font-family: 'Marcellus SC', Georgia, serif; font-size: .8rem; letter-spacing: .12em; color: var(--tinte-leise, oklch(79% .018 76)); padding: .45rem .85rem; border: 1px solid transparent; border-radius: .2rem .8rem .8rem .2rem; transition: color .3s cubic-bezier(.22,.61,.36,1), border-color .3s cubic-bezier(.22,.61,.36,1), background-color .3s cubic-bezier(.22,.61,.36,1); } .ds-navigator a[aria-current='true'] { color: var(--honig, oklch(80% .115 74)); border-color: var(--linie-honig, oklch(80% .115 74 / .30)); background: oklch(80% .115 74 / .09); } @media (hover: hover) and (pointer: fine) { .ds-navigator a:hover { color: var(--tinte, oklch(94.5% .014 78)); border-color: var(--linie-hell, oklch(62% .040 198 / .34)); } } .ds-navigator a:focus-visible { outline: 2px solid var(--honig, oklch(80% .115 74)); outline-offset: 3px; }"
+    },
+    {
+      "name": "Preistafel-Zeile",
+      "kind": "custom",
+      "refersTo": "tafel-zeile",
+      "description": "Feste Spalten, gezogene Zeilen. Die Spalten wandern nie, nur ihr Inhalt wechselt.",
+      "html": "<div class=\"ds-tafel\"><div class=\"ds-tafel-kopf\"><span>leistung</span><span>kurz</span><span>lang</span><span>dauer</span></div><div class=\"ds-tafel-zeile\"><span class=\"ds-was\"><span class=\"ds-name\">Strähnen, Folie</span><span class=\"ds-dazu\">inklusive Pflege und Föhnen</span></span><span class=\"ds-preis\">69 €</span><span class=\"ds-preis\">99 €</span><span class=\"ds-dauer\">ca. 2 Std.</span></div></div>",
+      "css": ".ds-tafel { max-width: 58rem; font-family: 'Archivo', system-ui, sans-serif; font-variant-numeric: tabular-nums; } .ds-tafel-kopf { display: grid; grid-template-columns: minmax(0,1fr) 6rem 6rem 5.5rem; gap: 1rem; padding: 0 0 .7rem; border-bottom: 1px solid var(--linie-honig, oklch(80% .115 74 / .30)); font-family: 'Marcellus SC', Georgia, serif; font-size: .74rem; letter-spacing: .2em; color: var(--honig, oklch(80% .115 74)); } .ds-tafel-kopf span:nth-child(n+2) { text-align: right; } .ds-tafel-zeile { display: grid; grid-template-columns: minmax(0,1fr) 6rem 6rem 5.5rem; gap: 1rem; align-items: baseline; padding: .95rem 0; border-bottom: 1px solid var(--linie, oklch(42% .030 200 / .55)); } .ds-was { display: flex; flex-direction: column; gap: .18rem; } .ds-name { color: var(--tinte, oklch(94.5% .014 78)); } .ds-dazu { font-size: .8rem; color: var(--tinte-still, oklch(66% .018 74)); line-height: 1.4; } .ds-preis { text-align: right; color: var(--honig, oklch(80% .115 74)); white-space: nowrap; } .ds-dauer { text-align: right; font-size: 1rem; color: var(--tinte-still, oklch(66% .018 74)); white-space: nowrap; }"
+    },
+    {
+      "name": "Zeilenliste",
+      "kind": "custom",
+      "refersTo": "zeilenliste",
+      "description": "Der Ersatz für die Dreierreihe aus gleich großen Karten. Eine gezogene Zeile hat keine Höhe zu erzwingen.",
+      "html": "<dl class=\"ds-zeilenliste\"><div><dt>Farbe</dt><dd>Ansatz, Strähnen, Balayage. Die Rezeptur bleibt im Haus, damit die nächste Farbe an die letzte anschließt.</dd></div><div><dt>Hochsteckfrisur</dt><dd>Mit Probetermin, wenn der Anlass es verlangt.</dd></div></dl>",
+      "css": ".ds-zeilenliste { margin: 0; display: grid; gap: 0; } .ds-zeilenliste > div { display: grid; grid-template-columns: minmax(0,14rem) minmax(0,1fr); gap: 1rem 2.5rem; padding: 1.5rem 0; border-top: 1px solid var(--linie, oklch(42% .030 200 / .55)); } .ds-zeilenliste > div:last-child { border-bottom: 1px solid var(--linie, oklch(42% .030 200 / .55)); } .ds-zeilenliste dt { font-family: 'Marcellus', Georgia, serif; font-size: 1.85rem; line-height: 1.14; color: var(--tinte, oklch(94.5% .014 78)); } .ds-zeilenliste dd { margin: 0; font-family: 'Archivo', system-ui, sans-serif; font-size: 1.0625rem; line-height: 1.62; color: var(--tinte-leise, oklch(79% .018 76)); max-width: 52ch; }"
+    },
+    {
+      "name": "Fächerblatt",
+      "kind": "custom",
+      "refersTo": "blatt-karte",
+      "description": "Ein Blatt des Farbfächers. Das Farbfeld an der Spitze ist aus dem Foto genau dieser Arbeit gemessen — zwei Proben, Ansatz und Länge.",
+      "html": "<div class=\"ds-blatt-halter\"><button class=\"ds-blatt-karte\" type=\"button\" aria-label=\"Balayage\"><span class=\"ds-blatt-ton\" style=\"--ton-oben:#a27754;--ton-unten:#8a6543\"></span><span class=\"ds-blatt-name\">balayage</span></button></div>",
+      "css": ".ds-blatt-halter { width: 4.2rem; height: 18rem; position: relative; } .ds-blatt-karte { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: stretch; padding: 0 0 2.2rem; border: 0; margin: 0; cursor: pointer; font: inherit; color: var(--papier-tinte, oklch(28% .022 60)); background: var(--papier, oklch(94% .016 82)); border-radius: 2.4rem 2.4rem .25rem .25rem; box-shadow: 0 0 0 1px var(--papier-rand, oklch(86% .022 80)), 0 10px 26px oklch(9% .02 205 / .42); transform-origin: 50% 100%; overflow: hidden; filter: brightness(.9) saturate(.94); transition: transform .5s cubic-bezier(.22,.61,.36,1), box-shadow .5s cubic-bezier(.22,.61,.36,1), filter .5s cubic-bezier(.22,.61,.36,1); } .ds-blatt-ton { height: 38%; flex: none; background: linear-gradient(to bottom, var(--ton-oben), var(--ton-unten)); border-bottom: 1px solid oklch(20% .02 60 / .18); } .ds-blatt-name { flex: 1; display: flex; align-items: center; justify-content: center; writing-mode: vertical-rl; transform: rotate(180deg); font-family: 'Marcellus SC', Georgia, serif; font-size: .88rem; letter-spacing: .13em; padding-block: .8rem 1.6rem; white-space: nowrap; opacity: 0; transition: opacity .5s cubic-bezier(.22,.61,.36,1); } @media (hover: hover) and (pointer: fine) { .ds-blatt-karte:hover { transform: scale(1.03); filter: brightness(1) saturate(1); } .ds-blatt-karte:hover .ds-blatt-name { opacity: .75; } } .ds-blatt-karte:focus-visible { outline: 2px solid var(--honig, oklch(80% .115 74)); outline-offset: -3px; } .ds-blatt-karte:focus-visible .ds-blatt-name { opacity: 1; }"
+    },
+    {
+      "name": "Schild",
+      "kind": "chip",
+      "refersTo": "schild",
+      "description": "Der Anhänger — ein Zustand am Objekt, keine Auszeichnungszeile über einer Überschrift.",
+      "html": "<span class=\"ds-schild\">noch offen bis 19 uhr</span>",
+      "css": ".ds-schild { display: inline-flex; align-items: center; gap: .5rem; font-family: 'Marcellus SC', Georgia, serif; font-size: .8rem; letter-spacing: .16em; color: var(--honig, oklch(80% .115 74)); border: 1px solid var(--linie-honig, oklch(80% .115 74 / .30)); border-radius: 100px; padding: .25rem .8rem; } .ds-schild::before { content: ''; width: .4rem; height: .4rem; border-radius: 50%; background: currentColor; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Die Papeterie des Salons",
+    "overview": "Die Seite ist die Farbkarte, die bei jeder Beratung aufgefächert auf dem Tisch liegt. Der Grund ist das Petrol der Moroccanoil-Regale, die im Laden jede Wand belegen — an der Wand gemessen, nicht gewählt, und für den Bildschirm auf Tintendichte gebracht. Darauf liegen Bauteile aus Karton: Papierweiß, feine Kante, Farbfeld an der Spitze. Die einzige warme Achse ist Haar; ihre fünf Stufen sind über die Arbeitsfotos des Salons gemessen und laufen vom dunklen Ansatz zur hellen Spitze messbar ins Gelbe.\n\nDie Dichte ist ruhig und großzügig: viel Grund, wenige Akzente, keine Kartenwand. Wo andere Salonseiten eine Dreierreihe gleich hoher Kacheln stellen, steht hier eine gezogene Zeilenliste. Bilder tragen ganze Abschnitte vollflächig unter einem mehrstufigen Schleier, statt als Kachel danebenzuliegen. Ornament tritt selten und nur dort auf, wo es inhaltlich etwas bedeutet.\n\nBestätigt abgelehnt: der Baukasten-Hero mit Vollbild, Serifenschrift und Goldrand, und ebenso die weiße Minimal-Antwort darauf. Ebenfalls abgelehnt: Farbschemata aus fremden Projekten — jede Farbe dieser Seite hat einen Beleg im Laden.",
+    "keyCharacteristics": [
+      "Gemessene Farben statt gewählter: jeder Ton stammt aus einem Foto des Ladens oder einer echten Arbeit (werkzeug/farben-messen.mjs, werkzeug/bilder-bauen.mjs).",
+      "Eine einzige Kantensprache, das Farbkartenblatt: oben rund, unten scharf.",
+      "Petrolgrund über die ganze Seite, Papierweiß nur für Bauteile, die Karton sind.",
+      "Feste Stufen in vier Umbruchpunkten statt fließender clamp()-Werte.",
+      "Bewegung ausschließlich ease-out, ausschließlich transform und opacity."
+    ],
+    "rules": [
+      { "name": "Die Messregel", "body": "Keine Farbe der Seite ist ausgedacht. Eine neue Farbe kommt aus einem Foto und wird mit den Werkzeugen in werkzeug/ gemessen, bevor sie in :root steht. Prüftest: zu jedem Token lässt sich das Foto benennen, aus dem es stammt.", "section": "colors" },
+      { "name": "Die Ornamentregel", "body": "Rosé ist niemals Textfarbe. Es erscheint als Punkt, Kante oder Fläche, nie als Buchstabe. Kommt eine dritte Farbe hinzu, gilt für sie dasselbe.", "section": "colors" },
+      { "name": "Die Regel der einen warmen Stimme", "body": "Auf dunklem Grund spricht genau eine warme Farbe: Honig. Preise, Verweise und die aktive Marke tragen sie; sonst nichts. Wird sie zur Fläche, steht der Text darauf in einem dunklen Braunton, nie in Weiß.", "section": "colors" },
+      { "name": "Die Schleierregel", "body": "Text steht nie direkt auf einem Foto. Über jedem Bild liegt ein zweifacher Verlauf in der Grundfarbe: senkrecht in die Abschnittsränder hinein, waagrecht dichter dort, wo Text steht. Unter 60 rem entfällt der seitliche Verlauf und wird durch eine gleichmäßige Überlagerung ersetzt.", "section": "colors" },
+      { "name": "Die Zwei-Stufen-Regel unterhalb der Grundgröße", "body": "Unter dem Fließtext gibt es genau zwei Größen: --s-klein (1 rem, Nebentext) und --s-mini (0,8 rem, nur gesperrte Kapitälchen). Weiter abgestuft wird über die Textfarbe, nicht über die Größe.", "section": "typography" },
+      { "name": "Die Stufenregel", "body": "Schriftgrößen sind feste Werte in vier Umbruchpunkten (Grundzustand, 40 rem, 64 rem, 88 rem), nicht clamp(). Feste Werte kann jeder Browser und jedes Prüfwerkzeug ausrechnen.", "section": "typography" },
+      { "name": "Die Kapitälchenregel", "body": "Weite Laufweite (≥ 0,12 em) gehört ausschließlich Marcellus SC und ausschließlich kurzen Auszeichnungen. Kein Fließtext dieser Seite ist gesperrt. Wird die Auszeichnungsschrift gewechselt, gehört diese Regel geprüft — und mit ihr die abgeschaltete Prüferregel wide-tracking.", "section": "typography" },
+      { "name": "Die Trennregel", "body": "Deutsche Zusammensetzungen werden in Anzeigengröße breiter als ein 320-px-Schirm. Überschriften tragen deshalb overflow-wrap: break-word, unter 30 rem zusätzlich hyphens: auto; das greift, weil lang=\"de\" am <html> steht.", "section": "typography" },
+      { "name": "Die Kopfregel", "body": "Über einer Überschrift steht mehr Luft als darunter: .kopf trägt clamp(2.5rem, 5vw, 6rem) nach unten, der Titel darin 1,5 rem.", "section": "layout" },
+      { "name": "Die Zeilenregel", "body": "Wiederholte Inhalte stehen als gezogene Zeile, nicht als Dreierreihe gleich hoher Karten. Karten erzwingen gleiche Höhe bei ungleich langem Inhalt und hinterlassen Totfläche.", "section": "layout" },
+      { "name": "Die Rasterregel für Arbeiten", "body": "Vier Spalten ab 40 rem, grid-auto-flow: row dense, zwei große Kacheln zu je vier Feldern und acht kleine — genau sechzehn Felder, ein volles Viereck ohne Loch.", "section": "layout" },
+      { "name": "Die Preistafelregel", "body": "Die Spalten wandern nie, nur ihr Inhalt wechselt; die Tafel ist auf 58 rem begrenzt. Unter 46 rem fällt der Tafelkopf weg und jede Zahl trägt ihre Beschriftung selbst über attr(data-was).", "section": "layout" },
+      { "name": "Die Glasregel", "body": "Alles, was klebt oder überlagert, ist getöntes Glas: Petrolgrund mit 0,90–0,98 Deckung plus backdrop-filter: blur(10–18px).", "section": "elevation" },
+      { "name": "Die Flachregel", "body": "Flächen ruhen flach. Ein Schatten ist entweder Material (Karton, Metall) oder Zustand (gezogen, geöffnet) — nie Dekoration auf einer Karte, die ohnehin schon eine Hairline hat.", "section": "elevation" },
+      { "name": "Die Eine-Kante-Regel", "body": "Ein neues Bauteil bekommt eine der beiden Blattformen oder eine echte Pille. Ein frei erfundener Radius ist ein Fehler.", "section": "shapes" }
+    ],
+    "dos": [
+      "Do jede neue Farbe aus einem Foto des Ladens messen und als Token in :root legen — werkzeug/farben-messen.mjs und werkzeug/bilder-bauen.mjs geben die Werte aus.",
+      "Do für jedes neue Bauteil eine der beiden Blattformen nehmen (--bogen-blatt stehend, --bogen-blatt-quer liegend) oder eine echte Pille.",
+      "Do Abstände aus der Reihe --r1 … --r8 nehmen und Größensprünge in die vorhandenen Umbruchpunkte (40 / 64 / 88 rem) legen.",
+      "Do Fotos vollflächig unter dem mehrstufigen Schleier einsetzen und unter 60 rem auf gleichmäßige Überlagerung wechseln.",
+      "Do wiederholte Inhalte als .zeilenliste setzen.",
+      "Do Zahlen in Archivo mit tabular-nums setzen, damit Preise untereinander stehen.",
+      "Do Hover hinter @media (hover: hover) and (pointer: fine) legen und prefers-reduced-motion bedienen.",
+      "Do Einblendungen so bauen, dass der sichtbare Zustand der Ausgangszustand ist und erst .mitskript sie scharf schaltet."
+    ],
+    "donts": [
+      "Don't Rosé als Textfarbe einsetzen — es ist Ornament, an genau einer Achse.",
+      "Don't Honig als Fläche mit weißem Text kombinieren; darauf steht ein dunkler Braunton (oklch(20–22% .04 60)).",
+      "Don't Fließtext sperren. Weite Laufweite gehört ausschließlich kurzen Marcellus-SC-Auszeichnungen.",
+      "Don't clamp() für Schriftgrößen, Seitenrand oder Abschnittshöhe einführen; diese Werte sind bewusst feste Stufen.",
+      "Don't Dreierreihen gleich hoher Karten bauen.",
+      "Don't Layout-Eigenschaften animieren (Höhe, Breite, top) — nur transform und opacity.",
+      "Don't federnde oder zurückschwingende Kurven verwenden; es gibt nur die beiden ease-out-Kurven und die drei Dauern 0,3 / 0,5 / 0,8 s.",
+      "Don't harte, versetzte oder schwarze Schlagschatten setzen; Schatten sind weit, weich und in Petrol getönt.",
+      "Don't Schriften von fremden Servern nachladen — sie liegen in schrift/.",
+      "Don't Symbole aus einer Zeichenschrift verwenden; Symbole sind Inline-SVG mit currentColor und stroke-width: 1.7.",
+      "Don't eine gesperrte Kleinzeile über eine große Überschrift setzen. Im ersten Bildschirm stehen Adresse und Öffnungsstand bewusst darunter."
+    ]
+  }
+}

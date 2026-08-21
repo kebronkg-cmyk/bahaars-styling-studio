@@ -773,8 +773,11 @@ a { color: inherit; }
 }
 .faecher-preis .dauer { font-size: var(--s-klein); color: var(--tinte-still); }
 
+/* Am Telefon steht das Bild über dem Text statt daneben: neben einer
+   schmalen Bildspalte blieb darunter eine hohe leere Fläche stehen. */
 @media (max-width: 30rem) {
-  .faecher-tafel { grid-template-columns: minmax(0, 7rem) minmax(0, 1fr); }
+  .faecher-tafel { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+  .faecher-tafel .arbeit { max-width: 11rem; }
 }
 
 /* ═══ Arbeiten ═════════════════════════════════════════════════════════
