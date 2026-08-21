@@ -132,7 +132,6 @@
   --bogen-blatt:       1.35rem 1.35rem .25rem .25rem;  /* stehendes Blatt */
   --bogen-blatt-quer:  .25rem 100px 100px .25rem;      /* liegendes Blatt */
   --bogen-blatt-spitz: 2.4rem 2.4rem .25rem .25rem;    /* Blatt im Fächer */
-  --bogen-marke:       .2rem .8rem .8rem .2rem;        /* kleine Marke    */
 
   /* ── Muster: feine Strähnen. Sparsam, an zwei Stellen. ─────────────── */
   --muster-straehne:
@@ -1029,7 +1028,7 @@ a { color: inherit; }
   color: var(--tinte-leise);
   padding: .45rem .85rem;
   border: 1px solid transparent;
-  border-radius: var(--bogen-marke);
+  border-radius: var(--bogen-blatt-quer);
   transition: color var(--t1) var(--kurve),
               border-color var(--t1) var(--kurve),
               background-color var(--t1) var(--kurve);
@@ -1343,7 +1342,7 @@ a { color: inherit; }
    keiner Gestaltung gehören.                                              */
 
 html {
-  scrollbar-color: oklch(42% .05 200) var(--grund-tief);
+  scrollbar-color: var(--rollbalken) var(--grund-tief);
   scrollbar-width: thin;
   caret-color: var(--honig);
   accent-color: var(--honig);

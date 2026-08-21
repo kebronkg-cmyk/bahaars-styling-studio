@@ -6,10 +6,10 @@ colors:
   grund-tief: "oklch(12.5% .022 207)"
   feld: "oklch(22.5% .032 203)"
   karte: "oklch(26.5% .030 202)"
-  karte-hoch: "oklch(31% .030 201)"
   tinte: "oklch(94.5% .014 78)"
   tinte-leise: "oklch(79% .018 76)"
   tinte-still: "oklch(66% .018 74)"
+  tinte-hell: "oklch(21% .040 60)"
   ansatz: "oklch(34% .045 55)"
   bronze: "oklch(48% .070 58)"
   karamell: "oklch(64% .095 64)"
@@ -18,11 +18,14 @@ colors:
   papier: "oklch(94% .016 82)"
   papier-rand: "oklch(86% .022 80)"
   papier-tinte: "oklch(28% .022 60)"
-  papier-leise: "oklch(46% .022 62)"
   rose: "oklch(80% .052 8)"
   linie: "oklch(42% .030 200 / .55)"
   linie-hell: "oklch(62% .040 198 / .34)"
   linie-honig: "oklch(80% .115 74 / .30)"
+  kante-hell: "oklch(20% .020 60 / .22)"
+  rollbalken: "oklch(38% .045 200)"
+  rollbalken-hoch: "oklch(50% .060 200)"
+  fremd-grund: "#ffffff"
 typography:
   display:
     fontFamily: "Marcellus, Georgia, serif"
@@ -41,6 +44,15 @@ typography:
     fontSize: "1.5rem → 1.85rem → 2rem → 2.2rem"
     fontWeight: 400
     lineHeight: 1.14
+  preis:
+    fontFamily: "Archivo, system-ui, sans-serif"
+    fontSize: "1.9rem"
+    lineHeight: 1
+    fontFeature: "tabular-nums"
+  marke:
+    fontFamily: "Marcellus, Georgia, serif"
+    fontSize: "1.25rem"
+    fontWeight: 400
   vorspann:
     fontFamily: "Archivo, system-ui, sans-serif"
     fontSize: "1.15rem → 1.3rem → 1.4rem → 1.5rem"
@@ -66,6 +78,8 @@ rounded:
   standard: "6px"
   blatt: "1.35rem 1.35rem .25rem .25rem"
   blatt-quer: ".25rem 100px 100px .25rem"
+  blatt-spitz: "2.4rem 2.4rem .25rem .25rem"
+  marke: ".2rem .8rem .8rem .2rem"
   pille: "100px"
 spacing:
   r1: ".5rem"
@@ -82,7 +96,7 @@ spacing:
 components:
   knopf-voll:
     backgroundColor: "{colors.honig}"
-    textColor: "oklch(20% .04 60)"
+    textColor: "{colors.tinte-hell}"
     typography: "{typography.label}"
     rounded: "{rounded.blatt-quer}"
     padding: ".95rem 1.7rem"
@@ -109,7 +123,7 @@ components:
   blatt-karte:
     backgroundColor: "{colors.papier}"
     textColor: "{colors.papier-tinte}"
-    rounded: "2.4rem 2.4rem .25rem .25rem"
+    rounded: "{rounded.blatt-spitz}"
     padding: "0 0 2.2rem"
   merken:
     backgroundColor: "transparent"
@@ -118,12 +132,12 @@ components:
     padding: ".22rem .5rem"
   merken-aktiv:
     backgroundColor: "{colors.honig}"
-    textColor: "oklch(22% .04 60)"
+    textColor: "{colors.tinte-hell}"
   navigator-marke:
     backgroundColor: "transparent"
     textColor: "{colors.tinte-leise}"
     typography: "{typography.label}"
-    rounded: ".2rem .8rem .8rem .2rem"
+    rounded: "{rounded.marke}"
     padding: ".45rem .85rem"
   navigator-marke-aktiv:
     backgroundColor: "oklch(80% .115 74 / .09)"
@@ -134,6 +148,12 @@ components:
     typography: "{typography.label}"
     rounded: "{rounded.pille}"
     padding: ".25rem .8rem"
+  schildchen-tonleiter:
+    backgroundColor: "{colors.papier}"
+    textColor: "{colors.papier-tinte}"
+    typography: "{typography.label}"
+    rounded: "{rounded.pille}"
+    padding: ".2rem .9rem"
   arbeit-kachel:
     backgroundColor: "{colors.feld}"
     rounded: "{rounded.blatt}"
@@ -173,6 +193,7 @@ Laden.
 - Petrolgrund über die ganze Seite, Papierweiß nur für Bauteile, die Karton sind.
 - Feste Stufen in vier Umbruchpunkten statt fließender `clamp()`-Werte.
 - Bewegung ausschließlich `ease-out`, ausschließlich `transform` und `opacity`.
+- Jeder Gestaltungswert steht als Token in `:root` — auch der Rollbalken.
 
 ## Colors
 
@@ -198,18 +219,33 @@ Eine kalte Grundwelt in Petrol (Farbton 198–207°) mit genau einer warmen Achs
 ### Neutral
 
 - **Grund** (`{colors.grund}`): Seitengrund überall, und zugleich die Farbe
-  jedes Schleiers über einem Foto. **Grund tief** liegt darunter: Fußzeile,
-  Rollbalkenbahn, Textfarbe auf dem gefüllten Knopf.
-- **Feld**, **Karte**, **Karte hoch**: die drei Flächenstufen über dem Grund.
-  Höher heißt näher; es gibt keine vierte Stufe.
-- **Tinte**, **Tinte leise**, **Tinte still**: die Textleiter. Fließtext ist
-  „leise", Hervorhebung und Namen sind „Tinte", Nebenangaben wie Dauer und
-  Zusatz sind „still".
-- **Papier**, **Papier-Rand**, **Papier-Tinte**, **Papier-Leise**: die
-  Kartonwelt. Nur für Bauteile, die tatsächlich Blatt sind — Fächerblätter,
-  das Schildchen der Tonleiter.
-- **Linie**, **Linie hell**, **Linie honig**: Hairlines. Eine Linie ist immer
-  1 px und immer halbdurchsichtig.
+  jedes Schleiers über einem Foto. Für die Schleier liegt der Grund in sechs
+  festen Deckungsstufen bereit (`--grund-96`, `--grund-88`, `--grund-72`,
+  `--grund-52`, `--grund-28`, `--grund-00`); sie sind ausgeschrieben, nicht
+  relativ gerechnet, damit sie in jedem Browser gleich ankommen. **Grund tief**
+  liegt darunter: Fußzeile, Rollbalkenbahn, Auswahlfarbe.
+- **Feld**, **Karte**: die zwei Flächenstufen über dem Grund. Höher heißt
+  näher; es gibt keine dritte.
+- **Tinte**, **Tinte leise**, **Tinte still**: die Textleiter auf dunklem
+  Grund. Fließtext ist „leise", Hervorhebung und Namen sind „Tinte",
+  Nebenangaben wie Dauer und Zusatz sind „still".
+- **Tinte hell** (`{colors.tinte-hell}`): die Gegenrichtung — dunkle Schrift auf
+  hellen Flächen. Ein Wert für beide Fälle, in denen das vorkommt: Text auf dem
+  gefüllten Honigknopf und auf der gedrückten Merkmarke.
+- **Papier**, **Papier-Rand**, **Papier-Tinte**: die Kartonwelt. Nur für
+  Bauteile, die tatsächlich Blatt sind — Fächerblätter, das Schildchen der
+  Tonleiter.
+- **Linie**, **Linie hell**, **Linie honig**: Hairlines auf dunklem Grund.
+  **Kante hell** (`{colors.kante-hell}`) ist dieselbe Rolle auf Papier: die
+  Trennlinie unter dem Farbfeld des Fächerblattes und zwischen den Bändern der
+  Tonleiter. Eine Linie ist immer 1 px und immer halbdurchsichtig.
+- **Rollbalken** und **Rollbalken hoch** (`{colors.rollbalken}`,
+  `{colors.rollbalken-hoch}`): der Griff des Rollbalkens im Ruhe- und im
+  Hover-Zustand, auf einer Bahn aus „Grund tief". Der Rollbalken ist Fläche der
+  Seite und wird deshalb wie eine gestaltet.
+- **Fremd-Grund** (`{colors.fremd-grund}`): der Grund des eingebetteten
+  Buchungsfensters. Ein benannter Fremdkörper — er markiert die einzige Fläche
+  der Seite, die wir nicht gestalten, statt sie unbenannt einzuschleusen.
 
 ### Named Rules
 
@@ -225,13 +261,21 @@ sie dasselbe.
 **Die Regel der einen warmen Stimme.** Auf dunklem Grund spricht genau eine
 warme Farbe: Honig. Preise, Verweise und die aktive Marke tragen sie; sonst
 nichts. Wird sie zur Fläche (gefüllter Knopf, gedrückte Merkmarke), steht der
-Text darauf in einem dunklen Braunton, nie in Weiß.
+Text darauf in „Tinte hell", nie in Weiß.
+
+**Die Ein-Wert-Regel.** Eine Rolle hat einen Wert. Zwei fast gleiche Fassungen
+derselben Sache sind kein Feinschliff, sondern ein Fehler: die dunkle Schrift
+auf hellem Grund ist `--tinte-hell`, die Trennlinie auf Papier ist
+`--kante-hell`, die Mikroschrift ist `--s-mini`. Prüftest: kein
+Gestaltungswert steht außerhalb von `:root`.
 
 **Die Schleierregel.** Text steht nie direkt auf einem Foto. Über jedem Bild
 liegt ein zweifacher Verlauf in der Grundfarbe: senkrecht in die Abschnittsränder
-hinein, waagrecht dichter dort, wo Text steht. Unter 60 rem entfällt der
-seitliche Verlauf und wird durch eine gleichmäßige Überlagerung ersetzt, weil
-er sonst genau in den Text greift.
+hinein, waagrecht dichter dort, wo Text steht. Der waagrechte Verlauf schließt
+an beiden Seiten in der Grundfarbe (`--grund-72` am fernen Rand) und läuft nicht
+mehr auf null aus — sonst steht das Foto an der einen Kante hart gegen den
+Grund. Unter 60 rem entfällt der seitliche Verlauf ganz und wird durch eine
+gleichmäßige Überlagerung ersetzt, weil er sonst genau in den Text greift.
 
 ## Typography
 
@@ -252,11 +296,18 @@ Zeichenvorrat zugeschnitten) — kein Nachladen von fremden Servern.
 - **Headline** (`.titel`, 400, 2,1→4 rem, Zeilenhöhe 1,02): Abschnittsüberschrift.
 - **Title** (`.titel-klein`, 400, 1,5→2,2 rem, Zeilenhöhe 1,14): Unterabschnitt,
   Begriff in der Zeilenliste, Rechtstext-`h2`.
+- **Preis** (`--s-preis`, 1,9 rem, Archivo, Zeilenhöhe 1): die große Zahl. Sie
+  steht an genau zwei Stellen — an der Fächertafel und am Merkzettel — und ist
+  dort die Aussage, nicht die Überschrift darüber.
 - **Vorspann** (400, 1,15→1,5 rem, Zeilenhöhe 1,5, „Tinte leise", max. 34ch):
   der Absatz direkt unter einem Titel.
+- **Marke** (`--s-marke`, 1,25 rem, Marcellus): die Wortmarke in der Kopfzeile,
+  mit gesperrtem Kapitälchen-Zusatz darunter.
 - **Body** (400, 1→1,125 rem, Zeilenhöhe 1,62, Lesespalte 38 rem): Fließtext.
-- **Label** (Marcellus SC, 0,72–0,8 rem, Laufweite 0,12–0,26 em): Knöpfe,
-  Navigatormarken, Tafelkopf, Blattname, Schild, Fußzeilenüberschriften.
+- **Klein** (`--s-klein`, 1 rem): Nebentext — Dauer, Zusatzangaben.
+- **Mini / Label** (`--s-mini`, 0,8 rem, Marcellus SC, Laufweite 0,12–0,26 em):
+  Knöpfe, Navigatormarken, Tafelkopf, Blattname, Schild, Schildchen der
+  Tonleiter, Fußzeilenüberschriften. Eine Größe für alle Mikroschrift.
 - **Zahl** (`.zahl`, Archivo, `tnum`, Laufweite 0,01 em): Preise, Zeiten,
   Dauern — immer gleich breit.
 
@@ -265,7 +316,8 @@ Zeichenvorrat zugeschnitten) — kein Nachladen von fremden Servern.
 **Die Zwei-Stufen-Regel unterhalb der Grundgröße.** Unter dem Fließtext gibt es
 genau zwei Größen: `--s-klein` (1 rem, Nebentext) und `--s-mini` (0,8 rem, nur
 gesperrte Kapitälchen). Weiter abgestuft wird über die Textfarbe, nicht über
-die Größe.
+die Größe. Fünf Mikrogrößen zwischen 0,62 und 0,76 rem sind genau daran
+gescheitert und auf `--s-mini` zusammengelegt.
 
 **Die Stufenregel.** Schriftgrößen sind feste Werte in vier Umbruchpunkten
 (Grundzustand, 40 rem, 64 rem, 88 rem), nicht `clamp()`. Feste Werte kann jeder
@@ -300,16 +352,26 @@ wachsen in drei Sprüngen mit:
 | Kartenpolster | 1,5 rem | 2 rem | 2,25 rem | — |
 
 Weitere Umbruchpunkte im Bestand: 22,5 rem (Buchungstor), 30 rem (Silbentrennung,
-Fächerspanne, Tonleiter), 44/46/48 rem (Preistafel, Gruppenabstand), 58 rem
-(Handymenü), 60 rem (Schleier), 64 rem (Fächerfeld).
+Fächerspanne, Tonleiter), 44 rem (Zeilenliste), 46 rem (Preistafel), 48 rem
+(Hero-Mindesthöhe, Fächerspanne, Gruppenabstand), 58 rem (Handymenü), 60 rem
+(Schleier), 64 rem (Fächerfeld), 72 rem (Gruppenabstand).
 
 **Die Kopfregel.** Über einer Überschrift steht mehr Luft als darunter:
 `.kopf` trägt `clamp(2.5rem, 5vw, 6rem)` nach unten, der Titel darin 1,5 rem.
 
+**Die Hero-Regel.** Der erste Bildschirm (`.flaeche.hero`) hat eine eigene,
+knappere Höhe als jeder andere Abschnitt: 3 rem Polster, ab 48 rem 4 rem und
+`min-height: min(42rem, 76svh)`. Mit der normalen Abschnittspolsterung lag die
+Tonleiter am Fuß erst bei 916 px und damit außerhalb jedes üblichen Fensters.
+Der Inhalt wird per Flex senkrecht zentriert, nicht per Grid — ein Grid-Kind mit
+eigener Höchstbreite zentriert sich in seiner Spur und rückt den Titel aus der
+linken Flucht, in der er auf allen anderen Seiten steht.
+
 **Die Zeilenregel.** Wiederholte Inhalte stehen als gezogene Zeile
-(`.zeilenliste`: 14 rem Begriffsspalte, Rest Beschreibung, Hairline oben, beim
-letzten auch unten), nicht als Dreierreihe gleich hoher Karten. Karten erzwingen
-gleiche Höhe bei ungleich langem Inhalt und hinterlassen Totfläche.
+(`.zeilenliste`: Begriffsspalte 14 rem, ab 44 rem 18 rem, Rest Beschreibung,
+Hairline oben, beim letzten auch unten), nicht als Dreierreihe gleich hoher
+Karten. Karten erzwingen gleiche Höhe bei ungleich langem Inhalt und hinterlassen
+Totfläche. Unter 44 rem fällt die Zeile einspaltig zusammen.
 
 **Die Rasterregel für Arbeiten.** Vier Spalten ab 40 rem, `grid-auto-flow: row
 dense`, zwei große Kacheln zu je vier Feldern und acht kleine — genau sechzehn
@@ -317,9 +379,10 @@ Felder, ein volles Viereck ohne Loch. Sechs Spalten lassen zwei Felder leer, und
 das sieht man.
 
 **Die Preistafelregel.** Die Spalten wandern nie (`1fr 6rem 6rem 5.5rem`), nur
-ihr Inhalt wechselt; die Tafel ist auf 58 rem begrenzt, damit das Auge nicht
-700 px leere Fläche vom Namen zum Preis überqueren muss. Unter 46 rem fällt der
-Tafelkopf weg und jede Zahl trägt ihre Beschriftung selbst über `attr(data-was)`.
+ihr Inhalt wechselt; die Tafel ist auf 58 rem begrenzt und ab 46 rem auf 46 rem
+eingezogen, damit das Auge nicht mehrere hundert Pixel leere Fläche vom Namen
+zum Preis überqueren muss. Unter 46 rem fällt der Tafelkopf weg und jede Zahl
+trägt ihre Beschriftung selbst über `attr(data-was)`.
 
 **Bewegung.** Nur `ease-out`: `--kurve` (`cubic-bezier(.22,.61,.36,1)`) für
 Zustände, `--kurve-weit` (`cubic-bezier(.16,.84,.44,1)`) für weite Wege. Dauern
@@ -332,11 +395,12 @@ sichtbar, erst die Klasse `mitskript` am `<html>` schaltet sie scharf.
 ## Elevation & Depth
 
 Das System ist überwiegend tonal: Tiefe entsteht durch die Flächenleiter
-(Grund → Feld → Karte → Karte hoch) und durch 1-px-Hairlines, nicht durch
-Schatten. Schatten treten nur dort auf, wo ein Gegenstand physisch über einem
-anderen liegt — Kartonblatt über Karton, Bild über Verdunkelung, klebende Leiste
-über der Seite. Sie sind weich, weit und in Petrol getönt (`oklch(5–10% .02 205)`),
-nie schwarz und nie versetzt.
+(Grund → Feld → Karte) und durch 1-px-Hairlines, nicht durch Schatten. Drei
+Stufen reichen; eine vierte war im Bestand und ist beim Aufräumen ersatzlos
+gefallen, weil kein Bauteil sie brauchte. Schatten treten nur dort auf, wo ein
+Gegenstand physisch über einem anderen liegt — Kartonblatt über Karton, Bild
+über Verdunkelung, klebende Leiste über der Seite. Sie sind weich, weit und in
+Petrol getönt (`oklch(5–10% .02 205)`), nie schwarz und nie versetzt.
 
 ### Schattenvokabular
 
@@ -351,6 +415,8 @@ nie schwarz und nie versetzt.
 - **Lupe** (`0 30px 80px oklch(5% .02 205 / .7)`): das Bild im Dialog.
 - **Klebekante** (`0 1px 0 var(--linie)`): die gesetzte Kopfzeile. Eine Linie,
   kein Schlagschatten.
+- **Schildchen** (`0 1px 4px oklch(15% .02 60 / .35)`): das gedruckte
+  Papierschildchen auf der Tonleiter — der einzige Schatten, der auf Papier fällt.
 
 **Die Glasregel.** Alles, was klebt oder überlagert, ist getöntes Glas:
 Petrolgrund mit 0,90–0,98 Deckung plus `backdrop-filter: blur(10–18px)`.
@@ -362,27 +428,26 @@ Karte, die ohnehin schon eine Hairline hat.
 
 ## Shapes
 
-Die Kantensprache kommt vom Farbkartenblatt und hat genau zwei Formen, die
-alles tragen:
+Die Kantensprache kommt vom Farbkartenblatt. Vier benannte Bögen, alle dieselbe
+Form in anderer Größe oder Lage:
 
 - **Stehendes Blatt** (`--bogen-blatt`, `1.35rem 1.35rem .25rem .25rem`): oben
   rund, unten scharf. Karten (`.blatt`), Arbeitskacheln, Bilder in der Lupe.
 - **Liegendes Blatt** (`--bogen-blatt-quer`, `.25rem 100px 100px .25rem`):
   dasselbe Blatt auf der Seite — rund an der Spitze, scharf an der Niete. Alle
-  Knöpfe, die Telefonmarke. Die Navigatormarke ist die verkleinerte Variante
-  (`.2rem .8rem .8rem .2rem`).
-
+  Knöpfe, die Telefonmarke.
+- **Spitzes Blatt** (`--bogen-blatt-spitz`, `2.4rem 2.4rem .25rem .25rem`): das
+  Blatt im Fächer. Derselbe Bogen größer, weil das Blatt höher ist als eine
+  Karte und ein Radius mit der Höhe mitwachsen muss, um gleich zu wirken.
 Daneben nur: 3 px (`--bogen-klein`, Fokusrahmen), 6 px (`--bogen`), 4 px
-(Merkmarke), `100px` für echte Pillen und Kreise (Menüknopf, Lupenknöpfe,
-Schild, Schildchen der Tonleiter, Rollbalken). Das Fächerblatt selbst trägt
-einen größeren Bogen derselben Form (`2.4rem 2.4rem .25rem .25rem`), weil es
-höher ist als eine Karte.
+(Merkmarke) und `100px` für echte Pillen und Kreise (Menüknopf, Lupenknöpfe,
+Schild, Schildchen der Tonleiter, Rollbalken).
 
-Ränder sind immer 1 px und immer halbdurchsichtig. Zwei Muster als SVG-Daten-URI
-stehen bereit und werden sparsam eingesetzt: feine Strähnen (`--muster-straehne`,
-Deckung 0,05) und das gestanzte Loch der Niete (`--muster-raster`, Deckung 0,07).
+Ränder sind immer 1 px und immer halbdurchsichtig. Ein einziges Muster steht als
+SVG-Daten-URI bereit und wird sparsam eingesetzt: feine Strähnen
+(`--muster-straehne`, Deckung 0,05).
 
-**Die Eine-Kante-Regel.** Ein neues Bauteil bekommt eine der beiden Blattformen
+**Die Eine-Kante-Regel.** Ein neues Bauteil bekommt einen der vier Blattbögen
 oder eine echte Pille. Ein frei erfundener Radius ist ein Fehler.
 
 ## Components
@@ -394,7 +459,7 @@ Kapitälchenbeschriftung.
 
 - **Form:** liegendes Blatt (`{rounded.blatt-quer}`), Polster `.95rem 1.7rem`,
   Marcellus SC, 1 rem, Laufweite 0,12 em.
-- **Voll** (`.knopf-voll`): Honigfläche, dunkelbrauner Text. Hover: Honig hell
+- **Voll** (`.knopf-voll`): Honigfläche, Text in „Tinte hell". Hover: Honig hell
   plus `translateY(-2px)`.
 - **Leer** (`.knopf-leer`): transparent, Rand „Linie hell", Text „Tinte".
   Hover: Rand und Text auf Honig, `translateY(-2px)`.
@@ -416,7 +481,7 @@ Kapitälchenbeschriftung.
 - **Merkmarke** (`.merken`): der Preis selbst ist der Schalter — kein Symbol
   daneben. Ruhezustand Honigtext auf transparent mit 4 px Radius; ein „+"
   erscheint bei Hover oben rechts. Gedrückt (`aria-pressed="true"`): Honigfläche,
-  dunkelbrauner Text, „✓" statt „+".
+  Text in „Tinte hell", „✓" statt „+".
 - **Schild** (`.schild`): Pille mit Honigrand, Kapitälchen, vorangestellter
   Punkt aus `currentColor`. Ein Anhänger, kein Auszeichnungsstreifen über einer
   Überschrift.
@@ -427,19 +492,23 @@ Kapitälchenbeschriftung.
 ### Navigation
 
 - **Kopfzeile:** klebend, transparent im Ruhezustand; ab dem ersten Scrollen
-  trägt sie `.gesetzt` — getöntes Glas plus Hairline. Marke in Marcellus 1,25 rem
-  mit gesperrtem Kapitälchen-Zusatz in Honig darunter.
+  trägt sie `.gesetzt` — getöntes Glas plus Hairline. Marke in Marcellus
+  (`--s-marke`, 1,25 rem) mit gesperrtem Kapitälchen-Zusatz in Honig darunter.
 - **Wegweiser:** Archivo 1 rem, „Tinte leise", darunter eine Honiglinie, die aus
   der linken Kante aufzieht (`scaleX(0) → 1`). Die aktuelle Seite trägt sie
   dauerhaft und steht in „Tinte".
 - **Handymenü** (unter 58 rem): Vollflächige Tafel von oben, Petrolglas,
   Einträge in Marcellus 1,35 rem, durch Hairlines getrennt; der Schalter
   verwandelt drei Striche in ein Kreuz (nur `transform` und `opacity`).
-- **Navigator** (Leistungsseite): klebende Leiste über den Gruppen, waagrecht
-  rollbar mit `scroll-snap`, ohne sichtbaren Rollbalken. Weicht beim
-  Runterscrollen nach oben aus (`translateY(-108%)`) und kommt beim Hochscrollen
-  zurück; ein Anker mit Höhe 0 davor liefert die Bezugsposition, weil ein
-  klebendes Element seine Klebeposition meldet.
+- **Navigator** (Leistungsseite): klebende Leiste über den Gruppen, Marken in
+  der kleinen Blattform (`{rounded.marke}`), waagrecht rollbar mit `scroll-snap`,
+  ohne sichtbaren Rollbalken. Weicht beim Runterscrollen nach oben aus
+  (`translateY(-108%)`) und kommt beim Hochscrollen zurück; ein Anker mit Höhe 0
+  davor liefert die Bezugsposition, weil ein klebendes Element seine
+  Klebeposition meldet.
+- **Rollbalken:** der eigene Rollbalken der Seite ist gestaltet, nicht
+  überlassen: Griff in „Rollbalken" (Hover „Rollbalken hoch"), Bahn in „Grund
+  tief", 11 px breit, Pille, 3 px Rand in der Bahnfarbe als Luft.
 
 ### Bilder
 
@@ -458,10 +527,10 @@ Die eine Idee, die es sonst nirgends gibt. Acht Kartonblätter sitzen auf
 derselben Niete am unteren Rand und sind von dort aufgefächert; gedreht wird
 ausschließlich über `transform` um `transform-origin: 50% 100%`.
 
-- **Blatt:** Papierfläche, Blattform mit großem Bogen, oben ein Farbfeld über
-  38 % der Höhe — ein Verlauf aus zwei am Foto genau dieser Arbeit gemessenen
-  Proben (`--ton-oben`, `--ton-unten`). Im Ruhezustand leicht abgedunkelt
-  (`brightness(.9) saturate(.94)`).
+- **Blatt:** Papierfläche, spitze Blattform (`{rounded.blatt-spitz}`), oben ein
+  Farbfeld über 38 % der Höhe — ein Verlauf aus zwei am Foto genau dieser Arbeit
+  gemessenen Proben (`--ton-oben`, `--ton-unten`), darunter eine Trennlinie in
+  „Kante hell". Im Ruhezustand leicht abgedunkelt (`brightness(.9) saturate(.94)`).
 - **Name:** längs am Blatt (`writing-mode: vertical-rl`), Marcellus SC, nur auf
   dem gezogenen Blatt sichtbar; alle anderen tragen ihn im `aria-label`.
 - **Gezogen:** `scale(1.05)`, volle Farbe, Honigkante, weiter Schatten.
@@ -477,12 +546,19 @@ ausschließlich über `transform` um `transform-origin: 50% 100%`.
 ### Die Tonleiter
 
 Derselbe Fächer im geschlossenen Zustand: acht Bänder von der Kante gesehen, in
-denselben acht gemessenen Tönen, über die volle Breite am Fuß des ersten
-Bildschirms. Jedes Band beginnt oben im Grund und endet unten in „Feld", damit
-das Foto in einen Verlauf endet statt an einer Kante. Die Beschriftung sitzt auf
-einem gedruckten Papierschildchen in der Mitte, weil der Ton darunter mal hell,
-mal dunkel ist. Hover dehnt die Bänder (`scaleY(1.22)`) — nie die Höhe, das wäre
-eine Layout-Eigenschaft.
+denselben acht gemessenen Tönen und nach Helligkeit sortiert, über die volle
+Breite am Fuß des ersten Bildschirms (Höhe 3,4 rem, unter 30 rem 2,9 rem). Sie
+ist ein Verweis: ein Antippen führt zur Farbkarte.
+
+- **Band:** jedes beginnt oben im Grund und endet unten in „Feld" — das Foto
+  darüber endet damit in einem Verlauf statt an einer harten Waagrechten, genau
+  wie beim Schleier. Zwischen zwei Bändern steht eine 1-px-Innenlinie in
+  „Kante hell".
+- **Beschriftung:** ein gedrucktes Papierschildchen in der Mitte (Papier,
+  Papier-Tinte, Pille, `--s-mini` mit 0,22 em Laufweite; unter 30 rem 0,14 em),
+  weil der Ton darunter mal hell und mal dunkel ist.
+- **Hover:** die Bänder dehnen sich (`scaleY(1.22)`, Ursprung unten) — nie die
+  Höhe, das wäre eine Layout-Eigenschaft.
 
 ## Do's and Don'ts
 
@@ -491,12 +567,16 @@ eine Layout-Eigenschaft.
 - **Do** jede neue Farbe aus einem Foto des Ladens messen und als Token in
   `:root` legen — `werkzeug/farben-messen.mjs` und `werkzeug/bilder-bauen.mjs`
   geben die Werte aus.
-- **Do** für jedes neue Bauteil eine der beiden Blattformen nehmen
-  (`--bogen-blatt` stehend, `--bogen-blatt-quer` liegend) oder eine echte Pille.
+- **Do** jeden Gestaltungswert benennen, bevor er im Stylesheet steht: auch
+  Rollbalken, Mikroschrift und der Grund eines fremden Fensters haben ein Token.
+- **Do** für jedes neue Bauteil einen der vier Blattbögen nehmen
+  (`--bogen-blatt`, `--bogen-blatt-quer`, `--bogen-blatt-spitz`) oder eine
+  echte Pille.
 - **Do** Abstände aus der Reihe `--r1` … `--r8` nehmen und Größensprünge in die
   vorhandenen Umbruchpunkte (40 / 64 / 88 rem) legen.
-- **Do** Fotos vollflächig unter dem mehrstufigen Schleier einsetzen und unter
-  60 rem auf gleichmäßige Überlagerung wechseln.
+- **Do** Fotos vollflächig unter dem mehrstufigen Schleier einsetzen, den
+  seitlichen Verlauf an beiden Seiten schließen und unter 60 rem auf
+  gleichmäßige Überlagerung wechseln.
 - **Do** wiederholte Inhalte als `.zeilenliste` setzen.
 - **Do** Zahlen in Archivo mit `tabular-nums` setzen, damit Preise untereinander
   stehen.
@@ -508,8 +588,11 @@ eine Layout-Eigenschaft.
 ### Don't:
 
 - **Don't** Rosé als Textfarbe einsetzen — es ist Ornament, an genau einer Achse.
-- **Don't** Honig als Fläche mit weißem Text kombinieren; darauf steht ein
-  dunkler Braunton (`oklch(20–22% .04 60)`).
+- **Don't** Honig als Fläche mit weißem Text kombinieren; darauf steht
+  `--tinte-hell`.
+- **Don't** eine zweite, fast gleiche Fassung eines vorhandenen Tokens anlegen —
+  es gibt eine dunkle Schrift auf hell, eine Trennlinie auf Papier, eine
+  Mikroschriftgröße.
 - **Don't** Fließtext sperren. Weite Laufweite gehört ausschließlich kurzen
   Marcellus-SC-Auszeichnungen.
 - **Don't** `clamp()` für Schriftgrößen, Seitenrand oder Abschnittshöhe
