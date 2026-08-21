@@ -32,6 +32,11 @@ for (const [name, viewport] of [['desktop', { width: 1440, height: 1000 }],
      Bewegung, die der nächste sofort unterbricht — der Durchlauf kommt dann
      nie unten an, und auf dem Bild fehlt die halbe Seite. */
   await page.addStyleTag({ content: 'html { scroll-behavior: auto !important; }' });
+  /* Ganzseiten-Aufnahmen malen Bilder, die noch faul geladen sind, als
+     leeren Kasten. Das sah dreimal nach einem kaputten Bild aus, obwohl im
+     Browser alles stand. Deshalb vor der Aufnahme alles scharf stellen und
+     auf das Dekodieren warten. */
+  await page.evaluate(() => { for (const b of document.images) b.loading = 'eager'; });
   await page.evaluate(async () => {
     const hoehe = document.documentElement.scrollHeight;
     for (let y = 0; y < hoehe; y += Math.round(innerHeight * 0.6)) {
@@ -58,6 +63,7 @@ for (const [name, viewport] of [['desktop', { width: 1440, height: 1000 }],
   if (versteckt.length) fehler.push(`unsichtbar: ${versteckt.join(', ')}`);
 
   const datei = `${ziel}-${name}.png`;
+  await page.evaluate(() => Promise.all([...document.images].map((b) => b.decode().catch(() => {}))));
   await page.screenshot({ path: datei, fullPage: !anker });
 
   // Und nachsehen, ob die Datei die Maße hat, die sie haben soll.

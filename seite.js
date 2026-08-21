@@ -275,6 +275,7 @@
     }, { passive: true });
 
     // Welche Gruppe steht gerade an?
+    const streifen = $('ol', navigator_);
     const marken = $$('a[href^="#"]', navigator_);
     const ziele = marken.map((a) => document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
     if (ziele.length && 'IntersectionObserver' in window) {
@@ -284,8 +285,16 @@
         const oben = ziele.find((z) => sichtbar.has(z));
         marken.forEach((a, i) => a.setAttribute('aria-current', String(ziele[i] === oben)));
         const treffer = marken.find((a) => a.getAttribute('aria-current') === 'true');
-        // Der Navigator scrollt die aktive Marke in sein Sichtfeld.
-        if (treffer) treffer.scrollIntoView({ inline: 'nearest', block: 'nearest', behavior: ruhig() ? 'auto' : 'smooth' });
+        /* Die aktive Marke wandert in das Sichtfeld des Streifens — und
+           zwar nur dort. scrollIntoView scrollt jeden scrollbaren Vorfahren
+           mit, also auch die Seite: Ein Klick im Navigator löste damit zwei
+           Bewegungen gleichzeitig aus, die zweite überschrieb das Ziel der
+           ersten, und die Seite blieb weit über der Gruppe stehen. Gemessen:
+           Sprung auf #umformen (offsetTop 1581) endete bei 628.           */
+        if (treffer && streifen) {
+          const links = treffer.offsetLeft - (streifen.clientWidth - treffer.offsetWidth) / 2;
+          streifen.scrollTo({ left: Math.max(0, links), behavior: ruhig() ? 'auto' : 'smooth' });
+        }
       }, { rootMargin: '-25% 0px -60% 0px' });
       ziele.forEach((z) => b.observe(z));
     }

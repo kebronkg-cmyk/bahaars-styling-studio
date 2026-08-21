@@ -1,316 +1,404 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-21T10:00:00Z",
+  "generatedAt": "2026-08-21T14:00:00Z",
   "title": "Gestaltungssystem: BaHaar's Styling Studio",
   "extensions": {
     "colorMeta": {
       "grund": {
         "role": "neutral",
-        "displayName": "Petrolgrund",
-        "canonical": "oklch(17.5% .028 205)",
-        "note": "Gemessen an den Moroccanoil-Regalen im Salon: oklch(61.3% .053 200.8), auf Tintendichte gebracht.",
+        "displayName": "Weißgrund",
+        "canonical": "oklch(99% .004 200)",
+        "note": "Der helle Laden: weiß gefliest, Tageslicht von der Straße. Ein Hauch Türkis, damit das Weiß zur Seite gehört.",
         "tonalRamp": [
-          "oklch(12.5% .028 205)",
-          "oklch(17.5% .028 205)",
-          "oklch(22.5% .028 205)",
-          "oklch(31% .028 205)",
-          "oklch(45% .028 205)",
-          "oklch(60% .028 205)",
-          "oklch(78% .028 205)",
-          "oklch(95% .028 205)"
+          "oklch(97% 0.004 200)",
+          "oklch(93% 0.004 200)",
+          "oklch(87% 0.004 200)",
+          "oklch(78% 0.004 200)",
+          "oklch(66% 0.004 200)",
+          "oklch(52% 0.004 200)",
+          "oklch(38% 0.004 200)",
+          "oklch(24% 0.004 200)"
         ]
       },
       "grund-tief": {
         "role": "neutral",
-        "displayName": "Petrol tief",
-        "canonical": "oklch(12.5% .022 207)",
+        "displayName": "Grund tief",
+        "canonical": "oklch(95% .018 198)",
+        "note": "Die tiefste Fläche der Seite: Fußzeile und Rollbalkenbahn.",
         "tonalRamp": [
-          "oklch(12.5% .022 207)",
-          "oklch(18% .022 207)",
-          "oklch(25% .022 207)",
-          "oklch(35% .022 207)",
-          "oklch(48% .022 207)",
-          "oklch(62% .022 207)",
-          "oklch(79% .022 207)",
-          "oklch(95% .022 207)"
+          "oklch(97% 0.018 198)",
+          "oklch(93% 0.018 198)",
+          "oklch(87% 0.018 198)",
+          "oklch(78% 0.018 198)",
+          "oklch(66% 0.018 198)",
+          "oklch(52% 0.018 198)",
+          "oklch(38% 0.018 198)",
+          "oklch(24% 0.018 198)"
         ]
       },
       "feld": {
         "role": "neutral",
         "displayName": "Feld",
-        "canonical": "oklch(22.5% .032 203)",
+        "canonical": "oklch(97% .013 198)",
+        "note": "Abgesetzter Abschnitt, eine Spur türkiser als der Grund.",
         "tonalRamp": [
-          "oklch(15% .032 203)",
-          "oklch(22.5% .032 203)",
-          "oklch(30% .032 203)",
-          "oklch(40% .032 203)",
-          "oklch(52% .032 203)",
-          "oklch(65% .032 203)",
-          "oklch(80% .032 203)",
-          "oklch(95% .032 203)"
+          "oklch(97% 0.013 198)",
+          "oklch(93% 0.013 198)",
+          "oklch(87% 0.013 198)",
+          "oklch(78% 0.013 198)",
+          "oklch(66% 0.013 198)",
+          "oklch(52% 0.013 198)",
+          "oklch(38% 0.013 198)",
+          "oklch(24% 0.013 198)"
         ]
       },
       "karte": {
         "role": "neutral",
-        "displayName": "Kartenfläche",
-        "canonical": "oklch(26.5% .030 202)",
+        "displayName": "Karte",
+        "canonical": "oklch(100% 0 0)",
+        "note": "Reines Weiß. Hebt ein Bauteil vom Grund ab.",
         "tonalRamp": [
-          "oklch(15% .030 202)",
-          "oklch(22% .030 202)",
-          "oklch(26.5% .030 202)",
-          "oklch(38% .030 202)",
-          "oklch(50% .030 202)",
-          "oklch(64% .030 202)",
-          "oklch(80% .030 202)",
-          "oklch(95% .030 202)"
+          "oklch(97% 0 0)",
+          "oklch(93% 0 0)",
+          "oklch(87% 0 0)",
+          "oklch(78% 0 0)",
+          "oklch(66% 0 0)",
+          "oklch(52% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(24% 0 0)"
         ]
       },
       "tinte": {
         "role": "neutral",
         "displayName": "Tinte",
-        "canonical": "oklch(94.5% .014 78)",
+        "canonical": "oklch(26% .040 205)",
+        "note": "Dunkles Petrol statt Grau — ein grauer Text macht eine helle Seite schmutzig.",
         "tonalRamp": [
-          "oklch(15% .014 78)",
-          "oklch(28% .014 78)",
-          "oklch(40% .014 78)",
-          "oklch(52% .014 78)",
-          "oklch(66% .014 78)",
-          "oklch(79% .014 78)",
-          "oklch(88% .014 78)",
-          "oklch(94.5% .014 78)"
+          "oklch(97% 0.04 205)",
+          "oklch(93% 0.04 205)",
+          "oklch(87% 0.04 205)",
+          "oklch(78% 0.04 205)",
+          "oklch(66% 0.04 205)",
+          "oklch(52% 0.04 205)",
+          "oklch(38% 0.04 205)",
+          "oklch(24% 0.04 205)"
         ]
       },
       "tinte-leise": {
         "role": "neutral",
         "displayName": "Tinte leise",
-        "canonical": "oklch(79% .018 76)",
+        "canonical": "oklch(40% .032 203)",
+        "note": "Fließtext.",
         "tonalRamp": [
-          "oklch(15% .018 76)",
-          "oklch(28% .018 76)",
-          "oklch(40% .018 76)",
-          "oklch(53% .018 76)",
-          "oklch(66% .018 76)",
-          "oklch(79% .018 76)",
-          "oklch(88% .018 76)",
-          "oklch(95% .018 76)"
+          "oklch(97% 0.032 203)",
+          "oklch(93% 0.032 203)",
+          "oklch(87% 0.032 203)",
+          "oklch(78% 0.032 203)",
+          "oklch(66% 0.032 203)",
+          "oklch(52% 0.032 203)",
+          "oklch(38% 0.032 203)",
+          "oklch(24% 0.032 203)"
         ]
       },
       "tinte-still": {
         "role": "neutral",
         "displayName": "Tinte still",
-        "canonical": "oklch(66% .018 74)",
+        "canonical": "oklch(47% .026 202)",
+        "note": "Nebenangaben: Dauer, Zusatz, Bildunterschrift.",
         "tonalRamp": [
-          "oklch(15% .018 74)",
-          "oklch(28% .018 74)",
-          "oklch(40% .018 74)",
-          "oklch(53% .018 74)",
-          "oklch(66% .018 74)",
-          "oklch(79% .018 74)",
-          "oklch(88% .018 74)",
-          "oklch(95% .018 74)"
+          "oklch(97% 0.026 202)",
+          "oklch(93% 0.026 202)",
+          "oklch(87% 0.026 202)",
+          "oklch(78% 0.026 202)",
+          "oklch(66% 0.026 202)",
+          "oklch(52% 0.026 202)",
+          "oklch(38% 0.026 202)",
+          "oklch(24% 0.026 202)"
         ]
-      },
-      "honig": {
-        "role": "primary",
-        "displayName": "Honig — Haarspitze",
-        "canonical": "oklch(80% .115 74)",
-        "note": "Helles Ende der gemessenen Haarachse (Farbton 53–78° über alle Arbeitsfotos).",
-        "tonalRamp": [
-          "oklch(15% .115 74)",
-          "oklch(28% .115 74)",
-          "oklch(40% .115 74)",
-          "oklch(53% .115 74)",
-          "oklch(66% .115 74)",
-          "oklch(80% .115 74)",
-          "oklch(88% .115 74)",
-          "oklch(95% .115 74)"
-        ]
-      },
-      "honig-hell": {
-        "role": "primary",
-        "displayName": "Honig hell",
-        "canonical": "oklch(88% .075 78)",
-        "tonalRamp": [
-          "oklch(15% .075 78)",
-          "oklch(28% .075 78)",
-          "oklch(41% .075 78)",
-          "oklch(54% .075 78)",
-          "oklch(67% .075 78)",
-          "oklch(80% .075 78)",
-          "oklch(88% .075 78)",
-          "oklch(95% .075 78)"
-        ]
-      },
-      "karamell": {
-        "role": "primary",
-        "displayName": "Karamell — Haarlänge",
-        "canonical": "oklch(64% .095 64)",
-        "tonalRamp": [
-          "oklch(15% .095 64)",
-          "oklch(28% .095 64)",
-          "oklch(40% .095 64)",
-          "oklch(52% .095 64)",
-          "oklch(64% .095 64)",
-          "oklch(78% .095 64)",
-          "oklch(88% .095 64)",
-          "oklch(95% .095 64)"
-        ]
-      },
-      "bronze": {
-        "role": "primary",
-        "displayName": "Bronze",
-        "canonical": "oklch(48% .070 58)",
-        "tonalRamp": [
-          "oklch(15% .070 58)",
-          "oklch(27% .070 58)",
-          "oklch(38% .070 58)",
-          "oklch(48% .070 58)",
-          "oklch(62% .070 58)",
-          "oklch(75% .070 58)",
-          "oklch(87% .070 58)",
-          "oklch(95% .070 58)"
-        ]
-      },
-      "ansatz": {
-        "role": "primary",
-        "displayName": "Ansatz — dunkler Haaransatz",
-        "canonical": "oklch(34% .045 55)",
-        "tonalRamp": [
-          "oklch(15% .045 55)",
-          "oklch(24% .045 55)",
-          "oklch(34% .045 55)",
-          "oklch(46% .045 55)",
-          "oklch(58% .045 55)",
-          "oklch(72% .045 55)",
-          "oklch(85% .045 55)",
-          "oklch(95% .045 55)"
-        ]
-      },
-      "rose": {
-        "role": "secondary",
-        "displayName": "Rosé — Wand im Brautfoto",
-        "canonical": "oklch(80% .052 8)",
-        "note": "Farbton 6–8°, gemessen. Ausschließlich Ornament auf der Brautachse, nie Textfarbe.",
-        "tonalRamp": [
-          "oklch(15% .052 8)",
-          "oklch(28% .052 8)",
-          "oklch(40% .052 8)",
-          "oklch(53% .052 8)",
-          "oklch(66% .052 8)",
-          "oklch(80% .052 8)",
-          "oklch(88% .052 8)",
-          "oklch(95% .052 8)"
-        ]
-      },
-      "papier": {
-        "role": "tertiary",
-        "displayName": "Kartonweiß",
-        "canonical": "oklch(94% .016 82)",
-        "tonalRamp": [
-          "oklch(15% .016 82)",
-          "oklch(28% .016 82)",
-          "oklch(40% .016 82)",
-          "oklch(53% .016 82)",
-          "oklch(66% .016 82)",
-          "oklch(80% .016 82)",
-          "oklch(88% .016 82)",
-          "oklch(94% .016 82)"
-        ]
-      },
-      "papier-rand": {
-        "role": "tertiary",
-        "displayName": "Kartonkante",
-        "canonical": "oklch(86% .022 80)",
-        "tonalRamp": [
-          "oklch(15% .022 80)",
-          "oklch(28% .022 80)",
-          "oklch(40% .022 80)",
-          "oklch(53% .022 80)",
-          "oklch(66% .022 80)",
-          "oklch(79% .022 80)",
-          "oklch(86% .022 80)",
-          "oklch(95% .022 80)"
-        ]
-      },
-      "papier-tinte": {
-        "role": "tertiary",
-        "displayName": "Karton-Tinte",
-        "canonical": "oklch(28% .022 60)",
-        "tonalRamp": [
-          "oklch(15% .022 60)",
-          "oklch(28% .022 60)",
-          "oklch(40% .022 60)",
-          "oklch(52% .022 60)",
-          "oklch(65% .022 60)",
-          "oklch(78% .022 60)",
-          "oklch(88% .022 60)",
-          "oklch(95% .022 60)"
-        ]
-      },
-      "linie": {
-        "role": "neutral",
-        "displayName": "Hairline",
-        "canonical": "oklch(42% .030 200 / .55)"
-      },
-      "linie-hell": {
-        "role": "neutral",
-        "displayName": "Hairline hell",
-        "canonical": "oklch(62% .040 198 / .34)"
-      },
-      "linie-honig": {
-        "role": "primary",
-        "displayName": "Hairline Honig",
-        "canonical": "oklch(80% .115 74 / .30)"
       },
       "tinte-hell": {
         "role": "neutral",
         "displayName": "Tinte hell",
-        "canonical": "oklch(21% .040 60)",
-        "note": "Dunkle Schrift auf hellen Flächen — Honigknopf und gedrückte Merkmarke. Ersetzt zwei fast gleiche Einzelfassungen.",
+        "canonical": "oklch(99% .004 200)",
+        "note": "Schrift auf Türkisflächen.",
         "tonalRamp": [
-          "oklch(15% .040 60)",
-          "oklch(21% .040 60)",
-          "oklch(32% .040 60)",
-          "oklch(45% .040 60)",
-          "oklch(58% .040 60)",
-          "oklch(72% .040 60)",
-          "oklch(85% .040 60)",
-          "oklch(95% .040 60)"
+          "oklch(97% 0.004 200)",
+          "oklch(93% 0.004 200)",
+          "oklch(87% 0.004 200)",
+          "oklch(78% 0.004 200)",
+          "oklch(66% 0.004 200)",
+          "oklch(52% 0.004 200)",
+          "oklch(38% 0.004 200)",
+          "oklch(24% 0.004 200)"
         ]
+      },
+      "auf-tuerkis": {
+        "role": "neutral",
+        "displayName": "Auf Türkis",
+        "canonical": "oklch(88% .030 200)",
+        "note": "Nebenschrift auf der Türkisbahn.",
+        "tonalRamp": [
+          "oklch(97% 0.03 200)",
+          "oklch(93% 0.03 200)",
+          "oklch(87% 0.03 200)",
+          "oklch(78% 0.03 200)",
+          "oklch(66% 0.03 200)",
+          "oklch(52% 0.03 200)",
+          "oklch(38% 0.03 200)",
+          "oklch(24% 0.03 200)"
+        ]
+      },
+      "tuerkis": {
+        "role": "primary",
+        "displayName": "Türkis",
+        "canonical": "oklch(48% .105 202)",
+        "note": "Gemessen an den Moroccanoil-Regalen im Salon: oklch(61,3% .053 200,8), auf Schriftdichte gebracht — 48 % Helligkeit, damit sie auf Weiß über 4,5 : 1 liegt.",
+        "tonalRamp": [
+          "oklch(97% 0.105 202)",
+          "oklch(93% 0.105 202)",
+          "oklch(87% 0.105 202)",
+          "oklch(78% 0.105 202)",
+          "oklch(66% 0.105 202)",
+          "oklch(52% 0.105 202)",
+          "oklch(38% 0.105 202)",
+          "oklch(24% 0.105 202)"
+        ]
+      },
+      "tuerkis-hell": {
+        "role": "primary",
+        "displayName": "Türkis hell",
+        "canonical": "oklch(66% .105 200)",
+        "note": "Ausschließlich Hover-Zustand des gefüllten Knopfs.",
+        "tonalRamp": [
+          "oklch(97% 0.105 200)",
+          "oklch(93% 0.105 200)",
+          "oklch(87% 0.105 200)",
+          "oklch(78% 0.105 200)",
+          "oklch(66% 0.105 200)",
+          "oklch(52% 0.105 200)",
+          "oklch(38% 0.105 200)",
+          "oklch(24% 0.105 200)"
+        ]
+      },
+      "tuerkis-blass": {
+        "role": "primary",
+        "displayName": "Türkis blass",
+        "canonical": "oklch(93% .035 198)",
+        "note": "Beschriftung auf der Türkisfläche, Hintergrund der aktiven Navigatormarke.",
+        "tonalRamp": [
+          "oklch(97% 0.035 198)",
+          "oklch(93% 0.035 198)",
+          "oklch(87% 0.035 198)",
+          "oklch(78% 0.035 198)",
+          "oklch(66% 0.035 198)",
+          "oklch(52% 0.035 198)",
+          "oklch(38% 0.035 198)",
+          "oklch(24% 0.035 198)"
+        ]
+      },
+      "tuerkis-tief": {
+        "role": "primary",
+        "displayName": "Türkis tief",
+        "canonical": "oklch(38% .080 204)",
+        "note": "Nur als Fläche, nur einmal: die Türkisbahn.",
+        "tonalRamp": [
+          "oklch(97% 0.08 204)",
+          "oklch(93% 0.08 204)",
+          "oklch(87% 0.08 204)",
+          "oklch(78% 0.08 204)",
+          "oklch(66% 0.08 204)",
+          "oklch(52% 0.08 204)",
+          "oklch(38% 0.08 204)",
+          "oklch(24% 0.08 204)"
+        ]
+      },
+      "haar-ansatz": {
+        "role": "accent",
+        "displayName": "Haar Ansatz",
+        "canonical": "oklch(34% .045 55)",
+        "note": "Dunkelste Stufe der gemessenen Haarachse. Material, nie Schrift.",
+        "tonalRamp": [
+          "oklch(97% 0.045 55)",
+          "oklch(93% 0.045 55)",
+          "oklch(87% 0.045 55)",
+          "oklch(78% 0.045 55)",
+          "oklch(66% 0.045 55)",
+          "oklch(52% 0.045 55)",
+          "oklch(38% 0.045 55)",
+          "oklch(24% 0.045 55)"
+        ]
+      },
+      "haar-bronze": {
+        "role": "accent",
+        "displayName": "Haar Bronze",
+        "canonical": "oklch(48% .070 58)",
+        "note": "Zweite Stufe der Haarachse.",
+        "tonalRamp": [
+          "oklch(97% 0.07 58)",
+          "oklch(93% 0.07 58)",
+          "oklch(87% 0.07 58)",
+          "oklch(78% 0.07 58)",
+          "oklch(66% 0.07 58)",
+          "oklch(52% 0.07 58)",
+          "oklch(38% 0.07 58)",
+          "oklch(24% 0.07 58)"
+        ]
+      },
+      "haar-karamell": {
+        "role": "accent",
+        "displayName": "Haar Karamell",
+        "canonical": "oklch(64% .095 64)",
+        "note": "Dritte Stufe der Haarachse.",
+        "tonalRamp": [
+          "oklch(97% 0.095 64)",
+          "oklch(93% 0.095 64)",
+          "oklch(87% 0.095 64)",
+          "oklch(78% 0.095 64)",
+          "oklch(66% 0.095 64)",
+          "oklch(52% 0.095 64)",
+          "oklch(38% 0.095 64)",
+          "oklch(24% 0.095 64)"
+        ]
+      },
+      "haar-hell": {
+        "role": "accent",
+        "displayName": "Haar hell",
+        "canonical": "oklch(78% .085 74)",
+        "note": "Hellste Stufe der Haarachse: die Spitze.",
+        "tonalRamp": [
+          "oklch(97% 0.085 74)",
+          "oklch(93% 0.085 74)",
+          "oklch(87% 0.085 74)",
+          "oklch(78% 0.085 74)",
+          "oklch(66% 0.085 74)",
+          "oklch(52% 0.085 74)",
+          "oklch(38% 0.085 74)",
+          "oklch(24% 0.085 74)"
+        ]
+      },
+      "papier": {
+        "role": "accent",
+        "displayName": "Papier",
+        "canonical": "oklch(98.5% .012 88)",
+        "note": "Der Karton der Farbkartenblätter, eine Spur wärmer als der Grund.",
+        "tonalRamp": [
+          "oklch(97% 0.012 88)",
+          "oklch(93% 0.012 88)",
+          "oklch(87% 0.012 88)",
+          "oklch(78% 0.012 88)",
+          "oklch(66% 0.012 88)",
+          "oklch(52% 0.012 88)",
+          "oklch(38% 0.012 88)",
+          "oklch(24% 0.012 88)"
+        ]
+      },
+      "papier-rand": {
+        "role": "accent",
+        "displayName": "Papier Rand",
+        "canonical": "oklch(88% .018 85)",
+        "note": "Der gezeichnete Blattrand.",
+        "tonalRamp": [
+          "oklch(97% 0.018 85)",
+          "oklch(93% 0.018 85)",
+          "oklch(87% 0.018 85)",
+          "oklch(78% 0.018 85)",
+          "oklch(66% 0.018 85)",
+          "oklch(52% 0.018 85)",
+          "oklch(38% 0.018 85)",
+          "oklch(24% 0.018 85)"
+        ]
+      },
+      "papier-tinte": {
+        "role": "accent",
+        "displayName": "Papier Tinte",
+        "canonical": "oklch(30% .025 60)",
+        "note": "Schrift auf Karton.",
+        "tonalRamp": [
+          "oklch(97% 0.025 60)",
+          "oklch(93% 0.025 60)",
+          "oklch(87% 0.025 60)",
+          "oklch(78% 0.025 60)",
+          "oklch(66% 0.025 60)",
+          "oklch(52% 0.025 60)",
+          "oklch(38% 0.025 60)",
+          "oklch(24% 0.025 60)"
+        ]
+      },
+      "rose": {
+        "role": "accent",
+        "displayName": "Rosé",
+        "canonical": "oklch(64% .095 8)",
+        "note": "Gemessen an der Wand im Brautfoto. Ornament an genau einer Achse, niemals Text.",
+        "tonalRamp": [
+          "oklch(97% 0.095 8)",
+          "oklch(93% 0.095 8)",
+          "oklch(87% 0.095 8)",
+          "oklch(78% 0.095 8)",
+          "oklch(66% 0.095 8)",
+          "oklch(52% 0.095 8)",
+          "oklch(38% 0.095 8)",
+          "oklch(24% 0.095 8)"
+        ]
+      },
+      "glas": {
+        "role": "neutral",
+        "displayName": "glas",
+        "canonical": "oklch(99% .004 200 / .86)"
+      },
+      "glas-dicht": {
+        "role": "neutral",
+        "displayName": "glas-dicht",
+        "canonical": "oklch(99% .004 200 / .94)"
+      },
+      "glas-voll": {
+        "role": "neutral",
+        "displayName": "glas-voll",
+        "canonical": "oklch(99% .004 200 / .98)"
+      },
+      "linie": {
+        "role": "neutral",
+        "displayName": "linie",
+        "canonical": "oklch(55% .025 200 / .28)"
+      },
+      "linie-hell": {
+        "role": "neutral",
+        "displayName": "linie-hell",
+        "canonical": "oklch(60% .030 198 / .16)"
+      },
+      "linie-akzent": {
+        "role": "neutral",
+        "displayName": "linie-akzent",
+        "canonical": "oklch(48% .105 202 / .32)"
+      },
+      "linie-auf-tuerkis": {
+        "role": "neutral",
+        "displayName": "linie-auf-tuerkis",
+        "canonical": "oklch(99% .004 200 / .24)"
       },
       "kante-hell": {
         "role": "neutral",
-        "displayName": "Kante hell",
-        "canonical": "oklch(20% .020 60 / .22)",
-        "note": "Trennlinie auf Papier: unter dem Farbfeld des Fächerblattes und zwischen den Bändern der Tonleiter. Ersetzt drei Fassungen."
+        "displayName": "kante-hell",
+        "canonical": "oklch(30% .020 60 / .16)"
+      },
+      "kante-perle": {
+        "role": "neutral",
+        "displayName": "kante-perle",
+        "canonical": "oklch(40% .050 60 / .35)"
       },
       "rollbalken": {
         "role": "neutral",
-        "displayName": "Rollbalken",
-        "canonical": "oklch(38% .045 200)",
-        "note": "Griff des Rollbalkens. Bahn ist --grund-tief.",
-        "tonalRamp": [
-          "oklch(15% .045 200)",
-          "oklch(26% .045 200)",
-          "oklch(38% .045 200)",
-          "oklch(50% .045 200)",
-          "oklch(62% .045 200)",
-          "oklch(75% .045 200)",
-          "oklch(87% .045 200)",
-          "oklch(95% .045 200)"
-        ]
+        "displayName": "rollbalken",
+        "canonical": "oklch(80% .030 200)"
       },
       "rollbalken-hoch": {
         "role": "neutral",
-        "displayName": "Rollbalken hoch",
-        "canonical": "oklch(50% .060 200)",
-        "note": "Der Griff im Hover-Zustand."
+        "displayName": "rollbalken-hoch",
+        "canonical": "oklch(66% .055 200)"
       },
       "fremd-grund": {
         "role": "neutral",
-        "displayName": "Fremder Grund",
-        "canonical": "#ffffff",
-        "note": "Der Grund des eingebetteten Buchungsfensters — die einzige Fläche der Seite, die wir nicht gestalten. Benannt, damit sie nicht unbenannt einschleicht."
+        "displayName": "fremd-grund",
+        "canonical": "#ffffff"
       }
     },
     "typographyMeta": {
@@ -351,43 +439,12 @@
         "purpose": "Die Marke in der Kopfzeile (--s-marke, 1,25 rem, Marcellus) mit gesperrtem Kapitälchen-Zusatz darunter."
       }
     },
-    "shadows": [
-      {
-        "name": "kante",
-        "value": "0 0 0 1px var(--papier-rand)",
-        "purpose": "Geschlossenes Fächerblatt — ein gezeichneter Blattrand, kein Schatten."
-      },
-      {
-        "name": "blatt-liegend",
-        "value": "0 0 0 1px var(--papier-rand), 0 10px 26px oklch(9% .02 205 / .42)",
-        "purpose": "Fächerblatt im aufgefächerten Ruhezustand."
-      },
-      {
-        "name": "blatt-gezogen",
-        "value": "0 0 0 1px var(--honig), 0 18px 40px oklch(8% .02 205 / .6)",
-        "purpose": "Gewähltes Fächerblatt. Auf der Brautachse steht var(--rose) statt Honig."
-      },
-      {
-        "name": "niete",
-        "value": "0 0 0 1px var(--linie-honig), 0 6px 18px oklch(10% .02 205 / .5)",
-        "purpose": "Der Messingnagel unter dem Fächer."
-      },
-      {
-        "name": "lupe",
-        "value": "0 30px 80px oklch(5% .02 205 / .7)",
-        "purpose": "Das Bild im Lupendialog."
-      },
-      {
-        "name": "klebekante",
-        "value": "0 1px 0 var(--linie)",
-        "purpose": "Die gesetzte Kopfzeile. Eine Linie, kein Schlagschatten."
-      },
-      {
-        "name": "schildchen",
-        "value": "0 1px 4px oklch(15% .02 60 / .35)",
-        "purpose": "Das gedruckte Papierschildchen auf der Tonleiter."
-      }
-    ],
+    "shadows": {
+      "flach": "0 1px 2px oklch(45% .04 200 / .06), 0 3px 10px oklch(45% .04 200 / .06)",
+      "blatt": "0 1px 3px oklch(45% .04 200 / .10), 0 10px 26px oklch(45% .04 200 / .13)",
+      "hoch": "0 2px 6px oklch(45% .04 200 / .10), 0 20px 44px oklch(45% .04 200 / .18)",
+      "band": "0 1px 4px oklch(40% .04 200 / .22)"
+    },
     "motion": [
       {
         "name": "kurve",
@@ -469,7 +526,7 @@
       "refersTo": "knopf-voll",
       "description": "Die Hauptaktion — Anrufen, Termin, Auswahl senden.",
       "html": "<a class=\"ds-knopf ds-knopf-voll\" href=\"#\">Termin anfragen</a>",
-      "css": ".ds-knopf { display: inline-flex; align-items: center; justify-content: center; gap: .6rem; font-family: 'Marcellus SC', Georgia, serif; font-size: 1rem; letter-spacing: .12em; text-decoration: none; text-align: center; padding: .95rem 1.7rem; border-radius: var(--bogen-blatt-quer, .25rem 100px 100px .25rem); border: 1px solid transparent; background: none; cursor: pointer; transition: transform .3s cubic-bezier(.22,.61,.36,1), background-color .3s cubic-bezier(.22,.61,.36,1), border-color .3s cubic-bezier(.22,.61,.36,1), color .3s cubic-bezier(.22,.61,.36,1); } .ds-knopf-voll { background: var(--honig, oklch(80% .115 74)); color: var(--tinte-hell, oklch(21% .040 60)); } @media (hover: hover) and (pointer: fine) { .ds-knopf-voll:hover { background: var(--honig-hell, oklch(88% .075 78)); transform: translateY(-2px); } } .ds-knopf-voll:active { transform: translateY(0); } .ds-knopf-voll:focus-visible { outline: 2px solid var(--honig, oklch(80% .115 74)); outline-offset: 3px; border-radius: 3px; }"
+      "css": ".ds-knopf { display: inline-flex; align-items: center; justify-content: center; gap: .6rem; font-family: 'Marcellus SC', Georgia, serif; font-size: 1rem; letter-spacing: .12em; text-decoration: none; text-align: center; padding: .95rem 1.7rem; border-radius: var(--bogen-blatt-quer, .25rem 100px 100px .25rem); border: 1px solid transparent; background: none; cursor: pointer; transition: transform .3s cubic-bezier(.22,.61,.36,1), background-color .3s cubic-bezier(.22,.61,.36,1), border-color .3s cubic-bezier(.22,.61,.36,1), color .3s cubic-bezier(.22,.61,.36,1); } .ds-knopf-voll { background: var(--tuerkis, oklch(80% .115 74)); color: var(--tinte-hell, oklch(21% .040 60)); } @media (hover: hover) and (pointer: fine) { .ds-knopf-voll:hover { background: var(--tuerkis-hell, oklch(88% .075 78)); transform: translateY(-2px); } } .ds-knopf-voll:active { transform: translateY(0); } .ds-knopf-voll:focus-visible { outline: 2px solid var(--tuerkis, oklch(80% .115 74)); outline-offset: 3px; border-radius: 3px; }"
     },
     {
       "name": "Knopf leer",
@@ -477,7 +534,7 @@
       "refersTo": "knopf-leer",
       "description": "Die zweite Aktion daneben — Preise ansehen, Weg zeigen.",
       "html": "<a class=\"ds-knopf ds-knopf-leer\" href=\"#\">Leistungen &amp; Preise</a>",
-      "css": ".ds-knopf { display: inline-flex; align-items: center; justify-content: center; gap: .6rem; font-family: 'Marcellus SC', Georgia, serif; font-size: 1rem; letter-spacing: .12em; text-decoration: none; padding: .95rem 1.7rem; border-radius: var(--bogen-blatt-quer, .25rem 100px 100px .25rem); border: 1px solid transparent; background: none; cursor: pointer; transition: transform .3s cubic-bezier(.22,.61,.36,1), border-color .3s cubic-bezier(.22,.61,.36,1), color .3s cubic-bezier(.22,.61,.36,1); } .ds-knopf-leer { border-color: var(--linie-hell, oklch(62% .040 198 / .34)); color: var(--tinte, oklch(94.5% .014 78)); } @media (hover: hover) and (pointer: fine) { .ds-knopf-leer:hover { border-color: var(--honig, oklch(80% .115 74)); color: var(--honig, oklch(80% .115 74)); transform: translateY(-2px); } } .ds-knopf-leer:active { transform: translateY(0); } .ds-knopf-leer:focus-visible { outline: 2px solid var(--honig, oklch(80% .115 74)); outline-offset: 3px; }"
+      "css": ".ds-knopf { display: inline-flex; align-items: center; justify-content: center; gap: .6rem; font-family: 'Marcellus SC', Georgia, serif; font-size: 1rem; letter-spacing: .12em; text-decoration: none; padding: .95rem 1.7rem; border-radius: var(--bogen-blatt-quer, .25rem 100px 100px .25rem); border: 1px solid transparent; background: none; cursor: pointer; transition: transform .3s cubic-bezier(.22,.61,.36,1), border-color .3s cubic-bezier(.22,.61,.36,1), color .3s cubic-bezier(.22,.61,.36,1); } .ds-knopf-leer { border-color: var(--linie-hell, oklch(62% .040 198 / .34)); color: var(--tinte, oklch(94.5% .014 78)); } @media (hover: hover) and (pointer: fine) { .ds-knopf-leer:hover { border-color: var(--tuerkis, oklch(80% .115 74)); color: var(--tuerkis, oklch(80% .115 74)); transform: translateY(-2px); } } .ds-knopf-leer:active { transform: translateY(0); } .ds-knopf-leer:focus-visible { outline: 2px solid var(--tuerkis, oklch(80% .115 74)); outline-offset: 3px; }"
     },
     {
       "name": "Telefonmarke",
@@ -485,7 +542,7 @@
       "refersTo": "ruf",
       "description": "Die Telefonnummer in der Kopfzeile — steht auf jedem Bildschirm, auch dem ersten.",
       "html": "<a class=\"ds-ruf\" href=\"tel:+49896923644\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" aria-hidden=\"true\"><path d=\"M6.5 3h3l1.5 4-2 1.5a12 12 0 0 0 6.5 6.5L17 13l4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 3.5 5.2 2 2 0 0 1 5.5 3z\"/></svg>089 692 36 44</a>",
-      "css": ".ds-ruf { display: inline-flex; align-items: center; gap: .5rem; text-decoration: none; font-size: 1rem; letter-spacing: .03em; padding: .5rem .95rem; border: 1px solid var(--linie-honig, oklch(80% .115 74 / .30)); border-radius: var(--bogen-blatt-quer, .25rem 100px 100px .25rem); color: var(--honig, oklch(80% .115 74)); white-space: nowrap; font-family: 'Archivo', system-ui, sans-serif; transition: background-color .3s cubic-bezier(.22,.61,.36,1), border-color .3s cubic-bezier(.22,.61,.36,1); } .ds-ruf svg { width: 1em; height: 1em; flex: none; } @media (hover: hover) and (pointer: fine) { .ds-ruf:hover { background: oklch(80% .115 74 / .12); border-color: var(--honig, oklch(80% .115 74)); } } .ds-ruf:focus-visible { outline: 2px solid var(--honig, oklch(80% .115 74)); outline-offset: 3px; }"
+      "css": ".ds-ruf { display: inline-flex; align-items: center; gap: .5rem; text-decoration: none; font-size: 1rem; letter-spacing: .03em; padding: .5rem .95rem; border: 1px solid var(--linie-akzent, oklch(80% .115 74 / .30)); border-radius: var(--bogen-blatt-quer, .25rem 100px 100px .25rem); color: var(--tuerkis, oklch(80% .115 74)); white-space: nowrap; font-family: 'Archivo', system-ui, sans-serif; transition: background-color .3s cubic-bezier(.22,.61,.36,1), border-color .3s cubic-bezier(.22,.61,.36,1); } .ds-ruf svg { width: 1em; height: 1em; flex: none; } @media (hover: hover) and (pointer: fine) { .ds-ruf:hover { background: oklch(80% .115 74 / .12); border-color: var(--tuerkis, oklch(80% .115 74)); } } .ds-ruf:focus-visible { outline: 2px solid var(--tuerkis, oklch(80% .115 74)); outline-offset: 3px; }"
     },
     {
       "name": "Karte (Blatt)",
@@ -501,7 +558,7 @@
       "refersTo": "merken",
       "description": "Der Preis selbst ist der Schalter. Kein Symbol daneben — wer 49 € für lang antippt, merkt sich genau diese Länge.",
       "html": "<button class=\"ds-merken\" type=\"button\" aria-pressed=\"false\">49 €</button> <button class=\"ds-merken\" type=\"button\" aria-pressed=\"true\">69 €</button>",
-      "css": ".ds-merken { font-family: 'Archivo', system-ui, sans-serif; font-size: 1.0625rem; font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; background: none; border: 1px solid transparent; border-radius: 4px; color: var(--honig, oklch(80% .115 74)); cursor: pointer; padding: .22rem .5rem; position: relative; transition: background-color .3s cubic-bezier(.22,.61,.36,1), border-color .3s cubic-bezier(.22,.61,.36,1), color .3s cubic-bezier(.22,.61,.36,1); } .ds-merken::after { content: '+'; position: absolute; top: -.1rem; right: -.15rem; font-size: .7em; line-height: 1; color: var(--tinte-still, oklch(66% .018 74)); opacity: 0; transition: opacity .3s cubic-bezier(.22,.61,.36,1); } .ds-merken[aria-pressed='true'] { background: var(--honig, oklch(80% .115 74)); border-color: var(--honig, oklch(80% .115 74)); color: var(--tinte-hell, oklch(21% .040 60)); } .ds-merken[aria-pressed='true']::after { content: '✓'; opacity: 1; color: var(--honig, oklch(80% .115 74)); } @media (hover: hover) and (pointer: fine) { .ds-merken:hover { border-color: var(--linie-honig, oklch(80% .115 74 / .30)); } .ds-merken:hover::after { opacity: 1; } } .ds-merken:focus-visible { outline: 2px solid var(--honig, oklch(80% .115 74)); outline-offset: 3px; }"
+      "css": ".ds-merken { font-family: 'Archivo', system-ui, sans-serif; font-size: 1.0625rem; font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; background: none; border: 1px solid transparent; border-radius: 4px; color: var(--tuerkis, oklch(80% .115 74)); cursor: pointer; padding: .22rem .5rem; position: relative; transition: background-color .3s cubic-bezier(.22,.61,.36,1), border-color .3s cubic-bezier(.22,.61,.36,1), color .3s cubic-bezier(.22,.61,.36,1); } .ds-merken::after { content: '+'; position: absolute; top: -.1rem; right: -.15rem; font-size: .7em; line-height: 1; color: var(--tinte-still, oklch(66% .018 74)); opacity: 0; transition: opacity .3s cubic-bezier(.22,.61,.36,1); } .ds-merken[aria-pressed='true'] { background: var(--tuerkis, oklch(80% .115 74)); border-color: var(--tuerkis, oklch(80% .115 74)); color: var(--tinte-hell, oklch(21% .040 60)); } .ds-merken[aria-pressed='true']::after { content: '✓'; opacity: 1; color: var(--tuerkis, oklch(80% .115 74)); } @media (hover: hover) and (pointer: fine) { .ds-merken:hover { border-color: var(--linie-akzent, oklch(80% .115 74 / .30)); } .ds-merken:hover::after { opacity: 1; } } .ds-merken:focus-visible { outline: 2px solid var(--tuerkis, oklch(80% .115 74)); outline-offset: 3px; }"
     },
     {
       "name": "Navigatormarke",
@@ -509,7 +566,7 @@
       "refersTo": "navigator-marke",
       "description": "Die klebende Leiste über den Leistungsgruppen: liegendes Blatt in klein, waagrecht rollbar.",
       "html": "<nav class=\"ds-navigator\"><ol><li><a href=\"#\" aria-current=\"true\">beratung</a></li><li><a href=\"#\">farbe</a></li><li><a href=\"#\">schnitt</a></li><li><a href=\"#\">hochsteckfrisur</a></li></ol></nav>",
-      "css": ".ds-navigator { padding: .65rem 1.25rem; background: oklch(14% .024 206 / .92); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--linie, oklch(42% .030 200 / .55)); } .ds-navigator ol { display: flex; gap: .4rem; list-style: none; margin: 0; padding: 0; overflow-x: auto; scrollbar-width: none; } .ds-navigator ol::-webkit-scrollbar { display: none; } .ds-navigator a { display: block; white-space: nowrap; text-decoration: none; font-family: 'Marcellus SC', Georgia, serif; font-size: .8rem; letter-spacing: .12em; color: var(--tinte-leise, oklch(79% .018 76)); padding: .45rem .85rem; border: 1px solid transparent; border-radius: var(--bogen-blatt-quer, .2rem .8rem .8rem .2rem); transition: color .3s cubic-bezier(.22,.61,.36,1), border-color .3s cubic-bezier(.22,.61,.36,1), background-color .3s cubic-bezier(.22,.61,.36,1); } .ds-navigator a[aria-current='true'] { color: var(--honig, oklch(80% .115 74)); border-color: var(--linie-honig, oklch(80% .115 74 / .30)); background: oklch(80% .115 74 / .09); } @media (hover: hover) and (pointer: fine) { .ds-navigator a:hover { color: var(--tinte, oklch(94.5% .014 78)); border-color: var(--linie-hell, oklch(62% .040 198 / .34)); } } .ds-navigator a:focus-visible { outline: 2px solid var(--honig, oklch(80% .115 74)); outline-offset: 3px; }"
+      "css": ".ds-navigator { padding: .65rem 1.25rem; background: oklch(14% .024 206 / .92); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--linie, oklch(42% .030 200 / .55)); } .ds-navigator ol { display: flex; gap: .4rem; list-style: none; margin: 0; padding: 0; overflow-x: auto; scrollbar-width: none; } .ds-navigator ol::-webkit-scrollbar { display: none; } .ds-navigator a { display: block; white-space: nowrap; text-decoration: none; font-family: 'Marcellus SC', Georgia, serif; font-size: .8rem; letter-spacing: .12em; color: var(--tinte-leise, oklch(79% .018 76)); padding: .45rem .85rem; border: 1px solid transparent; border-radius: var(--bogen-blatt-quer, .2rem .8rem .8rem .2rem); transition: color .3s cubic-bezier(.22,.61,.36,1), border-color .3s cubic-bezier(.22,.61,.36,1), background-color .3s cubic-bezier(.22,.61,.36,1); } .ds-navigator a[aria-current='true'] { color: var(--tuerkis, oklch(80% .115 74)); border-color: var(--linie-akzent, oklch(80% .115 74 / .30)); background: oklch(80% .115 74 / .09); } @media (hover: hover) and (pointer: fine) { .ds-navigator a:hover { color: var(--tinte, oklch(94.5% .014 78)); border-color: var(--linie-hell, oklch(62% .040 198 / .34)); } } .ds-navigator a:focus-visible { outline: 2px solid var(--tuerkis, oklch(80% .115 74)); outline-offset: 3px; }"
     },
     {
       "name": "Preistafel-Zeile",
@@ -517,7 +574,7 @@
       "refersTo": "tafel-zeile",
       "description": "Feste Spalten, gezogene Zeilen. Die Spalten wandern nie, nur ihr Inhalt wechselt.",
       "html": "<div class=\"ds-tafel\"><div class=\"ds-tafel-kopf\"><span>leistung</span><span>kurz</span><span>lang</span><span>dauer</span></div><div class=\"ds-tafel-zeile\"><span class=\"ds-was\"><span class=\"ds-name\">Strähnen, Folie</span><span class=\"ds-dazu\">inklusive Pflege und Föhnen</span></span><span class=\"ds-preis\">69 €</span><span class=\"ds-preis\">99 €</span><span class=\"ds-dauer\">ca. 2 Std.</span></div></div>",
-      "css": ".ds-tafel { max-width: 46rem; font-family: 'Archivo', system-ui, sans-serif; font-variant-numeric: tabular-nums; } .ds-tafel-kopf { display: grid; grid-template-columns: minmax(0,1fr) 6rem 6rem 5.5rem; gap: 1rem; padding: 0 0 .7rem; border-bottom: 1px solid var(--linie-honig, oklch(80% .115 74 / .30)); font-family: 'Marcellus SC', Georgia, serif; font-size: .74rem; letter-spacing: .2em; color: var(--honig, oklch(80% .115 74)); } .ds-tafel-kopf span:nth-child(n+2) { text-align: right; } .ds-tafel-zeile { display: grid; grid-template-columns: minmax(0,1fr) 6rem 6rem 5.5rem; gap: 1rem; align-items: baseline; padding: .95rem 0; border-bottom: 1px solid var(--linie, oklch(42% .030 200 / .55)); } .ds-was { display: flex; flex-direction: column; gap: .18rem; } .ds-name { color: var(--tinte, oklch(94.5% .014 78)); } .ds-dazu { font-size: .8rem; color: var(--tinte-still, oklch(66% .018 74)); line-height: 1.4; } .ds-preis { text-align: right; color: var(--honig, oklch(80% .115 74)); white-space: nowrap; } .ds-dauer { text-align: right; font-size: 1rem; color: var(--tinte-still, oklch(66% .018 74)); white-space: nowrap; }"
+      "css": ".ds-tafel { max-width: 46rem; font-family: 'Archivo', system-ui, sans-serif; font-variant-numeric: tabular-nums; } .ds-tafel-kopf { display: grid; grid-template-columns: minmax(0,1fr) 6rem 6rem 5.5rem; gap: 1rem; padding: 0 0 .7rem; border-bottom: 1px solid var(--linie-akzent, oklch(80% .115 74 / .30)); font-family: 'Marcellus SC', Georgia, serif; font-size: .74rem; letter-spacing: .2em; color: var(--tuerkis, oklch(80% .115 74)); } .ds-tafel-kopf span:nth-child(n+2) { text-align: right; } .ds-tafel-zeile { display: grid; grid-template-columns: minmax(0,1fr) 6rem 6rem 5.5rem; gap: 1rem; align-items: baseline; padding: .95rem 0; border-bottom: 1px solid var(--linie, oklch(42% .030 200 / .55)); } .ds-was { display: flex; flex-direction: column; gap: .18rem; } .ds-name { color: var(--tinte, oklch(94.5% .014 78)); } .ds-dazu { font-size: .8rem; color: var(--tinte-still, oklch(66% .018 74)); line-height: 1.4; } .ds-preis { text-align: right; color: var(--tuerkis, oklch(80% .115 74)); white-space: nowrap; } .ds-dauer { text-align: right; font-size: 1rem; color: var(--tinte-still, oklch(66% .018 74)); white-space: nowrap; }"
     },
     {
       "name": "Zeilenliste",
@@ -533,7 +590,7 @@
       "refersTo": "blatt-karte",
       "description": "Ein Blatt des Farbfächers. Das Farbfeld an der Spitze ist aus dem Foto genau dieser Arbeit gemessen — zwei Proben, Ansatz und Länge.",
       "html": "<div class=\"ds-blatt-halter\"><button class=\"ds-blatt-karte\" type=\"button\" aria-label=\"Balayage\"><span class=\"ds-blatt-ton\" style=\"--ton-oben:#a27754;--ton-unten:#8a6543\"></span><span class=\"ds-blatt-name\">balayage</span></button></div>",
-      "css": ".ds-blatt-halter { width: 4.2rem; height: 18rem; position: relative; } .ds-blatt-karte { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: stretch; padding: 0 0 2.2rem; border: 0; margin: 0; cursor: pointer; font: inherit; color: var(--papier-tinte, oklch(28% .022 60)); background: var(--papier, oklch(94% .016 82)); border-radius: var(--bogen-blatt-spitz, 2.4rem 2.4rem .25rem .25rem); box-shadow: 0 0 0 1px var(--papier-rand, oklch(86% .022 80)), 0 10px 26px oklch(9% .02 205 / .42); transform-origin: 50% 100%; overflow: hidden; filter: brightness(.9) saturate(.94); transition: transform .5s cubic-bezier(.22,.61,.36,1), box-shadow .5s cubic-bezier(.22,.61,.36,1), filter .5s cubic-bezier(.22,.61,.36,1); } .ds-blatt-ton { height: 38%; flex: none; background: linear-gradient(to bottom, var(--ton-oben), var(--ton-unten)); border-bottom: 1px solid var(--kante-hell, oklch(20% .020 60 / .22)); } .ds-blatt-name { flex: 1; display: flex; align-items: center; justify-content: center; writing-mode: vertical-rl; transform: rotate(180deg); font-family: 'Marcellus SC', Georgia, serif; font-size: .88rem; letter-spacing: .13em; padding-block: .8rem 1.6rem; white-space: nowrap; opacity: 0; transition: opacity .5s cubic-bezier(.22,.61,.36,1); } @media (hover: hover) and (pointer: fine) { .ds-blatt-karte:hover { transform: scale(1.03); filter: brightness(1) saturate(1); } .ds-blatt-karte:hover .ds-blatt-name { opacity: .75; } } .ds-blatt-karte:focus-visible { outline: 2px solid var(--honig, oklch(80% .115 74)); outline-offset: -3px; } .ds-blatt-karte:focus-visible .ds-blatt-name { opacity: 1; }"
+      "css": ".ds-blatt-halter { width: 4.2rem; height: 18rem; position: relative; } .ds-blatt-karte { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: stretch; padding: 0 0 2.2rem; border: 0; margin: 0; cursor: pointer; font: inherit; color: var(--papier-tinte, oklch(28% .022 60)); background: var(--papier, oklch(94% .016 82)); border-radius: var(--bogen-blatt-spitz, 2.4rem 2.4rem .25rem .25rem); box-shadow: 0 0 0 1px var(--papier-rand, oklch(86% .022 80)), 0 10px 26px oklch(9% .02 205 / .42); transform-origin: 50% 100%; overflow: hidden; filter: brightness(.9) saturate(.94); transition: transform .5s cubic-bezier(.22,.61,.36,1), box-shadow .5s cubic-bezier(.22,.61,.36,1), filter .5s cubic-bezier(.22,.61,.36,1); } .ds-blatt-ton { height: 38%; flex: none; background: linear-gradient(to bottom, var(--ton-oben), var(--ton-unten)); border-bottom: 1px solid var(--kante-hell, oklch(20% .020 60 / .22)); } .ds-blatt-name { flex: 1; display: flex; align-items: center; justify-content: center; writing-mode: vertical-rl; transform: rotate(180deg); font-family: 'Marcellus SC', Georgia, serif; font-size: .88rem; letter-spacing: .13em; padding-block: .8rem 1.6rem; white-space: nowrap; opacity: 0; transition: opacity .5s cubic-bezier(.22,.61,.36,1); } @media (hover: hover) and (pointer: fine) { .ds-blatt-karte:hover { transform: scale(1.03); filter: brightness(1) saturate(1); } .ds-blatt-karte:hover .ds-blatt-name { opacity: .75; } } .ds-blatt-karte:focus-visible { outline: 2px solid var(--tuerkis, oklch(80% .115 74)); outline-offset: -3px; } .ds-blatt-karte:focus-visible .ds-blatt-name { opacity: 1; }"
     },
     {
       "name": "Schild",
@@ -541,7 +598,7 @@
       "refersTo": "schild",
       "description": "Der Anhänger — ein Zustand am Objekt, keine Auszeichnungszeile über einer Überschrift.",
       "html": "<span class=\"ds-schild\">noch offen bis 19 uhr</span>",
-      "css": ".ds-schild { display: inline-flex; align-items: center; gap: .5rem; font-family: 'Marcellus SC', Georgia, serif; font-size: .8rem; letter-spacing: .16em; color: var(--honig, oklch(80% .115 74)); border: 1px solid var(--linie-honig, oklch(80% .115 74 / .30)); border-radius: 100px; padding: .25rem .8rem; } .ds-schild::before { content: ''; width: .4rem; height: .4rem; border-radius: 50%; background: currentColor; }"
+      "css": ".ds-schild { display: inline-flex; align-items: center; gap: .5rem; font-family: 'Marcellus SC', Georgia, serif; font-size: .8rem; letter-spacing: .16em; color: var(--tuerkis, oklch(80% .115 74)); border: 1px solid var(--linie-akzent, oklch(80% .115 74 / .30)); border-radius: 100px; padding: .25rem .8rem; } .ds-schild::before { content: ''; width: .4rem; height: .4rem; border-radius: 50%; background: currentColor; }"
     },
     {
       "name": "Tonleiter",
@@ -549,16 +606,16 @@
       "refersTo": "tonleiter",
       "description": "Der Fächer im geschlossenen Zustand: acht nach Helligkeit sortierte Bänder am Fuß des ersten Bildschirms, jedes vom Grund in die Farbe des nächsten Abschnitts verlaufend.",
       "html": "<a class=\"ds-tonleiter\" href=\"#faecher-titel\" aria-label=\"Zur Farbkarte: acht Töne, an echten Arbeiten gemessen\"><span style=\"--ton-oben:#775740;--ton-unten:#694d38\"></span><span style=\"--ton-oben:#866850;--ton-unten:#543823\"></span><span style=\"--ton-oben:#a27754;--ton-unten:#8a6543\"></span><span style=\"--ton-oben:#9b7b54;--ton-unten:#6a5039\"></span><span style=\"--ton-oben:#a98c6a;--ton-unten:#a37657\"></span><span style=\"--ton-oben:#ae9a7f;--ton-unten:#44321a\"></span><span style=\"--ton-oben:#c3a988;--ton-unten:#8c6f4d\"></span><span style=\"--ton-oben:#d8c5a4;--ton-unten:#a88a63\"></span></a>",
-      "css": ".ds-tonleiter { position: relative; display: flex; height: 3.4rem; text-decoration: none; } .ds-tonleiter span { flex: 1; background: linear-gradient(to bottom, var(--grund, oklch(17.5% .028 205)) 0%, var(--ton-oben) 26%, var(--ton-unten) 76%, var(--feld, oklch(22.5% .032 203)) 100%); transform-origin: bottom; transition: transform .5s cubic-bezier(.22,.61,.36,1); } .ds-tonleiter span + span { box-shadow: inset 1px 0 0 var(--kante-hell, oklch(20% .020 60 / .22)); } .ds-tonleiter::after { content: 'die farbkarte'; position: absolute; left: 50%; bottom: 50%; transform: translate(-50%, 50%); font-family: 'Marcellus SC', Georgia, serif; font-size: .8rem; letter-spacing: .22em; color: var(--papier-tinte, oklch(28% .022 60)); background: var(--papier, oklch(94% .016 82)); padding: .2rem .9rem; border-radius: 100px; box-shadow: 0 1px 4px oklch(15% .02 60 / .35); white-space: nowrap; pointer-events: none; } @media (hover: hover) and (pointer: fine) { .ds-tonleiter:hover span { transform: scaleY(1.22); } } .ds-tonleiter:focus-visible { outline: 2px solid var(--honig, oklch(80% .115 74)); outline-offset: -3px; }"
+      "css": ".ds-tonleiter { position: relative; display: flex; height: 3.4rem; text-decoration: none; } .ds-tonleiter span { flex: 1; background: linear-gradient(to bottom, var(--grund, oklch(17.5% .028 205)) 0%, var(--ton-oben) 26%, var(--ton-unten) 76%, var(--feld, oklch(22.5% .032 203)) 100%); transform-origin: bottom; transition: transform .5s cubic-bezier(.22,.61,.36,1); } .ds-tonleiter span + span { box-shadow: inset 1px 0 0 var(--kante-hell, oklch(20% .020 60 / .22)); } .ds-tonleiter::after { content: 'die farbkarte'; position: absolute; left: 50%; bottom: 50%; transform: translate(-50%, 50%); font-family: 'Marcellus SC', Georgia, serif; font-size: .8rem; letter-spacing: .22em; color: var(--papier-tinte, oklch(28% .022 60)); background: var(--papier, oklch(94% .016 82)); padding: .2rem .9rem; border-radius: 100px; box-shadow: 0 1px 4px oklch(15% .02 60 / .35); white-space: nowrap; pointer-events: none; } @media (hover: hover) and (pointer: fine) { .ds-tonleiter:hover span { transform: scaleY(1.22); } } .ds-tonleiter:focus-visible { outline: 2px solid var(--tuerkis, oklch(80% .115 74)); outline-offset: -3px; }"
     }
   ],
   "narrative": {
     "northStar": "Die Papeterie des Salons",
-    "overview": "Die Seite ist die Farbkarte, die bei jeder Beratung aufgefächert auf dem Tisch liegt. Der Grund ist das Petrol der Moroccanoil-Regale, die im Laden jede Wand belegen — an der Wand gemessen, nicht gewählt, und für den Bildschirm auf Tintendichte gebracht. Darauf liegen Bauteile aus Karton: Papierweiß, feine Kante, Farbfeld an der Spitze. Die einzige warme Achse ist Haar; ihre fünf Stufen sind über die Arbeitsfotos des Salons gemessen und laufen vom dunklen Ansatz zur hellen Spitze messbar ins Gelbe.\n\nDie Dichte ist ruhig und großzügig: viel Grund, wenige Akzente, keine Kartenwand. Wo andere Salonseiten eine Dreierreihe gleich hoher Kacheln stellen, steht hier eine gezogene Zeilenliste. Bilder tragen ganze Abschnitte vollflächig unter einem mehrstufigen Schleier, statt als Kachel danebenzuliegen. Ornament tritt selten und nur dort auf, wo es inhaltlich etwas bedeutet.\n\nBestätigt abgelehnt: der Baukasten-Hero mit Vollbild, Serifenschrift und Goldrand, und ebenso die weiße Minimal-Antwort darauf. Ebenfalls abgelehnt: Farbschemata aus fremden Projekten — jede Farbe dieser Seite hat einen Beleg im Laden.",
+    "overview": "Die Seite ist die Farbkarte, die bei jeder Beratung aufgefächert auf dem Tisch liegt. Der Laden ist hell: weiß gefliest, Tageslicht von der Perlacher Straße, und an jeder Wand das Türkis der Moroccanoil-Regale — an der Wand gemessen, nicht gewählt. Genau so ist die Seite gebaut: Weiß als Grund, Türkis als Stimme. Genau ein Abschnitt kippt um und steht auf voller Türkisfläche. Die einzige warme Achse ist Haar; ihre vier Stufen sind über die Arbeitsfotos des Salons gemessen und laufen vom dunklen Ansatz zur hellen Spitze messbar ins Gelbe.\n\nDie Dichte ist ruhig und großzügig: viel Grund, wenige Akzente, keine Kartenwand. Wo andere Salonseiten eine Dreierreihe gleich hoher Kacheln stellen, steht hier eine gezogene Zeilenliste. Bilder tragen ganze Abschnitte vollflächig unter einem mehrstufigen Schleier, statt als Kachel danebenzuliegen. Ornament tritt selten und nur dort auf, wo es inhaltlich etwas bedeutet.\n\nBestätigt abgelehnt: der Baukasten-Hero mit Vollbild, Serifenschrift und Goldrand, und ebenso die weiße Minimal-Antwort darauf. Ebenfalls abgelehnt: Farbschemata aus fremden Projekten — jede Farbe dieser Seite hat einen Beleg im Laden.",
     "keyCharacteristics": [
       "Gemessene Farben statt gewählter: jeder Ton stammt aus einem Foto des Ladens oder einer echten Arbeit (werkzeug/farben-messen.mjs, werkzeug/bilder-bauen.mjs).",
       "Eine einzige Kantensprache, das Farbkartenblatt: oben rund, unten scharf.",
-      "Petrolgrund über die ganze Seite, Papierweiß nur für Bauteile, die Karton sind.",
+      "Weißer Grund über die ganze Seite, genau eine Türkisfläche als Anker.",
       "Feste Stufen in vier Umbruchpunkten statt fließender clamp()-Werte.",
       "Bewegung ausschließlich ease-out, ausschließlich transform und opacity.",
       "Jeder Gestaltungswert steht als Token in :root — auch der Rollbalken."
@@ -576,7 +633,7 @@
       },
       {
         "name": "Die Regel der einen warmen Stimme",
-        "body": "Auf dunklem Grund spricht genau eine warme Farbe: Honig. Preise, Verweise und die aktive Marke tragen sie; sonst nichts. Wird sie zur Fläche, steht der Text darauf in --tinte-hell, nie in Weiß.",
+        "body": "Auf dem weißen Grund spricht genau eine Farbe: Türkis. Preise, Verweise und die aktive Marke tragen sie; sonst nichts. Wird sie zur Fläche (gefüllter Knopf, gedrückte Merkmarke, Türkisbahn), steht der Text darauf in --tinte-hell.",
         "section": "colors"
       },
       {
@@ -626,7 +683,7 @@
       },
       {
         "name": "Die Glasregel",
-        "body": "Alles, was klebt oder überlagert, ist getöntes Glas: Petrolgrund mit 0,90–0,98 Deckung plus backdrop-filter: blur(10–18px).",
+        "body": "Alles, was klebt oder überlagert, ist getöntes Glas: der Seitengrund mit 0,86–0,98 Deckung plus backdrop-filter: blur(10–18px). Drei Stufen als Token: --glas, --glas-dicht, --glas-voll.",
         "section": "elevation"
       },
       {
@@ -641,7 +698,7 @@
       },
       {
         "name": "Die Ein-Wert-Regel",
-        "body": "Eine Rolle hat einen Wert. Zwei fast gleiche Fassungen derselben Sache sind kein Feinschliff, sondern ein Fehler: die dunkle Schrift auf hellem Grund ist --tinte-hell, die Trennlinie auf Papier ist --kante-hell, die Mikroschrift ist --s-mini. Prüftest: kein Gestaltungswert steht außerhalb von :root.",
+        "body": "Eine Rolle hat einen Wert. Zwei fast gleiche Fassungen derselben Sache sind kein Feinschliff, sondern ein Fehler: die helle Schrift auf Türkis ist --tinte-hell, die Trennlinie auf Papier ist --kante-hell, die Mikroschrift ist --s-mini. Prüftest: kein Gestaltungswert steht außerhalb von :root.",
         "section": "colors"
       },
       {
@@ -663,8 +720,8 @@
     ],
     "donts": [
       "Don't Rosé als Textfarbe einsetzen — es ist Ornament, an genau einer Achse.",
-      "Don't Honig als Fläche mit weißem Text kombinieren; darauf steht --tinte-hell.",
-      "Don't eine zweite, fast gleiche Fassung eines vorhandenen Tokens anlegen — es gibt eine dunkle Schrift auf hell, eine Trennlinie auf Papier, eine Mikroschriftgröße.",
+      "Don't die Haarachse als Textfarbe einsetzen; Karamell, Bronze, Ansatz und Haar hell sind Material.",
+      "Don't eine zweite, fast gleiche Fassung eines vorhandenen Tokens anlegen — es gibt eine helle Schrift auf Türkis, eine Trennlinie auf Papier, eine Mikroschriftgröße.",
       "Don't Fließtext sperren. Weite Laufweite gehört ausschließlich kurzen Marcellus-SC-Auszeichnungen.",
       "Don't clamp() für Schriftgrößen, Seitenrand oder Abschnittshöhe einführen; diese Werte sind bewusst feste Stufen.",
       "Don't Dreierreihen gleich hoher Karten bauen.",
