@@ -97,53 +97,74 @@
   <nav class="wegweiser" id="wegweiser" aria-label="Hauptmenü">
     <ul>
       <li><a href="index.html" aria-current="page">Start</a></li>
-      <li><a href="leistungen.html">Leistungen &amp; Preise</a></li>
+      <li class="navpunkt">
+        <button type="button" aria-expanded="false" aria-controls="uebersicht-leistungen">
+          Leistungen &amp; Preise
+          <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg>
+        </button>
+        <a class="nav-ohne-skript" href="leistungen.html">Leistungen &amp; Preise</a>
+        <div class="uebersicht" id="uebersicht-leistungen" hidden>
+          <ul>
+            <li><a href="leistungen.html#schneiden">Waschen, Schneiden &amp; Föhnen <span class="ab">ab 30 €</span></a></li>
+            <li><a href="leistungen.html#farbe">Farbe &amp; Tönung <span class="ab">ab 43 €</span></a></li>
+            <li><a href="leistungen.html#straehnen">Strähnen &amp; Balayage <span class="ab">ab 69 €</span></a></li>
+            <li><a href="leistungen.html#umformen">Umformen <span class="ab">ab 69 €</span></a></li>
+            <li><a href="leistungen.html#pflege">Pflege &amp; Korrektur <span class="ab">ab 5 €</span></a></li>
+            <li><a href="leistungen.html#anlass">Für besondere Anlässe <span class="ab">ab 60 €</span></a></li>
+            <li><a href="leistungen.html#brauen">Brauen &amp; Wimpern <span class="ab">ab 10 €</span></a></li>
+            <li><a href="leistungen.html#herren">Herren <span class="ab">ab 10 €</span></a></li>
+            <li><a href="leistungen.html#kinder">Kinder bis 12 Jahre <span class="ab">ab 25 €</span></a></li>
+          </ul>
+          <p class="uebersicht-fuss">
+            <span>Preise nach Haarlänge und Aufwand · Beratung immer inklusive</span>
+            <a href="leistungen.html">Ganze Preisliste</a>
+          </p>
+        </div>
+      </li>
       <li><a href="brautstyling.html">Brautstyling</a></li>
       <li><a href="salon.html">Der Salon</a></li>
-      <li><a href="termin.html">Termin</a></li>
     </ul>
     <a class="ruf" href="tel:+49896923644">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M6.5 3h3l1.5 4-2 1.5a12 12 0 0 0 6.5 6.5L17 13l4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 3.5 5.2 2 2 0 0 1 5.5 3z"/></svg>
       089 692 36 44
     </a>
+    <a class="knopf knopf-voll knopf-termin" href="termin.html">Termin</a>
   </nav>
 </header>
 
 <main id="inhalt">
 
-<!-- ═══ Auftakt: die Inhaberin ══════════════════════════════════════════ -->
-<section class="auftakt dunkelbahn abschnitt" aria-labelledby="haupttitel">
-  <div class="bahn mitte">
+<!-- ═══ Auftakt ═════════════════════════════════════════════════════════ -->
+<section class="auftakt abschnitt bahn" aria-labelledby="haupttitel">
+  <div class="buehne" aria-hidden="true">
+    <picture><source media="(max-width: 64rem)" srcset="bilder/auftakt-1-hoch.webp"><img src="bilder/auftakt-1.webp" alt="" fetchpriority="high" decoding="async"></picture>
+    <picture><source media="(max-width: 64rem)" srcset="bilder/auftakt-2-hoch.webp"><img src="bilder/auftakt-2.webp" alt="" loading="lazy" decoding="async"></picture>
+    <picture><source media="(max-width: 64rem)" srcset="bilder/auftakt-3-hoch.webp"><img src="bilder/auftakt-3.webp" alt="" loading="lazy" decoding="async"></picture>
+    <picture><source media="(max-width: 64rem)" srcset="bilder/auftakt-4-hoch.webp"><img src="bilder/auftakt-4.webp" alt="" loading="lazy" decoding="async"></picture>
+  </div>
+  <div class="auftakt-schleier" aria-hidden="true"></div>
+
+  <div class="mitte">
     <div class="auftakt-raster">
       <div>
-        <h1 class="titel-gross" id="haupttitel">Zwanzig Jahre hinter dem Stuhl.</h1>
+        <h1 class="titel-gross" id="haupttitel">Seit zwanzig Jahren stehe ich selbst am Stuhl.</h1>
         <p class="vorspann lauf">
-          Fakhria Tokhi — im Laden nennen alle sie Bahar — ist
-          Friseurmeisterin und führt ihren Salon in der Perlacher Straße
-          selbst. Farbe, Schnitt, Hochsteckfrisuren und das komplette
-          Brautstyling: Haar und Make-up aus einer Hand.
+          Farbe, Schnitt, Hochsteckfrisuren, Brautstyling. Kein Filialleiter,
+          keine wechselnden Aushilfen — wer hier einen Termin bekommt, weiß
+          auch, wer ihn macht.
         </p>
-        <div class="knopfreihe" style="margin-top:var(--r4)">
-          <a class="knopf knopf-voll" href="tel:+49896923644">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M6.5 3h3l1.5 4-2 1.5a12 12 0 0 0 6.5 6.5L17 13l4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 3.5 5.2 2 2 0 0 1 5.5 3z"/></svg>
-            089 692 36 44
-          </a>
-          <a class="knopf knopf-leer" href="termin.html">Termin online buchen</a>
-        </div>
-        <p class="auftakt-fuss">
-          <span>Perlacher Straße 2 · München-Giesing</span>
-          <span class="oeffnungsstand"></span>
-        </p>
+        <p class="signatur">Fakhria Tokhi, Friseurmeisterin</p>
       </div>
 
-      <figure class="portrait">
-        <img 
-             alt="Fakhria Tokhi, genannt Bahar, Inhaberin des Salons, sitzt vor dem Produktregal ihres Studios" fetchpriority="high" decoding="async" src="bilder/bahar-gross.webp" width="520" height="743">
-        <figcaption>
-          <span class="name">Fakhria Tokhi</span>
-          <span class="rolle">Friseurmeisterin · Inhaberin</span>
-        </figcaption>
-      </figure>
+      <aside class="terminkarte" aria-label="Termin vereinbaren">
+        <p class="stand oeffnungsstand"></p>
+        <a class="knopf knopf-voll" href="termin.html">Online buchen</a>
+        <a class="knopf knopf-leer" href="tel:+49896923644">089 692 36 44</a>
+        <p class="fussnote">
+          Perlacher Straße 2, München-Giesing.
+          <a href="leistungen.html">Preise ansehen</a>
+        </p>
+      </aside>
     </div>
   </div>
 </section>
@@ -154,10 +175,9 @@
     <div class="kopf">
       <h2 class="titel" id="leistungen-titel">Was hier gemacht wird</h2>
       <p class="lauf">
-        Die typgerechte Beratung ist immer inklusive, und bei jeder Farbe
-        steht vorher eine Kopfhautanalyse. Der Ton neben dem Preis ist keine
-        Farbkarte aus dem Katalog: Er ist aus dem Foto genau dieser Arbeit
-        gemessen.
+        Beratung ist bei jedem Termin dabei, bei Farbe kommt die
+        Kopfhautanalyse dazu. Der Farbfleck neben dem Preis stammt aus keinem
+        Katalog — er ist aus dem Foto genau dieser Arbeit gemessen.
       </p>
     </div>
 
@@ -201,41 +221,62 @@
 </section>
 
 <!-- ═══ Arbeiten ════════════════════════════════════════════════════════ -->
-<section class="abschnitt bahn" aria-labelledby="arbeiten-titel" style="background:var(--grund-warm)">
+<section class="abschnitt bahn warm" aria-labelledby="arbeiten-titel">
   <div class="mitte">
     <div class="kopf">
       <h2 class="titel" id="arbeiten-titel">Arbeiten aus dem Salon</h2>
       <p class="lauf">
-        Aufnahmen aus dem Alltag in der Perlacher Straße, gemacht, während
-        die Kundin noch auf dem Stuhl saß. Sie zeigen Struktur, Verlauf und
-        Ansatz — mehr braucht es nicht, um zu sehen, ob jemand Farbe kann.
+        Aufnahmen aus dem Alltag in der Perlacher Straße, gemacht, während die
+        Kundin noch auf dem Stuhl saß. Nichts davon ist nachgestellt, und
+        nichts ist beschnitten — jedes Bild steht so, wie es aufgenommen wurde.
       </p>
     </div>
 
-    <div class="arbeiten-raster auf">
-      <button class="arbeit-kachel" type="button" data-text="Langes Haar mit weichem Verlauf vom dunkleren Ansatz in helle, warme Spitzen.">
-        <img alt="Langes Haar, Verlauf von dunklem Ansatz in helle warme Spitzen" loading="lazy" decoding="async" src="bilder/arbeit-balayage.webp" width="900" height="1200">
+    <div class="werkschau auf">
+      <button class="arbeit-kachel" type="button" data-text="Balayage über die ganze Länge: der Verlauf beginnt tief und läuft warm aus.">
+        <img src="bilder/arbeit-balayage.webp" alt="Langes Haar, Verlauf von dunklem Ansatz in helle warme Spitzen" width="1000" height="1333" loading="lazy" decoding="async">
       </button>
-      <button class="arbeit-kachel" type="button" data-text="Feine helle Strähnen, in dünnen Schichten durch die Länge gezogen.">
-        <img alt="Feine helle Strähnen in langem Haar" loading="lazy" decoding="async" src="bilder/arbeit-straehnen.webp" width="900" height="1200">
-      </button>
-      <button class="arbeit-kachel" type="button" data-text="Goldblonde Locken, mit dem Rundeisen in Form gelegt.">
-        <img alt="Goldblonde gelegte Locken" loading="lazy" decoding="async" src="bilder/arbeit-locken.webp" width="900" height="1200">
-      </button>
-      <button class="arbeit-kachel" type="button" data-text="Schulterlanges Haar, warmer Farbverlauf, die Spitzen nach innen geföhnt.">
-        <img alt="Schulterlanges Haar mit warmem Farbverlauf" loading="lazy" decoding="async" src="bilder/arbeit-ombre.webp" width="900" height="1200">
-      </button>
-      <button class="arbeit-kachel" type="button" data-text="Glatte Länge mit sauber ausgearbeiteten Stufen.">
-        <img alt="Glatte lange Haare mit ausgearbeiteten Stufen" loading="lazy" decoding="async" src="bilder/arbeit-glatt.webp" width="900" height="1200">
+      <button class="arbeit-kachel" type="button" data-text="Foliensträhnen, in dünnen Schichten durch die Länge gezogen.">
+        <img src="bilder/arbeit-straehnen.webp" alt="Feine helle Strähnen in langem Haar" width="1000" height="1333" loading="lazy" decoding="async">
       </button>
       <button class="arbeit-kachel" type="button" data-text="Lange Stufen in warmem Karamell, Bewegung in den Spitzen.">
-        <img alt="Lange Stufen in warmem Karamell" loading="lazy" decoding="async" src="bilder/arbeit-lang.webp" width="900" height="1200">
+        <img src="bilder/arbeit-lang.webp" alt="Lange Stufen in warmem Karamell" width="1000" height="1333" loading="lazy" decoding="async">
+      </button>
+      <button class="arbeit-kachel" type="button" data-text="Goldblonde Locken, mit dem Rundeisen in Form gelegt.">
+        <img src="bilder/arbeit-locken.webp" alt="Goldblonde gelegte Locken" width="1000" height="1333" loading="lazy" decoding="async">
+      </button>
+      <button class="arbeit-kachel" type="button" data-text="Glatte Länge mit sauber ausgearbeiteten Stufen.">
+        <img src="bilder/arbeit-glatt.webp" alt="Glatte lange Haare mit ausgearbeiteten Stufen" width="1000" height="1333" loading="lazy" decoding="async">
+      </button>
+      <button class="arbeit-kachel" type="button" data-text="Schulterlanges Haar, warmer Farbverlauf, Spitzen nach innen geföhnt.">
+        <img src="bilder/arbeit-ombre.webp" alt="Schulterlanges Haar mit warmem Farbverlauf" width="1000" height="1333" loading="lazy" decoding="async">
+      </button>
+      <button class="arbeit-kachel" type="button" data-text="Kurzer Bob in kühlem Aschblond, die Welle nach außen gelegt.">
+        <img src="bilder/arbeit-bob.webp" alt="Kurzer Bob in kühlem Aschblond mit gelegter Welle" width="1000" height="1333" loading="lazy" decoding="async">
+      </button>
+      <button class="arbeit-kachel" type="button" data-text="Helles Blond, kurz geschnitten und in weiche Wellen gelegt.">
+        <img src="bilder/arbeit-kurz-blond.webp" alt="Kurzes helles Blond in weichen Wellen" width="1000" height="1333" loading="lazy" decoding="async">
+      </button>
+      <button class="arbeit-kachel" type="button" data-text="Kurzes Silbergrau, in Form geföhnt — Griff und Fall bleiben weich.">
+        <img src="bilder/arbeit-kurz.webp" alt="Kurzes silbergraues Haar, in Form geföhnt" width="1000" height="1333" loading="lazy" decoding="async">
+      </button>
+      <button class="arbeit-kachel" type="button" data-text="Eng geflochten, Scheitel für Scheitel gezogen.">
+        <img src="bilder/arbeit-flecht.webp" alt="Eng anliegende Flechtfrisur mit gezogenen Zöpfen" width="1000" height="1000" loading="lazy" decoding="async">
+      </button>
+      <button class="arbeit-kachel" type="button" data-text="Hochgesteckt, mit gelegten Wellen an der Seite.">
+        <img src="bilder/arbeit-hochsteck.webp" alt="Hochsteckfrisur mit gelegten Wellen" width="1000" height="750" loading="lazy" decoding="async">
       </button>
       <button class="arbeit-kachel" type="button" data-text="Hochsteckfrisur mit eingearbeiteter Perlen- und Blütenranke.">
-        <img alt="Hochsteckfrisur mit Perlen- und Blütenranke" loading="lazy" decoding="async" src="bilder/arbeit-perlen.webp" width="353" height="471">
+        <img src="bilder/arbeit-perlen.webp" alt="Hochsteckfrisur mit Perlen- und Blütenranke" width="768" height="1024" loading="lazy" decoding="async">
       </button>
       <button class="arbeit-kachel" type="button" data-text="Brautfrisur: gelegte Locken, durchzogen von einer Perlenranke in Roségold.">
-        <img alt="Brautfrisur mit gelegten Locken und Perlenranke in Roségold" loading="lazy" decoding="async" src="bilder/arbeit-braut-perlen.webp" width="399" height="532">
+        <img src="bilder/arbeit-braut-perlen.webp" alt="Brautfrisur mit gelegten Locken und Perlenranke in Roségold" width="539" height="1024" loading="lazy" decoding="async">
+      </button>
+      <button class="arbeit-kachel" type="button" data-text="Hochgesteckt, mit Diadem und eingearbeitetem Schleier.">
+        <img src="bilder/arbeit-braut-schleier.webp" alt="Braut mit hochgestecktem Haar, Diadem und Schleier" width="550" height="977" loading="lazy" decoding="async">
+      </button>
+      <button class="arbeit-kachel" type="button" data-text="Kinderschnitt, kurz und sauber ausrasiert.">
+        <img src="bilder/arbeit-kind.webp" alt="Kinderschnitt, kurz und sauber ausrasiert" width="1000" height="1333" loading="lazy" decoding="async">
       </button>
     </div>
   </div>
@@ -248,10 +289,9 @@
       <div>
         <h2 class="titel" id="braut-titel">Brautstyling</h2>
         <p class="lauf" style="margin-top:var(--r3)">
-          Haar und Make-up macht dieselbe Person, an einem Termin, im selben
-          Raum. Das ist der Unterschied zum Hochzeitsmorgen mit drei Terminen
-          an drei Orten — und der Grund, warum das Brautstyling die Arbeit
-          ist, auf die dieser Laden am meisten Wert legt.
+          Haar und Make-up mache ich selbst, an einem Termin, im selben Raum.
+          Kein Hochzeitsmorgen mit drei Terminen an drei Orten. Vorher gibt es
+          einen Probetermin: Was dort steht, steht am Hochzeitstag.
         </p>
         <p class="preiszeile" style="margin-top:var(--r3)">
           <span class="gross zahl">390–600 €</span>
@@ -261,52 +301,46 @@
           <a class="knopf knopf-voll" href="brautstyling.html">Vom Probetermin bis zum Morgen</a>
         </p>
       </div>
-      <figure class="bildstreifen" style="margin:0">
-        <img 
-             alt="Brautfrisur aus der Nähe: gelegte Locken, durchzogen von einer Perlenranke in Roségold" loading="lazy" decoding="async" src="bilder/flaeche-braut-hoch.webp" width="760" height="844">
+      <figure class="vollbild" style="margin:0">
+        <img src="bilder/arbeit-braut-perlen.webp" alt="Brautfrisur: gelegte Locken, durchzogen von einer Perlenranke in Roségold" width="539" height="1024" loading="lazy" decoding="async">
       </figure>
     </div>
   </div>
 </section>
 
 <!-- ═══ Bahar und der Laden ═════════════════════════════════════════════ -->
-<section class="abschnitt bahn" aria-labelledby="bahar-titel" style="background:var(--grund-warm)">
+<section class="abschnitt bahn warm" aria-labelledby="bahar-titel">
   <div class="mitte">
     <div class="zweispalt" style="align-items:start">
       <div>
-        <h2 class="titel" id="bahar-titel">Bahar</h2>
+        <h2 class="titel" id="bahar-titel">Wer hier schneidet</h2>
         <p class="lauf" style="margin-top:var(--r3)">
-          Fakhria Tokhi, im Laden alle nennen sie Bahar, ist
-          <strong>Friseurmeisterin</strong> und arbeitet seit zwanzig Jahren
-          in München. Der Salon in der Perlacher Straße gehört ihr — kein
-          Filialleiter, keine Kette, keine wechselnden Aushilfen.
+          Ich heiße Fakhria Tokhi, im Laden nennen mich alle Bahar. Den
+          Meisterbrief habe ich von der Handwerkskammer für München und
+          Oberbayern; der Salon in der Perlacher Straße gehört mir.
         </p>
         <p class="lauf">
-          Was Kundinnen laut der bisherigen Seite besonders schätzen: dass
-          ausführlich beraten wird, bevor die Schere angesetzt wird. Bei
-          Farbbehandlungen gehört eine Kopfhautanalyse dazu. Steht das
+          Bevor die Schere kommt, reden wir. Bei jeder Farbe sehe ich mir
+          vorher die Kopfhaut an — was danach passiert, hängt davon ab, was
+          das Haar verträgt, nicht davon, was gerade läuft. Steht das
           Ergebnis fest, steht auch der Preis fest.
         </p>
-
         <p class="lauf">
-          Zwanzig Jahre hinter dem Stuhl, der Meisterbrief von der
-          Handwerkskammer für München und Oberbayern, und Augenbrauen in
-          Fadentechnik, die nicht jeder Salon in Giesing anbietet.
+          Augenbrauen mache ich in Fadentechnik, ohne Wachs und ohne
+          Pinzette. Nebenan ist das Kosmetikstudio dazugekommen.
         </p>
-      </div>
-
-      <div>
-        <figure class="bildstreifen" style="margin:0">
-          <img alt="Fakhria Tokhi, Inhaberin und Friseurmeisterin, in ihrem Salon" loading="lazy" decoding="async" src="bilder/bahar-nah.webp" width="470" height="470">
-          <figcaption style="margin-top:.7rem;font-size:var(--s-klein);color:var(--tinte-still)">
-            Bahar in ihrem Salon in der Perlacher Straße 2. Zwei Bedienplätze,
-            helle Fliesen, Tageslicht von der Straße.
-          </figcaption>
-        </figure>
-        <p style="margin-top:var(--r3)">
+        <p style="margin-top:var(--r4)">
           <a class="knopf knopf-leer" href="salon.html">Den Salon ansehen</a>
         </p>
       </div>
+
+      <figure class="portrait" style="margin:0">
+        <img src="bilder/bahar-gross.webp" alt="Fakhria Tokhi, Inhaberin und Friseurmeisterin, in ihrem Salon" width="600" height="833" loading="lazy" decoding="async">
+        <figcaption>
+          <span class="name">Fakhria Tokhi</span>
+          <span class="rolle">Friseurmeisterin · Inhaberin</span>
+        </figcaption>
+      </figure>
     </div>
   </div>
 </section>

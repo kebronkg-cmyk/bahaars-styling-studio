@@ -4,26 +4,19 @@ Die Seite ist fertig gebaut und läuft. Sieben Punkte kann nur die Inhaberin
 beantworten. **Bis dahin sollte die Seite nicht öffentlich gehen** — die
 ersten vier sind rechtlich, nicht kosmetisch.
 
-## 1. Einwilligungen für die Kundenfotos
+## 1. Einwilligungen für die Kundenfotos — bestätigt
 
-Die Arbeitsfotos stammen von der bisherigen Seite und zeigen Haare echter
-Kundinnen und Kunden. Dass sie dort standen, ist kein Nachweis, dass es
-zulässig war.
+Der Auftraggeber hat bestätigt: **alle abgebildeten Personen sind mit der
+Veröffentlichung einverstanden.** Damit zeigt die Seite die Arbeitsfotos in
+voller Aufnahme statt nur enge Haarausschnitte — fünfzehn Arbeiten, jede in
+ihrem eigenen Seitenverhältnis.
 
-**Was diese Seite deshalb tut:** Jeder Zuschnitt einer *Kundenarbeit* geht so
-eng ins Haar hinein, dass **kein Gesicht erkennbar** ist. Das einzige Gesicht
-auf der Seite ist das der Inhaberin — über ihr eigenes Bild entscheidet sie
-selbst.
-
-Fünf Vorlagen liegen ungenutzt in `recherche/bilder/`, teils wegen erkennbarer
-Personen, teils weil das Haar darauf nicht sauber aussieht: der Kinderschnitt
-(Kind erkennbar), das kurze graue Haar (Gesicht im Profil), die krause
-Blondaufnahme, die Hochsteckfrisur mit Orangestich und die Braut mit Schleier
-(Gesicht).
-
-Liegen Einwilligungen vor, lassen sich weitere Bilder freischalten: Zuschnitt
-in `werkzeug/bilder-bauen.mjs` eintragen, `node werkzeug/bilder-bauen.mjs`
-laufen lassen.
+**Bitte einmal schriftlich absichern.** Bei den Aufnahmen von Kundinnen und
+Kunden, dem Kind und der Braut sollte die Einwilligung dokumentiert sein
+(formlos genügt, aber schriftlich). Bei dem Kind ist die Einwilligung der
+Sorgeberechtigten nötig. Wer sie später zurückzieht, hat darauf Anspruch;
+das Bild ist dann aus `bilder/` und aus der Werkschau in `index.html` zu
+entfernen.
 
 ## 2. Sind die Preise noch aktuell?
 
@@ -64,25 +57,19 @@ Für „BaHaar's Kosmetikstudio" nebenan gibt es noch keine Preise.
 erfinden. Sobald die Preise feststehen, gehören sie in `leistungen.html` als
 zehnte Gruppe.
 
-## 6. Das Portrait — erledigt, mit einer Bitte
+## 6. Die Texte sprechen jetzt in Ihrer Stimme
 
-Der Auftraggeber hat bestätigt, dass `recherche/bilder/portrait-model.jpg`
-**Fakhria Tokhi selbst** zeigt. Das Bild trägt jetzt den ersten Bildschirm,
-mit Namen und Meistertitel.
+Die Seite ist von der dritten Person in die erste gewechselt: „Ich heiße
+Fakhria Tokhi", „Vor jeder Farbe sehe ich mir die Kopfhaut an". Das liest
+sich besser, aber es legt Ihnen Worte in den Mund.
 
-**Bitte gegenprüfen lassen.** Sie steht damit namentlich und mit Gesicht auf
-einer öffentlichen Seite — das sollte sie selbst gesehen und gewollt haben,
-bevor die Seite beworben wird.
+**Bitte einmal durchlesen und freigeben** — vor allem den ersten Bildschirm,
+den Abschnitt „Wer hier schneidet" auf der Startseite und den Abschnitt
+„Bahar" auf der Salonseite. Was nicht stimmt, ändere ich.
 
-**Eine bessere Aufnahme lohnt sich trotzdem.** Die Vorlage ist 624 × 1024 px
-und gibt nicht mehr her; deshalb steht sie in einer Spalte von höchstens
-23 rem statt vollflächig. Eine Stunde bei gutem Tageslicht am Fenster genügt,
-ein aktuelles Handy reicht. Danach nur den Zuschnitt in
-`werkzeug/bilder-bauen.mjs` austauschen.
-
-Ebenso hilfreich wären: Bahars Hände bei der Arbeit, Werkzeug in Nahaufnahme,
-der Laden ohne Kabel im Bild. Die drei vorhandenen Innenaufnahmen sind mit
-höchstens 733 px so klein, dass sie nur in Briefmarkengröße scharf sind.
+Ihr Portrait steht mit Namen und Meistertitel auf der Startseite und auf der
+Salonseite. Die Vorlage ist 624 × 1024 px und gibt nicht mehr her; eine
+Stunde bei Tageslicht am Fenster würde die Seite spürbar heben.
 
 ## 7. WhatsApp
 

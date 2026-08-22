@@ -142,6 +142,48 @@
     }
   }
 
+  /* ── Die Übersicht in der Kopfzeile ────────────────────────────────────
+     „Leistungen & Preise" klappt neun Gruppen mit Ab-Preis auf. Damit sieht
+     man in einem Blick, was es gibt und was es kostet, ohne die Seite zu
+     wechseln.
+
+     Ohne JavaScript gibt es den Knopf gar nicht — dann steht dort der
+     gewöhnliche Verweis auf die Preisliste (siehe .nav-ohne-skript). Das
+     Feld ist deshalb im Ausgangszustand [hidden] und wird hier freigegeben.  */
+
+  $$('.navpunkt').forEach((punkt) => {
+    const knopf = $('button', punkt);
+    const feld  = $('.uebersicht', punkt);
+    if (!knopf || !feld) return;
+    feld.hidden = false;
+
+    const zu = (zurueck) => {
+      if (knopf.getAttribute('aria-expanded') !== 'true') return;
+      knopf.setAttribute('aria-expanded', 'false');
+      if (zurueck) knopf.focus();
+    };
+    const auf = () => knopf.setAttribute('aria-expanded', 'true');
+
+    knopf.addEventListener('click', () => {
+      knopf.getAttribute('aria-expanded') === 'true' ? zu(false) : auf();
+    });
+
+    /* Ein Klick daneben schließt. Der Vergleich läuft über den Punkt, nicht
+       über das Feld: sonst zählt der Knopf selbst als „daneben" und der
+       Klick würde gleichzeitig öffnen und schließen. */
+    addEventListener('pointerdown', (e) => {
+      if (!punkt.contains(e.target)) zu(false);
+    });
+    punkt.addEventListener('keydown', (e) => { if (e.key === 'Escape') zu(true); });
+
+    /* Wandert der Tastaturfokus aus dem Punkt heraus, ist die Übersicht
+       erledigt. focusout feuert vor focusin am neuen Ziel, deshalb erst im
+       nächsten Takt prüfen. */
+    punkt.addEventListener('focusout', () => {
+      setTimeout(() => { if (!punkt.contains(document.activeElement)) zu(false); }, 0);
+    });
+  });
+
   /* ── Lupe für die Arbeiten ─────────────────────────────────────────── */
 
   const lupe = $('.lupe');

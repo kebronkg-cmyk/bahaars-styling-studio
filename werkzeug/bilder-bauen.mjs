@@ -10,69 +10,70 @@ const quelle = new URL('../recherche/bilder/', import.meta.url);
 const ziel = new URL('../bilder/', import.meta.url);
 mkdirSync(ziel, { recursive: true });
 
-/* Zwei Regeln bestimmen jeden Zuschnitt hier, und beide sind hart:
+/* Der Auftraggeber hat bestätigt, dass alle abgebildeten Personen mit der
+   Veröffentlichung einverstanden sind. Damit fällt die Beschränkung auf
+   Haar-Ausschnitte weg, die diese Seite bis hierher getragen hat.
 
-   1. Ein einziges Gesicht ist auf dieser Seite zu sehen: das der Inhaberin.
-      Sie entscheidet über ihr eigenes Bild. Ob für die Kundenfotos
-      Einwilligungen vorliegen, weiß nur sie — auf der alten Seite gestanden
-      zu haben ist kein Nachweis. Bis das geklärt ist, zeigen die
-      Arbeitsfotos Haar und sonst nichts.
-   2. Kein Salonhintergrund in den Arbeitsfotos. Föhne, Steckdosen, Kabel,
-      Regale und Plakate sind das, was die Vorlagen unbrauchbar macht. Der
-      Ausschnitt geht so weit hinein, dass nur noch Haar im Bild ist.
+   Zwei Regeln bleiben, und beide sind Gestaltung, nicht Recht:
 
-   Aussortiert, weil das Haar darauf nicht sauber aussieht oder eine fremde
-   Person erkennbar ist: der Kinderschnitt (Kind, erkennbar), das kurze graue
-   Haar (Gesicht im Profil), die krause Blondaufnahme, die Hochsteckfrisur mit
-   Orangestich und die Braut mit Schleier (Gesicht). Sie bleiben ungenutzt in
-   recherche/bilder/ liegen.
+   1. Vollformat. Jedes Bild wird so ausgeliefert, wie es aufgenommen wurde —
+      nur skaliert, nicht beschnitten (Verhältnis 0). Enge Ausschnitte machten
+      aus Frisuren abstrakte Texturen; man sah die Arbeit nicht mehr.
+   2. Kein Hochrechnen. Die Zielbreite liegt nie über der Vorlage.
+
+   Zugeschnitten wird nur da, wo ein Bild eine bestimmte Fläche füllen muss:
+   die wechselnden Hintergründe des Auftakts und das Portrait.
 
    [Ausgabename, Quelldatei, Mitte x, Mitte y, Höhe (Anteil), Breite:Höhe,
     Zielbreite, Güte, ohne Hochrechnen, Weißabgleich]                       */
 const auftraege = [
-  // ── Die Inhaberin. Das einzige Bild mit Gesicht, und das wichtigste der
-  //    Seite: bei einem inhabergeführten Salon kaufen die Leute die Person.
-  //    Die Vorlage ist 624×1024 — mehr als 620 px Breite gibt sie nicht her,
-  //    deshalb steht sie im Entwurf in einer Spalte und nicht vollflächig.
-  ['bahar-gross',        'portrait-model.jpg',            0.70, 0.40, 0.74, 0.70,  520, 0.88, true],
+  // ── Die Inhaberin ────────────────────────────────────────────────────
+  ['bahar-gross',        'portrait-model.jpg',            0.62, 0.42, 0.82, 0.72,  600, 0.88, true],
   ['bahar-nah',          'portrait-model.jpg',            0.62, 0.30, 0.46, 1.00,  470, 0.88, true],
 
-  // ── Arbeiten. Neun saubere Aufnahmen, hoch im Format, Haar füllt das Bild.
-  //    Größer ausgeliefert als vorher: sie tragen jetzt eigene Kacheln statt
-  //    unter einem Schleier zu verschwinden.
-  ['arbeit-balayage',    'arbeit-02-balayage.jpg',        0.56, 0.58, 0.62, 0.75,  900, 0.84],
-  ['arbeit-straehnen',   'arbeit-03-straehnen.jpg',       0.54, 0.40, 0.56, 0.75,  900, 0.84, false, [1.05, 0.95, 0.99]],
-  ['arbeit-locken',      'arbeit-05-blond-locken.jpg',    0.50, 0.55, 0.62, 0.75,  900, 0.84],
-  ['arbeit-ombre',       'arbeit-08-ombre.jpg',           0.60, 0.58, 0.60, 0.75,  900, 0.84],
-  ['arbeit-glatt',       'arbeit-09-lang-glatt.jpg',      0.56, 0.68, 0.54, 0.75,  900, 0.84],
-  ['arbeit-lang',        'arbeit-10-lang-blond.jpg',      0.58, 0.62, 0.60, 0.75,  900, 0.84],
-  ['arbeit-perlen',      'arbeit-13-hochsteck-blumen.jpg',0.33, 0.46, 0.46, 0.75,  420, 0.86, true],
-  ['arbeit-braut-perlen','arbeit-14-brautfrisur.jpg',     0.48, 0.36, 0.52, 0.75,  460, 0.86, true],
+  // ── Die Arbeiten, vollformatig. Fünfzehn Aufnahmen, jede in ihrem
+  //    eigenen Seitenverhältnis — das Raster richtet sich danach, nicht
+  //    umgekehrt.
+  ['arbeit-kind',        'arbeit-01-kinderschnitt.jpg',   0, 0, 0, 0, 1000, 0.84],
+  ['arbeit-balayage',    'arbeit-02-balayage.jpg',        0, 0, 0, 0, 1000, 0.84],
+  ['arbeit-straehnen',   'arbeit-03-straehnen.jpg',       0, 0, 0, 0, 1000, 0.84, false, [1.05, 0.95, 0.99]],
+  ['arbeit-kurz',        'arbeit-04-kurzhaar.jpg',        0, 0, 0, 0, 1000, 0.84],
+  ['arbeit-locken',      'arbeit-05-blond-locken.jpg',    0, 0, 0, 0, 1000, 0.84],
+  ['arbeit-bob',         'arbeit-06-bob-blond.jpg',       0, 0, 0, 0, 1000, 0.84],
+  ['arbeit-kurz-blond',  'arbeit-07-kurzhaar-blond.jpg',  0, 0, 0, 0, 1000, 0.84],
+  ['arbeit-ombre',       'arbeit-08-ombre.jpg',           0, 0, 0, 0, 1000, 0.84],
+  ['arbeit-glatt',       'arbeit-09-lang-glatt.jpg',      0, 0, 0, 0, 1000, 0.84],
+  ['arbeit-lang',        'arbeit-10-lang-blond.jpg',      0, 0, 0, 0, 1000, 0.84],
+  ['arbeit-flecht',      'arbeit-11-flechtfrisur.jpg',    0, 0, 0, 0, 1000, 0.86, true],
+  ['arbeit-hochsteck',   'arbeit-12-hochsteck.jpg',       0, 0, 0, 0, 1000, 0.86, true, [0.90, 1.00, 1.30]],
+  ['arbeit-perlen',      'arbeit-13-hochsteck-blumen.jpg',0, 0, 0, 0,  768, 0.86, true],
+  ['arbeit-braut-perlen','arbeit-14-brautfrisur.jpg',     0, 0, 0, 0,  539, 0.88, true],
+  ['arbeit-braut-schleier','arbeit-15-braut-schleier.jpg',0, 0, 0, 0,  550, 0.88, true],
 
-  // ── Zwei Vollflächen bleiben: die Kopfbilder von Brautstyling und
-  //    Leistungen. Eng ins Haar geschnitten, deshalb nie hochgerechnet.
-  // Breit genug, dass nichts hochgerechnet wird: bei 1,9:1 braucht eine
-  // Bahn von 1400 px eine Ausschnitthöhe von 737 px — das ist bei einer
-  // Vorlage von 2000 px Höhe ein Anteil von 0,37. Mit 0,26 kam sie auf 988
-  // px und wurde auf 1440 gezogen; das Haar sah dann matschig aus.
-  // Die Brautaufnahme ist nur 539 px breit; eine Bahn daraus müsste auf
-  // 1440 gezogen werden. Für die Fläche steht deshalb die Lockenaufnahme in
-  // voller Auflösung — dieselbe Handschrift, nur groß genug.
-  ['flaeche-braut',      'arbeit-05-blond-locken.jpg',    0.42, 0.44, 0.38, 1.90, 1400, 0.76, true],
-  ['flaeche-braut-hoch', 'arbeit-05-blond-locken.jpg',    0.50, 0.56, 0.52, 0.90,  760, 0.78, true],
-  // Der Nahausschnitt der Perlenranke bleibt — er steht als Bild neben Text,
-  // nicht als Bahn hinter Text, und braucht deshalb keine 1400 px.
-  ['braut-perlenranke',  'arbeit-14-brautfrisur.jpg',     0.48, 0.40, 0.46, 0.90,  480, 0.86, true],
-  ['flaeche-leistungen', 'arbeit-03-straehnen.jpg',       0.55, 0.38, 0.38, 1.90, 1400, 0.76, true, [1.05, 0.95, 0.99]],
-  ['flaeche-leistungen-hoch','arbeit-03-straehnen.jpg',   0.55, 0.36, 0.52, 0.90,  760, 0.78, true, [1.05, 0.95, 0.99]],
-  ['flaeche-termin',     'arbeit-09-lang-glatt.jpg',      0.56, 0.60, 0.38, 1.90, 1400, 0.76, true],
-  ['flaeche-termin-hoch','arbeit-09-lang-glatt.jpg',      0.56, 0.60, 0.52, 0.90,  760, 0.78, true],
+  // ── Der Laden und das Regal, ebenfalls vollformatig.
+  ['salon-raum',         'salon-stuehle-spiegel.jpg',     0, 0, 0, 0,  733, 0.88, true],
+  ['salon-platz',        'salon-arbeitsplatz.jpg',        0, 0, 0, 0,  455, 0.90, true],
+  ['salon-waschen',      'salon-waschbecken.jpg',         0, 0, 0, 0,  455, 0.90, true],
+  ['salon-plakate',      'salon-regal-plakate.jpg',       0, 0, 0, 0,  455, 0.90, true],
+  ['produkt-farben',     'produkte-farben.jpg',           0, 0, 0, 0,  455, 0.90, true],
+  ['produkt-herren',     'produkte-herren.jpg',           0, 0, 0, 0,  455, 0.90, true],
+  ['produkt-regal',      'produkte-regal.jpg',            0, 0, 0, 0,  455, 0.90, true],
+  ['logo-kosmetik',      'logo-kosmetikstudio.jpg',       0, 0, 0, 0,  499, 0.92, true],
 
-  // ── Der Laden, so groß ausgeliefert, wie die Auflösung es hergibt. Hier ist
-  //    kein Gesicht im Bild — die Köpfe auf den Plakaten sind Produktwerbung.
-  ['salon-raum',         'salon-stuehle-spiegel.jpg',     0.50, 0.50, 1.00, 1.34,  733, 0.86, true],
-  ['salon-platz',        'salon-arbeitsplatz.jpg',        0.50, 0.50, 1.00, 1.33,  455, 0.88, true],
-  ['salon-waschen',      'salon-waschbecken.jpg',         0.50, 0.50, 1.00, 1.33,  455, 0.88, true],
+  // ── Die wechselnden Hintergründe des Auftakts. Hier wird zugeschnitten,
+  //    weil sie eine feste Fläche füllen — und quadratisch, nicht quer:
+  //    ein 1,6:1-Ausschnitt musste die volle Vorlagenbreite nehmen und zog
+  //    Föhn, Steckdose und Regal mit ins Bild. Quadratisch bleibt der
+  //    Ausschnitt schmal genug, um beim Haar zu bleiben; die Fläche schneidet
+  //    ihn über object-fit auf ihr eigenes Format zurück.
+  ['auftakt-1',      'arbeit-03-straehnen.jpg',     0.52, 0.46, 0.62, 1.00, 1240, 0.80, true, [1.05, 0.95, 0.99]],
+  ['auftakt-1-hoch', 'arbeit-03-straehnen.jpg',     0.52, 0.46, 0.86, 0.70,  900, 0.80, true, [1.05, 0.95, 0.99]],
+  ['auftakt-2',      'arbeit-05-blond-locken.jpg',  0.48, 0.54, 0.62, 1.00, 1240, 0.80, true],
+  ['auftakt-2-hoch', 'arbeit-05-blond-locken.jpg',  0.48, 0.54, 0.86, 0.70,  900, 0.80, true],
+  ['auftakt-3',      'arbeit-09-lang-glatt.jpg',    0.56, 0.58, 0.62, 1.00, 1240, 0.80, true],
+  ['auftakt-3-hoch', 'arbeit-09-lang-glatt.jpg',    0.56, 0.58, 0.86, 0.70,  900, 0.80, true],
+  ['auftakt-4',      'arbeit-02-balayage.jpg',      0.55, 0.56, 0.62, 1.00, 1240, 0.80, true],
+  ['auftakt-4-hoch', 'arbeit-02-balayage.jpg',      0.55, 0.56, 0.86, 0.70,  900, 0.80, true],
 ];
 
 // Der Farbfächer zeigt pro Leistung ein Blatt. Die Farbe dieses Blattes wird
@@ -105,6 +106,8 @@ await page.evaluate(() => {
   // Zuschnitt aus Mittelpunkt, Höhe und Seitenverhältnis. Läuft nie über den
   // Bildrand hinaus: erst schieben, dann notfalls den Ausschnitt verkleinern.
   window.kasten = (bild, cx, cy, hAnteil, verhaeltnis) => {
+    // Verhältnis 0 heißt: das ganze Bild, so wie es aufgenommen wurde.
+    if (!verhaeltnis) return [0, 0, bild.width, bild.height];
     let h = Math.min(bild.height * hAnteil, bild.height);
     let b = h * verhaeltnis;
     if (b > bild.width) { b = bild.width; h = b / verhaeltnis; }
@@ -122,7 +125,7 @@ for (const [name, datei, cx, cy, hA, verh, breite, guete, ohneHoch, korr] of auf
     const bild = await window.laden(uri);
     const [sx, sy, sb, sh] = window.kasten(bild, cx, cy, hA, verh);
     const zb = Math.min(breite, ohneHoch ? sb : sb * 2);
-    const zh = Math.round(zb / verh);
+    const zh = Math.round(zb / (verh || (sb / sh)));
     // In zwei Schritten verkleinern, das hält die Haarstruktur zusammen.
     let c = document.createElement('canvas'); c.width = sb; c.height = sh;
     c.getContext('2d').drawImage(bild, sx, sy, sb, sh, 0, 0, sb, sh);

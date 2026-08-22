@@ -56,10 +56,10 @@ for (const seite of seiten) {
         return [r, g, b];
       };
       const raus = [];
-      for (const flaeche of document.querySelectorAll('.flaeche')) {
+      for (const flaeche of document.querySelectorAll('.flaeche, .auftakt')) {
         const felder = flaeche.querySelectorAll('h1, h2, h3, p, a, span, li');
         for (const el of felder) {
-          if (el.closest('.bild, .schleier')) continue;
+          if (el.closest('.bild, .schleier, .buehne, .auftakt-schleier')) continue;
           const text = (el.textContent || '').trim();
           if (text.length < 3) continue;
           // Nur Elemente, die den Text selbst tragen, nicht deren Eltern.
@@ -86,7 +86,7 @@ for (const seite of seiten) {
     // Die Seite einmal ohne Text malen, damit nur der Untergrund gemessen
     // wird. Ausgelesen wird im Browser: die Bildpunkte einer ganzen Seite
     // einzeln durch die Werkzeugbrücke zu schicken dauert Minuten.
-    await page.addStyleTag({ content: '.flaeche * { color: transparent !important; }' });
+    await page.addStyleTag({ content: '.flaeche *, .auftakt * { color: transparent !important; }' });
     await page.waitForTimeout(250);
     const bild = await page.screenshot({
       clip: { x: 0, y: 0, width: viewport.width, height: Math.min(viewport.height, 1600) },

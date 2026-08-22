@@ -170,49 +170,44 @@ components:
 
 **Leitbild: „Die Meisterin und ihre Arbeit"**
 
-Ein inhabergeführter Salon verkauft eine Person, keinen Laden. Deshalb steht
-Fakhria Tokhi — im Laden nennen alle sie Bahar — im ersten Bildschirm, mit
-Namen, Meistertitel und ihren zwanzig Jahren. Danach kommt ihre Arbeit: acht
-Aufnahmen aus dem Alltag, groß und ohne Schleier, und die Preise dazu.
+Ein inhabergeführter Salon verkauft eine Person, keinen Laden. Die Seite
+spricht deshalb in der ersten Person — „Seit zwanzig Jahren stehe ich selbst
+am Stuhl" — und zeigt danach die Arbeit: fünfzehn Aufnahmen aus dem Alltag,
+jede in ihrem eigenen Seitenverhältnis, keine beschnitten.
 
-Die Palette ist aus dem Material gemessen, nicht aus einem Regal geliehen.
-Über ihr Portrait und alle sauberen Arbeitsfotos hinweg liegt die warme Achse
-geschlossen im Farbtonband 47–88°, Schwerpunkt 60°: Espresso unten
-(L 24–36 %), Karamell in der Mitte (L 50–62 %, C bis .10), warmes Licht oben
-(L 87–95 %). Ein kalter Ton kam in keiner Messung vor. Grund ist warmes
-Papierweiß aus diesen Lichtern, Espresso ihre dunkle Seite, Messing die
-Leitfarbe aus dem Karamell im Haar.
+Der Auftakt ist hell. Hinter dem Text wechseln vier Aufnahmen aus dem Laden,
+jede acht Sekunden, mit anderthalb Sekunden Überblendung; darüber liegt ein
+Schleier in der Grundfarbe, dicht über der Textspalte und offen über dem
+Bild. Das Espresso, das hier vorher stand, trägt jetzt die Fußzeile: am
+Anfang war es zu schwer, am Ende schließt es die Seite ab.
 
-Genau ein Abschnitt kippt um: der Auftakt steht auf Espresso, die Kopfzeile
-darüber gehört solange zur Fläche. Danach ist alles wieder hell, im Wechsel
-zwischen Grund und Grund-warm. Ein zweiter dunkler Abschnitt wäre ein Muster
-statt eines Auftakts.
+Die Palette ist aus dem Material gemessen. Über das Portrait der Inhaberin
+und alle Arbeitsfotos hinweg liegt die warme Achse geschlossen im Farbtonband
+47–88°, Schwerpunkt 60°: Espresso unten (L 24–36 %), Karamell in der Mitte
+(L 50–62 %, C bis .10), warmes Licht oben (L 87–95 %). Ein kalter Ton kam in
+keiner Messung vor. Grund ist warmes Papierweiß aus diesen Lichtern, Messing
+die Leitfarbe aus dem Karamell im Haar.
 
-Die Dichte ist ruhig und großzügig: viel Grund, wenige Akzente, keine
-Kartenwand. Wo andere Salonseiten eine Dreierreihe gleich hoher Kacheln
-stellen, steht hier eine gezogene Zeilenliste. Ornament tritt selten und nur
-dort auf, wo es inhaltlich etwas bedeutet.
+Die Kopfzeile trägt drei Dinge: wohin es geht, wie man anruft, und den
+Termin. „Leistungen & Preise" klappt eine Übersicht auf — neun Gruppen mit
+Ab-Preis, damit man in einem Blick sieht, was es gibt und was es kostet, ohne
+die Seite zu wechseln. Der Termin ist der einzige gefüllte Knopf der Leiste,
+und im ersten Bildschirm steht die Terminkarte: erst der Öffnungsstand, dann
+Online-Buchung und Telefonnummer. Sichtbar, ohne zu drängen.
 
 **Was in dieser Fassung gefallen ist, und warum**
 
-- *Das Türkis der Moroccanoil-Regale.* Es war an der Wand gemessen und galt
-  deshalb als „aus dem Ort abgeleitet". Es ist aber die Markenfarbe eines
-  Lieferanten und nicht die Handschrift dieses Salons — deshalb wirkte es
-  aufgesetzt. Eine gemessene Farbe ist nicht automatisch die richtige; es
-  kommt darauf an, wem sie gehört.
-- *Der Farbfächer und die Tonleiter.* Acht Kartonblätter an einer Niete, dazu
-  ein Bänderstreifen am Fuß des ersten Bildschirms. Beide waren originell und
-  beide standen dort, wo die Besucherin wissen will, wer hier schneidet und
-  was es kostet. Was von der Idee bleibt, ist die Tonprobe: der Farbfleck
-  neben einem Preis, aus dem Foto genau dieser Arbeit gemessen. Klein, an
-  einer Stelle, wo er etwas bedeutet.
-- *Fünf Arbeitsfotos.* Kinderschnitt (Kind erkennbar), kurzes graues Haar
-  (Gesicht im Profil), krauses Blond, Hochsteckfrisur mit Orangestich, Braut
-  mit Schleier (Gesicht). Übrig bleiben acht, auf denen das Haar sauber
-  aussieht und kein fremdes Gesicht steht.
-
-Bestätigt abgelehnt: der Baukasten-Hero mit Vollbild, Serifenschrift und
-Goldrand, und ebenso die weiße Minimal-Antwort darauf.
+- *Das Türkis der Moroccanoil-Regale.* Gemessen, aber die Markenfarbe eines
+  Lieferanten — nicht die Handschrift dieses Salons. Prüftest: Würde die
+  Farbe verschwinden, wenn der Laden den Lieferanten wechselt?
+- *Der Farbfächer und die Tonleiter.* Originell, und beide standen dort, wo
+  die Besucherin wissen will, wer schneidet und was es kostet. Geblieben ist
+  die Tonprobe neben dem Preis.
+- *Die engen Haarausschnitte.* Sie waren die Antwort auf fehlende
+  Einwilligungen. Der Auftraggeber hat bestätigt, dass alle Abgebildeten
+  einverstanden sind — seitdem steht jedes Bild in voller Aufnahme.
+- *Die Fotobänder unter einem Schleier auf den Unterseiten.* Von der Arbeit
+  blieb dort nur Struktur übrig. Jetzt steht das Bild neben dem Text, ganz.
 
 **Key Characteristics:**
 
@@ -584,48 +579,56 @@ Kapitälchenbeschriftung.
 
 ### Der Auftakt
 
-Der erste Bildschirm, und der einzige dunkle Abschnitt der Seite.
+Heller Grund, vier wechselnde Aufnahmen dahinter.
 
-- **Fläche:** `--espresso`, darüber zwei radiale Verläufe als Licht — von
-  oben rechts warm (`oklch(45% .055 62 / .85)`, Mitte bei 78 % / −6 %, damit
-  an der oberen Kante keine Naht steht), von unten links eine Spur dunkler.
-  Dieselbe Lichtrichtung wie im Portrait, wo sie von den Spiegellampen kommt.
-- **Aufbau:** ab 62 rem zwei Spalten, `1fr` und höchstens 23 rem, senkrecht
-  zentriert. Darunter steht das Portrait über dem Text.
-- **Kopfzeile:** solange nicht gescrollt ist, gehört sie zur Fläche —
-  gleicher Grund, helle Schrift, Messing hell für Marke und Telefonmarke.
-  Beim Scrollen wird sie zum hellen Glas wie überall sonst. Ohne das liefe
-  ein heller Streifen quer über den ersten Bildschirm.
-- **Fuß:** Adresse und gerechneter Öffnungsstand, über einer 1-px-Linie in
-  `--linie-auf-espresso`.
+- **Die Bühne** (`.buehne`): vier `<picture>` übereinander, Überblendung über
+  `opacity`, 32 s Umlauf, Verzögerungen 0/8/16/24 s. Die Überblendung liegt
+  auf dem `<picture>`, nicht auf dem `<img>`: in einem `<picture>` ist das
+  Bild das **zweite** Kind, weil das `<source>` davor steht — auf dem Bild
+  traf `:nth-child(2)` alle vier Aufnahmen, alle bekamen dieselbe
+  Verzögerung, und es wechselte nichts. Bei `prefers-reduced-motion` steht
+  die erste Aufnahme still.
+- **Die Zuschnitte** sind quadratisch, nicht quer. Ein 1,6∶1-Ausschnitt musste
+  die volle Vorlagenbreite nehmen und zog Föhn, Steckdose und Regal mit ins
+  Bild; quadratisch bleibt der Ausschnitt beim Haar, und `object-fit` schneidet
+  ihn auf das Format der Fläche zurück.
+- **Der Schleier** deckt links voll (`--grund-96` bis 38 %), läuft bis 76 % auf
+  null und tuckt die rechte Kante mit `--grund-72` wieder ein — sonst endet
+  das Foto hart an der Fensterkante.
+- **Die Terminkarte** (`.terminkarte`): weiße Karte am Rand, zuerst der
+  gerechnete Öffnungsstand, dann Online-Buchung und Telefonnummer.
 
-### Das Portrait
+### Die Übersicht in der Kopfzeile
 
-- **Rahmen:** `--bogen-blatt`, 1 px Kante in `--linie-auf-espresso`, dazu
-  `--schatten-hoch`.
-- **Format:** `aspect-ratio: .7`, `object-fit: cover`.
-- **Beschriftung:** Name in Marcellus, Rolle in Marcellus SC gesperrt und in
-  Messing hell, beide auf einem Verlauf ins Espresso am unteren Bildrand —
-  damit die Schrift nicht auf der Bluse steht und trotzdem lesbar ist.
-- **Breite:** höchstens 23 rem am Schreibtisch, 17 rem am Telefon. Siehe die
-  Auflösungsregel: die Vorlage gibt 624 px her, mehr wird nicht gezogen.
+`.navpunkt` mit `<button aria-expanded>` und `.uebersicht`. Neun Gruppen mit
+Ab-Preis in drei Spalten. Escape schließt und gibt den Fokus zurück, ein Klick
+daneben schließt, ein Fokuswechsel nach draußen schließt.
 
-### Leistungskarten
+Ohne JavaScript gibt es den Knopf nicht (`display: none`, erst `.mitskript`
+zeigt ihn) — dann steht dort der gewöhnliche Verweis auf die Preisliste.
 
-Drei Karten mit echtem Foto, Ab-Preis und Tonprobe. Ein Spaltenraster: eine
-Spalte, ab 40 rem zwei, ab 64 rem drei.
+Der Selektor ist `button[aria-expanded='true'] ~ .uebersicht`, nicht `+`:
+zwischen Knopf und Feld steht der Verweis für den Fall ohne Skript.
 
-- **Bild:** `aspect-ratio: 4/5`, `--bogen-blatt`, beim Überfahren `scale(1.04)`.
-- **Preisblock:** senkrecht gestapelt, mit `margin-top: auto` am Fuß der
-  Karte. Nebeneinander gesetzt brach die Beschriftung nur auf einer der drei
-  Karten um, und drei Preiszeilen auf drei Höhen sehen aus wie ein Fehler.
-- **Tonprobe** (`.tonfleck`): 2,2 × 0,85 rem, Verlauf aus zwei am Foto genau
-  dieser Arbeit gemessenen Proben. Der eine eigene Gedanke, der bleibt.
+Die Textfarbe des Termin-Knopfs steht in `.kopfzeile .knopf-termin`, weil
+`.wegweiser a` spezifischer ist als `.knopf-voll` und ihn sonst in Messing auf
+Messing färbte — gemessen 1,1∶1.
 
-### Zweispalt
+### Die Werkschau
 
-Text links, Bild rechts. Eine Spalte, ab 58 rem `1fr` und höchstens 24 rem.
-Trägt den Brautabschnitt, den Bahar-Abschnitt und den Kopf der Salonseite.
+Fünfzehn Aufnahmen in Spalten (`columns: 2 / 3 / 4`), `break-inside: avoid`.
+Ein Raster aus gleich hohen Kacheln hätte jede zweite beschnitten; hier laufen
+die Spalten und die Bilder behalten ihre Form.
+
+### Vollbild
+
+Ein Foto in seinem eigenen Seitenverhältnis, mit `--bogen-blatt` und
+`--schatten-flach`. Der Ersatz für die Fotobahnen unter einem Schleier.
+
+### Die abgesetzte Bahn
+
+`.warm` trägt `--grund-warm` plus das Strähnenmuster. Jeder zweite Abschnitt
+steht darauf, damit nie zwei gleiche Gründe aneinanderstoßen.
 
 ## Do's and Don'ts
 
