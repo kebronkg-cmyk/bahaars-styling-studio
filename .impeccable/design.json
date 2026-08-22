@@ -1,404 +1,317 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-21T14:00:00Z",
+  "generatedAt": "2026-08-22T04:00:00Z",
   "title": "Gestaltungssystem: BaHaar's Styling Studio",
   "extensions": {
     "colorMeta": {
       "grund": {
         "role": "neutral",
-        "displayName": "Weißgrund",
-        "canonical": "oklch(99% .004 200)",
-        "note": "Der helle Laden: weiß gefliest, Tageslicht von der Straße. Ein Hauch Türkis, damit das Weiß zur Seite gehört.",
+        "displayName": "Papierweiß",
+        "canonical": "oklch(97.5% .009 84)",
+        "note": "Warmes Weiß aus den Lichtern der Arbeitsfotos (L 87–95 %).",
         "tonalRamp": [
-          "oklch(97% 0.004 200)",
-          "oklch(93% 0.004 200)",
-          "oklch(87% 0.004 200)",
-          "oklch(78% 0.004 200)",
-          "oklch(66% 0.004 200)",
-          "oklch(52% 0.004 200)",
-          "oklch(38% 0.004 200)",
-          "oklch(24% 0.004 200)"
+          "oklch(97% 0.009 84)",
+          "oklch(92% 0.009 84)",
+          "oklch(85% 0.009 84)",
+          "oklch(76% 0.009 84)",
+          "oklch(64% 0.009 84)",
+          "oklch(50% 0.009 84)",
+          "oklch(36% 0.009 84)",
+          "oklch(24% 0.009 84)"
         ]
       },
-      "grund-tief": {
+      "grund-warm": {
         "role": "neutral",
-        "displayName": "Grund tief",
-        "canonical": "oklch(95% .018 198)",
-        "note": "Die tiefste Fläche der Seite: Fußzeile und Rollbalkenbahn.",
+        "displayName": "Grund warm",
+        "canonical": "oklch(94.5% .015 82)",
+        "note": "Die abgesetzte Fläche. Abschnitte wechseln zwischen Grund und Grund-warm.",
         "tonalRamp": [
-          "oklch(97% 0.018 198)",
-          "oklch(93% 0.018 198)",
-          "oklch(87% 0.018 198)",
-          "oklch(78% 0.018 198)",
-          "oklch(66% 0.018 198)",
-          "oklch(52% 0.018 198)",
-          "oklch(38% 0.018 198)",
-          "oklch(24% 0.018 198)"
-        ]
-      },
-      "feld": {
-        "role": "neutral",
-        "displayName": "Feld",
-        "canonical": "oklch(97% .013 198)",
-        "note": "Abgesetzter Abschnitt, eine Spur türkiser als der Grund.",
-        "tonalRamp": [
-          "oklch(97% 0.013 198)",
-          "oklch(93% 0.013 198)",
-          "oklch(87% 0.013 198)",
-          "oklch(78% 0.013 198)",
-          "oklch(66% 0.013 198)",
-          "oklch(52% 0.013 198)",
-          "oklch(38% 0.013 198)",
-          "oklch(24% 0.013 198)"
+          "oklch(97% 0.015 82)",
+          "oklch(92% 0.015 82)",
+          "oklch(85% 0.015 82)",
+          "oklch(76% 0.015 82)",
+          "oklch(64% 0.015 82)",
+          "oklch(50% 0.015 82)",
+          "oklch(36% 0.015 82)",
+          "oklch(24% 0.015 82)"
         ]
       },
       "karte": {
         "role": "neutral",
         "displayName": "Karte",
-        "canonical": "oklch(100% 0 0)",
-        "note": "Reines Weiß. Hebt ein Bauteil vom Grund ab.",
+        "canonical": "oklch(99.2% .005 86)",
+        "note": "Die hellste Fläche, für Bauteile, die sich abheben.",
         "tonalRamp": [
-          "oklch(97% 0 0)",
-          "oklch(93% 0 0)",
-          "oklch(87% 0 0)",
-          "oklch(78% 0 0)",
-          "oklch(66% 0 0)",
-          "oklch(52% 0 0)",
-          "oklch(38% 0 0)",
-          "oklch(24% 0 0)"
+          "oklch(97% 0.005 86)",
+          "oklch(92% 0.005 86)",
+          "oklch(85% 0.005 86)",
+          "oklch(76% 0.005 86)",
+          "oklch(64% 0.005 86)",
+          "oklch(50% 0.005 86)",
+          "oklch(36% 0.005 86)",
+          "oklch(24% 0.005 86)"
+        ]
+      },
+      "espresso": {
+        "role": "primary",
+        "displayName": "Espresso",
+        "canonical": "oklch(24% .026 55)",
+        "note": "Aus dem Portrait gemessen: das Regal aus dunklem Holz, der Lederstuhl, ihre Kleidung. Trägt genau einen Abschnitt, den Auftakt.",
+        "tonalRamp": [
+          "oklch(97% 0.026 55)",
+          "oklch(92% 0.026 55)",
+          "oklch(85% 0.026 55)",
+          "oklch(76% 0.026 55)",
+          "oklch(64% 0.026 55)",
+          "oklch(50% 0.026 55)",
+          "oklch(36% 0.026 55)",
+          "oklch(24% 0.026 55)"
+        ]
+      },
+      "auf-espresso": {
+        "role": "neutral",
+        "displayName": "Auf Espresso",
+        "canonical": "oklch(83% .020 76)",
+        "note": "Nebenschrift auf der dunklen Fläche.",
+        "tonalRamp": [
+          "oklch(97% 0.02 76)",
+          "oklch(92% 0.02 76)",
+          "oklch(85% 0.02 76)",
+          "oklch(76% 0.02 76)",
+          "oklch(64% 0.02 76)",
+          "oklch(50% 0.02 76)",
+          "oklch(36% 0.02 76)",
+          "oklch(24% 0.02 76)"
         ]
       },
       "tinte": {
         "role": "neutral",
         "displayName": "Tinte",
-        "canonical": "oklch(26% .040 205)",
-        "note": "Dunkles Petrol statt Grau — ein grauer Text macht eine helle Seite schmutzig.",
+        "canonical": "oklch(28% .028 58)",
+        "note": "Dunkles Braun statt Grau — ein grauer Text macht eine warme Seite schmutzig.",
         "tonalRamp": [
-          "oklch(97% 0.04 205)",
-          "oklch(93% 0.04 205)",
-          "oklch(87% 0.04 205)",
-          "oklch(78% 0.04 205)",
-          "oklch(66% 0.04 205)",
-          "oklch(52% 0.04 205)",
-          "oklch(38% 0.04 205)",
-          "oklch(24% 0.04 205)"
+          "oklch(97% 0.028 58)",
+          "oklch(92% 0.028 58)",
+          "oklch(85% 0.028 58)",
+          "oklch(76% 0.028 58)",
+          "oklch(64% 0.028 58)",
+          "oklch(50% 0.028 58)",
+          "oklch(36% 0.028 58)",
+          "oklch(24% 0.028 58)"
         ]
       },
       "tinte-leise": {
         "role": "neutral",
         "displayName": "Tinte leise",
-        "canonical": "oklch(40% .032 203)",
+        "canonical": "oklch(43% .026 60)",
         "note": "Fließtext.",
         "tonalRamp": [
-          "oklch(97% 0.032 203)",
-          "oklch(93% 0.032 203)",
-          "oklch(87% 0.032 203)",
-          "oklch(78% 0.032 203)",
-          "oklch(66% 0.032 203)",
-          "oklch(52% 0.032 203)",
-          "oklch(38% 0.032 203)",
-          "oklch(24% 0.032 203)"
+          "oklch(97% 0.026 60)",
+          "oklch(92% 0.026 60)",
+          "oklch(85% 0.026 60)",
+          "oklch(76% 0.026 60)",
+          "oklch(64% 0.026 60)",
+          "oklch(50% 0.026 60)",
+          "oklch(36% 0.026 60)",
+          "oklch(24% 0.026 60)"
         ]
       },
       "tinte-still": {
         "role": "neutral",
         "displayName": "Tinte still",
-        "canonical": "oklch(47% .026 202)",
+        "canonical": "oklch(53% .022 62)",
         "note": "Nebenangaben: Dauer, Zusatz, Bildunterschrift.",
         "tonalRamp": [
-          "oklch(97% 0.026 202)",
-          "oklch(93% 0.026 202)",
-          "oklch(87% 0.026 202)",
-          "oklch(78% 0.026 202)",
-          "oklch(66% 0.026 202)",
-          "oklch(52% 0.026 202)",
-          "oklch(38% 0.026 202)",
-          "oklch(24% 0.026 202)"
+          "oklch(97% 0.022 62)",
+          "oklch(92% 0.022 62)",
+          "oklch(85% 0.022 62)",
+          "oklch(76% 0.022 62)",
+          "oklch(64% 0.022 62)",
+          "oklch(50% 0.022 62)",
+          "oklch(36% 0.022 62)",
+          "oklch(24% 0.022 62)"
         ]
       },
       "tinte-hell": {
         "role": "neutral",
         "displayName": "Tinte hell",
-        "canonical": "oklch(99% .004 200)",
-        "note": "Schrift auf Türkisflächen.",
+        "canonical": "oklch(97% .010 84)",
+        "note": "Schrift auf Messing- und Espressoflächen.",
         "tonalRamp": [
-          "oklch(97% 0.004 200)",
-          "oklch(93% 0.004 200)",
-          "oklch(87% 0.004 200)",
-          "oklch(78% 0.004 200)",
-          "oklch(66% 0.004 200)",
-          "oklch(52% 0.004 200)",
-          "oklch(38% 0.004 200)",
-          "oklch(24% 0.004 200)"
+          "oklch(97% 0.01 84)",
+          "oklch(92% 0.01 84)",
+          "oklch(85% 0.01 84)",
+          "oklch(76% 0.01 84)",
+          "oklch(64% 0.01 84)",
+          "oklch(50% 0.01 84)",
+          "oklch(36% 0.01 84)",
+          "oklch(24% 0.01 84)"
         ]
       },
-      "auf-tuerkis": {
-        "role": "neutral",
-        "displayName": "Auf Türkis",
-        "canonical": "oklch(88% .030 200)",
-        "note": "Nebenschrift auf der Türkisbahn.",
-        "tonalRamp": [
-          "oklch(97% 0.03 200)",
-          "oklch(93% 0.03 200)",
-          "oklch(87% 0.03 200)",
-          "oklch(78% 0.03 200)",
-          "oklch(66% 0.03 200)",
-          "oklch(52% 0.03 200)",
-          "oklch(38% 0.03 200)",
-          "oklch(24% 0.03 200)"
-        ]
-      },
-      "tuerkis": {
+      "messing": {
         "role": "primary",
-        "displayName": "Türkis",
-        "canonical": "oklch(48% .105 202)",
-        "note": "Gemessen an den Moroccanoil-Regalen im Salon: oklch(61,3% .053 200,8), auf Schriftdichte gebracht — 48 % Helligkeit, damit sie auf Weiß über 4,5 : 1 liegt.",
+        "displayName": "Messing",
+        "canonical": "oklch(45% .085 60)",
+        "note": "Die Leitfarbe, aus dem Karamell im Haar gemessen (L 50–62 %, C bis .10, Farbton 60°). Hier bei 45 % Helligkeit, weil sie Schrift trägt.",
         "tonalRamp": [
-          "oklch(97% 0.105 202)",
-          "oklch(93% 0.105 202)",
-          "oklch(87% 0.105 202)",
-          "oklch(78% 0.105 202)",
-          "oklch(66% 0.105 202)",
-          "oklch(52% 0.105 202)",
-          "oklch(38% 0.105 202)",
-          "oklch(24% 0.105 202)"
+          "oklch(97% 0.085 60)",
+          "oklch(92% 0.085 60)",
+          "oklch(85% 0.085 60)",
+          "oklch(76% 0.085 60)",
+          "oklch(64% 0.085 60)",
+          "oklch(50% 0.085 60)",
+          "oklch(36% 0.085 60)",
+          "oklch(24% 0.085 60)"
         ]
       },
-      "tuerkis-hell": {
+      "messing-hell": {
         "role": "primary",
-        "displayName": "Türkis hell",
-        "canonical": "oklch(66% .105 200)",
-        "note": "Ausschließlich Hover-Zustand des gefüllten Knopfs.",
+        "displayName": "Messing hell",
+        "canonical": "oklch(72% .095 68)",
+        "note": "Dieselbe Stimme auf Espresso.",
         "tonalRamp": [
-          "oklch(97% 0.105 200)",
-          "oklch(93% 0.105 200)",
-          "oklch(87% 0.105 200)",
-          "oklch(78% 0.105 200)",
-          "oklch(66% 0.105 200)",
-          "oklch(52% 0.105 200)",
-          "oklch(38% 0.105 200)",
-          "oklch(24% 0.105 200)"
+          "oklch(97% 0.095 68)",
+          "oklch(92% 0.095 68)",
+          "oklch(85% 0.095 68)",
+          "oklch(76% 0.095 68)",
+          "oklch(64% 0.095 68)",
+          "oklch(50% 0.095 68)",
+          "oklch(36% 0.095 68)",
+          "oklch(24% 0.095 68)"
         ]
       },
-      "tuerkis-blass": {
+      "messing-blass": {
         "role": "primary",
-        "displayName": "Türkis blass",
-        "canonical": "oklch(93% .035 198)",
-        "note": "Beschriftung auf der Türkisfläche, Hintergrund der aktiven Navigatormarke.",
+        "displayName": "Messing blass",
+        "canonical": "oklch(92% .030 78)",
+        "note": "Beschriftung und Hintergrund der aktiven Navigatormarke.",
         "tonalRamp": [
-          "oklch(97% 0.035 198)",
-          "oklch(93% 0.035 198)",
-          "oklch(87% 0.035 198)",
-          "oklch(78% 0.035 198)",
-          "oklch(66% 0.035 198)",
-          "oklch(52% 0.035 198)",
-          "oklch(38% 0.035 198)",
-          "oklch(24% 0.035 198)"
-        ]
-      },
-      "tuerkis-tief": {
-        "role": "primary",
-        "displayName": "Türkis tief",
-        "canonical": "oklch(38% .080 204)",
-        "note": "Nur als Fläche, nur einmal: die Türkisbahn.",
-        "tonalRamp": [
-          "oklch(97% 0.08 204)",
-          "oklch(93% 0.08 204)",
-          "oklch(87% 0.08 204)",
-          "oklch(78% 0.08 204)",
-          "oklch(66% 0.08 204)",
-          "oklch(52% 0.08 204)",
-          "oklch(38% 0.08 204)",
-          "oklch(24% 0.08 204)"
-        ]
-      },
-      "haar-ansatz": {
-        "role": "accent",
-        "displayName": "Haar Ansatz",
-        "canonical": "oklch(34% .045 55)",
-        "note": "Dunkelste Stufe der gemessenen Haarachse. Material, nie Schrift.",
-        "tonalRamp": [
-          "oklch(97% 0.045 55)",
-          "oklch(93% 0.045 55)",
-          "oklch(87% 0.045 55)",
-          "oklch(78% 0.045 55)",
-          "oklch(66% 0.045 55)",
-          "oklch(52% 0.045 55)",
-          "oklch(38% 0.045 55)",
-          "oklch(24% 0.045 55)"
+          "oklch(97% 0.03 78)",
+          "oklch(92% 0.03 78)",
+          "oklch(85% 0.03 78)",
+          "oklch(76% 0.03 78)",
+          "oklch(64% 0.03 78)",
+          "oklch(50% 0.03 78)",
+          "oklch(36% 0.03 78)",
+          "oklch(24% 0.03 78)"
         ]
       },
       "haar-bronze": {
         "role": "accent",
         "displayName": "Haar Bronze",
         "canonical": "oklch(48% .070 58)",
-        "note": "Zweite Stufe der Haarachse.",
+        "note": "Die eine Stufe der gemessenen Haarachse, die als Token bleibt: sie trägt den Verlauf der Ablaufleiste im Brautstyling. Jede Tonprobe trägt ihre eigenen zwei gemessenen Werte.",
         "tonalRamp": [
           "oklch(97% 0.07 58)",
-          "oklch(93% 0.07 58)",
-          "oklch(87% 0.07 58)",
-          "oklch(78% 0.07 58)",
-          "oklch(66% 0.07 58)",
-          "oklch(52% 0.07 58)",
-          "oklch(38% 0.07 58)",
+          "oklch(92% 0.07 58)",
+          "oklch(85% 0.07 58)",
+          "oklch(76% 0.07 58)",
+          "oklch(64% 0.07 58)",
+          "oklch(50% 0.07 58)",
+          "oklch(36% 0.07 58)",
           "oklch(24% 0.07 58)"
-        ]
-      },
-      "haar-karamell": {
-        "role": "accent",
-        "displayName": "Haar Karamell",
-        "canonical": "oklch(64% .095 64)",
-        "note": "Dritte Stufe der Haarachse.",
-        "tonalRamp": [
-          "oklch(97% 0.095 64)",
-          "oklch(93% 0.095 64)",
-          "oklch(87% 0.095 64)",
-          "oklch(78% 0.095 64)",
-          "oklch(66% 0.095 64)",
-          "oklch(52% 0.095 64)",
-          "oklch(38% 0.095 64)",
-          "oklch(24% 0.095 64)"
-        ]
-      },
-      "haar-hell": {
-        "role": "accent",
-        "displayName": "Haar hell",
-        "canonical": "oklch(78% .085 74)",
-        "note": "Hellste Stufe der Haarachse: die Spitze.",
-        "tonalRamp": [
-          "oklch(97% 0.085 74)",
-          "oklch(93% 0.085 74)",
-          "oklch(87% 0.085 74)",
-          "oklch(78% 0.085 74)",
-          "oklch(66% 0.085 74)",
-          "oklch(52% 0.085 74)",
-          "oklch(38% 0.085 74)",
-          "oklch(24% 0.085 74)"
-        ]
-      },
-      "papier": {
-        "role": "accent",
-        "displayName": "Papier",
-        "canonical": "oklch(98.5% .012 88)",
-        "note": "Der Karton der Farbkartenblätter, eine Spur wärmer als der Grund.",
-        "tonalRamp": [
-          "oklch(97% 0.012 88)",
-          "oklch(93% 0.012 88)",
-          "oklch(87% 0.012 88)",
-          "oklch(78% 0.012 88)",
-          "oklch(66% 0.012 88)",
-          "oklch(52% 0.012 88)",
-          "oklch(38% 0.012 88)",
-          "oklch(24% 0.012 88)"
-        ]
-      },
-      "papier-rand": {
-        "role": "accent",
-        "displayName": "Papier Rand",
-        "canonical": "oklch(88% .018 85)",
-        "note": "Der gezeichnete Blattrand.",
-        "tonalRamp": [
-          "oklch(97% 0.018 85)",
-          "oklch(93% 0.018 85)",
-          "oklch(87% 0.018 85)",
-          "oklch(78% 0.018 85)",
-          "oklch(66% 0.018 85)",
-          "oklch(52% 0.018 85)",
-          "oklch(38% 0.018 85)",
-          "oklch(24% 0.018 85)"
-        ]
-      },
-      "papier-tinte": {
-        "role": "accent",
-        "displayName": "Papier Tinte",
-        "canonical": "oklch(30% .025 60)",
-        "note": "Schrift auf Karton.",
-        "tonalRamp": [
-          "oklch(97% 0.025 60)",
-          "oklch(93% 0.025 60)",
-          "oklch(87% 0.025 60)",
-          "oklch(78% 0.025 60)",
-          "oklch(66% 0.025 60)",
-          "oklch(52% 0.025 60)",
-          "oklch(38% 0.025 60)",
-          "oklch(24% 0.025 60)"
         ]
       },
       "rose": {
         "role": "accent",
         "displayName": "Rosé",
         "canonical": "oklch(64% .095 8)",
-        "note": "Gemessen an der Wand im Brautfoto. Ornament an genau einer Achse, niemals Text.",
+        "note": "An der Wand im Brautfoto gemessen. Ornament an genau einer Achse, niemals Text.",
         "tonalRamp": [
           "oklch(97% 0.095 8)",
-          "oklch(93% 0.095 8)",
-          "oklch(87% 0.095 8)",
-          "oklch(78% 0.095 8)",
-          "oklch(66% 0.095 8)",
-          "oklch(52% 0.095 8)",
-          "oklch(38% 0.095 8)",
+          "oklch(92% 0.095 8)",
+          "oklch(85% 0.095 8)",
+          "oklch(76% 0.095 8)",
+          "oklch(64% 0.095 8)",
+          "oklch(50% 0.095 8)",
+          "oklch(36% 0.095 8)",
           "oklch(24% 0.095 8)"
         ]
       },
       "glas": {
         "role": "neutral",
         "displayName": "glas",
-        "canonical": "oklch(99% .004 200 / .86)"
+        "canonical": "oklch(97.5% .009 84 / .86)"
       },
       "glas-dicht": {
         "role": "neutral",
         "displayName": "glas-dicht",
-        "canonical": "oklch(99% .004 200 / .94)"
+        "canonical": "oklch(97.5% .009 84 / .94)"
       },
       "glas-voll": {
         "role": "neutral",
         "displayName": "glas-voll",
-        "canonical": "oklch(99% .004 200 / .98)"
+        "canonical": "oklch(97.5% .009 84 / .98)"
       },
       "linie": {
         "role": "neutral",
         "displayName": "linie",
-        "canonical": "oklch(55% .025 200 / .28)"
+        "canonical": "oklch(58% .022 66 / .30)"
       },
       "linie-hell": {
         "role": "neutral",
         "displayName": "linie-hell",
-        "canonical": "oklch(60% .030 198 / .16)"
+        "canonical": "oklch(64% .026 70 / .17)"
       },
       "linie-akzent": {
         "role": "neutral",
         "displayName": "linie-akzent",
-        "canonical": "oklch(48% .105 202 / .32)"
+        "canonical": "oklch(45% .085 60 / .32)"
       },
-      "linie-auf-tuerkis": {
+      "linie-auf-espresso": {
         "role": "neutral",
-        "displayName": "linie-auf-tuerkis",
-        "canonical": "oklch(99% .004 200 / .24)"
-      },
-      "kante-hell": {
-        "role": "neutral",
-        "displayName": "kante-hell",
-        "canonical": "oklch(30% .020 60 / .16)"
-      },
-      "kante-perle": {
-        "role": "neutral",
-        "displayName": "kante-perle",
-        "canonical": "oklch(40% .050 60 / .35)"
+        "displayName": "linie-auf-espresso",
+        "canonical": "oklch(97% .010 84 / .20)"
       },
       "rollbalken": {
         "role": "neutral",
         "displayName": "rollbalken",
-        "canonical": "oklch(80% .030 200)"
+        "canonical": "oklch(82% .022 80)"
       },
       "rollbalken-hoch": {
         "role": "neutral",
         "displayName": "rollbalken-hoch",
-        "canonical": "oklch(66% .055 200)"
+        "canonical": "oklch(66% .055 66)"
       },
       "fremd-grund": {
         "role": "neutral",
         "displayName": "fremd-grund",
         "canonical": "#ffffff"
+      },
+      "grund-96": {
+        "role": "neutral",
+        "displayName": "grund-96",
+        "canonical": "oklch(97.5% .009 84 / .96)"
+      },
+      "grund-88": {
+        "role": "neutral",
+        "displayName": "grund-88",
+        "canonical": "oklch(97.5% .009 84 / .88)"
+      },
+      "grund-72": {
+        "role": "neutral",
+        "displayName": "grund-72",
+        "canonical": "oklch(97.5% .009 84 / .72)"
+      },
+      "grund-52": {
+        "role": "neutral",
+        "displayName": "grund-52",
+        "canonical": "oklch(97.5% .009 84 / .52)"
+      },
+      "grund-00": {
+        "role": "neutral",
+        "displayName": "grund-00",
+        "canonical": "oklch(97.5% .009 84 / 0)"
+      },
+      "espresso-92": {
+        "role": "neutral",
+        "displayName": "espresso-92",
+        "canonical": "oklch(19% .022 52 / .92)"
+      },
+      "espresso-70": {
+        "role": "neutral",
+        "displayName": "espresso-70",
+        "canonical": "oklch(19% .022 52 / .70)"
       }
     },
     "typographyMeta": {
@@ -428,11 +341,11 @@
       },
       "label": {
         "displayName": "Stempelzeile",
-        "purpose": "Marcellus SC, Kapitälchen, weit gestellt (--s-mini, 0,8 rem). Knöpfe, Navigatormarken, Tafelkopf, Blattname, Schild, Schildchen der Tonleiter. Eine Größe für alle Mikroschrift; fünf frühere Größen zwischen 0,62 und 0,76 rem sind darauf zusammengelegt. Nie Fließtext."
+        "purpose": "Marcellus SC, Kapitälchen, weit gestellt (--s-mini, 0,8 rem). Knöpfe, Navigatormarken, Tafelkopf, Portraitrolle, Schild, Schildchen. Eine Größe für alle Mikroschrift; fünf frühere Größen zwischen 0,62 und 0,76 rem sind darauf zusammengelegt. Nie Fließtext."
       },
       "preis": {
         "displayName": "Preis",
-        "purpose": "Die große Zahl (--s-preis, 1,9 rem) an Fächertafel und Merkzettel. Archivo, Zeilenhöhe 1."
+        "purpose": "Die große Zahl (--s-preis, 1,9 rem) an Leistungskarte, Preiszeile und Merkzettel. Archivo, Zeilenhöhe 1."
       },
       "marke": {
         "displayName": "Wortmarke",
@@ -440,10 +353,8 @@
       }
     },
     "shadows": {
-      "flach": "0 1px 2px oklch(45% .04 200 / .06), 0 3px 10px oklch(45% .04 200 / .06)",
-      "blatt": "0 1px 3px oklch(45% .04 200 / .10), 0 10px 26px oklch(45% .04 200 / .13)",
-      "hoch": "0 2px 6px oklch(45% .04 200 / .10), 0 20px 44px oklch(45% .04 200 / .18)",
-      "band": "0 1px 4px oklch(40% .04 200 / .22)"
+      "flach": "0 1px 2px oklch(38% .04 60 / .07), 0 3px 10px oklch(38% .04 60 / .07)",
+      "hoch": "0 2px 6px oklch(38% .04 60 / .11), 0 20px 44px oklch(38% .04 60 / .20)"
     },
     "motion": [
       {
@@ -526,7 +437,7 @@
       "refersTo": "knopf-voll",
       "description": "Die Hauptaktion — Anrufen, Termin, Auswahl senden.",
       "html": "<a class=\"ds-knopf ds-knopf-voll\" href=\"#\">Termin anfragen</a>",
-      "css": ".ds-knopf { display: inline-flex; align-items: center; justify-content: center; gap: .6rem; font-family: 'Marcellus SC', Georgia, serif; font-size: 1rem; letter-spacing: .12em; text-decoration: none; text-align: center; padding: .95rem 1.7rem; border-radius: var(--bogen-blatt-quer, .25rem 100px 100px .25rem); border: 1px solid transparent; background: none; cursor: pointer; transition: transform .3s cubic-bezier(.22,.61,.36,1), background-color .3s cubic-bezier(.22,.61,.36,1), border-color .3s cubic-bezier(.22,.61,.36,1), color .3s cubic-bezier(.22,.61,.36,1); } .ds-knopf-voll { background: var(--tuerkis, oklch(80% .115 74)); color: var(--tinte-hell, oklch(21% .040 60)); } @media (hover: hover) and (pointer: fine) { .ds-knopf-voll:hover { background: var(--tuerkis-hell, oklch(88% .075 78)); transform: translateY(-2px); } } .ds-knopf-voll:active { transform: translateY(0); } .ds-knopf-voll:focus-visible { outline: 2px solid var(--tuerkis, oklch(80% .115 74)); outline-offset: 3px; border-radius: 3px; }"
+      "css": ".ds-knopf { display: inline-flex; align-items: center; justify-content: center; gap: .6rem; font-family: 'Marcellus SC', Georgia, serif; font-size: 1rem; letter-spacing: .12em; text-decoration: none; text-align: center; padding: .95rem 1.7rem; border-radius: var(--bogen-blatt-quer, .25rem 100px 100px .25rem); border: 1px solid transparent; background: none; cursor: pointer; transition: transform .3s cubic-bezier(.22,.61,.36,1), background-color .3s cubic-bezier(.22,.61,.36,1), border-color .3s cubic-bezier(.22,.61,.36,1), color .3s cubic-bezier(.22,.61,.36,1); } .ds-knopf-voll { background: var(--messing, oklch(80% .115 74)); color: var(--tinte-hell, oklch(21% .040 60)); } @media (hover: hover) and (pointer: fine) { .ds-knopf-voll:hover { background: var(--messing-hell, oklch(88% .075 78)); transform: translateY(-2px); } } .ds-knopf-voll:active { transform: translateY(0); } .ds-knopf-voll:focus-visible { outline: 2px solid var(--messing, oklch(80% .115 74)); outline-offset: 3px; border-radius: 3px; }"
     },
     {
       "name": "Knopf leer",
@@ -534,7 +445,7 @@
       "refersTo": "knopf-leer",
       "description": "Die zweite Aktion daneben — Preise ansehen, Weg zeigen.",
       "html": "<a class=\"ds-knopf ds-knopf-leer\" href=\"#\">Leistungen &amp; Preise</a>",
-      "css": ".ds-knopf { display: inline-flex; align-items: center; justify-content: center; gap: .6rem; font-family: 'Marcellus SC', Georgia, serif; font-size: 1rem; letter-spacing: .12em; text-decoration: none; padding: .95rem 1.7rem; border-radius: var(--bogen-blatt-quer, .25rem 100px 100px .25rem); border: 1px solid transparent; background: none; cursor: pointer; transition: transform .3s cubic-bezier(.22,.61,.36,1), border-color .3s cubic-bezier(.22,.61,.36,1), color .3s cubic-bezier(.22,.61,.36,1); } .ds-knopf-leer { border-color: var(--linie-hell, oklch(62% .040 198 / .34)); color: var(--tinte, oklch(94.5% .014 78)); } @media (hover: hover) and (pointer: fine) { .ds-knopf-leer:hover { border-color: var(--tuerkis, oklch(80% .115 74)); color: var(--tuerkis, oklch(80% .115 74)); transform: translateY(-2px); } } .ds-knopf-leer:active { transform: translateY(0); } .ds-knopf-leer:focus-visible { outline: 2px solid var(--tuerkis, oklch(80% .115 74)); outline-offset: 3px; }"
+      "css": ".ds-knopf { display: inline-flex; align-items: center; justify-content: center; gap: .6rem; font-family: 'Marcellus SC', Georgia, serif; font-size: 1rem; letter-spacing: .12em; text-decoration: none; padding: .95rem 1.7rem; border-radius: var(--bogen-blatt-quer, .25rem 100px 100px .25rem); border: 1px solid transparent; background: none; cursor: pointer; transition: transform .3s cubic-bezier(.22,.61,.36,1), border-color .3s cubic-bezier(.22,.61,.36,1), color .3s cubic-bezier(.22,.61,.36,1); } .ds-knopf-leer { border-color: var(--linie-hell, oklch(62% .040 198 / .34)); color: var(--tinte, oklch(94.5% .014 78)); } @media (hover: hover) and (pointer: fine) { .ds-knopf-leer:hover { border-color: var(--messing, oklch(80% .115 74)); color: var(--messing, oklch(80% .115 74)); transform: translateY(-2px); } } .ds-knopf-leer:active { transform: translateY(0); } .ds-knopf-leer:focus-visible { outline: 2px solid var(--messing, oklch(80% .115 74)); outline-offset: 3px; }"
     },
     {
       "name": "Telefonmarke",
@@ -542,15 +453,7 @@
       "refersTo": "ruf",
       "description": "Die Telefonnummer in der Kopfzeile — steht auf jedem Bildschirm, auch dem ersten.",
       "html": "<a class=\"ds-ruf\" href=\"tel:+49896923644\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" aria-hidden=\"true\"><path d=\"M6.5 3h3l1.5 4-2 1.5a12 12 0 0 0 6.5 6.5L17 13l4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 3.5 5.2 2 2 0 0 1 5.5 3z\"/></svg>089 692 36 44</a>",
-      "css": ".ds-ruf { display: inline-flex; align-items: center; gap: .5rem; text-decoration: none; font-size: 1rem; letter-spacing: .03em; padding: .5rem .95rem; border: 1px solid var(--linie-akzent, oklch(80% .115 74 / .30)); border-radius: var(--bogen-blatt-quer, .25rem 100px 100px .25rem); color: var(--tuerkis, oklch(80% .115 74)); white-space: nowrap; font-family: 'Archivo', system-ui, sans-serif; transition: background-color .3s cubic-bezier(.22,.61,.36,1), border-color .3s cubic-bezier(.22,.61,.36,1); } .ds-ruf svg { width: 1em; height: 1em; flex: none; } @media (hover: hover) and (pointer: fine) { .ds-ruf:hover { background: oklch(80% .115 74 / .12); border-color: var(--tuerkis, oklch(80% .115 74)); } } .ds-ruf:focus-visible { outline: 2px solid var(--tuerkis, oklch(80% .115 74)); outline-offset: 3px; }"
-    },
-    {
-      "name": "Karte (Blatt)",
-      "kind": "card",
-      "refersTo": "blatt",
-      "description": "Das durchgehende Bauteil: stehendes Farbkartenblatt, oben rund, unten scharf.",
-      "html": "<div class=\"ds-blatt\"><h3 class=\"ds-blatt-titel\">Balayage</h3><p class=\"ds-blatt-text\">Weiche Übergänge, von Hand gemalt. Der Ansatz darf mitwachsen.</p></div>",
-      "css": ".ds-blatt { background: var(--karte, oklch(26.5% .030 202)); border: 1px solid var(--linie, oklch(42% .030 200 / .55)); border-radius: var(--bogen-blatt, 1.35rem 1.35rem .25rem .25rem); padding: 2rem; position: relative; } .ds-blatt-titel { font-family: 'Marcellus', Georgia, serif; font-weight: 400; font-size: 1.85rem; line-height: 1.14; letter-spacing: -.008em; margin: 0 0 1rem; color: var(--tinte, oklch(94.5% .014 78)); } .ds-blatt-text { font-family: 'Archivo', system-ui, sans-serif; font-size: 1.0625rem; line-height: 1.62; color: var(--tinte-leise, oklch(79% .018 76)); margin: 0; }"
+      "css": ".ds-ruf { display: inline-flex; align-items: center; gap: .5rem; text-decoration: none; font-size: 1rem; letter-spacing: .03em; padding: .5rem .95rem; border: 1px solid var(--linie-akzent, oklch(80% .115 74 / .30)); border-radius: var(--bogen-blatt-quer, .25rem 100px 100px .25rem); color: var(--messing, oklch(80% .115 74)); white-space: nowrap; font-family: 'Archivo', system-ui, sans-serif; transition: background-color .3s cubic-bezier(.22,.61,.36,1), border-color .3s cubic-bezier(.22,.61,.36,1); } .ds-ruf svg { width: 1em; height: 1em; flex: none; } @media (hover: hover) and (pointer: fine) { .ds-ruf:hover { background: oklch(80% .115 74 / .12); border-color: var(--messing, oklch(80% .115 74)); } } .ds-ruf:focus-visible { outline: 2px solid var(--messing, oklch(80% .115 74)); outline-offset: 3px; }"
     },
     {
       "name": "Merkmarke (Preis als Schalter)",
@@ -558,7 +461,7 @@
       "refersTo": "merken",
       "description": "Der Preis selbst ist der Schalter. Kein Symbol daneben — wer 49 € für lang antippt, merkt sich genau diese Länge.",
       "html": "<button class=\"ds-merken\" type=\"button\" aria-pressed=\"false\">49 €</button> <button class=\"ds-merken\" type=\"button\" aria-pressed=\"true\">69 €</button>",
-      "css": ".ds-merken { font-family: 'Archivo', system-ui, sans-serif; font-size: 1.0625rem; font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; background: none; border: 1px solid transparent; border-radius: 4px; color: var(--tuerkis, oklch(80% .115 74)); cursor: pointer; padding: .22rem .5rem; position: relative; transition: background-color .3s cubic-bezier(.22,.61,.36,1), border-color .3s cubic-bezier(.22,.61,.36,1), color .3s cubic-bezier(.22,.61,.36,1); } .ds-merken::after { content: '+'; position: absolute; top: -.1rem; right: -.15rem; font-size: .7em; line-height: 1; color: var(--tinte-still, oklch(66% .018 74)); opacity: 0; transition: opacity .3s cubic-bezier(.22,.61,.36,1); } .ds-merken[aria-pressed='true'] { background: var(--tuerkis, oklch(80% .115 74)); border-color: var(--tuerkis, oklch(80% .115 74)); color: var(--tinte-hell, oklch(21% .040 60)); } .ds-merken[aria-pressed='true']::after { content: '✓'; opacity: 1; color: var(--tuerkis, oklch(80% .115 74)); } @media (hover: hover) and (pointer: fine) { .ds-merken:hover { border-color: var(--linie-akzent, oklch(80% .115 74 / .30)); } .ds-merken:hover::after { opacity: 1; } } .ds-merken:focus-visible { outline: 2px solid var(--tuerkis, oklch(80% .115 74)); outline-offset: 3px; }"
+      "css": ".ds-merken { font-family: 'Archivo', system-ui, sans-serif; font-size: 1.0625rem; font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; background: none; border: 1px solid transparent; border-radius: 4px; color: var(--messing, oklch(80% .115 74)); cursor: pointer; padding: .22rem .5rem; position: relative; transition: background-color .3s cubic-bezier(.22,.61,.36,1), border-color .3s cubic-bezier(.22,.61,.36,1), color .3s cubic-bezier(.22,.61,.36,1); } .ds-merken::after { content: '+'; position: absolute; top: -.1rem; right: -.15rem; font-size: .7em; line-height: 1; color: var(--tinte-still, oklch(66% .018 74)); opacity: 0; transition: opacity .3s cubic-bezier(.22,.61,.36,1); } .ds-merken[aria-pressed='true'] { background: var(--messing, oklch(80% .115 74)); border-color: var(--messing, oklch(80% .115 74)); color: var(--tinte-hell, oklch(21% .040 60)); } .ds-merken[aria-pressed='true']::after { content: '✓'; opacity: 1; color: var(--messing, oklch(80% .115 74)); } @media (hover: hover) and (pointer: fine) { .ds-merken:hover { border-color: var(--linie-akzent, oklch(80% .115 74 / .30)); } .ds-merken:hover::after { opacity: 1; } } .ds-merken:focus-visible { outline: 2px solid var(--messing, oklch(80% .115 74)); outline-offset: 3px; }"
     },
     {
       "name": "Navigatormarke",
@@ -566,7 +469,7 @@
       "refersTo": "navigator-marke",
       "description": "Die klebende Leiste über den Leistungsgruppen: liegendes Blatt in klein, waagrecht rollbar.",
       "html": "<nav class=\"ds-navigator\"><ol><li><a href=\"#\" aria-current=\"true\">beratung</a></li><li><a href=\"#\">farbe</a></li><li><a href=\"#\">schnitt</a></li><li><a href=\"#\">hochsteckfrisur</a></li></ol></nav>",
-      "css": ".ds-navigator { padding: .65rem 1.25rem; background: oklch(14% .024 206 / .92); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--linie, oklch(42% .030 200 / .55)); } .ds-navigator ol { display: flex; gap: .4rem; list-style: none; margin: 0; padding: 0; overflow-x: auto; scrollbar-width: none; } .ds-navigator ol::-webkit-scrollbar { display: none; } .ds-navigator a { display: block; white-space: nowrap; text-decoration: none; font-family: 'Marcellus SC', Georgia, serif; font-size: .8rem; letter-spacing: .12em; color: var(--tinte-leise, oklch(79% .018 76)); padding: .45rem .85rem; border: 1px solid transparent; border-radius: var(--bogen-blatt-quer, .2rem .8rem .8rem .2rem); transition: color .3s cubic-bezier(.22,.61,.36,1), border-color .3s cubic-bezier(.22,.61,.36,1), background-color .3s cubic-bezier(.22,.61,.36,1); } .ds-navigator a[aria-current='true'] { color: var(--tuerkis, oklch(80% .115 74)); border-color: var(--linie-akzent, oklch(80% .115 74 / .30)); background: oklch(80% .115 74 / .09); } @media (hover: hover) and (pointer: fine) { .ds-navigator a:hover { color: var(--tinte, oklch(94.5% .014 78)); border-color: var(--linie-hell, oklch(62% .040 198 / .34)); } } .ds-navigator a:focus-visible { outline: 2px solid var(--tuerkis, oklch(80% .115 74)); outline-offset: 3px; }"
+      "css": ".ds-navigator { padding: .65rem 1.25rem; background: oklch(14% .024 206 / .92); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--linie, oklch(42% .030 200 / .55)); } .ds-navigator ol { display: flex; gap: .4rem; list-style: none; margin: 0; padding: 0; overflow-x: auto; scrollbar-width: none; } .ds-navigator ol::-webkit-scrollbar { display: none; } .ds-navigator a { display: block; white-space: nowrap; text-decoration: none; font-family: 'Marcellus SC', Georgia, serif; font-size: .8rem; letter-spacing: .12em; color: var(--tinte-leise, oklch(79% .018 76)); padding: .45rem .85rem; border: 1px solid transparent; border-radius: var(--bogen-blatt-quer, .2rem .8rem .8rem .2rem); transition: color .3s cubic-bezier(.22,.61,.36,1), border-color .3s cubic-bezier(.22,.61,.36,1), background-color .3s cubic-bezier(.22,.61,.36,1); } .ds-navigator a[aria-current='true'] { color: var(--messing, oklch(80% .115 74)); border-color: var(--linie-akzent, oklch(80% .115 74 / .30)); background: oklch(80% .115 74 / .09); } @media (hover: hover) and (pointer: fine) { .ds-navigator a:hover { color: var(--tinte, oklch(94.5% .014 78)); border-color: var(--linie-hell, oklch(62% .040 198 / .34)); } } .ds-navigator a:focus-visible { outline: 2px solid var(--messing, oklch(80% .115 74)); outline-offset: 3px; }"
     },
     {
       "name": "Preistafel-Zeile",
@@ -574,7 +477,7 @@
       "refersTo": "tafel-zeile",
       "description": "Feste Spalten, gezogene Zeilen. Die Spalten wandern nie, nur ihr Inhalt wechselt.",
       "html": "<div class=\"ds-tafel\"><div class=\"ds-tafel-kopf\"><span>leistung</span><span>kurz</span><span>lang</span><span>dauer</span></div><div class=\"ds-tafel-zeile\"><span class=\"ds-was\"><span class=\"ds-name\">Strähnen, Folie</span><span class=\"ds-dazu\">inklusive Pflege und Föhnen</span></span><span class=\"ds-preis\">69 €</span><span class=\"ds-preis\">99 €</span><span class=\"ds-dauer\">ca. 2 Std.</span></div></div>",
-      "css": ".ds-tafel { max-width: 46rem; font-family: 'Archivo', system-ui, sans-serif; font-variant-numeric: tabular-nums; } .ds-tafel-kopf { display: grid; grid-template-columns: minmax(0,1fr) 6rem 6rem 5.5rem; gap: 1rem; padding: 0 0 .7rem; border-bottom: 1px solid var(--linie-akzent, oklch(80% .115 74 / .30)); font-family: 'Marcellus SC', Georgia, serif; font-size: .74rem; letter-spacing: .2em; color: var(--tuerkis, oklch(80% .115 74)); } .ds-tafel-kopf span:nth-child(n+2) { text-align: right; } .ds-tafel-zeile { display: grid; grid-template-columns: minmax(0,1fr) 6rem 6rem 5.5rem; gap: 1rem; align-items: baseline; padding: .95rem 0; border-bottom: 1px solid var(--linie, oklch(42% .030 200 / .55)); } .ds-was { display: flex; flex-direction: column; gap: .18rem; } .ds-name { color: var(--tinte, oklch(94.5% .014 78)); } .ds-dazu { font-size: .8rem; color: var(--tinte-still, oklch(66% .018 74)); line-height: 1.4; } .ds-preis { text-align: right; color: var(--tuerkis, oklch(80% .115 74)); white-space: nowrap; } .ds-dauer { text-align: right; font-size: 1rem; color: var(--tinte-still, oklch(66% .018 74)); white-space: nowrap; }"
+      "css": ".ds-tafel { max-width: 46rem; font-family: 'Archivo', system-ui, sans-serif; font-variant-numeric: tabular-nums; } .ds-tafel-kopf { display: grid; grid-template-columns: minmax(0,1fr) 6rem 6rem 5.5rem; gap: 1rem; padding: 0 0 .7rem; border-bottom: 1px solid var(--linie-akzent, oklch(80% .115 74 / .30)); font-family: 'Marcellus SC', Georgia, serif; font-size: .74rem; letter-spacing: .2em; color: var(--messing, oklch(80% .115 74)); } .ds-tafel-kopf span:nth-child(n+2) { text-align: right; } .ds-tafel-zeile { display: grid; grid-template-columns: minmax(0,1fr) 6rem 6rem 5.5rem; gap: 1rem; align-items: baseline; padding: .95rem 0; border-bottom: 1px solid var(--linie, oklch(42% .030 200 / .55)); } .ds-was { display: flex; flex-direction: column; gap: .18rem; } .ds-name { color: var(--tinte, oklch(94.5% .014 78)); } .ds-dazu { font-size: .8rem; color: var(--tinte-still, oklch(66% .018 74)); line-height: 1.4; } .ds-preis { text-align: right; color: var(--messing, oklch(80% .115 74)); white-space: nowrap; } .ds-dauer { text-align: right; font-size: 1rem; color: var(--tinte-still, oklch(66% .018 74)); white-space: nowrap; }"
     },
     {
       "name": "Zeilenliste",
@@ -585,37 +488,21 @@
       "css": ".ds-zeilenliste { margin: 0; display: grid; gap: 0; } .ds-zeilenliste > div { display: grid; grid-template-columns: minmax(0,18rem) minmax(0,1fr); gap: 1rem 2.5rem; padding: 1.5rem 0; border-top: 1px solid var(--linie, oklch(42% .030 200 / .55)); } .ds-zeilenliste > div:last-child { border-bottom: 1px solid var(--linie, oklch(42% .030 200 / .55)); } .ds-zeilenliste dt { font-family: 'Marcellus', Georgia, serif; font-size: 1.85rem; line-height: 1.14; color: var(--tinte, oklch(94.5% .014 78)); } .ds-zeilenliste dd { margin: 0; font-family: 'Archivo', system-ui, sans-serif; font-size: 1.0625rem; line-height: 1.62; color: var(--tinte-leise, oklch(79% .018 76)); max-width: 52ch; }"
     },
     {
-      "name": "Fächerblatt",
-      "kind": "custom",
-      "refersTo": "blatt-karte",
-      "description": "Ein Blatt des Farbfächers. Das Farbfeld an der Spitze ist aus dem Foto genau dieser Arbeit gemessen — zwei Proben, Ansatz und Länge.",
-      "html": "<div class=\"ds-blatt-halter\"><button class=\"ds-blatt-karte\" type=\"button\" aria-label=\"Balayage\"><span class=\"ds-blatt-ton\" style=\"--ton-oben:#a27754;--ton-unten:#8a6543\"></span><span class=\"ds-blatt-name\">balayage</span></button></div>",
-      "css": ".ds-blatt-halter { width: 4.2rem; height: 18rem; position: relative; } .ds-blatt-karte { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: stretch; padding: 0 0 2.2rem; border: 0; margin: 0; cursor: pointer; font: inherit; color: var(--papier-tinte, oklch(28% .022 60)); background: var(--papier, oklch(94% .016 82)); border-radius: var(--bogen-blatt-spitz, 2.4rem 2.4rem .25rem .25rem); box-shadow: 0 0 0 1px var(--papier-rand, oklch(86% .022 80)), 0 10px 26px oklch(9% .02 205 / .42); transform-origin: 50% 100%; overflow: hidden; filter: brightness(.9) saturate(.94); transition: transform .5s cubic-bezier(.22,.61,.36,1), box-shadow .5s cubic-bezier(.22,.61,.36,1), filter .5s cubic-bezier(.22,.61,.36,1); } .ds-blatt-ton { height: 38%; flex: none; background: linear-gradient(to bottom, var(--ton-oben), var(--ton-unten)); border-bottom: 1px solid var(--kante-hell, oklch(20% .020 60 / .22)); } .ds-blatt-name { flex: 1; display: flex; align-items: center; justify-content: center; writing-mode: vertical-rl; transform: rotate(180deg); font-family: 'Marcellus SC', Georgia, serif; font-size: .88rem; letter-spacing: .13em; padding-block: .8rem 1.6rem; white-space: nowrap; opacity: 0; transition: opacity .5s cubic-bezier(.22,.61,.36,1); } @media (hover: hover) and (pointer: fine) { .ds-blatt-karte:hover { transform: scale(1.03); filter: brightness(1) saturate(1); } .ds-blatt-karte:hover .ds-blatt-name { opacity: .75; } } .ds-blatt-karte:focus-visible { outline: 2px solid var(--tuerkis, oklch(80% .115 74)); outline-offset: -3px; } .ds-blatt-karte:focus-visible .ds-blatt-name { opacity: 1; }"
-    },
-    {
       "name": "Schild",
       "kind": "chip",
       "refersTo": "schild",
       "description": "Der Anhänger — ein Zustand am Objekt, keine Auszeichnungszeile über einer Überschrift.",
       "html": "<span class=\"ds-schild\">noch offen bis 19 uhr</span>",
-      "css": ".ds-schild { display: inline-flex; align-items: center; gap: .5rem; font-family: 'Marcellus SC', Georgia, serif; font-size: .8rem; letter-spacing: .16em; color: var(--tuerkis, oklch(80% .115 74)); border: 1px solid var(--linie-akzent, oklch(80% .115 74 / .30)); border-radius: 100px; padding: .25rem .8rem; } .ds-schild::before { content: ''; width: .4rem; height: .4rem; border-radius: 50%; background: currentColor; }"
-    },
-    {
-      "name": "Tonleiter",
-      "kind": "custom",
-      "refersTo": "tonleiter",
-      "description": "Der Fächer im geschlossenen Zustand: acht nach Helligkeit sortierte Bänder am Fuß des ersten Bildschirms, jedes vom Grund in die Farbe des nächsten Abschnitts verlaufend.",
-      "html": "<a class=\"ds-tonleiter\" href=\"#faecher-titel\" aria-label=\"Zur Farbkarte: acht Töne, an echten Arbeiten gemessen\"><span style=\"--ton-oben:#775740;--ton-unten:#694d38\"></span><span style=\"--ton-oben:#866850;--ton-unten:#543823\"></span><span style=\"--ton-oben:#a27754;--ton-unten:#8a6543\"></span><span style=\"--ton-oben:#9b7b54;--ton-unten:#6a5039\"></span><span style=\"--ton-oben:#a98c6a;--ton-unten:#a37657\"></span><span style=\"--ton-oben:#ae9a7f;--ton-unten:#44321a\"></span><span style=\"--ton-oben:#c3a988;--ton-unten:#8c6f4d\"></span><span style=\"--ton-oben:#d8c5a4;--ton-unten:#a88a63\"></span></a>",
-      "css": ".ds-tonleiter { position: relative; display: flex; height: 3.4rem; text-decoration: none; } .ds-tonleiter span { flex: 1; background: linear-gradient(to bottom, var(--grund, oklch(17.5% .028 205)) 0%, var(--ton-oben) 26%, var(--ton-unten) 76%, var(--feld, oklch(22.5% .032 203)) 100%); transform-origin: bottom; transition: transform .5s cubic-bezier(.22,.61,.36,1); } .ds-tonleiter span + span { box-shadow: inset 1px 0 0 var(--kante-hell, oklch(20% .020 60 / .22)); } .ds-tonleiter::after { content: 'die farbkarte'; position: absolute; left: 50%; bottom: 50%; transform: translate(-50%, 50%); font-family: 'Marcellus SC', Georgia, serif; font-size: .8rem; letter-spacing: .22em; color: var(--papier-tinte, oklch(28% .022 60)); background: var(--papier, oklch(94% .016 82)); padding: .2rem .9rem; border-radius: 100px; box-shadow: 0 1px 4px oklch(15% .02 60 / .35); white-space: nowrap; pointer-events: none; } @media (hover: hover) and (pointer: fine) { .ds-tonleiter:hover span { transform: scaleY(1.22); } } .ds-tonleiter:focus-visible { outline: 2px solid var(--tuerkis, oklch(80% .115 74)); outline-offset: -3px; }"
+      "css": ".ds-schild { display: inline-flex; align-items: center; gap: .5rem; font-family: 'Marcellus SC', Georgia, serif; font-size: .8rem; letter-spacing: .16em; color: var(--messing, oklch(80% .115 74)); border: 1px solid var(--linie-akzent, oklch(80% .115 74 / .30)); border-radius: 100px; padding: .25rem .8rem; } .ds-schild::before { content: ''; width: .4rem; height: .4rem; border-radius: 50%; background: currentColor; }"
     }
   ],
   "narrative": {
     "northStar": "Die Papeterie des Salons",
-    "overview": "Die Seite ist die Farbkarte, die bei jeder Beratung aufgefächert auf dem Tisch liegt. Der Laden ist hell: weiß gefliest, Tageslicht von der Perlacher Straße, und an jeder Wand das Türkis der Moroccanoil-Regale — an der Wand gemessen, nicht gewählt. Genau so ist die Seite gebaut: Weiß als Grund, Türkis als Stimme. Genau ein Abschnitt kippt um und steht auf voller Türkisfläche. Die einzige warme Achse ist Haar; ihre vier Stufen sind über die Arbeitsfotos des Salons gemessen und laufen vom dunklen Ansatz zur hellen Spitze messbar ins Gelbe.\n\nDie Dichte ist ruhig und großzügig: viel Grund, wenige Akzente, keine Kartenwand. Wo andere Salonseiten eine Dreierreihe gleich hoher Kacheln stellen, steht hier eine gezogene Zeilenliste. Bilder tragen ganze Abschnitte vollflächig unter einem mehrstufigen Schleier, statt als Kachel danebenzuliegen. Ornament tritt selten und nur dort auf, wo es inhaltlich etwas bedeutet.\n\nBestätigt abgelehnt: der Baukasten-Hero mit Vollbild, Serifenschrift und Goldrand, und ebenso die weiße Minimal-Antwort darauf. Ebenfalls abgelehnt: Farbschemata aus fremden Projekten — jede Farbe dieser Seite hat einen Beleg im Laden.",
+    "overview": "Die Seite ist die Farbkarte, die bei jeder Beratung aufgefächert auf dem Tisch liegt. Der Laden ist hell: weiß gefliest, Tageslicht von der Perlacher Straße, und an jeder Wand das Messing der Moroccanoil-Regale — an der Wand gemessen, nicht gewählt. Genau so ist die Seite gebaut: Weiß als Grund, Messing als Stimme. Genau ein Abschnitt kippt um und steht auf voller Messingfläche. Die einzige warme Achse ist Haar; ihre vier Stufen sind über die Arbeitsfotos des Salons gemessen und laufen vom dunklen Ansatz zur hellen Spitze messbar ins Gelbe.\n\nDie Dichte ist ruhig und großzügig: viel Grund, wenige Akzente, keine Kartenwand. Wo andere Salonseiten eine Dreierreihe gleich hoher Kacheln stellen, steht hier eine gezogene Zeilenliste. Bilder tragen ganze Abschnitte vollflächig unter einem mehrstufigen Schleier, statt als Kachel danebenzuliegen. Ornament tritt selten und nur dort auf, wo es inhaltlich etwas bedeutet.\n\nBestätigt abgelehnt: der Baukasten-Hero mit Vollbild, Serifenschrift und Goldrand, und ebenso die weiße Minimal-Antwort darauf. Ebenfalls abgelehnt: Farbschemata aus fremden Projekten — jede Farbe dieser Seite hat einen Beleg im Laden.",
     "keyCharacteristics": [
       "Gemessene Farben statt gewählter: jeder Ton stammt aus einem Foto des Ladens oder einer echten Arbeit (werkzeug/farben-messen.mjs, werkzeug/bilder-bauen.mjs).",
       "Eine einzige Kantensprache, das Farbkartenblatt: oben rund, unten scharf.",
-      "Weißer Grund über die ganze Seite, genau eine Türkisfläche als Anker.",
+      "Weißer Grund über die ganze Seite, genau eine Messingfläche als Anker.",
       "Feste Stufen in vier Umbruchpunkten statt fließender clamp()-Werte.",
       "Bewegung ausschließlich ease-out, ausschließlich transform und opacity.",
       "Jeder Gestaltungswert steht als Token in :root — auch der Rollbalken."
@@ -633,7 +520,7 @@
       },
       {
         "name": "Die Regel der einen warmen Stimme",
-        "body": "Auf dem weißen Grund spricht genau eine Farbe: Türkis. Preise, Verweise und die aktive Marke tragen sie; sonst nichts. Wird sie zur Fläche (gefüllter Knopf, gedrückte Merkmarke, Türkisbahn), steht der Text darauf in --tinte-hell.",
+        "body": "Auf dem weißen Grund spricht genau eine Farbe: Messing. Preise, Verweise und die aktive Marke tragen sie; sonst nichts. Wird sie zur Fläche (gefüllter Knopf, gedrückte Merkmarke, Auftakt), steht der Text darauf in --tinte-hell.",
         "section": "colors"
       },
       {
@@ -698,12 +585,12 @@
       },
       {
         "name": "Die Ein-Wert-Regel",
-        "body": "Eine Rolle hat einen Wert. Zwei fast gleiche Fassungen derselben Sache sind kein Feinschliff, sondern ein Fehler: die helle Schrift auf Türkis ist --tinte-hell, die Trennlinie auf Papier ist --kante-hell, die Mikroschrift ist --s-mini. Prüftest: kein Gestaltungswert steht außerhalb von :root.",
+        "body": "Eine Rolle hat einen Wert. Zwei fast gleiche Fassungen derselben Sache sind kein Feinschliff, sondern ein Fehler: die helle Schrift auf Espresso ist --tinte-hell, die Trennlinie auf Papier ist --kante-hell, die Mikroschrift ist --s-mini. Prüftest: kein Gestaltungswert steht außerhalb von :root.",
         "section": "colors"
       },
       {
         "name": "Die Hero-Regel",
-        "body": "Der erste Bildschirm (.flaeche.hero) hat eine eigene, knappere Höhe als jeder andere Abschnitt: 3 rem Polster, ab 48 rem 4 rem und min-height: min(42rem, 76svh). Mit der normalen Abschnittspolsterung lag die Tonleiter am Fuß erst bei 916 px. Der Inhalt wird per Flex zentriert, nicht per Grid, damit der Titel in der linken Flucht bleibt.",
+        "body": "Der erste Bildschirm zeigt die Person, nicht das Material: bei einem inhabergeführten Salon kaufen die Leute die Person. Zwei Spalten ab 62 rem, Portrait höchstens 23 rem breit.",
         "section": "layout"
       }
     ],
@@ -721,13 +608,13 @@
     "donts": [
       "Don't Rosé als Textfarbe einsetzen — es ist Ornament, an genau einer Achse.",
       "Don't die Haarachse als Textfarbe einsetzen; Karamell, Bronze, Ansatz und Haar hell sind Material.",
-      "Don't eine zweite, fast gleiche Fassung eines vorhandenen Tokens anlegen — es gibt eine helle Schrift auf Türkis, eine Trennlinie auf Papier, eine Mikroschriftgröße.",
+      "Don't eine zweite, fast gleiche Fassung eines vorhandenen Tokens anlegen — es gibt eine helle Schrift auf Espresso, eine Trennlinie auf Papier, eine Mikroschriftgröße.",
       "Don't Fließtext sperren. Weite Laufweite gehört ausschließlich kurzen Marcellus-SC-Auszeichnungen.",
       "Don't clamp() für Schriftgrößen, Seitenrand oder Abschnittshöhe einführen; diese Werte sind bewusst feste Stufen.",
       "Don't Dreierreihen gleich hoher Karten bauen.",
       "Don't Layout-Eigenschaften animieren (Höhe, Breite, top) — nur transform und opacity.",
       "Don't federnde oder zurückschwingende Kurven verwenden; es gibt nur die beiden ease-out-Kurven und die drei Dauern 0,3 / 0,5 / 0,8 s.",
-      "Don't harte, versetzte oder schwarze Schlagschatten setzen; Schatten sind weit, weich und in Petrol getönt.",
+      "Don't harte, versetzte oder schwarze Schlagschatten setzen; Schatten sind weit, weich und im Braun getönt.",
       "Don't Schriften von fremden Servern nachladen — sie liegen in schrift/.",
       "Don't Symbole aus einer Zeichenschrift verwenden; Symbole sind Inline-SVG mit currentColor und stroke-width: 1.7.",
       "Don't eine gesperrte Kleinzeile über eine große Überschrift setzen. Im ersten Bildschirm stehen Adresse und Öffnungsstand bewusst darunter."

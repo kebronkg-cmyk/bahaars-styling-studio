@@ -10,10 +10,16 @@ Die Arbeitsfotos stammen von der bisherigen Seite und zeigen Haare echter
 Kundinnen und Kunden. Dass sie dort standen, ist kein Nachweis, dass es
 zulässig war.
 
-**Was diese Seite deshalb tut:** Jeder Zuschnitt geht so eng ins Haar hinein,
-dass **kein Gesicht erkennbar** ist. Fünf Vorlagen mit deutlich erkennbaren
-Personen — darunter das Foto eines Kindes und die Portraitaufnahme — liegen
-ungenutzt in `recherche/bilder/`.
+**Was diese Seite deshalb tut:** Jeder Zuschnitt einer *Kundenarbeit* geht so
+eng ins Haar hinein, dass **kein Gesicht erkennbar** ist. Das einzige Gesicht
+auf der Seite ist das der Inhaberin — über ihr eigenes Bild entscheidet sie
+selbst.
+
+Fünf Vorlagen liegen ungenutzt in `recherche/bilder/`, teils wegen erkennbarer
+Personen, teils weil das Haar darauf nicht sauber aussieht: der Kinderschnitt
+(Kind erkennbar), das kurze graue Haar (Gesicht im Profil), die krause
+Blondaufnahme, die Hochsteckfrisur mit Orangestich und die Braut mit Schleier
+(Gesicht).
 
 Liegen Einwilligungen vor, lassen sich weitere Bilder freischalten: Zuschnitt
 in `werkzeug/bilder-bauen.mjs` eintragen, `node werkzeug/bilder-bauen.mjs`
@@ -58,15 +64,21 @@ Für „BaHaar's Kosmetikstudio" nebenan gibt es noch keine Preise.
 erfinden. Sobald die Preise feststehen, gehören sie in `leistungen.html` als
 zehnte Gruppe.
 
-## 6. Das Portrait
+## 6. Das Portrait — erledigt, mit einer Bitte
 
-Die Seite zeigt **kein Bild von Bahar**, weil unklar ist, ob
-`recherche/bilder/portrait-model.jpg` sie selbst oder ein Model zeigt. Ein
-falsch beschriftetes Portrait wäre schlimmer als gar keines.
+Der Auftraggeber hat bestätigt, dass `recherche/bilder/portrait-model.jpg`
+**Fakhria Tokhi selbst** zeigt. Das Bild trägt jetzt den ersten Bildschirm,
+mit Namen und Meistertitel.
 
-**Das ist die eine Aufnahme, die dieser Seite wirklich noch fehlt.** Bei
-einem inhabergeführten Salon kaufen die Leute die Person. Eine Stunde bei
-gutem Tageslicht am Fenster genügt; ein aktuelles Handy reicht.
+**Bitte gegenprüfen lassen.** Sie steht damit namentlich und mit Gesicht auf
+einer öffentlichen Seite — das sollte sie selbst gesehen und gewollt haben,
+bevor die Seite beworben wird.
+
+**Eine bessere Aufnahme lohnt sich trotzdem.** Die Vorlage ist 624 × 1024 px
+und gibt nicht mehr her; deshalb steht sie in einer Spalte von höchstens
+23 rem statt vollflächig. Eine Stunde bei gutem Tageslicht am Fenster genügt,
+ein aktuelles Handy reicht. Danach nur den Zuschnitt in
+`werkzeug/bilder-bauen.mjs` austauschen.
 
 Ebenso hilfreich wären: Bahars Hände bei der Arbeit, Werkzeug in Nahaufnahme,
 der Laden ohne Kabel im Bild. Die drei vorhandenen Innenaufnahmen sind mit

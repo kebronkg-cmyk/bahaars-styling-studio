@@ -26,6 +26,23 @@ Kurven, Muster (als SVG-Daten-URI) — alles an einer Stelle.
   Projekt übernehmen — Gold auf Schwarz war die Antwort für ein japanisches
   Restaurant, nicht die Handschrift des Auftraggebers. Erst schauen, dann
   festlegen; die Leitfarbe hat einen Grund im Laden zu haben.
+- **Gemessen reicht nicht — die Farbe muss dem Laden gehören.** Hier wurde
+  einmal das Türkis der Moroccanoil-Regale zur Leitfarbe gemacht, weil es an
+  jeder Wand hing und sauber gemessen war. Es ist trotzdem die Markenfarbe
+  eines Lieferanten, und die Seite wirkte damit aufgesetzt. Prüftest: Würde
+  diese Farbe verschwinden, wenn der Laden den Lieferanten wechselt? Dann ist
+  sie nicht seine Handschrift. Was bleibt, ist das eigene Material — bei
+  einem Friseur das Haar und die Person, die es macht.
+- **Bei einem inhabergeführten Betrieb steht die Person im ersten
+  Bildschirm.** Nicht das Material, nicht der Raum, nicht eine Idee über den
+  Beruf. Die Leute kaufen die Person. Eine originelle Idee darf danach
+  kommen, aber nicht dort, wo die Besucherin wissen will, wer hier schneidet
+  und was es kostet.
+- **Eine eigene Idee muss auch klein funktionieren.** Der Farbfächer aus acht
+  Kartonblättern war originell und fraß einen halben Bildschirm an der
+  wichtigsten Stelle. Geblieben ist derselbe Gedanke als Tonprobe neben dem
+  Preis: zwei Farbproben, aus dem Foto genau dieser Arbeit gemessen. Wenn
+  eine Idee nur groß funktioniert, ist sie meistens ein Schaustück.
 - **Kommt eine zweite Farbe dazu, tritt sie nur als Ornament auf**, nie als
   Textfarbe. Sonst kippt die einmal gesetzte Ordnung.
 - **Vollflächige Fotohintergründe.** Bilder tragen ganze Abschnitte, nicht als
@@ -41,6 +58,11 @@ Kurven, Muster (als SVG-Daten-URI) — alles an einer Stelle.
   schwerer als nachlegen.
 - **Echte Inhalte.** Richtige Preise, richtige Öffnungszeiten, richtige Fotos.
   Nie Platzhalter, nie Blindtext, nie „hier Ihr Text".
+- **Bildauswahl ist Gestaltung.** Eine Aufnahme, auf der das Haar kraus,
+  fahl oder farbstichig aussieht, macht die Arbeit schlechter, als sie ist —
+  bei einem Friseur ist das Foto das Produkt. Lieber acht saubere Bilder als
+  zwölf, von denen vier schaden. Kein Bild wird über seine Vorlage hinaus
+  gezogen; ein Bild, das kleiner bleibt, sieht besser aus als ein gezogenes.
 - Impressum und Datenschutz als eigene Seite. Copyright in den Footer.
   Telefonnummer schon auf dem ersten Bildschirm.
 

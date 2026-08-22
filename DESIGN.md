@@ -1,39 +1,32 @@
 ---
 name: BaHaar's Styling Studio
-description: Die Website als Farbkarte des Salons — weißer Grund, das Türkis der Regale, gemessene Haartöne.
+description: Die Meisterin und ihre Arbeit — warmes Papierweiß, Espresso als Gegenpol, Messing aus dem Haar gemessen.
 colors:
-  grund: "oklch(99% .004 200)"
-  grund-tief: "oklch(95% .018 198)"
-  feld: "oklch(97% .013 198)"
-  karte: "oklch(100% 0 0)"
-  glas: "oklch(99% .004 200 / .86)"
-  glas-dicht: "oklch(99% .004 200 / .94)"
-  glas-voll: "oklch(99% .004 200 / .98)"
-  tinte: "oklch(26% .040 205)"
-  tinte-leise: "oklch(40% .032 203)"
-  tinte-still: "oklch(47% .026 202)"
-  tinte-hell: "oklch(99% .004 200)"
-  auf-tuerkis: "oklch(88% .030 200)"
-  tuerkis: "oklch(48% .105 202)"
-  tuerkis-hell: "oklch(66% .105 200)"
-  tuerkis-blass: "oklch(93% .035 198)"
-  tuerkis-tief: "oklch(38% .080 204)"
-  haar-ansatz: "oklch(34% .045 55)"
+  grund: "oklch(97.5% .009 84)"
+  grund-warm: "oklch(94.5% .015 82)"
+  karte: "oklch(99.2% .005 86)"
+  glas: "oklch(97.5% .009 84 / .86)"
+  glas-dicht: "oklch(97.5% .009 84 / .94)"
+  glas-voll: "oklch(97.5% .009 84 / .98)"
+  espresso: "oklch(24% .026 55)"
+  espresso-92: "oklch(19% .022 52 / .92)"
+  espresso-70: "oklch(19% .022 52 / .70)"
+  auf-espresso: "oklch(83% .020 76)"
+  linie-auf-espresso: "oklch(97% .010 84 / .20)"
+  tinte: "oklch(28% .028 58)"
+  tinte-leise: "oklch(43% .026 60)"
+  tinte-still: "oklch(53% .022 62)"
+  tinte-hell: "oklch(97% .010 84)"
+  messing: "oklch(45% .085 60)"
+  messing-hell: "oklch(72% .095 68)"
+  messing-blass: "oklch(92% .030 78)"
   haar-bronze: "oklch(48% .070 58)"
-  haar-karamell: "oklch(64% .095 64)"
-  haar-hell: "oklch(78% .085 74)"
-  papier: "oklch(98.5% .012 88)"
-  papier-rand: "oklch(88% .018 85)"
-  papier-tinte: "oklch(30% .025 60)"
   rose: "oklch(64% .095 8)"
-  linie: "oklch(55% .025 200 / .28)"
-  linie-hell: "oklch(60% .030 198 / .16)"
-  linie-akzent: "oklch(48% .105 202 / .32)"
-  linie-auf-tuerkis: "oklch(99% .004 200 / .24)"
-  kante-hell: "oklch(30% .020 60 / .16)"
-  kante-perle: "oklch(40% .050 60 / .35)"
-  rollbalken: "oklch(80% .030 200)"
-  rollbalken-hoch: "oklch(66% .055 200)"
+  linie: "oklch(58% .022 66 / .30)"
+  linie-hell: "oklch(64% .026 70 / .17)"
+  linie-akzent: "oklch(45% .085 60 / .32)"
+  rollbalken: "oklch(82% .022 80)"
+  rollbalken-hoch: "oklch(66% .055 66)"
   fremd-grund: "#ffffff"
 typography:
   display:
@@ -87,7 +80,6 @@ rounded:
   standard: "6px"
   blatt: "1.35rem 1.35rem .25rem .25rem"
   blatt-quer: ".25rem 100px 100px .25rem"
-  blatt-spitz: "2.4rem 2.4rem .25rem .25rem"
   marke: ".2rem .8rem .8rem .2rem"
   pille: "100px"
 spacing:
@@ -104,13 +96,13 @@ spacing:
   breite-text: "38rem"
 components:
   knopf-voll:
-    backgroundColor: "{colors.tuerkis}"
+    backgroundColor: "{colors.messing}"
     textColor: "{colors.tinte-hell}"
     typography: "{typography.label}"
     rounded: "{rounded.blatt-quer}"
     padding: ".95rem 1.7rem"
   knopf-voll-hover:
-    backgroundColor: "{colors.tuerkis-hell}"
+    backgroundColor: "{colors.messing-hell}"
   knopf-leer:
     backgroundColor: "transparent"
     textColor: "{colors.tinte}"
@@ -118,10 +110,10 @@ components:
     rounded: "{rounded.blatt-quer}"
     padding: ".95rem 1.7rem"
   knopf-leer-hover:
-    textColor: "{colors.tuerkis}"
+    textColor: "{colors.messing}"
   ruf:
     backgroundColor: "transparent"
-    textColor: "{colors.tuerkis}"
+    textColor: "{colors.messing}"
     rounded: "{rounded.blatt-quer}"
     padding: ".5rem .95rem"
   blatt:
@@ -129,18 +121,13 @@ components:
     textColor: "{colors.tinte}"
     rounded: "{rounded.blatt}"
     padding: "1.5rem → 2rem → 2.25rem"
-  blatt-karte:
-    backgroundColor: "{colors.papier}"
-    textColor: "{colors.papier-tinte}"
-    rounded: "{rounded.blatt-spitz}"
-    padding: "0 0 2.2rem"
   merken:
     backgroundColor: "transparent"
-    textColor: "{colors.tuerkis}"
+    textColor: "{colors.messing}"
     rounded: "4px"
     padding: ".22rem .5rem"
   merken-aktiv:
-    backgroundColor: "{colors.tuerkis}"
+    backgroundColor: "{colors.messing}"
     textColor: "{colors.tinte-hell}"
   navigator-marke:
     backgroundColor: "transparent"
@@ -149,23 +136,31 @@ components:
     rounded: "{rounded.marke}"
     padding: ".45rem .85rem"
   navigator-marke-aktiv:
-    backgroundColor: "oklch(48% .105 202 / .10)"
-    textColor: "{colors.tuerkis}"
+    backgroundColor: "oklch(45% .085 60 / .10)"
+    textColor: "{colors.messing}"
   schild:
     backgroundColor: "transparent"
-    textColor: "{colors.tuerkis}"
+    textColor: "{colors.messing}"
     typography: "{typography.label}"
     rounded: "{rounded.pille}"
     padding: ".25rem .8rem"
-  schildchen-tonleiter:
-    backgroundColor: "{colors.papier}"
-    textColor: "{colors.papier-tinte}"
-    typography: "{typography.label}"
-    rounded: "{rounded.pille}"
-    padding: ".2rem .9rem"
   arbeit-kachel:
-    backgroundColor: "{colors.feld}"
+    backgroundColor: "{colors.grund-warm}"
     rounded: "{rounded.blatt}"
+    padding: "0"
+  portrait:
+    backgroundColor: "transparent"
+    textColor: "{colors.tinte-hell}"
+    rounded: "{rounded.blatt}"
+    padding: "0"
+  leistungskarte:
+    backgroundColor: "transparent"
+    textColor: "{colors.tinte}"
+    rounded: "{rounded.blatt}"
+    padding: "0"
+  tonfleck:
+    backgroundColor: "linear-gradient(to right, var(--ton-oben), var(--ton-unten))"
+    rounded: "{rounded.klein}"
     padding: "0"
 ---
 
@@ -173,147 +168,169 @@ components:
 
 ## Overview
 
-**Leitbild: „Die Papeterie des Salons"**
+**Leitbild: „Die Meisterin und ihre Arbeit"**
 
-Die Seite ist die Farbkarte, die bei jeder Beratung aufgefächert auf dem Tisch
-liegt. Der Laden ist hell: weiß gefliest, Tageslicht von der Perlacher Straße,
-und an jeder Wand das Türkis der Moroccanoil-Regale — an der Wand gemessen,
-nicht gewählt (oklch 61,3 % .053 200,8). Genau so ist die Seite gebaut: Weiß
-als Grund, Türkis als Stimme. Die einzige warme Achse ist Haar; ihre vier
-Stufen sind über die Arbeitsfotos des Salons gemessen und laufen vom dunklen
-Ansatz zur hellen Spitze messbar ins Gelbe. Sie tragen keine Schrift mehr,
-sondern nur noch das, was im Laden auch warm ist: die Fotos, die Blätter der
-Farbkarte, die Bänder der Tonleiter.
+Ein inhabergeführter Salon verkauft eine Person, keinen Laden. Deshalb steht
+Fakhria Tokhi — im Laden nennen alle sie Bahar — im ersten Bildschirm, mit
+Namen, Meistertitel und ihren zwanzig Jahren. Danach kommt ihre Arbeit: acht
+Aufnahmen aus dem Alltag, groß und ohne Schleier, und die Preise dazu.
 
-Genau ein Abschnitt kippt um. Die Türkisbahn — „Perlacher Straße 2" mit
-Öffnungszeiten, Anschrift und Erreichbarkeit — steht auf voller Fläche im
-Regal-Türkis, die Schrift darauf hell. Das ist der Anker der Seite; davor und
-danach steht wieder Weiß. Ein zweiter solcher Abschnitt wäre Dekor.
+Die Palette ist aus dem Material gemessen, nicht aus einem Regal geliehen.
+Über ihr Portrait und alle sauberen Arbeitsfotos hinweg liegt die warme Achse
+geschlossen im Farbtonband 47–88°, Schwerpunkt 60°: Espresso unten
+(L 24–36 %), Karamell in der Mitte (L 50–62 %, C bis .10), warmes Licht oben
+(L 87–95 %). Ein kalter Ton kam in keiner Messung vor. Grund ist warmes
+Papierweiß aus diesen Lichtern, Espresso ihre dunkle Seite, Messing die
+Leitfarbe aus dem Karamell im Haar.
+
+Genau ein Abschnitt kippt um: der Auftakt steht auf Espresso, die Kopfzeile
+darüber gehört solange zur Fläche. Danach ist alles wieder hell, im Wechsel
+zwischen Grund und Grund-warm. Ein zweiter dunkler Abschnitt wäre ein Muster
+statt eines Auftakts.
 
 Die Dichte ist ruhig und großzügig: viel Grund, wenige Akzente, keine
 Kartenwand. Wo andere Salonseiten eine Dreierreihe gleich hoher Kacheln
-stellen, steht hier eine gezogene Zeilenliste. Bilder tragen ganze Abschnitte
-vollflächig unter einem mehrstufigen Schleier, statt als Kachel danebenzuliegen.
-Ornament tritt selten und nur dort auf, wo es inhaltlich etwas bedeutet.
+stellen, steht hier eine gezogene Zeilenliste. Ornament tritt selten und nur
+dort auf, wo es inhaltlich etwas bedeutet.
+
+**Was in dieser Fassung gefallen ist, und warum**
+
+- *Das Türkis der Moroccanoil-Regale.* Es war an der Wand gemessen und galt
+  deshalb als „aus dem Ort abgeleitet". Es ist aber die Markenfarbe eines
+  Lieferanten und nicht die Handschrift dieses Salons — deshalb wirkte es
+  aufgesetzt. Eine gemessene Farbe ist nicht automatisch die richtige; es
+  kommt darauf an, wem sie gehört.
+- *Der Farbfächer und die Tonleiter.* Acht Kartonblätter an einer Niete, dazu
+  ein Bänderstreifen am Fuß des ersten Bildschirms. Beide waren originell und
+  beide standen dort, wo die Besucherin wissen will, wer hier schneidet und
+  was es kostet. Was von der Idee bleibt, ist die Tonprobe: der Farbfleck
+  neben einem Preis, aus dem Foto genau dieser Arbeit gemessen. Klein, an
+  einer Stelle, wo er etwas bedeutet.
+- *Fünf Arbeitsfotos.* Kinderschnitt (Kind erkennbar), kurzes graues Haar
+  (Gesicht im Profil), krauses Blond, Hochsteckfrisur mit Orangestich, Braut
+  mit Schleier (Gesicht). Übrig bleiben acht, auf denen das Haar sauber
+  aussieht und kein fremdes Gesicht steht.
 
 Bestätigt abgelehnt: der Baukasten-Hero mit Vollbild, Serifenschrift und
-Goldrand, und ebenso die weiße Minimal-Antwort darauf. Ebenfalls abgelehnt:
-Farbschemata aus fremden Projekten — jede Farbe dieser Seite hat einen Beleg im
-Laden.
+Goldrand, und ebenso die weiße Minimal-Antwort darauf.
 
 **Key Characteristics:**
 
-- Gemessene Farben statt gewählter: jeder Ton stammt aus einem Foto des Ladens
-  oder einer echten Arbeit (`werkzeug/farben-messen.mjs`, `werkzeug/bilder-bauen.mjs`).
+- Gemessene Farben statt gewählter — und gemessen wird am eigenen Material,
+  nicht an der Wandfarbe eines Lieferanten (`werkzeug/palette-messen.mjs`).
+- Ein einziges Gesicht auf der Seite: das der Inhaberin. Sie entscheidet über
+  ihr eigenes Bild; für Kundenfotos liegt keine Einwilligung vor, deshalb
+  zeigen die Arbeitsfotos Haar und sonst nichts.
 - Eine einzige Kantensprache, das Farbkartenblatt: oben rund, unten scharf.
-- Weißer Grund über die ganze Seite, genau eine Türkisfläche als Anker.
 - Feste Stufen in vier Umbruchpunkten statt fließender `clamp()`-Werte.
 - Bewegung ausschließlich `ease-out`, ausschließlich `transform` und `opacity`.
 - Jeder Gestaltungswert steht als Token in `:root` — auch der Rollbalken.
 
 ## Colors
 
-Eine helle Grundwelt in fast reinem Weiß mit einem Hauch Türkis (Farbton
-198–205°), einer warmen Achse aus Haar (Farbton 55–88°), die keine Schrift
-mehr trägt, und einer einzigen Ornamentfarbe.
+Eine warme Welt: Papierweiß als Grund, Espresso als Gegenpol, Messing als
+Stimme. Alle drei liegen im gemessenen Band 47–88°.
 
 ### Primary
 
-- **Türkis** (`{colors.tuerkis}`): die tragende Stimme. Preise, aktive
-  Navigationsmarken, Verweise im Fließtext, der gefüllte Knopf, der Fokusrahmen,
-  Textmarke und `accent-color`. Sie liegt bei 48 % Helligkeit, weil sie Schrift
-  trägt und auf Weiß sicher über 4,5 : 1 kommen muss. **Türkis hell** ist
-  ausschließlich Hover-Zustand des gefüllten Knopfs, **Türkis blass** die
-  Beschriftung auf der Türkisfläche.
-- **Türkis tief** (`{colors.tuerkis-tief}`): nur als Fläche, nur einmal — die
-  Türkisbahn. Tief genug, dass helle Schrift darauf über 4,5 : 1 liegt.
-- **Haar-Karamell**, **Haar-Bronze**, **Haar-Ansatz**, **Haar hell**: die
-  Stufen der Haarachse. Sie tragen Verläufe und Materialien — die Niete des
-  Fächers, die Bänder der Tonleiter, die Farbfelder der Blätter — nie Text.
+- **Messing** (`{colors.messing}`): die tragende Stimme. Preise, aktive
+  Navigationsmarken, Verweise im Fließtext, der gefüllte Knopf, der
+  Fokusrahmen, Textmarke und `accent-color`. Sie liegt bei 45 % Helligkeit,
+  weil sie Schrift trägt und auf dem Grund sicher über 4,5 : 1 kommen muss.
+  **Messing hell** ist dieselbe Stimme auf Espresso, **Messing blass** die
+  Beschriftung darauf.
+- **Espresso** (`{colors.espresso}`): die dunkle Seite,
+  aus dem Portrait gemessen — das Regal aus dunklem Holz, der Lederstuhl,
+  ihre Kleidung. Espresso trägt genau einen Abschnitt, den Auftakt.
+- **Haar-Bronze** (`{colors.haar-bronze}`): die eine Stufe der gemessenen
+  Haarachse, die als Token bleibt — sie trägt den Verlauf der Ablaufleiste im
+  Brautstyling. Die übrigen Stufen stehen nicht mehr in `:root`, weil jede
+  Tonprobe ihre eigenen zwei gemessenen Werte für genau diese Arbeit trägt.
+  Material, nie Text.
 
 ### Secondary
 
-- **Rosé** (`{colors.rose}`, Farbton 6–8°, gemessen an der Wand im Brautfoto):
+- **Rosé** (`{colors.rose}`, Farbton 8°, gemessen an der Wand im Brautfoto):
   tritt an genau einer Achse auf, der des Brautstylings — als Punkt der
   Ablaufleiste und als Kante des gezogenen Brautblattes.
 
 ### Neutral
 
-- **Grund** (`{colors.grund}`): Seitengrund überall, und zugleich die Farbe
-  jedes Schleiers über einem Foto. Für die Schleier liegt der Grund in sechs
-  festen Deckungsstufen bereit (`--grund-96`, `--grund-88`, `--grund-72`,
-  `--grund-52`, `--grund-28`, `--grund-00`); sie sind ausgeschrieben, nicht
-  relativ gerechnet, damit sie in jedem Browser gleich ankommen. **Grund tief**
-  ist die tiefste Fläche: Fußzeile und Rollbalkenbahn.
-- **Glas**, **Glas dicht**, **Glas voll**: derselbe Grund, nur durchlässig, für
-  die Leisten, die über dem Inhalt liegen — Kopfzeile, Navigator und Lupe,
-  Menü und Merkzettel. Drei Stufen, mehr braucht es nicht.
-- **Feld**, **Karte**: die zwei Flächenstufen neben dem Grund. „Feld" ist eine
-  Spur türkiser und setzt einen Abschnitt ab, „Karte" ist reines Weiß und hebt
-  ein Bauteil heraus.
-- **Tinte**, **Tinte leise**, **Tinte still**: die Textleiter auf hellem
-  Grund, dunkles Petrol statt Grau — ein grauer Text macht eine helle Seite
-  schmutzig. Fließtext ist „leise", Hervorhebung und Namen sind „Tinte",
-  Nebenangaben wie Dauer und Zusatz sind „still".
-- **Tinte hell** (`{colors.tinte-hell}`): die Gegenrichtung — helle Schrift auf
-  Türkisflächen: der gefüllte Knopf, die gedrückte Merkmarke, die Türkisbahn.
-  **Auf Türkis** ist die Nebenschrift dort.
-- **Papier**, **Papier-Rand**, **Papier-Tinte**: die Kartonwelt. Eine Spur
-  wärmer als der Grund, damit ein Blatt sich davon abhebt statt darin zu
-  verschwinden. Nur für Bauteile, die tatsächlich Blatt sind — Fächerblätter,
-  das Schildchen der Tonleiter.
-- **Linie**, **Linie hell**, **Linie Akzent**: Hairlines auf hellem Grund.
-  **Kante hell** ist dieselbe Rolle auf Papier, **Linie auf Türkis** dieselbe
-  Rolle auf der Türkisbahn. Eine Linie ist immer 1 px und immer halbdurchsichtig.
-- **Rollbalken** und **Rollbalken hoch**: der Griff des Rollbalkens im Ruhe-
-  und im Hover-Zustand. Der Rollbalken ist Fläche der Seite und wird deshalb
-  wie eine gestaltet.
+- **Grund** (`{colors.grund}`): warmes Papierweiß, Seitengrund überall, und
+  zugleich die Farbe jedes Schleiers über einem Foto. Für die Schleier liegt
+  er in sechs festen Deckungsstufen bereit (`--grund-96` … `--grund-00`);
+  ausgeschrieben, nicht relativ gerechnet, damit sie überall gleich ankommen.
+- **Grund warm** (`{colors.grund-warm}`): die abgesetzte Fläche. Die
+  Abschnitte wechseln zwischen Grund und Grund-warm, damit nie zwei gleiche
+  Flächen aneinanderstoßen.
+- **Glas**, **Glas dicht**, **Glas voll**: derselbe Grund, nur durchlässig,
+  für die Leisten über dem Inhalt — Kopfzeile, Navigator und Lupe, Menü und
+  Merkzettel.
+- **Karte**: die hellste Fläche, für Bauteile, die sich abheben sollen.
+- **Tinte**, **Tinte leise**, **Tinte still**: die Textleiter, dunkles Braun
+  statt Grau — ein grauer Text macht eine warme Seite schmutzig. Fließtext ist
+  „leise", Hervorhebung und Namen sind „Tinte", Nebenangaben sind „still".
+  Über einer Fotobahn rückt „still" auf „Tinte" hoch (siehe Schleierregel).
+- **Tinte hell** und **Auf Espresso**: die Gegenrichtung — Schrift auf der
+  dunklen Fläche.
+- **Linie**, **Linie hell**, **Linie Akzent**, **Linie auf Espresso**:
+  Hairlines. Eine Linie ist immer 1 px und immer halbdurchsichtig.
+- **Espresso 92** und **Espresso 70**: die zwei Stufen des Verlaufs unter der
+  Portraitbeschriftung. Ausgeschrieben statt im Verlauf hingeschrieben, damit
+  kein Gestaltungswert außerhalb von `:root` steht.
+- **Rollbalken** und **Rollbalken hoch**: der Griff im Ruhe- und im
+  Hover-Zustand. Der Rollbalken ist Fläche der Seite und wird wie eine
+  gestaltet.
 - **Fremd-Grund** (`{colors.fremd-grund}`): der Grund des eingebetteten
-  Buchungsfensters. Ein benannter Fremdkörper — er markiert die einzige Fläche
-  der Seite, die wir nicht gestalten, statt sie unbenannt einzuschleusen.
+  Buchungsfensters. Ein benannter Fremdkörper — er markiert die einzige
+  Fläche, die wir nicht gestalten, statt sie unbenannt einzuschleusen.
 
 ### Named Rules
 
 **Die Messregel.** Keine Farbe der Seite ist ausgedacht. Eine neue Farbe kommt
-aus einem Foto und wird mit den Werkzeugen in `werkzeug/` gemessen, bevor sie in
-`:root` steht. Prüftest: zu jedem Token lässt sich das Foto benennen, aus dem
-es stammt.
+aus einem Foto und wird gemessen, bevor sie in `:root` steht. Prüftest: zu
+jedem Token lässt sich das Foto benennen, aus dem es stammt.
 
-**Die Ornamentregel.** Rosé ist niemals Textfarbe. Es erscheint als Punkt,
-Kante oder Fläche, nie als Buchstabe. Dasselbe gilt seit dem hellen Grund für
-die ganze Haarachse: Karamell, Bronze, Ansatz und Haar hell sind Material,
-nicht Schrift.
+**Die Eigentumsregel.** Gemessen reicht nicht — die Farbe muss dem Laden
+gehören. Ein Produktregal, ein Plakat, eine Verpackung tragen die Marke ihres
+Herstellers ins Bild. Prüftest: Würde diese Farbe verschwinden, wenn der Salon
+den Lieferanten wechselt? Dann ist sie nicht seine Handschrift.
 
-**Die Regel der einen Stimme.** Auf dem weißen Grund spricht genau eine Farbe:
-Türkis. Preise, Verweise und die aktive Marke tragen sie; sonst nichts. Wird
-sie zur Fläche (gefüllter Knopf, gedrückte Merkmarke, Türkisbahn), steht der
-Text darauf in „Tinte hell".
+**Die Ornamentregel.** Rosé ist niemals Textfarbe. Dasselbe gilt für die
+ganze Haarachse: Karamell, Bronze, Ansatz und Haar hell sind Material.
+
+**Die Regel der einen Stimme.** Auf dem Grund spricht genau eine Farbe:
+Messing. Wird sie zur Fläche, steht der Text darauf in „Tinte hell".
 
 **Die Regel der einen Fläche.** Genau ein Abschnitt der Seite steht auf
-Türkis. Auf der Fläche dreht sich alles mit: Schrift, Linien, Knöpfe. Ein
-zweiter solcher Abschnitt macht aus dem Anker ein Muster.
+Espresso: der Auftakt. Auf der Fläche dreht sich alles mit — Schrift, Linien,
+Knöpfe, Fokusrahmen, und solange nicht gescrollt ist auch die Kopfzeile. Ein
+zweiter solcher Abschnitt macht aus dem Auftakt ein Muster.
 
-**Die Ein-Wert-Regel.** Eine Rolle hat einen Wert. Zwei fast gleiche Fassungen
-derselben Sache sind kein Feinschliff, sondern ein Fehler. Prüftest: kein
+**Die Ein-Wert-Regel.** Eine Rolle hat einen Wert. Prüftest: kein
 Gestaltungswert steht außerhalb von `:root`.
 
 **Die Schleierregel.** Text steht nie direkt auf einem Foto — aber auf hellem
-Grund verliert ein Foto seinen Körper, sobald man es zudeckt. Deshalb liegt der
-Schleier nicht mehr gleichmäßig darüber, sondern als Blatt genau dort, wo Text
-steht: waagrecht voll deckend über der Textspalte (`--grund-96` bis 44 %),
-dann in vier Stufen auf null bis 78 %; senkrecht nur ein schmaler Saum in die
-Abschnittsränder hinein, dazwischen offen. Das Bild selbst bekommt statt
-`blur(1.5px)` nur noch `blur(.6px)` und etwas mehr Zeichnung
-(`saturate(1.04) contrast(1.08)`), damit Haar Haar bleibt statt Nebel. Unter
-60 rem entfällt der seitliche Verlauf ganz und wird durch eine gleichmäßige
-Überlagerung ersetzt, weil er sonst genau in den Text greift.
+Grund verliert ein Foto seinen Körper, sobald man es zudeckt. Der Schleier
+liegt deshalb als Blatt genau dort, wo Text steht: waagrecht voll deckend über
+der Textspalte (`--grund-96` bis 44 %), dann in vier Stufen auf null bis 78 %;
+senkrecht nur ein schmaler Saum in die Abschnittsränder. Das Bild bekommt
+`blur(.6px)` und etwas mehr Zeichnung. Unter 60 rem entfällt der seitliche
+Verlauf und wird durch eine gleichmäßige Überlagerung ersetzt. Über einer
+Fotobahn geht das Kleingedruckte zwei Stufen hoch auf „Tinte" — gemessen kam
+es sonst auf 3,78 : 1.
 
-**Die Regel des umschlossenen Kastens.** Über einem Foto endet eine Überschrift
-dort, wo ihr letzter Buchstabe steht (`width: fit-content`, `max-width: 15ch`).
-Ein Block, der bis zur Spaltenkante läuft, schiebt eine unsichtbare Zeile über
-das Bild — und genau dort landet der Text, sobald jemand die Schrift größer
-stellt. Gemessen: ohne diese Regel lag der Kasten der Startseiten-Überschrift
-bei 184 → 1256 px, der Text nur bei 184 → 605 px.
+**Die Regel des umschlossenen Kastens.** Über einem Foto endet eine
+Überschrift dort, wo ihr letzter Buchstabe steht (`width: fit-content`,
+`max-width: 15ch`). Ein Block, der bis zur Spaltenkante läuft, schiebt eine
+unsichtbare Zeile über das Bild — und genau dort landet der Text, sobald
+jemand die Schrift größer stellt.
+
+**Die Auflösungsregel.** Kein Bild wird über seine Vorlage hinaus gezogen.
+Das Portrait ist 624×1024 und steht deshalb in einer Spalte von höchstens
+23 rem statt vollflächig; die Kopfbänder brauchen bei 1,9 : 1 einen
+Ausschnitt von 737 px Höhe, damit sie ohne Hochrechnen 1400 px breit werden.
+Ein Bild, das kleiner bleibt, sieht besser aus als eines, das gezogen wurde.
 
 ## Typography
 
@@ -335,7 +352,7 @@ Zeichenvorrat zugeschnitten) — kein Nachladen von fremden Servern.
 - **Title** (`.titel-klein`, 400, 1,5→2,2 rem, Zeilenhöhe 1,14): Unterabschnitt,
   Begriff in der Zeilenliste, Rechtstext-`h2`.
 - **Preis** (`--s-preis`, 1,9 rem, Archivo, Zeilenhöhe 1): die große Zahl. Sie
-  steht an genau zwei Stellen — an der Fächertafel und am Merkzettel — und ist
+  steht an genau zwei Stellen — an der Leistungskarte und am Merkzettel — und ist
   dort die Aussage, nicht die Überschrift darüber.
 - **Vorspann** (400, 1,15→1,5 rem, Zeilenhöhe 1,5, „Tinte leise", max. 34ch):
   der Absatz direkt unter einem Titel.
@@ -345,7 +362,7 @@ Zeichenvorrat zugeschnitten) — kein Nachladen von fremden Servern.
 - **Klein** (`--s-klein`, 1 rem): Nebentext — Dauer, Zusatzangaben.
 - **Mini / Label** (`--s-mini`, 0,8 rem, Marcellus SC, Laufweite 0,12–0,26 em):
   Knöpfe, Navigatormarken, Tafelkopf, Blattname, Schild, Schildchen der
-  Tonleiter, Fußzeilenüberschriften. Eine Größe für alle Mikroschrift.
+  Tonproben, Fußzeilenüberschriften. Eine Größe für alle Mikroschrift.
 - **Zahl** (`.zahl`, Archivo, `tnum`, Laufweite 0,01 em): Preise, Zeiten,
   Dauern — immer gleich breit.
 
@@ -390,20 +407,23 @@ wachsen in drei Sprüngen mit:
 | Kartenpolster | 1,5 rem | 2 rem | 2,25 rem | — |
 
 Weitere Umbruchpunkte im Bestand: 22,5 rem (Buchungstor), 30 rem (Silbentrennung,
-Fächerspanne, Tonleiter), 44 rem (Zeilenliste), 46 rem (Preistafel), 48 rem
-(Hero-Mindesthöhe, Fächerspanne, Gruppenabstand), 58 rem (Handymenü), 60 rem
-(Schleier), 64 rem (Fächerfeld), 72 rem (Gruppenabstand).
+Kartenraster), 44 rem (Zeilenliste), 46 rem (Preistafel), 48 rem
+(Gruppenabstand), 58 rem (Handymenü), 60 rem
+(Schleier), 62 rem (Auftakt), 64 rem (Kartenraster), 72 rem (Gruppenabstand).
 
 **Die Kopfregel.** Über einer Überschrift steht mehr Luft als darunter:
 `.kopf` trägt `clamp(2.5rem, 5vw, 6rem)` nach unten, der Titel darin 1,5 rem.
 
-**Die Hero-Regel.** Der erste Bildschirm (`.flaeche.hero`) hat eine eigene,
-knappere Höhe als jeder andere Abschnitt: 3 rem Polster, ab 48 rem 4 rem und
-`min-height: min(42rem, 76svh)`. Mit der normalen Abschnittspolsterung lag die
-Tonleiter am Fuß erst bei 916 px und damit außerhalb jedes üblichen Fensters.
-Der Inhalt wird per Flex senkrecht zentriert, nicht per Grid — ein Grid-Kind mit
-eigener Höchstbreite zentriert sich in seiner Spur und rückt den Titel aus der
-linken Flucht, in der er auf allen anderen Seiten steht.
+**Die Auftaktregel.** Der erste Bildschirm zeigt die Person, nicht das
+Material. Bei einem inhabergeführten Salon kaufen die Leute die Person — jede
+ausgezeichnete Salonseite macht das so. Die vorige Fassung zeigte einen
+abstrakten Haarausschnitt unter einem Schleier, und wer den Laden führt,
+erfuhr man erst nach fünf Bildschirmen.
+
+**Die Flächenfolge.** Kein Abschnitt grenzt an einen gleichfarbigen. Der
+Wechsel läuft Espresso → Grund → Grund-warm → Grund → Grund-warm → Grund. Wo
+zwei gleiche Flächen aneinanderstießen, verschwand die Trennung und zwei
+Abschnitte lasen sich als einer.
 
 **Die Zeilenregel.** Wiederholte Inhalte stehen als gezogene Zeile
 (`.zeilenliste`: Begriffsspalte 14 rem, ab 44 rem 18 rem, Rest Beschreibung,
@@ -450,20 +470,14 @@ schmutzig, ein schwarzer macht sie hart.
 
 ### Schattenvokabular
 
-Drei Stufen, alle mit Versatz und weichem Radius — ein Schein ohne Versatz wäre
-Dekoration, kein Licht.
+Zwei Stufen, beide mit Versatz und weichem Radius — ein Schein ohne Versatz
+wäre Dekoration, kein Licht. Eine dritte war da und ist beim Aufräumen
+gefallen, weil kein Bauteil sie brauchte.
 
 - **Flach** (`--schatten-flach`): `0 1px 2px` plus `0 3px 10px`, beide
-  `oklch(45% .04 200 / .06)`. Bauteile, die nur eben aufliegen.
-- **Blatt** (`--schatten-blatt`): `0 1px 3px / .10` plus `0 10px 26px / .13`.
-  Das Fächerblatt im aufgefächerten Ruhezustand, die Niete.
-- **Hoch** (`--schatten-hoch`): `0 2px 6px / .10` plus `0 20px 44px / .18`.
-  Das gezogene Blatt und das Bild in der Lupe.
-- **Band** (`--schatten-band`): `0 1px 4px oklch(40% .04 200 / .22)` — das
-  gedruckte Papierschildchen auf der Tonleiter, der einzige Schatten, der auf
-  Papier fällt.
-- **Kante** (`0 0 0 1px var(--papier-rand)`): das geschlossene Fächerblatt. Ein
-  gezeichneter Blattrand, kein Schatten.
+  `oklch(38% .04 60 / .07)`. Bildkacheln der Leistungskarten, Bildstreifen.
+- **Hoch** (`--schatten-hoch`): `0 2px 6px / .11` plus `0 20px 44px / .20`.
+  Das Portrait im Auftakt und das Bild in der Lupe.
 - **Klebekante** (`0 1px 0 var(--linie)`): die gesetzte Kopfzeile. Eine Linie,
   kein Schlagschatten.
 
@@ -486,12 +500,9 @@ Form in anderer Größe oder Lage:
 - **Liegendes Blatt** (`--bogen-blatt-quer`, `.25rem 100px 100px .25rem`):
   dasselbe Blatt auf der Seite — rund an der Spitze, scharf an der Niete. Alle
   Knöpfe, die Telefonmarke.
-- **Spitzes Blatt** (`--bogen-blatt-spitz`, `2.4rem 2.4rem .25rem .25rem`): das
-  Blatt im Fächer. Derselbe Bogen größer, weil das Blatt höher ist als eine
-  Karte und ein Radius mit der Höhe mitwachsen muss, um gleich zu wirken.
 Daneben nur: 3 px (`--bogen-klein`, Fokusrahmen), 6 px (`--bogen`), 4 px
 (Merkmarke) und `100px` für echte Pillen und Kreise (Menüknopf, Lupenknöpfe,
-Schild, Schildchen der Tonleiter, Rollbalken).
+Schild, Schildchen, Rollbalken).
 
 Ränder sind immer 1 px und immer halbdurchsichtig. Ein einziges Muster steht als
 SVG-Daten-URI bereit und wird sparsam eingesetzt: feine Strähnen
@@ -509,13 +520,13 @@ Kapitälchenbeschriftung.
 
 - **Form:** liegendes Blatt (`{rounded.blatt-quer}`), Polster `.95rem 1.7rem`,
   Marcellus SC, 1 rem, Laufweite 0,12 em.
-- **Voll** (`.knopf-voll`): Türkisfläche, Text in „Tinte hell". Hover: Türkis hell
+- **Voll** (`.knopf-voll`): Messingfläche, Text in „Tinte hell". Hover: Messing hell
   plus `translateY(-2px)`.
 - **Leer** (`.knopf-leer`): transparent, Rand „Linie hell", Text „Tinte".
-  Hover: Rand und Text auf Türkis, `translateY(-2px)`.
+  Hover: Rand und Text auf Messing, `translateY(-2px)`.
 - **Gedrückt:** `translateY(0)` — der Knopf setzt sich auf.
 - **Reihe:** `.knopfreihe`, `flex-wrap`, Lücke 1 rem.
-- **Telefonmarke** (`.ruf`): dieselbe Form kleiner, Türkisrand, Türkistext,
+- **Telefonmarke** (`.ruf`): dieselbe Form kleiner, Messingrand, Messingtext,
   Inline-SVG-Hörer bei 1 em. Steht in der Kopfzeile auf jedem Bildschirm.
 
 ### Karten / Behälter
@@ -529,13 +540,13 @@ Kapitälchenbeschriftung.
 ### Marken und Schalter
 
 - **Merkmarke** (`.merken`): der Preis selbst ist der Schalter — kein Symbol
-  daneben. Ruhezustand Türkistext auf transparent mit 4 px Radius; ein „+"
-  erscheint bei Hover oben rechts. Gedrückt (`aria-pressed="true"`): Türkisfläche,
+  daneben. Ruhezustand Messingtext auf transparent mit 4 px Radius; ein „+"
+  erscheint bei Hover oben rechts. Gedrückt (`aria-pressed="true"`): Messingfläche,
   Text in „Tinte hell", „✓" statt „+".
-- **Schild** (`.schild`): Pille mit Türkisrand, Kapitälchen, vorangestellter
+- **Schild** (`.schild`): Pille mit Messingrand, Kapitälchen, vorangestellter
   Punkt aus `currentColor`. Ein Anhänger, kein Auszeichnungsstreifen über einer
   Überschrift.
-- **Folgenummer** (`.folge`): Türkis, 0,62 em, vor der Gruppenüberschrift der
+- **Folgenummer** (`.folge`): Messing, 0,62 em, vor der Gruppenüberschrift der
   Preisliste. Die Reihenfolge ist dort eine Aussage — gegliedert wird nach dem,
   was auf dem Stuhl zuerst passiert.
 
@@ -543,8 +554,8 @@ Kapitälchenbeschriftung.
 
 - **Kopfzeile:** klebend, transparent im Ruhezustand; ab dem ersten Scrollen
   trägt sie `.gesetzt` — getöntes Glas plus Hairline. Marke in Marcellus
-  (`--s-marke`, 1,25 rem) mit gesperrtem Kapitälchen-Zusatz in Türkis darunter.
-- **Wegweiser:** Archivo 1 rem, „Tinte leise", darunter eine Türkislinie, die aus
+  (`--s-marke`, 1,25 rem) mit gesperrtem Kapitälchen-Zusatz in Messing darunter.
+- **Wegweiser:** Archivo 1 rem, „Tinte leise", darunter eine Messinglinie, die aus
   der linken Kante aufzieht (`scaleX(0) → 1`). Die aktuelle Seite trägt sie
   dauerhaft und steht in „Tinte".
 - **Handymenü** (unter 58 rem): Vollflächige Tafel von oben, Petrolglas,
@@ -571,62 +582,50 @@ Kapitälchenbeschriftung.
   `[open]`, der Übergang an `allow-discrete` und `@starting-style` — sonst liegt
   der geschlossene Dialog unsichtbar über der Seite und schluckt jeden Klick.
 
-### Der Farbfächer (Signatur)
+### Der Auftakt
 
-Die eine Idee, die es sonst nirgends gibt. Acht Kartonblätter sitzen auf
-derselben Niete am unteren Rand und sind von dort aufgefächert; gedreht wird
-ausschließlich über `transform` um `transform-origin: 50% 100%`.
+Der erste Bildschirm, und der einzige dunkle Abschnitt der Seite.
 
-- **Blatt:** Papierfläche, spitze Blattform (`{rounded.blatt-spitz}`), oben ein
-  Farbfeld über 38 % der Höhe — ein Verlauf aus zwei am Foto genau dieser Arbeit
-  gemessenen Proben (`--ton-oben`, `--ton-unten`), darunter eine Trennlinie in
-  „Kante hell". Im Ruhezustand tritt es zurück, indem es blasser wird
-  (`saturate(.72) opacity(.88)`): auf hellem Grund weicht ein Blatt nicht durch
-  Abdunkeln zurück, sondern durch Ausbleichen.
-- **Name:** längs am Blatt (`writing-mode: vertical-rl`), Marcellus SC, nur auf
-  dem gezogenen Blatt sichtbar; alle anderen tragen ihn im `aria-label`.
-- **Gezogen:** `scale(1.05)`, volle Farbe, Türkiskante, weiter Schatten.
-- **Auffächerung:** `--spanne` steht im Stylesheet (112°, 96° zwischen 30 und
-  48 rem, 84° darunter) und wird von `seite.js` ausgelesen — der Winkel gehört
-  zur Gestaltung, nicht zum Verhalten. Vor dem Auftauchen liegen die Blätter
-  geschlossen aufeinander; bei `prefers-reduced-motion` stehen sie sofort offen.
-- **Niete:** Messingkugel aus einem radialen Verlauf Türkis hell → Karamell →
-  Ansatz, 1,75 rem.
-- **Bedienung:** Reitermuster mit Pfeiltasten; `touch-action: pan-y`, damit
-  senkrechtes Scrollen erhalten bleibt.
+- **Fläche:** `--espresso`, darüber zwei radiale Verläufe als Licht — von
+  oben rechts warm (`oklch(45% .055 62 / .85)`, Mitte bei 78 % / −6 %, damit
+  an der oberen Kante keine Naht steht), von unten links eine Spur dunkler.
+  Dieselbe Lichtrichtung wie im Portrait, wo sie von den Spiegellampen kommt.
+- **Aufbau:** ab 62 rem zwei Spalten, `1fr` und höchstens 23 rem, senkrecht
+  zentriert. Darunter steht das Portrait über dem Text.
+- **Kopfzeile:** solange nicht gescrollt ist, gehört sie zur Fläche —
+  gleicher Grund, helle Schrift, Messing hell für Marke und Telefonmarke.
+  Beim Scrollen wird sie zum hellen Glas wie überall sonst. Ohne das liefe
+  ein heller Streifen quer über den ersten Bildschirm.
+- **Fuß:** Adresse und gerechneter Öffnungsstand, über einer 1-px-Linie in
+  `--linie-auf-espresso`.
 
-### Die Türkisbahn
+### Das Portrait
 
-Der eine Abschnitt, der umkippt: `.tuerkisbahn` auf der Startseite trägt
-„Perlacher Straße 2" mit Öffnungszeiten, Anschrift und Erreichbarkeit.
+- **Rahmen:** `--bogen-blatt`, 1 px Kante in `--linie-auf-espresso`, dazu
+  `--schatten-hoch`.
+- **Format:** `aspect-ratio: .7`, `object-fit: cover`.
+- **Beschriftung:** Name in Marcellus, Rolle in Marcellus SC gesperrt und in
+  Messing hell, beide auf einem Verlauf ins Espresso am unteren Bildrand —
+  damit die Schrift nicht auf der Bluse steht und trotzdem lesbar ist.
+- **Breite:** höchstens 23 rem am Schreibtisch, 17 rem am Telefon. Siehe die
+  Auflösungsregel: die Vorlage gibt 624 px her, mehr wird nicht gezogen.
 
-- **Fläche:** `--tuerkis-tief` mit demselben Strähnenmuster wie die Fußzeile,
-  nur in Weiß bei 0,10 Deckung (`--muster-straehne-hell`).
-- **Schrift:** Überschriften und Verweise in „Tinte hell", Fließtext und Zahlen
-  in „Auf Türkis", die Begriffsspalte in „Türkis blass".
-- **Linien:** `--linie-auf-tuerkis`, dieselbe 1-px-Rolle wie sonst `--linie`.
-- **Knöpfe drehen mit:** der gefüllte Knopf wird weiß mit türkisem Text, der
-  leere bekommt eine helle Kante. Der Fokusrahmen ebenfalls hell.
-- **Aufbau:** ab 64 rem stehen die drei Blöcke nebeneinander statt untereinander
-  — eine leere rechte Hälfte in dieser Größe wirkt nicht ruhig, sondern
-  unfertig. Darunter fällt die Bahn auf die gezogene Zeilenliste zurück.
+### Leistungskarten
 
-### Die Tonleiter
+Drei Karten mit echtem Foto, Ab-Preis und Tonprobe. Ein Spaltenraster: eine
+Spalte, ab 40 rem zwei, ab 64 rem drei.
 
-Derselbe Fächer im geschlossenen Zustand: acht Bänder von der Kante gesehen, in
-denselben acht gemessenen Tönen und nach Helligkeit sortiert, über die volle
-Breite am Fuß des ersten Bildschirms (Höhe 3,4 rem, unter 30 rem 2,9 rem). Sie
-ist ein Verweis: ein Antippen führt zur Farbkarte.
+- **Bild:** `aspect-ratio: 4/5`, `--bogen-blatt`, beim Überfahren `scale(1.04)`.
+- **Preisblock:** senkrecht gestapelt, mit `margin-top: auto` am Fuß der
+  Karte. Nebeneinander gesetzt brach die Beschriftung nur auf einer der drei
+  Karten um, und drei Preiszeilen auf drei Höhen sehen aus wie ein Fehler.
+- **Tonprobe** (`.tonfleck`): 2,2 × 0,85 rem, Verlauf aus zwei am Foto genau
+  dieser Arbeit gemessenen Proben. Der eine eigene Gedanke, der bleibt.
 
-- **Band:** jedes beginnt oben im Grund und endet unten in „Feld" — das Foto
-  darüber endet damit in einem Verlauf statt an einer harten Waagrechten, genau
-  wie beim Schleier. Zwischen zwei Bändern steht eine 1-px-Innenlinie in
-  „Kante hell".
-- **Beschriftung:** ein gedrucktes Papierschildchen in der Mitte (Papier,
-  Papier-Tinte, Pille, `--s-mini` mit 0,22 em Laufweite; unter 30 rem 0,14 em),
-  weil der Ton darunter mal hell und mal dunkel ist.
-- **Hover:** die Bänder dehnen sich (`scaleY(1.22)`, Ursprung unten) — nie die
-  Höhe, das wäre eine Layout-Eigenschaft.
+### Zweispalt
+
+Text links, Bild rechts. Eine Spalte, ab 58 rem `1fr` und höchstens 24 rem.
+Trägt den Brautabschnitt, den Bahar-Abschnitt und den Kopf der Salonseite.
 
 ## Do's and Don'ts
 
@@ -638,7 +637,7 @@ ist ein Verweis: ein Antippen führt zur Farbkarte.
 - **Do** jeden Gestaltungswert benennen, bevor er im Stylesheet steht: auch
   Rollbalken, Mikroschrift und der Grund eines fremden Fensters haben ein Token.
 - **Do** für jedes neue Bauteil einen der vier Blattbögen nehmen
-  (`--bogen-blatt`, `--bogen-blatt-quer`, `--bogen-blatt-spitz`) oder eine
+  (`--bogen-blatt`, `--bogen-blatt-quer`) oder eine
   echte Pille.
 - **Do** Abstände aus der Reihe `--r1` … `--r8` nehmen und Größensprünge in die
   vorhandenen Umbruchpunkte (40 / 64 / 88 rem) legen.
@@ -659,7 +658,7 @@ ist ein Verweis: ein Antippen führt zur Farbkarte.
 - **Don't** die Haarachse als Textfarbe einsetzen; Karamell, Bronze, Ansatz
   und Haar hell sind Material.
 - **Don't** eine zweite, fast gleiche Fassung eines vorhandenen Tokens anlegen —
-  es gibt eine helle Schrift auf Türkis, eine Trennlinie auf Papier, eine
+  es gibt eine helle Schrift auf Messing, eine Trennlinie auf Papier, eine
   Mikroschriftgröße.
 - **Don't** Fließtext sperren. Weite Laufweite gehört ausschließlich kurzen
   Marcellus-SC-Auszeichnungen.

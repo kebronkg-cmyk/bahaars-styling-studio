@@ -12,53 +12,67 @@ mkdirSync(ziel, { recursive: true });
 
 /* Zwei Regeln bestimmen jeden Zuschnitt hier, und beide sind hart:
 
-   1. Kein erkennbares Gesicht. Ob für die Kundenfotos Einwilligungen
-      vorliegen, weiß nur die Inhaberin — auf der alten Seite gestanden zu
-      haben ist kein Nachweis. Bis das geklärt ist, zeigt die Seite Haar und
-      sonst nichts. Das Kinderfoto, die Portraitaufnahme und drei weitere
-      Bilder mit deutlich erkennbaren Personen liegen deshalb ungenutzt in
-      recherche/bilder/.
-   2. Kein Salonhintergrund. Föhne, Steckdosen, Kabel, Regale und Plakate
-      sind das, was die Vorlagen dieser Bilder unbrauchbar macht. Der
+   1. Ein einziges Gesicht ist auf dieser Seite zu sehen: das der Inhaberin.
+      Sie entscheidet über ihr eigenes Bild. Ob für die Kundenfotos
+      Einwilligungen vorliegen, weiß nur sie — auf der alten Seite gestanden
+      zu haben ist kein Nachweis. Bis das geklärt ist, zeigen die
+      Arbeitsfotos Haar und sonst nichts.
+   2. Kein Salonhintergrund in den Arbeitsfotos. Föhne, Steckdosen, Kabel,
+      Regale und Plakate sind das, was die Vorlagen unbrauchbar macht. Der
       Ausschnitt geht so weit hinein, dass nur noch Haar im Bild ist.
 
+   Aussortiert, weil das Haar darauf nicht sauber aussieht oder eine fremde
+   Person erkennbar ist: der Kinderschnitt (Kind, erkennbar), das kurze graue
+   Haar (Gesicht im Profil), die krause Blondaufnahme, die Hochsteckfrisur mit
+   Orangestich und die Braut mit Schleier (Gesicht). Sie bleiben ungenutzt in
+   recherche/bilder/ liegen.
+
    [Ausgabename, Quelldatei, Mitte x, Mitte y, Höhe (Anteil), Breite:Höhe,
-    Zielbreite, Güte, ohne Hochrechnen]                                     */
+    Zielbreite, Güte, ohne Hochrechnen, Weißabgleich]                       */
 const auftraege = [
-  // Vollflächen. Eng genug für reines Haar heißt: der Ausschnitt ist kleiner
-  // als die Fläche, die er füllen soll. Deshalb wird hier nie hochgerechnet —
-  // die Seite legt die Bilder weich und unter einen Schleier, das trägt.
-  ['flaeche-start',      'arbeit-02-balayage.jpg',        0.57, 0.60, 0.30, 1.20, 1400, 0.72, true],
-  ['flaeche-start-hoch', 'arbeit-02-balayage.jpg',        0.56, 0.60, 0.38, 0.72,  700, 0.72, true],
-  ['flaeche-farbe',      'arbeit-03-straehnen.jpg',       0.55, 0.30, 0.30, 1.20, 1400, 0.72, true, [1.05, 0.95, 0.99]],
-  ['flaeche-farbe-hoch', 'arbeit-03-straehnen.jpg',       0.55, 0.32, 0.38, 0.72,  700, 0.72, true, [1.05, 0.95, 0.99]],
-  ['flaeche-braut',      'arbeit-05-blond-locken.jpg',    0.54, 0.58, 0.30, 1.20, 1400, 0.72, true],
-  ['flaeche-braut-hoch', 'arbeit-05-blond-locken.jpg',    0.52, 0.58, 0.38, 0.72,  700, 0.72, true],
-  ['flaeche-salon',      'arbeit-10-lang-blond.jpg',      0.55, 0.52, 0.34, 1.20, 1400, 0.72, true],
-  ['flaeche-salon-hoch', 'arbeit-10-lang-blond.jpg',      0.55, 0.55, 0.42, 0.72,  700, 0.72, true],
-  ['flaeche-leistungen', 'arbeit-06-bob-blond.jpg',       0.50, 0.45, 0.32, 1.20, 1400, 0.72, true],
-  ['flaeche-leistungen-hoch','arbeit-06-bob-blond.jpg',   0.50, 0.45, 0.40, 0.72,  700, 0.72, true],
-  ['flaeche-termin',     'arbeit-08-ombre.jpg',           0.57, 0.52, 0.32, 1.20, 1400, 0.72, true],
-  ['flaeche-termin-hoch','arbeit-08-ombre.jpg',           0.57, 0.55, 0.40, 0.72,  700, 0.72, true],
+  // ── Die Inhaberin. Das einzige Bild mit Gesicht, und das wichtigste der
+  //    Seite: bei einem inhabergeführten Salon kaufen die Leute die Person.
+  //    Die Vorlage ist 624×1024 — mehr als 620 px Breite gibt sie nicht her,
+  //    deshalb steht sie im Entwurf in einer Spalte und nicht vollflächig.
+  ['bahar-gross',        'portrait-model.jpg',            0.70, 0.40, 0.74, 0.70,  520, 0.88, true],
+  ['bahar-nah',          'portrait-model.jpg',            0.62, 0.30, 0.46, 1.00,  470, 0.88, true],
 
-  // Arbeiten — hoch, 3:4, Haar füllt das Bild.
-  ['arbeit-balayage',    'arbeit-02-balayage.jpg',        0.56, 0.58, 0.62, 0.75,  820, 0.82],
-  ['arbeit-straehnen',   'arbeit-03-straehnen.jpg',       0.54, 0.40, 0.56, 0.75,  820, 0.82, false, [1.05, 0.95, 0.99]],
-  ['arbeit-locken',      'arbeit-05-blond-locken.jpg',    0.50, 0.55, 0.62, 0.75,  820, 0.82],
-  ['arbeit-bob',         'arbeit-06-bob-blond.jpg',       0.52, 0.47, 0.62, 0.75,  820, 0.82],
-  ['arbeit-ombre',       'arbeit-08-ombre.jpg',           0.60, 0.58, 0.60, 0.75,  820, 0.82],
-  ['arbeit-lang',        'arbeit-10-lang-blond.jpg',      0.58, 0.62, 0.60, 0.75,  820, 0.82],
-  ['arbeit-kurz-blond',  'arbeit-07-kurzhaar-blond.jpg',  0.48, 0.62, 0.38, 0.75,  740, 0.82],
-  ['arbeit-glatt',       'arbeit-09-lang-glatt.jpg',      0.56, 0.68, 0.54, 0.75,  820, 0.82],
-  ['arbeit-perlen',      'arbeit-13-hochsteck-blumen.jpg',0.33, 0.48, 0.50, 0.75,  400, 0.84, true],
-  ['arbeit-braut-perlen','arbeit-14-brautfrisur.jpg',     0.48, 0.36, 0.52, 0.75,  420, 0.84, true],
-  ['arbeit-braut-schleier','arbeit-15-braut-schleier.jpg',0.58, 0.26, 0.23, 0.75,  240, 0.88, true],
+  // ── Arbeiten. Neun saubere Aufnahmen, hoch im Format, Haar füllt das Bild.
+  //    Größer ausgeliefert als vorher: sie tragen jetzt eigene Kacheln statt
+  //    unter einem Schleier zu verschwinden.
+  ['arbeit-balayage',    'arbeit-02-balayage.jpg',        0.56, 0.58, 0.62, 0.75,  900, 0.84],
+  ['arbeit-straehnen',   'arbeit-03-straehnen.jpg',       0.54, 0.40, 0.56, 0.75,  900, 0.84, false, [1.05, 0.95, 0.99]],
+  ['arbeit-locken',      'arbeit-05-blond-locken.jpg',    0.50, 0.55, 0.62, 0.75,  900, 0.84],
+  ['arbeit-ombre',       'arbeit-08-ombre.jpg',           0.60, 0.58, 0.60, 0.75,  900, 0.84],
+  ['arbeit-glatt',       'arbeit-09-lang-glatt.jpg',      0.56, 0.68, 0.54, 0.75,  900, 0.84],
+  ['arbeit-lang',        'arbeit-10-lang-blond.jpg',      0.58, 0.62, 0.60, 0.75,  900, 0.84],
+  ['arbeit-perlen',      'arbeit-13-hochsteck-blumen.jpg',0.33, 0.46, 0.46, 0.75,  420, 0.86, true],
+  ['arbeit-braut-perlen','arbeit-14-brautfrisur.jpg',     0.48, 0.36, 0.52, 0.75,  460, 0.86, true],
 
-  // Der Laden, so klein ausgeliefert, wie die Auflösung es hergibt. Hier ist
-  // kein Gesicht im Bild — die Köpfe auf den Plakaten sind Produktwerbung.
-  ['salon-raum',         'salon-stuehle-spiegel.jpg',     0.50, 0.50, 1.00, 1.34,  733, 0.84, true],
-  ['salon-platz',        'salon-arbeitsplatz.jpg',        0.50, 0.50, 1.00, 1.33,  455, 0.86, true],
-  ['salon-waschen',      'salon-waschbecken.jpg',         0.50, 0.50, 1.00, 1.33,  455, 0.86, true],
+  // ── Zwei Vollflächen bleiben: die Kopfbilder von Brautstyling und
+  //    Leistungen. Eng ins Haar geschnitten, deshalb nie hochgerechnet.
+  // Breit genug, dass nichts hochgerechnet wird: bei 1,9:1 braucht eine
+  // Bahn von 1400 px eine Ausschnitthöhe von 737 px — das ist bei einer
+  // Vorlage von 2000 px Höhe ein Anteil von 0,37. Mit 0,26 kam sie auf 988
+  // px und wurde auf 1440 gezogen; das Haar sah dann matschig aus.
+  // Die Brautaufnahme ist nur 539 px breit; eine Bahn daraus müsste auf
+  // 1440 gezogen werden. Für die Fläche steht deshalb die Lockenaufnahme in
+  // voller Auflösung — dieselbe Handschrift, nur groß genug.
+  ['flaeche-braut',      'arbeit-05-blond-locken.jpg',    0.42, 0.44, 0.38, 1.90, 1400, 0.76, true],
+  ['flaeche-braut-hoch', 'arbeit-05-blond-locken.jpg',    0.50, 0.56, 0.52, 0.90,  760, 0.78, true],
+  // Der Nahausschnitt der Perlenranke bleibt — er steht als Bild neben Text,
+  // nicht als Bahn hinter Text, und braucht deshalb keine 1400 px.
+  ['braut-perlenranke',  'arbeit-14-brautfrisur.jpg',     0.48, 0.40, 0.46, 0.90,  480, 0.86, true],
+  ['flaeche-leistungen', 'arbeit-03-straehnen.jpg',       0.55, 0.38, 0.38, 1.90, 1400, 0.76, true, [1.05, 0.95, 0.99]],
+  ['flaeche-leistungen-hoch','arbeit-03-straehnen.jpg',   0.55, 0.36, 0.52, 0.90,  760, 0.78, true, [1.05, 0.95, 0.99]],
+  ['flaeche-termin',     'arbeit-09-lang-glatt.jpg',      0.56, 0.60, 0.38, 1.90, 1400, 0.76, true],
+  ['flaeche-termin-hoch','arbeit-09-lang-glatt.jpg',      0.56, 0.60, 0.52, 0.90,  760, 0.78, true],
+
+  // ── Der Laden, so groß ausgeliefert, wie die Auflösung es hergibt. Hier ist
+  //    kein Gesicht im Bild — die Köpfe auf den Plakaten sind Produktwerbung.
+  ['salon-raum',         'salon-stuehle-spiegel.jpg',     0.50, 0.50, 1.00, 1.34,  733, 0.86, true],
+  ['salon-platz',        'salon-arbeitsplatz.jpg',        0.50, 0.50, 1.00, 1.33,  455, 0.88, true],
+  ['salon-waschen',      'salon-waschbecken.jpg',         0.50, 0.50, 1.00, 1.33,  455, 0.88, true],
 ];
 
 // Der Farbfächer zeigt pro Leistung ein Blatt. Die Farbe dieses Blattes wird
@@ -69,12 +83,13 @@ const tonproben = [
   ['farbe',      'arbeit-10-lang-blond.jpg',    0.58, 0.16, 0.50, 0.62],
   ['straehnen',  'arbeit-03-straehnen.jpg',     0.55, 0.16, 0.50, 0.66],
   ['balayage',   'arbeit-02-balayage.jpg',      0.50, 0.24, 0.60, 0.72],
-  ['glossing',   'arbeit-06-bob-blond.jpg',     0.50, 0.28, 0.52, 0.62],
-  ['dauerwelle', 'arbeit-05-blond-locken.jpg',  0.52, 0.30, 0.44, 0.66],
-  ['keratin',    'arbeit-09-lang-glatt.jpg',    0.52, 0.24, 0.52, 0.66],
+  ['locken',     'arbeit-05-blond-locken.jpg',  0.52, 0.30, 0.44, 0.66],
+  ['glatt',      'arbeit-09-lang-glatt.jpg',    0.52, 0.24, 0.52, 0.66],
+  ['ombre',      'arbeit-08-ombre.jpg',         0.58, 0.26, 0.56, 0.68],
   ['hochsteck',  'arbeit-13-hochsteck-blumen.jpg', 0.28, 0.40, 0.22, 0.62],
   ['braut',      'arbeit-14-brautfrisur.jpg',   0.45, 0.22, 0.35, 0.52],
 ];
+
 
 const alsDatenUri = (name) =>
   `data:image/jpeg;base64,${readFileSync(new URL(name, quelle)).toString('base64')}`;

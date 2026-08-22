@@ -35,37 +35,36 @@
 
 <main id="inhalt">
 
-<section class="flaeche abschnitt" aria-labelledby="haupttitel">
-  <div class="bild" aria-hidden="true">
-    <picture>
-      <source media="(max-width: 48rem)" srcset="bilder/flaeche-salon-hoch.webp">
-      <img src="bilder/flaeche-salon.webp" alt="" width="816" height="680" fetchpriority="high" decoding="async">
-    </picture>
-  </div>
-  <div class="schleier" aria-hidden="true"></div>
-
-  <div class="bahn mitte">
-    <h1 class="titel-gross" id="haupttitel">Der Salon</h1>
-    <p class="vorspann" style="margin-top:var(--r3)">
-      Zwei Bedienplätze, ein Waschbecken, ein türkises Regal, das man vom
-      Gehsteig aus sieht. Kein großer Laden — aber einer, in dem eine
-      Meisterin selbst am Stuhl steht.
-    </p>
-    <p class="hero-marke">
-      <span>Perlacher Straße 2 · München-Giesing</span>
-      <span class="oeffnungsstand"></span>
-    </p>
+<section class="abschnitt bahn" aria-labelledby="haupttitel" style="background:var(--grund-warm)">
+  <div class="mitte">
+    <div class="zweispalt" style="align-items:center">
+      <div>
+        <h1 class="titel-gross" id="haupttitel">Der Salon</h1>
+        <p class="vorspann" style="margin-top:var(--r3)">
+          Zwei Bedienplätze, ein Waschbecken, ein türkises Regal, das man vom
+          Gehsteig aus sieht. Kein großer Laden — aber einer, in dem eine
+          Meisterin selbst am Stuhl steht.
+        </p>
+        <p class="hero-marke">
+          <span>Perlacher Straße 2 · München-Giesing</span>
+          <span class="oeffnungsstand"></span>
+        </p>
+      </div>
+      <figure class="bildstreifen" style="margin:0">
+        <img src="bilder/salon-raum.webp" alt="Blick in den Salon: zwei Bedienplätze mit beleuchteten Spiegeln, schwarze Friseurstühle, helle Fliesen" width="733" height="547" fetchpriority="high" decoding="async">
+      </figure>
+    </div>
   </div>
 </section>
 
 <!-- ═══ Bahar ══════════════════════════════════════════════════════════ -->
-<section class="abschnitt bahn" style="background:var(--feld)" aria-labelledby="bahar-titel">
+<section class="abschnitt bahn" aria-labelledby="bahar-titel">
   <div class="mitte">
     <div class="kopf">
       <h2 class="titel" id="bahar-titel">Bahar</h2>
     </div>
 
-    <div class="faecher-feld" style="align-items:start">
+    <div class="zweispalt" style="align-items:start">
       <div>
         <p class="lauf">
           <strong>Fakhria Tokhi</strong> — im Laden nennen sie alle Bahar —
@@ -100,23 +99,23 @@
         </p>
         <ul style="list-style:none;margin:0;padding:0;display:grid;gap:.55rem">
           <li style="display:grid;grid-template-columns:auto 1fr;gap:.8rem;align-items:baseline">
-            <span style="width:.4rem;height:.4rem;border-radius:50%;background:var(--tuerkis)"></span>
+            <span style="width:.4rem;height:.4rem;border-radius:50%;background:var(--messing)"></span>
             <span><strong style="color:var(--tinte)">Moroccanoil</strong> <span style="color:var(--tinte-still)">prägt das ganze Regal, und die Farbe dieser Seite</span></span>
           </li>
           <li style="display:grid;grid-template-columns:auto 1fr;gap:.8rem;align-items:baseline">
-            <span style="width:.4rem;height:.4rem;border-radius:50%;background:var(--tuerkis)"></span>
+            <span style="width:.4rem;height:.4rem;border-radius:50%;background:var(--messing)"></span>
             <span><strong style="color:var(--tinte)">Olaplex</strong> <span style="color:var(--tinte-still)">Aufbau nach Blondierung, 30 €</span></span>
           </li>
           <li style="display:grid;grid-template-columns:auto 1fr;gap:.8rem;align-items:baseline">
-            <span style="width:.4rem;height:.4rem;border-radius:50%;background:var(--tuerkis)"></span>
+            <span style="width:.4rem;height:.4rem;border-radius:50%;background:var(--messing)"></span>
             <span><strong style="color:var(--tinte)">Revlon Professional</strong></span>
           </li>
           <li style="display:grid;grid-template-columns:auto 1fr;gap:.8rem;align-items:baseline">
-            <span style="width:.4rem;height:.4rem;border-radius:50%;background:var(--tuerkis)"></span>
+            <span style="width:.4rem;height:.4rem;border-radius:50%;background:var(--messing)"></span>
             <span><strong style="color:var(--tinte)">American Crew</strong> <span style="color:var(--tinte-still)">für die Herren</span></span>
           </li>
           <li style="display:grid;grid-template-columns:auto 1fr;gap:.8rem;align-items:baseline">
-            <span style="width:.4rem;height:.4rem;border-radius:50%;background:var(--tuerkis)"></span>
+            <span style="width:.4rem;height:.4rem;border-radius:50%;background:var(--messing)"></span>
             <span><strong style="color:var(--tinte)">CHI</strong></span>
           </li>
         </ul>
@@ -143,15 +142,15 @@
 
     <div class="reihe bildstreifen">
       <figure style="margin:0">
-        <img src="bilder/salon-raum.webp" alt="Zwei Bedienplätze mit Spiegeln und schwarzen Friseurstühlen, helle Fliesen" width="733" height="547" loading="lazy" decoding="async">
+        <img alt="Zwei Bedienplätze mit Spiegeln und schwarzen Friseurstühlen, helle Fliesen" loading="lazy" decoding="async" src="bilder/salon-raum.webp" width="733" height="547">
         <figcaption style="margin-top:.6rem;font-size:var(--s-klein);color:var(--tinte-still)">Die Bedienplätze mit den beleuchteten Spiegeln.</figcaption>
       </figure>
       <figure style="margin:0">
-        <img src="bilder/salon-platz.webp" alt="Produktregal mit Moroccanoil-Flaschen, dahinter die Farbregale" width="454" height="341" loading="lazy" decoding="async">
-        <figcaption style="margin-top:.6rem;font-size:var(--s-klein);color:var(--tinte-still)">Das türkise Regal. Die Leitfarbe dieser Seite kommt von hier.</figcaption>
+        <img alt="Produktregal mit Moroccanoil-Flaschen, dahinter die Farbregale" loading="lazy" decoding="async" src="bilder/salon-platz.webp" width="454" height="341">
+        <figcaption style="margin-top:.6rem;font-size:var(--s-klein);color:var(--tinte-still)">Das Produktregal: Moroccanoil, Revlon, Olaplex.</figcaption>
       </figure>
       <figure style="margin:0">
-        <img src="bilder/salon-waschen.webp" alt="Zwei Waschbecken mit Nackenstütze, daneben ein Regal mit Pflegeprodukten" width="454" height="341" loading="lazy" decoding="async">
+        <img alt="Zwei Waschbecken mit Nackenstütze, daneben ein Regal mit Pflegeprodukten" loading="lazy" decoding="async" src="bilder/salon-waschen.webp" width="454" height="341">
         <figcaption style="margin-top:.6rem;font-size:var(--s-klein);color:var(--tinte-still)">Die Waschplätze.</figcaption>
       </figure>
     </div>
@@ -159,7 +158,7 @@
 </section>
 
 <!-- ═══ Kosmetikstudio ═════════════════════════════════════════════════ -->
-<section class="abschnitt bahn" style="background:var(--feld)" aria-labelledby="kosmetik-titel">
+<section class="abschnitt bahn" style="background:var(--grund-warm)" aria-labelledby="kosmetik-titel">
   <div class="mitte">
     <div style="max-width:44rem">
       <h2 class="titel" id="kosmetik-titel" style="margin-bottom:var(--r3)">BaHaar’s Kosmetikstudio</h2>
@@ -194,7 +193,7 @@
       <div>
         <dt>Öffnungszeiten</dt>
         <dd>
-          <p class="oeffnungsstand" style="color:var(--tuerkis);margin-bottom:.6rem"></p>
+          <p class="oeffnungsstand" style="color:var(--messing);margin-bottom:.6rem"></p>
           <ul class="zeiten" style="max-width:22rem">
             <li data-tage="1"><span class="tag">Montag</span> <span class="zahl">10:00 – 16:00</span></li>
             <li data-tage="2,3,4,5"><span class="tag">Dienstag bis Freitag</span> <span class="zahl">09:00 – 19:00</span></li>
@@ -211,16 +210,16 @@
             Perlacher Straße 2<br>
             81539 München-Giesing
           </p>
-          <p><a href="https://www.openstreetmap.org/?mlat=48.1093&amp;mlon=11.5875#map=17/48.1093/11.5875" rel="noopener" style="color:var(--tuerkis)">Auf der Karte ansehen</a></p>
+          <p><a href="https://www.openstreetmap.org/?mlat=48.1093&amp;mlon=11.5875#map=17/48.1093/11.5875" rel="noopener" style="color:var(--messing)">Auf der Karte ansehen</a></p>
         </dd>
       </div>
       <div>
         <dt>Erreichen</dt>
         <dd>
           <p>
-            <a href="tel:+49896923644" style="color:var(--tuerkis);text-decoration:none">089 692 36 44</a><br>
-            <a href="mailto:info@bahaarsstylingstudio.de" style="color:var(--tuerkis);text-decoration:none">info@bahaarsstylingstudio.de</a><br>
-            <a href="https://www.instagram.com/bahaarsstylingstudio" rel="noopener" style="color:var(--tuerkis);text-decoration:none">@bahaarsstylingstudio</a>
+            <a href="tel:+49896923644" style="color:var(--messing);text-decoration:none">089 692 36 44</a><br>
+            <a href="mailto:info@bahaarsstylingstudio.de" style="color:var(--messing);text-decoration:none">info@bahaarsstylingstudio.de</a><br>
+            <a href="https://www.instagram.com/bahaarsstylingstudio" rel="noopener" style="color:var(--messing);text-decoration:none">@bahaarsstylingstudio</a>
           </p>
           <a class="knopf knopf-voll" href="termin.html">Termin buchen</a>
         </dd>
