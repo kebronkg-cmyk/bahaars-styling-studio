@@ -59,6 +59,18 @@ const auftraege = [
      68 gegen 239 und 304 der übrigen Auftaktbilder. Bei 1100 px bleibt es
      unter seiner Vorlage und steht sauber da. */
   ['salon-schere',       'salon-schere-standbild.png',    0, 0, 0, 0, 1100, 0.86, true],
+  /* Dasselbe Standbild noch einmal, in voller Vorlagenbreite: Es steht im
+     Auftakt, solange der Film lädt, und dauerhaft überall dort, wo er
+     nicht geladen wird. Es zeigt den Laden und nicht das Haar — genau das
+     war am vorigen Auftaktbild das Problem.
+
+     Es bleibt unbeschnitten. Ein Zuschnitt auf die untere Hälfte — dort
+     liegen Schere und Ablage — käme bei dieser Vorlage auf 738 × 415 px
+     heraus, und das ist für eine Vollfläche zu wenig. Stattdessen
+     verschiebt das Stylesheet den sichtbaren Ausschnitt nach unten
+     (object-position), was nichts kostet und nichts wegwirft.           */
+  ['auftakt-still',      'salon-schere-standbild.png',    0, 0, 0, 0, 1366, 0.84, true],
+  ['auftakt-still-hoch', 'salon-schere-standbild.png',    0, 0, 0, 0,  768, 0.84, true],
   ['salon-raum',         'salon-stuehle-spiegel.jpg',     0, 0, 0, 0,  733, 0.88, true],
   ['salon-platz',        'salon-arbeitsplatz.jpg',        0, 0, 0, 0,  455, 0.90, true],
   ['salon-waschen',      'salon-waschbecken.jpg',         0, 0, 0, 0,  455, 0.90, true],

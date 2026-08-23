@@ -57,6 +57,12 @@ Kurven, Muster (als SVG-Daten-URI) — alles an einer Stelle.
   überlagern statt seitlich.
 - **Eine eigene Idee pro Seite**, die es sonst nirgends gibt. Etwas Räumliches,
   das zum Laden gehört.
+- **Ein Schleier, der das Bild rettet, tötet es.** Wenn ein Film oder ein
+  Foto den ganzen Bildschirm trägt, darf der Schleier nicht über die ganze
+  Fläche gehen — dann sieht man ihn und nicht das Bild. Ein Schatten hinter
+  dem Textblock reicht; vier Fünftel der Aufnahme bleiben offen.
+- **Eine Leiste, die dauerhaft über dem Bild steht, versperrt die Sicht.**
+  Beim Runterscrollen weicht sie aus, beim Hochscrollen kommt sie zurück.
 - **Zurückhaltung beim Ornament.** Wenige Einsätze, dafür an Stellen, wo sie
   inhaltlich etwas bedeuten. Lieber zu leise als zu laut — zurücknehmen ist
   schwerer als nachlegen.
@@ -157,6 +163,9 @@ schlimmer als ein unbeschriftetes.
 | `position: relative` für ein `::before` überschreibt `position: sticky`, wenn die Regel spezifischer ist | `sticky` ist selbst schon Bezugsrahmen; die Zeile ist überflüssig |
 | `:nth-of-type` zählt nach Elementtyp, nicht nach Klasse — ein `<video>` zwischen `<div>`-Ebenen ist „das erste seiner Art" | Den Elementtyp aus dem Selektor halten (`:not(.klasse):nth-of-type(n)`) |
 | Ein Video am Scrollrad entlangzuspulen kostet so viel, wie zwischen den Schlüsselbildern liegt | Schlüsselbilder in der Datei zählen; sind es wenige, linear abspielen und nur die Kamera scrollen |
+| Ein Verlauf, dessen letzter Halt vor 100 % liegt, wird vom eigenen Kasten abgeschnitten — man sieht eine gerade Linie quer durchs Bild | Radius und letzten Halt so setzen, dass die Ellipse innerhalb ihres Kastens auf null ausläuft |
+| Eine neue Klasse mit einem schon vergebenen Namen zerlegt die andere Seite still — hier wurde aus einem Spaltenraster ein 3000 px breiter Streifen | Vor dem Benennen `grep` über alle Seiten |
+| Die kleinste Zeile über einem Bild ist die, die am Kontrast scheitert — gesperrte Kapitälchen in 12 px haben keine Reserve | Nicht am Verlauf drehen, sondern die Zeile dorthin setzen, wo der Schleier ohnehin dicht ist |
 
 ## Zugänglichkeit
 

@@ -754,6 +754,18 @@ body > .kopfzeile { margin-bottom: -5.5rem; }
   background: var(--glas-dicht);
   box-shadow: var(--schatten-hoch);
 }
+/* Ausgewichen. Der Weg ist die eigene Höhe plus der Abstand nach oben —
+   sonst bleibt ein Streifen stehen. transform, nicht top: Eine
+   Layout-Eigenschaft zu bewegen heißt, in jedem Bild neu zu setzen. */
+.kopfzeile {
+  transition: background-color var(--t2) var(--kurve),
+              box-shadow var(--t2) var(--kurve),
+              transform var(--t2) var(--kurve);
+}
+.kopfzeile.weg { transform: translateY(calc(-100% - var(--r2) - var(--r2))); }
+@media (prefers-reduced-motion: reduce) {
+  .kopfzeile { transition: none; }
+}
 
 .marke {
   font-family: 'Marcellus', Georgia, serif;
@@ -1882,6 +1894,9 @@ html {
   width: 100%; height: 100%;
   object-fit: cover; display: block;
 }
+/* Kein object-position: Bei 1366 × 768 auf einer Bühne von 1440 × 900
+   schneidet cover seitlich und nicht oben — senkrecht gibt es nichts zu
+   verschieben. Das Standbild bleibt, wie es ist. */
 /* Der Film liegt über dem Standbild und blendet sich darüber, sobald er
    läuft. Bis dahin — und wenn er nie kommt — steht das Standbild. Der
    Ladezustand ist damit zugleich die Rückfallebene. */
@@ -1896,21 +1911,21 @@ html {
    Übergang in den nächsten Abschnitt nahtlos ist. */
 .auftakt-grund {
   position: absolute; inset: 0; z-index: -1;
-  /* Gemessen, nicht geschätzt. Die erste Fassung ließ die Mitte offen und
-     setzte den Satz hinein — dort lag die hellste Stelle der Aufnahme, und
-     die Ortszeile kam auf 1,10 : 1. Jetzt steht der Satz unten, wo der
-     Verlauf ohnehin dicht sein muss, damit der Übergang in den nächsten
-     Abschnitt nahtlos ist. Die obere Hälfte des Bildes bleibt unberührt. */
+  /* Nur so viel Verlauf, wie die Schrift braucht. Die vorige Fassung war
+     ab 34 % dicht und hat den Film verdeckt — er war da, aber man sah ihn
+     nicht, und dann hat er keinen Zweck. Jetzt trägt er vier Fünftel des
+     Bildschirms allein. Unten muss er trotzdem in die Grundfarbe
+     auslaufen, sonst reißt die Kante zum nächsten Abschnitt. */
   background: linear-gradient(to top,
     var(--grund) 0%,
-    var(--grund) 22%,
-    var(--grund-96) 42%,
-    var(--grund-72) 58%,
-    var(--grund-28) 74%,
-    var(--grund-00) 88%);
+    var(--grund-96) 9%,
+    var(--grund-72) 17%,
+    var(--grund-28) 27%,
+    var(--grund-00) 40%);
 }
 
 .auftakt-satz {
+  position: relative;
   grid-row: 1;
   align-self: end;
   width: 100%;
@@ -1918,17 +1933,72 @@ html {
   margin-inline: auto;
   text-align: center;
 }
+/* Der Schatten liegt hinter dem Satz, nicht über dem Bild.
 
+   Das ist der Unterschied, der den Film überhaupt erst zu einem Film
+   macht: Ein Verlauf über die ganze Fläche muss dicht genug für die
+   dunkelste Zeile sein und verdeckt dann alles; eine Ellipse hinter den
+   vier Zeilen muss nur dort dicht sein, wo Buchstaben stehen. Vier
+   Fünftel der Aufnahme bleiben offen.
+
+   Sie ragt bewusst weit über den Textblock hinaus — eine Ellipse, deren
+   Kante man sieht, ist ein Fleck und kein Schatten.                    */
+.auftakt-satz::before {
+  content: '';
+  position: absolute;
+  /* Über die ganze Fensterbreite, nicht nur über die Textspalte. Sonst
+     schneidet der Kasten die Ellipse links und rechts ab, und man sieht
+     zwei senkrechte Kanten quer durch das Bild — ein Band statt eines
+     Schattens. */
+  inset: -11rem calc(-50vw + 50%) -8rem;
+  z-index: -1;
+  pointer-events: none;
+  /* Der letzte Halt muss bei 100 % stehen und der Radius darf den Kasten
+     nicht überschreiten — sonst schneidet der Kasten die Ellipse ab, und
+     man sieht eine gerade Linie quer über das Bild. Genau das war hier:
+     bei 74 % Radius lag die Kastenkante noch bei rund 70 % Deckung. */
+  background: radial-gradient(46% 50% at 50% 50%,
+    var(--grund-96) 0%,
+    var(--grund-96) 38%,
+    var(--grund-72) 60%,
+    var(--grund-28) 80%,
+    var(--grund-00) 100%);
+}
+@media (max-width: 48rem) {
+  /* Am schmalen Schirm steht die Ortszeile ganz oben im Block und lag
+     damit schon in der auslaufenden Kante der Ellipse — gemessen 4,07 : 1
+     in der hellen Stimmung. Zwölf Pixel mit weiter Sperrung haben keine
+     Reserve, also wandert der dichte Kern nach oben. */
+  .auftakt-satz::before {
+    inset: -7rem calc(-50vw + 50%) -5rem;
+    background: radial-gradient(64% 50% at 50% 50%,
+      var(--grund-96) 0%,
+      var(--grund-96) 42%,
+      var(--grund-72) 62%,
+      var(--grund-28) 82%,
+      var(--grund-00) 100%);
+  }
+}
+
+/* Adresse und Öffnungsstand stehen zusammen unter den Knöpfen: Beide
+   beantworten dieselbe Frage — wo und wann.
+
+   Sie standen vorher als gesperrte Kapitälchen über der Überschrift. Dort
+   lagen sie in der auslaufenden Kante des Schattens und kamen in den
+   hellen Stimmungen auf 3,3 : 1; zwölf Pixel mit weiter Sperrung haben
+   keine Reserve. Unten liegen sie im dichten Kern. */
+.auftakt-fuss {
+  margin: var(--r3) 0 0;
+  display: flex; flex-wrap: wrap; gap: .4rem 1rem;
+  justify-content: center; align-items: center;
+  font-size: var(--s-klein);
+  color: var(--tinte-leise);
+}
 .auftakt-ort {
   font-family: 'Marcellus SC', Georgia, serif;
   font-size: var(--s-mini);
-  letter-spacing: .26em;
-  /* Nicht in der Leitfarbe: Über einer Aufnahme muss auch die kleinste
-     Zeile 4,5 : 1 halten, und Messing schafft das auf hellem Haar nicht.
-     Und nicht „leise": am Handy blieb die Zeile damit bei 4,27 : 1 —
-     gesperrte Kapitälchen in Zwölf-Pixel-Größe haben keine Reserve. */
+  letter-spacing: .2em;
   color: var(--tinte);
-  margin: 0 0 var(--r3);
 }
 
 .auftakt-lauf {
@@ -1945,11 +2015,6 @@ html {
   justify-content: center; align-items: center;
 }
 
-.auftakt-stand {
-  margin: var(--r3) 0 0;
-  font-size: var(--s-klein);
-  color: var(--tinte-still);
-}
 
 /* Der Hinweis nach unten. Er sitzt in der zweiten Rasterzeile, damit er
    den Satz nicht aus der Mitte drückt. */
@@ -1979,20 +2044,18 @@ html {
   .auftakt-lauf { font-size: var(--t-body); }
   /* Gesperrte Kapitälchen brauchen Platz. Bei 390 px lief die Zeile aus
      dem Bild heraus und endete mitten in „Giesing". */
-  .auftakt-ort { letter-spacing: .16em; font-size: .72rem; }
+  .auftakt-ort { letter-spacing: .14em; font-size: .72rem; }
 
-  /* Am schmalen Schirm ist der Satz höher als breit: Er reicht bei 844 px
-     Höhe rund 430 px weit hinauf. Der Verlauf muss deshalb weiter oben
-     dicht werden — sonst steht die Ortszeile über dem nackten Bild. In den
-     hellen Stimmungen kam sie dort gemessen auf 2,3 : 1. */
+  /* Am schmalen Schirm steht der Satz höher, weil die Zeilen umbrechen.
+     Der Verlauf muss dort ein Stück weiter hinauf reichen — aber auch nur
+     ein Stück. */
   .auftakt-grund {
     background: linear-gradient(to top,
       var(--grund) 0%,
-      var(--grund) 34%,
-      var(--grund-96) 56%,
-      var(--grund-72) 70%,
-      var(--grund-28) 84%,
-      var(--grund-00) 94%);
+      var(--grund-96) 14%,
+      var(--grund-72) 25%,
+      var(--grund-28) 38%,
+      var(--grund-00) 52%);
   }
 }
 
@@ -2178,24 +2241,80 @@ html {
    aus gleich hohen Kacheln hätte jede zweite beschnitten; hier laufen die
    Spalten und die Bilder behalten ihre Form.                              */
 
+/* ═══ Die Werkschau als Mauerwerk ══════════════════════════════════════
+   Auf der Salonseite stehen die Aufnahmen mit Bildunterschrift in Spalten,
+   jede in ihrem eigenen Seitenverhältnis. Ein Raster mit festen Zeilen
+   hätte allen dieselbe Höhe aufgezwungen.                               */
+
 .werkschau { columns: 2; column-gap: .5rem; }
 @media (min-width: 40rem) { .werkschau { columns: 3; column-gap: .75rem; } }
 @media (min-width: 68rem) { .werkschau { columns: 4; column-gap: 1rem; } }
-
-.werkschau .arbeit-kachel {
-  display: block; width: 100%;
-  margin: 0 0 .5rem;
+.werkschau > * {
   break-inside: avoid;
-  aspect-ratio: auto;
-  padding: 0; border: 0;
-  background: var(--grund-warm);
+  margin: 0 0 .5rem;
+}
+@media (min-width: 40rem) { .werkschau > * { margin-bottom: .75rem; } }
+@media (min-width: 68rem) { .werkschau > * { margin-bottom: 1rem; } }
+
+/* ═══ Der Werkstreifen ═════════════════════════════════════════════════
+   Auf der Startseite steht die Werkschau am Ende und läuft quer.
+
+   Warum quer: Fünfzehn Aufnahmen in einem Mauerwerk aus vier Spalten sind
+   eine Liste — man überfliegt sie und sieht keine einzelne. Als Streifen,
+   den der Scrollweg vorbeizieht, kommt jede einzeln ins Bild und geht
+   wieder. Das ist der Unterschied zwischen zeigen und ausstellen.
+
+   Die Höhe ist fest, die Breite nicht: Jede Aufnahme behält ihr eigenes
+   Seitenverhältnis, das Hochformat wird schmal, das Querformat breit.
+
+   Ohne Skript und bei abbestellter Bewegung bleibt das Fenster ein
+   gewöhnlicher Rollbereich mit Fangpunkten — wischen geht dann immer
+   noch, nur zieht ihn niemand von selbst vorbei.                        */
+
+/* Beim Ziehen steht der Abschnitt einen Bildschirm hoch fest. Der Kopf
+   sitzt oben, der Streifen füllt den Rest — ohne diese Aufteilung stand
+   der Streifen im unteren Viertel und darüber war eine leere Fläche. */
+.werkstreifen-buehne { overflow: clip; }
+.mitzug .werkstreifen-buehne {
+  min-height: 100svh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding-top: var(--r5); padding-bottom: var(--r5);
+}
+.mitzug .werkstreifen-buehne .kopf { margin-bottom: clamp(2rem, 4vw, 3.5rem); }
+
+.werkstreifen-fenster {
+  margin-top: clamp(2rem, 4vw, 3.5rem);
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.werkstreifen-fenster::-webkit-scrollbar { display: none; }
+
+.werkstreifen {
+  display: flex;
+  gap: clamp(.5rem, 1.2vw, 1rem);
+  padding-inline: var(--rand);
+  width: max-content;
+}
+.werkstreifen .arbeit-kachel {
+  flex: none;
+  height: clamp(20rem, 46vh, 30rem);
+  margin: 0;
+  scroll-snap-align: center;
   border-radius: var(--bogen-blatt);
   overflow: hidden;
-  cursor: pointer;
 }
-@media (min-width: 40rem) { .werkschau .arbeit-kachel { margin-bottom: .75rem; } }
-@media (min-width: 68rem) { .werkschau .arbeit-kachel { margin-bottom: 1rem; } }
-.werkschau .arbeit-kachel img { height: auto; }
+.werkstreifen .arbeit-kachel img {
+  width: auto; height: 100%;
+  max-width: none;
+  object-fit: cover;
+}
+
+/* Zieht das Skript den Streifen, darf er selbst nicht mehr rollen —
+   zwei Rollbereiche an derselben Achse kämpfen gegeneinander. */
+.mitzug .werkstreifen-fenster { overflow-x: hidden; scroll-snap-type: none; }
+.mitzug .werkstreifen-buehne { padding-bottom: 0; }
 
 /* ── Leistungen im Überblick ─────────────────────────────────────────────
    Drei Karten mit echtem Foto, Ab-Preis und der gemessenen Tonprobe der

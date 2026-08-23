@@ -42,18 +42,48 @@
   if (choreografie) wurzel.classList.add('mitfahrt');
 
   /* ── Kopfzeile ────────────────────────────────────────────────────────
+     Sie weicht beim Runterscrollen nach oben aus und kommt beim
+     Hochscrollen zurück. Der Grund ist eine Beschwerde, die stimmt: Eine
+     Leiste, die dauerhaft über dem Bild steht, versperrt die Sicht — und
+     auf einer Seite, deren erster Bildschirm ein Film ist, versperrt sie
+     genau das, worum es geht.
+
+     Wer runterscrollt, will nach unten sehen und braucht die Navigation
+     nicht. Wer hochscrollt, sucht sie. Beim Hochscrollen kommt sie deshalb
+     sofort zurück, egal wie weit unten man ist.
+
      Hysterese von 6 px: ohne sie flackert der Umschalter genau dann, wenn
-     das sanfte Scrollen um den Schwellwert herum ausläuft.                */
+     das sanfte Scrollen um den Schwellwert herum ausläuft. Und ein
+     Mindestweg von 8 px, damit ein Zittern des Fingers sie nicht
+     hin- und herspringen lässt.                                          */
 
   const kopfzeile = $('.kopfzeile');
   if (kopfzeile) {
-    const AN = 26, AUS = 20;                 // 6 px Abstand dazwischen
-    let gesetzt = false;
+    const AN = 26, AUS = 20, WEG = 8;
+    let gesetzt = false, versteckt = false, zuletzt = window.scrollY;
+
     const pruefen = () => {
       const y = window.scrollY;
-      if (!gesetzt && y > AN) { gesetzt = true;  kopfzeile.classList.add('gesetzt'); }
+      const d = y - zuletzt;
+
+      if (!gesetzt && y > AN) { gesetzt = true; kopfzeile.classList.add('gesetzt'); }
       else if (gesetzt && y < AUS) { gesetzt = false; kopfzeile.classList.remove('gesetzt'); }
+
+      if (Math.abs(d) >= WEG) {
+        /* Über dem ersten Bildschirmrand bleibt sie immer stehen: Dort ist
+           sie noch nie im Weg, und ein Ausweichen sähe wie ein Zucken aus. */
+        const runter = d > 0 && y > innerHeight * 0.6;
+        if (runter !== versteckt) {
+          versteckt = runter;
+          kopfzeile.classList.toggle('weg', runter);
+          /* Ein ausgewichenes Menü darf nicht offen bleiben. */
+          if (runter) $('.menuknopf')?.getAttribute('aria-expanded') === 'true' &&
+            $('.menuknopf').click();
+        }
+        zuletzt = y;
+      }
     };
+
     addEventListener('scroll', pruefen, { passive: true });
     pruefen();
   }
@@ -91,7 +121,7 @@
 
   const auftauchen = $$('.auf');
   if (auftauchen.length && choreografie) {
-    G.set(auftauchen, { opacity: 0, y: 18 });
+    G.set(auftauchen, { opacity: 0, y: 34 });
 
     ST.batch(auftauchen, {
       start: 'top 92%',
@@ -99,7 +129,7 @@
       batchMax: 3,
       onEnter: (gruppe) => G.to(gruppe, {
         opacity: 1, y: 0,
-        duration: .55, stagger: .09,
+        duration: .7, stagger: .09,
         ease: 'power2.out',      /* Eintritt bremst aus — nie umgekehrt */
         overwrite: true
       })
@@ -236,6 +266,91 @@
         }
       });
     }
+  }
+
+  /* ── Die Überschriften kommen zeilenweise ─────────────────────────────
+     Jede Abschnittsüberschrift steigt beim Auftauchen auf: erst die
+     Augenbraue, dann der Titel, dann der Vorspann. Drei Dinge nacheinander
+     statt eines Blocks — das ist derselbe Gedanke wie im Auftakt, nur eine
+     Nummer kleiner.
+
+     Ausgangszustand über GSAP.from, nicht über eine Klasse im Stylesheet:
+     Ohne Skript steht der Kopf einfach da, und das ist die richtige
+     Rückfallebene.                                                       */
+
+  $$('.kopf').forEach((kopf) => {
+    const teile = $$(':scope > *', kopf);
+    if (!teile.length || !choreografie) return;
+    G.from(teile, {
+      opacity: 0, y: 22,
+      duration: .7, stagger: .08, ease: 'power2.out',
+      scrollTrigger: { trigger: kopf, start: 'top 88%', once: true }
+    });
+  });
+
+  /* ── Die Bilder in den Abschnitten ziehen mit ──────────────────────────
+     Ein schmaler Versatz gegen die Scrollrichtung, gerade so viel, dass
+     man ihn spürt und nicht sieht. Mehr wäre Zirkus: Diese Bilder stehen
+     neben Text, den jemand liest.                                        */
+
+  if (choreografie) {
+    $$('.bildstreifen img, .portrait img, .vollbild img').forEach((bild) => {
+      G.fromTo(bild, { yPercent: -4 }, {
+        yPercent: 4, ease: 'none',
+        scrollTrigger: {
+          trigger: bild.closest('figure, .portrait') || bild,
+          start: 'top bottom', end: 'bottom top', scrub: .6
+        }
+      });
+    });
+  }
+
+  /* ── Die Werkschau zieht vorbei ───────────────────────────────────────
+     Der Abschnitt bleibt stehen, und der Streifen läuft quer durch das
+     Bild. Der Scrollweg dafür ist genau so lang wie der Streifen breit
+     ist — dann läuft er mit derselben Geschwindigkeit, in der man scrollt,
+     und fühlt sich nicht nach Getriebe an.
+
+     Gerechnet wird die Strecke bei jedem Neuvermessen neu
+     (invalidateOnRefresh): Sie hängt an der Fensterbreite und an den
+     Bildhöhen, und beides ändert sich beim Drehen des Geräts.
+
+     Ohne Skript oder bei abbestellter Bewegung passiert nichts davon —
+     dann bleibt das Fenster ein Rollbereich, den man wischen kann. Die
+     Marke mitzug schaltet erst hier scharf, damit nie beides zugleich
+     gilt: ein gezogener Streifen, der außerdem selbst rollt, kämpft mit
+     sich.                                                                */
+
+  const werkBuehne  = $('.werkstreifen-buehne');
+  const werkFenster = $('.werkstreifen-fenster');
+  const werkSpur    = $('.werkstreifen');
+  if (werkBuehne && werkFenster && werkSpur && choreografie) {
+    wurzel.classList.add('mitzug');
+
+    const weg = () => Math.max(0, werkSpur.scrollWidth - werkFenster.clientWidth);
+
+    G.to(werkSpur, {
+      x: () => -weg(),
+      ease: 'none',
+      scrollTrigger: {
+        trigger: werkBuehne,
+        start: 'top top',
+        end: () => '+=' + weg(),
+        pin: true,
+        scrub: .4,
+        invalidateOnRefresh: true,
+        anticipatePin: 1
+      }
+    });
+
+    /* Die Bilder werden erst geladen, wenn sie an der Reihe sind — aber
+       „an der Reihe" heißt hier quer und nicht senkrecht, und das erkennt
+       loading="lazy" nicht. Beim Betreten des Abschnitts werden sie
+       deshalb alle scharf gestellt. */
+    ST.create({
+      trigger: werkBuehne, start: 'top bottom', once: true,
+      onEnter: () => $$('img', werkSpur).forEach((b) => { b.loading = 'eager'; })
+    });
   }
 
   /* ── Die Übersicht in der Kopfzeile ────────────────────────────────────

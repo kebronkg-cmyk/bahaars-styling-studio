@@ -146,19 +146,16 @@ try{var p=localStorage.getItem('bahaar-stimmung');
 <!-- ═══ Auftakt ═════════════════════════════════════════════════════════ -->
 <section class="auftakt" aria-labelledby="haupttitel">
 
-  <!-- Der Film trägt den ganzen ersten Bildschirm. Darüber liegt keine
-       Deko: kein Schein, kein Dunst, keine Flusen. Nur ein Verlauf von
-       unten, damit die Schrift trägt — und der ist so schmal wie möglich.
+  <!-- Der Film trägt den ganzen ersten Bildschirm und wird auch so gezeigt:
+       Über ihm liegt nur ein schmaler Verlauf am unteren Rand, gerade so
+       viel, dass die vier Zeilen darauf tragen. Alles andere ist offen.
 
-       Zwei Fassungen, quer und hochkant. Welche geladen wird, entscheidet
-       das Skript nach der Ausrichtung des Schirms; <source media> gilt nur
-       im <picture>, bei <video> ignorieren die Browser es. Ohne src wird
-       gar nichts geladen: nicht bei abbestellter Bewegung, nicht im
-       Sparmodus, nicht ohne passenden Codec. Dann trägt das Standbild. -->
+       Das Standbild darunter zeigt den Laden, nicht das Haar. Es steht,
+       solange der Film lädt, und dauerhaft dort, wo er nicht geladen wird. -->
   <div class="auftakt-bild" aria-hidden="true">
     <picture>
-      <source media="(orientation: portrait)" srcset="bilder/auftakt-1-hoch.webp">
-      <img src="bilder/auftakt-1.webp" alt="" width="1240" height="1240" fetchpriority="high" decoding="async">
+      <source media="(orientation: portrait)" srcset="bilder/auftakt-still-hoch.webp">
+      <img src="bilder/auftakt-still.webp" alt="" width="1366" height="768" fetchpriority="high" decoding="async">
     </picture>
     <video class="auftakt-film"
            data-quer="bilder/auftakt.mp4"
@@ -168,22 +165,15 @@ try{var p=localStorage.getItem('bahaar-stimmung');
   <div class="auftakt-grund" aria-hidden="true"></div>
 
   <div class="auftakt-satz">
-    <p class="auftakt-ort steig">Perlacher Stra&szlig;e 2 &middot; M&uuml;nchen-Giesing</p>
-
-    <h1 class="riesen zweistimmig steig" id="haupttitel">Seit zwanzig Jahren <em>stehe ich selbst am Stuhl.</em></h1>
-
-    <p class="auftakt-lauf steig">
-      Farbe, Schnitt, Hochsteckfrisuren, Brautstyling. Kein Filialleiter,
-      keine wechselnden Aushilfen — wer hier einen Termin bekommt, wei&szlig;
-      auch, wer ihn macht.
-    </p>
-
+    <h1 class="riesen steig" id="haupttitel">Ich stehe selbst am Stuhl.</h1>
     <div class="auftakt-wahl steig">
       <a class="knopf-glas gross" href="termin.html">Termin vereinbaren</a>
       <a class="knopf-still" href="tel:+49896923644">089&nbsp;692&nbsp;36&nbsp;44</a>
     </div>
-
-    <p class="auftakt-stand oeffnungsstand"></p>
+    <p class="auftakt-fuss steig">
+      <span class="auftakt-ort">Perlacher Stra&szlig;e 2 &middot; M&uuml;nchen-Giesing</span>
+      <span class="oeffnungsstand"></span>
+    </p>
   </div>
 
   <a class="auftakt-weiter" href="#leistungen-titel" aria-label="Weiter zu den Leistungen">
@@ -243,68 +233,6 @@ try{var p=localStorage.getItem('bahaar-stimmung');
   </div>
 </section>
 
-<!-- ═══ Arbeiten ════════════════════════════════════════════════════════ -->
-<section class="abschnitt bahn warm" aria-labelledby="arbeiten-titel">
-  <div class="mitte">
-    <div class="kopf">
-      <p class="braue">Werkschau</p>
-      <h2 class="titel" id="arbeiten-titel">Arbeiten aus dem Salon</h2>
-      <p class="lauf">
-        Aufnahmen aus dem Alltag in der Perlacher Straße, gemacht, während die
-        Kundin noch auf dem Stuhl saß. Nichts davon ist nachgestellt, und
-        nichts ist beschnitten — jedes Bild steht so, wie es aufgenommen wurde.
-      </p>
-    </div>
-
-    <div class="werkschau auf">
-      <button class="arbeit-kachel" type="button" data-text="Balayage über die ganze Länge: der Verlauf beginnt tief und läuft warm aus.">
-        <img src="bilder/arbeit-balayage.webp" alt="Langes Haar, Verlauf von dunklem Ansatz in helle warme Spitzen" width="1000" height="1333" loading="lazy" decoding="async">
-      </button>
-      <button class="arbeit-kachel" type="button" data-text="Foliensträhnen, in dünnen Schichten durch die Länge gezogen.">
-        <img src="bilder/arbeit-straehnen.webp" alt="Feine helle Strähnen in langem Haar" width="1000" height="1333" loading="lazy" decoding="async">
-      </button>
-      <button class="arbeit-kachel" type="button" data-text="Lange Stufen in warmem Karamell, Bewegung in den Spitzen.">
-        <img src="bilder/arbeit-lang.webp" alt="Lange Stufen in warmem Karamell" width="1000" height="1333" loading="lazy" decoding="async">
-      </button>
-      <button class="arbeit-kachel" type="button" data-text="Goldblonde Locken, mit dem Rundeisen in Form gelegt.">
-        <img src="bilder/arbeit-locken.webp" alt="Goldblonde gelegte Locken" width="1000" height="1333" loading="lazy" decoding="async">
-      </button>
-      <button class="arbeit-kachel" type="button" data-text="Glatte Länge mit sauber ausgearbeiteten Stufen.">
-        <img src="bilder/arbeit-glatt.webp" alt="Glatte lange Haare mit ausgearbeiteten Stufen" width="1000" height="1333" loading="lazy" decoding="async">
-      </button>
-      <button class="arbeit-kachel" type="button" data-text="Schulterlanges Haar, warmer Farbverlauf, Spitzen nach innen geföhnt.">
-        <img src="bilder/arbeit-ombre.webp" alt="Schulterlanges Haar mit warmem Farbverlauf" width="1000" height="1333" loading="lazy" decoding="async">
-      </button>
-      <button class="arbeit-kachel" type="button" data-text="Kurzer Bob in kühlem Aschblond, die Welle nach außen gelegt.">
-        <img src="bilder/arbeit-bob.webp" alt="Kurzer Bob in kühlem Aschblond mit gelegter Welle" width="1000" height="1333" loading="lazy" decoding="async">
-      </button>
-      <button class="arbeit-kachel" type="button" data-text="Helles Blond, kurz geschnitten und in weiche Wellen gelegt.">
-        <img src="bilder/arbeit-kurz-blond.webp" alt="Kurzes helles Blond in weichen Wellen" width="1000" height="1333" loading="lazy" decoding="async">
-      </button>
-      <button class="arbeit-kachel" type="button" data-text="Kurzes Silbergrau, in Form geföhnt — Griff und Fall bleiben weich.">
-        <img src="bilder/arbeit-kurz.webp" alt="Kurzes silbergraues Haar, in Form geföhnt" width="1000" height="1333" loading="lazy" decoding="async">
-      </button>
-      <button class="arbeit-kachel" type="button" data-text="Eng geflochten, Scheitel für Scheitel gezogen.">
-        <img src="bilder/arbeit-flecht.webp" alt="Eng anliegende Flechtfrisur mit gezogenen Zöpfen" width="1000" height="1000" loading="lazy" decoding="async">
-      </button>
-      <button class="arbeit-kachel" type="button" data-text="Hochgesteckt, mit gelegten Wellen an der Seite.">
-        <img src="bilder/arbeit-hochsteck.webp" alt="Hochsteckfrisur mit gelegten Wellen" width="1000" height="750" loading="lazy" decoding="async">
-      </button>
-      <button class="arbeit-kachel" type="button" data-text="Hochsteckfrisur mit eingearbeiteter Perlen- und Blütenranke.">
-        <img src="bilder/arbeit-perlen.webp" alt="Hochsteckfrisur mit Perlen- und Blütenranke" width="768" height="1024" loading="lazy" decoding="async">
-      </button>
-      <button class="arbeit-kachel" type="button" data-text="Brautfrisur: gelegte Locken, durchzogen von einer Perlenranke in Roségold.">
-        <img src="bilder/arbeit-braut-perlen.webp" alt="Brautfrisur mit gelegten Locken und Perlenranke in Roségold" width="539" height="1024" loading="lazy" decoding="async">
-      </button>
-      <button class="arbeit-kachel" type="button" data-text="Hochgesteckt, mit Diadem und eingearbeitetem Schleier.">
-        <img src="bilder/arbeit-braut-schleier.webp" alt="Braut mit hochgestecktem Haar, Diadem und Schleier" width="550" height="977" loading="lazy" decoding="async">
-      </button>
-      <button class="arbeit-kachel" type="button" data-text="Kinderschnitt, kurz und sauber ausrasiert.">
-        <img src="bilder/arbeit-kind.webp" alt="Kinderschnitt, kurz und sauber ausrasiert" width="1000" height="1333" loading="lazy" decoding="async">
-      </button>
-    </div>
-  </div>
-</section>
 
 <!-- ═══ Brautstyling ════════════════════════════════════════════════════ -->
 <section class="abschnitt bahn" aria-labelledby="braut-titel">
@@ -417,6 +345,76 @@ try{var p=localStorage.getItem('bahaar-stimmung');
     </dl>
   </div>
 </section>
+
+
+<!-- ═══ Arbeiten ════════════════════════════════════════════════════════ -->
+<section class="abschnitt werkstreifen-buehne" aria-labelledby="arbeiten-titel">
+  <div class="bahn mitte">
+    <div class="kopf">
+      <p class="braue">Werkschau</p>
+      <h2 class="titel" id="arbeiten-titel">Arbeiten aus dem Salon</h2>
+      <p class="lauf">
+        Aufnahmen aus dem Alltag in der Perlacher Straße, gemacht, während die
+        Kundin noch auf dem Stuhl saß. Nichts davon ist nachgestellt, und
+        nichts ist beschnitten — jedes Bild steht so, wie es aufgenommen wurde.
+      </p>
+    </div>
+  </div>
+
+  <!-- Der Streifen läuft quer. Ohne Skript und bei abbestellter Bewegung
+       ist er ein gewöhnlicher Rollbereich, den man wischen kann; mit
+       Skript zieht ihn der Scrollweg vorbei, während der Abschnitt steht. -->
+  <div class="werkstreifen-fenster">
+    <div class="werkstreifen">
+      <button class="arbeit-kachel" type="button" data-text="Balayage über die ganze Länge: der Verlauf beginnt tief und läuft warm aus.">
+        <img src="bilder/arbeit-balayage.webp" alt="Langes Haar, Verlauf von dunklem Ansatz in helle warme Spitzen" width="1000" height="1333" loading="lazy" decoding="async">
+      </button>
+      <button class="arbeit-kachel" type="button" data-text="Foliensträhnen, in dünnen Schichten durch die Länge gezogen.">
+        <img src="bilder/arbeit-straehnen.webp" alt="Feine helle Strähnen in langem Haar" width="1000" height="1333" loading="lazy" decoding="async">
+      </button>
+      <button class="arbeit-kachel" type="button" data-text="Lange Stufen in warmem Karamell, Bewegung in den Spitzen.">
+        <img src="bilder/arbeit-lang.webp" alt="Lange Stufen in warmem Karamell" width="1000" height="1333" loading="lazy" decoding="async">
+      </button>
+      <button class="arbeit-kachel" type="button" data-text="Goldblonde Locken, mit dem Rundeisen in Form gelegt.">
+        <img src="bilder/arbeit-locken.webp" alt="Goldblonde gelegte Locken" width="1000" height="1333" loading="lazy" decoding="async">
+      </button>
+      <button class="arbeit-kachel" type="button" data-text="Glatte Länge mit sauber ausgearbeiteten Stufen.">
+        <img src="bilder/arbeit-glatt.webp" alt="Glatte lange Haare mit ausgearbeiteten Stufen" width="1000" height="1333" loading="lazy" decoding="async">
+      </button>
+      <button class="arbeit-kachel" type="button" data-text="Schulterlanges Haar, warmer Farbverlauf, Spitzen nach innen geföhnt.">
+        <img src="bilder/arbeit-ombre.webp" alt="Schulterlanges Haar mit warmem Farbverlauf" width="1000" height="1333" loading="lazy" decoding="async">
+      </button>
+      <button class="arbeit-kachel" type="button" data-text="Kurzer Bob in kühlem Aschblond, die Welle nach außen gelegt.">
+        <img src="bilder/arbeit-bob.webp" alt="Kurzer Bob in kühlem Aschblond mit gelegter Welle" width="1000" height="1333" loading="lazy" decoding="async">
+      </button>
+      <button class="arbeit-kachel" type="button" data-text="Helles Blond, kurz geschnitten und in weiche Wellen gelegt.">
+        <img src="bilder/arbeit-kurz-blond.webp" alt="Kurzes helles Blond in weichen Wellen" width="1000" height="1333" loading="lazy" decoding="async">
+      </button>
+      <button class="arbeit-kachel" type="button" data-text="Kurzes Silbergrau, in Form geföhnt — Griff und Fall bleiben weich.">
+        <img src="bilder/arbeit-kurz.webp" alt="Kurzes silbergraues Haar, in Form geföhnt" width="1000" height="1333" loading="lazy" decoding="async">
+      </button>
+      <button class="arbeit-kachel" type="button" data-text="Eng geflochten, Scheitel für Scheitel gezogen.">
+        <img src="bilder/arbeit-flecht.webp" alt="Eng anliegende Flechtfrisur mit gezogenen Zöpfen" width="1000" height="1000" loading="lazy" decoding="async">
+      </button>
+      <button class="arbeit-kachel" type="button" data-text="Hochgesteckt, mit gelegten Wellen an der Seite.">
+        <img src="bilder/arbeit-hochsteck.webp" alt="Hochsteckfrisur mit gelegten Wellen" width="1000" height="750" loading="lazy" decoding="async">
+      </button>
+      <button class="arbeit-kachel" type="button" data-text="Hochsteckfrisur mit eingearbeiteter Perlen- und Blütenranke.">
+        <img src="bilder/arbeit-perlen.webp" alt="Hochsteckfrisur mit Perlen- und Blütenranke" width="768" height="1024" loading="lazy" decoding="async">
+      </button>
+      <button class="arbeit-kachel" type="button" data-text="Brautfrisur: gelegte Locken, durchzogen von einer Perlenranke in Roségold.">
+        <img src="bilder/arbeit-braut-perlen.webp" alt="Brautfrisur mit gelegten Locken und Perlenranke in Roségold" width="539" height="1024" loading="lazy" decoding="async">
+      </button>
+      <button class="arbeit-kachel" type="button" data-text="Hochgesteckt, mit Diadem und eingearbeitetem Schleier.">
+        <img src="bilder/arbeit-braut-schleier.webp" alt="Braut mit hochgestecktem Haar, Diadem und Schleier" width="550" height="977" loading="lazy" decoding="async">
+      </button>
+      <button class="arbeit-kachel" type="button" data-text="Kinderschnitt, kurz und sauber ausrasiert.">
+        <img src="bilder/arbeit-kind.webp" alt="Kinderschnitt, kurz und sauber ausrasiert" width="1000" height="1333" loading="lazy" decoding="async">
+      </button>
+    </div>
+  </div>
+</section>
+
 
 </main>
 
