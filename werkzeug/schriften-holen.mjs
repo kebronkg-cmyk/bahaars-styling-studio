@@ -21,6 +21,12 @@ const zeichen =
   '™©®№§†‡½¼¾×÷±≈≤≥→←↑↓✓✕';
 
 const schriften = [
+  // Die Schriften dieser Fassung. Beide stehen so im Auftrag des
+  // Auftraggebers; sie liegen im Projekt, nicht bei Google.
+  { datei: 'InstrumentSerif-Regular', pfad: 'ofl/instrumentserif/InstrumentSerif-Regular.ttf' },
+  { datei: 'InstrumentSerif-Italic',  pfad: 'ofl/instrumentserif/InstrumentSerif-Italic.ttf' },
+  { datei: 'Inter',                   pfad: 'ofl/inter/Inter%5Bopsz%2Cwght%5D.ttf' },
+
   // Anzeige
   { datei: 'Marcellus-Regular',    pfad: 'ofl/marcellus/Marcellus-Regular.ttf' },
   { datei: 'MarcellusSC-Regular',  pfad: 'ofl/marcellussc/MarcellusSC-Regular.ttf' },

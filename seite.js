@@ -76,9 +76,8 @@
         if (runter !== versteckt) {
           versteckt = runter;
           kopfzeile.classList.toggle('weg', runter);
-          /* Ein ausgewichenes Menü darf nicht offen bleiben. */
-          if (runter) $('.menuknopf')?.getAttribute('aria-expanded') === 'true' &&
-            $('.menuknopf').click();
+          /* Ein offenes Menü hält die Seite fest; dann gibt es kein
+             Runterscrollen, und die Leiste muss nicht ausweichen. */
         }
         zuletzt = y;
       }
@@ -88,19 +87,41 @@
     pruefen();
   }
 
-  /* ── Handymenü ─────────────────────────────────────────────────────── */
+  /* ── Die Navigation ───────────────────────────────────────────────────
+     Sie liegt über der ganzen Fläche, auf jedem Schirm — nicht nur am
+     Telefon. Eine Leiste mit sieben Einträgen über einem Film versperrt
+     genau das, worum es geht.
+
+     Solange sie offen ist, wird der Hintergrund festgehalten: Ohne das
+     scrollt die Seite unter ihr weg, und wer sie schließt, steht
+     woanders als vorher.                                                */
 
   const menuknopf = $('.menuknopf');
   const wegweiser = $('.wegweiser');
   if (menuknopf && wegweiser) {
-    const zu = () => { menuknopf.setAttribute('aria-expanded', 'false'); wegweiser.classList.remove('offen'); };
-    menuknopf.addEventListener('click', () => {
-      const offen = menuknopf.getAttribute('aria-expanded') === 'true';
-      menuknopf.setAttribute('aria-expanded', String(!offen));
-      wegweiser.classList.toggle('offen', !offen);
+    let vorher = 0;
+
+    const setzen = (offen) => {
+      menuknopf.setAttribute('aria-expanded', String(offen));
+      menuknopf.setAttribute('aria-label', offen ? 'Menü schließen' : 'Menü öffnen');
+      wegweiser.classList.toggle('offen', offen);
+      if (offen) {
+        vorher = window.scrollY;
+        document.body.style.cssText = `position:fixed;inset-inline:0;top:${-vorher}px;width:100%`;
+      } else if (document.body.style.position === 'fixed') {
+        document.body.style.cssText = '';
+        window.scrollTo(0, vorher);
+      }
+    };
+
+    menuknopf.addEventListener('click', () =>
+      setzen(menuknopf.getAttribute('aria-expanded') !== 'true'));
+    $$('a', wegweiser).forEach((a) => a.addEventListener('click', () => setzen(false)));
+    addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && wegweiser.classList.contains('offen')) {
+        setzen(false); menuknopf.focus();
+      }
     });
-    $$('a', wegweiser).forEach((a) => a.addEventListener('click', zu));
-    addEventListener('keydown', (e) => { if (e.key === 'Escape') zu(); });
   }
 
   /* ── Auftauchen beim Scrollen ──────────────────────────────────────────

@@ -25,7 +25,7 @@ rechtlich.
 | `PRODUCT.md` | Produktwahrheit: Nutzerinnen, Leistungen, Marke, offene Fragen |
 | `DESIGN.md` | Das Gestaltungssystem, wie es tatsächlich gebaut ist |
 | `index.html` … | Die sieben Seiten |
-| `stil.css` | Gesamtes Gestaltungssystem, alle Werte als Token in `:root` |
+| `stil.css` | Gesamtes Gestaltungssystem, alle Werte als Token in `:root`. Neu geschrieben; die vorige Fassung liegt in der Git-Geschichte |
 | `seite.js` | Gesamtes Verhalten |
 | `fremd/` | GSAP 3.15.0 und ScrollTrigger, im Projekt statt von einem fremden Server. Herkunft und Lizenz in `fremd/HERKUNFT.md` |
 | `bilder/`, `schrift/` | Ausgelieferte Bilder und Schriften, beide erzeugt |
