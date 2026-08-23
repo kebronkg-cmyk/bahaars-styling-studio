@@ -23,7 +23,17 @@ const durchlauf = async (seite, w, h, einrichten, name, dulden = /(?!)/) => {
   const fehler = [];
   page.on('pageerror', (e) => fehler.push('Skriptfehler: ' + e.message));
   page.on('console', (m) => { if (m.type() === 'error' && !dulden.test(m.text())) fehler.push('Konsole: ' + m.text()); });
-  page.on('requestfailed', (r) => { if (!dulden.test(r.url())) fehler.push('fehlt: ' + r.url().split('/').pop()); });
+  /* Der Film ist ein Sonderfall: Das Chromium, mit dem hier gemessen wird,
+     ist ohne die lizenzpflichtigen Codecs gebaut und kann H.264 nicht
+     dekodieren. Die Anfrage bricht dann ab und sähe aus wie eine fehlende
+     Datei. Statt das stumm zu schalten, wird unten geprüft, ob die Datei
+     wirklich da ist — eine echte Lücke fällt damit weiterhin auf. */
+  page.on('requestfailed', (r) => {
+    if (dulden.test(r.url())) return;
+    if (/auftakt\.mp4$/.test(r.url())) return;
+    fehler.push('fehlt: ' + r.url().split('/').pop());
+  });
+  let klageFilm = '';
   if (einrichten) await einrichten(page);
   await page.goto(`http://localhost:8099/${seite}`, { waitUntil: 'networkidle' });
   await page.addStyleTag({ content: 'html{scroll-behavior:auto!important}' });
@@ -36,6 +46,14 @@ const durchlauf = async (seite, w, h, einrichten, name, dulden = /(?!)/) => {
     scrollTo(0, hoehe); await new Promise((r) => setTimeout(r, 250)); scrollTo(0, 0);
   });
   await page.waitForTimeout(900);
+  const film = await page.evaluate(async () => {
+    const v = document.querySelector('.ebene-film');
+    if (!v) return null;
+    const a = await fetch(v.dataset.quelle, { method: 'HEAD' }).catch(() => null);
+    return a ? a.status : 0;
+  });
+  if (film !== null && film !== 200) klageFilm = `Film nicht erreichbar (${film})`;
+
   const befund = await page.evaluate(() => ({
     ueberlauf: document.documentElement.scrollWidth - innerWidth,
     unsichtbar: [...document.querySelectorAll('.auf')]
@@ -44,6 +62,7 @@ const durchlauf = async (seite, w, h, einrichten, name, dulden = /(?!)/) => {
     marken: document.documentElement.className
   }));
   const klage = [];
+  if (klageFilm) klage.push(klageFilm);
   if (befund.ueberlauf > 1) klage.push(`Überlauf ${befund.ueberlauf} px`);
   if (befund.unsichtbar.length) klage.push('unsichtbar: ' + befund.unsichtbar.join(', '));
   klage.push(...fehler);

@@ -62,6 +62,12 @@ Kurven, Muster (als SVG-Daten-URI) — alles an einer Stelle.
   schwerer als nachlegen.
 - **Echte Inhalte.** Richtige Preise, richtige Öffnungszeiten, richtige Fotos.
   Nie Platzhalter, nie Blindtext, nie „hier Ihr Text".
+- **Ein Film gehört nur dorthin, wo sein Format passt.** Eine 16:9-Aufnahme
+  am Hochkantschirm zeigt einen Mittelstreifen von einem Viertel der Breite.
+  Dann lieber Standbilder mit eigenem Hochkantzuschnitt.
+- **Der Ladezustand soll die Rückfallebene sein.** Was steht, solange der
+  Film lädt, muss auch dann stehen, wenn er nie kommt — sonst gibt es ein
+  Zwischenbild, das aussieht wie ein Fehler.
 - **Ein Standbild aus einem Video ist kein Foto.** Es taugt in der Größe, in
   der es aufgenommen wurde, und nicht darüber. Prüftest vor dem Einsetzen:
   Kantenenergie bei gleicher Breite gegen die vorhandenen Aufnahmen messen —
@@ -149,6 +155,8 @@ schlimmer als ein unbeschriftetes.
 | Ein Schleierfenster, das „über dem Bild offen" ist, kann vollständig hinter einer Karte liegen | Kanten von Text und Karte messen, dann die Verlaufsstufen daraus rechnen |
 | Ein Farbtoken, dessen Name sich mit „auf X" oder „unter X" ergänzen lässt, trägt zwei Aufgaben, sobald X in einer Variante anders hell ist | Entzweien, bevor die dunkle Variante kommt — nicht danach |
 | `position: relative` für ein `::before` überschreibt `position: sticky`, wenn die Regel spezifischer ist | `sticky` ist selbst schon Bezugsrahmen; die Zeile ist überflüssig |
+| `:nth-of-type` zählt nach Elementtyp, nicht nach Klasse — ein `<video>` zwischen `<div>`-Ebenen ist „das erste seiner Art" | Den Elementtyp aus dem Selektor halten (`:not(.klasse):nth-of-type(n)`) |
+| Ein Video am Scrollrad entlangzuspulen kostet so viel, wie zwischen den Schlüsselbildern liegt | Schlüsselbilder in der Datei zählen; sind es wenige, linear abspielen und nur die Kamera scrollen |
 
 ## Zugänglichkeit
 

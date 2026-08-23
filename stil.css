@@ -1807,9 +1807,30 @@ html {
    Handy blieb dadurch das untere Drittel der Bühne leer.                  */
 .ebene picture { position: absolute; inset: 0; display: block; }
 .ebene img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.ebene:nth-of-type(1) { opacity: var(--e1, 1); }
-.ebene:nth-of-type(2) { opacity: var(--e2, 0); }
-.ebene:nth-of-type(3) { opacity: var(--e3, 0); }
+
+/* Der Film liegt über den Aufnahmen und blendet sich darüber, sobald er
+   laufen kann. Bis dahin steht die erste Aufnahme — und sie steht auch
+   dann, wenn er nie kommt. Damit ist der Ladezustand zugleich die
+   Rückfallebene, und es gibt kein Zwischenbild, das aussieht wie ein
+   Fehler.
+
+   Er ist kein Bedienelement: kein Ton, keine Bedienleiste, nicht in der
+   Tabreihenfolge, aria-hidden erbt er von der Kamera.               */
+.ebene-film {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  opacity: 0;
+  pointer-events: none;
+}
+/* :not(.ebene-film) muss hier stehen, und der Grund ist eine alte Falle in
+   neuem Gewand: :nth-of-type zählt nach Elementtyp, nicht nach Klasse. Das
+   <video> ist das erste und einzige seiner Art unter den Geschwistern und
+   erbte deshalb die Regel der ersten Aufnahme — Deckkraft 1, noch bevor
+   auch nur ein Bild dekodiert war. Dieselbe Falle wie beim <picture>, wo
+   das <img> das zweite Kind ist und nicht das erste. */
+.ebene:not(.ebene-film):nth-of-type(1) { opacity: var(--e1, 1); }
+.ebene:not(.ebene-film):nth-of-type(2) { opacity: var(--e2, 0); }
+.ebene:not(.ebene-film):nth-of-type(3) { opacity: var(--e3, 0); }
 
 /* ── Licht und Dunst ────────────────────────────────────────────────────
    Ein warmer Schein von rechts oben und zwei Dunstbänder, die
@@ -1963,10 +1984,12 @@ html {
   .mitfahrt .auftakt-rolle { height: auto; }
   .mitfahrt .buehne { position: relative; height: auto; }
   .kamera { transform: none; }
-  .ebene:nth-of-type(1) { opacity: 1; }
-  .ebene:nth-of-type(2),
-  .ebene:nth-of-type(3),
-  .ebene:nth-of-type(4) { opacity: 0; }
+  .ebene:not(.ebene-film):nth-of-type(1) { opacity: 1; }
+  .ebene:not(.ebene-film):nth-of-type(2),
+  .ebene:not(.ebene-film):nth-of-type(3) { opacity: 0; }
+  /* Bei abbestellter Bewegung wird der Film gar nicht erst geladen; die
+     Regel hier sorgt dafür, dass auch sein leerer Kasten nichts überdeckt. */
+  .ebene-film { opacity: 0; }
   .staub { display: none; }
   .mitfahrt .stufe-2 { display: none; }
   .stufe { opacity: 1; transform: none; }

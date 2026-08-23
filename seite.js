@@ -168,7 +168,11 @@
   const buehne = $('.buehne');
   if (rolle && buehne && choreografie) {
     const kamera   = $('.kamera', buehne);
-    const ebenen   = $$('.ebene', buehne);
+    /* Ohne .ebene-film: Der Film ist zwar eine Ebene, aber er nimmt nicht
+       an der Überblendung der Standbilder teil. Stünde er in dieser Liste,
+       würde die Choreografie ihn wie eine vierte Aufnahme behandeln. */
+    const ebenen   = $$('.ebene:not(.ebene-film)', buehne);
+    const film     = $('.ebene-film', buehne);
     const licht    = $('.licht', buehne);
     const dunst    = $('.dunst-vorn', buehne);
     const schleier = $('.auftakt-schleier', buehne);
@@ -269,6 +273,78 @@
       { opacity: 0, y: -16, duration: 10, ease: 'power2.in' }, 38);
     F.fromTo(stufe2, { opacity: 0, y: 16 },
       { opacity: 1, y: 0, duration: 10, ease: 'power2.out' }, 48);
+
+    /* ── Der Film auf der Bühne ───────────────────────────────────────────
+       Eine Aufnahme aus dem Laden, in Schleife hinter dem Text. Sie läuft
+       linear und wird nicht am Scrollrad entlanggespult — das ist eine
+       gemessene Entscheidung, keine Bequemlichkeit: In der Datei stehen auf
+       176 Bilder genau zwei Schlüsselbilder (bei 1 und bei 81). Wer an eine
+       beliebige Stelle springt, zwingt den Dekoder, von dort bis zu achtzig
+       Bilder neu zu rechnen. Am Schreibtisch merkt man das kaum, am Telefon
+       wird daraus ein Ruckeln bei jeder Radumdrehung. Linear abgespielt
+       spielen Schlüsselbilder keine Rolle.
+
+       Die Fahrt bleibt trotzdem eine Fahrt: Kamera, Licht, Dunst, Schleier
+       und die beiden Textstufen hängen weiter am Scrollfortschritt. Nur die
+       Bildquelle darunter läuft in eigener Zeit.
+
+       Geladen wird er unter drei Bedingungen, und alle drei sind
+       Rücksicht, keine Vorsicht:
+
+         · Erst ab 48 rem. Die Aufnahme ist 16:9; am Hochkantschirm bliebe
+           davon ein Mittelstreifen von gut einem Viertel der Breite übrig.
+           Für den schmalen Schirm liegen eigene Hochkantzuschnitte bereit.
+         · Nicht im Sparmodus und nicht an einer langsamen Leitung. Es sind
+           3,6 MB; wer Daten zählt, soll sie nicht für Zierrat ausgeben.
+         · Nicht, wenn der Browser das Format nicht kennt.
+
+       Fällt eine davon aus, passiert schlicht nichts — dann tragen die drei
+       Standbilder, so wie sie es vorher allein getan haben.               */
+
+    const leitung = navigator.connection || {};
+    const langsam = leitung.saveData === true ||
+      ['slow-2g', '2g', '3g'].includes(leitung.effectiveType);
+
+    if (film && matchMedia('(min-width: 48rem)').matches && !langsam &&
+        film.canPlayType('video/mp4') !== '') {
+
+      const abbrechen = () => { film.removeAttribute('src'); film.load(); };
+
+      film.addEventListener('error', abbrechen, { once: true });
+      film.addEventListener('canplay', () => {
+        film.play().then(() => {
+          /* Erst wenn er wirklich läuft, wird umgeblendet — nicht schon,
+             wenn er es könnte. Ein Film, der beim Abspielen doch noch
+             abgelehnt wird, hinterließe sonst eine schwarze Bühne. */
+          G.to(film, {
+            opacity: 1, duration: .9, ease: 'power2.out',
+            onComplete: () => {
+              /* Die Standbilder darunter abschalten. Erst hier, und erst
+                 recht nicht vorher: Sie sind bis zu diesem Augenblick das,
+                 was man sieht. killTweensOf greift auch in die Zeitleiste
+                 hinein — sonst schriebe sie beim nächsten Scrollschritt
+                 ihre Deckkraft wieder zurück. */
+              G.killTweensOf(ebenen);
+              G.set(ebenen, { opacity: 0 });
+            }
+          });
+        }).catch(abbrechen);
+      }, { once: true });
+
+      film.src = film.dataset.quelle;
+      film.load();
+
+      /* Außerhalb des Bildes steht er still. Ein Film, den niemand sieht,
+         hat keinen Grund, den Akku zu belasten. */
+      ST.create({
+        trigger: rolle, start: 'top bottom', end: 'bottom top',
+        onToggle: (selbst) => {
+          if (!film.src) return;
+          if (selbst.isActive) film.play().catch(() => {});
+          else film.pause();
+        }
+      });
+    }
   }
 
   /* ── Die Übersicht in der Kopfzeile ────────────────────────────────────

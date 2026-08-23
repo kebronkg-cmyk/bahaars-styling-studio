@@ -597,6 +597,59 @@ Hälfte steht in `<em>` und tritt eine Tonstufe zurück (`.zweistimmig em`,
 - Vier Einsätze auf der ganzen Website. Auf jedem Titel wäre es ein Muster
   statt einer Betonung.
 
+### Der Film auf der Bühne
+
+Hinter dem Text der Startseite läuft eine Aufnahme aus dem Laden in
+Schleife (`bilder/auftakt.mp4`, 1920×1080, 5,9 s, H.264, 3,6 MB).
+
+**Warum in Schleife und nicht am Scrollrad entlanggespult.** Eine
+scrollgesteuerte Fahrt über ein Video setzt bei jeder Radumdrehung
+`currentTime` neu. Was das kostet, hängt an den Schlüsselbildern: Springt
+man an eine Stelle, muss der Dekoder vom letzten Schlüsselbild an alles
+dazwischen neu rechnen. In dieser Datei stehen auf 176 Bilder genau **zwei**
+Schlüsselbilder, bei Bild 1 und bei Bild 81. Ein Sprung auf Bild 79 kostet
+also 78 Bilder Rechenarbeit — am Schreibtisch kaum zu merken, am Telefon
+ein Ruckeln bei jeder Bewegung. Linear abgespielt spielen Schlüsselbilder
+überhaupt keine Rolle.
+
+Die Fahrt bleibt eine Fahrt: Kamera, Licht, Dunst, Schleier und die beiden
+Textstufen hängen weiter am Scrollfortschritt. Nur die Bildquelle darunter
+läuft in eigener Zeit.
+
+**Drei Bedingungen, und alle drei sind Rücksicht, keine Vorsicht:**
+
+| Bedingung | Grund |
+|---|---|
+| erst ab 48 rem | Die Aufnahme ist 16:9. Am Hochkantschirm bliebe ein Mittelstreifen von gut einem Viertel der Breite. Für schmale Schirme liegen eigene Hochkantzuschnitte bereit. |
+| nicht im Sparmodus, nicht an langsamer Leitung | 3,6 MB. Wer Daten zählt, soll sie nicht für Zierrat ausgeben. (`navigator.connection.saveData`, `effectiveType`) |
+| nur wenn der Browser das Format kennt | `canPlayType`, dazu ein `error`-Horcher für alles andere |
+
+Fällt eine davon aus, passiert schlicht nichts: Dann tragen die drei
+Standbilder, so wie sie es vorher allein getan haben. **Der Ladezustand ist
+zugleich die Rückfallebene** — es gibt kein Zwischenbild, das aussieht wie
+ein Fehler.
+
+**Umgeblendet wird erst, wenn er wirklich läuft**, nicht schon, wenn er es
+könnte: `play()` gibt ein Versprechen zurück, und ein Browser darf es auch
+dann noch ablehnen, wenn `canplay` längst gemeldet war. Erst nachdem die
+Einblendung durch ist, werden die Standbilder abgeschaltet — und zwar mit
+`gsap.killTweensOf`, weil die Zeitleiste ihre Deckkraft sonst beim nächsten
+Scrollschritt wieder zurückschreibt.
+
+Außerhalb des Bildes hält er an (eigener `ScrollTrigger` über die ganze
+Rolle). Ein Film, den niemand sieht, hat keinen Grund, den Akku zu
+belasten.
+
+**Die Falle, die dabei zuschlug:** `:nth-of-type` zählt nach Elementtyp,
+nicht nach Klasse. Das `<video>` ist das erste und einzige seiner Art unter
+den Geschwistern und erbte deshalb `.ebene:nth-of-type(1)` — Deckkraft 1,
+noch bevor auch nur ein Bild dekodiert war. Dieselbe Falle wie beim
+`<picture>`, wo das `<img>` das zweite Kind ist und nicht das erste. Die
+Regeln tragen jetzt `:not(.ebene-film)`.
+
+**Was das kostet:** Die erste Ladung der Startseite steigt am Schreibtisch
+von rund 400 KB auf rund 4 MB. Am Telefon bleibt sie bei 400 KB.
+
 ### Wenn eine Aufnahme nicht überall taugt
 
 Der Auftraggeber hat ein Standbild aus einem eigenen Video geliefert

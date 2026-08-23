@@ -99,7 +99,8 @@ lassen sich jederzeit erneut laufen lassen.
 | Ohne JavaScript | jeder Abschnitt sichtbar |
 | Ganzseiten- und Druckansicht | nichts bleibt eingeblendet stehen |
 | Schriften | selbst gehostet, 105 KB zugeschnitten, nichts von Google |
-| Erste Ladung Startseite | rund 400 KB |
+| Erste Ladung Startseite | rund 400 KB am Telefon, rund 4 MB am Schreibtisch (der Film) |
+| Der Film | vom eigenen Server, ohne Ton, ohne Bedienleiste; am Telefon und im Sparmodus gar nicht geladen |
 | Gestaltungswerte | 45 Token in `:root`, kein Einzelwert im Stylesheet |
 | Farbstimmungen | alle vier auf allen sieben Seiten geprüft, Kontrast in jeder einzeln gemessen und über dem Grenzwert |
 | Rückfallebenen | ohne GSAP und bei abbestellter Bewegung steht jede Seite vollständig sichtbar da |
@@ -129,6 +130,30 @@ Aufforderung.
 
 Zum Ansehen genügt ein Klick unten im Fuß; die Wahl bleibt dann in Ihrem
 Browser, bis Sie sie ändern.
+
+## 9. Der Film auf der Startseite — bitte einmal selbst ansehen
+
+Ihre Canva-Aufnahme läuft jetzt in Schleife hinter dem Text der Startseite.
+**Wie sie dort aussieht, konnte ich nicht prüfen**: Der Browser, mit dem ich
+hier messe, kann das Format H.264 nicht abspielen. Alles Übrige ist geprüft
+— dass sie geladen wird, dass sie umblendet, dass die Standbilder
+einspringen, wenn etwas schiefgeht, dass sie stehenbleibt, wenn niemand
+hinsieht. Nur das Bild selbst nicht.
+
+**Was Sie sich ansehen sollten:**
+
+1. Wirkt der Ausschnitt am Schreibtisch richtig? Die Bühne ist 1,6:1, die
+   Aufnahme 16:9 — links und rechts fehlt ein schmaler Streifen.
+2. Ist die Schleife von 5,9 Sekunden zu kurz? Wenn der Sprung am Ende
+   auffällt, hilft eine längere Aufnahme oder eine, die anfängt wie sie
+   aufhört.
+3. Ist der Text darüber überall gut lesbar? Der Schleier ist auf die
+   Standbilder eingestellt; wenn Ihre Aufnahme heller ist, ziehe ich ihn an.
+
+**Am Telefon läuft der Film bewusst nicht.** 16:9 auf einem Hochkantschirm
+hieße, gut drei Viertel der Breite wegzuschneiden; dort stehen die
+Standbilder in eigenen Hochkantzuschnitten. Wenn Sie den Film auch dort
+wollen, brauche ich eine Hochkantfassung (9:16) — die kann Canva ausgeben.
 
 ## Auslieferung
 
