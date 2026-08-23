@@ -5,11 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>BaHaar’s Styling Studio — Friseur in München-Giesing</title>
 <meta name="description" content="Friseurmeisterin Bahar in der Perlacher Straße 2, München-Giesing. Farbe, Schnitt, Hochsteckfrisuren und Brautstyling aus einer Hand. Termin unter 089 692 36 44.">
-<meta name="theme-color" content="#291c13">
+<meta name="theme-color" content="#140b06">
 <script>
 /* Die gewählte Farbstimmung noch vor dem ersten Bild setzen — sonst
-   blitzt beim Seitenwechsel kurz die Vorgabe auf. Bewusst ohne defer. */
-var F={asche:'#131e2b',rose:'#2c1516',nacht:'#140b06'};
+   blitzt beim Seitenwechsel kurz die Vorgabe auf. Bewusst ohne defer.
+   Ohne Eintrag gilt Nacht, und Nacht steht ohne Attribut da. */
+var F={tag:'#faf6f0',asche:'#f4f7fa',rose:'#fcf5f3'};
 try{var p=localStorage.getItem('bahaar-stimmung');
  if(F[p]){document.documentElement.dataset.palette=p;
   document.currentScript.previousElementSibling.content=F[p];}}catch(e){}
@@ -99,7 +100,7 @@ try{var p=localStorage.getItem('bahaar-stimmung');
 
 <a class="sprung" href="#inhalt">Zum Inhalt springen</a>
 
-<header class="kopfzeile">
+<header class="kopfzeile leiste">
   <a class="marke" href="index.html">BaHaar’s<span class="zusatz">styling studio</span></a>
   <button class="menuknopf" type="button" aria-expanded="false" aria-controls="wegweiser" aria-label="Menü öffnen"><span></span></button>
   <nav class="wegweiser" id="wegweiser" aria-label="Hauptmenü">
@@ -143,90 +144,58 @@ try{var p=localStorage.getItem('bahaar-stimmung');
 <main id="inhalt">
 
 <!-- ═══ Auftakt ═════════════════════════════════════════════════════════ -->
-<section class="auftakt-rolle" aria-labelledby="haupttitel">
-  <div class="buehne abschnitt bahn">
+<section class="auftakt" aria-labelledby="haupttitel">
 
-    <div class="kamera" aria-hidden="true">
-      <div class="ebene"><picture><source media="(max-width: 64rem)" srcset="bilder/auftakt-1-hoch.webp"><img src="bilder/auftakt-1.webp" alt="" width="1240" height="1240" fetchpriority="high" decoding="async"></picture></div>
-      <div class="ebene"><picture><source media="(max-width: 64rem)" srcset="bilder/auftakt-2-hoch.webp"><img src="bilder/auftakt-2.webp" alt="" width="1240" height="1240" loading="lazy" decoding="async"></picture></div>
-      <div class="ebene"><picture><source media="(max-width: 64rem)" srcset="bilder/auftakt-3-hoch.webp"><img src="bilder/auftakt-3.webp" alt="" width="1240" height="1240" loading="lazy" decoding="async"></picture></div>
-      <!-- Der Film, in zwei Fassungen: quer für den Schreibtisch, hochkant
-           fürs Telefon. Welche geladen wird, entscheidet das Skript nach der
-           Ausrichtung des Schirms — <source media> gilt nur im <picture>,
-           bei <video> ignorieren die Browser es.
+  <!-- Der Film trägt den ganzen ersten Bildschirm. Darüber liegt keine
+       Deko: kein Schein, kein Dunst, keine Flusen. Nur ein Verlauf von
+       unten, damit die Schrift trägt — und der ist so schmal wie möglich.
 
-           Ohne src: geladen wird erst, wenn feststeht, dass der Film hier
-           hingehört — nicht bei abbestellter Bewegung, nicht im Sparmodus,
-           nicht ohne passenden Codec. Bis dahin und andernfalls tragen die
-           drei Aufnahmen darüber. -->
-      <video class="ebene ebene-film"
-             data-quer="bilder/auftakt.mp4"
-             data-hoch="bilder/auftakt-hoch.mp4"
-             muted loop playsinline preload="none" tabindex="-1"></video>
-      <div class="licht"></div>
-      <div class="dunst dunst-vorn"></div>
-    </div>
-
-    <div class="staub" aria-hidden="true">
-      <i style="--sx:8%;--sy:88%;--sg:0.9;--sd:26s;--sv:0s"></i>
-      <i style="--sx:17%;--sy:64%;--sg:0.6;--sd:31s;--sv:-6s"></i>
-      <i style="--sx:24%;--sy:96%;--sg:1.2;--sd:22s;--sv:-13s"></i>
-      <i style="--sx:33%;--sy:72%;--sg:0.7;--sd:29s;--sv:-3s"></i>
-      <i style="--sx:41%;--sy:90%;--sg:1.0;--sd:34s;--sv:-19s"></i>
-      <i style="--sx:49%;--sy:58%;--sg:0.5;--sd:25s;--sv:-9s"></i>
-      <i style="--sx:56%;--sy:94%;--sg:1.1;--sd:28s;--sv:-22s"></i>
-      <i style="--sx:63%;--sy:70%;--sg:0.8;--sd:32s;--sv:-15s"></i>
-      <i style="--sx:70%;--sy:86%;--sg:0.6;--sd:24s;--sv:-5s"></i>
-      <i style="--sx:76%;--sy:60%;--sg:1.0;--sd:30s;--sv:-27s"></i>
-      <i style="--sx:83%;--sy:92%;--sg:0.7;--sd:27s;--sv:-11s"></i>
-      <i style="--sx:89%;--sy:74%;--sg:1.2;--sd:33s;--sv:-2s"></i>
-      <i style="--sx:94%;--sy:88%;--sg:0.5;--sd:23s;--sv:-17s"></i>
-      <i style="--sx:12%;--sy:52%;--sg:0.8;--sd:35s;--sv:-24s"></i>
-      <i style="--sx:37%;--sy:46%;--sg:0.6;--sd:29s;--sv:-30s"></i>
-      <i style="--sx:66%;--sy:44%;--sg:0.9;--sd:31s;--sv:-8s"></i>
-    </div>
-
-    <div class="auftakt-schleier" aria-hidden="true"></div>
-
-    <div class="mitte">
-      <div class="auftakt-raster">
-        <div>
-          <h1 class="titel-gross zweistimmig" id="haupttitel"><em>Seit zwanzig Jahren</em> stehe ich selbst am Stuhl.</h1>
-
-          <div class="stufe-halter">
-            <p class="vorspann lauf stufe stufe-1">
-              Farbe, Schnitt, Hochsteckfrisuren, Brautstyling. Kein
-              Filialleiter, keine wechselnden Aushilfen — wer hier einen
-              Termin bekommt, weiß auch, wer ihn macht.
-            </p>
-            <p class="vorspann lauf stufe stufe-2">
-              Vor jeder Farbe sehe ich mir die Kopfhaut an. Steht das
-              Ergebnis fest, steht auch der Preis fest — und was am
-              Probetermin steht, steht am Hochzeitstag.
-            </p>
-          </div>
-
-          <p class="signatur">Fakhria Tokhi, Friseurmeisterin</p>
-        </div>
-
-        <aside class="terminkarte glasrand" aria-label="Termin vereinbaren">
-          <p class="stand oeffnungsstand"></p>
-          <a class="knopf knopf-voll" href="termin.html">Online buchen</a>
-          <a class="knopf knopf-leer" href="tel:+49896923644">089 692 36 44</a>
-          <p class="fussnote">
-            Perlacher Straße 2, München-Giesing.
-            <a href="leistungen.html">Preise ansehen</a>
-          </p>
-        </aside>
-      </div>
-    </div>
+       Zwei Fassungen, quer und hochkant. Welche geladen wird, entscheidet
+       das Skript nach der Ausrichtung des Schirms; <source media> gilt nur
+       im <picture>, bei <video> ignorieren die Browser es. Ohne src wird
+       gar nichts geladen: nicht bei abbestellter Bewegung, nicht im
+       Sparmodus, nicht ohne passenden Codec. Dann trägt das Standbild. -->
+  <div class="auftakt-bild" aria-hidden="true">
+    <picture>
+      <source media="(orientation: portrait)" srcset="bilder/auftakt-1-hoch.webp">
+      <img src="bilder/auftakt-1.webp" alt="" width="1240" height="1240" fetchpriority="high" decoding="async">
+    </picture>
+    <video class="auftakt-film"
+           data-quer="bilder/auftakt.mp4"
+           data-hoch="bilder/auftakt-hoch.mp4"
+           muted loop playsinline preload="none" tabindex="-1"></video>
   </div>
+  <div class="auftakt-grund" aria-hidden="true"></div>
+
+  <div class="auftakt-satz">
+    <p class="auftakt-ort steig">Perlacher Stra&szlig;e 2 &middot; M&uuml;nchen-Giesing</p>
+
+    <h1 class="riesen zweistimmig steig" id="haupttitel">Seit zwanzig Jahren <em>stehe ich selbst am Stuhl.</em></h1>
+
+    <p class="auftakt-lauf steig">
+      Farbe, Schnitt, Hochsteckfrisuren, Brautstyling. Kein Filialleiter,
+      keine wechselnden Aushilfen — wer hier einen Termin bekommt, wei&szlig;
+      auch, wer ihn macht.
+    </p>
+
+    <div class="auftakt-wahl steig">
+      <a class="knopf-glas gross" href="termin.html">Termin vereinbaren</a>
+      <a class="knopf-still" href="tel:+49896923644">089&nbsp;692&nbsp;36&nbsp;44</a>
+    </div>
+
+    <p class="auftakt-stand oeffnungsstand"></p>
+  </div>
+
+  <a class="auftakt-weiter" href="#leistungen-titel" aria-label="Weiter zu den Leistungen">
+    <svg viewBox="0 0 16 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3v16M3 14l5 5 5-5"/></svg>
+  </a>
 </section>
 
 <!-- ═══ Leistungen im Überblick ═════════════════════════════════════════ -->
 <section class="abschnitt bahn" aria-labelledby="leistungen-titel">
   <div class="mitte">
     <div class="kopf">
+      <p class="braue">Leistungen</p>
       <h2 class="titel" id="leistungen-titel">Was hier gemacht wird</h2>
       <p class="lauf">
         Beratung ist bei jedem Termin dabei, bei Farbe kommt die
@@ -278,6 +247,7 @@ try{var p=localStorage.getItem('bahaar-stimmung');
 <section class="abschnitt bahn warm" aria-labelledby="arbeiten-titel">
   <div class="mitte">
     <div class="kopf">
+      <p class="braue">Werkschau</p>
       <h2 class="titel" id="arbeiten-titel">Arbeiten aus dem Salon</h2>
       <p class="lauf">
         Aufnahmen aus dem Alltag in der Perlacher Straße, gemacht, während die
@@ -341,6 +311,7 @@ try{var p=localStorage.getItem('bahaar-stimmung');
   <div class="mitte">
     <div class="zweispalt" style="align-items:center">
       <div>
+        <p class="braue">Der gro&szlig;e Tag</p>
         <h2 class="titel" id="braut-titel">Brautstyling</h2>
         <p class="lauf" style="margin-top:var(--r3)">
           Haar und Make-up mache ich selbst, an einem Termin, im selben Raum.
@@ -367,6 +338,7 @@ try{var p=localStorage.getItem('bahaar-stimmung');
   <div class="mitte">
     <div class="zweispalt" style="align-items:start">
       <div>
+        <p class="braue">Die Meisterin</p>
         <h2 class="titel zweistimmig" id="bahar-titel"><em>Wer hier</em> schneidet</h2>
         <p class="lauf" style="margin-top:var(--r3)">
           Ich heiße Fakhria Tokhi, im Laden nennen mich alle Bahar. Den
@@ -403,6 +375,7 @@ try{var p=localStorage.getItem('bahaar-stimmung');
 <section class="abschnitt bahn" aria-labelledby="kontakt-titel" id="kontakt">
   <div class="mitte">
     <div class="kopf">
+      <p class="braue">Hierher kommen</p>
       <h2 class="titel" id="kontakt-titel">Perlacher Straße 2</h2>
     </div>
 
@@ -505,17 +478,17 @@ try{var p=localStorage.getItem('bahaar-stimmung');
     <div class="stimmungswahl">
       <span class="stimmung-titel" id="stimmung-titel">Stimmung</span>
       <div class="stimmung-reihe" role="group" aria-labelledby="stimmung-titel">
-        <button type="button" class="stimmung" data-stimmung="messing" aria-pressed="true">
-          <span class="stimmung-probe probe-messing" aria-hidden="true"></span>Messing
+        <button type="button" class="stimmung" data-stimmung="nacht" aria-pressed="true">
+          <span class="stimmung-probe probe-nacht" aria-hidden="true"></span>Nacht
+        </button>
+        <button type="button" class="stimmung" data-stimmung="tag" aria-pressed="false">
+          <span class="stimmung-probe probe-tag" aria-hidden="true"></span>Tag
         </button>
         <button type="button" class="stimmung" data-stimmung="asche" aria-pressed="false">
           <span class="stimmung-probe probe-asche" aria-hidden="true"></span>Asche
         </button>
         <button type="button" class="stimmung" data-stimmung="rose" aria-pressed="false">
           <span class="stimmung-probe probe-rose" aria-hidden="true"></span>Ros&eacute;
-        </button>
-        <button type="button" class="stimmung" data-stimmung="nacht" aria-pressed="false">
-          <span class="stimmung-probe probe-nacht" aria-hidden="true"></span>Nacht
         </button>
       </div>
     </div>

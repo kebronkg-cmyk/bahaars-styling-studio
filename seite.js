@@ -137,205 +137,88 @@
     }
   }
 
-  /* ── Die Kamerafahrt im Auftakt ────────────────────────────────────────
-     Über zwei Bildschirmhöhen fährt die Kamera heran, vier Aufnahmen lösen
-     einander ab, Licht und Dunst ziehen mit.
+  /* ── Der Auftakt ───────────────────────────────────────────────────────
+     Ein Bildschirm, den das Bild trägt. Drei Dinge passieren hier, und
+     mehr nicht:
 
-     Gefahren wird über eine GSAP-Zeitleiste von hundert Einheiten, an
-     ScrollTrigger gehängt. Hundert, damit jede Marke sich als Prozentzahl
-     der Strecke liest: die zweite Aufnahme setzt bei 15 ein, die dritte
-     bei 40, der Text wechselt zwischen 40 und 60.
+       1. Der Satz steigt auf. Nacheinander, nicht alles auf einmal.
+       2. Das Bild zieht beim Scrollen langsamer mit als der Text darüber.
+          Daraus entsteht Tiefe — nicht aus einem Weichzeichner und nicht
+          aus einer Ebene voller Flusen.
+       3. Der Film löst das Standbild ab, sobald er wirklich läuft.
 
-     Warum nicht mehr von Hand: Vorher lag hier eine eigene Schleife, die
-     den Scrollfortschritt anglich (lerp .075) und in jedem Bild ein
-     Dutzend Variablen neu rechnete. Das lief, aber jede Marke stand als
-     ausgerechnete Rampe im Code — wer eine Aufnahme dazwischenschob,
-     musste alle Fenster nachrechnen. scrub übernimmt die Angleichung, und
-     zwar geschwindigkeitsabhängig: 0,6 Sekunden Nachlauf, in denen GSAP
-     im eigenen Takt aufholt. Die Choreografie steht dafür als Reihe von
-     Marken da und nicht mehr als Rechnung.
+     Die vorige Fassung fuhr über zwei Bildschirmhöhen mit klebender Bühne,
+     drei Bildwechseln, wanderndem Schein, zwei Dunstbändern, sechzehn
+     Staubflusen und zwei Textstufen. Das war zu viel: Man sah die Mittel
+     und nicht den Laden.                                                 */
 
-     Gesetzt werden weiterhin ausschließlich CSS-Variablen, die in
-     transform und opacity landen — keine Layout-Eigenschaft. Und
-     ausschließlich mit fromTo: ein reines to müsste den Startwert aus dem
-     berechneten Stil lesen, und die Variablen stehen dort gar nicht, weil
-     das Stylesheet sie nur mit Rückfallwert benutzt. GSAP läse dann null.
+  const auftakt = $('.auftakt');
+  if (auftakt && choreografie) {
+    const bild = $('.auftakt-bild', auftakt);
+    const film = $('.auftakt-film', auftakt);
 
-     Ruhend und ohne GSAP läuft nichts davon: dann steht die erste
-     Aufnahme still, und die Bühne ist ein gewöhnlicher Abschnitt.        */
+    /* Der Auftritt. 90 ms Versatz, ausbremsende Kurve, höchstens drei
+       gleichzeitig in Bewegung — mehr kann das Auge nicht einzeln
+       verfolgen. */
+    G.from($$('.steig', auftakt), {
+      opacity: 0, y: 26,
+      duration: .85, stagger: .09,
+      ease: 'power2.out'
+    });
 
-  const rolle = $('.auftakt-rolle');
-  const buehne = $('.buehne');
-  if (rolle && buehne && choreografie) {
-    const kamera   = $('.kamera', buehne);
-    /* Ohne .ebene-film: Der Film ist zwar eine Ebene, aber er nimmt nicht
-       an der Überblendung der Standbilder teil. Stünde er in dieser Liste,
-       würde die Choreografie ihn wie eine vierte Aufnahme behandeln. */
-    const ebenen   = $$('.ebene:not(.ebene-film)', buehne);
-    const film     = $('.ebene-film', buehne);
-    const licht    = $('.licht', buehne);
-    const dunst    = $('.dunst-vorn', buehne);
-    const schleier = $('.auftakt-schleier', buehne);
-    const stufe1   = $('.stufe-1', buehne);
-    const stufe2   = $('.stufe-2', buehne);
-
-    /* Der Anfangszustand muss stehen, bevor die Fahrt beginnt: onUpdate
-       meldet nur den Wechsel, nicht den Ausgangspunkt. Ohne diese zwei
-       Zeilen läse eine Vorlesesoftware beide Sätze, weil die zweite Stufe
-       zwar auf Deckkraft null steht, im Baum aber vorhanden ist. */
-    stufe1.setAttribute('aria-hidden', 'false');
-    stufe2.setAttribute('aria-hidden', 'true');
-    let zweite = false;
-
-    const F = G.timeline({
-      defaults: { ease: 'none' },   /* an den Scroll gebunden heißt linear */
-      scrollTrigger: {
-        trigger: rolle,
-        start: 'top top',
-        end: 'bottom bottom',
-        scrub: .6,
-        invalidateOnRefresh: true,
-        /* Die zweite Textstufe übernimmt in der Mitte des Wechsels. Was
-           gerade verschwindet, darf die Vorlesesoftware nicht mehr
-           ansagen — sonst hört man zwei Sätze übereinander. */
-        onUpdate: (selbst) => {
-          const jetzt = selbst.progress >= .53;   /* Mitte des Wechsels */
-          if (jetzt === zweite) return;
-          zweite = jetzt;
-          stufe1.setAttribute('aria-hidden', String(jetzt));
-          stufe2.setAttribute('aria-hidden', String(!jetzt));
+    /* Das Bild zieht langsamer. Kein Kleben, kein Pinnen: Der Abschnitt
+       scrollt ganz normal weg, nur sein Inhalt bleibt ein Stück zurück.
+       Das ist die ruhigere Fahrt und kostet den Kompositor eine einzige
+       bewegte Ebene. */
+    if (bild) {
+      G.fromTo(bild, { yPercent: 0, scale: 1.06 }, {
+        yPercent: 12, scale: 1, ease: 'none',
+        scrollTrigger: {
+          trigger: auftakt,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: .5
         }
-      }
-    });
+      });
+    }
 
-    /* Die Kamera fährt heran und sinkt dabei ein Stück. Sehr
-       zurückhaltend — das ist ein Salon, kein Trailer.
+    /* ── Der Film ────────────────────────────────────────────────────────
+       Er läuft linear und wird nicht am Scrollrad entlanggespult. Das ist
+       gemessen, nicht bequem: In der Datei stehen auf 176 Bilder genau
+       zwei Schlüsselbilder (bei 1 und bei 81). Wer an eine beliebige
+       Stelle springt, zwingt den Dekoder, von dort bis zu achtzig Bilder
+       neu zu rechnen — am Telefon ein Ruckeln bei jeder Radumdrehung.
 
-       Die Richtung ist nicht beliebig: Vorher lief sie andersherum, von
-       1,09 auf 1,00, also von nah nach weit. Am Ende der Fahrt kamen
-       dadurch die Ränder der Aufnahme ins Bild — Föhnarm, Bodenfliesen,
-       eine türkise Sprühflasche. Wer heranfährt, schneidet das weg,
-       statt es aufzudecken.                                              */
-    F.fromTo(kamera, { scale: 1.02, y: 0 }, { scale: 1.12, y: -38, duration: 100 }, 0);
+       Zwei Fassungen, quer und hochkant, gewählt nach der Ausrichtung des
+       Schirms und nicht nach seiner Breite: Ein schmales Fenster am
+       Schreibtisch ist genauso hochkant wie ein Telefon. Die Wahl fällt
+       einmal beim Laden; wer später dreht, sieht einen anderen Ausschnitt,
+       aber lädt keine zweiten drei Megabyte.
 
-    /* Die Aufnahmen. Jede obere blendet über die darunter und bleibt dann
-       stehen. Nicht gegenläufig überblenden: die Ebenen liegen gestapelt,
-       und wenn beide bei halber Deckung stehen, scheint der Grund
-       zwischen ihnen durch.
+       <source media> gibt es nur im <picture>; im <video> ignorieren die
+       Browser es und nehmen die erste Quelle.
 
-       Der Einsatz sitzt bei 15, 40 und 65 Prozent und dauert 20. Damit
-       steht jede Aufnahme ein Stück weit allein, bevor die nächste kommt. */
-    /* Der Ausgangszustand steht außerhalb der Zeitleiste, und das ist keine
-       Geschmacksfrage: Zwei set-Anweisungen an derselben Stelle (erst alle
-       auf null, dann die erste auf eins) laufen beim Rückwärtslesen in
-       umgekehrter Reihenfolge ab. Wer bis unten scrollte und wieder hoch
-       kam, sah dann eine leere Bühne — alle drei Aufnahmen auf null. Am
-       ersten Bildschirm ist das nicht weniger als die halbe Seite.        */
-    G.set(ebenen, { opacity: 0 });
-    G.set(ebenen[0], { opacity: 1 });
-
-    ebenen.forEach((e, k) => {
-      if (!k) return;
-      const mitte = k * (100 / ebenen.length);
-      F.fromTo(e, { opacity: 0 }, { opacity: 1, duration: 20, ease: 'power1.inOut' }, mitte - 10);
-      /* Und die darunter aus, sobald sie wirklich verdeckt ist. Sichtbar
-         ändert das nichts — messbar schon: vier deckende Bildschirmflächen
-         übereinander kosten den Kompositor in jedem Bild Arbeit für etwas,
-         das niemand sieht. */
-      F.to(ebenen[k - 1], { opacity: 0, duration: 1 }, mitte + 10);
-    });
-
-    /* Licht: wandert nach links und wird zur Mitte hin kräftiger. Zwei
-       Hälften mit sine-Kurve statt einer Sinusrechnung je Bild — das ist
-       dieselbe Bewegung, nur steht sie jetzt als Marke da. */
-    F.fromTo(licht, { x: 0 }, { x: -320, duration: 100 }, 0)
-     .fromTo(licht, { opacity: .34 }, { opacity: .68, duration: 50, ease: 'sine.inOut' }, 0)
-     .to(licht, { opacity: .34, duration: 50, ease: 'sine.inOut' }, 50);
-
-    /* Der Dunst zieht langsamer als das Licht. Aus dem Unterschied der
-       beiden Geschwindigkeiten entsteht die Tiefe, nicht aus einem
-       Weichzeichner. */
-    F.fromTo(dunst, { x: 0, opacity: .30 }, { x: -150, opacity: .56, duration: 100 }, 0);
-
-    /* Der Schleier zieht zur Mitte hin leicht an: dort fährt die Kamera in
-       die hellste Stelle, und der Text braucht mehr Rückhalt. */
-    F.fromTo(schleier, { opacity: .92 }, { opacity: 1, duration: 50, ease: 'sine.inOut' }, 0)
-     .to(schleier, { opacity: .92, duration: 50, ease: 'sine.inOut' }, 50);
-
-    /* Die beiden Textstufen, nacheinander statt überlappend: die erste ist
-       weg, bevor die zweite kommt. Überschnitten standen bei halber Fahrt
-       beide bei etwa 40 Prozent Deckung übereinander — zwei Sätze auf
-       demselben Fleck, und keiner davon lesbar.
-
-       Der Abgang beschleunigt, der Auftritt bremst aus. Andersherum sieht
-       es aus, als würde der Text weggezogen und dann hingeworfen.        */
-    F.fromTo(stufe1, { opacity: 1, y: 0 },
-      { opacity: 0, y: -16, duration: 10, ease: 'power2.in' }, 38);
-    F.fromTo(stufe2, { opacity: 0, y: 16 },
-      { opacity: 1, y: 0, duration: 10, ease: 'power2.out' }, 48);
-
-    /* ── Der Film auf der Bühne ───────────────────────────────────────────
-       Eine Aufnahme aus dem Laden, in Schleife hinter dem Text. Sie läuft
-       linear und wird nicht am Scrollrad entlanggespult — das ist eine
-       gemessene Entscheidung, keine Bequemlichkeit: In der Datei stehen auf
-       176 Bilder genau zwei Schlüsselbilder (bei 1 und bei 81). Wer an eine
-       beliebige Stelle springt, zwingt den Dekoder, von dort bis zu achtzig
-       Bilder neu zu rechnen. Am Schreibtisch merkt man das kaum, am Telefon
-       wird daraus ein Ruckeln bei jeder Radumdrehung. Linear abgespielt
-       spielen Schlüsselbilder keine Rolle.
-
-       Die Fahrt bleibt trotzdem eine Fahrt: Kamera, Licht, Dunst, Schleier
-       und die beiden Textstufen hängen weiter am Scrollfortschritt. Nur die
-       Bildquelle darunter läuft in eigener Zeit.
-
-       Er liegt in zwei Fassungen vor, quer und hochkant, und die Wahl
-       trifft die Ausrichtung des Schirms — nicht seine Breite. Ein
-       schmales Fenster am Schreibtisch ist genauso hochkant wie ein
-       Telefon, und beide wollen dieselbe Fassung. Gewählt wird einmal beim
-       Laden; wer das Gerät später dreht, sieht einen etwas anderen
-       Ausschnitt, aber keinen zweiten Ladevorgang von drei Megabyte.
-
-       Warum nicht <source media>: Das gibt es nur im <picture>. Im <video>
-       ignorieren die Browser das Attribut und nehmen die erste Quelle.
-
-       Geladen wird er unter zwei Bedingungen, und beide sind Rücksicht,
-       keine Vorsicht:
-
-         · Nicht im Sparmodus und nicht an einer langsamen Leitung. Es sind
-           3 bis 3,6 MB; wer Daten zählt, soll sie nicht für Zierrat
-           ausgeben.
-         · Nicht, wenn der Browser das Format nicht kennt.
-
-       Fällt eine davon aus, passiert schlicht nichts — dann tragen die drei
-       Standbilder, so wie sie es vorher allein getan haben.               */
+       Geladen wird unter zwei Bedingungen, und beide sind Rücksicht:
+       nicht im Sparmodus oder an langsamer Leitung (es sind 3 bis 3,6 MB),
+       und nicht ohne passenden Codec. Fällt eine aus, passiert schlicht
+       nichts — dann steht das Standbild, so wie es bis dahin stand. Der
+       Ladezustand ist damit zugleich die Rückfallebene.                 */
 
     const leitung = navigator.connection || {};
     const langsam = leitung.saveData === true ||
       ['slow-2g', '2g', '3g'].includes(leitung.effectiveType);
 
     if (film && !langsam && film.canPlayType('video/mp4') !== '') {
-
       const abbrechen = () => { film.removeAttribute('src'); film.load(); };
 
       film.addEventListener('error', abbrechen, { once: true });
       film.addEventListener('canplay', () => {
-        film.play().then(() => {
-          /* Erst wenn er wirklich läuft, wird umgeblendet — nicht schon,
-             wenn er es könnte. Ein Film, der beim Abspielen doch noch
-             abgelehnt wird, hinterließe sonst eine schwarze Bühne. */
-          G.to(film, {
-            opacity: 1, duration: .9, ease: 'power2.out',
-            onComplete: () => {
-              /* Die Standbilder darunter abschalten. Erst hier, und erst
-                 recht nicht vorher: Sie sind bis zu diesem Augenblick das,
-                 was man sieht. killTweensOf greift auch in die Zeitleiste
-                 hinein — sonst schriebe sie beim nächsten Scrollschritt
-                 ihre Deckkraft wieder zurück. */
-              G.killTweensOf(ebenen);
-              G.set(ebenen, { opacity: 0 });
-            }
-          });
-        }).catch(abbrechen);
+        /* Erst wenn er wirklich läuft, wird umgeblendet — nicht schon,
+           wenn er es könnte. play() gibt ein Versprechen zurück, das ein
+           Browser auch nach canplay noch ablehnen darf. */
+        film.play()
+          .then(() => G.to(film, { opacity: 1, duration: .9, ease: 'power2.out' }))
+          .catch(abbrechen);
       }, { once: true });
 
       film.src = matchMedia('(orientation: portrait)').matches
@@ -345,7 +228,7 @@
       /* Außerhalb des Bildes steht er still. Ein Film, den niemand sieht,
          hat keinen Grund, den Akku zu belasten. */
       ST.create({
-        trigger: rolle, start: 'top bottom', end: 'bottom top',
+        trigger: auftakt, start: 'top bottom', end: 'bottom top',
         onToggle: (selbst) => {
           if (!film.src) return;
           if (selbst.isActive) film.play().catch(() => {});
@@ -722,7 +605,7 @@
 
   const stimmungen = $$('.stimmung');
   if (stimmungen.length) {
-    const FARBE = { messing: '#291c13', asche: '#131e2b', rose: '#2c1516', nacht: '#140b06' };
+    const FARBE = { nacht: '#140b06', tag: '#faf6f0', asche: '#f4f7fa', rose: '#fcf5f3' };
 
     const anzeigen = (name) => {
       stimmungen.forEach((k) => {
@@ -732,7 +615,7 @@
 
     const setzen = (name, weich) => {
       const tun = () => {
-        if (name === 'messing') delete document.documentElement.dataset.palette;
+        if (name === 'nacht') delete document.documentElement.dataset.palette;
         else document.documentElement.dataset.palette = name;
         $('meta[name=theme-color]')?.setAttribute('content', FARBE[name]);
         anzeigen(name);
@@ -742,7 +625,7 @@
       try { localStorage.setItem('bahaar-stimmung', name); } catch (e) { /* privater Modus */ }
     };
 
-    anzeigen(document.documentElement.dataset.palette || 'messing');
+    anzeigen(document.documentElement.dataset.palette || 'nacht');
     stimmungen.forEach((k) => {
       k.addEventListener('click', () => setzen(k.dataset.stimmung, true));
     });
