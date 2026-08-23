@@ -135,36 +135,70 @@
 <main id="inhalt">
 
 <!-- ═══ Auftakt ═════════════════════════════════════════════════════════ -->
-<section class="auftakt abschnitt bahn" aria-labelledby="haupttitel">
-  <div class="buehne" aria-hidden="true">
-    <picture><source media="(max-width: 64rem)" srcset="bilder/auftakt-1-hoch.webp"><img src="bilder/auftakt-1.webp" alt="" fetchpriority="high" decoding="async"></picture>
-    <picture><source media="(max-width: 64rem)" srcset="bilder/auftakt-2-hoch.webp"><img src="bilder/auftakt-2.webp" alt="" loading="lazy" decoding="async"></picture>
-    <picture><source media="(max-width: 64rem)" srcset="bilder/auftakt-3-hoch.webp"><img src="bilder/auftakt-3.webp" alt="" loading="lazy" decoding="async"></picture>
-    <picture><source media="(max-width: 64rem)" srcset="bilder/auftakt-4-hoch.webp"><img src="bilder/auftakt-4.webp" alt="" loading="lazy" decoding="async"></picture>
-  </div>
-  <div class="auftakt-schleier" aria-hidden="true"></div>
+<section class="auftakt-rolle" aria-labelledby="haupttitel">
+  <div class="buehne abschnitt bahn">
 
-  <div class="mitte">
-    <div class="auftakt-raster">
-      <div>
-        <h1 class="titel-gross" id="haupttitel">Seit zwanzig Jahren stehe ich selbst am Stuhl.</h1>
-        <p class="vorspann lauf">
-          Farbe, Schnitt, Hochsteckfrisuren, Brautstyling. Kein Filialleiter,
-          keine wechselnden Aushilfen — wer hier einen Termin bekommt, weiß
-          auch, wer ihn macht.
-        </p>
-        <p class="signatur">Fakhria Tokhi, Friseurmeisterin</p>
+    <div class="kamera" aria-hidden="true">
+      <div class="ebene"><picture><source media="(max-width: 64rem)" srcset="bilder/auftakt-1-hoch.webp"><img src="bilder/auftakt-1.webp" alt="" width="1240" height="1240" fetchpriority="high" decoding="async"></picture></div>
+      <div class="ebene"><picture><source media="(max-width: 64rem)" srcset="bilder/auftakt-2-hoch.webp"><img src="bilder/auftakt-2.webp" alt="" width="1240" height="1240" loading="lazy" decoding="async"></picture></div>
+      <div class="ebene"><picture><source media="(max-width: 64rem)" srcset="bilder/auftakt-3-hoch.webp"><img src="bilder/auftakt-3.webp" alt="" width="1240" height="1240" loading="lazy" decoding="async"></picture></div>
+      <div class="ebene"><picture><source media="(max-width: 64rem)" srcset="bilder/auftakt-4-hoch.webp"><img src="bilder/auftakt-4.webp" alt="" width="1240" height="1240" loading="lazy" decoding="async"></picture></div>
+      <div class="licht"></div>
+      <div class="dunst dunst-vorn"></div>
+    </div>
+
+    <div class="staub" aria-hidden="true">
+      <i style="--sx:8%;--sy:88%;--sg:0.9;--sd:26s;--sv:0s"></i>
+      <i style="--sx:17%;--sy:64%;--sg:0.6;--sd:31s;--sv:-6s"></i>
+      <i style="--sx:24%;--sy:96%;--sg:1.2;--sd:22s;--sv:-13s"></i>
+      <i style="--sx:33%;--sy:72%;--sg:0.7;--sd:29s;--sv:-3s"></i>
+      <i style="--sx:41%;--sy:90%;--sg:1.0;--sd:34s;--sv:-19s"></i>
+      <i style="--sx:49%;--sy:58%;--sg:0.5;--sd:25s;--sv:-9s"></i>
+      <i style="--sx:56%;--sy:94%;--sg:1.1;--sd:28s;--sv:-22s"></i>
+      <i style="--sx:63%;--sy:70%;--sg:0.8;--sd:32s;--sv:-15s"></i>
+      <i style="--sx:70%;--sy:86%;--sg:0.6;--sd:24s;--sv:-5s"></i>
+      <i style="--sx:76%;--sy:60%;--sg:1.0;--sd:30s;--sv:-27s"></i>
+      <i style="--sx:83%;--sy:92%;--sg:0.7;--sd:27s;--sv:-11s"></i>
+      <i style="--sx:89%;--sy:74%;--sg:1.2;--sd:33s;--sv:-2s"></i>
+      <i style="--sx:94%;--sy:88%;--sg:0.5;--sd:23s;--sv:-17s"></i>
+      <i style="--sx:12%;--sy:52%;--sg:0.8;--sd:35s;--sv:-24s"></i>
+      <i style="--sx:37%;--sy:46%;--sg:0.6;--sd:29s;--sv:-30s"></i>
+      <i style="--sx:66%;--sy:44%;--sg:0.9;--sd:31s;--sv:-8s"></i>
+    </div>
+
+    <div class="auftakt-schleier" aria-hidden="true"></div>
+
+    <div class="mitte">
+      <div class="auftakt-raster">
+        <div>
+          <h1 class="titel-gross" id="haupttitel">Seit zwanzig Jahren stehe ich selbst am Stuhl.</h1>
+
+          <div class="stufe-halter">
+            <p class="vorspann lauf stufe stufe-1">
+              Farbe, Schnitt, Hochsteckfrisuren, Brautstyling. Kein
+              Filialleiter, keine wechselnden Aushilfen — wer hier einen
+              Termin bekommt, weiß auch, wer ihn macht.
+            </p>
+            <p class="vorspann lauf stufe stufe-2">
+              Vor jeder Farbe sehe ich mir die Kopfhaut an. Steht das
+              Ergebnis fest, steht auch der Preis fest — und was am
+              Probetermin steht, steht am Hochzeitstag.
+            </p>
+          </div>
+
+          <p class="signatur">Fakhria Tokhi, Friseurmeisterin</p>
+        </div>
+
+        <aside class="terminkarte" aria-label="Termin vereinbaren">
+          <p class="stand oeffnungsstand"></p>
+          <a class="knopf knopf-voll" href="termin.html">Online buchen</a>
+          <a class="knopf knopf-leer" href="tel:+49896923644">089 692 36 44</a>
+          <p class="fussnote">
+            Perlacher Straße 2, München-Giesing.
+            <a href="leistungen.html">Preise ansehen</a>
+          </p>
+        </aside>
       </div>
-
-      <aside class="terminkarte" aria-label="Termin vereinbaren">
-        <p class="stand oeffnungsstand"></p>
-        <a class="knopf knopf-voll" href="termin.html">Online buchen</a>
-        <a class="knopf knopf-leer" href="tel:+49896923644">089 692 36 44</a>
-        <p class="fussnote">
-          Perlacher Straße 2, München-Giesing.
-          <a href="leistungen.html">Preise ansehen</a>
-        </p>
-      </aside>
     </div>
   </div>
 </section>

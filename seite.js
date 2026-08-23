@@ -142,6 +142,103 @@
     }
   }
 
+  /* ── Die Kamerafahrt im Auftakt ────────────────────────────────────────
+     Über zwei Bildschirmhöhen fährt die Kamera heran, vier Aufnahmen lösen
+     einander ab, Licht und Dunst ziehen mit. Alles hängt an derselben Zahl:
+     dem Scrollfortschritt p zwischen 0 und 1.
+
+     Zwei Dinge machen den Unterschied zwischen „läuft" und „ruckelt":
+
+     1. p wird nicht direkt verwendet, sondern angeglichen (lerp mit .075).
+        Ein Mausrad springt in groben Stufen; ohne Angleichung springt die
+        Fahrt mit. Gerechnet wird in requestAnimationFrame, nicht im
+        Scroll-Ereignis.
+     2. Gesetzt werden ausschließlich CSS-Variablen, die in transform und
+        opacity landen. Keine Layout-Eigenschaft wird angefasst.
+
+     Ruhend läuft nichts davon: dann steht die erste Aufnahme still.       */
+
+  const rolle = $('.auftakt-rolle');
+  const buehne = $('.buehne');
+  if (rolle && buehne && !ruhig()) {
+    const kamera = $('.kamera', buehne);
+    const schleier = $('.auftakt-schleier', buehne);
+    const stufe1 = $('.stufe-1', buehne);
+    const stufe2 = $('.stufe-2', buehne);
+    const ebenen = $$('.ebene', buehne).length;
+
+    let ziel = 0, sanft = 0, laeuft = false;
+
+    const klemm = (x) => x < 0 ? 0 : x > 1 ? 1 : x;
+    /* Weicher Ein- und Ausstieg für jede Überblendung: hart geschnitten
+       sieht man den Wechsel als Kante, nicht als Übergang. */
+    const rampe = (x, a, b) => klemm((x - a) / (b - a));
+    const weich = (x) => x * x * (3 - 2 * x);
+
+    const messen = () => {
+      const k = rolle.getBoundingClientRect();
+      const weg = k.height - innerHeight;
+      ziel = weg > 0 ? klemm(-k.top / weg) : 0;
+      if (!laeuft) { laeuft = true; requestAnimationFrame(malen); }
+    };
+
+    const malen = () => {
+      sanft += (ziel - sanft) * 0.075;
+      const p = sanft;
+
+      /* Kamera: fährt heran und sinkt dabei ein Stück. Sehr zurückhaltend —
+         das ist ein Salon, kein Trailer. */
+      kamera.style.setProperty('--kamera-s', (1.09 - p * 0.09).toFixed(4));
+      kamera.style.setProperty('--kamera-y', (p * -38).toFixed(1) + 'px');
+
+      /* Die vier Aufnahmen. Jede bekommt ein Fenster, die Ränder
+         überlappen sich; die Summe ist immer mindestens eins, sonst
+         scheint zwischendurch der nackte Grund durch. */
+      const schritt = 1 / (ebenen - 1);
+      for (let i = 0; i < ebenen; i++) {
+        const mitte = i * schritt;
+        const d = Math.abs(p - mitte) / schritt;
+        kamera.style.setProperty('--e' + (i + 1), weich(klemm(1 - d)).toFixed(3));
+      }
+
+      /* Licht wandert von rechts oben nach links und wird zur Mitte hin
+         kräftiger. */
+      kamera.style.setProperty('--licht-x', (p * -320).toFixed(1) + 'px');
+      kamera.style.setProperty('--licht-o', (0.34 + Math.sin(p * Math.PI) * 0.34).toFixed(3));
+
+      /* Zwei Dunstbänder, unterschiedlich schnell — daraus wird Tiefe. */
+      kamera.style.setProperty('--dunst-v-x', (p * -150).toFixed(1) + 'px');
+      kamera.style.setProperty('--dunst-v-o', (0.30 + p * 0.26).toFixed(3));
+
+      /* Der Schleier zieht zur Mitte hin leicht an: dort fährt die Kamera
+         in die hellste Stelle, und der Text braucht mehr Rückhalt. */
+      schleier.style.setProperty('--schleier-o', (0.92 + Math.sin(p * Math.PI) * 0.08).toFixed(3));
+
+      /* Textstufen, nacheinander statt überlappend: die erste ist bei 50 %
+         ganz weg, dann kommt die zweite. Überschnitten standen bei halber
+         Fahrt beide bei etwa 40 % Deckung übereinander — zwei Sätze auf
+         demselben Fleck, und keiner davon lesbar. */
+      const ab = weich(rampe(p, 0.40, 0.50));
+      const an = weich(rampe(p, 0.50, 0.60));
+      stufe1.style.setProperty('--stufe-o', (1 - ab).toFixed(3));
+      stufe1.style.setProperty('--stufe-y', (ab * -16).toFixed(1) + 'px');
+      stufe2.style.setProperty('--stufe-o', an.toFixed(3));
+      stufe2.style.setProperty('--stufe-y', ((1 - an) * 16).toFixed(1) + 'px');
+      stufe2.setAttribute('aria-hidden', an < 0.5 ? 'true' : 'false');
+      stufe1.setAttribute('aria-hidden', an < 0.5 ? 'false' : 'true');
+
+      /* Weiterrechnen, solange die Angleichung noch nicht angekommen ist. */
+      if (Math.abs(ziel - sanft) > 0.0002) requestAnimationFrame(malen);
+      else { sanft = ziel; laeuft = false; }
+    };
+
+    addEventListener('scroll', messen, { passive: true });
+    addEventListener('resize', messen);
+    messen();
+    sanft = ziel; malen();
+
+  }
+
   /* ── Die Übersicht in der Kopfzeile ────────────────────────────────────
      „Leistungen & Preise" klappt neun Gruppen mit Ab-Preis auf. Damit sieht
      man in einem Blick, was es gibt und was es kostet, ohne die Seite zu

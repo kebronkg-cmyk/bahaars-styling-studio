@@ -1363,53 +1363,153 @@ html {
 }
 .ablauf.braut li::before { background: var(--rose); }
 
-/* ═══ Der Auftakt ══════════════════════════════════════════════════════
-   Vier Aufnahmen aus dem Laden wechseln sich hinter dem Text ab, jede acht
-   Sekunden, mit anderthalb Sekunden Überblendung. Der Grund darüber ist
-   hell — das Dunkel, das hier vorher stand, ist in die Fußzeile gewandert,
-   wo es die Seite abschließt statt sie zu eröffnen.
+/* ═══ Der Auftakt: eine Kamerafahrt über Standbilder ═══════════════════
+   Der erste Bildschirm ist nicht mehr an eine Uhr gebunden, sondern an das
+   Scrollrad. Über zwei Bildschirmhöhen fährt die Kamera langsam heran, vier
+   Aufnahmen aus dem Laden lösen einander ab, Dunst und Staub ziehen mit —
+   und alles davon hängt an derselben Zahl: dem Scrollfortschritt p.
 
-   Kein Ruckeln: gewechselt wird ausschließlich über opacity, und der Wechsel
-   ist mit 32 s Umlauf deutlich langsamer als jede Zustandsbewegung.        */
+   Warum zwei Bildschirme und nicht sechs: Wer hier landet, sucht meistens
+   eine Telefonnummer. Die Terminkarte steht deshalb von der ersten Sekunde
+   an im Bild und bleibt es über die ganze Fahrt.
 
-.auftakt {
-  position: relative; isolation: isolate;
-  overflow: clip;
+   Ohne Skript und bei prefers-reduced-motion fällt die Rolle auf einen
+   gewöhnlichen Bildschirm zusammen: eine Aufnahme, kein Kleben, keine
+   Bewegung. Was ruhend sinnlos aussieht, wird abgeschaltet, nicht
+   eingefroren.                                                            */
+
+.auftakt-rolle { position: relative; }
+.mitskript .auftakt-rolle { height: 200svh; }
+
+.buehne {
+  position: relative;
+  min-height: min(44rem, 88svh);
   display: flex; flex-direction: column; justify-content: center;
   padding-top: var(--r5); padding-bottom: var(--r5);
-  min-height: min(44rem, 86svh);
+  overflow: clip;
+  /* isolation trennt den Stapel sauber ab: ohne sie mischen sich die
+     Ebenen mit dem Rest der Seite, und beim Scrollen flackert es. */
+  isolation: isolate;
 }
-.auftakt > .mitte { width: 100%; }
+.mitskript .buehne {
+  position: sticky; top: 0;
+  height: 100svh;
+}
 
-.buehne { position: absolute; inset: 0; z-index: -2; overflow: hidden; }
-/* Die Überblendung liegt auf dem <picture>, nicht auf dem <img>: in einem
-   <picture> ist das Bild das zweite Kind, weil das <source> davor steht.
-   Auf dem Bild traf :nth-child(2) deshalb alle vier Aufnahmen, alle bekamen
-   dieselbe Verzögerung, und es wechselte nichts. */
-.buehne picture {
-  position: absolute; inset: 0; display: block;
+/* ── Die Kamera ─────────────────────────────────────────────────────────
+   Ein einziger Träger für alle Bildebenen. Bewegt wird ausschließlich über
+   transform, und will-change hält ihn auf einer eigenen Ebene — sonst malt
+   der Browser bei jedem Scrollschritt die ganze Fläche neu.               */
+.kamera {
+  position: absolute; inset: 0; z-index: -2;
+  will-change: transform;
+  transform: translate3d(0, var(--kamera-y, 0px), 0) scale(var(--kamera-s, 1.06));
+}
+
+.ebene { position: absolute; inset: 0; opacity: 0; }
+/* Das <picture> muss selbst die Fläche füllen. Ohne diese Zeile erbt es die
+   globale Regel height:auto, das <img> darin rechnet seine 100 % gegen null
+   — und das Bild steht in seiner Vorlagenhöhe statt in der der Bühne. Am
+   Handy blieb dadurch das untere Drittel der Bühne leer.                  */
+.ebene picture { position: absolute; inset: 0; display: block; }
+.ebene img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ebene:nth-of-type(1) { opacity: var(--e1, 1); }
+.ebene:nth-of-type(2) { opacity: var(--e2, 0); }
+.ebene:nth-of-type(3) { opacity: var(--e3, 0); }
+.ebene:nth-of-type(4) { opacity: var(--e4, 0); }
+
+/* ── Licht und Dunst ────────────────────────────────────────────────────
+   Ein warmer Schein von rechts oben und zwei Dunstbänder, die
+   unterschiedlich schnell mitziehen — daraus entsteht die Tiefe.
+
+   Beides ist mit weichen Verlaufsstufen gemalt, nicht mit filter: blur()
+   und nicht mit mix-blend-mode. Gemessen wurde der Preis dafür: Beim
+   Scrollen lief die Bühne mit Weichzeichner und Mischung auf 8 Bildern je
+   Sekunde, ohne Weichzeichner auf 20, ohne beides auf 43 — bei 62 auf jeder
+   anderen Seite dieser Website. Ein Weichzeichner über eine halbe
+   Bildschirmfläche wird in jedem Frame neu gerechnet; ein Verlauf mit
+   genug Stufen sieht genauso aus und kostet nichts.
+
+   Die Warnung, ohne screen würden solche Ebenen als Blöcke erscheinen,
+   gilt für deckende Verläufe. Diese laufen auf transparent aus.          */
+
+.licht {
+  position: absolute; inset: -18% -26%;
+  pointer-events: none;
+  opacity: var(--licht-o, .5);
+  /* Zwei Scheine in einer Ebene: der warme oben rechts, dazu der weiche
+     Dunst links auf halber Höhe. Als eigene Ebene kostete der zweite
+     gemessen rund fünf Bilder je Sekunde. */
+  background:
+    radial-gradient(34% 42% at 62% 20%,
+      oklch(97% .045 82 / .62) 0%,
+      oklch(96% .040 82 / .46) 22%,
+      oklch(95% .034 82 / .28) 42%,
+      oklch(95% .028 82 / .13) 62%,
+      oklch(95% .022 82 / .04) 80%,
+      transparent 100%),
+    radial-gradient(42% 34% at 22% 56%,
+      oklch(98% .018 84 / .40) 0%,
+      oklch(97% .016 84 / .24) 30%,
+      oklch(97% .014 84 / .09) 58%,
+      transparent 84%);
+  transform: translate3d(var(--licht-x, 0px), 0, 0);
+  will-change: transform, opacity;
+}
+
+.dunst {
+  position: absolute; inset-inline: -18%;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+.dunst-vorn {
+  bottom: -8%; height: 52%;
+  opacity: var(--dunst-v-o, .42);
+  transform: translate3d(var(--dunst-v-x, 0px), 0, 0);
+  background: radial-gradient(66% 100% at 68% 50%,
+    oklch(99% .012 86 / .64) 0%,
+    oklch(98% .012 86 / .44) 24%,
+    oklch(98% .010 86 / .22) 48%,
+    oklch(98% .008 86 / .06) 74%,
+    transparent 100%);
+}
+
+/* ── Staub ──────────────────────────────────────────────────────────────
+   Feine Flusen im Gegenlicht — im Salon liegt das wirklich in der Luft.
+
+   Gemacht aus sechzehn winzigen Ebenen, nicht aus einer Leinwand. Eine
+   Leinwand über den weichgezeichneten screen-Ebenen kostet bei jedem Frame
+   ein vollständiges Neuzusammensetzen des ganzen Stapels: gemessen 9 statt
+   59 Bilder je Sekunde, und zwar unabhängig von ihrer Größe (1440×900,
+   360×225 und 2×2 lagen alle bei acht bis neun). Sechzehn Ebenen, die nur
+   transform und opacity bewegen, laufen dagegen im Kompositor mit.        */
+
+.staub { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+.staub i {
+  position: absolute;
+  left: var(--sx); top: var(--sy);
+  width: calc(var(--sg) * 7px); height: calc(var(--sg) * 7px);
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    oklch(99% .02 84 / .85) 0%, oklch(97% .03 82 / .45) 38%, transparent 70%);
   opacity: 0;
-  animation: buehne-wechsel 32s var(--kurve) infinite;
+  will-change: transform, opacity;
+  animation: rieseln var(--sd) linear var(--sv) infinite;
 }
-.buehne picture:nth-child(2) { animation-delay:  8s; }
-.buehne picture:nth-child(3) { animation-delay: 16s; }
-.buehne picture:nth-child(4) { animation-delay: 24s; }
-.buehne img { width: 100%; height: 100%; object-fit: cover; display: block; }
-@keyframes buehne-wechsel {
-  0%              { opacity: 0; }
-  4.7%,  25%      { opacity: 1; }
-  29.7%, 100%     { opacity: 0; }
-}
-/* Ruhend hat ein Wechsel keinen Sinn: dann steht die erste Aufnahme. */
-@media (prefers-reduced-motion: reduce) {
-  .buehne picture { animation: none; }
-  .buehne picture:first-child { opacity: 1; }
+@keyframes rieseln {
+  0%        { opacity: 0;   transform: translate3d(0, 0, 0); }
+  12%, 78%  { opacity: .75; }
+  100%      { opacity: 0;   transform: translate3d(2.5rem, -46svh, 0); }
 }
 
-/* Der Schleier. Dicht über der Textspalte, offen über dem Bild — und oben
-   wie unten ein Saum, damit die Fläche nicht an einer Kante hart endet.   */
+/* ── Der Schleier ───────────────────────────────────────────────────────
+   Dicht über der Textspalte, offen über dem Bild, und beide Kanten
+   eingetuckt. Seine Dichte zieht mit der Fahrt leicht an, damit der Text
+   auch dann trägt, wenn die Kamera in eine hellere Stelle fährt.          */
 .auftakt-schleier {
   position: absolute; inset: 0; z-index: -1;
+  opacity: var(--schleier-o, 1);
+  will-change: opacity;
   background:
     linear-gradient(to bottom,
       var(--grund) 0%, var(--grund-72) 6%, var(--grund-28) 16%,
@@ -1429,21 +1529,50 @@ html {
   }
 }
 
-.auftakt-raster {
-  display: grid;
-  gap: var(--r4);
-  align-items: end;
-}
+/* ── Der Inhalt auf der Bühne ───────────────────────────────────────── */
+.auftakt-raster { display: grid; gap: var(--r4); align-items: end; }
 @media (min-width: 64rem) {
   .auftakt-raster {
     grid-template-columns: minmax(0, 1fr) minmax(0, 20rem);
     gap: var(--r6);
   }
 }
-/* Eine Stufe kleiner als auf den Unterseiten: der Satz ist länger als eine
-   Seitenüberschrift und stünde sonst in vier Zeilen quer über die Bühne. */
-.auftakt .titel-gross { max-width: 18ch; font-size: var(--t-titel); }
-.auftakt .lauf { max-width: 40ch; margin-top: var(--r3); }
+.buehne .titel-gross { max-width: 18ch; font-size: var(--t-titel); }
+.buehne .lauf { max-width: 40ch; margin-top: var(--r3); }
+
+/* Die zwei Textstufen. Die erste steht am Anfang, die zweite übernimmt in
+   der zweiten Hälfte der Fahrt. Bewegt wird nur transform und opacity. */
+.stufe {
+  opacity: var(--stufe-o, 1);
+  transform: translate3d(0, var(--stufe-y, 0px), 0);
+  transition: none;
+}
+.stufe-2 {
+  position: absolute; inset-inline: 0; top: 0;
+  pointer-events: none;
+}
+.mitskript .stufe-halter { position: relative; }
+.mitskript .stufe-2 { pointer-events: auto; }
+
+/* Ohne Skript steht nur die erste Stufe; die zweite wäre dort ein
+   zusammenhangloser Satz über dem ersten. */
+.stufe-2 { display: none; }
+.mitskript .stufe-2 { display: block; }
+
+/* ── Ruhend ─────────────────────────────────────────────────────────────
+   Kein Kleben, keine Fahrt, kein Staub. Eine Aufnahme, ein Bildschirm.   */
+@media (prefers-reduced-motion: reduce) {
+  .mitskript .auftakt-rolle { height: auto; }
+  .mitskript .buehne { position: relative; height: auto; }
+  .kamera { transform: none; }
+  .ebene:nth-of-type(1) { opacity: 1; }
+  .ebene:nth-of-type(2),
+  .ebene:nth-of-type(3),
+  .ebene:nth-of-type(4) { opacity: 0; }
+  .staub { display: none; }
+  .mitskript .stufe-2 { display: none; }
+  .stufe { opacity: 1; transform: none; }
+}
 
 /* ═══ Die Terminkarte ══════════════════════════════════════════════════
    Der Weg zum Termin steht im ersten Bildschirm, aber er drängt sich nicht

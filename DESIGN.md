@@ -577,26 +577,57 @@ Kapitälchenbeschriftung.
   `[open]`, der Übergang an `allow-discrete` und `@starting-style` — sonst liegt
   der geschlossene Dialog unsichtbar über der Seite und schluckt jeden Klick.
 
-### Der Auftakt
+### Der Auftakt: eine Kamerafahrt über Standbilder
 
-Heller Grund, vier wechselnde Aufnahmen dahinter.
+Über zwei Bildschirmhöhen (`.auftakt-rolle`, `height: 200svh`) klebt die
+Bühne oben fest und fährt: die Kamera zieht heran, vier Aufnahmen lösen
+einander ab, Licht und Dunst ziehen mit. Alles hängt an einer Zahl, dem
+Scrollfortschritt `p`.
 
-- **Die Bühne** (`.buehne`): vier `<picture>` übereinander, Überblendung über
-  `opacity`, 32 s Umlauf, Verzögerungen 0/8/16/24 s. Die Überblendung liegt
-  auf dem `<picture>`, nicht auf dem `<img>`: in einem `<picture>` ist das
-  Bild das **zweite** Kind, weil das `<source>` davor steht — auf dem Bild
-  traf `:nth-child(2)` alle vier Aufnahmen, alle bekamen dieselbe
-  Verzögerung, und es wechselte nichts. Bei `prefers-reduced-motion` steht
-  die erste Aufnahme still.
-- **Die Zuschnitte** sind quadratisch, nicht quer. Ein 1,6∶1-Ausschnitt musste
-  die volle Vorlagenbreite nehmen und zog Föhn, Steckdose und Regal mit ins
-  Bild; quadratisch bleibt der Ausschnitt beim Haar, und `object-fit` schneidet
-  ihn auf das Format der Fläche zurück.
-- **Der Schleier** deckt links voll (`--grund-96` bis 38 %), läuft bis 76 % auf
-  null und tuckt die rechte Kante mit `--grund-72` wieder ein — sonst endet
-  das Foto hart an der Fensterkante.
-- **Die Terminkarte** (`.terminkarte`): weiße Karte am Rand, zuerst der
-  gerechnete Öffnungsstand, dann Online-Buchung und Telefonnummer.
+- **Warum zwei Bildschirme und nicht sechs.** Wer hier landet, sucht meistens
+  eine Telefonnummer. Die Terminkarte steht deshalb vom ersten Moment an im
+  Bild und bleibt über die ganze Fahrt sichtbar.
+- **Angleichung** (`sanft += (ziel - sanft) * .075`) in `requestAnimationFrame`,
+  nicht im Scroll-Ereignis. Ein Mausrad springt in groben Stufen; ohne
+  Angleichung springt die Fahrt mit.
+- **Isolierung.** `isolation: isolate` auf der Bühne trennt den Stapel ab,
+  `will-change: transform` hält die Kamera auf einer eigenen Ebene.
+- **Gesetzt werden nur CSS-Variablen**, die in `transform` und `opacity`
+  landen. Keine Layout-Eigenschaft wird angefasst.
+- **Ruhend und ohne Skript** fällt die Rolle auf einen Bildschirm zusammen:
+  eine Aufnahme, kein Kleben, kein Staub, keine zweite Textstufe.
+
+**Was die Vorlage vorgab und was daraus wurde.** Die Vorlage verlangt
+`filter: blur()` auf den Dunstebenen und `mix-blend-mode: screen`, dazu eine
+Partikel-Leinwand. Gemessen wurde, was das kostet — beim Scrollen, gegen die
+62 Bilder je Sekunde, die jede andere Seite dieser Website erreicht:
+
+| Aufbau | Bilder je Sekunde |
+|---|---|
+| mit Weichzeichner und Mischung | 8 |
+| ohne Weichzeichner | 20 |
+| ohne beides | 43 |
+| Endstand, zwei Dunstebenen | 46 |
+
+Der Weichzeichner über eine halbe Bildschirmfläche wird in jedem Frame neu
+gerechnet. Ein Verlauf mit genug Stufen sieht genauso aus und kostet nichts;
+die Warnung, ohne `screen` erschienen solche Ebenen als Blöcke, gilt für
+deckende Verläufe — diese laufen auf transparent aus. Die Partikel-Leinwand
+kostete für sich 9 statt 59 Bilder je Sekunde, und zwar unabhängig von ihrer
+Größe: 1440×900, 360×225 und 2×2 lagen alle bei acht bis neun. An ihrer
+Stelle stehen sechzehn winzige Ebenen, die nur `transform` und `opacity`
+bewegen.
+
+**Zwei Fallen, die hier zugeschlagen haben.** Das `<picture>` erbt die globale
+Regel `height: auto`; das `<img>` darin rechnet seine 100 % dann gegen null,
+und am Handy blieb das untere Drittel der Bühne leer. Und die Textstufen
+überschnitten sich anfangs: bei halber Fahrt standen beide bei rund 40 %
+Deckung übereinander. Jetzt ist die erste bei 50 % ganz weg, bevor die zweite
+kommt.
+
+**Gemessen wird die Fahrt, nicht der Anfang.** `werkzeug/kontrast-fahrt.mjs`
+misst den Kontrast an fünf Stellen zwischen 0 und 100 %, weil Bild, Licht und
+Schleier sich mitbewegen. 80 Messungen, engste Stelle 4,78 : 1.
 
 ### Die Übersicht in der Kopfzeile
 
