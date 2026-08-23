@@ -168,6 +168,151 @@
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34'%3E%3Cpath d='M-4 38 42-8M-4 21 42-25M-4 55 42 9' stroke='%23ffffff' stroke-opacity='.10' stroke-width='1' fill='none'/%3E%3C/svg%3E");
 }
 
+/* ═══ Farbvarianten ════════════════════════════════════════════════════
+   Drei Stimmungen aus demselben Laden. Jede ist an einem anderen Teil des
+   eigenen Materials gemessen — keine ist erfunden, und keine gehört einem
+   Lieferanten.
+
+     · Messing (Vorgabe) — das Karamell im Haar und das dunkle Holz im
+       Portrait. Die Handschrift des Salons.
+     · Asche — die kühlen Schattenseiten in arbeit-06 (Bob blond,
+       oklch(24,4% .045 254)) und arbeit-04 (Kurzhaar,
+       oklch(22,3% .020 303)). Sehr wenig Buntheit, deshalb streng.
+     · Rosé — die Brautbilder: arbeit-15 (Schleier, oklch(65,5% .051 6))
+       und arbeit-13 (Hochsteckfrisur mit Blumen, oklch(41,8% .122 20)).
+
+   Umgeschaltet wird über data-palette am <html>. Ohne Attribut gilt
+   Messing. Verändert werden ausschließlich Farbtoken — Abstände, Kurven,
+   Schriftgrößen und Muster-Geometrie bleiben in allen drei gleich, sonst
+   wären es drei Seiten statt einer Seite in drei Stimmungen.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Asche ─────────────────────────────────────────────────────
+   Kühl und streng. Gemessen an den Schattenseiten der blonden
+   Arbeiten: Farbton 250–303°, Buntheit unter .05.
+   ────────────────────────────────────────────────────────────────── */
+:root[data-palette="asche"] {
+
+  --grund:        oklch(97.5% .005 250);
+  --grund-warm:   oklch(94.5% .008 248);
+  --karte:        oklch(99.2% .003 252);
+
+  --grund-96:     oklch(97.5% .005 250 / .96);
+  --grund-88:     oklch(97.5% .005 250 / .88);
+  --grund-72:     oklch(97.5% .005 250 / .72);
+  --grund-52:     oklch(97.5% .005 250 / .52);
+  --grund-28:     oklch(97.5% .005 250 / .28);
+  --grund-00:     oklch(97.5% .005 250 / 0);
+
+  --glas:         oklch(97.5% .005 250 / .86);
+  --glas-dicht:   oklch(97.5% .005 250 / .94);
+  --glas-voll:    oklch(97.5% .005 250 / .98);
+
+  --espresso:      oklch(23%   .030 254);
+  --espresso-92:   oklch(18%   .026 252 / .92);
+  --espresso-70:   oklch(18%   .026 252 / .70);
+  --auf-espresso:  oklch(83%   .016 250);
+  --linie-auf-espresso: oklch(97% .006 250 / .20);
+
+  --tinte:        oklch(27%   .026 252);
+  --tinte-leise:  oklch(43%   .024 251);
+  --tinte-still:  oklch(53%   .020 250);
+  --tinte-hell:   oklch(97%   .006 250);
+
+  --messing:       oklch(45%   .052 250);
+  --messing-hell:  oklch(72%   .055 248);
+  --messing-blass: oklch(92%   .022 250);
+
+  --haar-bronze:  oklch(48%   .044 250);
+
+  /* Ornament: die warme Wand aus dem Brautfoto — sie bleibt warm, gerade
+     weil ringsum alles kühl ist. */
+  --rose:         oklch(64%   .085 14);
+
+  --rollbalken:      oklch(82% .014 250);
+  --rollbalken-hoch: oklch(66% .038 250);
+
+  --linie:        oklch(58% .016 250 / .30);
+  --linie-hell:   oklch(64% .018 250 / .17);
+  --linie-akzent: oklch(45% .052 250 / .32);
+
+  --schatten-flach: 0 1px 2px oklch(38% .030 252 / .08), 0 3px 10px oklch(38% .030 252 / .08);
+  --schatten-hoch:  0 2px 6px oklch(38% .030 252 / .12), 0 20px 44px oklch(38% .030 252 / .21);
+
+  --muster-straehne:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34'%3E%3Cpath d='M-4 38 42-8M-4 21 42-25M-4 55 42 9' stroke='%2331445a' stroke-opacity='.05' stroke-width='1' fill='none'/%3E%3C/svg%3E");
+}
+
+/* ── Rosé ─────────────────────────────────────────────────────
+   Warm und weich. Gemessen an den Brautbildern: Farbton 6–26°,
+   Buntheit bis .122.
+   ────────────────────────────────────────────────────────────────── */
+:root[data-palette="rose"] {
+
+  --grund:        oklch(97.5% .008 40);
+  --grund-warm:   oklch(94.5% .014 30);
+  --karte:        oklch(99.2% .005 42);
+
+  --grund-96:     oklch(97.5% .008 40 / .96);
+  --grund-88:     oklch(97.5% .008 40 / .88);
+  --grund-72:     oklch(97.5% .008 40 / .72);
+  --grund-52:     oklch(97.5% .008 40 / .52);
+  --grund-28:     oklch(97.5% .008 40 / .28);
+  --grund-00:     oklch(97.5% .008 40 / 0);
+
+  --glas:         oklch(97.5% .008 40 / .86);
+  --glas-dicht:   oklch(97.5% .008 40 / .94);
+  --glas-voll:    oklch(97.5% .008 40 / .98);
+
+  --espresso:      oklch(23%   .038 18);
+  --espresso-92:   oklch(18%   .032 16 / .92);
+  --espresso-70:   oklch(18%   .032 16 / .70);
+  --auf-espresso:  oklch(83%   .022 32);
+  --linie-auf-espresso: oklch(97% .008 40 / .20);
+
+  --tinte:        oklch(27%   .032 20);
+  --tinte-leise:  oklch(43%   .030 22);
+  --tinte-still:  oklch(53%   .026 24);
+  --tinte-hell:   oklch(97%   .008 40);
+
+  --messing:       oklch(45%   .095 24);
+  --messing-hell:  oklch(72%   .085 26);
+  --messing-blass: oklch(92%   .028 30);
+
+  --haar-bronze:  oklch(48%   .082 26);
+
+  /* Ornament: das Karamell aus dem Haar. Warmes Gold gegen Rosé — die
+     zweite Farbe muss sich von der Leitfarbe lösen, sonst sieht man sie
+     nicht als zweite. */
+  --rose:         oklch(64%   .080 70);
+
+  --rollbalken:      oklch(82% .020 34);
+  --rollbalken-hoch: oklch(66% .062 26);
+
+  --linie:        oklch(58% .026 26 / .30);
+  --linie-hell:   oklch(64% .028 30 / .17);
+  --linie-akzent: oklch(45% .095 24 / .32);
+
+  --schatten-flach: 0 1px 2px oklch(38% .045 20 / .07), 0 3px 10px oklch(38% .045 20 / .07);
+  --schatten-hoch:  0 2px 6px oklch(38% .045 20 / .11), 0 20px 44px oklch(38% .045 20 / .20);
+
+  --muster-straehne:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34'%3E%3Cpath d='M-4 38 42-8M-4 21 42-25M-4 55 42 9' stroke='%235e3535' stroke-opacity='.05' stroke-width='1' fill='none'/%3E%3C/svg%3E");
+}
+
+/* Der Wechsel der Stimmung: ein Schnitt über die ganze Seite, nicht
+   hundert einzeln überblendende Farben. Wo der Browser keine
+   View-Transition kann, schaltet es hart um — das ist kein Verlust. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: .45s;
+  animation-timing-function: var(--kurve);
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) { animation: none; }
+}
+
 /* ═══ Grundlagen ═══════════════════════════════════════════════════════ */
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -424,7 +569,9 @@ a { color: inherit; }
   display: inline-flex; align-items: center; gap: .5rem;
   text-decoration: none;
   font-size: var(--s-klein); letter-spacing: .03em;
-  padding: .5rem .95rem;
+  /* Rechts mehr Luft: das liegende Blatt ist dort halbrund, und eine Ziffer
+     dicht an der Rundung sieht angeschnitten aus. */
+  padding: .5rem 1.2rem .5rem .95rem;
   border: 1px solid var(--linie-akzent);
   border-radius: var(--bogen-blatt-quer);
   color: var(--messing);
@@ -433,6 +580,12 @@ a { color: inherit; }
               border-color var(--t1) var(--kurve);
 }
 .ruf svg { width: 1em; height: 1em; flex: none; }
+/* Muss hier stehen und mit .wegweiser davor: die Nachbarregel .wegweiser a
+   setzt padding: .35rem 0 und ist mit zwei Klassen spezifischer als .ruf
+   allein. Gemessen kam an der Pille deshalb links und rechts null Polsterung
+   an — die Rundung schnitt in die letzte Ziffer. Dieselbe Falle wie beim
+   Terminknopf weiter unten. */
+.wegweiser .ruf { padding: .5rem 1.2rem .5rem .95rem; }
 @media (hover: hover) and (pointer: fine) {
   .ruf:hover { background: var(--messing-blass); border-color: var(--messing); }
 }
@@ -536,18 +689,22 @@ a { color: inherit; }
 /* ═══ Bewegung beim Auftauchen ═════════════════════════════════════════ */
 
 /* Sichtbar ist der Ausgangszustand. Erst wenn das Skript läuft, setzt es
-   .mitskript auf <html> und die Einblendung wird scharf geschaltet — sonst
+   .mitfahrt auf <html> und die Einblendung wird scharf geschaltet — sonst
    bliebe bei abgeschaltetem JavaScript die halbe Seite unsichtbar. */
-.mitskript .auf {
+.mitfahrt .auf {
   opacity: 0;
   transform: translateY(18px);
   transition: opacity var(--t3) var(--kurve-weit),
               transform var(--t3) var(--kurve-weit);
 }
-.mitskript .auf.da { opacity: 1; transform: none; }
+.mitfahrt .auf.da { opacity: 1; transform: none; }
+/* Läuft GSAP, gehört die Einblendung ihm allein: es setzt Deckkraft und
+   Versatz direkt am Element. Eine CSS-Überblendung daneben zöge am selben
+   Wert, und aus einer Bewegung würden zwei, die sich gegenseitig bremsen. */
+.mitgsap .auf { transition: none; }
 
 @media (prefers-reduced-motion: reduce) {
-  .mitskript .auf { opacity: 1; transform: none; transition: none; }
+  .mitfahrt .auf { opacity: 1; transform: none; transition: none; }
   *, *::before, *::after {
     animation-duration: .001ms !important;
     animation-iteration-count: 1 !important;
@@ -555,10 +712,16 @@ a { color: inherit; }
   }
 }
 
-/* ═══ Die Türkisbahn ═══════════════════════════════════════════════════
-   Ein einziger Abschnitt kippt um: das Türkis der Moroccanoil-Regale wird
-   zur Fläche, die Schrift wird hell. Das ist der Anker der Seite — davor
-   und danach steht wieder Weiß. Genau ein Einsatz, sonst wäre es Dekor.  */
+/* ═══ Die dunkle Bahn ══════════════════════════════════════════════════
+   Ein einziger Abschnitt kippt um: Espresso wird zur Fläche, die Schrift
+   wird hell. Das ist der Anker der Seite — davor und danach steht wieder
+   der helle Grund. Genau ein Einsatz, sonst wäre es Dekor.
+
+   Der Name stimmte einmal anders: Hier stand das Türkis der
+   Moroccanoil-Regale. Es war sauber an der Wand gemessen und trotzdem die
+   Markenfarbe eines Lieferanten — deshalb wirkte die Seite damit
+   aufgesetzt. Espresso kommt aus dem Portrait der Inhaberin und bleibt,
+   auch wenn der Salon den Lieferanten wechselt.                          */
 
 .dunkelbahn {
   position: relative; isolation: isolate;
@@ -598,7 +761,7 @@ a { color: inherit; }
 .dunkelbahn :focus-visible { outline-color: var(--tinte-hell); }
 
 /* Auf der Fläche stehen die drei Blöcke nebeneinander statt untereinander:
-   sonst bleibt die rechte Hälfte des Türkis leer, und eine leere Fläche in
+   sonst bleibt die rechte Hälfte der Bahn leer, und eine leere Fläche in
    dieser Größe wirkt nicht ruhig, sondern unfertig.                       */
 @media (min-width: 64rem) {
   .dunkelbahn .zeilenliste {
@@ -656,6 +819,60 @@ a { color: inherit; }
   font-size: var(--s-klein); color: var(--tinte-still);
 }
 .fusszeile-schluss .rechts { margin-left: auto; }
+
+/* ── Die Stimmungswahl ─────────────────────────────────────────────────
+   Drei Proben, jede in ihren eigenen Farben — nicht in denen der Seite,
+   sonst zeigt der Umschalter dreimal dasselbe. Die Probe ist das liegende
+   Kartonblatt in klein: dieselbe Form wie überall sonst.                */
+.stimmungswahl {
+  margin-top: var(--r5);
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: var(--r2) var(--r3);
+}
+.stimmung-titel {
+  font-family: 'Marcellus SC', Georgia, serif;
+  font-size: var(--s-mini); letter-spacing: .24em;
+  color: var(--messing-blass);
+}
+.stimmung-reihe { display: flex; flex-wrap: wrap; gap: .5rem; }
+.stimmung {
+  display: inline-flex; align-items: center; gap: .55rem;
+  padding: .42rem .85rem .42rem .5rem;
+  font: inherit; font-size: var(--s-klein);
+  color: var(--auf-espresso);
+  background: transparent;
+  border: 1px solid var(--linie-auf-espresso);
+  border-radius: var(--bogen-blatt-quer);
+  cursor: pointer;
+  transition: color var(--t1) var(--kurve),
+              border-color var(--t1) var(--kurve),
+              transform var(--t1) var(--kurve);
+}
+.stimmung-probe {
+  width: 1.35rem; height: 1.35rem; flex: none;
+  border-radius: 50%;
+  /* Halber Kreis Grund, halber Kreis Leitfarbe: die Probe zeigt beide
+     Enden der Palette, nicht nur eines. */
+  background: linear-gradient(105deg, var(--probe-grund) 50%, var(--probe-leit) 50%);
+  box-shadow: inset 0 0 0 1px oklch(0% 0 0 / .18);
+}
+.probe-messing { --probe-grund: #faf6f0; --probe-leit: #8a5f2e; }
+.probe-asche   { --probe-grund: #f4f7fa; --probe-leit: #4a6b93; }
+.probe-rose    { --probe-grund: #fcf5f3; --probe-leit: #9c4a4c; }
+
+.stimmung[aria-pressed='true'] {
+  color: var(--tinte-hell);
+  border-color: var(--messing-hell);
+}
+.stimmung[aria-pressed='true'] .stimmung-probe {
+  box-shadow: inset 0 0 0 1px oklch(0% 0 0 / .18), 0 0 0 3px var(--espresso), 0 0 0 4px var(--messing-hell);
+}
+@media (hover: hover) and (pointer: fine) {
+  .stimmung:hover { color: var(--tinte-hell); border-color: var(--auf-espresso); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .stimmung:active { transform: translateY(1px); }
+}
 
 /* Öffnungszeiten als Tabelle mit fester Spalte — wie die Zeile auf einer
    Anzeigetafel: die Spalten wandern nie, nur ihr Inhalt.                   */
@@ -1379,7 +1596,7 @@ html {
    eingefroren.                                                            */
 
 .auftakt-rolle { position: relative; }
-.mitskript .auftakt-rolle { height: 200svh; }
+.mitfahrt .auftakt-rolle { height: 200svh; }
 
 .buehne {
   position: relative;
@@ -1391,7 +1608,7 @@ html {
      Ebenen mit dem Rest der Seite, und beim Scrollen flackert es. */
   isolation: isolate;
 }
-.mitskript .buehne {
+.mitfahrt .buehne {
   position: sticky; top: 0;
   height: 100svh;
 }
@@ -1416,7 +1633,6 @@ html {
 .ebene:nth-of-type(1) { opacity: var(--e1, 1); }
 .ebene:nth-of-type(2) { opacity: var(--e2, 0); }
 .ebene:nth-of-type(3) { opacity: var(--e3, 0); }
-.ebene:nth-of-type(4) { opacity: var(--e4, 0); }
 
 /* ── Licht und Dunst ────────────────────────────────────────────────────
    Ein warmer Schein von rechts oben und zwei Dunstbänder, die
@@ -1514,10 +1730,15 @@ html {
     linear-gradient(to bottom,
       var(--grund) 0%, var(--grund-72) 6%, var(--grund-28) 16%,
       var(--grund-28) 84%, var(--grund-72) 94%, var(--grund) 100%),
+    /* Das offene Fenster liegt zwischen Text und Terminkarte — gemessen,
+       nicht geschätzt: Bei 1440 endet die längste Titelzeile bei 798 (55 %)
+       und die Karte beginnt bei 1008 (70 %). Vorher lag das Fenster bei
+       76–88 % und damit vollständig hinter der Karte; vom Foto war auf dem
+       ersten Bildschirm praktisch nichts zu sehen. */
     linear-gradient(to right,
-      var(--grund-96) 0%, var(--grund-96) 38%, var(--grund-88) 50%,
-      var(--grund-52) 62%, var(--grund-00) 76%, var(--grund-00) 88%,
-      var(--grund-72) 100%);
+      var(--grund-96) 0%, var(--grund-96) 42%, var(--grund-88) 52%,
+      var(--grund-52) 60%, var(--grund-00) 68%, var(--grund-00) 94%,
+      var(--grund-52) 100%);
 }
 @media (max-width: 62rem) {
   .auftakt-schleier {
@@ -1551,26 +1772,26 @@ html {
   position: absolute; inset-inline: 0; top: 0;
   pointer-events: none;
 }
-.mitskript .stufe-halter { position: relative; }
-.mitskript .stufe-2 { pointer-events: auto; }
+.mitfahrt .stufe-halter { position: relative; }
+.mitfahrt .stufe-2 { pointer-events: auto; }
 
 /* Ohne Skript steht nur die erste Stufe; die zweite wäre dort ein
    zusammenhangloser Satz über dem ersten. */
 .stufe-2 { display: none; }
-.mitskript .stufe-2 { display: block; }
+.mitfahrt .stufe-2 { display: block; }
 
 /* ── Ruhend ─────────────────────────────────────────────────────────────
    Kein Kleben, keine Fahrt, kein Staub. Eine Aufnahme, ein Bildschirm.   */
 @media (prefers-reduced-motion: reduce) {
-  .mitskript .auftakt-rolle { height: auto; }
-  .mitskript .buehne { position: relative; height: auto; }
+  .mitfahrt .auftakt-rolle { height: auto; }
+  .mitfahrt .buehne { position: relative; height: auto; }
   .kamera { transform: none; }
   .ebene:nth-of-type(1) { opacity: 1; }
   .ebene:nth-of-type(2),
   .ebene:nth-of-type(3),
   .ebene:nth-of-type(4) { opacity: 0; }
   .staub { display: none; }
-  .mitskript .stufe-2 { display: none; }
+  .mitfahrt .stufe-2 { display: none; }
   .stufe { opacity: 1; transform: none; }
 }
 

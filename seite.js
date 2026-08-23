@@ -9,14 +9,37 @@
 (() => {
   'use strict';
 
-  // Marke am <html>. Erst damit greifen die Einblendungen — ohne Skript
-  // bleibt jeder Abschnitt sichtbar, statt auf ein Ereignis zu warten,
-  // das nie kommt.
-  document.documentElement.classList.add('mitskript');
-
   const $  = (w, in_ = document) => in_.querySelector(w);
   const $$ = (w, in_ = document) => [...in_.querySelectorAll(w)];
   const ruhig = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ── Drei Marken am <html>, und jede sagt etwas anderes ────────────────
+
+     mitskript  Das Skript läuft. Damit greift alles, was ohne Skript nicht
+                bedienbar wäre — die Ausklapp-Übersicht in der Kopfzeile
+                etwa steht ohne Skript als schlichte Liste da.
+     mitgsap    GSAP liegt vor. Damit gehört die Einblendung ihm; eine
+                CSS-Überblendung daneben zöge am selben Wert.
+     mitfahrt   Es wird choreografiert: die Bühne wird zwei Bildschirme
+                hoch und klebt, die Abschnitte kommen erst beim Auftauchen.
+
+     Der Unterschied ist die Rückfallebene. Fehlt GSAP oder ist Bewegung
+     abbestellt, wird mitfahrt nicht gesetzt — dann steht die Seite genau
+     so da wie ganz ohne Skript: alles sichtbar, nichts wartet auf ein
+     Ereignis, das nicht kommt. Das ist der einzige Zustand, in dem eine
+     Einblendung gefährlich wird: wenn sie nie ausgelöst wird, ist aus ihr
+     verschwundener Inhalt geworden.                                       */
+
+  const wurzel = document.documentElement;
+  wurzel.classList.add('mitskript');
+
+  const G = window.gsap, ST = window.ScrollTrigger;
+  const choreografie = !!(G && ST) && !ruhig();
+  if (G && ST) {
+    G.registerPlugin(ST);
+    wurzel.classList.add('mitgsap');
+  }
+  if (choreografie) wurzel.classList.add('mitfahrt');
 
   /* ── Kopfzeile ────────────────────────────────────────────────────────
      Hysterese von 6 px: ohne sie flackert der Umschalter genau dann, wenn
@@ -51,79 +74,51 @@
   }
 
   /* ── Auftauchen beim Scrollen ──────────────────────────────────────────
-     Bewusst über die gemessene Position statt über einen Beobachter. Ein
-     IntersectionObserver hat einen Zustand, in dem er nie auslöst — etwa
-     wenn die Seite in voller Höhe auf einmal gerendert wird oder direkt an
-     einen Anker gesprungen wird. Dann bliebe der Abschnitt für immer auf
-     Deckkraft 0, und aus einer Einblendung würde verschwundener Inhalt.
+     ScrollTrigger.batch statt eines eigenen Beobachters: Es sammelt alle
+     Elemente ein, die im selben Wimpernschlag ins Bild kommen, und gibt
+     sie als eine Gruppe weiter. Erst dadurch lässt sich staffeln — vorher
+     stand an jedem Element ein von Hand eingetragener Verzug, und wer eins
+     dazwischenschob, brachte die ganze Reihe durcheinander.
 
-     Die Prüfung hier kennt diesen Zustand nicht: Sie läuft beim Start, bei
-     jedem Scrollen, bei jeder Größenänderung und ein letztes Mal nach dem
-     vollständigen Laden. Fertige Elemente fallen aus der Liste, am Ende
-     kostet sie nichts mehr.                                               */
+     Höchstens drei auf einmal. Vier gleichzeitig anlaufende Bewegungen
+     kann das Auge nicht mehr einzeln verfolgen; es sieht dann nur noch,
+     dass sich etwas bewegt, nicht mehr was. Der Rest kommt als nächste
+     Gruppe, 90 ms später — nah genug, dass es eine Bewegung bleibt.
+
+     Nach unten wird nicht zurückgesetzt. Wer zurückscrollt, will lesen,
+     was er schon gesehen hat, und nicht dabei zusehen, wie es noch einmal
+     erscheint.                                                            */
 
   const auftauchen = $$('.auf');
-  if (auftauchen.length) {
-    if (ruhig()) {
-      auftauchen.forEach((el) => el.classList.add('da'));
-    } else {
-      let offen = auftauchen.slice();
-      let geplant = false;
+  if (auftauchen.length && choreografie) {
+    G.set(auftauchen, { opacity: 0, y: 18 });
 
-      const zeigen = (el, verzug) => {
-        if (verzug) setTimeout(() => el.classList.add('da'), verzug);
-        else el.classList.add('da');
-      };
+    ST.batch(auftauchen, {
+      start: 'top 92%',
+      interval: .09,
+      batchMax: 3,
+      onEnter: (gruppe) => G.to(gruppe, {
+        opacity: 1, y: 0,
+        duration: .55, stagger: .09,
+        ease: 'power2.out',      /* Eintritt bremst aus — nie umgekehrt */
+        overwrite: true
+      })
+    });
 
-      const pruefen = () => {
-        geplant = false;
-        if (!offen.length) return;
-        const grenze = window.innerHeight * 0.92;
-        const bleibt = [];
-        for (const el of offen) {
-          const k = el.getBoundingClientRect();
-          // Alles, was im Bild ist oder schon darüber liegt, wird gezeigt.
-          if (k.top < grenze) zeigen(el, Number(el.dataset.verzug || 0));
-          else bleibt.push(el);
-        }
-        offen = bleibt;
-        if (!offen.length) abmelden();
-      };
-
-      const anstossen = () => {
-        if (geplant) return;
-        geplant = true;
-        requestAnimationFrame(pruefen);
-      };
-
-      let gescrollt = false;
-      const beiScroll = () => { gescrollt = true; anstossen(); };
-      const abmelden = () => {
-        removeEventListener('scroll', beiScroll);
-        removeEventListener('resize', anstossen);
-      };
-      const alleZeigen = () => {
-        offen.forEach((el) => el.classList.add('da'));
-        offen = [];
-        abmelden();
-      };
-
-      addEventListener('scroll', beiScroll, { passive: true });
-      addEventListener('resize', anstossen, { passive: true });
-      pruefen();
-      // Nach dem vollständigen Laden noch einmal: bis dahin haben Bilder und
-      // Schriften das Layout verschoben.
-      addEventListener('load', anstossen);
-      setTimeout(anstossen, 400);
-
-      /* Wer nach drei Sekunden noch nicht gescrollt hat, sieht ohnehin nur
-         den ersten Bildschirm — für den kostet es nichts, den Rest der Seite
-         einzublenden. Wer gar nicht scrollen kann, gewinnt dabei alles:
-         Ganzseiten-Aufnahmen, Druckansichten und Lesemodi holen sich die
-         Seite in einem Zug und würden sonst leere Abschnitte abbilden. */
-      setTimeout(() => { if (!gescrollt) alleZeigen(); }, 3000);
-      addEventListener('beforeprint', alleZeigen);
-    }
+    /* Zwei Zustände, in denen niemand scrollt und trotzdem alles sichtbar
+       sein muss: der Druck und die Ganzseiten-Aufnahme. Beide holen sich
+       die Seite in einem Zug; was noch auf sein Auftauchen wartet, wäre
+       darauf ein leerer Kasten. Und wer nach drei Sekunden nicht gescrollt
+       hat, sieht ohnehin nur den ersten Bildschirm — für den kostet es
+       nichts, den Rest freizugeben.                                       */
+    const alleZeigen = () => {
+      ST.getAll().forEach((t) => { if (auftauchen.includes(t.trigger)) t.kill(); });
+      G.set(auftauchen, { opacity: 1, y: 0 });
+    };
+    let gescrollt = false;
+    addEventListener('scroll', () => { gescrollt = true; }, { passive: true, once: true });
+    setTimeout(() => { if (!gescrollt) alleZeigen(); }, 3000);
+    addEventListener('beforeprint', alleZeigen);
   }
 
   /* ── Sprung auf einen Anker beim Laden ────────────────────────────────
@@ -144,99 +139,136 @@
 
   /* ── Die Kamerafahrt im Auftakt ────────────────────────────────────────
      Über zwei Bildschirmhöhen fährt die Kamera heran, vier Aufnahmen lösen
-     einander ab, Licht und Dunst ziehen mit. Alles hängt an derselben Zahl:
-     dem Scrollfortschritt p zwischen 0 und 1.
+     einander ab, Licht und Dunst ziehen mit.
 
-     Zwei Dinge machen den Unterschied zwischen „läuft" und „ruckelt":
+     Gefahren wird über eine GSAP-Zeitleiste von hundert Einheiten, an
+     ScrollTrigger gehängt. Hundert, damit jede Marke sich als Prozentzahl
+     der Strecke liest: die zweite Aufnahme setzt bei 15 ein, die dritte
+     bei 40, der Text wechselt zwischen 40 und 60.
 
-     1. p wird nicht direkt verwendet, sondern angeglichen (lerp mit .075).
-        Ein Mausrad springt in groben Stufen; ohne Angleichung springt die
-        Fahrt mit. Gerechnet wird in requestAnimationFrame, nicht im
-        Scroll-Ereignis.
-     2. Gesetzt werden ausschließlich CSS-Variablen, die in transform und
-        opacity landen. Keine Layout-Eigenschaft wird angefasst.
+     Warum nicht mehr von Hand: Vorher lag hier eine eigene Schleife, die
+     den Scrollfortschritt anglich (lerp .075) und in jedem Bild ein
+     Dutzend Variablen neu rechnete. Das lief, aber jede Marke stand als
+     ausgerechnete Rampe im Code — wer eine Aufnahme dazwischenschob,
+     musste alle Fenster nachrechnen. scrub übernimmt die Angleichung, und
+     zwar geschwindigkeitsabhängig: 0,6 Sekunden Nachlauf, in denen GSAP
+     im eigenen Takt aufholt. Die Choreografie steht dafür als Reihe von
+     Marken da und nicht mehr als Rechnung.
 
-     Ruhend läuft nichts davon: dann steht die erste Aufnahme still.       */
+     Gesetzt werden weiterhin ausschließlich CSS-Variablen, die in
+     transform und opacity landen — keine Layout-Eigenschaft. Und
+     ausschließlich mit fromTo: ein reines to müsste den Startwert aus dem
+     berechneten Stil lesen, und die Variablen stehen dort gar nicht, weil
+     das Stylesheet sie nur mit Rückfallwert benutzt. GSAP läse dann null.
+
+     Ruhend und ohne GSAP läuft nichts davon: dann steht die erste
+     Aufnahme still, und die Bühne ist ein gewöhnlicher Abschnitt.        */
 
   const rolle = $('.auftakt-rolle');
   const buehne = $('.buehne');
-  if (rolle && buehne && !ruhig()) {
-    const kamera = $('.kamera', buehne);
+  if (rolle && buehne && choreografie) {
+    const kamera   = $('.kamera', buehne);
+    const ebenen   = $$('.ebene', buehne);
+    const licht    = $('.licht', buehne);
+    const dunst    = $('.dunst-vorn', buehne);
     const schleier = $('.auftakt-schleier', buehne);
-    const stufe1 = $('.stufe-1', buehne);
-    const stufe2 = $('.stufe-2', buehne);
-    const ebenen = $$('.ebene', buehne).length;
+    const stufe1   = $('.stufe-1', buehne);
+    const stufe2   = $('.stufe-2', buehne);
 
-    let ziel = 0, sanft = 0, laeuft = false;
+    /* Der Anfangszustand muss stehen, bevor die Fahrt beginnt: onUpdate
+       meldet nur den Wechsel, nicht den Ausgangspunkt. Ohne diese zwei
+       Zeilen läse eine Vorlesesoftware beide Sätze, weil die zweite Stufe
+       zwar auf Deckkraft null steht, im Baum aber vorhanden ist. */
+    stufe1.setAttribute('aria-hidden', 'false');
+    stufe2.setAttribute('aria-hidden', 'true');
+    let zweite = false;
 
-    const klemm = (x) => x < 0 ? 0 : x > 1 ? 1 : x;
-    /* Weicher Ein- und Ausstieg für jede Überblendung: hart geschnitten
-       sieht man den Wechsel als Kante, nicht als Übergang. */
-    const rampe = (x, a, b) => klemm((x - a) / (b - a));
-    const weich = (x) => x * x * (3 - 2 * x);
-
-    const messen = () => {
-      const k = rolle.getBoundingClientRect();
-      const weg = k.height - innerHeight;
-      ziel = weg > 0 ? klemm(-k.top / weg) : 0;
-      if (!laeuft) { laeuft = true; requestAnimationFrame(malen); }
-    };
-
-    const malen = () => {
-      sanft += (ziel - sanft) * 0.075;
-      const p = sanft;
-
-      /* Kamera: fährt heran und sinkt dabei ein Stück. Sehr zurückhaltend —
-         das ist ein Salon, kein Trailer. */
-      kamera.style.setProperty('--kamera-s', (1.09 - p * 0.09).toFixed(4));
-      kamera.style.setProperty('--kamera-y', (p * -38).toFixed(1) + 'px');
-
-      /* Die vier Aufnahmen. Jede bekommt ein Fenster, die Ränder
-         überlappen sich; die Summe ist immer mindestens eins, sonst
-         scheint zwischendurch der nackte Grund durch. */
-      const schritt = 1 / (ebenen - 1);
-      for (let i = 0; i < ebenen; i++) {
-        const mitte = i * schritt;
-        const d = Math.abs(p - mitte) / schritt;
-        kamera.style.setProperty('--e' + (i + 1), weich(klemm(1 - d)).toFixed(3));
+    const F = G.timeline({
+      defaults: { ease: 'none' },   /* an den Scroll gebunden heißt linear */
+      scrollTrigger: {
+        trigger: rolle,
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: .6,
+        invalidateOnRefresh: true,
+        /* Die zweite Textstufe übernimmt in der Mitte des Wechsels. Was
+           gerade verschwindet, darf die Vorlesesoftware nicht mehr
+           ansagen — sonst hört man zwei Sätze übereinander. */
+        onUpdate: (selbst) => {
+          const jetzt = selbst.progress >= .53;   /* Mitte des Wechsels */
+          if (jetzt === zweite) return;
+          zweite = jetzt;
+          stufe1.setAttribute('aria-hidden', String(jetzt));
+          stufe2.setAttribute('aria-hidden', String(!jetzt));
+        }
       }
+    });
 
-      /* Licht wandert von rechts oben nach links und wird zur Mitte hin
-         kräftiger. */
-      kamera.style.setProperty('--licht-x', (p * -320).toFixed(1) + 'px');
-      kamera.style.setProperty('--licht-o', (0.34 + Math.sin(p * Math.PI) * 0.34).toFixed(3));
+    /* Die Kamera fährt heran und sinkt dabei ein Stück. Sehr
+       zurückhaltend — das ist ein Salon, kein Trailer.
 
-      /* Zwei Dunstbänder, unterschiedlich schnell — daraus wird Tiefe. */
-      kamera.style.setProperty('--dunst-v-x', (p * -150).toFixed(1) + 'px');
-      kamera.style.setProperty('--dunst-v-o', (0.30 + p * 0.26).toFixed(3));
+       Die Richtung ist nicht beliebig: Vorher lief sie andersherum, von
+       1,09 auf 1,00, also von nah nach weit. Am Ende der Fahrt kamen
+       dadurch die Ränder der Aufnahme ins Bild — Föhnarm, Bodenfliesen,
+       eine türkise Sprühflasche. Wer heranfährt, schneidet das weg,
+       statt es aufzudecken.                                              */
+    F.fromTo(kamera, { scale: 1.02, y: 0 }, { scale: 1.12, y: -38, duration: 100 }, 0);
 
-      /* Der Schleier zieht zur Mitte hin leicht an: dort fährt die Kamera
-         in die hellste Stelle, und der Text braucht mehr Rückhalt. */
-      schleier.style.setProperty('--schleier-o', (0.92 + Math.sin(p * Math.PI) * 0.08).toFixed(3));
+    /* Die Aufnahmen. Jede obere blendet über die darunter und bleibt dann
+       stehen. Nicht gegenläufig überblenden: die Ebenen liegen gestapelt,
+       und wenn beide bei halber Deckung stehen, scheint der Grund
+       zwischen ihnen durch.
 
-      /* Textstufen, nacheinander statt überlappend: die erste ist bei 50 %
-         ganz weg, dann kommt die zweite. Überschnitten standen bei halber
-         Fahrt beide bei etwa 40 % Deckung übereinander — zwei Sätze auf
-         demselben Fleck, und keiner davon lesbar. */
-      const ab = weich(rampe(p, 0.40, 0.50));
-      const an = weich(rampe(p, 0.50, 0.60));
-      stufe1.style.setProperty('--stufe-o', (1 - ab).toFixed(3));
-      stufe1.style.setProperty('--stufe-y', (ab * -16).toFixed(1) + 'px');
-      stufe2.style.setProperty('--stufe-o', an.toFixed(3));
-      stufe2.style.setProperty('--stufe-y', ((1 - an) * 16).toFixed(1) + 'px');
-      stufe2.setAttribute('aria-hidden', an < 0.5 ? 'true' : 'false');
-      stufe1.setAttribute('aria-hidden', an < 0.5 ? 'false' : 'true');
+       Der Einsatz sitzt bei 15, 40 und 65 Prozent und dauert 20. Damit
+       steht jede Aufnahme ein Stück weit allein, bevor die nächste kommt. */
+    /* Der Ausgangszustand steht außerhalb der Zeitleiste, und das ist keine
+       Geschmacksfrage: Zwei set-Anweisungen an derselben Stelle (erst alle
+       auf null, dann die erste auf eins) laufen beim Rückwärtslesen in
+       umgekehrter Reihenfolge ab. Wer bis unten scrollte und wieder hoch
+       kam, sah dann eine leere Bühne — alle drei Aufnahmen auf null. Am
+       ersten Bildschirm ist das nicht weniger als die halbe Seite.        */
+    G.set(ebenen, { opacity: 0 });
+    G.set(ebenen[0], { opacity: 1 });
 
-      /* Weiterrechnen, solange die Angleichung noch nicht angekommen ist. */
-      if (Math.abs(ziel - sanft) > 0.0002) requestAnimationFrame(malen);
-      else { sanft = ziel; laeuft = false; }
-    };
+    ebenen.forEach((e, k) => {
+      if (!k) return;
+      const mitte = k * (100 / ebenen.length);
+      F.fromTo(e, { opacity: 0 }, { opacity: 1, duration: 20, ease: 'power1.inOut' }, mitte - 10);
+      /* Und die darunter aus, sobald sie wirklich verdeckt ist. Sichtbar
+         ändert das nichts — messbar schon: vier deckende Bildschirmflächen
+         übereinander kosten den Kompositor in jedem Bild Arbeit für etwas,
+         das niemand sieht. */
+      F.to(ebenen[k - 1], { opacity: 0, duration: 1 }, mitte + 10);
+    });
 
-    addEventListener('scroll', messen, { passive: true });
-    addEventListener('resize', messen);
-    messen();
-    sanft = ziel; malen();
+    /* Licht: wandert nach links und wird zur Mitte hin kräftiger. Zwei
+       Hälften mit sine-Kurve statt einer Sinusrechnung je Bild — das ist
+       dieselbe Bewegung, nur steht sie jetzt als Marke da. */
+    F.fromTo(licht, { x: 0 }, { x: -320, duration: 100 }, 0)
+     .fromTo(licht, { opacity: .34 }, { opacity: .68, duration: 50, ease: 'sine.inOut' }, 0)
+     .to(licht, { opacity: .34, duration: 50, ease: 'sine.inOut' }, 50);
 
+    /* Der Dunst zieht langsamer als das Licht. Aus dem Unterschied der
+       beiden Geschwindigkeiten entsteht die Tiefe, nicht aus einem
+       Weichzeichner. */
+    F.fromTo(dunst, { x: 0, opacity: .30 }, { x: -150, opacity: .56, duration: 100 }, 0);
+
+    /* Der Schleier zieht zur Mitte hin leicht an: dort fährt die Kamera in
+       die hellste Stelle, und der Text braucht mehr Rückhalt. */
+    F.fromTo(schleier, { opacity: .92 }, { opacity: 1, duration: 50, ease: 'sine.inOut' }, 0)
+     .to(schleier, { opacity: .92, duration: 50, ease: 'sine.inOut' }, 50);
+
+    /* Die beiden Textstufen, nacheinander statt überlappend: die erste ist
+       weg, bevor die zweite kommt. Überschnitten standen bei halber Fahrt
+       beide bei etwa 40 Prozent Deckung übereinander — zwei Sätze auf
+       demselben Fleck, und keiner davon lesbar.
+
+       Der Abgang beschleunigt, der Auftritt bremst aus. Andersherum sieht
+       es aus, als würde der Text weggezogen und dann hingeworfen.        */
+    F.fromTo(stufe1, { opacity: 1, y: 0 },
+      { opacity: 0, y: -16, duration: 10, ease: 'power2.in' }, 38);
+    F.fromTo(stufe2, { opacity: 0, y: 16 },
+      { opacity: 1, y: 0, duration: 10, ease: 'power2.out' }, 48);
   }
 
   /* ── Die Übersicht in der Kopfzeile ────────────────────────────────────
@@ -589,6 +621,46 @@
       rahmen.loading = 'lazy';
       rahmen.referrerPolicy = 'no-referrer-when-downgrade';
       buchung.replaceChildren(rahmen);
+    });
+  }
+
+  /* ── Die Stimmungswahl ────────────────────────────────────────────────
+     Drei Paletten, alle aus dem eigenen Material gemessen. Gewechselt wird
+     ein Attribut am <html>, mehr nicht — die Farben selbst stehen in
+     stil.css. Die Wahl bleibt im Browser der Besucherin und verlässt ihn
+     nicht; im Kopf jeder Seite steht ein winziges Skript, das sie noch vor
+     dem ersten Bild setzt, sonst blitzt beim Seitenwechsel Messing auf.
+
+     Der Wechsel läuft über die View-Transition, wo der Browser sie kann:
+     ein einziger Schnitt über die ganze Seite ist ruhiger als hundert
+     einzeln überblendende Farben — und billiger, weil der Browser zwei
+     Standbilder überblendet statt jede Fläche neu zu zeichnen.            */
+
+  const stimmungen = $$('.stimmung');
+  if (stimmungen.length) {
+    const FARBE = { messing: '#291c13', asche: '#131e2b', rose: '#2c1516' };
+
+    const anzeigen = (name) => {
+      stimmungen.forEach((k) => {
+        k.setAttribute('aria-pressed', String(k.dataset.stimmung === name));
+      });
+    };
+
+    const setzen = (name, weich) => {
+      const tun = () => {
+        if (name === 'messing') delete document.documentElement.dataset.palette;
+        else document.documentElement.dataset.palette = name;
+        $('meta[name=theme-color]')?.setAttribute('content', FARBE[name]);
+        anzeigen(name);
+      };
+      if (weich && !ruhig() && document.startViewTransition) document.startViewTransition(tun);
+      else tun();
+      try { localStorage.setItem('bahaar-stimmung', name); } catch (e) { /* privater Modus */ }
+    };
+
+    anzeigen(document.documentElement.dataset.palette || 'messing');
+    stimmungen.forEach((k) => {
+      k.addEventListener('click', () => setzen(k.dataset.stimmung, true));
     });
   }
 

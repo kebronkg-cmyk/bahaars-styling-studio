@@ -66,14 +66,16 @@ const auftraege = [
   //    Föhn, Steckdose und Regal mit ins Bild. Quadratisch bleibt der
   //    Ausschnitt schmal genug, um beim Haar zu bleiben; die Fläche schneidet
   //    ihn über object-fit auf ihr eigenes Format zurück.
-  ['auftakt-1',      'arbeit-10-lang-blond.jpg',    0.55, 0.58, 0.62, 1.00, 1240, 0.80, true],
-  ['auftakt-1-hoch', 'arbeit-10-lang-blond.jpg',    0.55, 0.58, 0.86, 0.70,  900, 0.80, true],
+  //    arbeit-10-lang-blond ist hier raus. Es war die erste Aufnahme der
+  //    Fahrt und damit das erste, was jemand von diesem Salon sieht — und
+  //    ausgerechnet dort standen krause Flusen, ein fahler Ton und ein
+  //    Fussel auf dem Umhang. Bei einem Friseur ist das Foto das Produkt.
+  ['auftakt-1',      'arbeit-09-lang-glatt.jpg',    0.56, 0.58, 0.62, 1.00, 1240, 0.80, true],
+  ['auftakt-1-hoch', 'arbeit-09-lang-glatt.jpg',    0.56, 0.58, 0.86, 0.70,  900, 0.80, true],
   ['auftakt-2',      'arbeit-05-blond-locken.jpg',  0.48, 0.54, 0.62, 1.00, 1240, 0.80, true],
   ['auftakt-2-hoch', 'arbeit-05-blond-locken.jpg',  0.48, 0.54, 0.86, 0.70,  900, 0.80, true],
-  ['auftakt-3',      'arbeit-09-lang-glatt.jpg',    0.56, 0.58, 0.62, 1.00, 1240, 0.80, true],
-  ['auftakt-3-hoch', 'arbeit-09-lang-glatt.jpg',    0.56, 0.58, 0.86, 0.70,  900, 0.80, true],
-  ['auftakt-4',      'arbeit-02-balayage.jpg',      0.55, 0.56, 0.62, 1.00, 1240, 0.80, true],
-  ['auftakt-4-hoch', 'arbeit-02-balayage.jpg',      0.55, 0.56, 0.86, 0.70,  900, 0.80, true],
+  ['auftakt-3',      'arbeit-02-balayage.jpg',      0.55, 0.56, 0.62, 1.00, 1240, 0.80, true],
+  ['auftakt-3-hoch', 'arbeit-02-balayage.jpg',      0.55, 0.56, 0.86, 0.70,  900, 0.80, true],
 ];
 
 // Der Farbfächer zeigt pro Leistung ein Blatt. Die Farbe dieses Blattes wird

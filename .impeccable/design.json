@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-22T04:00:00Z",
+  "generatedAt": "2026-08-23T04:00:52Z",
   "title": "Gestaltungssystem: BaHaar's Styling Studio",
   "extensions": {
     "colorMeta": {
@@ -356,33 +356,36 @@
       "flach": "0 1px 2px oklch(38% .04 60 / .07), 0 3px 10px oklch(38% .04 60 / .07)",
       "hoch": "0 2px 6px oklch(38% .04 60 / .11), 0 20px 44px oklch(38% .04 60 / .20)"
     },
-    "motion": [
-      {
-        "name": "kurve",
-        "value": "cubic-bezier(.22, .61, .36, 1)",
-        "purpose": "Standardkurve für Zustandswechsel. Nur ease-out, kein Federn."
+    "motion": {
+      "engine": "GSAP 3.15.0 + ScrollTrigger, im Projekt unter fremd/ (kein CDN)",
+      "personality": "Premium — 350–600 ms, ausbremsend, kein Überschwingen",
+      "signatureEase": "power2.out (GSAP) / cubic-bezier(.22,.61,.36,1) (CSS)",
+      "durations": {
+        "schnell": "0.3s",
+        "standard": "0.55s",
+        "weit": "0.8s"
       },
-      {
-        "name": "kurve-weit",
-        "value": "cubic-bezier(.16, .84, .44, 1)",
-        "purpose": "Für weite Wege: Auffächern, Einblenden, Bildzoom."
+      "direction": "Auftritt bremst aus (power2.out), Abgang beschleunigt (power2.in)",
+      "stagger": {
+        "batchMax": 3,
+        "abstand": "0.09s",
+        "grund": "vier gleichzeitig anlaufende Bewegungen kann das Auge nicht mehr einzeln verfolgen"
       },
-      {
-        "name": "t1",
-        "value": "0.3s",
-        "purpose": "Farbe, Rand, kleine Verschiebung."
+      "auftakt": {
+        "technik": "Zeitleiste über 100 Einheiten an ScrollTrigger mit scrub 0.6, pin über CSS-sticky",
+        "kamera": "scale 1.02 → 1.12, y 0 → -38px, linear",
+        "aufnahmen": 3,
+        "properties": "ausschließlich transform und opacity, direkt am Element"
       },
-      {
-        "name": "t2",
-        "value": "0.5s",
-        "purpose": "Überlagerungen, klebende Leisten, Schatten."
-      },
-      {
-        "name": "t3",
-        "value": "0.8s",
-        "purpose": "Einblendungen und das Auffächern."
+      "fallback": {
+        "marken": [
+          "mitskript",
+          "mitgsap",
+          "mitfahrt"
+        ],
+        "regel": "ohne GSAP oder bei prefers-reduced-motion wird mitfahrt nicht gesetzt; die Seite steht dann vollständig sichtbar da wie ganz ohne Skript"
       }
-    ],
+    },
     "breakpoints": [
       {
         "name": "hoch-schmal",
@@ -428,7 +431,51 @@
         "name": "stufe-3",
         "value": "88rem"
       }
-    ]
+    ],
+    "colorVariants": {
+      "mechanism": "data-palette am <html>; ohne Attribut gilt messing",
+      "storage": "localStorage-Schlüssel bahaar-stimmung",
+      "scope": "ausschließlich Farbtoken — Abstände, Kurven, Schriftgrößen und Muster-Geometrie bleiben in allen Varianten gleich",
+      "variants": [
+        {
+          "id": "messing",
+          "displayName": "Messing",
+          "default": true,
+          "grund": "oklch(97.5% .009 84)",
+          "tief": "oklch(24% .026 55)",
+          "tinte": "oklch(28% .028 58)",
+          "leit": "oklch(45% .085 60)",
+          "leitHell": "oklch(72% .095 68)",
+          "ornament": "oklch(64% .095 8)",
+          "gemessenAn": "Karamell im Haar über alle Arbeitsfotos; dunkles Holz, Lederstuhl und Kleidung im Portrait der Inhaberin"
+        },
+        {
+          "id": "asche",
+          "displayName": "Asche",
+          "default": false,
+          "grund": "oklch(97.5% .005 250)",
+          "tief": "oklch(23% .030 254)",
+          "tinte": "oklch(27% .026 252)",
+          "leit": "oklch(45% .052 250)",
+          "leitHell": "oklch(72% .055 248)",
+          "ornament": "oklch(64% .085 14)",
+          "gemessenAn": "kühle Schattenseiten in arbeit-06-bob-blond (oklch(24,4% .045 254)) und arbeit-04-kurzhaar (oklch(22,3% .020 303))"
+        },
+        {
+          "id": "rose",
+          "displayName": "Rosé",
+          "default": false,
+          "grund": "oklch(97.5% .008 40)",
+          "tief": "oklch(23% .038 18)",
+          "tinte": "oklch(27% .032 20)",
+          "leit": "oklch(45% .095 24)",
+          "leitHell": "oklch(72% .085 26)",
+          "ornament": "oklch(64% .080 70)",
+          "gemessenAn": "Brautbilder arbeit-15-braut-schleier (oklch(65,5% .051 6)) und arbeit-13-hochsteck-blumen (oklch(41,8% .122 20))"
+        }
+      ],
+      "rule": "Auch die Varianten stehen unter der Eigentumsregel: jede ist am eigenen Material gemessen, keine an einem Lieferantenregal. Die Ornamentfarbe wandert mit, damit sich die zweite Farbe von der Leitfarbe löst."
+    }
   },
   "components": [
     {

@@ -26,7 +26,8 @@ rechtlich.
 | `DESIGN.md` | Das Gestaltungssystem, wie es tatsächlich gebaut ist |
 | `index.html` … | Die sieben Seiten |
 | `stil.css` | Gesamtes Gestaltungssystem, alle Werte als Token in `:root` |
-| `seite.js` | Gesamtes Verhalten, ohne Fremdcode |
+| `seite.js` | Gesamtes Verhalten |
+| `fremd/` | GSAP 3.15.0 und ScrollTrigger, im Projekt statt von einem fremden Server. Herkunft und Lizenz in `fremd/HERKUNFT.md` |
 | `bilder/`, `schrift/` | Ausgelieferte Bilder und Schriften, beide erzeugt |
 | `werkzeug/` | Messwerkzeuge: Screenshots, Kontrast, Bildzuschnitte, Farben, Schriften |
 
@@ -38,6 +39,8 @@ Alles rechnet in Chromium über Playwright — kein Zusatzprogramm nötig.
 python3 -m http.server 8099 &
 
 node werkzeug/schuss.mjs index.html       # Screenshots 1440 + 390, Konsolenfehler
+node werkzeug/rundgang.mjs               # alle Seiten × 3 Breiten × 3 Stimmungen × 2 Rückfallebenen
+node werkzeug/varianten-schau.mjs        # dieselbe Stelle in allen drei Farbstimmungen
 node werkzeug/kontrast-messen.mjs *.html  # echter Kontrast über den Fotoflächen
 node werkzeug/bilder-bauen.mjs            # Zuschnitte neu erzeugen, Haartöne messen
 node werkzeug/farben-messen.mjs           # Farben aus den Rohfotos lesen

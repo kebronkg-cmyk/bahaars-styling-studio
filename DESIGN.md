@@ -175,11 +175,13 @@ spricht deshalb in der ersten Person — „Seit zwanzig Jahren stehe ich selbst
 am Stuhl" — und zeigt danach die Arbeit: fünfzehn Aufnahmen aus dem Alltag,
 jede in ihrem eigenen Seitenverhältnis, keine beschnitten.
 
-Der Auftakt ist hell. Hinter dem Text wechseln vier Aufnahmen aus dem Laden,
-jede acht Sekunden, mit anderthalb Sekunden Überblendung; darüber liegt ein
-Schleier in der Grundfarbe, dicht über der Textspalte und offen über dem
-Bild. Das Espresso, das hier vorher stand, trägt jetzt die Fußzeile: am
-Anfang war es zu schwer, am Ende schließt es die Seite ab.
+Der Auftakt ist hell und scrollgesteuert: Über zwei Bildschirmhöhen klebt
+die Bühne fest, die Kamera fährt heran, drei Aufnahmen lösen einander ab.
+Nichts davon läuft auf einer Uhr — wer nicht scrollt, sieht ein Standbild.
+Darüber liegt ein Schleier in der Grundfarbe, dicht über der Textspalte und
+offen in der Lücke zwischen Text und Terminkarte. Das Espresso, das hier
+vorher stand, trägt jetzt die Fußzeile: am Anfang war es zu schwer, am Ende
+schließt es die Seite ab.
 
 Die Palette ist aus dem Material gemessen. Über das Portrait der Inhaberin
 und alle Arbeitsfotos hinweg liegt die warme Achse geschlossen im Farbtonband
@@ -208,6 +210,14 @@ Online-Buchung und Telefonnummer. Sichtbar, ohne zu drängen.
   einverstanden sind — seitdem steht jedes Bild in voller Aufnahme.
 - *Die Fotobänder unter einem Schleier auf den Unterseiten.* Von der Arbeit
   blieb dort nur Struktur übrig. Jetzt steht das Bild neben dem Text, ganz.
+- *Die vierte Aufnahme des Auftakts* (`arbeit-10-lang-blond`). Sie war das
+  erste, was jemand von diesem Salon sah — und zeigte ausgerechnet krause
+  Flusen, einen fahlen Ton und einen Fussel auf dem Umhang. Bei einem
+  Friseur ist das Foto das Produkt. Drei saubere Aufnahmen sind besser als
+  vier, von denen eine schadet.
+- *Die eigene Scroll-Schleife.* Sie funktionierte, aber jede Marke stand als
+  ausgerechnete Rampe im Code. Jetzt trägt GSAP ScrollTrigger die Fahrt, und
+  die Choreografie liest sich als Reihe von Marken.
 
 **Key Characteristics:**
 
@@ -279,6 +289,36 @@ Stimme. Alle drei liegen im gemessenen Band 47–88°.
 - **Fremd-Grund** (`{colors.fremd-grund}`): der Grund des eingebetteten
   Buchungsfensters. Ein benannter Fremdkörper — er markiert die einzige
   Fläche, die wir nicht gestalten, statt sie unbenannt einzuschleusen.
+
+### Farbvarianten
+
+Drei Stimmungen aus demselben Laden, umgeschaltet über `data-palette` am
+`<html>`. Ohne Attribut gilt Messing. Verändert werden ausschließlich
+Farbtoken — Abstände, Kurven, Schriftgrößen und Muster-Geometrie bleiben in
+allen drei gleich, sonst wären es drei Seiten statt einer Seite in drei
+Stimmungen.
+
+| Variante | Grund | Tief | Leitfarbe | Woher gemessen |
+|---|---|---|---|---|
+| **Messing** (Vorgabe) | `oklch(97.5% .009 84)` | `oklch(24% .026 55)` | `oklch(45% .085 60)` | Karamell im Haar, dunkles Holz im Portrait |
+| **Asche** | `oklch(97.5% .005 250)` | `oklch(23% .030 254)` | `oklch(45% .052 250)` | Schattenseiten von `arbeit-06` (`oklch(24,4% .045 254)`) und `arbeit-04` (`oklch(22,3% .020 303)`) |
+| **Rosé** | `oklch(97.5% .008 40)` | `oklch(23% .038 18)` | `oklch(45% .095 24)` | Brautbilder: `arbeit-15` (`oklch(65,5% .051 6)`), `arbeit-13` (`oklch(41,8% .122 20)`) |
+
+Auch die Varianten stehen unter der Eigentumsregel: Asche kommt aus den
+kühlen Schatten in den eigenen Arbeitsfotos, Rosé aus den eigenen
+Brautbildern. Keine der drei ist von einem Regal abgelesen.
+
+Die Ornamentfarbe wandert mit: In Messing und Asche ist sie Rosé, in Rosé
+ist sie das Karamell — die zweite Farbe muss sich von der Leitfarbe lösen,
+sonst sieht man sie nicht als zweite.
+
+**Der Umschalter** steht im Fuß: drei Proben, jede halb Grund und halb
+Leitfarbe *ihrer eigenen* Palette, nicht der gerade gültigen — sonst zeigt er
+dreimal dasselbe. Die Wahl liegt in `localStorage` (`bahaar-stimmung`) und
+wird im Kopf jeder Seite von einem winzigen Skript noch vor dem ersten Bild
+gesetzt; ohne das blitzt beim Seitenwechsel Messing auf. Gewechselt wird über
+`document.startViewTransition`, wo der Browser das kann: ein Schnitt über die
+ganze Seite ist ruhiger als hundert einzeln überblendende Farben.
 
 ### Named Rules
 
@@ -450,8 +490,37 @@ Zustände, `--kurve-weit` (`cubic-bezier(.16,.84,.44,1)`) für weite Wege. Dauer
 sind 0,3 s / 0,5 s / 0,8 s. Animiert werden ausschließlich `transform` und
 `opacity`. Hover-Effekte stehen hinter `@media (hover: hover) and (pointer: fine)`.
 `prefers-reduced-motion` schaltet Einblendungen ganz ab und kappt alle Dauern.
-Einblendungen (`.auf`) sind ohne JavaScript sichtbar: der Ausgangszustand ist
-sichtbar, erst die Klasse `mitskript` am `<html>` schaltet sie scharf.
+
+**Der Bewegungscharakter ist „Premium"**: 350–600 ms, ausbremsende Kurven,
+kein Überschwingen. Das deckt sich mit der Hausregel — kein Federn, kein
+Zurückschwingen. Daraus folgen drei Konstanten für die ganze Seite:
+
+| | |
+|---|---|
+| Signaturkurve | `power2.out` (GSAP) bzw. `--kurve` (CSS) |
+| Dauern | 0,3 s schnell · 0,55 s Standard · 0,8 s weit |
+| Eintrittsmuster | 18 px von unten, ausbremsend, gestaffelt zu dritt |
+
+Richtungsregel: **Auftritt bremst aus, Abgang beschleunigt.** Andersherum
+sieht es aus, als würde etwas weggezogen und dann hingeworfen. Deshalb geht
+die erste Textstufe der Bühne mit `power2.in` und die zweite kommt mit
+`power2.out`.
+
+**Drei Marken am `<html>`, und jede sagt etwas anderes.** Der Unterschied ist
+die Rückfallebene:
+
+- `mitskript` — das Skript läuft. Damit greift alles, was ohne Skript nicht
+  bedienbar wäre, etwa die Ausklapp-Übersicht in der Kopfzeile.
+- `mitgsap` — GSAP liegt vor. Dann gehört die Einblendung ihm allein; eine
+  CSS-Überblendung daneben zöge am selben Wert.
+- `mitfahrt` — es wird choreografiert: die Bühne wird zwei Bildschirme hoch
+  und klebt, die Abschnitte kommen erst beim Auftauchen.
+
+Fehlt GSAP oder ist Bewegung abbestellt, wird `mitfahrt` nicht gesetzt — dann
+steht die Seite da wie ganz ohne Skript: alles sichtbar, nichts wartet auf ein
+Ereignis, das nicht kommt. Das ist der einzige Zustand, in dem eine
+Einblendung gefährlich wird: Löst sie nie aus, ist aus ihr verschwundener
+Inhalt geworden.
 
 ## Elevation & Depth
 
@@ -580,22 +649,53 @@ Kapitälchenbeschriftung.
 ### Der Auftakt: eine Kamerafahrt über Standbilder
 
 Über zwei Bildschirmhöhen (`.auftakt-rolle`, `height: 200svh`) klebt die
-Bühne oben fest und fährt: die Kamera zieht heran, vier Aufnahmen lösen
-einander ab, Licht und Dunst ziehen mit. Alles hängt an einer Zahl, dem
-Scrollfortschritt `p`.
+Bühne oben fest und fährt: die Kamera zieht heran, drei Aufnahmen lösen
+einander ab, Licht und Dunst ziehen mit.
+
+Gefahren wird über eine **GSAP-Zeitleiste von hundert Einheiten**, an einen
+`ScrollTrigger` mit `scrub: .6` gehängt. Hundert, damit jede Marke sich als
+Prozentzahl der Strecke liest: die zweite Aufnahme setzt bei 23 ein, die
+dritte bei 56, der Text wechselt zwischen 38 und 58.
 
 - **Warum zwei Bildschirme und nicht sechs.** Wer hier landet, sucht meistens
   eine Telefonnummer. Die Terminkarte steht deshalb vom ersten Moment an im
   Bild und bleibt über die ganze Fahrt sichtbar.
-- **Angleichung** (`sanft += (ziel - sanft) * .075`) in `requestAnimationFrame`,
-  nicht im Scroll-Ereignis. Ein Mausrad springt in groben Stufen; ohne
-  Angleichung springt die Fahrt mit.
+- **Warum nicht mehr von Hand.** Vorher lag hier eine eigene Schleife, die
+  den Scrollfortschritt anglich (lerp `.075`) und in jedem Bild ein Dutzend
+  Variablen neu rechnete. Das lief — aber jede Marke stand als ausgerechnete
+  Rampe im Code, und wer eine Aufnahme dazwischenschob, musste alle Fenster
+  nachrechnen. `scrub` übernimmt die Angleichung, geschwindigkeitsabhängig;
+  die Choreografie steht dafür als Reihe von Marken da statt als Rechnung.
+- **Nur `transform` und `opacity`**, und GSAP schreibt sie direkt aufs
+  Element statt über CSS-Variablen. Keine Layout-Eigenschaft wird angefasst.
 - **Isolierung.** `isolation: isolate` auf der Bühne trennt den Stapel ab,
   `will-change: transform` hält die Kamera auf einer eigenen Ebene.
-- **Gesetzt werden nur CSS-Variablen**, die in `transform` und `opacity`
-  landen. Keine Layout-Eigenschaft wird angefasst.
-- **Ruhend und ohne Skript** fällt die Rolle auf einen Bildschirm zusammen:
-  eine Aufnahme, kein Kleben, kein Staub, keine zweite Textstufe.
+- **Ruhend und ohne GSAP** fällt die Rolle auf einen Bildschirm zusammen:
+  eine Aufnahme, kein Kleben, kein Staub, keine zweite Textstufe. Die Marke
+  `.mitfahrt` wird dann gar nicht erst gesetzt — die Seite steht da wie ganz
+  ohne Skript, alles sichtbar, nichts wartet auf ein Ereignis.
+
+**Drei Fehler, die die Umstellung ans Licht gebracht hat.**
+
+1. *Zwei `set` an derselben Stelle.* Der Ausgangszustand stand als
+   `F.set(alle, 0).set(erste, 1)` in der Zeitleiste. Beim Rückwärtslesen
+   laufen gleichzeitige Anweisungen in umgekehrter Reihenfolge ab: Wer bis
+   unten scrollte und wieder hochkam, sah eine leere Bühne. Der
+   Ausgangszustand gehört außerhalb der Zeitleiste.
+2. *Die Kamera fuhr in die falsche Richtung.* `scale` lief von 1,09 auf
+   1,00 — also von nah nach weit, entgegen dem eigenen Kommentar. Am Ende
+   der Fahrt kamen dadurch die Ränder der Aufnahme ins Bild: Föhnarm,
+   Bodenfliesen, eine türkise Sprühflasche. Jetzt 1,02 → 1,12.
+3. *Das Fenster im Schleier lag hinter der Karte.* Der seitliche Verlauf war
+   erst bei 76–88 % ganz offen; bei 1440 px liegt die Terminkarte bei
+   70–92 %. Vom Foto war auf dem ersten Bildschirm praktisch nichts zu
+   sehen. Gemessen: längste Titelzeile endet bei 55 %, Karte beginnt bei
+   70 % — das Fenster öffnet jetzt ab 60 % und ist ab 68 % ganz auf.
+
+**Die Einblendungen** laufen über `ScrollTrigger.batch` mit `batchMax: 3` und
+`stagger: .09`. Höchstens drei auf einmal: Vier gleichzeitig anlaufende
+Bewegungen kann das Auge nicht mehr einzeln verfolgen. Nach unten wird nicht
+zurückgesetzt — wer zurückscrollt, will lesen, nicht zusehen.
 
 **Was die Vorlage vorgab und was daraus wurde.** Die Vorlage verlangt
 `filter: blur()` auf den Dunstebenen und `mix-blend-mode: screen`, dazu eine
@@ -627,7 +727,20 @@ kommt.
 
 **Gemessen wird die Fahrt, nicht der Anfang.** `werkzeug/kontrast-fahrt.mjs`
 misst den Kontrast an fünf Stellen zwischen 0 und 100 %, weil Bild, Licht und
-Schleier sich mitbewegen. 80 Messungen, engste Stelle 4,78 : 1.
+Schleier sich mitbewegen.
+
+**Was der Wechsel auf GSAP an Tempo gebracht hat: nichts.** Die Fahrt lief
+vorher bei 46, jetzt bei 45–48 Bildern je Sekunde — im Rauschen. Gemessen
+wurde auch, woran das liegt, und die naheliegende Vermutung war falsch: Nicht
+das Bewegen der Lichtebene kostet (stillgestellt 48, bewegt 46, kleiner 45,
+mit nur einem Verlauf 46 — alles dasselbe), sondern dass sie überhaupt im
+Stapel liegt. Mit `display: none` springt die Fahrt auf 57–60. Der Preis ist
+die Bildsprache selbst: mehrere durchscheinende Vollflächen übereinander.
+Dieser Rechner zeichnet ohne Grafikkarte (SwiftShader); auf einem Gerät mit
+Kompositor im Chip fällt genau diese Arbeit weg.
+
+Ein Gewinn steht trotzdem im Code: Eine Aufnahme, die vollständig verdeckt
+ist, wird jetzt auf null gesetzt statt deckend liegenzubleiben.
 
 ### Die Übersicht in der Kopfzeile
 

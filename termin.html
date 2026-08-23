@@ -5,7 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Termin — BaHaar’s Styling Studio</title>
 <meta name="description" content="Termin im Friseursalon BaHaar’s Styling Studio in München-Giesing: online buchen, anrufen unter 089 692 36 44 oder eine Nachricht schreiben.">
-<meta name="theme-color" content="#0d2b31">
+<meta name="theme-color" content="#291c13">
+<script>
+/* Die gewählte Farbstimmung noch vor dem ersten Bild setzen — sonst
+   blitzt beim Seitenwechsel kurz die Vorgabe auf. Bewusst ohne defer. */
+try{var p=localStorage.getItem('bahaar-stimmung');
+ if(p==='asche'||p==='rose'){document.documentElement.dataset.palette=p;
+  document.currentScript.previousElementSibling.content=p==='asche'?'#131e2b':'#2c1516';}}catch(e){}
+</script>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preload" href="schrift/Marcellus-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="schrift/Archivo.woff2" as="font" type="font/woff2" crossorigin>
@@ -235,6 +242,20 @@
         </ul>
       </div>
     </div>
+    <div class="stimmungswahl">
+      <span class="stimmung-titel" id="stimmung-titel">Stimmung</span>
+      <div class="stimmung-reihe" role="group" aria-labelledby="stimmung-titel">
+        <button type="button" class="stimmung" data-stimmung="messing" aria-pressed="true">
+          <span class="stimmung-probe probe-messing" aria-hidden="true"></span>Messing
+        </button>
+        <button type="button" class="stimmung" data-stimmung="asche" aria-pressed="false">
+          <span class="stimmung-probe probe-asche" aria-hidden="true"></span>Asche
+        </button>
+        <button type="button" class="stimmung" data-stimmung="rose" aria-pressed="false">
+          <span class="stimmung-probe probe-rose" aria-hidden="true"></span>Ros&eacute;
+        </button>
+      </div>
+    </div>
     <div class="fusszeile-schluss">
       <span>© <span class="jahr">2026</span> BaHaar’s Styling Studio</span>
       <a href="impressum.html">Impressum</a>
@@ -244,6 +265,12 @@
   </div>
 </footer>
 
+<!-- GSAP liegt im Projekt, nicht auf einem fremden Server (fremd/HERKUNFT.md).
+     defer hält die Reihenfolge ein: erst der Kern, dann ScrollTrigger, dann
+     unser Code. Fehlt eines davon, läuft die Seite ohne Choreografie — und
+     zwar vollständig sichtbar, nicht halb eingeblendet. -->
+<script src="fremd/gsap.min.js" defer></script>
+<script src="fremd/ScrollTrigger.min.js" defer></script>
 <script src="seite.js" defer></script>
 </body>
 </html>
