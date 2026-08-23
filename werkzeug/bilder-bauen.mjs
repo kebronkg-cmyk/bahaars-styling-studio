@@ -66,8 +66,8 @@ const auftraege = [
   //    Föhn, Steckdose und Regal mit ins Bild. Quadratisch bleibt der
   //    Ausschnitt schmal genug, um beim Haar zu bleiben; die Fläche schneidet
   //    ihn über object-fit auf ihr eigenes Format zurück.
-  ['auftakt-1',      'arbeit-03-straehnen.jpg',     0.52, 0.46, 0.62, 1.00, 1240, 0.80, true, [1.05, 0.95, 0.99]],
-  ['auftakt-1-hoch', 'arbeit-03-straehnen.jpg',     0.52, 0.46, 0.86, 0.70,  900, 0.80, true, [1.05, 0.95, 0.99]],
+  ['auftakt-1',      'arbeit-10-lang-blond.jpg',    0.55, 0.58, 0.62, 1.00, 1240, 0.80, true],
+  ['auftakt-1-hoch', 'arbeit-10-lang-blond.jpg',    0.55, 0.58, 0.86, 0.70,  900, 0.80, true],
   ['auftakt-2',      'arbeit-05-blond-locken.jpg',  0.48, 0.54, 0.62, 1.00, 1240, 0.80, true],
   ['auftakt-2-hoch', 'arbeit-05-blond-locken.jpg',  0.48, 0.54, 0.86, 0.70,  900, 0.80, true],
   ['auftakt-3',      'arbeit-09-lang-glatt.jpg',    0.56, 0.58, 0.62, 1.00, 1240, 0.80, true],
