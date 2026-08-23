@@ -94,6 +94,15 @@ Was hier den Platz der Speisekarte einnimmt:
 - Dauern zwischen 0,3 s und 0,9 s. Endlosschleifen deutlich langsamer.
 - **Tempo aus gemessenen Werten rechnen, nicht aus festen Dauern**, sobald die
   Strecke von Schriftgröße oder Inhalt abhängt.
+- **Höchstens drei Bewegungen gleichzeitig.** Vier gleichzeitig anlaufende
+  Bewegungen kann das Auge nicht mehr einzeln verfolgen; es sieht dann nur
+  noch, dass sich etwas bewegt, nicht mehr was. Der Rest kommt als nächste
+  Gruppe, rund 90 ms später.
+- **Auftritt bremst aus, Abgang beschleunigt.** Andersherum sieht es aus, als
+  würde etwas weggezogen und dann hingeworfen.
+- **Eine Kamerafahrt fährt heran, nicht heraus.** Wer heranfährt, schneidet
+  den Rand der Aufnahme weg; wer herausfährt, deckt ihn auf — und am Rand
+  einer Salonaufnahme stehen Föhn, Steckdose und Bodenfliesen.
 
 ## Prüfen statt behaupten
 
@@ -123,6 +132,9 @@ schlimmer als ein unbeschriftetes.
 | Grid mit zwei Kindern erzeugt zwei Zeilen | `grid-area: 1 / 1` zum Stapeln |
 | Scroll-Umschalter flackert beim sanften Auslaufen | 6 px Hysterese |
 | Viele DOM-Zeilen einzeln einfügen ruckelt | `DocumentFragment` + `replaceChildren` |
+| Zwei `set` an derselben Stelle einer GSAP-Zeitleiste laufen beim Rückwärtslesen in umgekehrter Reihenfolge | Ausgangszustand außerhalb der Zeitleiste setzen |
+| Eine spezifischere Nachbarregel (`.wegweiser a`, zwei Klassen) hebelt eine Ein-Klassen-Regel aus — auch bei Polsterung, nicht nur bei Farbe | Die Regel mit dem Elternselektor davor schreiben, nicht mit `!important` |
+| Ein Schleierfenster, das „über dem Bild offen" ist, kann vollständig hinter einer Karte liegen | Kanten von Text und Karte messen, dann die Verlaufsstufen daraus rechnen |
 
 ## Zugänglichkeit
 

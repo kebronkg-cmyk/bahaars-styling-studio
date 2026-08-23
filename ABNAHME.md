@@ -101,6 +101,27 @@ lassen sich jederzeit erneut laufen lassen.
 | Schriften | selbst gehostet, 105 KB zugeschnitten, nichts von Google |
 | Erste Ladung Startseite | rund 400 KB |
 | Gestaltungswerte | 45 Token in `:root`, kein Einzelwert im Stylesheet |
+| Farbstimmungen | alle drei auf allen sieben Seiten geprüft, Kontrast in jeder über dem Grenzwert |
+| Rückfallebenen | ohne GSAP und bei abbestellter Bewegung steht jede Seite vollständig sichtbar da |
+| Bewegungsbibliothek | GSAP 3.15.0, im Projekt statt von einem CDN — die Zusage „nichts von fremden Servern" bleibt wahr |
+| Rundgang | `werkzeug/rundgang.mjs`: 7 Seiten × 3 Breiten × 3 Stimmungen × 2 Rückfallebenen, ohne Beanstandung |
+
+## 8. Die drei Farbstimmungen — welche soll die Vorgabe sein?
+
+Am Fuß jeder Seite stehen jetzt drei Stimmungen zur Wahl. Alle drei sind aus
+Ihrem eigenen Bildmaterial gemessen, keine ist ausgedacht:
+
+- **Messing** (steht derzeit als Vorgabe): warmes Papierweiß, Espresso,
+  Messing. Gemessen am Karamell im Haar und am dunklen Holz in Ihrem
+  Portrait.
+- **Asche**: dieselbe Seite in Kühl. Gemessen an den Schattenseiten der
+  blonden Arbeiten.
+- **Rosé**: warm und weich. Gemessen an den Brautbildern.
+
+**Was wir von Ihnen brauchen:** Welche soll die Besucherin sehen, wenn sie
+zum ersten Mal kommt? Oder sollen die anderen beiden ganz weg? Der
+Umschalter ist bewusst klein und steht unten — er soll eine Möglichkeit sein,
+keine Aufforderung.
 
 ## Auslieferung
 
