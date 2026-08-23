@@ -1589,6 +1589,11 @@ a { color: inherit; }
   border: 1px solid var(--linie);
   box-shadow: var(--schatten-flach);
 }
+/* Für eine Aufnahme im Breitformat. Ohne diese Zeile schneidet das
+   erzwungene 4:3 einem 16:9-Bild beide Seiten ab — bei der Aufnahme mit
+   der Schere lagen genau dort die Spitzen. Das Bild gibt das Format vor,
+   nicht der Rahmen. */
+.bildstreifen.breit img { aspect-ratio: 16 / 9; }
 /* Ein großes Bild oben, zwei kleinere darunter. Das ist nicht nur hübscher
    als drei gleich große: die kleinste Vorlage hat nur 240 px Breite und
    würde in voller Spaltenbreite sichtbar weich. */

@@ -51,6 +51,14 @@ const auftraege = [
   ['arbeit-braut-schleier','arbeit-15-braut-schleier.jpg',0, 0, 0, 0,  550, 0.88, true],
 
   // ── Der Laden und das Regal, ebenfalls vollformatig.
+  /* Ein Standbild aus einem Video des Auftraggebers, 1366×768. Es ist die
+     einzige Aufnahme im Bestand, die den Laden aus Augenhöhe zeigt: die
+     Schere auf der Ablage, der Stuhl, der Raum dahinter weich. Als
+     Auftaktfläche taugt es nicht — dort bräuchte es bei 1440 px eine Breite
+     von 1613, und gemessen an gleicher Breite liegt seine Kantenenergie bei
+     68 gegen 239 und 304 der übrigen Auftaktbilder. Bei 1100 px bleibt es
+     unter seiner Vorlage und steht sauber da. */
+  ['salon-schere',       'salon-schere-standbild.png',    0, 0, 0, 0, 1100, 0.86, true],
   ['salon-raum',         'salon-stuehle-spiegel.jpg',     0, 0, 0, 0,  733, 0.88, true],
   ['salon-platz',        'salon-arbeitsplatz.jpg',        0, 0, 0, 0,  455, 0.90, true],
   ['salon-waschen',      'salon-waschbecken.jpg',         0, 0, 0, 0,  455, 0.90, true],

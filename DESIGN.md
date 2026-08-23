@@ -597,6 +597,35 @@ Hälfte steht in `<em>` und tritt eine Tonstufe zurück (`.zweistimmig em`,
 - Vier Einsätze auf der ganzen Website. Auf jedem Titel wäre es ein Muster
   statt einer Betonung.
 
+### Wenn eine Aufnahme nicht überall taugt
+
+Der Auftraggeber hat ein Standbild aus einem eigenen Video geliefert
+(1366×768): die Schere auf der weißen Ablage, dahinter der Stuhl und der
+Raum in weicher Unschärfe. Es ist die einzige Aufnahme im Bestand, die den
+Laden aus Augenhöhe zeigt — und trotzdem kann sie nicht die Bühne tragen.
+
+Gemessen statt geschätzt. Kantenenergie bei gleicher Breite (1200 px):
+
+| Aufnahme | Vorlage | Kantenenergie |
+|---|---|---|
+| Standbild mit Schere | 1366×768 | 68 |
+| `arbeit-09` (Auftakt 1) | 1500×2000 | 239 |
+| `arbeit-05` (Auftakt 2) | 1500×2000 | 304 |
+| `salon-stuehle-spiegel` | 733×549 | 103 |
+
+Dazu die Größenrechnung: Die Bühne braucht bei 1440 px und Kamerastand 1,12
+eine Bildbreite von 1613 px. Das Standbild müsste also 18 % hochgerechnet
+werden — und zeigt schon bei 100 % die Matschkanten einer Videokompression.
+
+Sein Platz ist der Kopf der Salonseite bei 1100 px: unter seiner Vorlage,
+in der Darstellung rund 385 px breit. Dort ist von der Weichheit nichts
+mehr zu sehen, und die Aufnahme leistet, was keine andere leistet.
+
+**Und der Rahmen gibt nicht mehr das Format vor.** `.bildstreifen img`
+erzwang `aspect-ratio: 4/3`; einer 16:9-Aufnahme schnitt das beide Seiten
+ab, und dort lagen die Spitzen der Schere. `.bildstreifen.breit` nimmt das
+Format der Aufnahme.
+
 ## Elevation & Depth
 
 Das System ist überwiegend tonal: Tiefe entsteht durch die Flächenleiter

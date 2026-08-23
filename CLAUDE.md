@@ -62,6 +62,14 @@ Kurven, Muster (als SVG-Daten-URI) — alles an einer Stelle.
   schwerer als nachlegen.
 - **Echte Inhalte.** Richtige Preise, richtige Öffnungszeiten, richtige Fotos.
   Nie Platzhalter, nie Blindtext, nie „hier Ihr Text".
+- **Ein Standbild aus einem Video ist kein Foto.** Es taugt in der Größe, in
+  der es aufgenommen wurde, und nicht darüber. Prüftest vor dem Einsetzen:
+  Kantenenergie bei gleicher Breite gegen die vorhandenen Aufnahmen messen —
+  liegt sie bei einem Drittel, gehört das Bild an eine kleinere Stelle, nicht
+  auf die Fläche.
+- **Der Rahmen gibt nicht das Format vor, die Aufnahme tut es.** Ein
+  erzwungenes `aspect-ratio` mit `object-fit: cover` schneidet einer
+  Aufnahme im falschen Format genau das weg, worum es geht.
 - **Bildauswahl ist Gestaltung.** Eine Aufnahme, auf der das Haar kraus,
   fahl oder farbstichig aussieht, macht die Arbeit schlechter, als sie ist —
   bei einem Friseur ist das Foto das Produkt. Lieber acht saubere Bilder als
