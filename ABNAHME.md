@@ -99,8 +99,8 @@ lassen sich jederzeit erneut laufen lassen.
 | Ohne JavaScript | jeder Abschnitt sichtbar |
 | Ganzseiten- und Druckansicht | nichts bleibt eingeblendet stehen |
 | Schriften | selbst gehostet, 105 KB zugeschnitten, nichts von Google |
-| Erste Ladung Startseite | rund 400 KB am Telefon, rund 4 MB am Schreibtisch (der Film) |
-| Der Film | vom eigenen Server, ohne Ton, ohne Bedienleiste; am Telefon und im Sparmodus gar nicht geladen |
+| Erste Ladung Startseite | rund 400 KB ohne Film, rund 4 MB am Schreibtisch, rund 3,5 MB am Telefon |
+| Der Film | vom eigenen Server, ohne Ton, ohne Bedienleiste; quer und hochkant, im Sparmodus gar nicht geladen |
 | Gestaltungswerte | 45 Token in `:root`, kein Einzelwert im Stylesheet |
 | Farbstimmungen | alle vier auf allen sieben Seiten geprüft, Kontrast in jeder einzeln gemessen und über dem Grenzwert |
 | Rückfallebenen | ohne GSAP und bei abbestellter Bewegung steht jede Seite vollständig sichtbar da |
@@ -150,10 +150,16 @@ hinsieht. Nur das Bild selbst nicht.
 3. Ist der Text darüber überall gut lesbar? Der Schleier ist auf die
    Standbilder eingestellt; wenn Ihre Aufnahme heller ist, ziehe ich ihn an.
 
-**Am Telefon läuft der Film bewusst nicht.** 16:9 auf einem Hochkantschirm
-hieße, gut drei Viertel der Breite wegzuschneiden; dort stehen die
-Standbilder in eigenen Hochkantzuschnitten. Wenn Sie den Film auch dort
-wollen, brauche ich eine Hochkantfassung (9:16) — die kann Canva ausgeben.
+**Am Telefon läuft die Hochkantfassung** (1080 × 1920), am Schreibtisch die
+quere. Welche geladen wird, entscheidet die Ausrichtung des Schirms, nicht
+seine Breite — ein schmales Browserfenster bekommt also ebenfalls die
+hochkante. Bitte beide einmal ansehen.
+
+**Was er an Daten kostet:** rund 3,5 MB beim ersten Aufruf der Startseite.
+Wer den Datensparmodus eingeschaltet hat oder an einer langsamen Leitung
+hängt, bekommt statt des Films die Standbilder und bleibt bei 400 KB. Falls
+Ihnen das zu viel ist, sagen Sie Bescheid — dann läuft der Film nur am
+Schreibtisch.
 
 ## Auslieferung
 

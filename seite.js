@@ -288,14 +288,22 @@
        und die beiden Textstufen hängen weiter am Scrollfortschritt. Nur die
        Bildquelle darunter läuft in eigener Zeit.
 
-       Geladen wird er unter drei Bedingungen, und alle drei sind
-       Rücksicht, keine Vorsicht:
+       Er liegt in zwei Fassungen vor, quer und hochkant, und die Wahl
+       trifft die Ausrichtung des Schirms — nicht seine Breite. Ein
+       schmales Fenster am Schreibtisch ist genauso hochkant wie ein
+       Telefon, und beide wollen dieselbe Fassung. Gewählt wird einmal beim
+       Laden; wer das Gerät später dreht, sieht einen etwas anderen
+       Ausschnitt, aber keinen zweiten Ladevorgang von drei Megabyte.
 
-         · Erst ab 48 rem. Die Aufnahme ist 16:9; am Hochkantschirm bliebe
-           davon ein Mittelstreifen von gut einem Viertel der Breite übrig.
-           Für den schmalen Schirm liegen eigene Hochkantzuschnitte bereit.
+       Warum nicht <source media>: Das gibt es nur im <picture>. Im <video>
+       ignorieren die Browser das Attribut und nehmen die erste Quelle.
+
+       Geladen wird er unter zwei Bedingungen, und beide sind Rücksicht,
+       keine Vorsicht:
+
          · Nicht im Sparmodus und nicht an einer langsamen Leitung. Es sind
-           3,6 MB; wer Daten zählt, soll sie nicht für Zierrat ausgeben.
+           3 bis 3,6 MB; wer Daten zählt, soll sie nicht für Zierrat
+           ausgeben.
          · Nicht, wenn der Browser das Format nicht kennt.
 
        Fällt eine davon aus, passiert schlicht nichts — dann tragen die drei
@@ -305,8 +313,7 @@
     const langsam = leitung.saveData === true ||
       ['slow-2g', '2g', '3g'].includes(leitung.effectiveType);
 
-    if (film && matchMedia('(min-width: 48rem)').matches && !langsam &&
-        film.canPlayType('video/mp4') !== '') {
+    if (film && !langsam && film.canPlayType('video/mp4') !== '') {
 
       const abbrechen = () => { film.removeAttribute('src'); film.load(); };
 
@@ -331,7 +338,8 @@
         }).catch(abbrechen);
       }, { once: true });
 
-      film.src = film.dataset.quelle;
+      film.src = matchMedia('(orientation: portrait)').matches
+        ? film.dataset.hoch : film.dataset.quer;
       film.load();
 
       /* Außerhalb des Bildes steht er still. Ein Film, den niemand sieht,

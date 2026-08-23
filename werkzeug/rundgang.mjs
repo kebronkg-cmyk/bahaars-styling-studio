@@ -30,7 +30,7 @@ const durchlauf = async (seite, w, h, einrichten, name, dulden = /(?!)/) => {
      wirklich da ist — eine echte Lücke fällt damit weiterhin auf. */
   page.on('requestfailed', (r) => {
     if (dulden.test(r.url())) return;
-    if (/auftakt\.mp4$/.test(r.url())) return;
+    if (/auftakt(-hoch)?\.mp4$/.test(r.url())) return;
     fehler.push('fehlt: ' + r.url().split('/').pop());
   });
   let klageFilm = '';
@@ -46,13 +46,23 @@ const durchlauf = async (seite, w, h, einrichten, name, dulden = /(?!)/) => {
     scrollTo(0, hoehe); await new Promise((r) => setTimeout(r, 250)); scrollTo(0, 0);
   });
   await page.waitForTimeout(900);
+  /* Beide Fassungen prüfen, quer und hochkant — geladen wird je nach
+     Ausrichtung nur eine, fehlen darf keine. */
   const film = await page.evaluate(async () => {
     const v = document.querySelector('.ebene-film');
     if (!v) return null;
-    const a = await fetch(v.dataset.quelle, { method: 'HEAD' }).catch(() => null);
-    return a ? a.status : 0;
+    const aus = {};
+    for (const [name, pfad] of [['quer', v.dataset.quer], ['hoch', v.dataset.hoch]]) {
+      const a = await fetch(pfad, { method: 'HEAD' }).catch(() => null);
+      aus[name] = a ? a.status : 0;
+    }
+    return aus;
   });
-  if (film !== null && film !== 200) klageFilm = `Film nicht erreichbar (${film})`;
+  if (film) {
+    const fehlend = Object.entries(film).filter(([, st]) => st !== 200);
+    if (fehlend.length) klageFilm = 'Film nicht erreichbar: ' +
+      fehlend.map(([n, st]) => `${n} (${st})`).join(', ');
+  }
 
   const befund = await page.evaluate(() => ({
     ueberlauf: document.documentElement.scrollWidth - innerWidth,

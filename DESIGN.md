@@ -616,12 +616,28 @@ Die Fahrt bleibt eine Fahrt: Kamera, Licht, Dunst, Schleier und die beiden
 Textstufen hängen weiter am Scrollfortschritt. Nur die Bildquelle darunter
 läuft in eigener Zeit.
 
-**Drei Bedingungen, und alle drei sind Rücksicht, keine Vorsicht:**
+**Zwei Fassungen, gewählt nach der Ausrichtung:**
+
+| Datei | Maße | Größe | wann |
+|---|---|---|---|
+| `bilder/auftakt.mp4` | 1920×1080 | 3,6 MB | Querformat |
+| `bilder/auftakt-hoch.mp4` | 1080×1920 | 3,1 MB | Hochformat |
+
+Gewählt wird nach `(orientation: portrait)`, nicht nach der Breite: Ein
+schmales Fenster am Schreibtisch ist genauso hochkant wie ein Telefon, und
+beide wollen dieselbe Fassung. Die Wahl fällt einmal beim Laden; wer das
+Gerät später dreht, sieht einen etwas anderen Ausschnitt, aber keinen
+zweiten Ladevorgang von drei Megabyte.
+
+**`<source media>` gibt es nur im `<picture>`.** Im `<video>` ignorieren die
+Browser das Attribut und nehmen die erste Quelle — deshalb entscheidet das
+Skript.
+
+**Zwei Bedingungen, und beide sind Rücksicht, keine Vorsicht:**
 
 | Bedingung | Grund |
 |---|---|
-| erst ab 48 rem | Die Aufnahme ist 16:9. Am Hochkantschirm bliebe ein Mittelstreifen von gut einem Viertel der Breite. Für schmale Schirme liegen eigene Hochkantzuschnitte bereit. |
-| nicht im Sparmodus, nicht an langsamer Leitung | 3,6 MB. Wer Daten zählt, soll sie nicht für Zierrat ausgeben. (`navigator.connection.saveData`, `effectiveType`) |
+| nicht im Sparmodus, nicht an langsamer Leitung | 3 bis 3,6 MB. Wer Daten zählt, soll sie nicht für Zierrat ausgeben. (`navigator.connection.saveData`, `effectiveType`) |
 | nur wenn der Browser das Format kennt | `canPlayType`, dazu ein `error`-Horcher für alles andere |
 
 Fällt eine davon aus, passiert schlicht nichts: Dann tragen die drei
@@ -647,8 +663,9 @@ noch bevor auch nur ein Bild dekodiert war. Dieselbe Falle wie beim
 `<picture>`, wo das `<img>` das zweite Kind ist und nicht das erste. Die
 Regeln tragen jetzt `:not(.ebene-film)`.
 
-**Was das kostet:** Die erste Ladung der Startseite steigt am Schreibtisch
-von rund 400 KB auf rund 4 MB. Am Telefon bleibt sie bei 400 KB.
+**Was das kostet:** Die erste Ladung der Startseite steigt von rund 400 KB
+auf rund 4 MB am Schreibtisch und rund 3,5 MB am Telefon. Im Sparmodus und
+an langsamer Leitung bleibt sie bei 400 KB.
 
 ### Wenn eine Aufnahme nicht überall taugt
 

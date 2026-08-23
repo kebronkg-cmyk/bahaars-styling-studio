@@ -150,11 +150,18 @@ try{var p=localStorage.getItem('bahaar-stimmung');
       <div class="ebene"><picture><source media="(max-width: 64rem)" srcset="bilder/auftakt-1-hoch.webp"><img src="bilder/auftakt-1.webp" alt="" width="1240" height="1240" fetchpriority="high" decoding="async"></picture></div>
       <div class="ebene"><picture><source media="(max-width: 64rem)" srcset="bilder/auftakt-2-hoch.webp"><img src="bilder/auftakt-2.webp" alt="" width="1240" height="1240" loading="lazy" decoding="async"></picture></div>
       <div class="ebene"><picture><source media="(max-width: 64rem)" srcset="bilder/auftakt-3-hoch.webp"><img src="bilder/auftakt-3.webp" alt="" width="1240" height="1240" loading="lazy" decoding="async"></picture></div>
-      <!-- Der Film. Ohne src: geladen wird er erst, wenn das Skript
-           entschieden hat, dass er hier hingehört — nicht am schmalen
-           Schirm, nicht bei abbestellter Bewegung, nicht im Sparmodus.
-           Bis dahin und andernfalls tragen die drei Aufnahmen darüber. -->
-      <video class="ebene ebene-film" data-quelle="bilder/auftakt.mp4"
+      <!-- Der Film, in zwei Fassungen: quer für den Schreibtisch, hochkant
+           fürs Telefon. Welche geladen wird, entscheidet das Skript nach der
+           Ausrichtung des Schirms — <source media> gilt nur im <picture>,
+           bei <video> ignorieren die Browser es.
+
+           Ohne src: geladen wird erst, wenn feststeht, dass der Film hier
+           hingehört — nicht bei abbestellter Bewegung, nicht im Sparmodus,
+           nicht ohne passenden Codec. Bis dahin und andernfalls tragen die
+           drei Aufnahmen darüber. -->
+      <video class="ebene ebene-film"
+             data-quer="bilder/auftakt.mp4"
+             data-hoch="bilder/auftakt-hoch.mp4"
              muted loop playsinline preload="none" tabindex="-1"></video>
       <div class="licht"></div>
       <div class="dunst dunst-vorn"></div>

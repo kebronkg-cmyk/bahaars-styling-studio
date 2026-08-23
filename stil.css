@@ -1815,7 +1815,10 @@ html {
    Fehler.
 
    Er ist kein Bedienelement: kein Ton, keine Bedienleiste, nicht in der
-   Tabreihenfolge, aria-hidden erbt er von der Kamera.               */
+   Tabreihenfolge, aria-hidden erbt er von der Kamera.
+
+   Es gibt ihn quer und hochkant; welche Fassung geladen wird, entscheidet
+   das Skript nach der Ausrichtung des Schirms.                       */
 .ebene-film {
   width: 100%; height: 100%;
   object-fit: cover; display: block;
