@@ -472,9 +472,61 @@
           "leitHell": "oklch(72% .085 26)",
           "ornament": "oklch(64% .080 70)",
           "gemessenAn": "Brautbilder arbeit-15-braut-schleier (oklch(65,5% .051 6)) und arbeit-13-hochsteck-blumen (oklch(41,8% .122 20))"
+        },
+        {
+          "id": "nacht",
+          "displayName": "Nacht",
+          "default": false,
+          "grund": "oklch(16% .018 52)",
+          "tief": "oklch(11% .016 50)",
+          "tinte": "oklch(93% .012 84)",
+          "leit": "oklch(78% .085 70)",
+          "leitHell": "oklch(85% .075 74)",
+          "ornament": "oklch(74% .080 12)",
+          "gemessenAn": "dieselbe Stelle im Portrait wie Espresso, nur ihr tiefster Punkt: das Regal aus dunklem Holz (L 14–18 %, Farbton 50–55°)",
+          "hinweis": "keine Umkehrung der hellen Stimmung: die Leitfarbe wandert von L45 auf L78, die Espresso-Fläche geht tiefer statt höher, das Strähnenmuster wechselt von dunklen auf helle Striche, und der Schleier über dem Auftakt verdunkelt statt aufzuhellen"
         }
       ],
-      "rule": "Auch die Varianten stehen unter der Eigentumsregel: jede ist am eigenen Material gemessen, keine an einem Lieferantenregal. Die Ornamentfarbe wandert mit, damit sich die zweite Farbe von der Leitfarbe löst."
+      "rule": "Auch die Varianten stehen unter der Eigentumsregel: jede ist am eigenen Material gemessen, keine an einem Lieferantenregal. Die Ornamentfarbe wandert mit, damit sich die zweite Farbe von der Leitfarbe löst.",
+      "tokenSplit": {
+        "grund": "Nacht hat aufgedeckt, dass zwei Token je zwei gegensätzliche Aufgaben trugen. In den hellen Stimmungen fiel das nicht auf, weil beide Aufgaben denselben Wert wollten.",
+        "paare": [
+          {
+            "behalten": "--messing-blass",
+            "aufgabe": "Beschriftung auf der Espresso-Fläche — immer hell",
+            "neu": "--messing-fahl",
+            "neueAufgabe": "blasse Füllung unter Messing-Schrift — muss sich von der Leitfarbe absetzen"
+          },
+          {
+            "behalten": "--tinte-hell",
+            "aufgabe": "Schrift auf der dunklen Fläche — immer hell",
+            "neu": "--auf-messing",
+            "neueAufgabe": "Schrift auf der Messing-Füllung — in Nacht dunkel"
+          }
+        ],
+        "prueftest": "Lässt sich der Name eines Tokens mit „auf X\" oder „unter X\" ergänzen, und sind X in zwei Stimmungen verschieden hell? Dann sind es zwei Token."
+      }
+    },
+    "glasrand": {
+      "wo": [
+        "Terminkarte über dem Auftaktfoto",
+        "Kopfzeile, sobald sie klebt"
+      ],
+      "technik": "::before mit padding 1.4px, zwei übereinandergelegte Masken, mask-composite: exclude",
+      "token": [
+        "--glanz-stark",
+        "--glanz-leise"
+      ],
+      "regel": "Die Kante ist ein Token, kein festes Weiß. Weiß auf Papierweiß ist keine Kante; in den hellen Stimmungen ist sie die Tinte selbst, sehr schwach.",
+      "rueckfall": "Ohne Maskenverrechnung fehlt genau die Kante und sonst nichts.",
+      "falle": ".kopfzeile.gesetzt { position: relative } überschreibt position: sticky aus .kopfzeile — zwei Klassen schlagen eine. sticky ist selbst schon Bezugsrahmen."
+    },
+    "zweistimmigeSchlagzeile": {
+      "klasse": ".zweistimmig em",
+      "farbe": "--tinte-leise",
+      "regel": "font-style: normal — <em> steht für die Betonung, die es in der Vorlesesoftware auch wirklich gibt, nicht für Schrägstellung",
+      "einsaetze": 4,
+      "grund": "In einem langen Titel steht selten alles gleich wichtig da. Die leise Hälfte tritt eine Tonstufe zurück, der Blick landet dort, wo der Satz beginnt."
     }
   },
   "components": [

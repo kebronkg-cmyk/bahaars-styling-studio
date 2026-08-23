@@ -638,7 +638,7 @@
 
   const stimmungen = $$('.stimmung');
   if (stimmungen.length) {
-    const FARBE = { messing: '#291c13', asche: '#131e2b', rose: '#2c1516' };
+    const FARBE = { messing: '#291c13', asche: '#131e2b', rose: '#2c1516', nacht: '#140b06' };
 
     const anzeigen = (name) => {
       stimmungen.forEach((k) => {

@@ -101,14 +101,14 @@ lassen sich jederzeit erneut laufen lassen.
 | Schriften | selbst gehostet, 105 KB zugeschnitten, nichts von Google |
 | Erste Ladung Startseite | rund 400 KB |
 | Gestaltungswerte | 45 Token in `:root`, kein Einzelwert im Stylesheet |
-| Farbstimmungen | alle drei auf allen sieben Seiten geprüft, Kontrast in jeder über dem Grenzwert |
+| Farbstimmungen | alle vier auf allen sieben Seiten geprüft, Kontrast in jeder einzeln gemessen und über dem Grenzwert |
 | Rückfallebenen | ohne GSAP und bei abbestellter Bewegung steht jede Seite vollständig sichtbar da |
 | Bewegungsbibliothek | GSAP 3.15.0, im Projekt statt von einem CDN — die Zusage „nichts von fremden Servern" bleibt wahr |
-| Rundgang | `werkzeug/rundgang.mjs`: 7 Seiten × 3 Breiten × 3 Stimmungen × 2 Rückfallebenen, ohne Beanstandung |
+| Rundgang | `werkzeug/rundgang.mjs`: 7 Seiten × 3 Breiten × 4 Stimmungen × 2 Rückfallebenen, ohne Beanstandung |
 
-## 8. Die drei Farbstimmungen — welche soll die Vorgabe sein?
+## 8. Die vier Farbstimmungen — welche soll die Vorgabe sein?
 
-Am Fuß jeder Seite stehen jetzt drei Stimmungen zur Wahl. Alle drei sind aus
+Am Fuß jeder Seite stehen jetzt vier Stimmungen zur Wahl. Alle vier sind aus
 Ihrem eigenen Bildmaterial gemessen, keine ist ausgedacht:
 
 - **Messing** (steht derzeit als Vorgabe): warmes Papierweiß, Espresso,
@@ -117,11 +117,18 @@ Ihrem eigenen Bildmaterial gemessen, keine ist ausgedacht:
 - **Asche**: dieselbe Seite in Kühl. Gemessen an den Schattenseiten der
   blonden Arbeiten.
 - **Rosé**: warm und weich. Gemessen an den Brautbildern.
+- **Nacht**: dieselbe Seite bei ausgeschaltetem Licht. Gemessen am selben
+  Portrait, nur an seiner tiefsten Stelle — dem dunklen Holzregal hinter
+  Ihnen. Hier trägt das Foto den ganzen ersten Bildschirm; es ist die
+  Fassung, die am meisten nach Abendtermin aussieht.
 
 **Was wir von Ihnen brauchen:** Welche soll die Besucherin sehen, wenn sie
-zum ersten Mal kommt? Oder sollen die anderen beiden ganz weg? Der
-Umschalter ist bewusst klein und steht unten — er soll eine Möglichkeit sein,
-keine Aufforderung.
+zum ersten Mal kommt? Oder sollen die anderen ganz weg? Der Umschalter ist
+bewusst klein und steht unten — er soll eine Möglichkeit sein, keine
+Aufforderung.
+
+Zum Ansehen genügt ein Klick unten im Fuß; die Wahl bleibt dann in Ihrem
+Browser, bis Sie sie ändern.
 
 ## Auslieferung
 

@@ -103,13 +103,24 @@
   --tinte:        oklch(28%   .028 58);
   --tinte-leise:  oklch(43%   .026 60);
   --tinte-still:  oklch(53%   .022 62);
-  --tinte-hell:   oklch(97%   .010 84);    /* Schrift auf dunkler Fläche */
+  --tinte-hell:   oklch(97%   .010 84);    /* Schrift auf der dunklen Fläche */
+  /* Und Schrift auf der Messing-Füllung. In den hellen Stimmungen derselbe
+     Wert — aber wieder zwei gegensätzliche Aufgaben: „auf Dunkel" muss
+     immer hell sein, „auf Messing" muss sich von der Leitfarbe absetzen.
+     In Nacht ist Messing hell, und dann muss diese Schrift dunkel sein. */
+  --auf-messing:  oklch(97%   .010 84);
 
   /* ── Messing: die Leitfarbe. Aus dem Karamell im Haar. Sie trägt Schrift,
        deshalb ist sie tief genug für 4,5:1 auf dem Grund.                */
   --messing:       oklch(45%   .085 60);
   --messing-hell:  oklch(72%   .095 68);   /* dieselbe Stimme auf Espresso */
-  --messing-blass: oklch(92%   .030 78);
+  --messing-blass: oklch(92%   .030 78);   /* Beschriftung auf Espresso  */
+  /* Und die blasse Füllung unter Messing-Schrift auf dem Grund. Sieht in
+     den hellen Stimmungen genauso aus wie blass — muss aber ein eigener
+     Name sein, weil beide gegensätzliche Aufgaben haben: blass steht auf
+     der dunklen Fläche und muss hell sein, fahl liegt unter der Leitfarbe
+     und muss sich von ihr absetzen. In Nacht laufen sie auseinander.    */
+  --messing-fahl:  oklch(92%   .030 78);
 
   /* ── Die warme Achse: Haar, vom Ansatz zur Spitze. Gemessen über alle
        Arbeitsfotos. Material, nie Schrift.                               */
@@ -130,6 +141,13 @@
   --fremd-grund:  #ffffff;
 
   /* ── Linien ────────────────────────────────────────────────────────── */
+  /* Der Glanz auf einer Glasfläche: oben und unten eine helle Kante, in
+     der Mitte nichts — wie Licht, das über eine Kante läuft. Auf hellem
+     Grund kann diese Kante nicht weiß sein, sonst sieht man sie nicht;
+     dort ist sie die Tinte selbst, sehr schwach.                        */
+  --glanz-stark:  oklch(30% .030 60 / .28);
+  --glanz-leise:  oklch(30% .030 60 / .09);
+
   --linie:        oklch(58% .022 66 / .30);
   --linie-hell:   oklch(64% .026 70 / .17);
   --linie-akzent: oklch(45% .085 60 / .32);
@@ -218,10 +236,12 @@
   --tinte-leise:  oklch(43%   .024 251);
   --tinte-still:  oklch(53%   .020 250);
   --tinte-hell:   oklch(97%   .006 250);
+  --auf-messing:  oklch(97%   .006 250);
 
   --messing:       oklch(45%   .052 250);
   --messing-hell:  oklch(72%   .055 248);
   --messing-blass: oklch(92%   .022 250);
+  --messing-fahl:  oklch(92%   .022 250);
 
   --haar-bronze:  oklch(48%   .044 250);
 
@@ -231,6 +251,9 @@
 
   --rollbalken:      oklch(82% .014 250);
   --rollbalken-hoch: oklch(66% .038 250);
+
+  --glanz-stark:  oklch(30% .026 252 / .28);
+  --glanz-leise:  oklch(30% .026 252 / .09);
 
   --linie:        oklch(58% .016 250 / .30);
   --linie-hell:   oklch(64% .018 250 / .17);
@@ -274,10 +297,12 @@
   --tinte-leise:  oklch(43%   .030 22);
   --tinte-still:  oklch(53%   .026 24);
   --tinte-hell:   oklch(97%   .008 40);
+  --auf-messing:  oklch(97%   .008 40);
 
   --messing:       oklch(45%   .095 24);
   --messing-hell:  oklch(72%   .085 26);
   --messing-blass: oklch(92%   .028 30);
+  --messing-fahl:  oklch(92%   .028 30);
 
   --haar-bronze:  oklch(48%   .082 26);
 
@@ -289,6 +314,9 @@
   --rollbalken:      oklch(82% .020 34);
   --rollbalken-hoch: oklch(66% .062 26);
 
+  --glanz-stark:  oklch(30% .034 20 / .28);
+  --glanz-leise:  oklch(30% .034 20 / .09);
+
   --linie:        oklch(58% .026 26 / .30);
   --linie-hell:   oklch(64% .028 30 / .17);
   --linie-akzent: oklch(45% .095 24 / .32);
@@ -298,6 +326,92 @@
 
   --muster-straehne:
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34'%3E%3Cpath d='M-4 38 42-8M-4 21 42-25M-4 55 42 9' stroke='%235e3535' stroke-opacity='.05' stroke-width='1' fill='none'/%3E%3C/svg%3E");
+}
+
+/* ── Nacht ──────────────────────────────────────────────────────────────
+   Dieselbe Seite bei ausgeschaltetem Licht. Kein Umkehren der hellen
+   Stimmung — die Werte sind aus demselben Portrait gemessen wie Espresso,
+   nur aus seiner tiefsten Stelle: dem Regal aus dunklem Holz hinter ihr
+   (L 14–18 %, Farbton 50–55°).
+
+   Was hier nicht bloß umgedreht wird:
+
+     · Die Leitfarbe wandert von L 45 auf L 78. Messing bei 45 % Helligkeit
+       trägt Schrift auf Papierweiß; auf einem Grund bei 16 % trägt sie
+       nichts mehr. Es ist dieselbe Farbe, von der anderen Seite gesehen.
+     · Die Espresso-Fläche geht nicht nach oben, sondern noch tiefer
+       (L 11 %). Sie ist der Anker der Seite; auf einer dunklen Seite ankert
+       man nach unten, nicht nach oben.
+     · Das Strähnenmuster wechselt von dunklen auf helle Striche. Ein
+       dunkles Muster auf dunklem Grund ist kein feines Muster, sondern
+       keines.
+     · Der Schleier über dem Auftakt verdunkelt jetzt, statt aufzuhellen —
+       und genau dadurch wird die Bühne zum ersten Mal das, was sie sein
+       will: Licht und Staub sind endlich zu sehen, weil sie hell sind und
+       zum ersten Mal etwas Dunkles hinter sich haben.
+   ────────────────────────────────────────────────────────────────────── */
+:root[data-palette="nacht"] {
+  color-scheme: dark;
+
+  --grund:        oklch(16%   .018 52);
+  --grund-warm:   oklch(20%   .020 54);
+  --karte:        oklch(22%   .022 55);
+
+  --grund-96:     oklch(16% .018 52 / .96);
+  --grund-88:     oklch(16% .018 52 / .88);
+  --grund-72:     oklch(16% .018 52 / .72);
+  --grund-52:     oklch(16% .018 52 / .52);
+  --grund-28:     oklch(16% .018 52 / .28);
+  --grund-00:     oklch(16% .018 52 / 0);
+
+  --glas:         oklch(16% .018 52 / .86);
+  --glas-dicht:   oklch(16% .018 52 / .94);
+  --glas-voll:    oklch(16% .018 52 / .98);
+
+  --espresso:      oklch(11%   .016 50);
+  --espresso-92:   oklch(8%    .012 48 / .92);
+  --espresso-70:   oklch(8%    .012 48 / .70);
+  --auf-espresso:  oklch(80%   .016 78);
+  --linie-auf-espresso: oklch(88% .014 80 / .16);
+
+  --tinte:        oklch(93%   .012 84);
+  --tinte-leise:  oklch(80%   .014 80);
+  --tinte-still:  oklch(66%   .014 76);
+  /* Bleibt hell: Die Espresso-Fläche ist auch in Nacht die dunkelste
+     Fläche der Seite, und Schrift darauf muss hell sein. */
+  --tinte-hell:   oklch(96%   .010 82);
+  /* Diese hier kehrt sich um: Messing ist jetzt die helle Farbe. */
+  --auf-messing:  oklch(15%   .018 52);
+
+  --messing:       oklch(78%   .085 70);
+  --messing-hell:  oklch(85%   .075 74);
+  --messing-blass: oklch(84%   .045 76);   /* Beschriftung auf Espresso  */
+  --messing-fahl:  oklch(28%   .045 66);   /* Füllung unter Messing      */
+
+  --haar-bronze:  oklch(62%   .075 58);
+
+  --rose:         oklch(74%   .080 12);
+
+  --rollbalken:      oklch(34% .020 60);
+  --rollbalken-hoch: oklch(58% .050 66);
+
+  /* In Nacht ist es endlich das, was die Vorlage meinte: eine weiße
+     Lichtkante auf dunklem Glas. */
+  --glanz-stark:  oklch(97% .010 84 / .45);
+  --glanz-leise:  oklch(97% .010 84 / .15);
+
+  --linie:        oklch(78% .016 72 / .20);
+  --linie-hell:   oklch(80% .014 76 / .12);
+  --linie-akzent: oklch(78% .085 70 / .34);
+
+  /* Auf Dunkel muss ein Schatten tiefer und weiter sein: Ein Schatten
+     wirkt über den Helligkeitsunterschied zum Grund, und der ist hier
+     nach unten hin knapp. */
+  --schatten-flach: 0 1px 2px oklch(0% 0 0 / .34), 0 3px 12px oklch(0% 0 0 / .34);
+  --schatten-hoch:  0 2px 8px oklch(0% 0 0 / .42), 0 24px 52px oklch(0% 0 0 / .56);
+
+  --muster-straehne:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34'%3E%3Cpath d='M-4 38 42-8M-4 21 42-25M-4 55 42 9' stroke='%23ffffff' stroke-opacity='.055' stroke-width='1' fill='none'/%3E%3C/svg%3E");
 }
 
 /* Der Wechsel der Stimmung: ein Schnitt über die ganze Seite, nicht
@@ -312,6 +426,52 @@
   ::view-transition-old(root),
   ::view-transition-new(root) { animation: none; }
 }
+
+/* ═══ Glasrand ═════════════════════════════════════════════════════════
+   Eine Lichtkante auf Glasflächen: oben und unten hell, in der Mitte
+   nichts — so, wie Licht über eine gebogene Kante läuft. Gemacht aus
+   einem Rahmen von 1,4 px, den zwei übereinandergelegte Masken aus einer
+   vollen Fläche herausschneiden (`mask-composite: exclude`). Ein
+   gewöhnlicher Rahmen kann das nicht: Er ist ringsum gleich hell.
+
+   Zwei Dinge, die daran hängen:
+
+   1. `border-radius: inherit` — die Kante muss die Form ihres Elements
+      annehmen, und die Formen dieser Seite sind Blattformen mit vier
+      verschiedenen Ecken.
+   2. Die Kante ist ein Token, kein festes Weiß. Weiß auf Papierweiß ist
+      keine Kante. Auf den hellen Stimmungen ist sie die Tinte selbst,
+      sehr schwach; erst in Nacht wird sie das weiße Licht, als das die
+      Vorlage sie gedacht hat.
+
+   Zeigt der Browser keine Maskenverrechnung, fehlt genau diese Kante und
+   sonst nichts — die Fläche darunter steht unverändert.                 */
+
+/* Die Kopfzeile steht hier bewusst NICHT mit dabei. Sie ist schon
+   position: sticky, und das reicht dem ::before als Bezugsrahmen. Wer ihr
+   hier position: relative gibt, überschreibt das Kleben — .kopfzeile.gesetzt
+   ist mit zwei Klassen spezifischer als .kopfzeile. Die Kopfzeile scrollte
+   daraufhin auf allen vier Stimmungen einfach weg. */
+.glasrand { position: relative; }
+.glasrand::before,
+.kopfzeile.gesetzt::before {
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  padding: 1.4px;
+  background: linear-gradient(180deg,
+    var(--glanz-stark) 0%, var(--glanz-leise) 20%,
+    transparent 40%, transparent 60%,
+    var(--glanz-leise) 80%, var(--glanz-stark) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
+}
+/* Wo die Kante über Text laufen würde, muss sie darunter bleiben. */
+.glasrand > *,
+.kopfzeile.gesetzt > * { position: relative; z-index: 1; }
 
 /* ═══ Grundlagen ═══════════════════════════════════════════════════════ */
 
@@ -348,7 +508,7 @@ body {
 img, picture, svg { max-width: 100%; height: auto; display: block; }
 [hidden] { display: none !important; }
 
-::selection { background: var(--messing); color: var(--tinte-hell); }
+::selection { background: var(--messing); color: var(--auf-messing); }
 
 :focus-visible {
   outline: 2px solid var(--messing);
@@ -379,6 +539,17 @@ h1, h2, h3, h4 {
   line-height: .95;
   letter-spacing: -.018em;
 }
+
+/* Zweistimmige Schlagzeile. In einem langen Titel steht selten alles
+   gleich wichtig da: „Seit zwanzig Jahren" ist Beiwerk, „stehe ich selbst
+   am Stuhl" ist der Satz. Die leise Hälfte tritt eine Tonstufe zurück,
+   und der Blick landet dort, wo der Satz beginnt.
+
+   Kursiv wird sie ausdrücklich nicht — <em> steht hier für die Betonung,
+   die es in der Vorlesesoftware auch wirklich gibt, nicht für Schrägstellung.
+   Und die leise Stufe ist „Tinte leise", nicht „Tinte still": Auf einer
+   Schlagzeile über einem Foto muss auch das Beiwerk noch tragen.        */
+.zweistimmig em { font-style: normal; color: var(--tinte-leise); }
 .titel {
   font-size: var(--t-titel);
   line-height: 1.02;
@@ -587,7 +758,7 @@ a { color: inherit; }
    Terminknopf weiter unten. */
 .wegweiser .ruf { padding: .5rem 1.2rem .5rem .95rem; }
 @media (hover: hover) and (pointer: fine) {
-  .ruf:hover { background: var(--messing-blass); border-color: var(--messing); }
+  .ruf:hover { background: var(--messing-fahl); border-color: var(--messing); }
 }
 
 /* Schalter fürs Handymenü */
@@ -662,7 +833,7 @@ a { color: inherit; }
               border-color var(--t1) var(--kurve),
               color var(--t1) var(--kurve);
 }
-.knopf-voll { background: var(--messing); color: var(--tinte-hell); }
+.knopf-voll { background: var(--messing); color: var(--auf-messing); }
 .knopf-leer { border-color: var(--linie-hell); color: var(--tinte); }
 .knopf svg { width: 1.05em; height: 1.05em; flex: none; }
 @media (hover: hover) and (pointer: fine) {
@@ -859,6 +1030,7 @@ a { color: inherit; }
 .probe-messing { --probe-grund: #faf6f0; --probe-leit: #8a5f2e; }
 .probe-asche   { --probe-grund: #f4f7fa; --probe-leit: #4a6b93; }
 .probe-rose    { --probe-grund: #fcf5f3; --probe-leit: #9c4a4c; }
+.probe-nacht   { --probe-grund: #140b06; --probe-leit: #d8a866; }
 
 .stimmung[aria-pressed='true'] {
   color: var(--tinte-hell);
@@ -901,7 +1073,7 @@ a { color: inherit; }
   position: absolute; left: var(--rand); top: .5rem;
   z-index: 100;
   padding: .7rem 1.1rem;
-  background: var(--messing); color: var(--tinte-hell);
+  background: var(--messing); color: var(--auf-messing);
   border-radius: var(--bogen);
   text-decoration: none;
   transform: translateY(-200%);
@@ -1069,7 +1241,7 @@ a { color: inherit; }
 .merken[aria-pressed='true'] {
   background: var(--messing);
   border-color: var(--messing);
-  color: var(--tinte-hell);
+  color: var(--auf-messing);
 }
 .merken[aria-pressed='true']::after { content: '✓'; opacity: 1; color: var(--messing); }
 @media (hover: hover) and (pointer: fine) {
@@ -1144,7 +1316,7 @@ a { color: inherit; }
 }
 .navigator a[aria-current='true'] {
   color: var(--messing); border-color: var(--linie-akzent);
-  background: var(--messing-blass);
+  background: var(--messing-fahl);
 }
 @media (hover: hover) and (pointer: fine) {
   .navigator a:hover { color: var(--tinte); border-color: var(--linie-hell); }
@@ -1918,10 +2090,10 @@ html {
   padding: .55rem 1.6rem .55rem 1.15rem;
   font-size: var(--s-mini);
   flex: none;
-  color: var(--tinte-hell);
+  color: var(--auf-messing);
 }
 @media (hover: hover) and (pointer: fine) {
-  .kopfzeile .knopf-termin:hover { color: var(--tinte-hell); }
+  .kopfzeile .knopf-termin:hover { color: var(--auf-messing); }
 }
 
 /* ═══ Werkschau ════════════════════════════════════════════════════════

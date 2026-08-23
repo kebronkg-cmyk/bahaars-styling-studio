@@ -54,7 +54,7 @@ const durchlauf = async (seite, w, h, einrichten, name, dulden = /(?!)/) => {
 for (const [w, h] of breiten) {
   for (const seite of seiten) await durchlauf(seite, w, h, null, 'normal');
 }
-for (const stimmung of ['asche','rose']) {
+for (const stimmung of ['asche','rose','nacht']) {
   for (const seite of seiten) {
     await durchlauf(seite, 1440, 900,
       (p) => p.addInitScript((s) => { try { localStorage.setItem('bahaar-stimmung', s); } catch (e) {} }, stimmung),

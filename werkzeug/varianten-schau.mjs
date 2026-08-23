@@ -13,7 +13,7 @@ const anker = process.argv[3] || null;
 const ziel  = process.env.ZIEL || '/tmp/v';
 
 const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium' });
-for (const stimmung of ['messing', 'asche', 'rose']) {
+for (const stimmung of ['messing', 'asche', 'rose', 'nacht']) {
   const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
   const fehler = [];
   page.on('pageerror', (e) => fehler.push('pageerror: ' + e));

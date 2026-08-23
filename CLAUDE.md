@@ -45,6 +45,10 @@ Kurven, Muster (als SVG-Daten-URI) — alles an einer Stelle.
   eine Idee nur groß funktioniert, ist sie meistens ein Schaustück.
 - **Kommt eine zweite Farbe dazu, tritt sie nur als Ornament auf**, nie als
   Textfarbe. Sonst kippt die einmal gesetzte Ordnung.
+- **Eine dunkle Variante ist keine Umkehrung.** Die Leitfarbe muss von der
+  anderen Seite neu gemessen werden, die Ankerfläche geht tiefer statt
+  höher, und ein feines dunkles Muster auf dunklem Grund ist kein feines
+  Muster, sondern keines.
 - **Vollflächige Fotohintergründe.** Bilder tragen ganze Abschnitte, nicht als
   Kachel daneben. Darüber ein mehrstufiger Schleier: von oben und unten in den
   Abschnittsrand hinein, seitlich dichter dort, wo Text steht. Der Schleier
@@ -135,6 +139,8 @@ schlimmer als ein unbeschriftetes.
 | Zwei `set` an derselben Stelle einer GSAP-Zeitleiste laufen beim Rückwärtslesen in umgekehrter Reihenfolge | Ausgangszustand außerhalb der Zeitleiste setzen |
 | Eine spezifischere Nachbarregel (`.wegweiser a`, zwei Klassen) hebelt eine Ein-Klassen-Regel aus — auch bei Polsterung, nicht nur bei Farbe | Die Regel mit dem Elternselektor davor schreiben, nicht mit `!important` |
 | Ein Schleierfenster, das „über dem Bild offen" ist, kann vollständig hinter einer Karte liegen | Kanten von Text und Karte messen, dann die Verlaufsstufen daraus rechnen |
+| Ein Farbtoken, dessen Name sich mit „auf X" oder „unter X" ergänzen lässt, trägt zwei Aufgaben, sobald X in einer Variante anders hell ist | Entzweien, bevor die dunkle Variante kommt — nicht danach |
+| `position: relative` für ein `::before` überschreibt `position: sticky`, wenn die Regel spezifischer ist | `sticky` ist selbst schon Bezugsrahmen; die Zeile ist überflüssig |
 
 ## Zugänglichkeit
 

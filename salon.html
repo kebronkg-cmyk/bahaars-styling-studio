@@ -9,9 +9,10 @@
 <script>
 /* Die gewählte Farbstimmung noch vor dem ersten Bild setzen — sonst
    blitzt beim Seitenwechsel kurz die Vorgabe auf. Bewusst ohne defer. */
+var F={asche:'#131e2b',rose:'#2c1516',nacht:'#140b06'};
 try{var p=localStorage.getItem('bahaar-stimmung');
- if(p==='asche'||p==='rose'){document.documentElement.dataset.palette=p;
-  document.currentScript.previousElementSibling.content=p==='asche'?'#131e2b':'#2c1516';}}catch(e){}
+ if(F[p]){document.documentElement.dataset.palette=p;
+  document.currentScript.previousElementSibling.content=F[p];}}catch(e){}
 </script>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preload" href="schrift/Marcellus-Regular.woff2" as="font" type="font/woff2" crossorigin>
@@ -310,6 +311,9 @@ try{var p=localStorage.getItem('bahaar-stimmung');
         </button>
         <button type="button" class="stimmung" data-stimmung="rose" aria-pressed="false">
           <span class="stimmung-probe probe-rose" aria-hidden="true"></span>Ros&eacute;
+        </button>
+        <button type="button" class="stimmung" data-stimmung="nacht" aria-pressed="false">
+          <span class="stimmung-probe probe-nacht" aria-hidden="true"></span>Nacht
         </button>
       </div>
     </div>

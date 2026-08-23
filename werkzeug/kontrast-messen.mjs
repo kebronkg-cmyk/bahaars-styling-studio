@@ -30,6 +30,14 @@ for (const seite of seiten) {
   for (const [geraet, viewport] of [['desktop', { width: 1440, height: 1000 }],
                                    ['handy',   { width: 390,  height: 844 }]]) {
     const page = await browser.newPage({ viewport });
+    /* Die Farbstimmung kommt über die Umgebung: STIMMUNG=nacht node …
+       Ohne Angabe gilt Messing. Gemessen werden muss jede einzeln — ein
+       Grenzwert, der in Messing hält, sagt über Nacht gar nichts. */
+    if (process.env.STIMMUNG) {
+      await page.addInitScript((s) => {
+        try { localStorage.setItem('bahaar-stimmung', s); } catch (e) {}
+      }, process.env.STIMMUNG);
+    }
     await page.goto(`http://localhost:8099/${seite}`, { waitUntil: 'networkidle' });
     await page.evaluate(async () => {
       const h = document.documentElement.scrollHeight;

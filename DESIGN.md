@@ -303,6 +303,37 @@ Stimmungen.
 | **Messing** (Vorgabe) | `oklch(97.5% .009 84)` | `oklch(24% .026 55)` | `oklch(45% .085 60)` | Karamell im Haar, dunkles Holz im Portrait |
 | **Asche** | `oklch(97.5% .005 250)` | `oklch(23% .030 254)` | `oklch(45% .052 250)` | Schattenseiten von `arbeit-06` (`oklch(24,4% .045 254)`) und `arbeit-04` (`oklch(22,3% .020 303)`) |
 | **Rosé** | `oklch(97.5% .008 40)` | `oklch(23% .038 18)` | `oklch(45% .095 24)` | Brautbilder: `arbeit-15` (`oklch(65,5% .051 6)`), `arbeit-13` (`oklch(41,8% .122 20)`) |
+| **Nacht** | `oklch(16% .018 52)` | `oklch(11% .016 50)` | `oklch(78% .085 70)` | dieselbe Stelle im Portrait wie Espresso, nur ihr tiefster Punkt: das Regal aus dunklem Holz (L 14–18 %, Farbton 50–55°) |
+
+**Nacht ist keine Umkehrung.** Vier Dinge drehen sich nicht einfach mit:
+
+1. *Die Leitfarbe wandert von L 45 auf L 78.* Messing bei 45 % trägt Schrift
+   auf Papierweiß; auf einem Grund bei 16 % trägt sie nichts mehr. Es ist
+   dieselbe Farbe, von der anderen Seite gesehen.
+2. *Die Espresso-Fläche geht nicht nach oben, sondern noch tiefer* (L 11 %).
+   Sie ist der Anker der Seite; auf einer dunklen Seite ankert man nach
+   unten.
+3. *Das Strähnenmuster wechselt von dunklen auf helle Striche.* Ein dunkles
+   Muster auf dunklem Grund ist kein feines Muster, sondern keines.
+4. *Der Schleier über dem Auftakt verdunkelt, statt aufzuhellen* — und genau
+   dadurch wird die Bühne zum ersten Mal das, was sie sein will: Licht und
+   Staub sind endlich zu sehen, weil sie hell sind und zum ersten Mal etwas
+   Dunkles hinter sich haben.
+
+**Zwei Token mussten dafür entzweit werden.** Nacht hat aufgedeckt, dass
+zwei Namen je zwei gegensätzliche Aufgaben trugen — in den hellen Stimmungen
+fiel das nicht auf, weil beide Aufgaben denselben Wert wollten:
+
+| vorher | jetzt | Aufgabe |
+|---|---|---|
+| `--messing-blass` | `--messing-blass` | Beschriftung **auf** der Espresso-Fläche — immer hell |
+| | `--messing-fahl` | blasse Füllung **unter** Messing-Schrift — muss sich von der Leitfarbe absetzen |
+| `--tinte-hell` | `--tinte-hell` | Schrift **auf** der dunklen Fläche — immer hell |
+| | `--auf-messing` | Schrift **auf** der Messing-Füllung — in Nacht dunkel |
+
+Prüftest für so ein Token: Lässt sich sein Name mit „auf X" oder „unter X"
+ergänzen, und sind X in zwei Stimmungen verschieden hell? Dann sind es zwei
+Token.
 
 Auch die Varianten stehen unter der Eigentumsregel: Asche kommt aus den
 kühlen Schatten in den eigenen Arbeitsfotos, Rosé aus den eigenen
@@ -312,9 +343,9 @@ Die Ornamentfarbe wandert mit: In Messing und Asche ist sie Rosé, in Rosé
 ist sie das Karamell — die zweite Farbe muss sich von der Leitfarbe lösen,
 sonst sieht man sie nicht als zweite.
 
-**Der Umschalter** steht im Fuß: drei Proben, jede halb Grund und halb
+**Der Umschalter** steht im Fuß: vier Proben, jede halb Grund und halb
 Leitfarbe *ihrer eigenen* Palette, nicht der gerade gültigen — sonst zeigt er
-dreimal dasselbe. Die Wahl liegt in `localStorage` (`bahaar-stimmung`) und
+viermal dasselbe. Die Wahl liegt in `localStorage` (`bahaar-stimmung`) und
 wird im Kopf jeder Seite von einem winzigen Skript noch vor dem ersten Bild
 gesetzt; ohne das blitzt beim Seitenwechsel Messing auf. Gewechselt wird über
 `document.startViewTransition`, wo der Browser das kann: ein Schnitt über die
@@ -521,6 +552,50 @@ steht die Seite da wie ganz ohne Skript: alles sichtbar, nichts wartet auf ein
 Ereignis, das nicht kommt. Das ist der einzige Zustand, in dem eine
 Einblendung gefährlich wird: Löst sie nie aus, ist aus ihr verschwundener
 Inhalt geworden.
+
+### Der Glasrand
+
+Eine Lichtkante auf den beiden Flächen, die wirklich Glas sind: der
+Terminkarte über dem Auftaktfoto und der Kopfzeile, sobald sie klebt. Oben
+und unten hell, in der Mitte nichts — so, wie Licht über eine gebogene Kante
+läuft.
+
+Gemacht aus einem Rahmen von 1,4 px, den zwei übereinandergelegte Masken aus
+einer vollen Fläche herausschneiden (`mask-composite: exclude`). Ein
+gewöhnlicher `border` kann das nicht: Er ist ringsum gleich hell.
+
+Zwei Dinge hängen daran:
+
+- `border-radius: inherit` — die Kante muss die Form ihres Elements
+  annehmen, und die Formen dieser Seite sind Blattformen mit vier
+  verschiedenen Ecken.
+- **Die Kante ist ein Token, kein festes Weiß** (`--glanz-stark`,
+  `--glanz-leise`). Weiß auf Papierweiß ist keine Kante. In den hellen
+  Stimmungen ist sie die Tinte selbst, sehr schwach; erst in Nacht wird sie
+  das weiße Licht, als das solche Effekte üblicherweise gedacht sind.
+
+Zeigt ein Browser keine Maskenverrechnung, fehlt genau diese Kante und sonst
+nichts — die Fläche darunter steht unverändert.
+
+**Die Falle, die dabei zuschlug:** `.kopfzeile.gesetzt { position: relative }`
+für den Bezugsrahmen des `::before` — und damit war `position: sticky` aus
+`.kopfzeile` überschrieben, denn zwei Klassen schlagen eine. Die Kopfzeile
+scrollte auf allen vier Stimmungen weg. `sticky` ist selbst schon ein
+Bezugsrahmen; die Zeile war überflüssig.
+
+### Die zweistimmige Schlagzeile
+
+In einem langen Titel steht selten alles gleich wichtig da. „Seit zwanzig
+Jahren" ist Beiwerk, „stehe ich selbst am Stuhl" ist der Satz. Die leise
+Hälfte steht in `<em>` und tritt eine Tonstufe zurück (`.zweistimmig em`,
+`--tinte-leise`); der Blick landet dort, wo der Satz beginnt.
+
+- Kursiv wird sie ausdrücklich **nicht**. `<em>` steht hier für die Betonung,
+  die es in der Vorlesesoftware auch wirklich gibt, nicht für Schrägstellung.
+- Die leise Stufe ist „Tinte leise", nicht „Tinte still": Auf einer
+  Schlagzeile über einem Foto muss auch das Beiwerk noch tragen.
+- Vier Einsätze auf der ganzen Website. Auf jedem Titel wäre es ein Muster
+  statt einer Betonung.
 
 ## Elevation & Depth
 
