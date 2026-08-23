@@ -13,6 +13,13 @@
   const $$ = (w, in_ = document) => [...in_.querySelectorAll(w)];
   const ruhig = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* Wer Daten zählt, soll sie nicht für Zierrat ausgeben. Ein Film wird
+     an einer langsamen Leitung und im Sparmodus gar nicht erst geladen. */
+  const langsameLeitung = () => {
+    const l = navigator.connection || {};
+    return l.saveData === true || ['slow-2g', '2g', '3g'].includes(l.effectiveType);
+  };
+
   /* ── Drei Marken am <html>, und jede sagt etwas anderes ────────────────
 
      mitskript  Das Skript läuft. Damit greift alles, was ohne Skript nicht
@@ -240,26 +247,18 @@
        Stelle springt, zwingt den Dekoder, von dort bis zu achtzig Bilder
        neu zu rechnen — am Telefon ein Ruckeln bei jeder Radumdrehung.
 
-       Zwei Fassungen, quer und hochkant, gewählt nach der Ausrichtung des
-       Schirms und nicht nach seiner Breite: Ein schmales Fenster am
-       Schreibtisch ist genauso hochkant wie ein Telefon. Die Wahl fällt
-       einmal beim Laden; wer später dreht, sieht einen anderen Ausschnitt,
-       aber lädt keine zweiten drei Megabyte.
-
-       <source media> gibt es nur im <picture>; im <video> ignorieren die
-       Browser es und nehmen die erste Quelle.
+       Eine Fassung, hochkant. Sie steht am Hochkantschirm über die ganze
+       Fläche und am Querschirm als Säule in ihrem eigenen Format — nicht
+       auf die doppelte Breite gezogen. Die Rechnung dazu steht im
+       Stylesheet bei .auftakt-saeule.
 
        Geladen wird unter zwei Bedingungen, und beide sind Rücksicht:
-       nicht im Sparmodus oder an langsamer Leitung (es sind 3 bis 3,6 MB),
+       nicht im Sparmodus oder an langsamer Leitung (es sind 1,4 MB),
        und nicht ohne passenden Codec. Fällt eine aus, passiert schlicht
        nichts — dann steht das Standbild, so wie es bis dahin stand. Der
        Ladezustand ist damit zugleich die Rückfallebene.                 */
 
-    const leitung = navigator.connection || {};
-    const langsam = leitung.saveData === true ||
-      ['slow-2g', '2g', '3g'].includes(leitung.effectiveType);
-
-    if (film && !langsam && film.canPlayType('video/mp4') !== '') {
+    if (film && !langsameLeitung() && film.canPlayType('video/mp4') !== '') {
       const abbrechen = () => { film.removeAttribute('src'); film.load(); };
 
       film.addEventListener('error', abbrechen, { once: true });
@@ -272,8 +271,7 @@
           .catch(abbrechen);
       }, { once: true });
 
-      film.src = matchMedia('(orientation: portrait)').matches
-        ? film.dataset.hoch : film.dataset.quer;
+      film.src = film.dataset.quelle;
       film.load();
 
       /* Außerhalb des Bildes steht er still. Ein Film, den niemand sieht,
@@ -325,6 +323,42 @@
       });
     });
   }
+
+  /* ── Filme in einem Rahmen ────────────────────────────────────────────
+     Dieselben Regeln wie im Auftakt, nur für Aufnahmen, die mitten auf
+     einer Seite stehen: Geladen wird erst, wenn der Rahmen ins Bild
+     kommt — ein Film weiter unten auf der Seite kostet sonst Daten für
+     etwas, das niemand ansieht. Umgeblendet wird erst, wenn er läuft.
+     Außerhalb des Bildes hält er an.                                    */
+
+  $$('.rahmenfilm').forEach((film) => {
+    if (!choreografie || langsameLeitung() || film.canPlayType('video/mp4') === '') return;
+    const rahmen = film.closest('.filmrahmen') || film;
+
+    ST.create({
+      trigger: rahmen, start: 'top bottom', once: true,
+      onEnter: () => {
+        const abbrechen = () => { film.removeAttribute('src'); film.load(); };
+        film.addEventListener('error', abbrechen, { once: true });
+        film.addEventListener('canplay', () => {
+          film.play()
+            .then(() => G.to(film, { opacity: 1, duration: .9, ease: 'power2.out' }))
+            .catch(abbrechen);
+        }, { once: true });
+        film.src = film.dataset.quelle;
+        film.load();
+      }
+    });
+
+    ST.create({
+      trigger: rahmen, start: 'top bottom', end: 'bottom top',
+      onToggle: (selbst) => {
+        if (!film.src) return;
+        if (selbst.isActive) film.play().catch(() => {});
+        else film.pause();
+      }
+    });
+  });
 
   /* ── Die Werkschau zieht vorbei ───────────────────────────────────────
      Der Abschnitt bleibt stehen, und der Streifen läuft quer durch das

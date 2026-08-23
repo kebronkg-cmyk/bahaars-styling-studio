@@ -99,8 +99,8 @@ lassen sich jederzeit erneut laufen lassen.
 | Ohne JavaScript | jeder Abschnitt sichtbar |
 | Ganzseiten- und Druckansicht | nichts bleibt eingeblendet stehen |
 | Schriften | selbst gehostet, 105 KB zugeschnitten, nichts von Google |
-| Erste Ladung Startseite | rund 400 KB ohne Film, rund 4 MB am Schreibtisch, rund 3,5 MB am Telefon |
-| Der Film | vom eigenen Server, ohne Ton, ohne Bedienleiste; quer und hochkant, im Sparmodus gar nicht geladen |
+| Erste Ladung Startseite | rund 400 KB ohne Film, rund 1,8 MB mit |
+| Die Filme | vom eigenen Server, ohne Ton, ohne Bedienleiste; im Sparmodus gar nicht geladen. Startseite 1,4 MB, Salonseite 3,6 MB und erst beim Auftauchen |
 | Gestaltungswerte | 45 Token in `:root`, kein Einzelwert im Stylesheet |
 | Farbstimmungen | alle vier auf allen sieben Seiten geprüft, Kontrast in jeder einzeln gemessen und über dem Grenzwert |
 | Rückfallebenen | ohne GSAP und bei abbestellter Bewegung steht jede Seite vollständig sichtbar da |
@@ -131,35 +131,35 @@ Aufforderung.
 Zum Ansehen genügt ein Klick unten im Fuß; die Wahl bleibt dann in Ihrem
 Browser, bis Sie sie ändern.
 
-## 9. Der Film auf der Startseite — bitte einmal selbst ansehen
+## 9. Die beiden Filme — bitte einmal selbst ansehen
 
-Ihre Canva-Aufnahme läuft jetzt in Schleife hinter dem Text der Startseite.
-**Wie sie dort aussieht, konnte ich nicht prüfen**: Der Browser, mit dem ich
-hier messe, kann das Format H.264 nicht abspielen. Alles Übrige ist geprüft
-— dass sie geladen wird, dass sie umblendet, dass die Standbilder
-einspringen, wenn etwas schiefgeht, dass sie stehenbleibt, wenn niemand
-hinsieht. Nur das Bild selbst nicht.
+**Wie sie aussehen, konnte ich nicht prüfen**: Der Browser, mit dem ich
+hier messe, ist ohne die lizenzpflichtigen Codecs gebaut und kann H.264
+nicht abspielen. Alles Übrige ist geprüft — dass sie geladen werden, dass
+sie umblenden, dass die Standbilder einspringen, wenn etwas schiefgeht,
+dass sie stehenbleiben, wenn niemand hinsieht.
+
+**Der Auftakt** zeigt die Hochkantaufnahme (726 × 1266). Am Telefon füllt
+sie die Fläche; am Schreibtisch steht sie als Säule in der Mitte, in ihrem
+eigenen Format. Sie auf die volle Breite zu ziehen hieße, sie auf das
+Doppelte ihrer Vorlage zu vergrößern — dann wäre sie unscharf.
+
+**Die Salonseite** zeigt die erste Aufnahme (1920 × 1080) am Kopf der
+Seite, dort wo der Laden das Thema ist.
 
 **Was Sie sich ansehen sollten:**
 
-1. Wirkt der Ausschnitt am Schreibtisch richtig? Die Bühne ist 1,6:1, die
-   Aufnahme 16:9 — links und rechts fehlt ein schmaler Streifen.
-2. Ist die Schleife von 5,9 Sekunden zu kurz? Wenn der Sprung am Ende
-   auffällt, hilft eine längere Aufnahme oder eine, die anfängt wie sie
-   aufhört.
-3. Ist der Text darüber überall gut lesbar? Der Schleier ist auf die
-   Standbilder eingestellt; wenn Ihre Aufnahme heller ist, ziehe ich ihn an.
+1. Sitzt der Ausschnitt der Säule am Schreibtisch? Sie ist so hoch wie der
+   Bildschirm und entsprechend schmal.
+2. Fällt der Sprung am Ende auf? Der Auftaktfilm dauert 4 Sekunden.
+3. Tragen die Zeilen darüber überall?
 
-**Am Telefon läuft die Hochkantfassung** (1080 × 1920), am Schreibtisch die
-quere. Welche geladen wird, entscheidet die Ausrichtung des Schirms, nicht
-seine Breite — ein schmales Browserfenster bekommt also ebenfalls die
-hochkante. Bitte beide einmal ansehen.
-
-**Was er an Daten kostet:** rund 3,5 MB beim ersten Aufruf der Startseite.
-Wer den Datensparmodus eingeschaltet hat oder an einer langsamen Leitung
-hängt, bekommt statt des Films die Standbilder und bleibt bei 400 KB. Falls
-Ihnen das zu viel ist, sagen Sie Bescheid — dann läuft der Film nur am
-Schreibtisch.
+**Zwei Kleinigkeiten an der neuen Datei**, beide ohne Folgen für den
+Betrieb, aber erwähnenswert: Sie hat eine Tonspur (die Seite spielt
+stumm ab, der Ton kostet nur ein paar Kilobyte), und ihr Inhalts-
+verzeichnis steht am Dateiende statt am Anfang. Dadurch muss der Browser
+sie ganz laden, bevor er anfangen kann — bei 1,4 MB fällt das kaum auf.
+Wer in Canva exportiert, kann das nicht beeinflussen.
 
 ## Auslieferung
 

@@ -29,6 +29,12 @@ mkdirSync(ziel, { recursive: true });
 const auftraege = [
   // ── Die Inhaberin ────────────────────────────────────────────────────
   ['bahar-gross',        'portrait-model.jpg',            0.62, 0.42, 0.82, 0.72,  600, 0.88, true],
+  /* Dieselbe Aufnahme im Format der Auftaktsäule (726 : 1266). Sie steht
+     dort, solange der Film lädt, und dauerhaft überall, wo er nicht
+     geladen wird. Ein Portrait ist die richtige Rückfallebene für eine
+     Hochkantfläche — und bei einem inhabergeführten Betrieb ohnehin das
+     Bild, das auf den ersten Bildschirm gehört. */
+  ['auftakt-saeule',     'portrait-model.jpg',            0.60, 0.44, 1.00, 0.573, 560, 0.86, true],
   ['bahar-nah',          'portrait-model.jpg',            0.62, 0.30, 0.46, 1.00,  470, 0.88, true],
 
   // ── Die Arbeiten, vollformatig. Fünfzehn Aufnahmen, jede in ihrem
@@ -64,13 +70,10 @@ const auftraege = [
      nicht geladen wird. Es zeigt den Laden und nicht das Haar — genau das
      war am vorigen Auftaktbild das Problem.
 
-     Es bleibt unbeschnitten. Ein Zuschnitt auf die untere Hälfte — dort
-     liegen Schere und Ablage — käme bei dieser Vorlage auf 738 × 415 px
-     heraus, und das ist für eine Vollfläche zu wenig. Stattdessen
-     verschiebt das Stylesheet den sichtbaren Ausschnitt nach unten
-     (object-position), was nichts kostet und nichts wegwirft.           */
-  ['auftakt-still',      'salon-schere-standbild.png',    0, 0, 0, 0, 1366, 0.84, true],
-  ['auftakt-still-hoch', 'salon-schere-standbild.png',    0, 0, 0, 0,  768, 0.84, true],
+     Es bleibt unbeschnitten und steht am Kopf der Salonseite. Als
+     Auftaktbild taugte es nicht: Vollflächig gezogen war die obere Hälfte
+     nur die Rückenlehne eines Stuhls, und der Auftakt zeigt jetzt eine
+     Hochkantsäule, in die ein Querformat ohnehin nicht passt.           */
   ['salon-raum',         'salon-stuehle-spiegel.jpg',     0, 0, 0, 0,  733, 0.88, true],
   ['salon-platz',        'salon-arbeitsplatz.jpg',        0, 0, 0, 0,  455, 0.90, true],
   ['salon-waschen',      'salon-waschbecken.jpg',         0, 0, 0, 0,  455, 0.90, true],

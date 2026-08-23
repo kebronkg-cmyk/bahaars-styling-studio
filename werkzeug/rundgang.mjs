@@ -30,7 +30,7 @@ const durchlauf = async (seite, w, h, einrichten, name, dulden = /(?!)/) => {
      wirklich da ist — eine echte Lücke fällt damit weiterhin auf. */
   page.on('requestfailed', (r) => {
     if (dulden.test(r.url())) return;
-    if (/auftakt(-hoch)?\.mp4$/.test(r.url())) return;
+    if (/\.mp4$/.test(r.url())) return;   /* Codec, nicht fehlende Datei */
     fehler.push('fehlt: ' + r.url().split('/').pop());
   });
   let klageFilm = '';
@@ -49,14 +49,15 @@ const durchlauf = async (seite, w, h, einrichten, name, dulden = /(?!)/) => {
   /* Beide Fassungen prüfen, quer und hochkant — geladen wird je nach
      Ausrichtung nur eine, fehlen darf keine. */
   const film = await page.evaluate(async () => {
-    const v = document.querySelector('.ebene-film');
-    if (!v) return null;
     const aus = {};
-    for (const [name, pfad] of [['quer', v.dataset.quer], ['hoch', v.dataset.hoch]]) {
-      const a = await fetch(pfad, { method: 'HEAD' }).catch(() => null);
-      aus[name] = a ? a.status : 0;
+    /* Nur die Filme, nicht jedes Element mit data-quelle: Das
+       Buchungsfenster trägt dort die Adresse des fremden Dienstes, und
+       die ist von hier aus absichtlich nicht erreichbar. */
+    for (const v of document.querySelectorAll('video[data-quelle]')) {
+      const a = await fetch(v.dataset.quelle, { method: 'HEAD' }).catch(() => null);
+      aus[v.dataset.quelle.split('/').pop()] = a ? a.status : 0;
     }
-    return aus;
+    return Object.keys(aus).length ? aus : null;
   });
   if (film) {
     const fehlend = Object.entries(film).filter(([, st]) => st !== 200);

@@ -694,6 +694,34 @@ html:not(.mitskript) .wegweiser-fuss { display: none; }
 }
 
 .auftakt-bild { position: absolute; inset: 0; z-index: -2; will-change: transform; }
+
+/* Die Säule: Am Hochkantschirm ist sie die ganze Fläche, am Querschirm
+   eine Spalte in der Mitte, die das Format der Aufnahme behält.
+
+   Der Grund ist eine Rechnung. Der Film ist 726 × 1266. Auf einer Bühne
+   von 1440 × 900 quer gefüllt müsste er auf 1440 Breite gezogen werden —
+   das Doppelte seiner Vorlage. In voller Höhe als Säule wird er dagegen
+   auf 900 px verkleinert und bleibt scharf. Ein Bild, das kleiner
+   bleibt, sieht besser aus als ein gezogenes. */
+.auftakt-saeule { position: absolute; inset: 0; }
+@media (orientation: landscape) and (min-width: 48rem) {
+  .auftakt-saeule {
+    left: 50%; right: auto;
+    transform: translateX(-50%);
+    width: auto;
+    aspect-ratio: 726 / 1266;
+    height: 100%;
+  }
+  /* Links und rechts läuft die Säule in den Grund aus, damit sie nicht
+     als Kasten mitten auf der Fläche steht. */
+  .auftakt-saeule::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to right,
+      var(--grund) 0%, var(--grund-24) 7%, var(--grund-00) 18%,
+      var(--grund-00) 82%, var(--grund-24) 93%, var(--grund) 100%);
+  }
+}
 .auftakt-bild picture { position: absolute; inset: 0; display: block; }
 .auftakt-bild img, .auftakt-film {
   width: 100%; height: 100%;
@@ -881,6 +909,20 @@ html:not(.mitskript) .wegweiser-fuss { display: none; }
 .bildstreifen { margin: 0; }
 .bildstreifen img { width: 100%; border-radius: var(--kante); }
 .bildstreifen.breit img { aspect-ratio: 16 / 9; object-fit: cover; }
+
+/* Ein Rahmen, in dem ein Film das Standbild ablöst. Dieselbe Regel wie im
+   Auftakt: Was während des Ladens steht, steht auch dann, wenn der Film
+   nie kommt. */
+.filmrahmen { position: relative; }
+.rahmenfilm {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  border-radius: var(--kante);
+  opacity: 0;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) { .rahmenfilm { opacity: 0; } }
 
 /* Das Portrait mit Beschriftung darauf. */
 .portrait { position: relative; margin: 0; border-radius: var(--kante); overflow: hidden; }

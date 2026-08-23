@@ -157,21 +157,21 @@ try{var p=localStorage.getItem('bahaar-stimmung');
 <!-- ═══ Auftakt ═════════════════════════════════════════════════════════ -->
 <section class="auftakt" aria-labelledby="haupttitel">
 
-  <!-- Der Film trägt den ganzen ersten Bildschirm und wird auch so gezeigt:
-       Über ihm liegt nur ein schmaler Verlauf am unteren Rand, gerade so
-       viel, dass die vier Zeilen darauf tragen. Alles andere ist offen.
+  <!-- Der Film ist eine Hochkantaufnahme, 726 × 1266. Am Hochkantschirm
+       füllt er die Fläche; am Querschirm steht er in seinem eigenen
+       Format als Säule in voller Höhe, statt auf die doppelte Breite
+       gezogen zu werden. Bei 900 px Bühnenhöhe wird er dabei verkleinert
+       und bleibt scharf — gezogen wäre er es nicht.
 
-       Das Standbild darunter zeigt den Laden, nicht das Haar. Es steht,
-       solange der Film lädt, und dauerhaft dort, wo er nicht geladen wird. -->
+       Das Standbild darunter steht, solange er lädt, und dauerhaft dort,
+       wo er nicht geladen wird. -->
   <div class="auftakt-bild" aria-hidden="true">
-    <picture>
-      <source media="(orientation: portrait)" srcset="bilder/auftakt-still-hoch.webp">
-      <img src="bilder/auftakt-still.webp" alt="" width="1366" height="768" fetchpriority="high" decoding="async">
-    </picture>
-    <video class="auftakt-film"
-           data-quer="bilder/auftakt.mp4"
-           data-hoch="bilder/auftakt-hoch.mp4"
-           muted loop playsinline preload="none" tabindex="-1"></video>
+    <div class="auftakt-saeule">
+      <img src="bilder/auftakt-saeule.webp" alt="" width="560" height="977" fetchpriority="high" decoding="async">
+      <video class="auftakt-film"
+             data-quelle="bilder/auftakt-hoch.mp4"
+             muted loop playsinline preload="none" tabindex="-1"></video>
+    </div>
   </div>
   <div class="auftakt-grund" aria-hidden="true"></div>
 
