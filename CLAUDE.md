@@ -166,6 +166,8 @@ schlimmer als ein unbeschriftetes.
 | Ein Verlauf, dessen letzter Halt vor 100 % liegt, wird vom eigenen Kasten abgeschnitten — man sieht eine gerade Linie quer durchs Bild | Radius und letzten Halt so setzen, dass die Ellipse innerhalb ihres Kastens auf null ausläuft |
 | Eine neue Klasse mit einem schon vergebenen Namen zerlegt die andere Seite still — hier wurde aus einem Spaltenraster ein 3000 px breiter Streifen | Vor dem Benennen `grep` über alle Seiten |
 | Die kleinste Zeile über einem Bild ist die, die am Kontrast scheitert — gesperrte Kapitälchen in 12 px haben keine Reserve | Nicht am Verlauf drehen, sondern die Zeile dorthin setzen, wo der Schleier ohnehin dicht ist |
+| Bei einem radialen Verlauf zählt der Abstand in beiden Achsen zusammen — an den Enden einer breiten, tiefen Zeile liegt der Punkt schon bei 82 % des Radius | Für einen breiten Textblock ein senkrechtes Band nehmen, keine Ellipse |
+| Zwei Regeln mit demselben Selektor: die zweite gewinnt, und die erste sieht im Quelltext richtig aus | Nach dem Einfügen `grep -c` auf den Selektor |
 
 ## Zugänglichkeit
 

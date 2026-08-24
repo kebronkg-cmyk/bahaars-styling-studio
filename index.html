@@ -157,23 +157,36 @@ try{var p=localStorage.getItem('bahaar-stimmung');
 <!-- ═══ Auftakt ═════════════════════════════════════════════════════════ -->
 <section class="auftakt" aria-labelledby="haupttitel">
 
-  <!-- Der Film ist eine Hochkantaufnahme, 726 × 1266. Am Hochkantschirm
-       füllt er die Fläche; am Querschirm steht er in seinem eigenen
-       Format als Säule in voller Höhe, statt auf die doppelte Breite
-       gezogen zu werden. Bei 900 px Bühnenhöhe wird er dabei verkleinert
-       und bleibt scharf — gezogen wäre er es nicht.
+  <!-- Drei Ebenen in einem Raum, jede auf ihrer eigenen Tiefe:
 
-       Das Standbild darunter steht, solange er lädt, und dauerhaft dort,
-       wo er nicht geladen wird. -->
-  <div class="auftakt-bild" aria-hidden="true">
-    <div class="auftakt-saeule">
-      <img src="bilder/auftakt-saeule.webp" alt="" width="560" height="977" fetchpriority="high" decoding="async">
-      <video class="auftakt-film"
-             data-quelle="bilder/auftakt-hoch.mp4"
+         fern    die Querformataufnahme aus dem Laden, weit hinten
+         tafel   die Hochkantaufnahme, davor, in einem Rahmen aus Glas
+         Text    ganz vorn
+
+       Sie stehen nebeneinander und nicht ineinander. preserve-3d löst
+       sich schneidende Flächen nicht sauber auf; getrennte Ebenen mit
+       derselben Perspektive stapeln sich dagegen sauber.
+
+       Der Hintergrundfilm wird nur am Querschirm geladen — am
+       Hochkantschirm deckt die Tafel ihn vollständig ab, und drei
+       Megabyte für etwas zu laden, das niemand sieht, wäre unhöflich. -->
+  <div class="raum" aria-hidden="true">
+    <div class="ebene ebene-fern">
+      <img src="bilder/salon-schere.webp" alt="" width="1100" height="618" decoding="async">
+      <video class="raumfilm" data-quelle="bilder/salon-film.mp4" data-nur="landscape"
              muted loop playsinline preload="none" tabindex="-1"></video>
     </div>
+
+    <div class="ebene ebene-schleier"></div>
+
+    <div class="ebene ebene-tafel">
+      <div class="auftakt-tafel">
+        <img src="bilder/auftakt-saeule.webp" alt="" width="560" height="977" fetchpriority="high" decoding="async">
+        <video class="raumfilm" data-quelle="bilder/auftakt-hoch.mp4"
+               muted loop playsinline preload="none" tabindex="-1"></video>
+      </div>
+    </div>
   </div>
-  <div class="auftakt-grund" aria-hidden="true"></div>
 
   <div class="auftakt-satz">
     <h1 class="riesen steig" id="haupttitel">Ich stehe selbst am Stuhl.</h1>
@@ -359,7 +372,7 @@ try{var p=localStorage.getItem('bahaar-stimmung');
 
 
 <!-- ═══ Arbeiten ════════════════════════════════════════════════════════ -->
-<section class="abschnitt werkstreifen-buehne" aria-labelledby="arbeiten-titel">
+<section class="abschnitt" aria-labelledby="arbeiten-titel">
   <div class="bahn mitte">
     <div class="kopf">
       <p class="braue">Werkschau</p>
@@ -372,11 +385,8 @@ try{var p=localStorage.getItem('bahaar-stimmung');
     </div>
   </div>
 
-  <!-- Der Streifen läuft quer. Ohne Skript und bei abbestellter Bewegung
-       ist er ein gewöhnlicher Rollbereich, den man wischen kann; mit
-       Skript zieht ihn der Scrollweg vorbei, während der Abschnitt steht. -->
-  <div class="werkstreifen-fenster">
-    <div class="werkstreifen">
+  <div class="bahn mitte">
+    <div class="collage">
       <button class="arbeit-kachel" type="button" data-text="Balayage über die ganze Länge: der Verlauf beginnt tief und läuft warm aus.">
         <img src="bilder/arbeit-balayage.webp" alt="Langes Haar, Verlauf von dunklem Ansatz in helle warme Spitzen" width="1000" height="1333" loading="lazy" decoding="async">
       </button>

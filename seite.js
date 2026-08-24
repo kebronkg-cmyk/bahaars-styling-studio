@@ -196,132 +196,77 @@
   }
 
   /* ── Der Auftakt ───────────────────────────────────────────────────────
-     Ein Bildschirm, den das Bild trägt. Drei Dinge passieren hier, und
-     mehr nicht:
+     Ein Raum aus drei Ebenen: die Querformataufnahme weit hinten, die
+     Hochkantaufnahme als Tafel davor, der Text ganz vorn. Sie stehen auf
+     verschiedenen Tiefen, und daraus entsteht die Tiefe von selbst — wer
+     die Maus bewegt oder scrollt, sieht sie sich gegeneinander
+     verschieben, weil sie verschieden weit weg sind.
 
-       1. Der Satz steigt auf. Nacheinander, nicht alles auf einmal.
-       2. Das Bild zieht beim Scrollen langsamer mit als der Text darüber.
-          Daraus entsteht Tiefe — nicht aus einem Weichzeichner und nicht
-          aus einer Ebene voller Flusen.
-       3. Der Film löst das Standbild ab, sobald er wirklich läuft.
+     Gerechnet wird in Grad und Pixel, gesetzt werden CSS-Variablen, die
+     im Stylesheet in transform landen. Keine Layout-Eigenschaft wird
+     angefasst.
 
-     Die vorige Fassung fuhr über zwei Bildschirmhöhen mit klebender Bühne,
-     drei Bildwechseln, wanderndem Schein, zwei Dunstbändern, sechzehn
-     Staubflusen und zwei Textstufen. Das war zu viel: Man sah die Mittel
-     und nicht den Laden.                                                 */
+     Am Hochkantschirm gibt es den Raum nicht: Dort füllt die Tafel die
+     Fläche, und ein Kippen wäre ein Wackeln.                            */
 
   const auftakt = $('.auftakt');
   if (auftakt && choreografie) {
-    const bild = $('.auftakt-bild', auftakt);
-    const film = $('.auftakt-film', auftakt);
+    const raum  = $('.raum', auftakt);
+    const fern  = $('.ebene-fern', auftakt);
+    const tafel = $('.ebene-tafel', auftakt);
 
-    /* Der Auftritt. 90 ms Versatz, ausbremsende Kurve, höchstens drei
-       gleichzeitig in Bewegung — mehr kann das Auge nicht einzeln
-       verfolgen. */
     G.from($$('.steig', auftakt), {
       opacity: 0, y: 26,
       duration: .85, stagger: .09,
       ease: 'power2.out'
     });
 
-    /* Das Bild zieht langsamer. Kein Kleben, kein Pinnen: Der Abschnitt
-       scrollt ganz normal weg, nur sein Inhalt bleibt ein Stück zurück.
-       Das ist die ruhigere Fahrt und kostet den Kompositor eine einzige
-       bewegte Ebene. */
-    if (bild) {
-      G.fromTo(bild, { yPercent: 0, scale: 1.06 }, {
-        yPercent: 12, scale: 1, ease: 'none',
-        scrollTrigger: {
-          trigger: auftakt,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: .5
-        }
+    const raeumlich = () => matchMedia('(orientation: landscape) and (min-width: 48rem)').matches;
+
+    /* ── Kippen nach dem Zeiger ─────────────────────────────────────────
+       Höchstens vier Grad. Mehr sieht nach Spielerei aus, und der Text
+       steht darauf.
+
+       Angeglichen mit einem eigenen Takt: Ein Zeigerereignis kommt
+       hundertmal je Sekunde, gezeichnet wird sechzigmal. Ohne
+       Angleichung ruckelt das Kippen, und bei jedem Ereignis eine
+       Transformation zu setzen kostet mehr, als sie wert ist.          */
+    if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      let zielX = 0, zielY = 0, istX = 0, istY = 0, laeuft = false;
+
+      const malen = () => {
+        istX += (zielX - istX) * .08;
+        istY += (zielY - istY) * .08;
+        raum.style.setProperty('--kipp-x', istX.toFixed(3) + 'deg');
+        raum.style.setProperty('--kipp-y', istY.toFixed(3) + 'deg');
+        if (Math.abs(zielX - istX) > .002 || Math.abs(zielY - istY) > .002) {
+          requestAnimationFrame(malen);
+        } else { laeuft = false; }
+      };
+
+      auftakt.addEventListener('pointermove', (e) => {
+        if (!raeumlich()) return;
+        const k = auftakt.getBoundingClientRect();
+        zielY = ((e.clientX - k.left) / k.width  - .5) *  4;
+        zielX = ((e.clientY - k.top)  / k.height - .5) * -4;
+        if (!laeuft) { laeuft = true; requestAnimationFrame(malen); }
+      });
+      auftakt.addEventListener('pointerleave', () => {
+        zielX = zielY = 0;
+        if (!laeuft) { laeuft = true; requestAnimationFrame(malen); }
       });
     }
 
-    /* ── Der Film ────────────────────────────────────────────────────────
-       Er läuft linear und wird nicht am Scrollrad entlanggespult. Das ist
-       gemessen, nicht bequem: In der Datei stehen auf 176 Bilder genau
-       zwei Schlüsselbilder (bei 1 und bei 81). Wer an eine beliebige
-       Stelle springt, zwingt den Dekoder, von dort bis zu achtzig Bilder
-       neu zu rechnen — am Telefon ein Ruckeln bei jeder Radumdrehung.
-
-       Eine Fassung, hochkant. Sie steht am Hochkantschirm über die ganze
-       Fläche und am Querschirm als Säule in ihrem eigenen Format — nicht
-       auf die doppelte Breite gezogen. Die Rechnung dazu steht im
-       Stylesheet bei .auftakt-saeule.
-
-       Geladen wird unter zwei Bedingungen, und beide sind Rücksicht:
-       nicht im Sparmodus oder an langsamer Leitung (es sind 1,4 MB),
-       und nicht ohne passenden Codec. Fällt eine aus, passiert schlicht
-       nichts — dann steht das Standbild, so wie es bis dahin stand. Der
-       Ladezustand ist damit zugleich die Rückfallebene.                 */
-
-    if (film && !langsameLeitung() && film.canPlayType('video/mp4') !== '') {
-      const abbrechen = () => { film.removeAttribute('src'); film.load(); };
-
-      film.addEventListener('error', abbrechen, { once: true });
-      film.addEventListener('canplay', () => {
-        /* Erst wenn er wirklich läuft, wird umgeblendet — nicht schon,
-           wenn er es könnte. play() gibt ein Versprechen zurück, das ein
-           Browser auch nach canplay noch ablehnen darf. */
-        film.play()
-          .then(() => G.to(film, { opacity: 1, duration: .9, ease: 'power2.out' }))
-          .catch(abbrechen);
-      }, { once: true });
-
-      film.src = film.dataset.quelle;
-      film.load();
-
-      /* Außerhalb des Bildes steht er still. Ein Film, den niemand sieht,
-         hat keinen Grund, den Akku zu belasten. */
-      ST.create({
-        trigger: auftakt, start: 'top bottom', end: 'bottom top',
-        onToggle: (selbst) => {
-          if (!film.src) return;
-          if (selbst.isActive) film.play().catch(() => {});
-          else film.pause();
-        }
-      });
-    }
-  }
-
-  /* ── Die Überschriften kommen zeilenweise ─────────────────────────────
-     Jede Abschnittsüberschrift steigt beim Auftauchen auf: erst die
-     Augenbraue, dann der Titel, dann der Vorspann. Drei Dinge nacheinander
-     statt eines Blocks — das ist derselbe Gedanke wie im Auftakt, nur eine
-     Nummer kleiner.
-
-     Ausgangszustand über GSAP.from, nicht über eine Klasse im Stylesheet:
-     Ohne Skript steht der Kopf einfach da, und das ist die richtige
-     Rückfallebene.                                                       */
-
-  $$('.kopf').forEach((kopf) => {
-    const teile = $$(':scope > *', kopf);
-    if (!teile.length || !choreografie) return;
-    G.from(teile, {
-      opacity: 0, y: 22,
-      duration: .7, stagger: .08, ease: 'power2.out',
-      scrollTrigger: { trigger: kopf, start: 'top 88%', once: true }
-    });
-  });
-
-  /* ── Die Bilder in den Abschnitten ziehen mit ──────────────────────────
-     Ein schmaler Versatz gegen die Scrollrichtung, gerade so viel, dass
-     man ihn spürt und nicht sieht. Mehr wäre Zirkus: Diese Bilder stehen
-     neben Text, den jemand liest.                                        */
-
-  if (choreografie) {
-    $$('.bildstreifen img, .portrait img, .vollbild img').forEach((bild) => {
-      G.fromTo(bild, { yPercent: -4 }, {
-        yPercent: 4, ease: 'none',
-        scrollTrigger: {
-          trigger: bild.closest('figure, .portrait') || bild,
-          start: 'top bottom', end: 'bottom top', scrub: .6
-        }
-      });
-    });
+    /* ── Auseinanderziehen beim Scrollen ────────────────────────────────
+       Die hintere Ebene zieht am langsamsten, die Tafel schneller, der
+       Text am schnellsten — das ist dieselbe Bewegung, die man aus einem
+       fahrenden Zug kennt. */
+    G.timeline({
+      scrollTrigger: { trigger: auftakt, start: 'top top', end: 'bottom top', scrub: .5 }
+    })
+      .fromTo(fern,  { '--fern-y': '0px' },  { '--fern-y': '60px',  ease: 'none' }, 0)
+      .fromTo(tafel, { '--tafel-y': '0px' }, { '--tafel-y': '150px', ease: 'none' }, 0)
+      .fromTo($('.auftakt-satz', auftakt), { y: 0 }, { y: 260, ease: 'none' }, 0);
   }
 
   /* ── Filme in einem Rahmen ────────────────────────────────────────────
@@ -331,9 +276,14 @@
      etwas, das niemand ansieht. Umgeblendet wird erst, wenn er läuft.
      Außerhalb des Bildes hält er an.                                    */
 
-  $$('.rahmenfilm').forEach((film) => {
+  $$('.rahmenfilm, .raumfilm').forEach((film) => {
+    /* data-nur schränkt eine Aufnahme auf eine Ausrichtung ein: Der
+       Hintergrundfilm im Auftakt wird am Hochkantschirm von der Tafel
+       vollständig verdeckt, und drei Megabyte für etwas zu laden, das
+       niemand sieht, wäre unhöflich. */
+    if (film.dataset.nur && !matchMedia(`(orientation: ${film.dataset.nur})`).matches) return;
     if (!choreografie || langsameLeitung() || film.canPlayType('video/mp4') === '') return;
-    const rahmen = film.closest('.filmrahmen') || film;
+    const rahmen = film.closest('.filmrahmen, .auftakt') || film;
 
     ST.create({
       trigger: rahmen, start: 'top bottom', once: true,
@@ -359,54 +309,6 @@
       }
     });
   });
-
-  /* ── Die Werkschau zieht vorbei ───────────────────────────────────────
-     Der Abschnitt bleibt stehen, und der Streifen läuft quer durch das
-     Bild. Der Scrollweg dafür ist genau so lang wie der Streifen breit
-     ist — dann läuft er mit derselben Geschwindigkeit, in der man scrollt,
-     und fühlt sich nicht nach Getriebe an.
-
-     Gerechnet wird die Strecke bei jedem Neuvermessen neu
-     (invalidateOnRefresh): Sie hängt an der Fensterbreite und an den
-     Bildhöhen, und beides ändert sich beim Drehen des Geräts.
-
-     Ohne Skript oder bei abbestellter Bewegung passiert nichts davon —
-     dann bleibt das Fenster ein Rollbereich, den man wischen kann. Die
-     Marke mitzug schaltet erst hier scharf, damit nie beides zugleich
-     gilt: ein gezogener Streifen, der außerdem selbst rollt, kämpft mit
-     sich.                                                                */
-
-  const werkBuehne  = $('.werkstreifen-buehne');
-  const werkFenster = $('.werkstreifen-fenster');
-  const werkSpur    = $('.werkstreifen');
-  if (werkBuehne && werkFenster && werkSpur && choreografie) {
-    wurzel.classList.add('mitzug');
-
-    const weg = () => Math.max(0, werkSpur.scrollWidth - werkFenster.clientWidth);
-
-    G.to(werkSpur, {
-      x: () => -weg(),
-      ease: 'none',
-      scrollTrigger: {
-        trigger: werkBuehne,
-        start: 'top top',
-        end: () => '+=' + weg(),
-        pin: true,
-        scrub: .4,
-        invalidateOnRefresh: true,
-        anticipatePin: 1
-      }
-    });
-
-    /* Die Bilder werden erst geladen, wenn sie an der Reihe sind — aber
-       „an der Reihe" heißt hier quer und nicht senkrecht, und das erkennt
-       loading="lazy" nicht. Beim Betreten des Abschnitts werden sie
-       deshalb alle scharf gestellt. */
-    ST.create({
-      trigger: werkBuehne, start: 'top bottom', once: true,
-      onEnter: () => $$('img', werkSpur).forEach((b) => { b.loading = 'eager'; })
-    });
-  }
 
   /* ── Die Übersicht in der Kopfzeile ────────────────────────────────────
      „Leistungen & Preise" klappt neun Gruppen mit Ab-Preis auf. Damit sieht
