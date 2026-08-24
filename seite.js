@@ -445,10 +445,11 @@
   const merkzettel = $('.merkzettel');
   if (merkzettel) {
     const SCHLUESSEL = 'bahaar-merkzettel';
+    let zugetan = false;
     const liste  = $('ul', merkzettel);
     const zahl   = $('.merkzettel-zahl', merkzettel);
     const summe  = $('.summe', merkzettel);
-    const kopf   = $('.merkzettel-text .kopf', merkzettel);
+    const kopf   = $('.merkzettel-kopf', merkzettel);
     let gemerkt = [];
 
     try { gemerkt = JSON.parse(sessionStorage.getItem(SCHLUESSEL) || '[]'); } catch { gemerkt = []; }
@@ -477,9 +478,12 @@
     };
 
     const zeichnen = () => {
-      merkzettel.classList.toggle('da', gemerkt.length > 0);
+      /* Ein einmal zugetaner Riegel bleibt zu, bis wieder etwas dazukommt. */
+      merkzettel.classList.toggle('da', gemerkt.length > 0 && !zugetan);
       zahl.textContent = gemerkt.length;
-      kopf.textContent = gemerkt.length === 1 ? 'Eine Leistung gemerkt' : `${gemerkt.length} Leistungen gemerkt`;
+      /* Die Ziffer links steht schon da — der Text wiederholt sie nicht.
+         Zusammen gelesen ergibt es „1 Leistung gemerkt“. */
+      kopf.textContent = gemerkt.length === 1 ? 'Leistung gemerkt' : 'Leistungen gemerkt';
 
       const preis = gemerkt.reduce((a, e) => a + untergrenze(e.preis), 0);
       const min   = gemerkt.reduce((a, e) => a + dauerMinuten(e.dauer), 0);
@@ -491,7 +495,7 @@
 
       // Der Riegel klebt unten am Bild — die Fußzeile braucht so viel Platz
       // darunter, wie er hoch ist, sonst verdeckt er sie.
-      document.body.style.paddingBottom = gemerkt.length ? `${merkzettel.offsetHeight}px` : '';
+      document.body.style.paddingBottom = merkzettel.classList.contains('da') ? `${merkzettel.offsetHeight}px` : '';
 
       const stueck = document.createDocumentFragment();
       gemerkt.forEach((e, i) => {
@@ -532,10 +536,16 @@
         const k = kennung(b);
         const bei = gemerkt.findIndex((e) => `${e.name}|${e.laenge || ''}` === k);
         if (bei >= 0) gemerkt.splice(bei, 1);
-        else gemerkt.push({
-          name: b.dataset.name, laenge: b.dataset.laenge || '',
-          preis: b.dataset.preis, dauer: b.dataset.dauer || '',
-        });
+        else {
+          gemerkt.push({
+            name: b.dataset.name, laenge: b.dataset.laenge || '',
+            preis: b.dataset.preis, dauer: b.dataset.dauer || '',
+          });
+          /* Etwas Neues holt den Riegel zurück. Zugemacht heißt „jetzt
+             gerade nicht", nicht „nie wieder" — wer danach weitermerkt,
+             will sehen, was er sammelt. Beim Wegnehmen bleibt er zu. */
+          zugetan = false;
+        }
         sichern(); zeichnen(); knoepfeAbgleichen();
       });
     });
@@ -558,10 +568,24 @@
       return zeilen.join('\n');
     };
 
-    $('.merkzettel-mail', merkzettel)?.addEventListener('click', (e) => {
-      e.currentTarget.href = 'mailto:info@bahaarsstylingstudio.de'
-        + '?subject=' + encodeURIComponent('Terminanfrage')
-        + '&body=' + encodeURIComponent(alsText());
+    /* Der Hauptweg führt ins Buchungsfenster, nicht ins E-Mail-Programm.
+       Die Auswahl wird dabei mitgenommen: Sie steht schon in
+       sessionStorage, und die Terminseite liest sie von dort und zeigt sie
+       neben dem Buchungsfenster an. Übergeben wird nichts über die
+       Adresse — eine Terminanfrage in einer URL steht in jedem
+       Serverprotokoll und in jedem Verlauf. */
+    $('.merkzettel-buchen', merkzettel)?.addEventListener('click', () => {
+      try { sessionStorage.setItem('bahaar-merkzettel-mit', '1'); } catch (e) { /* privater Modus */ }
+    });
+
+    /* Zumachen. Der Riegel steht am unteren Rand und verdeckt dort einen
+       Streifen der Seite; wer ihn gerade nicht braucht, muss ihn wegtun
+       können, ohne die Auswahl zu verlieren. Beim nächsten Merken kommt
+       er von selbst zurück. */
+    $('.merkzettel-zu', merkzettel)?.addEventListener('click', () => {
+      zugetan = true;
+      merkzettel.classList.remove('da');
+      document.body.style.paddingBottom = '';
     });
 
     const kopieren = $('.merkzettel-kopieren', merkzettel);
@@ -591,6 +615,45 @@
     });
 
     zeichnen(); knoepfeAbgleichen();
+  }
+
+  /* ── Die mitgebrachte Auswahl auf der Terminseite ──────────────────────
+     Wer auf der Preisliste etwas gemerkt und dort „Termin buchen" gedrückt
+     hat, sieht die Liste hier neben dem Buchungsfenster — zum Ablesen,
+     nicht zum Übertragen: Das fremde Fenster nimmt nichts entgegen.     */
+
+  const mitgebracht = $('.mitgebracht');
+  if (mitgebracht) {
+    let posten = [];
+    try {
+      if (sessionStorage.getItem('bahaar-merkzettel-mit')) {
+        posten = JSON.parse(sessionStorage.getItem('bahaar-merkzettel') || '[]');
+      }
+    } catch (e) { /* privater Modus */ }
+
+    if (posten.length) {
+      const liste = $('ul', mitgebracht);
+      const stueck = document.createDocumentFragment();
+      let summe = 0;
+      for (const e of posten) {
+        const li = document.createElement('li');
+        const was = document.createElement('span');
+        was.textContent = e.laenge ? `${e.name} (${e.laenge})` : e.name;
+        const preis = document.createElement('span');
+        preis.textContent = `${e.preis} €`;
+        li.append(was, preis);
+        stueck.append(li);
+        summe += Number(e.preis) || 0;
+      }
+      liste.replaceChildren(stueck);
+      const fuss = document.createElement('li');
+      fuss.className = 'summe';
+      const wort = document.createElement('span'); wort.textContent = 'Zusammen etwa';
+      const zahl = document.createElement('span'); zahl.textContent = `${summe} €`;
+      fuss.append(wort, zahl);
+      liste.append(fuss);
+      mitgebracht.hidden = false;
+    }
   }
 
   /* ── Öffnungszeiten: heute hervorheben, offen oder zu sagen ────────────

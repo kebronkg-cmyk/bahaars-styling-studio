@@ -42,18 +42,25 @@ const auftraege = [
   //    umgekehrt.
   ['arbeit-kind',        'arbeit-01-kinderschnitt.jpg',   0, 0, 0, 0, 1000, 0.84],
   ['arbeit-balayage',    'arbeit-02-balayage.jpg',        0, 0, 0, 0, 1000, 0.84],
-  ['arbeit-straehnen',   'arbeit-03-straehnen.jpg',       0, 0, 0, 0, 1000, 0.84, false, [1.05, 0.95, 0.99]],
+  /* Drei Aufnahmen hat der Auftraggeber in besserer Fassung nachgereicht.
+     Es sind dieselben Arbeiten, nur sauber: kein Flusenflug, kein
+     Farbstich, mehr Glanz. Die alten .jpg bleiben im Ordner liegen, damit
+     der Unterschied nachvollziehbar bleibt.
+
+     Der Weißabgleich von Hand fällt weg — die neue Fassung braucht ihn
+     nicht mehr. */
+  ['arbeit-straehnen',   'arbeit-03-straehnen.png',       0, 0, 0, 0, 1000, 0.84, true],
   ['arbeit-kurz',        'arbeit-04-kurzhaar.jpg',        0, 0, 0, 0, 1000, 0.84],
   ['arbeit-locken',      'arbeit-05-blond-locken.jpg',    0, 0, 0, 0, 1000, 0.84],
   ['arbeit-bob',         'arbeit-06-bob-blond.jpg',       0, 0, 0, 0, 1000, 0.84],
   ['arbeit-kurz-blond',  'arbeit-07-kurzhaar-blond.jpg',  0, 0, 0, 0, 1000, 0.84],
   ['arbeit-ombre',       'arbeit-08-ombre.jpg',           0, 0, 0, 0, 1000, 0.84],
-  ['arbeit-glatt',       'arbeit-09-lang-glatt.jpg',      0, 0, 0, 0, 1000, 0.84],
+  ['arbeit-glatt',       'arbeit-09-lang-glatt.png',      0, 0, 0, 0, 1000, 0.84, true],
   ['arbeit-lang',        'arbeit-10-lang-blond.jpg',      0, 0, 0, 0, 1000, 0.84],
   ['arbeit-flecht',      'arbeit-11-flechtfrisur.jpg',    0, 0, 0, 0, 1000, 0.86, true],
   ['arbeit-hochsteck',   'arbeit-12-hochsteck.jpg',       0, 0, 0, 0, 1000, 0.86, true, [0.90, 1.00, 1.30]],
   ['arbeit-perlen',      'arbeit-13-hochsteck-blumen.jpg',0, 0, 0, 0,  768, 0.86, true],
-  ['arbeit-braut-perlen','arbeit-14-brautfrisur.jpg',     0, 0, 0, 0,  539, 0.88, true],
+  ['arbeit-braut-perlen','arbeit-14-brautfrisur.png',     0, 0, 0, 0,  899, 0.88, true],
   ['arbeit-braut-schleier','arbeit-15-braut-schleier.jpg',0, 0, 0, 0,  550, 0.88, true],
 
   // ── Der Laden und das Regal, ebenfalls vollformatig.
@@ -107,7 +114,7 @@ const auftraege = [
 // [Kennung, Quelldatei, Ansatz x/y, Länge x/y]
 const tonproben = [
   ['farbe',      'arbeit-10-lang-blond.jpg',    0.58, 0.16, 0.50, 0.62],
-  ['straehnen',  'arbeit-03-straehnen.jpg',     0.55, 0.16, 0.50, 0.66],
+  ['straehnen',  'arbeit-03-straehnen.png',     0.55, 0.16, 0.50, 0.66],
   ['balayage',   'arbeit-02-balayage.jpg',      0.50, 0.24, 0.60, 0.72],
   ['locken',     'arbeit-05-blond-locken.jpg',  0.52, 0.30, 0.44, 0.66],
   ['glatt',      'arbeit-09-lang-glatt.jpg',    0.52, 0.24, 0.52, 0.66],

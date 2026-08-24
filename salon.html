@@ -24,46 +24,58 @@ try{var p=localStorage.getItem('bahaar-stimmung');
 <body>
 <a class="sprung" href="#inhalt">Zum Inhalt springen</a>
 
-<header class="kopfzeile leiste">
-  <a class="marke" href="index.html">BaHaar’s<span class="zusatz">styling studio</span></a>
-  <button class="menuknopf" type="button" aria-expanded="false" aria-controls="wegweiser" aria-label="Menü öffnen"><span></span></button>
-  <nav class="wegweiser" id="wegweiser" aria-label="Hauptmenü">
-    <ul>
-      <li><a href="index.html">Start</a></li>
-      <li class="navpunkt">
-        <button type="button" aria-expanded="false" aria-controls="uebersicht-leistungen">
-          Leistungen &amp; Preise
-          <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg>
-        </button>
-        <a class="nav-ohne-skript" href="leistungen.html">Leistungen &amp; Preise</a>
-        <div class="uebersicht" id="uebersicht-leistungen" hidden>
-          <ul>
-            <li><a href="leistungen.html#schneiden">Waschen, Schneiden &amp; Föhnen <span class="ab">ab 30 €</span></a></li>
-            <li><a href="leistungen.html#farbe">Farbe &amp; Tönung <span class="ab">ab 43 €</span></a></li>
-            <li><a href="leistungen.html#straehnen">Strähnen &amp; Balayage <span class="ab">ab 69 €</span></a></li>
-            <li><a href="leistungen.html#umformen">Umformen <span class="ab">ab 69 €</span></a></li>
-            <li><a href="leistungen.html#pflege">Pflege &amp; Korrektur <span class="ab">ab 5 €</span></a></li>
-            <li><a href="leistungen.html#anlass">Für besondere Anlässe <span class="ab">ab 60 €</span></a></li>
-            <li><a href="leistungen.html#brauen">Brauen &amp; Wimpern <span class="ab">ab 10 €</span></a></li>
-            <li><a href="leistungen.html#herren">Herren <span class="ab">ab 10 €</span></a></li>
-            <li><a href="leistungen.html#kinder">Kinder bis 12 Jahre <span class="ab">ab 25 €</span></a></li>
-          </ul>
-          <p class="uebersicht-fuss">
-            <span>Preise nach Haarlänge und Aufwand · Beratung immer inklusive</span>
-            <a href="leistungen.html">Ganze Preisliste</a>
-          </p>
-        </div>
-      </li>
-      <li><a href="brautstyling.html">Brautstyling</a></li>
-      <li><a href="salon.html" aria-current="page">Der Salon</a></li>
-    </ul>
-    <a class="ruf" href="tel:+49896923644">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M6.5 3h3l1.5 4-2 1.5a12 12 0 0 0 6.5 6.5L17 13l4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 3.5 5.2 2 2 0 0 1 5.5 3z"/></svg>
-      089 692 36 44
-    </a>
-    <a class="knopf knopf-voll knopf-termin" href="termin.html">Termin</a>
-  </nav>
+<header class="kopfzeile">
+  <a class="marke" href="index.html">BaHaar&rsquo;s<span class="zusatz">styling studio</span></a>
+  <a class="ruf" href="tel:+49896923644">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M6.5 3h3l1.5 4-2 1.5a12 12 0 0 0 6.5 6.5L17 13l4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 3.5 5.2 2 2 0 0 1 5.5 3z"/></svg>
+    089 692 36 44
+  </a>
+  <a class="knopf knopf-voll knopf-termin" href="termin.html">Termin</a>
+  <button class="menuknopf" type="button" aria-expanded="false" aria-controls="wegweiser" aria-label="Men&uuml; &ouml;ffnen"><span></span></button>
 </header>
+
+<!-- Die Navigation liegt hinter dem Schalter und öffnet sich über die
+     ganze Fläche. Sie ist kein Menü, sondern ein Inhaltsverzeichnis:
+     Ziffer, Name, und unter „Leistungen & Preise" die neun Gruppen mit
+     Ab-Preis. Ohne Skript gibt es keinen Schalter — dann steht sie als
+     gewöhnliche Liste im Fluss. -->
+<nav class="wegweiser" id="wegweiser" aria-label="Hauptmen&uuml;">
+  <ul>
+    <li><a href="index.html"><span class="ziffer">01</span> Start</a></li>
+    <li class="navpunkt">
+      <button type="button" aria-expanded="false" aria-controls="uebersicht-leistungen">
+        <span class="ziffer">02</span> Leistungen &amp; Preise
+        <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg>
+      </button>
+      <a class="nav-ohne-skript" href="leistungen.html"><span class="ziffer">02</span> Leistungen &amp; Preise</a>
+      <div class="uebersicht" id="uebersicht-leistungen" hidden>
+        <ul>
+          <li><a href="leistungen.html#schneiden">Waschen, Schneiden &amp; F&ouml;hnen <span class="ab">ab 30 &euro;</span></a></li>
+          <li><a href="leistungen.html#farbe">Farbe &amp; T&ouml;nung <span class="ab">ab 43 &euro;</span></a></li>
+          <li><a href="leistungen.html#straehnen">Str&auml;hnen &amp; Balayage <span class="ab">ab 69 &euro;</span></a></li>
+          <li><a href="leistungen.html#umformen">Umformen <span class="ab">ab 69 &euro;</span></a></li>
+          <li><a href="leistungen.html#pflege">Pflege &amp; Korrektur <span class="ab">ab 5 &euro;</span></a></li>
+          <li><a href="leistungen.html#anlass">F&uuml;r besondere Anl&auml;sse <span class="ab">ab 60 &euro;</span></a></li>
+          <li><a href="leistungen.html#brauen">Brauen &amp; Wimpern <span class="ab">ab 10 &euro;</span></a></li>
+          <li><a href="leistungen.html#herren">Herren <span class="ab">ab 10 &euro;</span></a></li>
+          <li><a href="leistungen.html#kinder">Kinder bis 12 Jahre <span class="ab">ab 25 &euro;</span></a></li>
+        </ul>
+        <p class="uebersicht-fuss">
+          <span>Preise nach Haarl&auml;nge und Aufwand &middot; Beratung immer inklusive</span>
+          <a href="leistungen.html">Ganze Preisliste</a>
+        </p>
+      </div>
+    </li>
+    <li><a href="brautstyling.html"><span class="ziffer">03</span> Brautstyling</a></li>
+    <li><a href="salon.html" aria-current="page"><span class="ziffer">04</span> Der Salon</a></li>
+    <li><a href="termin.html"><span class="ziffer">05</span> Termin</a></li>
+  </ul>
+  <p class="wegweiser-fuss">
+    <a href="tel:+49896923644">089 692 36 44</a>
+    <a href="mailto:info@bahaarsstylingstudio.de">info@bahaarsstylingstudio.de</a>
+    <span>Perlacher Stra&szlig;e 2 &middot; 81539 M&uuml;nchen</span>
+  </p>
+</nav>
 
 <main id="inhalt">
 
@@ -72,7 +84,7 @@ try{var p=localStorage.getItem('bahaar-stimmung');
     <div class="zweispalt" style="align-items:center">
       <div>
         <h1 class="titel-gross" id="haupttitel">Der Salon</h1>
-        <p class="vorspann" style="margin-top:var(--r3)">
+        <p class="vorspann" style="margin-top:var(--a3)">
           Zwei Bedienplätze, ein Waschbecken, ein türkises Regal, das man vom
           Gehsteig aus sieht. Kein großer Laden — aber einer, in dem eine
           Meisterin selbst am Stuhl steht.
@@ -128,33 +140,33 @@ try{var p=localStorage.getItem('bahaar-stimmung');
       </div>
 
       <div class="blatt">
-        <h3 class="titel-klein" style="margin-bottom:var(--r2)">Womit gearbeitet wird</h3>
-        <p style="color:var(--tinte-leise);margin-bottom:var(--r2)">
+        <h3 class="titel-klein" style="margin-bottom:var(--a2)">Womit gearbeitet wird</h3>
+        <p style="color:var(--tinte-leise);margin-bottom:var(--a2)">
           Was im Regal steht und tatsächlich benutzt wird:
         </p>
         <ul style="list-style:none;margin:0;padding:0;display:grid;gap:.55rem">
           <li style="display:grid;grid-template-columns:auto 1fr;gap:.8rem;align-items:baseline">
-            <span style="width:.4rem;height:.4rem;border-radius:50%;background:var(--messing)"></span>
+            <span style="width:.4rem;height:.4rem;border-radius:50%;background:var(--leit)"></span>
             <span><strong style="color:var(--tinte)">Moroccanoil</strong> <span style="color:var(--tinte-still)">prägt das ganze Regal, und die Farbe dieser Seite</span></span>
           </li>
           <li style="display:grid;grid-template-columns:auto 1fr;gap:.8rem;align-items:baseline">
-            <span style="width:.4rem;height:.4rem;border-radius:50%;background:var(--messing)"></span>
+            <span style="width:.4rem;height:.4rem;border-radius:50%;background:var(--leit)"></span>
             <span><strong style="color:var(--tinte)">Olaplex</strong> <span style="color:var(--tinte-still)">Aufbau nach Blondierung, 30 €</span></span>
           </li>
           <li style="display:grid;grid-template-columns:auto 1fr;gap:.8rem;align-items:baseline">
-            <span style="width:.4rem;height:.4rem;border-radius:50%;background:var(--messing)"></span>
+            <span style="width:.4rem;height:.4rem;border-radius:50%;background:var(--leit)"></span>
             <span><strong style="color:var(--tinte)">Revlon Professional</strong></span>
           </li>
           <li style="display:grid;grid-template-columns:auto 1fr;gap:.8rem;align-items:baseline">
-            <span style="width:.4rem;height:.4rem;border-radius:50%;background:var(--messing)"></span>
+            <span style="width:.4rem;height:.4rem;border-radius:50%;background:var(--leit)"></span>
             <span><strong style="color:var(--tinte)">American Crew</strong> <span style="color:var(--tinte-still)">für die Herren</span></span>
           </li>
           <li style="display:grid;grid-template-columns:auto 1fr;gap:.8rem;align-items:baseline">
-            <span style="width:.4rem;height:.4rem;border-radius:50%;background:var(--messing)"></span>
+            <span style="width:.4rem;height:.4rem;border-radius:50%;background:var(--leit)"></span>
             <span><strong style="color:var(--tinte)">CHI</strong></span>
           </li>
         </ul>
-        <p style="margin-top:var(--r3);font-size:var(--s-klein);color:var(--tinte-still)">
+        <p style="margin-top:var(--a3);font-size:var(--t-klein);color:var(--tinte-still)">
           Ammoniakfreie, allergiefreie Farbe gibt es für alle, die
           empfindlich reagieren — sie kostet 6 bis 10 € Aufpreis.
         </p>
@@ -166,6 +178,82 @@ try{var p=localStorage.getItem('bahaar-stimmung');
     </div>
   </div>
 </section>
+
+
+<!-- ═══ Kosmetikstudio ═════════════════════════════════════════════════ -->
+<section class="abschnitt bahn" aria-labelledby="kosmetik-titel">
+  <div class="mitte">
+    <div style="max-width:44rem">
+      <h2 class="titel" id="kosmetik-titel" style="margin-bottom:var(--a3)">BaHaar’s Kosmetikstudio</h2>
+      <p class="lauf">
+        Direkt nebenan ist das Kosmetikstudio dazugekommen:
+        Gesichtsbehandlung, Waxing, Maniküre, Pediküre, Make-up und Wimpern.
+      </p>
+      <figure class="vollbild" style="margin:var(--a3) 0 0;max-width:22rem">
+        <img src="bilder/logo-kosmetik.webp" alt="Schriftzug des Kosmetikstudios: Beauty, Waxing, Maniküre" width="499" height="122" loading="lazy" decoding="async">
+      </figure>
+      <div class="blatt" style="margin-top:var(--a4);border-color:var(--linie-leit)">
+        <p class="schild">noch offen</p>
+        <p style="color:var(--tinte-leise)">
+          Für das Kosmetikstudio stehen die Preise noch nicht fest. Ich
+          schreibe hier lieber nichts hin, als eine Zahl zu nennen, die an
+          der Kasse nicht gilt. Rufen Sie an, dann sage ich Ihnen, was eine
+          Behandlung kostet.
+        </p>
+        <p style="margin-top:var(--a3)">
+          <a class="knopf knopf-leer" href="tel:+49896923644" style="padding:.7rem 1.2rem;font-size:var(--t-klein)">089 692 36 44</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Herkommen ══════════════════════════════════════════════════════ -->
+<section class="abschnitt bahn" aria-labelledby="weg-titel">
+  <div class="mitte">
+    <div class="kopf">
+      <h2 class="titel" id="weg-titel">Perlacher Straße 2</h2>
+    </div>
+
+    <dl class="zeilenliste">
+      <div>
+        <dt>Öffnungszeiten</dt>
+        <dd>
+          <p class="oeffnungsstand" style="color:var(--leit);margin-bottom:.6rem"></p>
+          <ul class="zeiten" style="max-width:22rem">
+            <li data-tage="1"><span class="tag">Montag</span> <span class="zahl">10:00 – 16:00</span></li>
+            <li data-tage="2,3,4,5"><span class="tag">Dienstag bis Freitag</span> <span class="zahl">09:00 – 19:00</span></li>
+            <li data-tage="6"><span class="tag">Samstag</span> <span class="zahl">09:00 – 16:00</span></li>
+            <li data-tage="0" class="zu"><span class="tag">Sonntag</span> <span>geschlossen</span></li>
+          </ul>
+        </dd>
+      </div>
+      <div>
+        <dt>Anschrift</dt>
+        <dd>
+          <p>
+            BaHaar’s Styling Studio<br>
+            Perlacher Straße 2<br>
+            81539 München-Giesing
+          </p>
+          <p><a href="https://www.openstreetmap.org/?mlat=48.1093&amp;mlon=11.5875#map=17/48.1093/11.5875" rel="noopener" style="color:var(--leit)">Auf der Karte ansehen</a></p>
+        </dd>
+      </div>
+      <div>
+        <dt>Erreichen</dt>
+        <dd>
+          <p>
+            <a href="tel:+49896923644" style="color:var(--leit);text-decoration:none">089 692 36 44</a><br>
+            <a href="mailto:info@bahaarsstylingstudio.de" style="color:var(--leit);text-decoration:none">info@bahaarsstylingstudio.de</a><br>
+            <a href="https://www.instagram.com/bahaarsstylingstudio" rel="noopener" style="color:var(--leit);text-decoration:none">@bahaarsstylingstudio</a>
+          </p>
+          <a class="knopf knopf-voll" href="termin.html">Termin buchen</a>
+        </dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
 
 <!-- ═══ Der Laden ══════════════════════════════════════════════════════ -->
 <section class="abschnitt bahn warm" aria-labelledby="laden-titel">
@@ -191,79 +279,6 @@ try{var p=localStorage.getItem('bahaar-stimmung');
   </div>
 </section>
 
-<!-- ═══ Kosmetikstudio ═════════════════════════════════════════════════ -->
-<section class="abschnitt bahn" aria-labelledby="kosmetik-titel">
-  <div class="mitte">
-    <div style="max-width:44rem">
-      <h2 class="titel" id="kosmetik-titel" style="margin-bottom:var(--r3)">BaHaar’s Kosmetikstudio</h2>
-      <p class="lauf">
-        Direkt nebenan ist das Kosmetikstudio dazugekommen:
-        Gesichtsbehandlung, Waxing, Maniküre, Pediküre, Make-up und Wimpern.
-      </p>
-      <figure class="vollbild" style="margin:var(--r3) 0 0;max-width:22rem">
-        <img src="bilder/logo-kosmetik.webp" alt="Schriftzug des Kosmetikstudios: Beauty, Waxing, Maniküre" width="499" height="122" loading="lazy" decoding="async">
-      </figure>
-      <div class="blatt" style="margin-top:var(--r4);border-color:var(--linie-akzent)">
-        <p class="schild">noch offen</p>
-        <p style="color:var(--tinte-leise)">
-          Für das Kosmetikstudio stehen die Preise noch nicht fest. Ich
-          schreibe hier lieber nichts hin, als eine Zahl zu nennen, die an
-          der Kasse nicht gilt. Rufen Sie an, dann sage ich Ihnen, was eine
-          Behandlung kostet.
-        </p>
-        <p style="margin-top:var(--r3)">
-          <a class="knopf knopf-leer" href="tel:+49896923644" style="padding:.7rem 1.2rem;font-size:var(--s-klein)">089 692 36 44</a>
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ Herkommen ══════════════════════════════════════════════════════ -->
-<section class="abschnitt bahn" aria-labelledby="weg-titel">
-  <div class="mitte">
-    <div class="kopf">
-      <h2 class="titel" id="weg-titel">Perlacher Straße 2</h2>
-    </div>
-
-    <dl class="zeilenliste">
-      <div>
-        <dt>Öffnungszeiten</dt>
-        <dd>
-          <p class="oeffnungsstand" style="color:var(--messing);margin-bottom:.6rem"></p>
-          <ul class="zeiten" style="max-width:22rem">
-            <li data-tage="1"><span class="tag">Montag</span> <span class="zahl">10:00 – 16:00</span></li>
-            <li data-tage="2,3,4,5"><span class="tag">Dienstag bis Freitag</span> <span class="zahl">09:00 – 19:00</span></li>
-            <li data-tage="6"><span class="tag">Samstag</span> <span class="zahl">09:00 – 16:00</span></li>
-            <li data-tage="0" class="zu"><span class="tag">Sonntag</span> <span>geschlossen</span></li>
-          </ul>
-        </dd>
-      </div>
-      <div>
-        <dt>Anschrift</dt>
-        <dd>
-          <p>
-            BaHaar’s Styling Studio<br>
-            Perlacher Straße 2<br>
-            81539 München-Giesing
-          </p>
-          <p><a href="https://www.openstreetmap.org/?mlat=48.1093&amp;mlon=11.5875#map=17/48.1093/11.5875" rel="noopener" style="color:var(--messing)">Auf der Karte ansehen</a></p>
-        </dd>
-      </div>
-      <div>
-        <dt>Erreichen</dt>
-        <dd>
-          <p>
-            <a href="tel:+49896923644" style="color:var(--messing);text-decoration:none">089 692 36 44</a><br>
-            <a href="mailto:info@bahaarsstylingstudio.de" style="color:var(--messing);text-decoration:none">info@bahaarsstylingstudio.de</a><br>
-            <a href="https://www.instagram.com/bahaarsstylingstudio" rel="noopener" style="color:var(--messing);text-decoration:none">@bahaarsstylingstudio</a>
-          </p>
-          <a class="knopf knopf-voll" href="termin.html">Termin buchen</a>
-        </dd>
-      </div>
-    </dl>
-  </div>
-</section>
 
 </main>
 
@@ -271,7 +286,7 @@ try{var p=localStorage.getItem('bahaar-stimmung');
   <div class="bahn mitte">
     <div class="fusszeile-raster">
       <div>
-        <p class="marke" style="display:block;margin-bottom:var(--r2)">BaHaar’s<span class="zusatz">styling studio</span></p>
+        <p class="marke" style="display:block;margin-bottom:var(--a2)">BaHaar’s<span class="zusatz">styling studio</span></p>
         <p style="color:var(--tinte-leise);max-width:24rem">
           Friseursalon in München-Giesing. Inhaberin Fakhria Tokhi,
           Friseurmeisterin.

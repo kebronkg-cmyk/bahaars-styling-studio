@@ -76,7 +76,6 @@
   --grund-24: oklch(15% .017 52 / .24);
   --grund-00: oklch(15% .017 52 / 0);
 
-  --glas:       oklch(15% .017 52 / .72);
   --glas-dicht: oklch(15% .017 52 / .92);
 
   /* ── Schrift auf dem Grund ──────────────────────────────────────── */
@@ -625,9 +624,14 @@ strong { color: var(--tinte); font-weight: 600; }
 .wegweiser {
   position: fixed; inset: 0; z-index: 65;
   background: var(--grund);
-  display: grid; align-content: center;
+  display: grid;
+  /* safe center: mittig, solange es passt — sonst oben bündig. Ohne das
+     schneidet ein zentrierter Inhalt, der höher ist als das Fenster, oben
+     ab, und man kommt an die erste Zeile nicht mehr heran. */
+  align-content: safe center;
   padding: var(--a6) var(--rand) var(--a5);
   overflow-y: auto;
+  overscroll-behavior: contain;
   visibility: hidden;
   opacity: 0;
   transition: opacity var(--t2) var(--kurve), visibility var(--t2);
@@ -649,7 +653,8 @@ strong { color: var(--tinte); font-weight: 600; }
   transition: color var(--t1) var(--kurve);
 }
 .wegweiser a .ziffer { flex: none; }
-.wegweiser a[aria-current='page'] { color: var(--leit); }
+.wegweiser a[aria-current='page'],
+.navpunkt > button[aria-current='page'] { color: var(--leit); }
 @media (hover: hover) and (pointer: fine) { .wegweiser a:hover { color: var(--leit); } }
 
 .wegweiser-fuss {
@@ -658,7 +663,15 @@ strong { color: var(--tinte); font-weight: 600; }
   font-size: var(--t-klein);
   color: var(--tinte-still);
 }
-.wegweiser-fuss a { color: var(--tinte-leise); }
+/* Die Fußzeile des Wegweisers erbt sonst die große Auszeichnungsschrift
+   von .wegweiser a — die Mailadresse stand dann in 40 px und brach um. */
+.wegweiser-fuss a {
+  display: inline; padding: 0; gap: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: var(--t-klein); line-height: 1.5; letter-spacing: 0;
+  color: var(--tinte-leise);
+  overflow-wrap: anywhere;
+}
 
 /* Ohne Skript: kein Schalter, die Liste steht offen im Fluss. */
 .menuknopf { display: none; }
@@ -996,55 +1009,43 @@ html:not(.mitskript) .wegweiser-fuss { display: none; }
    Fassung war unhandlich, und das stimmte: Wer eine Galerie sehen will,
    will sie sehen und nicht bedienen.
 
-   Gebaut als Raster mit fester Spaltenzahl und automatischen Zeilen. Vier
-   Kacheln sind größer als die übrigen und nehmen zwei Felder ein — daraus
-   entsteht der Rhythmus, ohne dass ein Bild beschnitten würde, das nicht
-   dafür gedacht ist. Die Großen sitzen an festen Stellen, damit die
-   Collage bei jedem Laden gleich aussieht.
+   Gebaut aus Spalten, nicht aus einem Raster. Der Grund steht daneben im
+   Text: "nichts ist beschnitten". Ein Raster mit festem Seitenverhältnis
+   und object-fit: cover hätte genau das getan — jede Aufnahme auf 3:4
+   geschnitten, egal wie sie aufgenommen wurde. In Spalten behält jedes
+   Bild sein eigenes Format, und der Rhythmus entsteht von selbst aus den
+   unterschiedlichen Höhen.
 
-   grid-auto-flow: dense füllt die Löcher, die eine große Kachel hinter
-   sich lässt. Ohne das steht am Ende eine Reihe halb leer.             */
+   Der zweite Grund: ein Raster mit großen Kacheln lässt Löcher, sobald
+   die Bilderzahl nicht aufgeht. Bei fünfzehn Aufnahmen auf vier Spalten
+   standen zwei dunkle Felder mitten in der Collage. Spalten haben dieses
+   Problem nicht.                                                       */
 
 .collage {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-auto-rows: minmax(0, 1fr);
-  grid-auto-flow: row dense;
-  gap: var(--a1);
+  columns: 2;
+  column-gap: var(--a1);
 }
-@media (min-width: 40rem) { .collage { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-@media (min-width: 64rem) { .collage { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--a2); } }
+@media (min-width: 40rem) { .collage { columns: 3; } }
+@media (min-width: 64rem) { .collage { columns: 4; column-gap: var(--a2); } }
 
 .collage .arbeit-kachel {
-  position: relative;
-  margin: 0; padding: 0; border: 0;
+  display: block;
+  width: 100%;
+  margin: 0 0 var(--a1);
+  padding: 0; border: 0;
   background: var(--grund-hoch);
   border-radius: var(--kante);
   overflow: hidden;
   cursor: pointer;
-  aspect-ratio: 3 / 4;
+  /* Eine Kachel darf nicht zwischen zwei Spalten zerrissen werden. */
+  break-inside: avoid;
 }
-.collage .arbeit-kachel img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  transition: transform var(--t3) var(--kurve-weit), opacity var(--t2) var(--kurve);
-}
+@media (min-width: 64rem) { .collage .arbeit-kachel { margin-bottom: var(--a2); } }
 
-/* Vier größere Kacheln an festen Stellen. Sie nehmen zwei Spalten und
-   zwei Zeilen und tragen jeweils eine Aufnahme, die das verträgt. */
-@media (min-width: 40rem) {
-  .collage .arbeit-kachel:nth-child(1),
-  .collage .arbeit-kachel:nth-child(8),
-  .collage .arbeit-kachel:nth-child(12) {
-    grid-column: span 2; grid-row: span 2;
-    aspect-ratio: auto;
-  }
-}
-@media (min-width: 64rem) {
-  .collage .arbeit-kachel:nth-child(5) {
-    grid-column: span 2; grid-row: span 2;
-    aspect-ratio: auto;
-  }
+.collage .arbeit-kachel img {
+  display: block;
+  width: 100%; height: auto;
+  transition: transform var(--t3) var(--kurve-weit), opacity var(--t2) var(--kurve);
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -1228,7 +1229,6 @@ html:not(.mitskript) .wegweiser-fuss { display: none; }
   --grund-56: oklch(97.5% .009 84 / .56);
   --grund-24: oklch(97.5% .009 84 / .24);
   --grund-00: oklch(97.5% .009 84 / 0);
-  --glas:       oklch(97.5% .009 84 / .72);
   --glas-dicht: oklch(97.5% .009 84 / .92);
   --tinte:       oklch(26%   .028 58);
   --tinte-leise: oklch(41%   .026 60);
@@ -1259,7 +1259,6 @@ html:not(.mitskript) .wegweiser-fuss { display: none; }
   --grund-56: oklch(97.5% .005 250 / .56);
   --grund-24: oklch(97.5% .005 250 / .24);
   --grund-00: oklch(97.5% .005 250 / 0);
-  --glas:       oklch(97.5% .005 250 / .72);
   --glas-dicht: oklch(97.5% .005 250 / .92);
   --tinte:       oklch(25%   .026 252);
   --tinte-leise: oklch(41%   .024 251);
@@ -1290,7 +1289,6 @@ html:not(.mitskript) .wegweiser-fuss { display: none; }
   --grund-56: oklch(97.5% .008 40 / .56);
   --grund-24: oklch(97.5% .008 40 / .24);
   --grund-00: oklch(97.5% .008 40 / 0);
-  --glas:       oklch(97.5% .008 40 / .72);
   --glas-dicht: oklch(97.5% .008 40 / .92);
   --tinte:       oklch(25%   .032 20);
   --tinte-leise: oklch(41%   .030 22);
@@ -1526,23 +1524,58 @@ html:not(.mitskript) .wegweiser-fuss { display: none; }
 .merkzettel.da { transform: translateY(0); visibility: visible; }
 @media (prefers-reduced-motion: reduce) { .merkzettel { transition: none; } }
 
+/* Der Riegel als Raster, nicht als umbrechender Flex-Kasten. Mit
+   flex-wrap rutschte am Handy jedes Kind auf eine eigene Zeile — der
+   Riegel wurde 450 px hoch und verdeckte den halben Bildschirm. Als
+   Raster stehen die Zeilen fest: oben Zahl, Text und das Kreuz, darunter
+   die beiden Knöpfe nebeneinander. */
 .merkzettel-riegel {
-  display: flex; flex-wrap: wrap; align-items: center; gap: var(--a2);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: .5rem var(--a2);
   padding: var(--a2) var(--rand);
   max-width: var(--spalte); margin-inline: auto;
 }
+.merkzettel-buchen, .merkzettel-kopieren {
+  grid-row: 2; text-align: center; white-space: nowrap;
+  padding-inline: var(--a2);
+}
+.merkzettel-buchen { grid-column: 1 / 3; }
+.merkzettel-kopieren { grid-column: 3 / 4; }
+
+/* Ab Tablettbreite ist Platz für eine einzige Zeile. */
+@media (min-width: 48rem) {
+  .merkzettel-riegel { grid-template-columns: auto 1fr auto auto auto; }
+  .merkzettel-buchen, .merkzettel-kopieren { grid-row: 1; }
+  .merkzettel-buchen  { grid-column: 3 / 4; }
+  .merkzettel-kopieren { grid-column: 4 / 5; }
+}
 .merkzettel-zahl {
-  font-size: var(--t-marke); font-weight: 500;
-  letter-spacing: .16em; text-transform: uppercase;
+  font-size: var(--t-ziffer); font-weight: 400; line-height: 1;
   color: var(--leit);
 }
-.merkzettel-text { flex: 1 1 12rem; font-size: var(--t-klein); color: var(--tinte-leise); }
+.merkzettel-text {
+  min-width: 0;
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: .25rem .75rem;
+  font-size: var(--t-klein); color: var(--tinte-leise);
+}
+.merkzettel-kopf, .merkzettel-text .summe { margin: 0; }
+.merkzettel-text .summe { color: var(--tinte); }
 .merkzettel-klappe, .merkzettel-leeren {
   background: transparent; border: 0; cursor: pointer;
   font: inherit; font-size: var(--t-klein);
   color: var(--tinte-still);
   text-decoration: underline; text-underline-offset: .2em;
 }
+/* Ohne Maß malt ein <svg> ohne width/height sich 300 × 150 px groß — im
+   Riegel stand ein handtellergroßer Haken. */
+.merkzettel-klappe {
+  display: inline-flex; align-items: center; gap: .35rem;
+  padding: 0; white-space: nowrap;
+}
+.merkzettel-klappe svg { width: .7rem; height: .7rem; flex: none; }
+.merkzettel-klappe[aria-expanded='true'] svg { transform: rotate(180deg); }
 .merkzettel-blatt {
   max-width: var(--spalte); margin-inline: auto;
   padding: 0 var(--rand) var(--a3);
@@ -1560,7 +1593,42 @@ html:not(.mitskript) .wegweiser-fuss { display: none; }
   color: var(--tinte);
 }
 .merkzettel-hinweis { font-size: var(--t-klein); color: var(--tinte-still); }
-.merkzettel-mail, .merkzettel-kopieren { margin-top: var(--a2); }
+
+/* Zumachen. Der Riegel liegt am unteren Rand und verdeckt dort einen
+   Streifen der Seite — wer ihn gerade nicht braucht, muss ihn wegtun
+   können, ohne seine Auswahl zu verlieren. */
+.merkzettel-zu {
+  width: 2.25rem; height: 2.25rem;
+  display: grid; place-items: center;
+  flex: none;
+  background: transparent;
+  border: 1px solid var(--linie);
+  border-radius: var(--kante-voll);
+  color: var(--tinte-still);
+  cursor: pointer;
+  transition: color var(--t1) var(--kurve), border-color var(--t1) var(--kurve);
+}
+.merkzettel-zu svg { width: 1rem; height: 1rem; }
+@media (hover: hover) and (pointer: fine) {
+  .merkzettel-zu:hover { color: var(--tinte); border-color: var(--tinte-still); }
+}
+
+/* Die von der Preisliste mitgebrachte Auswahl auf der Terminseite. */
+.mitgebracht {
+  margin-bottom: var(--a3);
+  padding: var(--a3);
+  border: 1px solid var(--linie);
+  border-radius: var(--kante);
+}
+.mitgebracht ul { list-style: none; margin: var(--a2) 0; padding: 0; }
+.mitgebracht li {
+  display: flex; justify-content: space-between; gap: var(--a2);
+  padding: .45rem 0;
+  border-bottom: 1px solid var(--linie-hell);
+  font-size: var(--t-klein);
+}
+.mitgebracht li.summe { border-bottom: 0; color: var(--tinte); padding-top: var(--a2); }
+.mitgebracht li.summe span:last-child { color: var(--leit); }
 
 
 /* ═══ Die Übersicht in der Kopfzeile ═══════════════════════════════════
@@ -1582,7 +1650,21 @@ html:not(.mitskript) .wegweiser-fuss { display: none; }
 .mitskript .navpunkt > button { display: flex; }
 .mitskript .nav-ohne-skript { display: none; }
 
+/* Die Vorschau steht zu, bis jemand sie aufklappt. Der Verweis mit ~ und
+   nicht mit +: Zwischen Knopf und Feld steht .nav-ohne-skript, und ein
+   Nachbarselektor mit + fände das Feld dann nicht. */
+.navpunkt > button[aria-expanded='false'] ~ .uebersicht { display: none; }
 .uebersicht { padding: 0 0 var(--a3); }
+/* Der Pfeil am Knopf dreht sich mit. */
+/* Ohne width/height malt sich ein <svg> 300 × 150 px groß — im Wegweiser
+   stand ein handtellergroßer Haken quer über zwei Zeilen. */
+.navpunkt > button svg {
+  width: .55em; height: .55em; flex: none;
+  align-self: center;
+  color: var(--tinte-still);
+  transition: transform var(--t2) var(--kurve);
+}
+.navpunkt > button[aria-expanded='true'] svg { transform: rotate(180deg); }
 .uebersicht ul { display: grid; gap: 0; }
 @media (min-width: 44rem) { .uebersicht ul { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--a4); } }
 @media (min-width: 72rem) { .uebersicht ul { grid-template-columns: repeat(3, minmax(0, 1fr)); } }

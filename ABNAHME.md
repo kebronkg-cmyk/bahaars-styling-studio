@@ -161,6 +161,57 @@ verzeichnis steht am Dateiende statt am Anfang. Dadurch muss der Browser
 sie ganz laden, bevor er anfangen kann — bei 1,4 MB fällt das kaum auf.
 Wer in Canva exportiert, kann das nicht beeinflussen.
 
+## Die fünf Punkte aus der letzten Rückmeldung
+
+**1. Das Menü öffnet die Preisvorschau nicht mehr von selbst.** Unter
+„Leistungen & Preise“ steht ein Haken; erst ein Druck darauf klappt die
+neun Gruppen mit Ab-Preis auf. Vorher stand die Liste offen da, sobald
+das Menü aufging.
+
+**2. Wer im Preisverzeichnis etwas anklickt, landet beim Buchen.** Der
+Knopf im Riegel heißt „Termin buchen“ und führt auf die Terminseite; die
+Mail-Möglichkeit ist dort weg. Die Auswahl reist über den Sitzungsspeicher
+mit und steht auf der Terminseite über dem Buchungsfenster, damit man sie
+beim Eintragen vor Augen hat. Bewusst *nicht* über die Adresszeile: eine
+Terminanfrage in einer URL steht in jedem Serverprotokoll und in jedem
+Verlauf.
+
+**3. Der Riegel lässt sich zumachen.** Rechts sitzt ein Kreuz. Einmal
+gedrückt, verschwindet er samt seinem Platzhalter unter der Fußzeile —
+die Auswahl bleibt erhalten und kommt zurück, sobald etwas Neues
+dazukommt. Er ist dabei auch deutlich flacher geworden: am Telefon von
+etwa 450 auf 204 px, also von der halben auf ein knappes Viertel der
+Bildschirmhöhe.
+
+**4. Die drei neuen Aufnahmen** sind an den passenden Stellen
+eingesetzt: die Brautfrisur mit dem Perlenband (899 × 1750), die lange
+glatte Länge (1000 × 1195) und die Foliensträhnen (1000 × 1339). Alle
+Breiten- und Höhenangaben in den Seiten sind nachgezogen.
+
+**5. Die Galerie steht vor der Fußzeile.** Auf der Startseite stand sie
+dort schon; verschoben wurde die Galerie der **Salonseite**, die vorher
+mitten im Text saß. Auf beiden ist sie jetzt der letzte Abschnitt.
+
+**Dazu kam bei der Prüfung heraus** und ist mit erledigt:
+
+- Die Collage war ein Raster mit erzwungenem 3:4 und `object-fit: cover` —
+  jedes Bild also beschnitten, obwohl daneben steht „nichts ist
+  beschnitten“. Jetzt sind es Spalten: jede Aufnahme in ihrem eigenen
+  Format, und die zwei dunklen Löcher, die das Raster übrig ließ, sind weg.
+- Die Abstandsnamen `--r1` bis `--r6` gab es seit dem Neubau nicht mehr,
+  wurden aber in den Seiten noch 43-mal benutzt. Jede dieser Angaben war
+  wirkungslos. Sie heißen jetzt `--a1` bis `--a6`. Dasselbe galt für
+  `--messing`, `--s-klein` und `--linie-akzent`.
+- Die Unterseiten trugen noch die alte Kopfzeile. Sie haben jetzt
+  dieselbe wie die Startseite: Telefonnummer, Terminknopf, Menüschalter,
+  und dahinter denselben Wegweiser mit Ziffern.
+- Zwei Haken (im Menü und im Riegel) waren ohne Maß im Quelltext und
+  wurden deshalb 300 × 150 px groß gezeichnet.
+
+**Was Sie sich ansehen sollten:** ob die drei neuen Bilder an den
+richtigen Stellen stehen, und ob der Riegel am Telefon jetzt klein genug
+ist.
+
 ## Auslieferung
 
 `.github/workflows/deploy-pages.yml` veröffentlicht bei jedem Push auf

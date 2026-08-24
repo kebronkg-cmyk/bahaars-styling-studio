@@ -24,46 +24,58 @@ try{var p=localStorage.getItem('bahaar-stimmung');
 <body>
 <a class="sprung" href="#inhalt">Zum Inhalt springen</a>
 
-<header class="kopfzeile leiste">
-  <a class="marke" href="index.html">BaHaar’s<span class="zusatz">styling studio</span></a>
-  <button class="menuknopf" type="button" aria-expanded="false" aria-controls="wegweiser" aria-label="Menü öffnen"><span></span></button>
-  <nav class="wegweiser" id="wegweiser" aria-label="Hauptmenü">
-    <ul>
-      <li><a href="index.html">Start</a></li>
-      <li class="navpunkt">
-        <button type="button" aria-expanded="false" aria-controls="uebersicht-leistungen">
-          Leistungen &amp; Preise
-          <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg>
-        </button>
-        <a class="nav-ohne-skript" href="leistungen.html">Leistungen &amp; Preise</a>
-        <div class="uebersicht" id="uebersicht-leistungen" hidden>
-          <ul>
-            <li><a href="leistungen.html#schneiden">Waschen, Schneiden &amp; Föhnen <span class="ab">ab 30 €</span></a></li>
-            <li><a href="leistungen.html#farbe">Farbe &amp; Tönung <span class="ab">ab 43 €</span></a></li>
-            <li><a href="leistungen.html#straehnen">Strähnen &amp; Balayage <span class="ab">ab 69 €</span></a></li>
-            <li><a href="leistungen.html#umformen">Umformen <span class="ab">ab 69 €</span></a></li>
-            <li><a href="leistungen.html#pflege">Pflege &amp; Korrektur <span class="ab">ab 5 €</span></a></li>
-            <li><a href="leistungen.html#anlass">Für besondere Anlässe <span class="ab">ab 60 €</span></a></li>
-            <li><a href="leistungen.html#brauen">Brauen &amp; Wimpern <span class="ab">ab 10 €</span></a></li>
-            <li><a href="leistungen.html#herren">Herren <span class="ab">ab 10 €</span></a></li>
-            <li><a href="leistungen.html#kinder">Kinder bis 12 Jahre <span class="ab">ab 25 €</span></a></li>
-          </ul>
-          <p class="uebersicht-fuss">
-            <span>Preise nach Haarlänge und Aufwand · Beratung immer inklusive</span>
-            <a href="leistungen.html">Ganze Preisliste</a>
-          </p>
-        </div>
-      </li>
-      <li><a href="brautstyling.html" aria-current="page">Brautstyling</a></li>
-      <li><a href="salon.html">Der Salon</a></li>
-    </ul>
-    <a class="ruf" href="tel:+49896923644">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M6.5 3h3l1.5 4-2 1.5a12 12 0 0 0 6.5 6.5L17 13l4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 3.5 5.2 2 2 0 0 1 5.5 3z"/></svg>
-      089 692 36 44
-    </a>
-    <a class="knopf knopf-voll knopf-termin" href="termin.html">Termin</a>
-  </nav>
+<header class="kopfzeile">
+  <a class="marke" href="index.html">BaHaar&rsquo;s<span class="zusatz">styling studio</span></a>
+  <a class="ruf" href="tel:+49896923644">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M6.5 3h3l1.5 4-2 1.5a12 12 0 0 0 6.5 6.5L17 13l4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 3.5 5.2 2 2 0 0 1 5.5 3z"/></svg>
+    089 692 36 44
+  </a>
+  <a class="knopf knopf-voll knopf-termin" href="termin.html">Termin</a>
+  <button class="menuknopf" type="button" aria-expanded="false" aria-controls="wegweiser" aria-label="Men&uuml; &ouml;ffnen"><span></span></button>
 </header>
+
+<!-- Die Navigation liegt hinter dem Schalter und öffnet sich über die
+     ganze Fläche. Sie ist kein Menü, sondern ein Inhaltsverzeichnis:
+     Ziffer, Name, und unter „Leistungen & Preise" die neun Gruppen mit
+     Ab-Preis. Ohne Skript gibt es keinen Schalter — dann steht sie als
+     gewöhnliche Liste im Fluss. -->
+<nav class="wegweiser" id="wegweiser" aria-label="Hauptmen&uuml;">
+  <ul>
+    <li><a href="index.html"><span class="ziffer">01</span> Start</a></li>
+    <li class="navpunkt">
+      <button type="button" aria-expanded="false" aria-controls="uebersicht-leistungen">
+        <span class="ziffer">02</span> Leistungen &amp; Preise
+        <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg>
+      </button>
+      <a class="nav-ohne-skript" href="leistungen.html"><span class="ziffer">02</span> Leistungen &amp; Preise</a>
+      <div class="uebersicht" id="uebersicht-leistungen" hidden>
+        <ul>
+          <li><a href="leistungen.html#schneiden">Waschen, Schneiden &amp; F&ouml;hnen <span class="ab">ab 30 &euro;</span></a></li>
+          <li><a href="leistungen.html#farbe">Farbe &amp; T&ouml;nung <span class="ab">ab 43 &euro;</span></a></li>
+          <li><a href="leistungen.html#straehnen">Str&auml;hnen &amp; Balayage <span class="ab">ab 69 &euro;</span></a></li>
+          <li><a href="leistungen.html#umformen">Umformen <span class="ab">ab 69 &euro;</span></a></li>
+          <li><a href="leistungen.html#pflege">Pflege &amp; Korrektur <span class="ab">ab 5 &euro;</span></a></li>
+          <li><a href="leistungen.html#anlass">F&uuml;r besondere Anl&auml;sse <span class="ab">ab 60 &euro;</span></a></li>
+          <li><a href="leistungen.html#brauen">Brauen &amp; Wimpern <span class="ab">ab 10 &euro;</span></a></li>
+          <li><a href="leistungen.html#herren">Herren <span class="ab">ab 10 &euro;</span></a></li>
+          <li><a href="leistungen.html#kinder">Kinder bis 12 Jahre <span class="ab">ab 25 &euro;</span></a></li>
+        </ul>
+        <p class="uebersicht-fuss">
+          <span>Preise nach Haarl&auml;nge und Aufwand &middot; Beratung immer inklusive</span>
+          <a href="leistungen.html">Ganze Preisliste</a>
+        </p>
+      </div>
+    </li>
+    <li><a href="brautstyling.html" aria-current="page"><span class="ziffer">03</span> Brautstyling</a></li>
+    <li><a href="salon.html"><span class="ziffer">04</span> Der Salon</a></li>
+    <li><a href="termin.html"><span class="ziffer">05</span> Termin</a></li>
+  </ul>
+  <p class="wegweiser-fuss">
+    <a href="tel:+49896923644">089 692 36 44</a>
+    <a href="mailto:info@bahaarsstylingstudio.de">info@bahaarsstylingstudio.de</a>
+    <span>Perlacher Stra&szlig;e 2 &middot; 81539 M&uuml;nchen</span>
+  </p>
+</nav>
 
 <main id="inhalt">
 
@@ -72,15 +84,15 @@ try{var p=localStorage.getItem('bahaar-stimmung');
     <div class="zweispalt" style="align-items:center">
       <div>
     <h1 class="titel-gross" id="haupttitel">Brautstyling</h1>
-    <p class="vorspann" style="margin-top:var(--r3)">
+    <p class="vorspann" style="margin-top:var(--a3)">
       Haar und Make-up macht dieselbe Person, an einem Termin, im selben
       Raum. Kein Hochzeitsmorgen mit drei Terminen an drei Orten.
     </p>
-    <p class="preiszeile" style="margin-top:var(--r4)">
+    <p class="preiszeile" style="margin-top:var(--a4)">
       <span class="gross zahl">390–600 €</span>
       <span class="dauer">Hairstyling und Braut-Make-up zusammen</span>
     </p>
-    <div class="knopfreihe" style="margin-top:var(--r4)">
+    <div class="knopfreihe" style="margin-top:var(--a4)">
       <a class="knopf knopf-voll" href="tel:+49896923644">089 692 36 44</a>
       <a class="knopf knopf-leer" href="mailto:info@bahaarsstylingstudio.de?subject=Brautstyling%20—%20Anfrage">Anfrage schreiben</a>
       </div>
@@ -183,7 +195,7 @@ try{var p=localStorage.getItem('bahaar-stimmung');
 
       <div class="bildstapel">
         <figure style="margin:0">
-          <img alt="Brautfrisur mit gelegten Locken und einer Perlenranke in Roségold" loading="lazy" decoding="async" src="bilder/arbeit-braut-perlen.webp" width="399" height="532">
+          <img alt="Brautfrisur mit gelegten Locken und einer Perlenranke in Roségold" loading="lazy" decoding="async" src="bilder/arbeit-braut-perlen.webp" width="899" height="1750">
         </figure>
         <figure style="margin:0">
           <img alt="Hochsteckfrisur mit eingearbeiteter Perlen- und Blütenranke" loading="lazy" decoding="async" src="bilder/arbeit-perlen.webp" width="353" height="471">
@@ -198,7 +210,7 @@ try{var p=localStorage.getItem('bahaar-stimmung');
 <section class="abschnitt bahn" aria-labelledby="preis-titel">
   <div class="mitte">
     <div style="max-width:36rem;margin-left:auto">
-      <h2 class="titel-klein" id="preis-titel" style="margin-bottom:var(--r3)">Die Zahlen</h2>
+      <h2 class="titel-klein" id="preis-titel" style="margin-bottom:var(--a3)">Die Zahlen</h2>
       <div class="tafel einfach ohne-dauer">
         <div class="tafel-zeile">
           <div class="was"><span class="name">Brautstyling gesamt</span><span class="dazu">Hairstyling und Braut-Make-up</span></div>
@@ -217,10 +229,10 @@ try{var p=localStorage.getItem('bahaar-stimmung');
           <span class="preis zahl">80 €</span>
         </div>
       </div>
-      <p class="hinweis" style="margin-top:var(--r4)">
+      <p class="hinweis" style="margin-top:var(--a4)">
         Der Probetermin wird beim Brautstyling mit abgerechnet. Was genau in
         Ihrem Fall gilt, klären wir am Telefon:
-        <a href="tel:+49896923644" style="color:var(--messing)">089 692 36 44</a>.
+        <a href="tel:+49896923644" style="color:var(--leit)">089 692 36 44</a>.
       </p>
     </div>
   </div>
@@ -229,8 +241,8 @@ try{var p=localStorage.getItem('bahaar-stimmung');
 <!-- ═══ Schluss ════════════════════════════════════════════════════════ -->
 <section class="abschnitt-eng bahn">
   <div class="mitte" style="text-align:center">
-    <h2 class="titel" style="margin-bottom:var(--r3)">Nennen Sie uns Ihren Tag</h2>
-    <p class="lauf" style="margin:0 auto var(--r4);text-align:center">
+    <h2 class="titel" style="margin-bottom:var(--a3)">Nennen Sie uns Ihren Tag</h2>
+    <p class="lauf" style="margin:0 auto var(--a4);text-align:center">
       Ein Anruf reicht, um den Termin vormerken zu lassen. Alles andere
       klären wir beim Probetermin.
     </p>
@@ -247,7 +259,7 @@ try{var p=localStorage.getItem('bahaar-stimmung');
   <div class="bahn mitte">
     <div class="fusszeile-raster">
       <div>
-        <p class="marke" style="display:block;margin-bottom:var(--r2)">BaHaar’s<span class="zusatz">styling studio</span></p>
+        <p class="marke" style="display:block;margin-bottom:var(--a2)">BaHaar’s<span class="zusatz">styling studio</span></p>
         <p style="color:var(--tinte-leise);max-width:24rem">
           Friseursalon in München-Giesing. Inhaberin Fakhria Tokhi,
           Friseurmeisterin.
