@@ -8,161 +8,173 @@
 (() => {
   'use strict';
 
-  /* ── Der Hahn ────────────────────────────────────────────────────────
-     Der Griff ist ein Drehregler: Gedreht wird um seine eigene Mitte,
-     gerechnet wird der Winkelunterschied zwischen zwei Zeigerpunkten und
-     aufaddiert. Das ist der einzige Weg, bei dem es gleich bleibt, ob man
-     den Griff am Rand oder weit außerhalb anfasst.                     */
+  /* ── Der Wasserhahn ──────────────────────────────────────────────────
+     Das Ventil ist ein Drehrad. Gerechnet wird der Winkelunterschied
+     zwischen zwei Zeigerpunkten und aufaddiert — nur so bleibt es gleich,
+     ob man das Rad am Reifen anfasst oder weit außerhalb.
 
-  const BEREICH = 160;          // Grad von zu bis ganz offen
-  const SCHRITT = 0.06;         // eine Pfeiltaste
+     Der Film folgt dem Rad nicht hart, sondern zieht nach. Wasser hat
+     Trägheit; ein Bild, das exakt am Finger klebt, fühlt sich an wie ein
+     Schieberegler und nicht wie eine Armatur.                          */
+
+  const BEREICH = 300;      // Grad von zu bis ganz auf
+  const NACHLAUF = 0.10;    // wie träge der Film dem Rad folgt
+  const SCHRITT = 0.08;     // eine Pfeiltaste
+
+  /* Die Wanderung des Strahls, am Film gemessen und geglättet: Versatz
+     der Strahlmitte in Prozent der Bildbreite, 25 Stützstellen über die
+     ganze Länge. Der Film wird gegenläufig geschoben, damit der Strahl
+     unter der Düse stehen bleibt. */
+  const STRAHL = [-4.91,-5.57,-5.89,-6.89,-6.85,-4.78,-1.68,0.26,-0.44,0.33,
+                  1.8,2.34,4.19,5.11,6.55,8.07,7.1,8.42,6.1,7.09,9.31,9.21,
+                  7.69,5.89,5.13];
+  const ZOOM = 1.26;
+
   const film   = document.getElementById('film');
-  const griff  = document.getElementById('griff');
-  const kreuz  = document.getElementById('kreuz');
-  const skala  = document.getElementById('skala');
+  const bild   = document.getElementById('bild');
+  const ventil = document.getElementById('ventil');
+  const rad    = ventil && ventil.querySelector('svg');
   const wort   = document.getElementById('hahn-wort');
-  const tafel  = document.querySelector('.wasser');
+  if (!film || !ventil) return;
 
-  if (!film || !griff) return;
-
-  let wert = 0;                 // 0 = zu, 1 = ganz offen
+  let soll = 0;          // wohin das Rad zeigt, 0..1
+  let ist  = 0;          // wo der Film gerade steht, läuft dem Soll nach
   let angefasst = false;
-  let nassBild = null;          // Rückfallebene, falls der Film ausbleibt
+  let nassBild = null;   // Rückfallebene, falls der Film ausbleibt
 
-  /* Die Skala wird über ihre eigene Länge gefüllt statt über einen
-     geschätzten Wert — die Bogenlänge kennt nur der Browser. */
-  const skalaLaenge = skala.getTotalLength();
-  skala.style.strokeDasharray = skalaLaenge;
-  skala.style.strokeDashoffset = skalaLaenge;
+  const klemme = (v, a, b) => v < a ? a : v > b ? b : v;
 
-  const klemme = (v, min, max) => v < min ? min : v > max ? max : v;
+  /* Zwischen den Stützstellen wird linear geblendet. */
+  function versatz(v) {
+    const x = klemme(v, 0, 1) * (STRAHL.length - 1);
+    const i = Math.floor(x), r = x - i;
+    const a = STRAHL[i], b = STRAHL[Math.min(i + 1, STRAHL.length - 1)];
+    return a + (b - a) * r;
+  }
 
   function wortFuer(v) {
-    if (v < 0.02) return 'Wasserhahn aufdrehen';
+    if (v < 0.02) return 'Griff drehen';
     if (v > 0.97) return 'Ganz offen';
     return 'Läuft · ' + Math.round(v * 100) + ' %';
   }
-
   function textFuer(v) {
     if (v < 0.02) return 'zugedreht – das Haar ist trocken';
     if (v > 0.97) return 'ganz offen – das Haar ist nass';
-    return Math.round(v * 100) + ' Prozent offen';
+    return Math.round(v * 100) + ' Prozent offen';
   }
 
-  function zeichne() {
-    kreuz.style.transform = 'rotate(' + (wert * BEREICH) + 'deg)';
-    skala.style.strokeDashoffset = skalaLaenge * (1 - wert);
-    griff.setAttribute('aria-valuenow', Math.round(wert * 100));
-    griff.setAttribute('aria-valuetext', textFuer(wert));
+  function radZeigen() {
+    ventil.style.setProperty('--dreh', (soll * BEREICH) + 'deg');
+    ventil.setAttribute('aria-valuenow', Math.round(soll * 100));
+    ventil.setAttribute('aria-valuetext', textFuer(soll));
+    ventil.setAttribute('aria-label', soll > 0.02 ? 'Wasserhahn zudrehen' : 'Wasserhahn aufdrehen');
     if (wort) {
-      wort.textContent = wortFuer(wert);
-      wort.classList.toggle('offen', wert >= 0.02);
+      wort.textContent = wortFuer(soll);
+      wort.classList.toggle('offen', soll >= 0.02);
     }
-    if (nassBild) nassBild.style.opacity = wert;
   }
 
-  /* ── Den Film spulen ─────────────────────────────────────────────────
-     Ein Sprung kostet so viel, wie zwischen zwei Schlüsselbildern liegt.
-     Die Datei ist deshalb mit einem Schlüsselbild alle vier Bilder
-     gepackt.
-
-     Gesprungen wird immer nur einmal gleichzeitig. Wer schneller dreht,
-     als der Browser springen kann, überschreibt das Ziel, statt eine
-     Warteschlange anzulegen — sonst läuft der Film der Hand hinterher.
-     Das zuletzt gewünschte Ziel darf dabei nie verloren gehen: Es bleibt
-     in `ziel` stehen, bis es wirklich gesetzt wurde.                   */
-
-  let ziel = null;          // gewünschte Stelle, noch nicht angesprungen
-  let springt = false;      // ein Sprung ist gerade unterwegs
-
-  function spulen() {
-    if (springt || ziel === null || !film.duration) return;
-    const z = ziel;
-    ziel = null;
-    if (Math.abs(film.currentTime - z) < 0.008) return;
-    springt = true;
-    film.currentTime = z;
+  function setzeSoll(v, vonHand) {
+    soll = klemme(v, 0, 1);
+    radZeigen();
+    if (vonHand) ersteBeruehrung();
   }
 
-  /* Nie auf die Dauer selbst springen: Das letzte Bild endet dort, ein
-     Sprung dorthin meldet je nach Browser kein `seeked` — und dann steht
-     der Hahn still. Ein Bild davor ist die letzte sichere Stelle. */
-  function letzteStelle() {
-    return Math.max(0, film.duration - 1 / 24);
-  }
+  /* ── Der Film folgt ──────────────────────────────────────────────────
+     Ein Sprung kostet so viel, wie seit dem letzten Schlüsselbild liegt;
+     die Datei hat deshalb alle vier Bilder eines. Gesprungen wird immer
+     nur einmal gleichzeitig: Wer schneller dreht, als der Browser
+     springen kann, überschreibt das Ziel, statt eine Schlange anzulegen.
+     Sonst läuft der Film der Hand hinterher.                           */
 
-  film.addEventListener('seeked', () => { springt = false; spulen(); });
+  let springt = false;
+  film.addEventListener('seeked', () => { springt = false; });
 
-  function setzeWert(v) {
-    wert = klemme(v, 0, 1);
-    zeichne();
-    if (film.duration) { ziel = wert * letzteStelle(); spulen(); }
+  function schleife() {
+    ist += (soll - ist) * NACHLAUF;
+    if (Math.abs(soll - ist) < 0.0004) ist = soll;
+
+    /* Der Ausgleich läuft mit dem Film, nicht mit dem Rad — sonst würde
+       das Bild vorauseilen. Der Zoom multipliziert die Verschiebung mit,
+       also wird sie vorher herausgerechnet. */
+    bild.style.setProperty('--schub', (-versatz(ist) * ZOOM).toFixed(3) + '%');
+
+    if (film.duration && !springt) {
+      const ziel = klemme(ist * (film.duration - 1 / 24), 0, film.duration);
+      if (Math.abs(film.currentTime - ziel) > 0.012) {
+        springt = true;
+        film.currentTime = ziel;
+      }
+    }
+    if (nassBild) nassBild.style.opacity = ist;
+    requestAnimationFrame(schleife);
   }
+  requestAnimationFrame(schleife);
 
   /* ── Drehen mit Zeiger ───────────────────────────────────────────── */
 
-  let letzterWinkel = 0;
-  let zeiger = null;
+  let zeiger = null, letzter = 0;
 
   function winkel(ev) {
-    const r = griff.getBoundingClientRect();
+    const r = ventil.getBoundingClientRect();
     const dx = ev.clientX - (r.left + r.width / 2);
     const dy = ev.clientY - (r.top + r.height / 2);
-    if (Math.hypot(dx, dy) < 10) return null;   // zu nah an der Mitte
+    if (Math.hypot(dx, dy) < 8) return null;   // zu nah an der Mitte
     return Math.atan2(dy, dx) * 180 / Math.PI;
   }
 
-  griff.addEventListener('pointerdown', (ev) => {
+  ventil.addEventListener('pointerdown', (ev) => {
     const w = winkel(ev);
     if (w === null) return;
     zeiger = ev.pointerId;
-    letzterWinkel = w;
-    griff.setPointerCapture(ev.pointerId);
+    letzter = w;
+    ventil.setPointerCapture(ev.pointerId);
     ersteBeruehrung();
     ev.preventDefault();
   });
 
-  griff.addEventListener('pointermove', (ev) => {
+  ventil.addEventListener('pointermove', (ev) => {
     if (ev.pointerId !== zeiger) return;
     const w = winkel(ev);
     if (w === null) return;
-    let d = w - letzterWinkel;
-    while (d > 180) d -= 360;                   // über die Naht hinweg
+    let d = w - letzter;
+    while (d > 180) d -= 360;                  // über die Naht hinweg
     while (d < -180) d += 360;
-    letzterWinkel = w;
-    setzeWert(wert + d / BEREICH);
+    letzter = w;
+    setzeSoll(soll + d / BEREICH, true);
   });
 
-  function loslassen(ev) {
-    if (ev.pointerId !== zeiger) return;
-    zeiger = null;
-  }
-  griff.addEventListener('pointerup', loslassen);
-  griff.addEventListener('pointercancel', loslassen);
+  const loslassen = (ev) => { if (ev.pointerId === zeiger) zeiger = null; };
+  ventil.addEventListener('pointerup', loslassen);
+  ventil.addEventListener('pointercancel', loslassen);
 
-  /* ── Drehen mit der Tastatur ─────────────────────────────────────── */
+  /* Ein Knopf löst bei Leertaste und Enter ein click aus. Ohne das
+     Abfangen springt der Hahn zusätzlich zur Tastensteuerung. */
+  ventil.addEventListener('click', (ev) => ev.preventDefault());
 
-  griff.addEventListener('keydown', (ev) => {
+  ventil.addEventListener('keydown', (ev) => {
     const k = ev.key;
     let v = null;
-    if (k === 'ArrowRight' || k === 'ArrowUp')   v = wert + SCHRITT;
-    else if (k === 'ArrowLeft' || k === 'ArrowDown') v = wert - SCHRITT;
-    else if (k === 'PageUp')   v = wert + SCHRITT * 3;
-    else if (k === 'PageDown') v = wert - SCHRITT * 3;
+    if (k === 'ArrowRight' || k === 'ArrowUp')        v = soll + SCHRITT;
+    else if (k === 'ArrowLeft' || k === 'ArrowDown')  v = soll - SCHRITT;
+    else if (k === 'PageUp')   v = soll + SCHRITT * 3;
+    else if (k === 'PageDown') v = soll - SCHRITT * 3;
     else if (k === 'Home')     v = 0;
     else if (k === 'End')      v = 1;
+    else if (k === ' ' || k === 'Enter') v = soll > 0.02 ? 0 : 0.8;
     if (v === null) return;
     ev.preventDefault();
-    ersteBeruehrung();
-    setzeWert(v);
+    setzeSoll(v, true);
   });
 
-  /* ── Der Film wird geladen, sobald jemand ihn braucht ────────────────
-     Vorher steht das erste Bild als Standbild da — und das erste Bild
-     ist genau das, was ein zugedrehter Hahn zeigt. Wer nie anfasst, lädt
-     keine zwei Megabyte.                                               */
+  /* ── Der Film wird geladen, sobald die Bühne zu sehen ist ────────────
+     Vorher steht das erste Bild da — und das erste Bild ist genau das,
+     was ein zugedrehter Hahn zeigt: trockenes Haar, kein Wasser. Wer mit
+     gedrosselter Datenmenge unterwegs ist, bekommt den Film erst beim
+     Anfassen.                                                          */
 
   let geladen = false;
+  const sparsam = navigator.connection && navigator.connection.saveData;
 
   function ladeFilm() {
     if (geladen) return;
@@ -178,15 +190,14 @@
 
   film.addEventListener('loadeddata', () => {
     film.pause();
-    tafel.classList.add('laeuft');
-    ziel = wert * letzteStelle();
-    spulen();
+    bild.classList.add('laeuft');
+    if (!angefasst && !sparsam) vorfuehren();
   });
-
   film.addEventListener('error', rueckfall);
 
-  /* Bleibt der Film aus, übernimmt ein zweites Standbild: Der Hahn blendet
-     dann das nasse Haar über das trockene. Die Bedienung bleibt dieselbe. */
+  /* Bleibt der Film aus, übernimmt ein zweites Standbild: Das Ventil
+     blendet dann das nasse Haar über das trockene. Die Bedienung bleibt
+     dieselbe. */
   function rueckfall() {
     if (nassBild) return;
     nassBild = new Image();
@@ -194,24 +205,41 @@
     nassBild.alt = '';
     nassBild.width = 720; nassBild.height = 1280;
     nassBild.className = 'wasser-halt';
-    nassBild.style.opacity = wert;
+    nassBild.style.opacity = ist;
     nassBild.style.transition = 'none';
-    tafel.appendChild(nassBild);
+    bild.appendChild(nassBild);
   }
 
   function ersteBeruehrung() {
-    if (!angefasst) {
-      angefasst = true;
-      griff.classList.remove('wink');
-      ladeFilm();
-      /* Kommt binnen sechs Sekunden kein Bild, bauen wir die Rückfallebene
-         auf, statt die Besucherin an einem toten Griff drehen zu lassen. */
-      setTimeout(() => { if (!tafel.classList.contains('laeuft')) rueckfall(); }, 6000);
-    }
+    if (angefasst) return;
+    angefasst = true;
+    ventil.classList.remove('wink');
+    ladeFilm();
+    /* Kommt binnen sechs Sekunden kein Bild, bauen wir die Rückfallebene
+       auf, statt die Besucherin an einem toten Rad drehen zu lassen. */
+    setTimeout(() => { if (!bild.classList.contains('laeuft')) rueckfall(); }, 6000);
   }
 
-  griff.classList.add('wink');
-  zeichne();
+  /* Einmal vormachen, wofür das Rad da ist: aufdrehen, kurz laufen
+     lassen, zudrehen. Bricht sofort ab, sobald jemand selbst anfasst. */
+  function vorfuehren() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    setTimeout(() => { if (!angefasst) { soll = 0.62; radZeigen(); } }, 900);
+    setTimeout(() => { if (!angefasst) { soll = 0;    radZeigen(); } }, 4200);
+  }
+
+  ventil.classList.add('wink');
+  radZeigen();
+
+  /* Geladen wird, sobald die Bühne im Bild ist. */
+  if ('IntersectionObserver' in window && !sparsam) {
+    const beobachter = new IntersectionObserver((eintraege) => {
+      for (const e of eintraege) {
+        if (e.isIntersecting) { beobachter.disconnect(); ladeFilm(); }
+      }
+    }, { rootMargin: '200px' });
+    beobachter.observe(bild);
+  }
 
   /* ── Öffnungsstand ───────────────────────────────────────────────────
      Gerechnet wird immer nach der Uhr des Ladens, nicht nach der des
