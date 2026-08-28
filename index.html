@@ -8,123 +8,91 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="neu.css">
 <link rel="preload" href="schrift/InstrumentSerif-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="schrift/InstrumentSerif-Italic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="schrift/Inter.woff2" as="font" type="font/woff2" crossorigin>
 </head>
 <body>
 
 <a class="sprung" href="#auftakt-titel">Zum Inhalt springen</a>
 
-<header class="kopf">
-  <a class="kopf-marke" href="/">BaHaar&rsquo;s <span>Styling&nbsp;Studio</span></a>
-  <a class="kopf-ruf" href="tel:+498969236440">089&nbsp;692&nbsp;36&nbsp;44</a>
-</header>
-
-<main>
 <section class="auftakt">
 
-  <!-- ── Die Bühne: der Film und der Hahn, der ihn bedient ──────────────
-       Der Film läuft nicht von selbst. Er steht auf seinem ersten Bild —
-       trockenes Haar, kein Wasser — und rückt nur vor, soweit der Hahn
-       geöffnet wird. Das erste Bild ist zugleich das Standbild: Was zu
-       sehen ist, solange der Film lädt, ist genau das, was ein
-       geschlossener Hahn zeigt. Bleibt der Film ganz aus, fehlt nichts,
-       was man als Fehler lesen könnte.                                 -->
-  <div class="buehne">
-    <div class="wasser">
+  <div class="himmel" aria-hidden="true"></div>
 
-      <!-- Die Armatur. Sie liegt nicht auf dem Bild, sondern davor: Der Film
-           beginnt erst unter dem Auslauf, darüber steht der Grund der Seite.
-           So kommt der Strahl wirklich aus der Düse und nicht aus dem
-           Bildrand. -->
-      <div class="armatur">
-        <div class="rohr" aria-hidden="true"></div>
-        <div class="duese" aria-hidden="true"></div>
+  <!-- ── Der Film, vollflächig ──────────────────────────────────────────
+       Er wird waagerecht gegenläufig geschoben, weil der Strahl in der
+       Aufnahme über die zehn Sekunden um 15 % der Bildbreite wandert.
+       Wo die Düse sitzt, rechnet neu.js aus der gemessenen Geometrie —
+       damit es bei jeder Fenstergröße stimmt, quer wie hoch.          -->
+  <div class="film" id="bild">
+    <video class="film-lauf" id="film"
+           poster="bilder/wasser-trocken.webp"
+           muted playsinline preload="none" tabindex="-1" aria-hidden="true"></video>
+    <img class="film-halt" src="bilder/wasser-trocken.webp" alt=""
+         width="720" height="1280" fetchpriority="high" decoding="async">
+  </div>
 
-        <button class="ventil" id="ventil" type="button"
-                role="slider" tabindex="0"
-                aria-label="Wasserhahn"
-                aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
-                aria-valuetext="zugedreht &ndash; das Haar ist trocken">
-          <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
-            <defs>
-              <linearGradient id="rand" x1=".12" y1="0" x2=".88" y2="1">
-                <stop offset="0"   stop-color="var(--messing-glanz)"/>
-                <stop offset=".34" stop-color="var(--messing)"/>
-                <stop offset=".66" stop-color="var(--messing-tief)"/>
-                <stop offset="1"   stop-color="var(--messing-hell)"/>
-              </linearGradient>
-              <radialGradient id="nabe" cx=".34" cy=".28" r=".85">
-                <stop offset="0"   stop-color="var(--messing-glanz)"/>
-                <stop offset=".45" stop-color="var(--messing)"/>
-                <stop offset="1"   stop-color="var(--messing-tief)"/>
-              </radialGradient>
-            </defs>
+  <!-- Die Decke verdeckt den Strahl oberhalb der Düsenmündung und trägt
+       die Leiste. Nach unten läuft sie aus, damit das Wasser genau an der
+       Mündung sichtbar wird und nicht an einer Kante beginnt. -->
+  <div class="decke" aria-hidden="true"></div>
 
-            <circle class="rad-schatten" cx="32" cy="33.5" r="25"/>
-            <circle class="rad-reif" cx="32" cy="32" r="25"/>
-            <g class="rad-speichen">
-              <path d="M32 32 8.2 32"/><path d="M32 32 51.9 13.9"/>
-              <path d="M32 32 55.9 39.4"/><path d="M32 32 40.6 54.8"/>
-              <path d="M32 32 16.3 51.4"/>
-            </g>
-            <circle class="rad-nabe" cx="32" cy="32" r="10.5"/>
-            <circle class="rad-kerbe" cx="32" cy="13" r="2.4"/>
-            <path class="rad-glanz" d="M 14.4 14.4 A 25 25 0 0 1 32 7"/>
-          </svg>
-        </button>
-      </div>
+  <header class="leiste">
+    <a class="marke" href="/">BaHaar&rsquo;s <span>Styling&nbsp;Studio</span></a>
+    <nav class="wege" aria-label="Hauptmen&uuml;">
+      <a href="leistungen.html">Leistungen</a>
+      <a href="salon.html">Salon</a>
+      <a href="brautstyling.html">Brautstyling</a>
+    </nav>
+    <a class="pille" href="tel:+498969236440">089&nbsp;692&nbsp;36&nbsp;44</a>
+  </header>
 
-      <!-- Der Film. Er wird waagerecht gegenläufig geschoben, weil der
-           Strahl in der Aufnahme über die zehn Sekunden um 166 px nach
-           rechts wandert — ohne den Ausgleich löst er sich sichtbar vom
-           Auslauf. Der Zoom gibt den Spielraum dafür. -->
-      <div class="wasser-bild" id="bild">
-        <video class="wasser-film" id="film"
-               poster="bilder/wasser-trocken.webp"
-               width="720" height="1280"
-               muted playsinline preload="none" tabindex="-1" aria-hidden="true"></video>
-        <img class="wasser-halt" src="bilder/wasser-trocken.webp" alt=""
-             width="720" height="1280" fetchpriority="high" decoding="async">
-      </div>
+  <!-- ── Der Wasserhahn ─────────────────────────────────────────────────
+       Drei Schichten aus einer Aufnahme: Körper, Hebel, Nabe. Der Hebel
+       dreht um die Nabe, die Nabe liegt darüber und verdeckt die Naht.
+       Das Rohr wird nach rechts mit einer Scheibe seiner eigenen Kante
+       fortgesetzt, sonst endete es in der Luft.                       -->
+  <div class="hahn">
+    <div class="hahn-rohr" aria-hidden="true"></div>
+    <img class="hahn-koerper" src="bilder/hahn-koerper.webp" alt="" width="561" height="540" fetchpriority="high" decoding="async">
 
+    <div class="hebel" id="hebel"
+         role="slider" tabindex="0"
+         aria-label="Hebel des Wasserhahns"
+         aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
+         aria-valuetext="zugedreht &ndash; das Haar ist trocken">
+      <img src="bilder/hahn-hebel.webp" alt="" width="561" height="540" decoding="async">
     </div>
 
-    <p class="hahn-wort" id="hahn-wort" aria-hidden="true">Griff drehen</p>
+    <img class="hahn-nabe" src="bilder/hahn-nabe.webp" alt="" width="561" height="540" decoding="async">
+    <p class="hahn-wort" id="hahn-wort" aria-hidden="true">Hebel anheben</p>
   </div>
 
   <!-- ── Der Satz ─────────────────────────────────────────────────────── -->
   <div class="satz">
     <p class="braue">Friseursalon in M&uuml;nchen-Giesing</p>
-
-    <h1 class="riesen" id="auftakt-titel">Ihr Friseur<br>in Giesing.</h1>
-
+    <h1 class="riesen" id="auftakt-titel">Ihr Friseur<br>in <em>Giesing</em>.</h1>
     <p class="lauf">
       Bahar ist Friseurmeisterin und steht seit zwanzig Jahren selbst am
       Stuhl. Schnitt, Farbe, Str&auml;hnen, Brautstyling &mdash; die
       typgerechte Beratung ist inklusive.
     </p>
-
     <div class="wahl">
-      <a class="knopf" href="https://bahaars-styling-studio.salonized.com/widget_bookings/new?widget_id=sNYusRnC1XwjUqnu97LzSfiz" target="_blank" rel="noopener">Termin buchen</a>
+      <a class="knopf" href="https://bahaars-styling-studio.salonized.com/widget_bookings/new?widget_id=sNYusRnC1XwjUqnu97LzSfiz" target="_blank" rel="noopener">Termin vereinbaren</a>
       <a class="knopf-still" href="tel:+498969236440">
         <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M5.2 2.3 6.6 5 5.3 6.4c.7 1.6 2 2.9 3.6 3.6l1.4-1.3 2.7 1.4-.4 2.4c-.1.6-.6 1-1.2 1C6.4 13.3 2.7 9.6 2.5 4.6c0-.6.4-1.1 1-1.2z" fill="currentColor"/></svg>
         089&nbsp;692&nbsp;36&nbsp;44
       </a>
     </div>
-
-    <p class="ort">
-      <span>Perlacher Stra&szlig;e&nbsp;2, 81539&nbsp;M&uuml;nchen</span>
-      <span class="stand" id="stand"></span>
-    </p>
-
-    <p class="zeichen">
-      <img src="bilder/bahar-nah.webp" alt="Bahar, Inhaberin und Friseurmeisterin" width="88" height="88" decoding="async">
-      <span><b>Bahar</b>Friseurmeisterin, Inhaberin</span>
-    </p>
   </div>
 
+  <!-- ── Der Fuß des Auftakts ─────────────────────────────────────────── -->
+  <p class="boden">
+    <span>Perlacher Stra&szlig;e&nbsp;2 &middot; 81539&nbsp;M&uuml;nchen</span>
+    <span class="stand" id="stand"></span>
+  </p>
+
 </section>
-</main>
 
 <script src="neu.js" defer></script>
 </body>

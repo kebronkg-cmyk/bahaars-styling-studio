@@ -17,7 +17,7 @@
      Trägheit; ein Bild, das exakt am Finger klebt, fühlt sich an wie ein
      Schieberegler und nicht wie eine Armatur.                          */
 
-  const BEREICH = 300;      // Grad von zu bis ganz auf
+  const BEREICH = 78;       // Grad, um die sich der Hebel hebt
   const NACHLAUF = 0.10;    // wie träge der Film dem Rad folgt
   const SCHRITT = 0.08;     // eine Pfeiltaste
 
@@ -25,17 +25,18 @@
      der Strahlmitte in Prozent der Bildbreite, 25 Stützstellen über die
      ganze Länge. Der Film wird gegenläufig geschoben, damit der Strahl
      unter der Düse stehen bleibt. */
-  const STRAHL = [-4.91,-5.57,-5.89,-6.89,-6.85,-4.78,-1.68,0.26,-0.44,0.33,
-                  1.8,2.34,4.19,5.11,6.55,8.07,7.1,8.42,6.1,7.09,9.31,9.21,
-                  7.69,5.89,5.13];
-  const ZOOM = 1.26;
+  const STRAHL = [-4.63,-5.29,-5.61,-6.63,-6.61,-4.52,-1.4,0.41,-0.42,0.18,
+                  1.48,1.98,3.79,4.64,6.01,7.51,6.52,7.89,5.63,6.85,9.31,9.41,
+                  8.09,6.25,5.46];
+
+  const QUELLE = 720 / 1280;   // Seitenverhältnis der Aufnahme
+  const F0 = 0.4597;           // Mitte der Strahlwanderung, Anteil der Bildbreite
 
   const film   = document.getElementById('film');
   const bild   = document.getElementById('bild');
-  const ventil = document.getElementById('ventil');
-  const rad    = ventil && ventil.querySelector('svg');
+  const hebel  = document.getElementById('hebel');
   const wort   = document.getElementById('hahn-wort');
-  if (!film || !ventil) return;
+  if (!film || !hebel) return;
 
   let soll = 0;          // wohin das Rad zeigt, 0..1
   let ist  = 0;          // wo der Film gerade steht, läuft dem Soll nach
@@ -52,8 +53,38 @@
     return a + (b - a) * r;
   }
 
+  /* ── Wo sitzt die Düse? ──────────────────────────────────────────────
+     object-fit: cover skaliert über die Breite, solange der Kasten
+     breiter ist als die Aufnahme, sonst über die Höhe — und dann wird
+     zusätzlich waagerecht beschnitten. Beides verschiebt den Strahl
+     anders. Deshalb wird die Stelle gerechnet statt geschrieben, und bei
+     jeder Größenänderung neu.                                          */
+
+  let breite = 1, inhalt = 1, zoomWert = 1.26;  // Kastenbreite, Filmbreite darin, Zoom
+
+  function geometrie() {
+    const k = bild.getBoundingClientRect();
+    if (!k.width || !k.height) return;
+    breite = k.width;
+    inhalt = Math.max(k.width, k.height * QUELLE);   // cover
+    const links = -(inhalt - breite) / 2;            // waagerecht mittig
+    const zoom = parseFloat(getComputedStyle(document.documentElement)
+                            .getPropertyValue('--zoom')) || 1;
+    // Bildanteil F0 landet ohne Schub hier:
+    const x = breite / 2 + (links + F0 * inhalt - breite / 2) * zoom;
+    /* In Pixeln, nicht in Prozent: Die Armatur hängt an der Bühne, der
+       Film aber kann am breiten Schirm schmaler sein als sie. Prozente
+       bezögen sich dann auf den falschen Kasten. */
+    const versetzt = k.left - bild.offsetParent.getBoundingClientRect().left;
+    document.documentElement.style.setProperty('--auslauf-px', (versetzt + x).toFixed(1) + 'px');
+    zoomWert = zoom;
+  }
+
+  geometrie();
+  addEventListener('resize', geometrie);
+
   function wortFuer(v) {
-    if (v < 0.02) return 'Griff drehen';
+    if (v < 0.02) return 'Hebel anheben';
     if (v > 0.97) return 'Ganz offen';
     return 'Läuft · ' + Math.round(v * 100) + ' %';
   }
@@ -64,10 +95,9 @@
   }
 
   function radZeigen() {
-    ventil.style.setProperty('--dreh', (soll * BEREICH) + 'deg');
-    ventil.setAttribute('aria-valuenow', Math.round(soll * 100));
-    ventil.setAttribute('aria-valuetext', textFuer(soll));
-    ventil.setAttribute('aria-label', soll > 0.02 ? 'Wasserhahn zudrehen' : 'Wasserhahn aufdrehen');
+    hebel.style.setProperty('--dreh', (soll * BEREICH) + 'deg');
+    hebel.setAttribute('aria-valuenow', Math.round(soll * 100));
+    hebel.setAttribute('aria-valuetext', textFuer(soll));
     if (wort) {
       wort.textContent = wortFuer(soll);
       wort.classList.toggle('offen', soll >= 0.02);
@@ -97,7 +127,11 @@
     /* Der Ausgleich läuft mit dem Film, nicht mit dem Rad — sonst würde
        das Bild vorauseilen. Der Zoom multipliziert die Verschiebung mit,
        also wird sie vorher herausgerechnet. */
-    bild.style.setProperty('--schub', (-versatz(ist) * ZOOM).toFixed(3) + '%');
+    /* Der Schub wird in Prozent der Kastenbreite gesetzt, die Wanderung
+       ist aber in Prozent der Filmbreite gemessen. Bei waagerechtem
+       Beschnitt sind das nicht dieselben Prozente. */
+    bild.style.setProperty('--schub',
+      (-versatz(ist) * zoomWert * inhalt / breite).toFixed(3) + '%');
 
     if (film.duration && !springt) {
       const ziel = klemme(ist * (film.duration - 1 / 24), 0, film.duration);
@@ -115,25 +149,28 @@
 
   let zeiger = null, letzter = 0;
 
+  /* Gedreht wird um die Nabe, nicht um die Mitte des Kastens: Der Hebel
+     sitzt in einer Ecke seines Bildes, und die Naht liegt bei 67,2 % /
+     20,74 % — gemessen an der Aufnahme. */
   function winkel(ev) {
-    const r = ventil.getBoundingClientRect();
-    const dx = ev.clientX - (r.left + r.width / 2);
-    const dy = ev.clientY - (r.top + r.height / 2);
-    if (Math.hypot(dx, dy) < 8) return null;   // zu nah an der Mitte
+    const r = hebel.getBoundingClientRect();
+    const dx = ev.clientX - (r.left + r.width * 0.672);
+    const dy = ev.clientY - (r.top + r.height * 0.2074);
+    if (Math.hypot(dx, dy) < 14) return null;   // zu nah am Drehpunkt
     return Math.atan2(dy, dx) * 180 / Math.PI;
   }
 
-  ventil.addEventListener('pointerdown', (ev) => {
+  hebel.addEventListener('pointerdown', (ev) => {
     const w = winkel(ev);
     if (w === null) return;
     zeiger = ev.pointerId;
     letzter = w;
-    ventil.setPointerCapture(ev.pointerId);
+    hebel.setPointerCapture(ev.pointerId);
     ersteBeruehrung();
     ev.preventDefault();
   });
 
-  ventil.addEventListener('pointermove', (ev) => {
+  hebel.addEventListener('pointermove', (ev) => {
     if (ev.pointerId !== zeiger) return;
     const w = winkel(ev);
     if (w === null) return;
@@ -145,14 +182,10 @@
   });
 
   const loslassen = (ev) => { if (ev.pointerId === zeiger) zeiger = null; };
-  ventil.addEventListener('pointerup', loslassen);
-  ventil.addEventListener('pointercancel', loslassen);
+  hebel.addEventListener('pointerup', loslassen);
+  hebel.addEventListener('pointercancel', loslassen);
 
-  /* Ein Knopf löst bei Leertaste und Enter ein click aus. Ohne das
-     Abfangen springt der Hahn zusätzlich zur Tastensteuerung. */
-  ventil.addEventListener('click', (ev) => ev.preventDefault());
-
-  ventil.addEventListener('keydown', (ev) => {
+  hebel.addEventListener('keydown', (ev) => {
     const k = ev.key;
     let v = null;
     if (k === 'ArrowRight' || k === 'ArrowUp')        v = soll + SCHRITT;
@@ -204,7 +237,7 @@
     nassBild.src = 'bilder/wasser-nass.webp';
     nassBild.alt = '';
     nassBild.width = 720; nassBild.height = 1280;
-    nassBild.className = 'wasser-halt';
+    nassBild.className = 'film-halt';
     nassBild.style.opacity = ist;
     nassBild.style.transition = 'none';
     bild.appendChild(nassBild);
@@ -213,7 +246,7 @@
   function ersteBeruehrung() {
     if (angefasst) return;
     angefasst = true;
-    ventil.classList.remove('wink');
+    hebel.classList.remove('wink');
     ladeFilm();
     /* Kommt binnen sechs Sekunden kein Bild, bauen wir die Rückfallebene
        auf, statt die Besucherin an einem toten Rad drehen zu lassen. */
@@ -228,7 +261,7 @@
     setTimeout(() => { if (!angefasst) { soll = 0;    radZeigen(); } }, 4200);
   }
 
-  ventil.classList.add('wink');
+  hebel.classList.add('wink');
   radZeigen();
 
   /* Geladen wird, sobald die Bühne im Bild ist. */
