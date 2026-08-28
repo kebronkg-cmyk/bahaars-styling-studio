@@ -8,18 +8,31 @@
 
    ── Der Auftakt dieser Fassung ────────────────────────────────────────
 
-   Ein Film, den die Besucherin selbst bedient. Er zeigt Haar, das nass
-   wird, und er rührt sich nur, wenn jemand den Hahn aufdreht. Kein
-   Autoplay, keine Schleife: zehn Sekunden, die unter der Hand der
-   Besucherin liegen.
+   Ein Film, den die Besucherin selbst bedient. Über der Tafel hängt eine
+   Armatur aus Messing; wer das Ventil aufdreht, lässt Wasser aus der Düse
+   laufen, und das Haar darunter wird nass. Kein Autoplay, keine Schleife:
+   zehn Sekunden, die unter der Hand der Besucherin liegen.
 
-   Der Film ist kühl (Farbton 213, gemessen), die Seite ist warm
-   (Farbton 52, am Portrait gemessen). Das ist kein Versehen, sondern
-   die Ordnung dieses Bildschirms: Wasser ist kalt, Messing ist warm.
-   Damit das Türkis nicht zur Seitenfarbe wird, läuft der Film am Rand
-   in den Grund aus — er bleibt ein Gegenstand im Raum, keine Fläche.
-   Ungegradet: Jeder Versuch, ihn auf die warme Achse zu ziehen, macht
-   das Haar fahl, und bei einem Friseur ist das Haar das Produkt.
+   Damit der Strahl an der Düse hängen bleibt, wird der Film waagerecht
+   gegenläufig geschoben — in der Aufnahme wandert er um 15 % der Breite.
+   Die gemessene Tabelle steht in neu.js, der Zoom liefert den Spielraum,
+   --auslauf sagt, wo die Düse sitzt. Die drei gehören zusammen.
+
+   ── Die Farbe ─────────────────────────────────────────────────────────
+
+   Der Grund ist Meerblau, und damit gehört der Film zur Seite, statt
+   gegen sie zu stehen. Sein Hintergrund misst Farbton 199–209 bei sehr
+   wenig Buntheit; die Seite geht davon aus tiefer und blauer, sodass der
+   Film als helleres Wasser darin liegt. An den Rändern läuft er in den
+   Grund aus, dort ist der Übergang jetzt fast nahtlos.
+
+   Der Film bleibt ungegradet. Jeder Versuch, ihn zu verstimmen, macht das
+   Haar fahl, und bei einem Friseur ist das Haar das Produkt.
+
+   Messing ist die einzige warme Farbe. Sie ist am Karamell im Haar der
+   Inhaberin gemessen und trägt genau das, was angefasst werden soll: die
+   Armatur, die Nummer, den Termin.
+
    ═══════════════════════════════════════════════════════════════════════ */
 
 /* ── Schrift. Beide liegen im Projekt, nicht bei Google: Ein deutscher
@@ -40,31 +53,39 @@
 :root {
   color-scheme: dark;
 
-  /* ── Farben. Am eigenen Material gemessen, keine ist ausgedacht. ───
-     Grund: die tiefste Stelle im Portrait, das dunkle Holzregal.
-     Messing: das Karamell im Haar. Es trägt hier den Hahn.            */
+  /* ── Farben ─────────────────────────────────────────────────────────
+     Der Grund ist Meerblau. Der Farbton kommt aus dem Film: Dessen Wand
+     misst 199–209 bei sehr wenig Buntheit (Chroma .015–.023), also ein
+     gedämpftes Petrol. Die Seite geht davon aus tiefer und deutlich
+     blauer — so liegt der Film als helleres Wasser im Meer, statt
+     dagegen zu stehen.
 
-  --grund:      oklch(15% .017 52);
-  --grund-tief: oklch(10% .014 50);
-  --grund-hoch: oklch(19% .019 54);
+     Messing bleibt. Es ist am Karamell im Haar der Inhaberin gemessen
+     und ist die einzige warme Farbe auf der Seite: Sie trägt die
+     Armatur, die Nummer und den Termin — also genau das, was angefasst
+     werden soll.                                                      */
 
-  --grund-00: oklch(15% .017 52 / 0);
-  --grund-40: oklch(15% .017 52 / .40);
-  --grund-72: oklch(15% .017 52 / .72);
-  --grund-92: oklch(15% .017 52 / .92);
+  --grund:      oklch(17% .042 228);
+  --grund-tief: oklch(12% .036 230);
+  --grund-hoch: oklch(22% .046 226);
 
-  --tinte:       oklch(94% .011 84);
-  --tinte-leise: oklch(78% .013 80);
-  --tinte-still: oklch(62% .013 76);
+  --grund-00: oklch(17% .042 228 / 0);
+  --grund-40: oklch(17% .042 228 / .40);
+  --grund-72: oklch(17% .042 228 / .72);
+  --grund-92: oklch(17% .042 228 / .92);
 
-  --messing:      oklch(78% .085 70);
+  --tinte:       oklch(95% .010 220);
+  --tinte-leise: oklch(81% .015 220);
+  --tinte-still: oklch(68% .019 222);
+
+  --messing:       oklch(78% .085 70);
   --messing-hell:  oklch(88% .062 76);
   --messing-glanz: oklch(96% .038 84);
-  --messing-tief: oklch(58% .078 64);
-  --auf-messing:  oklch(14% .017 52);
+  --messing-tief:  oklch(58% .078 64);
+  --auf-messing:   oklch(16% .038 228);
 
-  --linie:      oklch(80% .014 76 / .17);
-  --linie-fein: oklch(80% .014 76 / .09);
+  --linie:      oklch(80% .020 220 / .19);
+  --linie-fein: oklch(80% .020 220 / .10);
 
   /* ── Maße ────────────────────────────────────────────────────────── */
   --t-riesen: 2.6rem;
