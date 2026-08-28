@@ -1,0 +1,416 @@
+@charset "utf-8";
+
+/* ═══════════════════════════════════════════════════════════════════════
+   BaHaar's Styling Studio — zweite Fassung, von vorn
+
+   Die alte Seite ist verworfen. Was bleibt, sind die Inhalte und die
+   Farben: Beide sind am Laden erhoben und nicht am Reißbrett.
+
+   ── Der Auftakt dieser Fassung ────────────────────────────────────────
+
+   Ein Film, den die Besucherin selbst bedient. Er zeigt Haar, das nass
+   wird, und er rührt sich nur, wenn jemand den Hahn aufdreht. Kein
+   Autoplay, keine Schleife: zehn Sekunden, die unter der Hand der
+   Besucherin liegen.
+
+   Der Film ist kühl (Farbton 213, gemessen), die Seite ist warm
+   (Farbton 52, am Portrait gemessen). Das ist kein Versehen, sondern
+   die Ordnung dieses Bildschirms: Wasser ist kalt, Messing ist warm.
+   Damit das Türkis nicht zur Seitenfarbe wird, läuft der Film am Rand
+   in den Grund aus — er bleibt ein Gegenstand im Raum, keine Fläche.
+   Ungegradet: Jeder Versuch, ihn auf die warme Achse zu ziehen, macht
+   das Haar fahl, und bei einem Friseur ist das Haar das Produkt.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── Schrift. Beide liegen im Projekt, nicht bei Google: Ein deutscher
+      Auftritt, der Schriften von fremden Servern nachlädt, ist abmahnbar
+      (LG München I, 3 O 17493/20).                                     */
+
+@font-face {
+  font-family: 'Instrument Serif';
+  src: url('schrift/InstrumentSerif-Regular.woff2') format('woff2');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('schrift/Inter.woff2') format('woff2');
+  font-weight: 100 900; font-style: normal; font-display: swap;
+}
+
+:root {
+  color-scheme: dark;
+
+  /* ── Farben. Am eigenen Material gemessen, keine ist ausgedacht. ───
+     Grund: die tiefste Stelle im Portrait, das dunkle Holzregal.
+     Messing: das Karamell im Haar. Es trägt hier den Hahn.            */
+
+  --grund:      oklch(15% .017 52);
+  --grund-tief: oklch(10% .014 50);
+  --grund-hoch: oklch(19% .019 54);
+
+  --grund-00: oklch(15% .017 52 / 0);
+  --grund-40: oklch(15% .017 52 / .40);
+  --grund-72: oklch(15% .017 52 / .72);
+  --grund-92: oklch(15% .017 52 / .92);
+
+  --tinte:       oklch(94% .011 84);
+  --tinte-leise: oklch(78% .013 80);
+  --tinte-still: oklch(62% .013 76);
+
+  --messing:      oklch(78% .085 70);
+  --messing-hell: oklch(88% .062 76);
+  --messing-tief: oklch(58% .078 64);
+  --auf-messing:  oklch(14% .017 52);
+
+  --linie:      oklch(80% .014 76 / .17);
+  --linie-fein: oklch(80% .014 76 / .09);
+
+  /* ── Maße ────────────────────────────────────────────────────────── */
+  --t-riesen: 2.6rem;
+  --t-lauf:   1.0625rem;
+  --t-klein:  .9375rem;
+  --t-marke:  .76rem;
+
+  --a1: .5rem;  --a2: 1rem;  --a3: 1.75rem;
+  --a4: 3rem;   --a5: 5rem;
+
+  --rand: 1.25rem;
+  --spalte: 76rem;
+
+  /* ── Bewegung. Nur ease-out, kein Federn. ────────────────────────── */
+  --kurve: cubic-bezier(.22, .61, .36, 1);
+  --t1: .25s; --t2: .45s;
+
+  --kante: 2px;
+  --kante-voll: 999px;
+
+  /* Das Format der Filmtafel. Die Aufnahme ist 9:16; die Tafel schneidet
+     unten ab, wo ohnehin nur noch Schulter steht. */
+  --tafel: 4 / 5;
+  --tafel-hoehe: 33svh;
+  --griff-groesse: 4.4rem;
+}
+
+@media (min-width: 30rem) {
+  :root { --tafel-hoehe: 40svh; }
+}
+@media (min-width: 48rem) {
+  :root { --t-riesen: 4.1rem; --rand: 2rem; --tafel-hoehe: 48svh; --griff-groesse: 5rem; }
+}
+@media (min-width: 64rem) {
+  :root {
+    --t-riesen: 4.6rem; --rand: 3rem;
+    --tafel: 3 / 4; --tafel-hoehe: min(60svh, 30rem);
+    --griff-groesse: 5.2rem;
+  }
+}
+
+/* ── Grundlagen ───────────────────────────────────────────────────────── */
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }   /* verliert sonst gegen Klassen */
+
+html {
+  -webkit-text-size-adjust: 100%;        /* Android-WebViews blasen Text auf */
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--grund);
+  color: var(--tinte);
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-size: var(--t-lauf);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img, svg, video { display: block; max-width: 100%; }
+
+a { color: inherit; }
+
+:focus-visible {
+  outline: 2px solid var(--messing);
+  outline-offset: 3px;
+  border-radius: var(--kante);
+}
+
+.sprung {
+  position: absolute; left: var(--rand); top: -4rem; z-index: 20;
+  padding: .6rem 1rem; border-radius: var(--kante);
+  background: var(--messing); color: var(--auf-messing);
+  font-size: var(--t-klein); font-weight: 600; text-decoration: none;
+  transition: top var(--t1) var(--kurve);
+}
+.sprung:focus-visible { top: var(--rand); }
+
+/* ── Kopf ─────────────────────────────────────────────────────────────── */
+
+.kopf {
+  position: relative; z-index: 3;
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: var(--a2);
+  padding: var(--a3) var(--rand) 0;
+  max-width: var(--spalte); margin-inline: auto;
+}
+
+.kopf-marke {
+  display: inline-flex; align-items: baseline; gap: .62rem; flex-wrap: wrap;
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: 1.42rem; line-height: 1.1;
+  letter-spacing: -.005em;
+  font-kerning: normal;
+  text-decoration: none;
+}
+/* Der Zusatz steht in der Grotesk: Instrument Serif setzt bei dieser Größe
+   sehr eigenwillige Abstände, und eine Wortmarke darf nicht löchrig sein. */
+@media (max-width: 26rem) {
+  .kopf-marke span { display: none; }
+}
+.kopf-marke span {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: .67rem; font-weight: 500;
+  letter-spacing: .19em; text-transform: uppercase;
+  color: var(--tinte-still);
+}
+
+.kopf-ruf {
+  font-size: var(--t-klein);
+  font-variant-numeric: tabular-nums;
+  color: var(--tinte-leise);
+  text-decoration: none;
+  white-space: nowrap;
+}
+@media (hover: hover) and (pointer: fine) {
+  .kopf-ruf { transition: color var(--t1) var(--kurve); }
+  .kopf-ruf:hover { color: var(--messing); }
+}
+
+/* ── Der Auftakt ──────────────────────────────────────────────────────── */
+
+.auftakt {
+  display: grid;
+  gap: var(--a3);
+  align-items: center;
+  max-width: var(--spalte);
+  margin-inline: auto;
+  padding: var(--a4) var(--rand) var(--a5);
+}
+
+@media (min-width: 64rem) {
+  .auftakt {
+    grid-template-columns: minmax(0, 1.04fr) minmax(0, .96fr);
+    gap: var(--a5);
+    padding-block: var(--a5);
+    align-content: center;
+    min-height: calc(100svh - 7rem);
+  }
+  /* Der Satz steht links, die Bühne rechts — aber im Quelltext kommt die
+     Bühne zuerst, damit sie am schmalen Schirm oben liegt. */
+  .satz   { grid-column: 1; grid-row: 1; }
+  .buehne { grid-column: 2; grid-row: 1; }
+}
+
+/* ── Der Satz ─────────────────────────────────────────────────────────── */
+
+.braue {
+  margin: 0 0 var(--a2);
+  font-size: var(--t-marke);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--tinte-still);
+}
+
+.riesen {
+  margin: 0 0 var(--a3);
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-weight: 400;
+  font-size: var(--t-riesen);
+  line-height: 1.02;
+  letter-spacing: -.015em;
+}
+
+.lauf {
+  margin: 0 0 var(--a3);
+  max-width: 33rem;
+  color: var(--tinte-leise);
+}
+
+.wahl {
+  display: flex; flex-wrap: wrap; gap: var(--a2);
+  margin-bottom: var(--a3);
+}
+
+.knopf, .knopf-still {
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .82rem 1.4rem;
+  border-radius: var(--kante-voll);
+  font-size: var(--t-klein); font-weight: 600;
+  text-decoration: none; white-space: nowrap;
+}
+.knopf {
+  background: var(--messing);
+  color: var(--auf-messing);
+}
+.knopf-still {
+  border: 1px solid var(--linie);
+  color: var(--tinte);
+  font-variant-numeric: tabular-nums;
+}
+.knopf-still svg { width: 1em; height: 1em; opacity: .7; }
+
+@media (hover: hover) and (pointer: fine) {
+  .knopf, .knopf-still { transition: transform var(--t1) var(--kurve), background-color var(--t1) var(--kurve), border-color var(--t1) var(--kurve); }
+  .knopf:hover       { transform: translateY(-2px); background: var(--messing-hell); }
+  .knopf-still:hover { transform: translateY(-2px); border-color: var(--messing); }
+}
+
+.ort {
+  display: flex; flex-wrap: wrap; align-items: center; gap: .5rem var(--a2);
+  margin: 0 0 var(--a3);
+  font-size: var(--t-klein);
+  color: var(--tinte-still);
+}
+
+.stand { display: inline-flex; align-items: center; gap: .45rem; }
+.stand::before {
+  content: ""; width: .45rem; height: .45rem; border-radius: 50%;
+  background: currentColor;
+}
+.stand.offen { color: var(--messing); }
+
+.zeichen {
+  display: flex; align-items: center; gap: .8rem;
+  margin: 0; padding-top: var(--a3);
+  border-top: 1px solid var(--linie-fein);
+  font-size: var(--t-klein);
+  color: var(--tinte-still);
+}
+.zeichen img {
+  width: 2.75rem; height: 2.75rem;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 22%;
+}
+.zeichen span { display: flex; flex-direction: column; line-height: 1.35; }
+.zeichen b { color: var(--tinte); font-weight: 600; }
+
+/* ── Die Bühne ────────────────────────────────────────────────────────── */
+
+.buehne { position: relative; }
+
+.wasser {
+  /* Die Höhe führt. Setzt man nur die Breite und deckelt mit max-height,
+     zerdrückt der Deckel das Seitenverhältnis, und object-fit schneidet
+     dann genau dort, wo der Kopf steht. */
+  display: grid;
+  height: var(--tafel-hoehe);
+  aspect-ratio: var(--tafel);
+  width: auto;
+  max-width: 100%;
+  margin: 0 auto;
+  background: var(--grund-tief);
+  border-radius: var(--kante);
+  overflow: hidden;
+
+  /* Der Film läuft an allen vier Rändern in den Grund aus, damit das
+     Türkis eine Farbe im Bild bleibt und keine Fläche der Seite wird.
+     Der letzte Halt liegt auf 100 %: Ein Verlauf, der vorher endet, wird
+     vom eigenen Kasten abgeschnitten und zeigt eine gerade Kante. */
+  --schleier:
+    linear-gradient(to bottom, transparent 0%, #000 17%, #000 56%, oklch(0% 0 0 / .28) 88%, transparent 100%),
+    linear-gradient(to right,  transparent 0%, #000 14%, #000 86%, transparent 100%);
+  -webkit-mask-image: var(--schleier);
+          mask-image: var(--schleier);
+  -webkit-mask-composite: source-in;
+          mask-composite: intersect;
+}
+
+/* Film und Standbild liegen exakt übereinander. Zwei Kinder in einem Grid
+   erzeugen sonst zwei Zeilen — 1/1 stapelt sie. */
+.wasser > * {
+  grid-area: 1 / 1;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: 50% 12%;
+}
+
+.wasser-film { opacity: 0; transition: opacity var(--t2) var(--kurve); }
+.wasser-halt { transition: opacity var(--t2) var(--kurve); }
+.wasser.laeuft .wasser-film { opacity: 1; }
+.wasser.laeuft .wasser-halt { opacity: 0; }
+
+/* ── Der Hahn ─────────────────────────────────────────────────────────── */
+
+.hahn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .3rem;
+  position: relative;
+  z-index: 2;
+  /* Der Hahn steht auf der Unterkante der Tafel — dort ist der Film
+     ohnehin in den Grund ausgelaufen, also verdeckt er nichts. */
+  margin-top: calc(var(--griff-groesse) * -.42);
+}
+
+.hahn-griff {
+  width: var(--griff-groesse);
+  padding: .3rem;
+  cursor: grab;
+  touch-action: none;               /* sonst scrollt die Seite beim Drehen */
+  border-radius: 8px;
+}
+.hahn-griff:active { cursor: grabbing; }
+.hahn-griff svg { width: 100%; height: auto; overflow: visible; }
+
+/* Die Teile des Hahns. Messing ist die Leitfarbe des Hauses und kommt
+   aus dem Karamell im Haar — hier trägt sie das einzige Gerät auf der
+   Seite, das man wirklich anfassen kann. */
+.messing-flaeche { fill: url(#messing); }
+.messing-strich {
+  fill: none;
+  stroke: url(#messing);
+  stroke-width: 15;
+  stroke-linecap: round;
+}
+.griff-kern { fill: var(--grund-tief); }
+
+.skala-spur {
+  fill: none; stroke: var(--linie); stroke-width: 2.5; stroke-linecap: round;
+}
+.skala-voll {
+  fill: none; stroke: var(--messing); stroke-width: 2.5; stroke-linecap: round;
+}
+
+/* Der Kreuzgriff dreht sich um seine eigene Mitte. Ohne transform-box
+   bezieht sich der Ursprung auf den Kasten des Elements statt auf das
+   Koordinatennetz der Zeichnung — dann schwenkt der Griff aus dem Bild. */
+.kreuz { transform-box: view-box; transform-origin: 70px 43.5px; }
+
+.hahn-wort {
+  margin: .45rem 0 0;
+  font-size: var(--t-marke);
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--tinte-still);
+  text-align: center;
+  transition: color var(--t1) var(--kurve);
+}
+.hahn-wort.offen { color: var(--messing); }
+
+/* Der Wink, solange noch niemand angefasst hat. Eine einzige Bewegung,
+   deutlich langsamer als eine Handlung, und sie hört nach der ersten
+   Berührung auf. */
+@keyframes wink {
+  0%, 62%, 100% { transform: rotate(0deg); }
+  74%           { transform: rotate(-7deg); }
+  88%           { transform: rotate(3deg); }
+}
+.hahn-griff.wink .kreuz { animation: wink 4.5s var(--kurve) infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hahn-griff.wink .kreuz { animation: none; }
+  .wasser-film, .wasser-halt { transition: none; }
+  .sprung, .knopf, .knopf-still, .kopf-ruf { transition: none; }
+}

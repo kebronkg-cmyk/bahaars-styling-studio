@@ -1,532 +1,119 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BaHaar’s Styling Studio — Friseur in München-Giesing</title>
-<meta name="description" content="Friseurmeisterin Bahar in der Perlacher Straße 2, München-Giesing. Farbe, Schnitt, Hochsteckfrisuren und Brautstyling aus einer Hand. Termin unter 089 692 36 44.">
-<meta name="theme-color" content="#140b06">
-<script>
-/* Die gewählte Farbstimmung noch vor dem ersten Bild setzen — sonst
-   blitzt beim Seitenwechsel kurz die Vorgabe auf. Bewusst ohne defer.
-   Ohne Eintrag gilt Nacht, und Nacht steht ohne Attribut da. */
-var F={tag:'#faf6f0',asche:'#f4f7fa',rose:'#fcf5f3'};
-try{var p=localStorage.getItem('bahaar-stimmung');
- if(F[p]){document.documentElement.dataset.palette=p;
-  document.currentScript.previousElementSibling.content=F[p];}}catch(e){}
-</script>
+<title>BaHaar&rsquo;s Styling Studio &mdash; Ihr Friseur in Giesing</title>
+<meta name="description" content="Friseursalon in M&uuml;nchen-Giesing. Bahar, Friseurmeisterin, seit 20 Jahren an der Perlacher Stra&szlig;e. Schnitt, Farbe, Str&auml;hnen, Brautstyling. Telefon 089 692 36 44.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="canonical" href="https://bahaarsstylingstudio.de/">
-
-<meta property="og:type" content="website">
-<meta property="og:locale" content="de_DE">
-<meta property="og:site_name" content="BaHaar’s Styling Studio">
-<meta property="og:title" content="BaHaar’s Styling Studio — Friseur in München-Giesing">
-<meta property="og:description" content="Friseurmeisterin Bahar in der Perlacher Straße 2. Farbe, Schnitt, Hochsteckfrisuren und Brautstyling aus einer Hand.">
-<meta property="og:image" content="bilder/arbeit-balayage.webp">
-
-<link rel="preload" href="schrift/Marcellus-Regular.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="schrift/Archivo.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="stil.css">
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "HairSalon",
-  "name": "BaHaar’s Styling Studio",
-  "description": "Friseursalon in München-Giesing. Inhaberin Fakhria Tokhi, Friseurmeisterin.",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Perlacher Straße 2",
-    "postalCode": "81539",
-    "addressLocality": "München",
-    "addressRegion": "Bayern",
-    "addressCountry": "DE"
-  },
-  "telephone": "+49896923644",
-  "email": "info@bahaarsstylingstudio.de",
-  "url": "https://bahaarsstylingstudio.de/",
-  "sameAs": ["https://www.instagram.com/bahaarsstylingstudio"],
-  "priceRange": "€€",
-  "currenciesAccepted": "EUR",
-  "openingHoursSpecification": [
-    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Monday",  "opens": "10:00", "closes": "16:00" },
-    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday","Wednesday","Thursday","Friday"], "opens": "09:00", "closes": "19:00" },
-    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "16:00" }
-  ]
-}
-</script>
+<link rel="stylesheet" href="neu.css">
+<link rel="preload" href="schrift/InstrumentSerif-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="schrift/Inter.woff2" as="font" type="font/woff2" crossorigin>
 </head>
+<body>
 
-<body class="start">
-<!--
-  RICHTUNG — verbindlich für jede weitere Änderung an dieser Seite.
+<a class="sprung" href="#auftakt-titel">Zum Inhalt springen</a>
 
-  THESIS: Ein inhabergeführter Salon verkauft eine Person, keinen Laden.
-  Deshalb steht Bahar im ersten Bildschirm — mit Namen, Meistertitel und
-  zwanzig Jahren — und nicht ein abstrakter Haarausschnitt unter einem
-  Schleier. Die Seite verweigert weiterhin den Baukasten-Hero mit Vollbild,
-  Serifenschrift und Goldrand.
-
-  OWN-WORLD: Die Palette ist aus dem Material gemessen, nicht aus einem
-  Regal geliehen: über das Portrait der Inhaberin und alle sauberen
-  Arbeitsfotos liegt die warme Achse geschlossen bei Farbton 47–88°,
-  Schwerpunkt 60°. Grund ist warmes Papierweiß aus den Lichtern dieser
-  Fotos, Espresso ihre dunkle Seite, Messing die Leitfarbe aus dem Karamell
-  im Haar. Genau ein Abschnitt steht auf Espresso: der Auftakt. Die
-  Haarachse ist Material, nie Schrift. Rosé nur als Ornament.
-
-  Nicht mehr im Haus: das Türkis der Moroccanoil-Regale. Es war an der Wand
-  gemessen, aber es ist die Markenfarbe eines Lieferanten und nicht die
-  Handschrift dieses Salons.
-
-  STORY: Die Besucherin sieht in einem Bildschirm, wer hier schneidet,
-  findet Preis und Dauer ohne zu suchen, und ruft an oder bucht.
-
-  FIRST VIEWPORT: Espressofläche mit warmem Licht von oben rechts. Links der
-  Titel in Marcellus, der Vorspann, die Telefonnummer als erster Knopf und
-  der gerechnete Öffnungsstand. Rechts ihr Portrait mit Namen und
-  Meistertitel auf dem Bild.
-
-  FORM: Die eine eigene Idee, die bleibt, ist die Tonprobe: Der Farbfleck
-  neben einem Preis ist aus dem Foto genau dieser Arbeit gemessen. Klein, an
-  einer Stelle, wo er etwas bedeutet — nicht als Schaustück über einen
-  halben Bildschirm.
-
-  FINISH: unreviewed and undocumented is unfinished; this build ends with the
-  finish review, the verdict, DESIGN.md, and every shipping raster carrying
-  its provenance.
--->
-
-<a class="sprung" href="#inhalt">Zum Inhalt springen</a>
-
-<header class="kopfzeile">
-  <a class="marke" href="index.html">BaHaar&rsquo;s<span class="zusatz">styling studio</span></a>
-  <a class="ruf" href="tel:+49896923644">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M6.5 3h3l1.5 4-2 1.5a12 12 0 0 0 6.5 6.5L17 13l4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 3.5 5.2 2 2 0 0 1 5.5 3z"/></svg>
-    089 692 36 44
-  </a>
-  <a class="knopf knopf-voll knopf-termin" href="termin.html">Termin</a>
-  <button class="menuknopf" type="button" aria-expanded="false" aria-controls="wegweiser" aria-label="Men&uuml; &ouml;ffnen"><span></span></button>
+<header class="kopf">
+  <a class="kopf-marke" href="/">BaHaar&rsquo;s <span>Styling&nbsp;Studio</span></a>
+  <a class="kopf-ruf" href="tel:+498969236440">089&nbsp;692&nbsp;36&nbsp;44</a>
 </header>
 
-<!-- Die Navigation liegt hinter dem Schalter und öffnet sich über die
-     ganze Fläche. Sie ist kein Menü, sondern ein Inhaltsverzeichnis:
-     Ziffer, Name, und unter „Leistungen & Preise" die neun Gruppen mit
-     Ab-Preis. Ohne Skript gibt es keinen Schalter — dann steht sie als
-     gewöhnliche Liste im Fluss. -->
-<nav class="wegweiser" id="wegweiser" aria-label="Hauptmen&uuml;">
-  <ul>
-    <li><a href="index.html" aria-current="page"><span class="ziffer">01</span> Start</a></li>
-    <li class="navpunkt">
-      <button type="button" aria-expanded="false" aria-controls="uebersicht-leistungen">
-        <span class="ziffer">02</span> Leistungen &amp; Preise
-        <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg>
-      </button>
-      <a class="nav-ohne-skript" href="leistungen.html"><span class="ziffer">02</span> Leistungen &amp; Preise</a>
-      <div class="uebersicht" id="uebersicht-leistungen" hidden>
-        <ul>
-          <li><a href="leistungen.html#schneiden">Waschen, Schneiden &amp; F&ouml;hnen <span class="ab">ab 30 &euro;</span></a></li>
-          <li><a href="leistungen.html#farbe">Farbe &amp; T&ouml;nung <span class="ab">ab 43 &euro;</span></a></li>
-          <li><a href="leistungen.html#straehnen">Str&auml;hnen &amp; Balayage <span class="ab">ab 69 &euro;</span></a></li>
-          <li><a href="leistungen.html#umformen">Umformen <span class="ab">ab 69 &euro;</span></a></li>
-          <li><a href="leistungen.html#pflege">Pflege &amp; Korrektur <span class="ab">ab 5 &euro;</span></a></li>
-          <li><a href="leistungen.html#anlass">F&uuml;r besondere Anl&auml;sse <span class="ab">ab 60 &euro;</span></a></li>
-          <li><a href="leistungen.html#brauen">Brauen &amp; Wimpern <span class="ab">ab 10 &euro;</span></a></li>
-          <li><a href="leistungen.html#herren">Herren <span class="ab">ab 10 &euro;</span></a></li>
-          <li><a href="leistungen.html#kinder">Kinder bis 12 Jahre <span class="ab">ab 25 &euro;</span></a></li>
-        </ul>
-        <p class="uebersicht-fuss">
-          <span>Preise nach Haarl&auml;nge und Aufwand &middot; Beratung immer inklusive</span>
-          <a href="leistungen.html">Ganze Preisliste</a>
-        </p>
+<main>
+<section class="auftakt">
+
+  <!-- ── Die Bühne: der Film und der Hahn, der ihn bedient ──────────────
+       Der Film läuft nicht von selbst. Er steht auf seinem ersten Bild —
+       trockenes Haar, kein Wasser — und rückt nur vor, soweit der Hahn
+       geöffnet wird. Das erste Bild ist zugleich das Standbild: Was zu
+       sehen ist, solange der Film lädt, ist genau das, was ein
+       geschlossener Hahn zeigt. Bleibt der Film ganz aus, fehlt nichts,
+       was man als Fehler lesen könnte.                                 -->
+  <div class="buehne">
+    <figure class="wasser">
+      <video class="wasser-film" id="film"
+             poster="bilder/wasser-trocken.webp"
+             width="720" height="1280"
+             muted playsinline preload="none" tabindex="-1" aria-hidden="true"></video>
+      <img class="wasser-halt" src="bilder/wasser-trocken.webp" alt=""
+           width="720" height="1280" fetchpriority="high" decoding="async">
+    </figure>
+
+    <div class="hahn">
+      <div class="hahn-griff"
+           id="griff"
+           role="slider"
+           tabindex="0"
+           aria-label="Wasserhahn"
+           aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
+           aria-valuetext="zugedreht &ndash; das Haar ist trocken">
+        <svg viewBox="0 0 140 156" aria-hidden="true" focusable="false">
+          <defs>
+            <linearGradient id="messing" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0"   stop-color="var(--messing-hell)"/>
+              <stop offset=".45" stop-color="var(--messing)"/>
+              <stop offset="1"   stop-color="var(--messing-tief)"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Die Skala liegt hinter dem Griff und f&uuml;llt sich mit ihm -->
+          <path class="skala-spur" d="M 32.4 57.7 A 40 40 0 1 1 107.6 57.7"/>
+          <path class="skala-voll" id="skala" d="M 32.4 57.7 A 40 40 0 1 1 107.6 57.7"/>
+
+          <!-- Fu&szlig;, S&auml;ule, Auslauf -->
+          <rect class="messing-flaeche" x="38" y="132" width="64" height="11" rx="5"/>
+          <rect class="messing-flaeche" x="54" y="58"  width="32" height="78" rx="8"/>
+          <path class="messing-strich" d="M 84 76 C 112 76, 122 86, 122 106"/>
+          <rect class="messing-flaeche" x="115" y="104" width="14" height="12" rx="4"/>
+
+          <!-- Der Kreuzgriff. Er allein dreht sich. -->
+          <g id="kreuz" class="kreuz">
+            <rect class="messing-flaeche" x="42"   y="38" width="56" height="11" rx="5.5"/>
+            <rect class="messing-flaeche" x="64.5" y="16" width="11" height="56" rx="5.5"/>
+            <circle class="messing-flaeche" cx="70" cy="43.5" r="12"/>
+            <circle class="griff-kern" cx="70" cy="43.5" r="5"/>
+          </g>
+        </svg>
       </div>
-    </li>
-    <li><a href="brautstyling.html"><span class="ziffer">03</span> Brautstyling</a></li>
-    <li><a href="salon.html"><span class="ziffer">04</span> Der Salon</a></li>
-    <li><a href="termin.html"><span class="ziffer">05</span> Termin</a></li>
-  </ul>
-  <p class="wegweiser-fuss">
-    <a href="tel:+49896923644">089 692 36 44</a>
-    <a href="mailto:info@bahaarsstylingstudio.de">info@bahaarsstylingstudio.de</a>
-    <span>Perlacher Stra&szlig;e 2 &middot; 81539 M&uuml;nchen</span>
-  </p>
-</nav>
 
-<main id="inhalt">
-
-<!-- ═══ Auftakt ═════════════════════════════════════════════════════════ -->
-<section class="auftakt" aria-labelledby="haupttitel">
-
-  <!-- Drei Ebenen in einem Raum, jede auf ihrer eigenen Tiefe:
-
-         fern    die Querformataufnahme aus dem Laden, weit hinten
-         tafel   die Hochkantaufnahme, davor, in einem Rahmen aus Glas
-         Text    ganz vorn
-
-       Sie stehen nebeneinander und nicht ineinander. preserve-3d löst
-       sich schneidende Flächen nicht sauber auf; getrennte Ebenen mit
-       derselben Perspektive stapeln sich dagegen sauber.
-
-       Der Hintergrundfilm wird nur am Querschirm geladen — am
-       Hochkantschirm deckt die Tafel ihn vollständig ab, und drei
-       Megabyte für etwas zu laden, das niemand sieht, wäre unhöflich. -->
-  <div class="raum" aria-hidden="true">
-    <div class="ebene ebene-fern">
-      <img src="bilder/salon-schere.webp" alt="" width="1100" height="618" decoding="async">
-      <video class="raumfilm" data-quelle="bilder/salon-film.mp4" data-nur="landscape"
-             muted loop playsinline preload="none" tabindex="-1"></video>
-    </div>
-
-    <div class="ebene ebene-schleier"></div>
-
-    <div class="ebene ebene-tafel">
-      <div class="auftakt-tafel">
-        <img src="bilder/auftakt-saeule.webp" alt="" width="560" height="977" fetchpriority="high" decoding="async">
-        <video class="raumfilm" data-quelle="bilder/auftakt-hoch.mp4"
-               muted loop playsinline preload="none" tabindex="-1"></video>
-      </div>
+      <p class="hahn-wort" id="hahn-wort" aria-hidden="true">Wasserhahn aufdrehen</p>
     </div>
   </div>
 
-  <div class="auftakt-satz">
-    <h1 class="riesen steig" id="haupttitel">Ich stehe selbst am Stuhl.</h1>
-    <div class="auftakt-wahl steig">
-      <a class="knopf-glas gross" href="termin.html">Termin vereinbaren</a>
-      <a class="knopf-still" href="tel:+49896923644">089&nbsp;692&nbsp;36&nbsp;44</a>
+  <!-- ── Der Satz ─────────────────────────────────────────────────────── -->
+  <div class="satz">
+    <p class="braue">Friseursalon in M&uuml;nchen-Giesing</p>
+
+    <h1 class="riesen" id="auftakt-titel">Ihr Friseur<br>in Giesing.</h1>
+
+    <p class="lauf">
+      Bahar ist Friseurmeisterin und steht seit zwanzig Jahren selbst am
+      Stuhl. Schnitt, Farbe, Str&auml;hnen, Brautstyling &mdash; die
+      typgerechte Beratung ist inklusive.
+    </p>
+
+    <div class="wahl">
+      <a class="knopf" href="https://bahaars-styling-studio.salonized.com/widget_bookings/new?widget_id=sNYusRnC1XwjUqnu97LzSfiz" target="_blank" rel="noopener">Termin buchen</a>
+      <a class="knopf-still" href="tel:+498969236440">
+        <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M5.2 2.3 6.6 5 5.3 6.4c.7 1.6 2 2.9 3.6 3.6l1.4-1.3 2.7 1.4-.4 2.4c-.1.6-.6 1-1.2 1C6.4 13.3 2.7 9.6 2.5 4.6c0-.6.4-1.1 1-1.2z" fill="currentColor"/></svg>
+        089&nbsp;692&nbsp;36&nbsp;44
+      </a>
     </div>
-    <p class="auftakt-fuss steig">
-      <span class="auftakt-ort">Perlacher Stra&szlig;e 2 &middot; M&uuml;nchen-Giesing</span>
-      <span class="oeffnungsstand"></span>
+
+    <p class="ort">
+      <span>Perlacher Stra&szlig;e&nbsp;2, 81539&nbsp;M&uuml;nchen</span>
+      <span class="stand" id="stand"></span>
+    </p>
+
+    <p class="zeichen">
+      <img src="bilder/bahar-nah.webp" alt="Bahar, Inhaberin und Friseurmeisterin" width="88" height="88" decoding="async">
+      <span><b>Bahar</b>Friseurmeisterin, Inhaberin</span>
     </p>
   </div>
 
-  <a class="auftakt-weiter" href="#leistungen-titel" aria-label="Weiter zu den Leistungen">
-    <svg viewBox="0 0 16 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3v16M3 14l5 5 5-5"/></svg>
-  </a>
 </section>
-
-<!-- ═══ Leistungen im Überblick ═════════════════════════════════════════ -->
-<section class="abschnitt bahn" aria-labelledby="leistungen-titel">
-  <div class="mitte">
-    <div class="kopf">
-      <p class="braue">Leistungen</p>
-      <h2 class="titel" id="leistungen-titel">Was hier gemacht wird</h2>
-      <p class="lauf">
-        Beratung ist bei jedem Termin dabei, bei Farbe kommt die
-        Kopfhautanalyse dazu. Der Farbfleck neben dem Preis stammt aus keinem
-        Katalog — er ist aus dem Foto genau dieser Arbeit gemessen.
-      </p>
-    </div>
-
-    <div class="leistungsreihe auf">
-      <a class="leistungskarte" href="leistungen.html#farbe">
-        <span class="bild"><img alt="Feine helle Strähnen, in dünnen Schichten durch die Länge gezogen" loading="lazy" decoding="async" src="bilder/arbeit-straehnen.webp" width="1000" height="1339"></span>
-        <h3>Farbe &amp; Strähnen</h3>
-        <p>Farbe, Tönung, Foliensträhnen und Balayage. Ammoniakfrei für alle, die empfindlich reagieren.</p>
-        <span class="abpreis">
-          <span class="zahl">ab 43 €</span>
-          <span class="dazu"><span class="tonfleck" style="--ton-oben:#ae9a7f;--ton-unten:#44321a"></span> gemessen an dieser Arbeit</span>
-        </span>
-      </a>
-
-      <a class="leistungskarte" href="leistungen.html#schneiden">
-        <span class="bild"><img alt="Glatte Länge mit sauber ausgearbeiteten Stufen" loading="lazy" decoding="async" src="bilder/arbeit-glatt.webp" width="1000" height="1195"></span>
-        <h3>Schnitt &amp; Pflege</h3>
-        <p>Waschen, Schneiden, Föhnen — und was das Haar danach wieder in Form hält, von Olaplex bis Keratin.</p>
-        <span class="abpreis">
-          <span class="zahl">ab 30 €</span>
-          <span class="dazu"><span class="tonfleck" style="--ton-oben:#694d38;--ton-unten:#775740"></span> gemessen an dieser Arbeit</span>
-        </span>
-      </a>
-
-      <a class="leistungskarte" href="brautstyling.html">
-        <span class="bild"><img alt="Brautfrisur: gelegte Locken, durchzogen von einer Perlenranke in Roségold" loading="lazy" decoding="async" src="bilder/arbeit-braut-perlen.webp" width="899" height="1750"></span>
-        <h3>Brautstyling</h3>
-        <p>Haar und Make-up macht dieselbe Person, an einem Termin, im selben Raum. Mit Probetermin.</p>
-        <span class="abpreis">
-          <span class="zahl">390–600 €</span>
-          <span class="dazu"><span class="tonfleck" style="--ton-oben:#a98c6a;--ton-unten:#a37657"></span> gemessen an dieser Arbeit</span>
-        </span>
-      </a>
-    </div>
-
-    <p class="hinweis" style="margin-top:var(--a4)">
-      Alle Preise richten sich nach Haarlänge und Aufwand.
-      <a href="leistungen.html" style="color:var(--leit)">Zur vollständigen Preisliste</a>
-    </p>
-  </div>
-</section>
-
-
-<!-- ═══ Brautstyling ════════════════════════════════════════════════════ -->
-<section class="abschnitt bahn" aria-labelledby="braut-titel">
-  <div class="mitte">
-    <div class="zweispalt" style="align-items:center">
-      <div>
-        <p class="braue">Der gro&szlig;e Tag</p>
-        <h2 class="titel" id="braut-titel">Brautstyling</h2>
-        <p class="lauf" style="margin-top:var(--a3)">
-          Haar und Make-up mache ich selbst, an einem Termin, im selben Raum.
-          Kein Hochzeitsmorgen mit drei Terminen an drei Orten. Vorher gibt es
-          einen Probetermin: Was dort steht, steht am Hochzeitstag.
-        </p>
-        <p class="preiszeile" style="margin-top:var(--a3)">
-          <span class="gross zahl">390–600 €</span>
-          <span class="dauer">Hairstyling und Braut-Make-up zusammen</span>
-        </p>
-        <p style="margin-top:var(--a4)">
-          <a class="knopf knopf-voll" href="brautstyling.html">Vom Probetermin bis zum Morgen</a>
-        </p>
-      </div>
-      <figure class="vollbild" style="margin:0">
-        <img src="bilder/arbeit-braut-perlen.webp" alt="Brautfrisur: gelegte Locken, durchzogen von einer Perlenranke in Roségold" width="899" height="1750" loading="lazy" decoding="async">
-      </figure>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ Bahar und der Laden ═════════════════════════════════════════════ -->
-<section class="abschnitt bahn warm" aria-labelledby="bahar-titel">
-  <div class="mitte">
-    <div class="zweispalt" style="align-items:start">
-      <div>
-        <p class="braue">Die Meisterin</p>
-        <h2 class="titel zweistimmig" id="bahar-titel"><em>Wer hier</em> schneidet</h2>
-        <p class="lauf" style="margin-top:var(--a3)">
-          Ich heiße Fakhria Tokhi, im Laden nennen mich alle Bahar. Den
-          Meisterbrief habe ich von der Handwerkskammer für München und
-          Oberbayern; der Salon in der Perlacher Straße gehört mir.
-        </p>
-        <p class="lauf">
-          Bevor die Schere kommt, reden wir. Bei jeder Farbe sehe ich mir
-          vorher die Kopfhaut an — was danach passiert, hängt davon ab, was
-          das Haar verträgt, nicht davon, was gerade läuft. Steht das
-          Ergebnis fest, steht auch der Preis fest.
-        </p>
-        <p class="lauf">
-          Augenbrauen mache ich in Fadentechnik, ohne Wachs und ohne
-          Pinzette. Nebenan ist das Kosmetikstudio dazugekommen.
-        </p>
-        <p style="margin-top:var(--a4)">
-          <a class="knopf knopf-leer" href="salon.html">Den Salon ansehen</a>
-        </p>
-      </div>
-
-      <figure class="portrait" style="margin:0">
-        <img src="bilder/bahar-gross.webp" alt="Fakhria Tokhi, Inhaberin und Friseurmeisterin, in ihrem Salon" width="600" height="833" loading="lazy" decoding="async">
-        <figcaption>
-          <span class="name">Fakhria Tokhi</span>
-          <span class="rolle">Friseurmeisterin · Inhaberin</span>
-        </figcaption>
-      </figure>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ Kontakt ═════════════════════════════════════════════════════════ -->
-<section class="abschnitt bahn" aria-labelledby="kontakt-titel" id="kontakt">
-  <div class="mitte">
-    <div class="kopf">
-      <p class="braue">Hierher kommen</p>
-      <h2 class="titel" id="kontakt-titel">Perlacher Straße 2</h2>
-    </div>
-
-    <dl class="zeilenliste">
-      <div>
-        <dt>Öffnungszeiten</dt>
-        <dd>
-          <p class="oeffnungsstand" style="margin-bottom:.6rem"></p>
-          <ul class="zeiten">
-            <li data-tage="1"><span class="tag">Montag</span> <span class="zahl">10:00 – 16:00</span></li>
-            <li data-tage="2,3,4,5"><span class="tag">Dienstag bis Freitag</span> <span class="zahl">09:00 – 19:00</span></li>
-            <li data-tage="6"><span class="tag">Samstag</span> <span class="zahl">09:00 – 16:00</span></li>
-            <li data-tage="0" class="zu"><span class="tag">Sonntag</span> <span>geschlossen</span></li>
-          </ul>
-        </dd>
-      </div>
-      <div>
-        <dt>Anschrift</dt>
-        <dd>
-          <p>
-            BaHaar’s Styling Studio<br>
-            Perlacher Straße 2<br>
-            81539 München-Giesing
-          </p>
-          <p><a href="https://www.openstreetmap.org/?mlat=48.1093&amp;mlon=11.5875#map=17/48.1093/11.5875" rel="noopener">Auf der Karte ansehen</a></p>
-        </dd>
-      </div>
-      <div>
-        <dt>Erreichen</dt>
-        <dd>
-          <p>
-            <a href="tel:+49896923644" style="text-decoration:none">089 692 36 44</a><br>
-            <a href="mailto:info@bahaarsstylingstudio.de" style="text-decoration:none">info@bahaarsstylingstudio.de</a><br>
-            <a href="https://www.instagram.com/bahaarsstylingstudio" rel="noopener" style="text-decoration:none">@bahaarsstylingstudio</a>
-          </p>
-          <a class="knopf knopf-voll" href="termin.html">Termin buchen</a>
-        </dd>
-      </div>
-    </dl>
-  </div>
-</section>
-
-
-<!-- ═══ Arbeiten ════════════════════════════════════════════════════════ -->
-<section class="abschnitt" aria-labelledby="arbeiten-titel">
-  <div class="bahn mitte">
-    <div class="kopf">
-      <p class="braue">Werkschau</p>
-      <h2 class="titel" id="arbeiten-titel">Arbeiten aus dem Salon</h2>
-      <p class="lauf">
-        Aufnahmen aus dem Alltag in der Perlacher Straße, gemacht, während die
-        Kundin noch auf dem Stuhl saß. Nichts davon ist nachgestellt, und
-        nichts ist beschnitten — jedes Bild steht so, wie es aufgenommen wurde.
-      </p>
-    </div>
-  </div>
-
-  <div class="bahn mitte">
-    <div class="collage">
-      <button class="arbeit-kachel" type="button" data-text="Balayage über die ganze Länge: der Verlauf beginnt tief und läuft warm aus.">
-        <img src="bilder/arbeit-balayage.webp" alt="Langes Haar, Verlauf von dunklem Ansatz in helle warme Spitzen" width="1000" height="1333" loading="lazy" decoding="async">
-      </button>
-      <button class="arbeit-kachel" type="button" data-text="Foliensträhnen, in dünnen Schichten durch die Länge gezogen.">
-        <img src="bilder/arbeit-straehnen.webp" alt="Feine helle Strähnen in langem Haar" width="1000" height="1339" loading="lazy" decoding="async">
-      </button>
-      <button class="arbeit-kachel" type="button" data-text="Lange Stufen in warmem Karamell, Bewegung in den Spitzen.">
-        <img src="bilder/arbeit-lang.webp" alt="Lange Stufen in warmem Karamell" width="1000" height="1333" loading="lazy" decoding="async">
-      </button>
-      <button class="arbeit-kachel" type="button" data-text="Goldblonde Locken, mit dem Rundeisen in Form gelegt.">
-        <img src="bilder/arbeit-locken.webp" alt="Goldblonde gelegte Locken" width="1000" height="1333" loading="lazy" decoding="async">
-      </button>
-      <button class="arbeit-kachel" type="button" data-text="Glatte Länge mit sauber ausgearbeiteten Stufen.">
-        <img src="bilder/arbeit-glatt.webp" alt="Glatte lange Haare mit ausgearbeiteten Stufen" width="1000" height="1195" loading="lazy" decoding="async">
-      </button>
-      <button class="arbeit-kachel" type="button" data-text="Schulterlanges Haar, warmer Farbverlauf, Spitzen nach innen geföhnt.">
-        <img src="bilder/arbeit-ombre.webp" alt="Schulterlanges Haar mit warmem Farbverlauf" width="1000" height="1333" loading="lazy" decoding="async">
-      </button>
-      <button class="arbeit-kachel" type="button" data-text="Kurzer Bob in kühlem Aschblond, die Welle nach außen gelegt.">
-        <img src="bilder/arbeit-bob.webp" alt="Kurzer Bob in kühlem Aschblond mit gelegter Welle" width="1000" height="1333" loading="lazy" decoding="async">
-      </button>
-      <button class="arbeit-kachel" type="button" data-text="Helles Blond, kurz geschnitten und in weiche Wellen gelegt.">
-        <img src="bilder/arbeit-kurz-blond.webp" alt="Kurzes helles Blond in weichen Wellen" width="1000" height="1333" loading="lazy" decoding="async">
-      </button>
-      <button class="arbeit-kachel" type="button" data-text="Kurzes Silbergrau, in Form geföhnt — Griff und Fall bleiben weich.">
-        <img src="bilder/arbeit-kurz.webp" alt="Kurzes silbergraues Haar, in Form geföhnt" width="1000" height="1333" loading="lazy" decoding="async">
-      </button>
-      <button class="arbeit-kachel" type="button" data-text="Eng geflochten, Scheitel für Scheitel gezogen.">
-        <img src="bilder/arbeit-flecht.webp" alt="Eng anliegende Flechtfrisur mit gezogenen Zöpfen" width="1000" height="1000" loading="lazy" decoding="async">
-      </button>
-      <button class="arbeit-kachel" type="button" data-text="Hochgesteckt, mit gelegten Wellen an der Seite.">
-        <img src="bilder/arbeit-hochsteck.webp" alt="Hochsteckfrisur mit gelegten Wellen" width="1000" height="750" loading="lazy" decoding="async">
-      </button>
-      <button class="arbeit-kachel" type="button" data-text="Hochsteckfrisur mit eingearbeiteter Perlen- und Blütenranke.">
-        <img src="bilder/arbeit-perlen.webp" alt="Hochsteckfrisur mit Perlen- und Blütenranke" width="768" height="1024" loading="lazy" decoding="async">
-      </button>
-      <button class="arbeit-kachel" type="button" data-text="Brautfrisur: gelegte Locken, durchzogen von einer Perlenranke in Roségold.">
-        <img src="bilder/arbeit-braut-perlen.webp" alt="Brautfrisur mit gelegten Locken und Perlenranke in Roségold" width="899" height="1750" loading="lazy" decoding="async">
-      </button>
-      <button class="arbeit-kachel" type="button" data-text="Hochgesteckt, mit Diadem und eingearbeitetem Schleier.">
-        <img src="bilder/arbeit-braut-schleier.webp" alt="Braut mit hochgestecktem Haar, Diadem und Schleier" width="550" height="977" loading="lazy" decoding="async">
-      </button>
-      <button class="arbeit-kachel" type="button" data-text="Kinderschnitt, kurz und sauber ausrasiert.">
-        <img src="bilder/arbeit-kind.webp" alt="Kinderschnitt, kurz und sauber ausrasiert" width="1000" height="1333" loading="lazy" decoding="async">
-      </button>
-    </div>
-  </div>
-</section>
-
-
 </main>
 
-<!-- ═══ Lupe ═══════════════════════════════════════════════════════════ -->
-<dialog class="lupe" aria-label="Arbeit vergrößert">
-  <button class="lupe-zu" type="button" aria-label="Schließen">
-    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"/></svg>
-  </button>
-  <button class="lupe-blaettern zurueck" type="button" aria-label="Vorherige Arbeit">
-    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4L6 10l6 6"/></svg>
-  </button>
-  <button class="lupe-blaettern vor" type="button" aria-label="Nächste Arbeit">
-    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4l6 6-6 6"/></svg>
-  </button>
-  <figure>
-    <img alt="Langes Haar, Verlauf von dunklem Ansatz in helle warme Spitzen" loading="lazy" decoding="async" src="bilder/arbeit-balayage.webp" width="900" height="1200">
-    <figcaption>Langes Haar mit weichem Verlauf vom dunkleren Ansatz in helle, warme Spitzen.</figcaption>
-  </figure>
-</dialog>
-
-<footer class="fusszeile">
-  <div class="bahn mitte">
-    <div class="fusszeile-raster">
-      <div>
-        <p class="marke" style="display:block;margin-bottom:var(--a2)">BaHaar’s<span class="zusatz">styling studio</span></p>
-        <p style="color:var(--tinte-leise);max-width:24rem">
-          Friseursalon in München-Giesing. Inhaberin Fakhria Tokhi,
-          Friseurmeisterin.
-        </p>
-      </div>
-      <div>
-        <h3>Seiten</h3>
-        <ul>
-          <li><a href="leistungen.html">Leistungen &amp; Preise</a></li>
-          <li><a href="brautstyling.html">Brautstyling</a></li>
-          <li><a href="salon.html">Der Salon</a></li>
-          <li><a href="termin.html">Termin</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3>Öffnungszeiten</h3>
-        <ul class="zeiten">
-          <li data-tage="1"><span class="tag">Mo</span> <span class="zahl">10–16</span></li>
-          <li data-tage="2,3,4,5"><span class="tag">Di–Fr</span> <span class="zahl">09–19</span></li>
-          <li data-tage="6"><span class="tag">Sa</span> <span class="zahl">09–16</span></li>
-          <li data-tage="0" class="zu"><span class="tag">So</span> <span>zu</span></li>
-        </ul>
-      </div>
-      <div>
-        <h3>Kontakt</h3>
-        <ul>
-          <li><a href="tel:+49896923644">089 692 36 44</a></li>
-          <li><a href="mailto:info@bahaarsstylingstudio.de">info@bahaarsstylingstudio.de</a></li>
-          <li>Perlacher Straße 2<br>81539 München</li>
-          <li><a href="https://www.instagram.com/bahaarsstylingstudio" rel="noopener">Instagram</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="stimmungswahl">
-      <span class="stimmung-titel" id="stimmung-titel">Stimmung</span>
-      <div class="stimmung-reihe" role="group" aria-labelledby="stimmung-titel">
-        <button type="button" class="stimmung" data-stimmung="nacht" aria-pressed="true">
-          <span class="stimmung-probe probe-nacht" aria-hidden="true"></span>Nacht
-        </button>
-        <button type="button" class="stimmung" data-stimmung="tag" aria-pressed="false">
-          <span class="stimmung-probe probe-tag" aria-hidden="true"></span>Tag
-        </button>
-        <button type="button" class="stimmung" data-stimmung="asche" aria-pressed="false">
-          <span class="stimmung-probe probe-asche" aria-hidden="true"></span>Asche
-        </button>
-        <button type="button" class="stimmung" data-stimmung="rose" aria-pressed="false">
-          <span class="stimmung-probe probe-rose" aria-hidden="true"></span>Ros&eacute;
-        </button>
-      </div>
-    </div>
-    <div class="fusszeile-schluss">
-      <span>© <span class="jahr">2026</span> BaHaar’s Styling Studio</span>
-      <a href="impressum.html">Impressum</a>
-      <a href="datenschutz.html">Datenschutz</a>
-      <span class="rechts">Diese Seite lädt nichts von fremden Servern.</span>
-    </div>
-  </div>
-</footer>
-
-<!-- GSAP liegt im Projekt, nicht auf einem fremden Server (fremd/HERKUNFT.md).
-     defer hält die Reihenfolge ein: erst der Kern, dann ScrollTrigger, dann
-     unser Code. Fehlt eines davon, läuft die Seite ohne Choreografie — und
-     zwar vollständig sichtbar, nicht halb eingeblendet. -->
-<script src="fremd/gsap.min.js" defer></script>
-<script src="fremd/ScrollTrigger.min.js" defer></script>
-<script src="seite.js" defer></script>
+<script src="neu.js" defer></script>
 </body>
 </html>
