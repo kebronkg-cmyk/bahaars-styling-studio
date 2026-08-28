@@ -1,87 +1,31 @@
 /* ═══════════════════════════════════════════════════════════════════════
    BaHaar's Styling Studio — Auftakt
 
-   Zwei Dinge passieren hier: Der Hahn dreht den Film, und der Öffnungs-
-   stand rechnet sich aus der Uhr. Sonst nichts.
+   Der Hebel steuert zweierlei: wie dicht das gezeichnete Wasser läuft
+   und wie weit der Film steht. Sonst passiert hier nur noch die Uhr.
    ═══════════════════════════════════════════════════════════════════════ */
 
 (() => {
   'use strict';
 
-  /* ── Der Wasserhahn ──────────────────────────────────────────────────
-     Das Ventil ist ein Drehrad. Gerechnet wird der Winkelunterschied
-     zwischen zwei Zeigerpunkten und aufaddiert — nur so bleibt es gleich,
-     ob man das Rad am Reifen anfasst oder weit außerhalb.
-
-     Der Film folgt dem Rad nicht hart, sondern zieht nach. Wasser hat
-     Trägheit; ein Bild, das exakt am Finger klebt, fühlt sich an wie ein
-     Schieberegler und nicht wie eine Armatur.                          */
-
-  const BEREICH = 78;       // Grad, um die sich der Hebel hebt
-  const NACHLAUF = 0.10;    // wie träge der Film dem Rad folgt
-  const SCHRITT = 0.08;     // eine Pfeiltaste
-
-  /* Die Wanderung des Strahls, am Film gemessen und geglättet: Versatz
-     der Strahlmitte in Prozent der Bildbreite, 25 Stützstellen über die
-     ganze Länge. Der Film wird gegenläufig geschoben, damit der Strahl
-     unter der Düse stehen bleibt. */
-  const STRAHL = [-4.63,-5.29,-5.61,-6.63,-6.61,-4.52,-1.4,0.41,-0.42,0.18,
-                  1.48,1.98,3.79,4.64,6.01,7.51,6.52,7.89,5.63,6.85,9.31,9.41,
-                  8.09,6.25,5.46];
-
-  const QUELLE = 720 / 1280;   // Seitenverhältnis der Aufnahme
-  const F0 = 0.4597;           // Mitte der Strahlwanderung, Anteil der Bildbreite
+  const BEREICH  = 76;     // Grad, um die sich der Hebel hebt
+  const WEG      = 240;    // Pixel Zugweg von zu bis ganz auf
+  const NACHLAUF = 0.13;   // wie träge der Film der Hand folgt
+  const SCHRITT  = 0.07;   // eine Pfeiltaste
 
   const film   = document.getElementById('film');
   const bild   = document.getElementById('bild');
   const hebel  = document.getElementById('hebel');
+  const strahl = document.getElementById('strahl');
   const wort   = document.getElementById('hahn-wort');
   if (!film || !hebel) return;
 
-  let soll = 0;          // wohin das Rad zeigt, 0..1
-  let ist  = 0;          // wo der Film gerade steht, läuft dem Soll nach
+  let soll = 0;            // wohin der Hebel zeigt, 0..1
+  let ist  = 0;            // wo der Film steht, läuft dem Soll nach
   let angefasst = false;
-  let nassBild = null;   // Rückfallebene, falls der Film ausbleibt
+  let nassBild = null;
 
   const klemme = (v, a, b) => v < a ? a : v > b ? b : v;
-
-  /* Zwischen den Stützstellen wird linear geblendet. */
-  function versatz(v) {
-    const x = klemme(v, 0, 1) * (STRAHL.length - 1);
-    const i = Math.floor(x), r = x - i;
-    const a = STRAHL[i], b = STRAHL[Math.min(i + 1, STRAHL.length - 1)];
-    return a + (b - a) * r;
-  }
-
-  /* ── Wo sitzt die Düse? ──────────────────────────────────────────────
-     object-fit: cover skaliert über die Breite, solange der Kasten
-     breiter ist als die Aufnahme, sonst über die Höhe — und dann wird
-     zusätzlich waagerecht beschnitten. Beides verschiebt den Strahl
-     anders. Deshalb wird die Stelle gerechnet statt geschrieben, und bei
-     jeder Größenänderung neu.                                          */
-
-  let breite = 1, inhalt = 1, zoomWert = 1.26;  // Kastenbreite, Filmbreite darin, Zoom
-
-  function geometrie() {
-    const k = bild.getBoundingClientRect();
-    if (!k.width || !k.height) return;
-    breite = k.width;
-    inhalt = Math.max(k.width, k.height * QUELLE);   // cover
-    const links = -(inhalt - breite) / 2;            // waagerecht mittig
-    const zoom = parseFloat(getComputedStyle(document.documentElement)
-                            .getPropertyValue('--zoom')) || 1;
-    // Bildanteil F0 landet ohne Schub hier:
-    const x = breite / 2 + (links + F0 * inhalt - breite / 2) * zoom;
-    /* In Pixeln, nicht in Prozent: Die Armatur hängt an der Bühne, der
-       Film aber kann am breiten Schirm schmaler sein als sie. Prozente
-       bezögen sich dann auf den falschen Kasten. */
-    const versetzt = k.left - bild.offsetParent.getBoundingClientRect().left;
-    document.documentElement.style.setProperty('--auslauf-px', (versetzt + x).toFixed(1) + 'px');
-    zoomWert = zoom;
-  }
-
-  geometrie();
-  addEventListener('resize', geometrie);
 
   function wortFuer(v) {
     if (v < 0.02) return 'Hebel anheben';
@@ -94,8 +38,8 @@
     return Math.round(v * 100) + ' Prozent offen';
   }
 
-  function radZeigen() {
-    hebel.style.setProperty('--dreh', (soll * BEREICH) + 'deg');
+  function zeigen() {
+    hebel.style.setProperty('--dreh', (soll * BEREICH).toFixed(2) + 'deg');
     hebel.setAttribute('aria-valuenow', Math.round(soll * 100));
     hebel.setAttribute('aria-valuetext', textFuer(soll));
     if (wort) {
@@ -106,65 +50,65 @@
 
   function setzeSoll(v, vonHand) {
     soll = klemme(v, 0, 1);
-    radZeigen();
+    zeigen();
     if (vonHand) ersteBeruehrung();
   }
 
-  /* ── Der Film folgt ──────────────────────────────────────────────────
+  /* ── Was der Film und das Wasser daraus machen ───────────────────────
+     Der Film folgt nicht hart, sondern zieht nach: Wasser hat Trägheit,
+     und ein Bild, das am Finger klebt, fühlt sich an wie ein
+     Schieberegler und nicht wie eine Armatur.
+
      Ein Sprung kostet so viel, wie seit dem letzten Schlüsselbild liegt;
      die Datei hat deshalb alle vier Bilder eines. Gesprungen wird immer
-     nur einmal gleichzeitig: Wer schneller dreht, als der Browser
-     springen kann, überschreibt das Ziel, statt eine Schlange anzulegen.
-     Sonst läuft der Film der Hand hinterher.                           */
+     nur einmal gleichzeitig — wer schneller zieht, als der Browser
+     springen kann, überschreibt das Ziel, statt eine Schlange
+     anzulegen.                                                        */
 
   let springt = false;
   film.addEventListener('seeked', () => { springt = false; });
 
   function schleife() {
+    const vorher = ist;
     ist += (soll - ist) * NACHLAUF;
     if (Math.abs(soll - ist) < 0.0004) ist = soll;
 
-    /* Der Ausgleich läuft mit dem Film, nicht mit dem Rad — sonst würde
-       das Bild vorauseilen. Der Zoom multipliziert die Verschiebung mit,
-       also wird sie vorher herausgerechnet. */
-    /* Der Schub wird in Prozent der Kastenbreite gesetzt, die Wanderung
-       ist aber in Prozent der Filmbreite gemessen. Bei waagerechtem
-       Beschnitt sind das nicht dieselben Prozente. */
-    bild.style.setProperty('--schub',
-      (-versatz(ist) * zoomWert * inhalt / breite).toFixed(3) + '%');
+    if (ist !== vorher) {
+      strahl.style.setProperty('--fluss', ist.toFixed(3));
+      strahl.classList.toggle('laeuft', ist > 0.015);
+      if (nassBild) nassBild.style.opacity = ist;
+    }
 
     if (film.duration && !springt) {
+      /* Nie auf die Dauer selbst springen: Ein Sprung dorthin meldet je
+         nach Browser kein `seeked`, und dann steht der Hahn still. */
       const ziel = klemme(ist * (film.duration - 1 / 24), 0, film.duration);
       if (Math.abs(film.currentTime - ziel) > 0.012) {
         springt = true;
         film.currentTime = ziel;
       }
     }
-    if (nassBild) nassBild.style.opacity = ist;
     requestAnimationFrame(schleife);
   }
   requestAnimationFrame(schleife);
 
-  /* ── Drehen mit Zeiger ───────────────────────────────────────────── */
+  /* ── Ziehen ──────────────────────────────────────────────────────────
+     Gerechnet wird der zurückgelegte Weg entlang des Bogens, nicht der
+     Winkel. Der Hebel ist am Telefon nur siebzig Pixel lang; über den
+     Winkel gerechnet drehte ihn schon ein kurzer Wisch ganz auf. Über
+     den Weg braucht es immer dieselben dreihundert Pixel — gleich, ob
+     man ihn an der Spitze anfasst oder weit daneben.                  */
 
-  let zeiger = null, letzter = 0;
+  let zeiger = null, letztX = 0, letztY = 0;
 
-  /* Gedreht wird um die Nabe, nicht um die Mitte des Kastens: Der Hebel
-     sitzt in einer Ecke seines Bildes, und die Naht liegt bei 67,2 % /
-     20,74 % — gemessen an der Aufnahme. */
-  function winkel(ev) {
+  function nabe() {
     const r = hebel.getBoundingClientRect();
-    const dx = ev.clientX - (r.left + r.width * 0.672);
-    const dy = ev.clientY - (r.top + r.height * 0.2074);
-    if (Math.hypot(dx, dy) < 14) return null;   // zu nah am Drehpunkt
-    return Math.atan2(dy, dx) * 180 / Math.PI;
+    return [r.left + r.width * 0.672, r.top + r.height * 0.2074];
   }
 
   hebel.addEventListener('pointerdown', (ev) => {
-    const w = winkel(ev);
-    if (w === null) return;
     zeiger = ev.pointerId;
-    letzter = w;
+    letztX = ev.clientX; letztY = ev.clientY;
     hebel.setPointerCapture(ev.pointerId);
     ersteBeruehrung();
     ev.preventDefault();
@@ -172,13 +116,14 @@
 
   hebel.addEventListener('pointermove', (ev) => {
     if (ev.pointerId !== zeiger) return;
-    const w = winkel(ev);
-    if (w === null) return;
-    let d = w - letzter;
-    while (d > 180) d -= 360;                  // über die Naht hinweg
-    while (d < -180) d += 360;
-    letzter = w;
-    setzeSoll(soll + d / BEREICH, true);
+    const [cx, cy] = nabe();
+    const rx = ev.clientX - cx, ry = ev.clientY - cy;
+    const r = Math.hypot(rx, ry);
+    if (r < 12) { letztX = ev.clientX; letztY = ev.clientY; return; }
+    /* Der Anteil der Bewegung quer zum Arm — das ist der Bogenweg. */
+    const quer = ((ev.clientX - letztX) * -ry + (ev.clientY - letztY) * rx) / r;
+    letztX = ev.clientX; letztY = ev.clientY;
+    setzeSoll(soll + quer / WEG, true);
   });
 
   const loslassen = (ev) => { if (ev.pointerId === zeiger) zeiger = null; };
@@ -194,17 +139,17 @@
     else if (k === 'PageDown') v = soll - SCHRITT * 3;
     else if (k === 'Home')     v = 0;
     else if (k === 'End')      v = 1;
-    else if (k === ' ' || k === 'Enter') v = soll > 0.02 ? 0 : 0.8;
+    else if (k === ' ' || k === 'Enter') v = soll > 0.02 ? 0 : 0.75;
     if (v === null) return;
     ev.preventDefault();
     setzeSoll(v, true);
   });
 
-  /* ── Der Film wird geladen, sobald die Bühne zu sehen ist ────────────
-     Vorher steht das erste Bild da — und das erste Bild ist genau das,
-     was ein zugedrehter Hahn zeigt: trockenes Haar, kein Wasser. Wer mit
-     gedrosselter Datenmenge unterwegs ist, bekommt den Film erst beim
-     Anfassen.                                                          */
+  /* ── Laden ───────────────────────────────────────────────────────────
+     Bis der Film da ist, steht sein erstes Bild als Standbild — und das
+     erste Bild ist genau das, was ein zugedrehter Hahn zeigt: trockenes
+     Haar. Wer mit gedrosselter Datenmenge unterwegs ist, lädt ihn erst
+     beim Anfassen.                                                    */
 
   let geladen = false;
   const sparsam = navigator.connection && navigator.connection.saveData;
@@ -213,7 +158,7 @@
     if (geladen) return;
     geladen = true;
     const schmal = window.matchMedia('(max-width: 43rem)').matches;
-    film.src = schmal ? 'bilder/wasser-klein.mp4' : 'bilder/wasser.mp4';
+    film.src = schmal ? 'bilder/kopf-klein.mp4' : 'bilder/kopf.mp4';
     film.load();
     /* Auf iOS gibt ein pausiertes Video erst nach einer echten Berührung
        Bilder heraus. Einmal anspielen und sofort anhalten genügt. */
@@ -228,15 +173,14 @@
   });
   film.addEventListener('error', rueckfall);
 
-  /* Bleibt der Film aus, übernimmt ein zweites Standbild: Das Ventil
-     blendet dann das nasse Haar über das trockene. Die Bedienung bleibt
-     dieselbe. */
+  /* Bleibt der Film aus, übernimmt ein zweites Standbild: Der Hebel
+     blendet dann das nasse Haar über das trockene. */
   function rueckfall() {
     if (nassBild) return;
     nassBild = new Image();
-    nassBild.src = 'bilder/wasser-nass.webp';
+    nassBild.src = 'bilder/kopf-nass.webp';
     nassBild.alt = '';
-    nassBild.width = 720; nassBild.height = 1280;
+    nassBild.width = 720; nassBild.height = 880;
     nassBild.className = 'film-halt';
     nassBild.style.opacity = ist;
     nassBild.style.transition = 'none';
@@ -248,87 +192,65 @@
     angefasst = true;
     hebel.classList.remove('wink');
     ladeFilm();
-    /* Kommt binnen sechs Sekunden kein Bild, bauen wir die Rückfallebene
-       auf, statt die Besucherin an einem toten Rad drehen zu lassen. */
     setTimeout(() => { if (!bild.classList.contains('laeuft')) rueckfall(); }, 6000);
   }
 
-  /* Einmal vormachen, wofür das Rad da ist: aufdrehen, kurz laufen
-     lassen, zudrehen. Bricht sofort ab, sobald jemand selbst anfasst. */
+  /* Einmal vormachen, wofür der Hebel da ist. Bricht ab, sobald jemand
+     selbst anfasst, und bleibt bei prefers-reduced-motion ganz aus. */
   function vorfuehren() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    setTimeout(() => { if (!angefasst) { soll = 0.62; radZeigen(); } }, 900);
-    setTimeout(() => { if (!angefasst) { soll = 0;    radZeigen(); } }, 4200);
+    setTimeout(() => { if (!angefasst) { soll = 0.55; zeigen(); } }, 1100);
+    setTimeout(() => { if (!angefasst) { soll = 0;    zeigen(); } }, 4600);
   }
 
   hebel.classList.add('wink');
-  radZeigen();
+  zeigen();
 
-  /* Geladen wird, sobald die Bühne im Bild ist. */
   if ('IntersectionObserver' in window && !sparsam) {
-    const beobachter = new IntersectionObserver((eintraege) => {
-      for (const e of eintraege) {
-        if (e.isIntersecting) { beobachter.disconnect(); ladeFilm(); }
-      }
+    const beobachter = new IntersectionObserver((e) => {
+      for (const x of e) if (x.isIntersecting) { beobachter.disconnect(); ladeFilm(); }
     }, { rootMargin: '200px' });
     beobachter.observe(bild);
   }
 
   /* ── Öffnungsstand ───────────────────────────────────────────────────
-     Gerechnet wird immer nach der Uhr des Ladens, nicht nach der des
-     Geräts: Wer aus einer anderen Zeitzone schaut, bekommt sonst eine
-     falsche Auskunft.                                                  */
+     Gerechnet wird nach der Uhr des Ladens, nicht nach der des Geräts. */
 
-  const ZEITEN = {          // Wochentag 0 = Sonntag
-    0: null,
-    1: [10, 16],
-    2: [9, 19], 3: [9, 19], 4: [9, 19], 5: [9, 19],
-    6: [9, 16],
-  };
+  const ZEITEN = { 0: null, 1: [10, 16], 2: [9, 19], 3: [9, 19], 4: [9, 19], 5: [9, 19], 6: [9, 16] };
   const TAGE = ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'];
 
   function ladenzeit() {
     const f = new Intl.DateTimeFormat('de-DE', {
       timeZone: 'Europe/Berlin', weekday: 'short', hour: '2-digit', minute: '2-digit', hour12: false,
     });
-    const teile = {};
-    for (const t of f.formatToParts(new Date())) teile[t.type] = t.value;
+    const t = {};
+    for (const teil of f.formatToParts(new Date())) t[teil.type] = teil.value;
     const kurz = { 'So': 0, 'Mo': 1, 'Di': 2, 'Mi': 3, 'Do': 4, 'Fr': 5, 'Sa': 6 };
-    const tag = kurz[teile.weekday.replace('.', '')];
-    return { tag, stunden: Number(teile.hour) + Number(teile.minute) / 60 };
+    return { tag: kurz[t.weekday.replace('.', '')],
+             stunden: Number(t.hour) + Number(t.minute) / 60 };
   }
-
-  function uhr(h) {
-    return String(h).padStart(2, '0') + ' Uhr';
-  }
+  const uhr = (h) => String(h).padStart(2, '0') + ' Uhr';
 
   function standSetzen() {
     const el = document.getElementById('stand');
     if (!el) return;
     const { tag, stunden } = ladenzeit();
     const heute = ZEITEN[tag];
-
     if (heute && stunden >= heute[0] && stunden < heute[1]) {
       el.textContent = 'Jetzt geöffnet · bis ' + uhr(heute[1]);
       el.classList.add('offen');
       return;
     }
     el.classList.remove('offen');
-
-    if (heute && stunden < heute[0]) {
-      el.textContent = 'Heute ab ' + uhr(heute[0]);
-      return;
-    }
+    if (heute && stunden < heute[0]) { el.textContent = 'Heute ab ' + uhr(heute[0]); return; }
     for (let i = 1; i <= 7; i++) {
       const t = (tag + i) % 7;
       if (ZEITEN[t]) {
-        const wann = i === 1 ? 'Morgen' : TAGE[t];
-        el.textContent = 'Geschlossen · ' + wann + ' ab ' + uhr(ZEITEN[t][0]);
+        el.textContent = 'Geschlossen · ' + (i === 1 ? 'Morgen' : TAGE[t]) + ' ab ' + uhr(ZEITEN[t][0]);
         return;
       }
     }
   }
-
   standSetzen();
   setInterval(standSetzen, 60000);
 })();

@@ -1,48 +1,42 @@
 @charset "utf-8";
 
 /* ═══════════════════════════════════════════════════════════════════════
-   BaHaar's Styling Studio — zweite Fassung, von vorn
+   BaHaar's Styling Studio — Auftakt
 
-   Die alte Seite ist verworfen. Was bleibt, sind die Inhalte und die
-   Farben: Beide sind am Laden erhoben und nicht am Reißbrett.
+   ── Was hier passiert ─────────────────────────────────────────────────
 
-   ── Der Auftakt dieser Fassung ────────────────────────────────────────
+   Ein Wasserhahn aus Kupfer hängt über dem Kopf. Wer den Hebel anhebt,
+   lässt Wasser laufen; das Haar darunter wird nass, genau so weit, wie
+   der Hebel steht. Zurücklegen dreht es zurück.
 
-   Ein Film, den die Besucherin selbst bedient. Über der Tafel hängt eine
-   Armatur aus Messing; wer das Ventil aufdreht, lässt Wasser aus der Düse
-   laufen, und das Haar darunter wird nass. Kein Autoplay, keine Schleife:
-   zehn Sekunden, die unter der Hand der Besucherin liegen.
+   ── Der Strahl ist gezeichnet, nicht gefilmt ──────────────────────────
 
-   Damit der Strahl an der Düse hängen bleibt, wird der Film waagerecht
-   gegenläufig geschoben — in der Aufnahme wandert er um 15 % der Breite.
-   Die gemessene Tabelle steht in neu.js, der Zoom liefert den Spielraum,
-   --auslauf sagt, wo die Düse sitzt. Die drei gehören zusammen.
+   In der Aufnahme schwankt der Wasserstrahl um 20 % der Bildbreite
+   (gemessen, Bild für Bild). Ihn unter einem festen Auslauf zu halten
+   hiesse, den ganzen Film waagerecht mitzuschieben — und diese Bewegung
+   sieht man. Deshalb ist der Strahl aus dem Film herausgeschnitten: Der
+   Film beginnt erst am Scheitel. Das Wasser dazwischen ist gezeichnet
+   und hängt fest an der Düse. Nichts muss sich mehr bewegen.
 
    ── Die Farbe ─────────────────────────────────────────────────────────
 
-   Der Grund ist Meerblau, und damit gehört der Film zur Seite, statt
-   gegen sie zu stehen. Sein Hintergrund misst Farbton 199–209 bei sehr
-   wenig Buntheit; die Seite geht davon aus tiefer und blauer, sodass der
-   Film als helleres Wasser darin liegt. An den Rändern läuft er in den
-   Grund aus, dort ist der Übergang jetzt fast nahtlos.
+   Der Himmel ist aus der Vorlage gemessen: oklch(35–41 % .072 237). Der
+   Film ist auf denselben Ton korrigiert — Schatten und Mitten nach Blau,
+   Lichter warm gelassen, damit das Haar sein Karamell behält. Deshalb
+   gibt es keine Kante zwischen Himmel und Film; es ist ein Bild.
 
-   Der Film bleibt ungegradet. Jeder Versuch, ihn zu verstimmen, macht das
-   Haar fahl, und bei einem Friseur ist das Haar das Produkt.
-
-   Messing ist die einzige warme Farbe. Sie ist am Karamell im Haar der
-   Inhaberin gemessen und trägt genau das, was angefasst werden soll: die
-   Armatur, die Nummer, den Termin.
-
+   Kupfer ist die einzige warme Farbe. Sie trägt, was angefasst wird.
    ═══════════════════════════════════════════════════════════════════════ */
-
-/* ── Schrift. Beide liegen im Projekt, nicht bei Google: Ein deutscher
-      Auftritt, der Schriften von fremden Servern nachlädt, ist abmahnbar
-      (LG München I, 3 O 17493/20).                                     */
 
 @font-face {
   font-family: 'Instrument Serif';
   src: url('schrift/InstrumentSerif-Regular.woff2') format('woff2');
   font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Instrument Serif';
+  src: url('schrift/InstrumentSerif-Italic.woff2') format('woff2');
+  font-weight: 400; font-style: italic; font-display: swap;
 }
 @font-face {
   font-family: 'Inter';
@@ -53,107 +47,73 @@
 :root {
   color-scheme: dark;
 
-  /* ── Farben ─────────────────────────────────────────────────────────
-     Der Grund ist Meerblau. Der Farbton kommt aus dem Film: Dessen Wand
-     misst 199–209 bei sehr wenig Buntheit (Chroma .015–.023), also ein
-     gedämpftes Petrol. Die Seite geht davon aus tiefer und deutlich
-     blauer — so liegt der Film als helleres Wasser im Meer, statt
-     dagegen zu stehen.
+  /* ── Farben, an der Vorlage gemessen ─────────────────────────────── */
+  --himmel-hoch: oklch(25% .070 250);
+  --himmel:      oklch(34% .072 242);
+  --himmel-tief: oklch(37.5% .056 243);   /* der Grund des Films, gemessen */
 
-     Messing bleibt. Es ist am Karamell im Haar der Inhaberin gemessen
-     und ist die einzige warme Farbe auf der Seite: Sie trägt die
-     Armatur, die Nummer und den Termin — also genau das, was angefasst
-     werden soll.                                                      */
+  --tinte:       oklch(97% .008 230);
+  --tinte-leise: oklch(84% .014 232);
+  --tinte-still: oklch(72% .020 234);
 
-  --grund:      oklch(17% .042 228);
-  --grund-tief: oklch(12% .036 230);
-  --grund-hoch: oklch(22% .046 226);
+  --kupfer:       oklch(72% .105 52);
+  --kupfer-hell:  oklch(84% .080 60);
+  --kupfer-glanz: oklch(94% .045 70);
+  --kupfer-tief:  oklch(52% .095 45);
 
-  --grund-00: oklch(17% .042 228 / 0);
-  --grund-40: oklch(17% .042 228 / .40);
-  --grund-72: oklch(17% .042 228 / .72);
-  --grund-92: oklch(17% .042 228 / .92);
-
-  --tinte:       oklch(95% .010 220);
-  --tinte-leise: oklch(81% .015 220);
-  --tinte-still: oklch(68% .019 222);
-
-  --messing:       oklch(78% .085 70);
-  --messing-hell:  oklch(88% .062 76);
-  --messing-glanz: oklch(96% .038 84);
-  --messing-tief:  oklch(58% .078 64);
-  --auf-messing:   oklch(16% .038 228);
-
-  --linie:      oklch(80% .020 220 / .19);
-  --linie-fein: oklch(80% .020 220 / .10);
+  --linie:      oklch(88% .020 232 / .30);
+  --linie-fein: oklch(88% .020 232 / .16);
 
   /* ── Maße ────────────────────────────────────────────────────────── */
-  --t-riesen: 2.6rem;
-  --t-lauf:   1.0625rem;
+  --t-riesen: 2.35rem;
+  --t-lauf:   1rem;
   --t-klein:  .9375rem;
-  --t-marke:  .76rem;
+  --t-marke:  .74rem;
 
-  --a1: .5rem;  --a2: 1rem;  --a3: 1.75rem;
-  --a4: 3rem;   --a5: 5rem;
+  --a1: .5rem;  --a2: 1rem;  --a3: 1.75rem;  --a4: 3rem;
 
   --rand: 1.25rem;
-  --spalte: 76rem;
 
-  /* ── Bewegung. Nur ease-out, kein Federn. ────────────────────────── */
+  --leiste:   54px;
+  --film-h:   36svh;        /* wie hoch der Film unten steht           */
+  --hahn-b:   150px;        /* Breite der Hahn-Aufnahme                */
+  --hahn-h:   calc(var(--hahn-b) * 540 / 561);
+  --muendung: 452px;        /* wo die Düse endet                       */
+  --scheitel: 49%;          /* Lage des Scheitels in der Filmbreite    */
+
   --kurve: cubic-bezier(.22, .61, .36, 1);
-  --t1: .25s; --t2: .45s;
+  --t1: .25s; --t2: .5s;
 
   --kante: 2px;
   --kante-voll: 999px;
-
-  /* Das Format der Filmtafel. Die Aufnahme ist 9:16; die Tafel schneidet
-     unten ab, wo ohnehin nur noch Schulter steht. */
-  --leiste: 58px;         /* Höhe der Kopfleiste                        */
-  --hahn-b: 152px;        /* Breite der Hahn-Aufnahme auf dem Schirm     */
-  --muendung: 182px;      /* wo die Düse endet und das Wasser austritt   */
-
-  /* Lage in der Aufnahme, gemessen: Düse bei 14,08 %/98,15 %, der
-     Drehpunkt des Hebels bei 67,20 %/20,74 % von 561 x 540. */
-  --hahn-h: calc(var(--hahn-b) * 540 / 561);
-  /* Der Strahl wandert in der Aufnahme um 15 % der Bildbreite. Der Film
-     wird gegenläufig geschoben (--schub in neu.js), damit er unter der
-     Düse stehen bleibt; der Zoom liefert den seitlichen Spielraum.
-
-     --auslauf ist nur der Startwert, bis neu.js nachgemessen hat: Wohin
-     der Strahl auf dem Schirm fällt, hängt davon ab, ob cover waagerecht
-     oder senkrecht beschneidet, und das ändert sich mit dem Fenster.
-     Am Zoom darf gedreht werden, die Düse zieht dann von selbst nach. */
-  /* Der Zoom liefert den seitlichen Spielraum für den Ausgleich der
-     Strahlwanderung — mehr braucht es nicht. Am Telefon beschneidet
-     cover ohnehin seitlich, dort genügen 6 %; jedes Prozent mehr würde
-     oben Fallhöhe wegschneiden, und der Fall des Wassers ist die halbe
-     Geschichte. Am breiten Schirm liegt der Beschnitt senkrecht, dort
-     sind 26 % nötig. */
-  --zoom: 1.06;
-  --auslauf: 45%;
-  --schnitt: 4%;          /* senkrechter Bildausschnitt                  */
 }
 
 @media (min-width: 48rem) {
-  :root { --t-riesen: 4.1rem; --rand: 2rem; --leiste: 66px; --hahn-b: 252px; --muendung: 300px; --zoom: 1.26; }
+  :root {
+    --t-riesen: 3.1rem; --rand: 2rem; --leiste: 62px;
+    --hahn-b: 170px; --muendung: 476px; --film-h: 38svh;
+  }
 }
 @media (min-width: 64rem) {
-  :root { --t-riesen: 4.7rem; --rand: 2.75rem; }
+  :root {
+    --t-riesen: 3.7rem; --rand: 2.75rem;
+    --hahn-b: 168px; --muendung: 470px; --film-h: 40svh;
+  }
 }
 
 /* ── Grundlagen ───────────────────────────────────────────────────────── */
 
 *, *::before, *::after { box-sizing: border-box; }
-[hidden] { display: none !important; }   /* verliert sonst gegen Klassen */
+[hidden] { display: none !important; }
 
 html {
-  -webkit-text-size-adjust: 100%;        /* Android-WebViews blasen Text auf */
+  -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
 
 body {
   margin: 0;
-  background: var(--grund);
+  background: var(--himmel-tief);
   color: var(--tinte);
   font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
   font-size: var(--t-lauf);
@@ -166,7 +126,7 @@ img, svg, video { display: block; max-width: 100%; }
 a { color: inherit; }
 
 :focus-visible {
-  outline: 2px solid var(--messing);
+  outline: 2px solid var(--kupfer-hell);
   outline-offset: 3px;
   border-radius: var(--kante);
 }
@@ -174,99 +134,37 @@ a { color: inherit; }
 .sprung {
   position: absolute; left: var(--rand); top: -4rem; z-index: 30;
   padding: .6rem 1rem; border-radius: var(--kante);
-  background: var(--messing); color: var(--auf-messing);
+  background: var(--kupfer); color: oklch(18% .045 244);
   font-size: var(--t-klein); font-weight: 600; text-decoration: none;
   transition: top var(--t1) var(--kurve);
 }
 .sprung:focus-visible { top: var(--rand); }
 
-/* ── Die Bühne ────────────────────────────────────────────────────────
-   Der Film trägt den ganzen ersten Bildschirm, von Rand zu Rand. Kein
-   Rahmen, keine Kachel: Das Bild ist der Auftakt.                     */
+/* ── Die Bühne ────────────────────────────────────────────────────────── */
 
 .auftakt {
   position: relative;
   min-height: 100svh;
   overflow: hidden;
-  isolation: isolate;
 }
 
-/* ── Der Himmel ───────────────────────────────────────────────────────
-   Der Grund der Bühne wird gebaut, nicht aus dem Film übernommen: eine
-   Tiefe aus Meerblau mit einem Lichtsee dort, wo die Frau steht. Der
-   Film liegt mit „screen“ darüber — so addiert er nur sein Licht, sein
-   Studiohintergrund verschwindet im Blau, und ihre Silhouette bleibt
-   stehen, weil screen die Helligkeitsunterschiede erhält.            */
-
+/* Der Himmel. Oben tiefer, zur Mitte hin heller — dort steht der Satz,
+   und dort geht er nahtlos in den Grund des Films über. */
 .himmel {
   position: absolute; inset: 0; z-index: 0;
   background:
-    radial-gradient(72% 46% at 42% 40%, oklch(42% .075 216 / .60) 0%, transparent 68%),
-    radial-gradient(120% 80% at 46% 108%, oklch(30% .070 230 / .70) 0%, transparent 72%),
-    radial-gradient(90% 60% at 84% 8%,  oklch(34% .060 250 / .40) 0%, transparent 70%),
-    linear-gradient(to bottom, oklch(9% .035 246) 0%, oklch(15% .048 232) 46%, oklch(11% .042 240) 100%);
-}
-
-.film {
-  position: absolute; inset: 0; z-index: 1;
-  mix-blend-mode: screen;
-}
-
-/* Am breiten Schirm bekommt der Film eine hohe Spalte statt der ganzen
-   Fläche. Grund: Die Aufnahme ist 9:16. Randlos über ein 16:10-Fenster
-   gezogen bliebe nur ein Drittel ihrer Höhe übrig — und weg wäre genau
-   das, worum es geht, der Fall des Wassers. Die Spalte läuft links, oben
-   und unten aus dem Bild und löst sich rechts in den Grund auf; ein
-   Rahmen entsteht dabei nicht. */
-@media (min-width: 60rem) {
-  .film {
-    right: auto;
-    /* Breit genug, dass zwischen Bildrand und Scheitel Platz für den
-       Fall des Wassers bleibt: Der Abstand wächst nur mit der Breite,
-       weil die Aufnahme 9:16 ist. */
-    width: clamp(30rem, 61vw, 58rem);
-    --schleier: linear-gradient(to right, #000 0%, #000 58%, transparent 100%);
-    -webkit-mask-image: var(--schleier);
-            mask-image: var(--schleier);
-  }
-}
-
-/* Film und Standbild liegen exakt übereinander — absolut gesetzt, nicht
-   im Grid gestapelt: In einer inhaltsbestimmten Grid-Zeile löst sich
-   height:100% gegen sich selbst auf, das Bild nimmt seine natürliche
-   Höhe an, und object-fit hat nichts mehr zu beschneiden. */
-.film > * {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  object-position: 50% var(--schnitt, 46%);
-  transform: translateX(var(--schub, 0%)) scale(var(--zoom));
-}
-
-.film-lauf { opacity: 0; transition: opacity var(--t2) var(--kurve); }
-.film-halt { transition: opacity var(--t2) var(--kurve); }
-.film.laeuft .film-lauf { opacity: 1; }
-.film.laeuft .film-halt { opacity: 0; }
-
-/* Die Decke. Sie verdeckt den Strahl oberhalb der Düse und trägt die
-   Leiste. Nach unten läuft sie aus, damit das Wasser genau an der
-   Mündung sichtbar wird und nicht an einer Kante beginnt. */
-.decke {
-  position: absolute; inset: 0 0 auto 0;
-  height: calc(var(--muendung) + 3rem);
-  z-index: 2;
-  background: linear-gradient(
-    to bottom,
-    var(--grund) 0%,
-    var(--grund) calc(var(--muendung) - 4px),
-    var(--grund-72) calc(var(--muendung) + 1.5rem),
-    transparent 100%);
+    radial-gradient(80% 46% at 50% 84%, oklch(44% .060 240 / .45) 0%, transparent 72%),
+    linear-gradient(to bottom,
+      var(--himmel-hoch) 0%,
+      var(--himmel) 40%,
+      var(--himmel-tief) 72%,
+      var(--himmel-tief) 100%);
 }
 
 /* ── Die Leiste ───────────────────────────────────────────────────────── */
 
 .leiste {
-  position: absolute; inset: 0 0 auto 0; z-index: 4;
+  position: absolute; inset: 0 0 auto 0; z-index: 5;
   height: var(--leiste);
   display: flex; align-items: center; gap: var(--a3);
   padding-inline: var(--rand);
@@ -275,110 +173,248 @@ a { color: inherit; }
 .marke {
   display: inline-flex; align-items: baseline; gap: .55rem; flex-wrap: wrap;
   font-family: 'Instrument Serif', Georgia, serif;
-  font-size: 1.34rem; line-height: 1.1;
+  font-size: 1.3rem; line-height: 1.1;
   letter-spacing: -.005em; font-kerning: normal;
   text-decoration: none;
 }
-/* Der Zusatz steht in der Grotesk: Instrument Serif setzt bei dieser
-   Größe sehr eigenwillige Abstände, und eine Wortmarke darf nicht
-   löchrig sein. */
 .marke span {
   font-family: 'Inter', system-ui, sans-serif;
-  font-size: .64rem; font-weight: 500;
+  font-size: .62rem; font-weight: 500;
   letter-spacing: .19em; text-transform: uppercase;
   color: var(--tinte-still);
 }
 @media (max-width: 26rem) { .marke span { display: none; } }
 
 .wege {
-  display: none;
-  margin-inline: auto;
-  gap: var(--a3);
-  font-size: var(--t-klein);
-  color: var(--tinte-leise);
+  display: none; margin-inline: auto; gap: var(--a3);
+  font-size: var(--t-klein); color: var(--tinte-leise);
 }
 .wege a { text-decoration: none; }
 @media (min-width: 60rem) { .wege { display: flex; } }
 
-@media (max-width: 60rem) { .pille { display: none; } }
-
 .pille {
   margin-left: auto;
-  padding: .5rem 1rem;
+  padding: .45rem 1rem;
   border: 1px solid var(--linie);
   border-radius: var(--kante-voll);
   font-size: var(--t-klein);
   font-variant-numeric: tabular-nums;
   text-decoration: none; white-space: nowrap;
 }
-@media (min-width: 60rem) { .pille { margin-left: 0; } }
 
 @media (hover: hover) and (pointer: fine) {
   .wege a, .pille { transition: color var(--t1) var(--kurve), border-color var(--t1) var(--kurve); }
-  .wege a:hover { color: var(--messing); }
-  .pille:hover { border-color: var(--messing); color: var(--messing); }
+  .wege a:hover { color: var(--kupfer-hell); }
+  .pille:hover { border-color: var(--kupfer-hell); color: var(--kupfer-hell); }
 }
+
+/* ── Der Satz ─────────────────────────────────────────────────────────
+   Er steht oben im offenen Himmel, wie in der Vorlage. Dort braucht es
+   keinen Schleier über dem Bild: Das Bild fängt weiter unten an.     */
+
+.satz {
+  position: absolute; z-index: 4;
+  top: calc(var(--leiste) + 1.25rem);
+  left: var(--rand); right: var(--rand);
+  text-align: center;
+}
+
+.riesen {
+  margin: 0 auto var(--a2);
+  max-width: 18ch;
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-weight: 400;
+  font-size: var(--t-riesen);
+  line-height: 1.06;
+  letter-spacing: -.015em;
+  text-wrap: balance;
+}
+.riesen em { font-style: italic; color: var(--kupfer-hell); }
+
+.lauf {
+  margin: 0 auto var(--a3);
+  max-width: 34ch;
+  font-size: var(--t-klein);
+  line-height: 1.55;
+  color: var(--tinte-leise);
+}
+
+/* Der Knopf ist ein Umriss, wie in der Vorlage — aber mit klarem Wort:
+   Er ist der Weg zum Termin, nicht nur eine Geste. */
+.knopf {
+  display: inline-flex; align-items: center;
+  padding: .72rem 1.6rem;
+  border: 1px solid var(--linie);
+  border-radius: var(--kante-voll);
+  font-size: var(--t-klein); font-weight: 500;
+  letter-spacing: .02em;
+  text-decoration: none;
+  background: oklch(20% .05 242 / .28);
+  -webkit-backdrop-filter: blur(6px);
+          backdrop-filter: blur(6px);
+}
+@media (hover: hover) and (pointer: fine) {
+  .knopf { transition: border-color var(--t1) var(--kurve), background-color var(--t1) var(--kurve); }
+  .knopf:hover { border-color: var(--kupfer-hell); background: oklch(20% .05 242 / .5); }
+}
+
+/* ── Hahn, Wasser und Film in einem Rahmen ──────────────────────────── */
+
+.buehne { position: absolute; inset: 0; z-index: 1; }
+@media (min-width: 64rem) {
+  .buehne { left: 50%; transform: translateX(-50%); width: min(46rem, 62vw); }
+}
+
+/* Der Film sitzt unten. Sein oberer Rand ist der Scheitel; er läuft
+   nach oben und zur Seite in den Himmel aus, und weil beide dieselbe
+   Farbe haben, sieht man keine Kante. */
+.film {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  height: var(--film-h);
+  z-index: 1;
+  overflow: hidden;
+  /* Lange Verläufe: Der Film ist auf den Himmel korrigiert, aber nicht
+     auf den Punkt genau. Über 30 % Breite verteilt fällt der Rest nicht
+     mehr auf; über 10 % sah man den Kasten. */
+  /* Kurze Kanten reichen, seit der Himmel unten denselben Ton hat wie
+     der Grund des Films. Lange Verläufe frassen ihr Haar an den Seiten. */
+  --schleier:
+    linear-gradient(to bottom, transparent 0%, #000 11%, #000 100%),
+    linear-gradient(to right,  transparent 0%, #000 17%, #000 83%, transparent 100%);
+  -webkit-mask-image: var(--schleier);
+          mask-image: var(--schleier);
+  -webkit-mask-composite: source-in;
+          mask-composite: intersect;
+}
+.film > * {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: 50% 0%;
+}
+.film-lauf { opacity: 0; transition: opacity var(--t2) var(--kurve); }
+.film-halt { transition: opacity var(--t2) var(--kurve); }
+.film.laeuft .film-lauf { opacity: 1; }
+.film.laeuft .film-halt { opacity: 0; }
+
+/* ── Der gezeichnete Strahl ───────────────────────────────────────────
+   Er hängt an der Düse und reicht bis in das Haar hinein. Je weiter der
+   Hebel steht, desto dichter läuft er: --fluss geht von 0 bis 1.     */
+
+.strahl {
+  position: absolute; z-index: 2;
+  left: var(--scheitel);
+  top: var(--muendung);
+  height: calc(100% - var(--film-h) - var(--muendung) + 2.5rem);
+  width: 40px;
+  transform: translateX(-50%);
+  opacity: min(1, calc(var(--fluss, 0) * 7));
+  pointer-events: none;
+}
+.strahl span { position: absolute; inset: 0; display: block; }
+
+/* Der Saum: der weiche Schleier um das Wasser */
+.strahl-saum {
+  background: linear-gradient(to right,
+    transparent 18%,
+    oklch(94% .014 230 / .14) 34%,
+    oklch(97% .010 224 / .36) 50%,
+    oklch(94% .014 230 / .14) 66%,
+    transparent 82%);
+  filter: blur(2.5px);
+}
+/* Der Kern: die helle Mitte. Sie wird mit dem Hebel dicker, und ein
+   zweiter, wiederholter Verlauf darüber wandert nach unten — das ist
+   das Fliessen. Alles in einer Regel: Zwei Regeln mit demselben
+   Selektor gewinnt die zweite, und die erste sieht trotzdem richtig aus. */
+.strahl-kern {
+  left: 50%;
+  width: calc(2px + 4px * var(--fluss, 0));
+  transform: translateX(-50%);
+  background-image:
+    repeating-linear-gradient(to bottom,
+      oklch(97% .008 222 / 0) 0px,
+      oklch(97% .008 222 / .13) 34px,
+      oklch(97% .008 222 / 0) 74px),
+    linear-gradient(to bottom,
+      oklch(97% .010 224 / .94) 0%,
+      oklch(96% .010 224 / .84) 46%,
+      oklch(95% .012 226 / .56) 100%);
+  box-shadow: 0 0 12px oklch(92% .022 228 / .60);
+  filter: blur(.4px);
+  animation: fliessen .9s linear infinite;
+  animation-play-state: paused;
+}
+/* Der Aufschlag: das Leuchten dort, wo das Wasser das Haar trifft */
+.strahl-aufschlag {
+  top: auto; bottom: -10px; height: 44px;
+  background: radial-gradient(58% 100% at 50% 100%,
+    oklch(98% .012 226 / .60) 0%,
+    oklch(98% .012 226 / .20) 52%,
+    transparent 100%);
+  filter: blur(3px);
+}
+
+/* Das Fliessen. Sehr langsam und sehr leise — es soll bemerkt und nicht
+   angeschaut werden. Läuft nur, solange Wasser kommt. */
+@keyframes fliessen {
+  from { background-position-y: 0; }
+  to   { background-position-y: 148px; }
+}
+.strahl.laeuft .strahl-kern { animation-play-state: running; }
 
 /* ── Der Wasserhahn ───────────────────────────────────────────────────
-   Die Aufnahme ist in drei Schichten zerlegt: Körper, Hebel, Nabe. Der
-   Hebel dreht um die Nabe, die Nabe liegt darüber und verdeckt die Naht.
-
-   Wo der Hahn hängt, hängt an --auslauf-px: Das ist die Stelle, an der
-   der Strahl im Film ankommt, von neu.js aus der Geometrie gerechnet.
-   Die Düse sitzt bei 14,08 % der Bildbreite und 98,15 % der Bildhöhe —
-   daraus ergibt sich der Versatz nach links und oben.                */
+   Drei Schichten aus einer Aufnahme: Körper, Hebel, Nabe. Der Hebel
+   dreht um die Nabe, die Nabe liegt darüber und verdeckt die Naht.
+   Die Düse sitzt bei 14,08 % der Bildbreite und 98,15 % der Höhe —
+   gemessen; daraus ergibt sich der Versatz.                          */
 
 .hahn {
-  position: absolute;
-  z-index: 4;
-  width: var(--hahn-b);
-  height: var(--hahn-h);
-  left: calc(var(--auslauf-px, 46%) - .1408 * var(--hahn-b));
+  position: absolute; z-index: 3;
+  width: var(--hahn-b); height: var(--hahn-h);
+  left: calc(var(--scheitel) - .1408 * var(--hahn-b));
   top:  calc(var(--muendung) - .9815 * var(--hahn-h));
-  filter: drop-shadow(0 18px 34px oklch(0% 0 0 / .55));
+  filter: drop-shadow(0 16px 30px oklch(15% .05 244 / .55));
 }
-
 .hahn > img { position: absolute; inset: 0; width: 100%; height: 100%; }
 
 /* Das Rohr läuft nach rechts aus dem Bild. Fortgesetzt wird es mit einer
-   acht Pixel breiten Scheibe seiner eigenen rechten Kante — gestreckt
-   auf dieselbe Höhe, gekachelt bis zum Rand. Ein nachgebauter Verlauf
-   träfe die Kupferzeichnung nie genau. */
+   acht Pixel breiten Scheibe seiner eigenen rechten Kante — ein
+   nachgebauter Verlauf träfe die Kupferzeichnung nie genau. */
 .hahn-rohr {
-  position: absolute;
-  top: 0; bottom: 0;
-  left: 100%;
+  position: absolute; top: 0; bottom: 0; left: 100%;
   width: 100vw;
   background: url("bilder/hahn-rohr.webp") repeat-x left top;
   background-size: auto 100%;
+  /* Es kommt von irgendwoher und löst sich auf, statt als Balken quer
+     über den ganzen Schirm zu laufen. */
+  --aus: linear-gradient(to right, #000 0%, #000 22%, transparent 78%);
+  -webkit-mask-image: var(--aus);
+          mask-image: var(--aus);
 }
 
 .hebel {
   position: absolute; inset: 0;
-  transform-origin: 67.2% 20.74%;      /* die Nabe, gemessen */
+  transform-origin: 67.2% 20.74%;
   transform: rotate(var(--dreh, 0deg));
   cursor: grab;
-  touch-action: none;                  /* sonst scrollt die Seite beim Ziehen */
+  touch-action: none;
 }
 .hebel:active { cursor: grabbing; }
-.hebel img { width: 100%; height: 100%; display: block; }
+.hebel img { width: 100%; height: 100%; }
 .hebel:focus-visible { outline: none; }
 .hebel:focus-visible::after {
   content: "";
   position: absolute;
   left: 43.5%; top: 24.5%; width: 30%; height: 42.5%;
-  border: 2px solid var(--messing);
+  border: 2px solid var(--kupfer-hell);
   border-radius: var(--kante-voll);
 }
-
 .hahn-nabe { pointer-events: none; }
 
 .hahn-wort {
-  position: absolute;
-  /* Unter dem Hebel, nicht unter der Düse: Dort stünde sie im Wasser. */
-  top: calc(100% + .4rem);
-  left: 67.2%;
-  transform: translateX(-50%);
+  position: absolute; z-index: 4;
+  top: calc(var(--muendung) - 1.5rem);
+  left: calc(var(--scheitel) + 2.4rem);
   margin: 0;
   font-size: var(--t-marke);
   letter-spacing: .15em; text-transform: uppercase;
@@ -386,151 +422,59 @@ a { color: inherit; }
   white-space: nowrap;
   transition: color var(--t1) var(--kurve);
 }
-.hahn-wort.offen { color: var(--messing); }
+.hahn-wort.offen { color: var(--kupfer-hell); }
 
-/* Der Wink, solange noch niemand angefasst hat: Der Hebel hebt sich
-   einmal kurz an. Eine einzige Bewegung, deutlich langsamer als eine
-   Handlung, und sie hört nach der ersten Berührung auf. */
+/* Der Wink, solange noch niemand angefasst hat. Eine einzige Bewegung,
+   langsamer als eine Handlung, und sie hört nach der ersten Berührung
+   auf. */
 @keyframes wink {
-  0%, 58%, 100% { transform: rotate(var(--dreh, 0deg)); }
-  76%           { transform: rotate(calc(var(--dreh, 0deg) + 11deg)); }
+  0%, 62%, 100% { transform: rotate(var(--dreh, 0deg)); }
+  78%           { transform: rotate(calc(var(--dreh, 0deg) + 9deg)); }
 }
-.hebel.wink { animation: wink 5s var(--kurve) infinite; }
-
-/* ── Der Satz ─────────────────────────────────────────────────────────
-   Er steht rechts: Die Frau im Film sitzt links der Mitte, und dort
-   fällt auch das Wasser. Ein Schleier über die ganze Fläche würde das
-   Bild erschlagen; hinter dem Textblock liegt deshalb nur ein Schatten,
-   und der Rest der Aufnahme bleibt offen.                             */
-
-.satz {
-  position: absolute;
-  z-index: 3;
-  left: var(--rand); right: var(--rand);
-  bottom: 6.5rem;
-  text-align: center;
-}
-/* Der Schatten hinter dem Satz liegt auf der ganzen Bühne, nicht in
-   einem Kasten um den Text: Ein Verlauf mit eigenen Kanten zeigt genau
-   diese Kanten, und dann klebt ein graues Rechteck auf dem Bild. So
-   bleiben vier Fünftel der Aufnahme offen. */
-.auftakt::after {
-  content: "";
-  position: absolute; inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  /* Am Telefon steht der Satz auf ihrem hell beleuchteten nassen Haar.
-     Gemessen kam die Überschrift dort auf 1,5:1 — unlesbar. Der Schatten
-     muss unten deshalb kräftig sein. Die obere Hälfte bleibt offen, und
-     dort steht das, worum es geht: Hahn, Wasser, Kopf. */
-  background: linear-gradient(to top,
-    oklch(10% .034 234 / .97) 0%,
-    oklch(10% .034 234 / .94) 30%,
-    oklch(10% .034 234 / .78) 47%,
-    oklch(10% .034 234 / .34) 62%,
-    transparent 80%);
-}
-@media (min-width: 60rem) {
-  .auftakt::after {
-    /* Am breiten Schirm steht der Satz rechts; unten läuft zusätzlich
-       ein schmales Band, weil die Adresszeile sonst auf dem hellen Haar
-       liegt — dort waren es gemessen 2,5:1. */
-    background:
-      linear-gradient(to top,  oklch(12% .036 230 / .88) 0%, oklch(12% .036 230 / .45) 8%, transparent 17%),
-      linear-gradient(to left, oklch(12% .036 230 / .92) 0%,
-                               oklch(12% .036 230 / .78) 30%,
-                               oklch(12% .036 230 / .22) 62%,
-                               transparent 82%);
-  }
-}
-
-@media (min-width: 60rem) {
-  .satz {
-    left: auto; right: var(--rand);
-    top: 50%; bottom: auto;
-    transform: translateY(-50%);
-    width: min(30rem, 46vw);
-  }
-  .satz::before { inset: -3rem -3.5rem; }
-}
-
-/* Am Telefon fällt die Braue weg. Sie ist die kleinste Zeile über dem
-   Bild und hat als gesperrte 12-px-Schrift keine Kontrastreserve — auf
-   dem hell beleuchteten nassen Haar kam sie gemessen auf 1,0:1. Den
-   Verlauf dafür noch dichter zu ziehen hiesse, das Bild zu erschlagen;
-   die Überschrift und die Adresszeile sagen ohnehin dasselbe. */
-@media (max-width: 60rem) { .braue { display: none; } }
-
-.braue {
-  margin: 0 0 var(--a2);
-  font-size: var(--t-marke);
-  letter-spacing: .17em; text-transform: uppercase;
-  color: var(--tinte-still);
-}
-
-.riesen {
-  margin: 0 0 var(--a3);
-  font-family: 'Instrument Serif', Georgia, serif;
-  font-weight: 400;
-  font-size: var(--t-riesen);
-  line-height: 1.02;
-  letter-spacing: -.015em;
-}
-.riesen em { font-style: italic; color: var(--messing); }
-
-.lauf {
-  margin: 0 auto var(--a3);
-  max-width: 32rem;
-  color: var(--tinte-leise);
-}
-
-.wahl { display: flex; flex-wrap: wrap; gap: var(--a2); justify-content: center; }
-
-.knopf, .knopf-still {
-  display: inline-flex; align-items: center; gap: .5rem;
-  padding: .82rem 1.4rem;
-  border-radius: var(--kante-voll);
-  font-size: var(--t-klein); font-weight: 600;
-  text-decoration: none; white-space: nowrap;
-}
-.knopf { background: var(--messing); color: var(--auf-messing); }
-.knopf-still {
-  border: 1px solid var(--linie);
-  color: var(--tinte);
-  font-variant-numeric: tabular-nums;
-}
-.knopf-still svg { width: 1em; height: 1em; opacity: .7; }
-
-@media (hover: hover) and (pointer: fine) {
-  .knopf, .knopf-still { transition: transform var(--t1) var(--kurve), background-color var(--t1) var(--kurve), border-color var(--t1) var(--kurve); }
-  .knopf:hover       { transform: translateY(-2px); background: var(--messing-hell); }
-  .knopf-still:hover { transform: translateY(-2px); border-color: var(--messing); }
-}
+.hebel.wink { animation: wink 5.5s var(--kurve) infinite; }
 
 /* ── Der Fuß ──────────────────────────────────────────────────────────── */
 
+/* Ein kurzes Band unten: Ohne das läge die Adresszeile auf ihrem
+   Gesicht. Es reicht nur über die untersten zwölf Prozent — der Rest
+   der Aufnahme bleibt offen. */
+.auftakt::after {
+  content: "";
+  position: absolute; inset: auto 0 0 0; height: 26%;
+  z-index: 3; pointer-events: none;
+  /* Gemessen: Ohne dieses Band steht die Adresszeile am Telefon auf
+     ihrem hellsten Haar bei 1,7:1. Es reicht nur über das untere
+     Viertel; darüber bleibt die Aufnahme offen. */
+  background: linear-gradient(to top,
+    oklch(20% .050 242 / .97) 0%,
+    oklch(20% .050 242 / .88) 22%,
+    oklch(20% .050 242 / .46) 52%,
+    transparent 100%);
+}
+
 .boden {
-  position: absolute; z-index: 3;
-  left: var(--rand); right: var(--rand); bottom: 1.5rem;
+  position: absolute; z-index: 4;
+  left: var(--rand); right: var(--rand); bottom: 1.1rem;
   margin: 0;
-  display: flex; flex-wrap: wrap; justify-content: center; gap: .4rem var(--a2);
+  display: flex; flex-wrap: wrap; justify-content: center; gap: .3rem var(--a2);
   font-size: var(--t-klein);
-  color: var(--tinte-still);
-  text-shadow: 0 1px 12px oklch(12% .036 230 / .9);
+  /* Nicht die leiseste Stufe: Die Zeile steht unten über ihrem Haar und
+     kam damit gemessen nur auf 3,7:1. */
+  color: var(--tinte-leise);
+  text-shadow: 0 1px 14px oklch(20% .05 242 / .95);
 }
-@media (min-width: 60rem) {
-  .boden { justify-content: space-between; }
-}
+@media (min-width: 60rem) { .boden { justify-content: space-between; } }
 
 .stand { display: inline-flex; align-items: center; gap: .45rem; }
 .stand::before {
   content: ""; width: .45rem; height: .45rem; border-radius: 50%;
   background: currentColor;
 }
-.stand.offen { color: var(--messing); }
+.stand.offen { color: var(--kupfer-hell); }
 
 @media (prefers-reduced-motion: reduce) {
   .hebel.wink { animation: none; }
+  .strahl-kern { animation: none; }
   .film-lauf, .film-halt { transition: none; }
-  .sprung, .knopf, .knopf-still, .wege a, .pille { transition: none; }
+  .sprung, .knopf, .wege a, .pille { transition: none; }
 }
