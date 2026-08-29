@@ -1,237 +1,127 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Impressum — BaHaar’s Styling Studio</title>
-<meta name="description" content="Impressum und Anbieterkennzeichnung von BaHaar’s Styling Studio, Perlacher Straße 2, 81539 München.">
-<meta name="theme-color" content="#140b06">
-<script>
-/* Die gewählte Farbstimmung noch vor dem ersten Bild setzen — sonst
-   blitzt beim Seitenwechsel kurz die Vorgabe auf. Bewusst ohne defer.
-   Ohne Eintrag gilt Nacht, und Nacht steht ohne Attribut da. */
-var F={tag:'#faf6f0',asche:'#f4f7fa',rose:'#fcf5f3'};
-try{var p=localStorage.getItem('bahaar-stimmung');
- if(F[p]){document.documentElement.dataset.palette=p;
-  document.currentScript.previousElementSibling.content=F[p];}}catch(e){}
-</script>
+<title>Impressum &mdash; BaHaar&rsquo;s Styling Studio</title>
+<meta name="description" content="Anbieterkennzeichnung nach &sect; 5 DDG f&uuml;r BaHaar&rsquo;s Styling Studio, Perlacher Stra&szlig;e 2, 81539 M&uuml;nchen.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="preload" href="schrift/Marcellus-Regular.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="schrift/Archivo.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="stil.css">
+<link rel="stylesheet" href="neu.css">
+<link rel="preload" href="schrift/InstrumentSerif-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="schrift/Inter.woff2" as="font" type="font/woff2" crossorigin>
 </head>
-
 <body>
-<a class="sprung" href="#inhalt">Zum Inhalt springen</a>
 
-<header class="kopfzeile">
-  <a class="marke" href="index.html">BaHaar&rsquo;s<span class="zusatz">styling studio</span></a>
-  <a class="ruf" href="tel:+49896923644">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M6.5 3h3l1.5 4-2 1.5a12 12 0 0 0 6.5 6.5L17 13l4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 3.5 5.2 2 2 0 0 1 5.5 3z"/></svg>
-    089 692 36 44
-  </a>
-  <a class="knopf knopf-voll knopf-termin" href="termin.html">Termin</a>
-  <button class="menuknopf" type="button" aria-expanded="false" aria-controls="wegweiser" aria-label="Men&uuml; &ouml;ffnen"><span></span></button>
+<a class="sprung" href="#titel">Zum Inhalt springen</a>
+
+<header class="leiste">
+  <a class="marke" href="index.html">BaHaar&rsquo;s <span>Styling&nbsp;Studio</span></a>
+  <nav class="wege" id="wege" aria-label="Hauptmen&uuml;">
+    <a href="index.html">Startseite</a>
+    <a href="leistungen.html">Preisliste</a>
+    <a href="index.html#arbeiten">Arbeiten</a>
+    <a href="index.html#laden">Der Laden</a>
+    <a href="index.html#kontakt">Kontakt</a>
+  </nav>
+  <a class="pille" href="tel:+498969236440">089&nbsp;692&nbsp;36&nbsp;44</a>
+  <button class="klapp" id="klapp" type="button"
+          aria-expanded="false" aria-controls="wege" aria-label="Men&uuml; &ouml;ffnen">
+    <span aria-hidden="true"></span><span aria-hidden="true"></span>
+  </button>
 </header>
 
-<!-- Die Navigation liegt hinter dem Schalter und öffnet sich über die
-     ganze Fläche. Sie ist kein Menü, sondern ein Inhaltsverzeichnis:
-     Ziffer, Name, und unter „Leistungen & Preise" die neun Gruppen mit
-     Ab-Preis. Ohne Skript gibt es keinen Schalter — dann steht sie als
-     gewöhnliche Liste im Fluss. -->
-<nav class="wegweiser" id="wegweiser" aria-label="Hauptmen&uuml;">
-  <ul>
-    <li><a href="index.html"><span class="ziffer">01</span> Start</a></li>
-    <li class="navpunkt">
-      <button type="button" aria-expanded="false" aria-controls="uebersicht-leistungen">
-        <span class="ziffer">02</span> Leistungen &amp; Preise
-        <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg>
-      </button>
-      <a class="nav-ohne-skript" href="leistungen.html"><span class="ziffer">02</span> Leistungen &amp; Preise</a>
-      <div class="uebersicht" id="uebersicht-leistungen" hidden>
-        <ul>
-          <li><a href="leistungen.html#schneiden">Waschen, Schneiden &amp; F&ouml;hnen <span class="ab">ab 30 &euro;</span></a></li>
-          <li><a href="leistungen.html#farbe">Farbe &amp; T&ouml;nung <span class="ab">ab 43 &euro;</span></a></li>
-          <li><a href="leistungen.html#straehnen">Str&auml;hnen &amp; Balayage <span class="ab">ab 69 &euro;</span></a></li>
-          <li><a href="leistungen.html#umformen">Umformen <span class="ab">ab 69 &euro;</span></a></li>
-          <li><a href="leistungen.html#pflege">Pflege &amp; Korrektur <span class="ab">ab 5 &euro;</span></a></li>
-          <li><a href="leistungen.html#anlass">F&uuml;r besondere Anl&auml;sse <span class="ab">ab 60 &euro;</span></a></li>
-          <li><a href="leistungen.html#brauen">Brauen &amp; Wimpern <span class="ab">ab 10 &euro;</span></a></li>
-          <li><a href="leistungen.html#herren">Herren <span class="ab">ab 10 &euro;</span></a></li>
-          <li><a href="leistungen.html#kinder">Kinder bis 12 Jahre <span class="ab">ab 25 &euro;</span></a></li>
-        </ul>
-        <p class="uebersicht-fuss">
-          <span>Preise nach Haarl&auml;nge und Aufwand &middot; Beratung immer inklusive</span>
-          <a href="leistungen.html">Ganze Preisliste</a>
-        </p>
-      </div>
-    </li>
-    <li><a href="brautstyling.html"><span class="ziffer">03</span> Brautstyling</a></li>
-    <li><a href="salon.html"><span class="ziffer">04</span> Der Salon</a></li>
-    <li><a href="termin.html"><span class="ziffer">05</span> Termin</a></li>
-  </ul>
-  <p class="wegweiser-fuss">
-    <a href="tel:+49896923644">089 692 36 44</a>
-    <a href="mailto:info@bahaarsstylingstudio.de">info@bahaarsstylingstudio.de</a>
-    <span>Perlacher Stra&szlig;e 2 &middot; 81539 M&uuml;nchen</span>
+<main class="recht">
+<div class="mitte">
+
+  <p class="braue">Rechtliches</p>
+  <h1 class="riesen" id="titel">Impressum</h1>
+
+  <h2>Angaben nach &sect;&nbsp;5 DDG</h2>
+  <dl class="daten">
+    <div><dt>Anbieterin</dt><dd>Fakhria Tokhi</dd></div>
+    <div><dt>Betrieb</dt><dd>BaHaar&rsquo;s Styling Studio</dd></div>
+    <div><dt>Anschrift</dt><dd>Perlacher Stra&szlig;e 2, 81539 M&uuml;nchen</dd></div>
+    <div><dt>Telefon</dt><dd><a href="tel:+498969236440">089&nbsp;692&nbsp;36&nbsp;44</a></dd></div>
+    <div><dt>E-Mail</dt><dd><a href="mailto:info@bahaarsstylingstudio.de">info@bahaarsstylingstudio.de</a></dd></div>
+  </dl>
+
+  <h2>Verantwortlich f&uuml;r den Inhalt</h2>
+  <p>Fakhria Tokhi, Perlacher Stra&szlig;e 2, 81539 M&uuml;nchen.</p>
+
+  <h2>Umsatzsteuer</h2>
+  <p>Umsatzsteuer-Identifikationsnummer 148/156/01115.</p>
+
+  <h2>Berufsrechtliche Angaben</h2>
+  <dl class="daten">
+    <div><dt>Berufsbezeichnung</dt><dd>Friseurmeisterin, verliehen in der Bundesrepublik Deutschland</dd></div>
+    <div><dt>Zust&auml;ndige Kammer</dt><dd>Handwerkskammer f&uuml;r M&uuml;nchen und Oberbayern,<br>Max-Joseph-Stra&szlig;e 4, 80333 M&uuml;nchen</dd></div>
+    <div><dt>Regelung</dt><dd>Handwerksordnung (HwO)</dd></div>
+  </dl>
+
+  <h2>Termine</h2>
+  <p>
+    Ein Termin l&auml;sst sich telefonisch unter
+    <a href="tel:+498969236440">089&nbsp;692&nbsp;36&nbsp;44</a> vereinbaren oder
+    &uuml;ber den Buchungskalender, den der Salon bei Salonized&nbsp;B.V.
+    (Niederlande) f&uuml;hrt. Der Kalender ist auf dieser Seite nicht
+    eingebettet, sondern verlinkt; erst beim Anklicken verbindet sich Ihr
+    Browser mit Salonized. N&auml;heres steht in der
+    <a href="datenschutz.html">Datenschutzerkl&auml;rung</a>.
   </p>
-</nav>
 
-<main id="inhalt">
+  <h2>Verbraucherstreitbeilegung</h2>
+  <p>
+    Wir sind nicht bereit und nicht verpflichtet, an einem
+    Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle
+    teilzunehmen.
+  </p>
 
-<section class="abschnitt-eng bahn">
-  <div class="mitte">
-    <h1 class="titel" style="margin-bottom:var(--a5)">Impressum</h1>
+  <h2>Haftung f&uuml;r Inhalte</h2>
+  <p>
+    Die Inhalte dieser Seiten wurden mit Sorgfalt erstellt. F&uuml;r
+    Richtigkeit, Vollst&auml;ndigkeit und Aktualit&auml;t k&ouml;nnen wir keine
+    Gew&auml;hr &uuml;bernehmen. Insbesondere Preise und &Ouml;ffnungszeiten
+    k&ouml;nnen sich &auml;ndern; verbindlich ist immer, was im Salon oder am
+    Telefon gesagt wird.
+  </p>
 
-    <div class="fliess">
-      <h2>Angaben nach § 5 DDG</h2>
-      <dl>
-        <dt>Anbieterin</dt><dd>Fakhria Tokhi</dd>
-        <dt>Betrieb</dt><dd>BaHaar’s Styling Studio</dd>
-        <dt>Anschrift</dt><dd>Perlacher Straße 2<br>81539 München</dd>
-        <dt>Telefon</dt><dd><a href="tel:+49896923644">089 692 36 44</a></dd>
-        <dt>E-Mail</dt><dd><a href="mailto:info@bahaarsstylingstudio.de">info@bahaarsstylingstudio.de</a></dd>
-      </dl>
+  <h2>Haftung f&uuml;r Links</h2>
+  <p>
+    Diese Seite verweist an einigen Stellen auf fremde Angebote &mdash; auf die
+    Terminbuchung bei Salonized, auf Instagram und auf eine Karte bei Google
+    Maps. Auf deren Inhalte haben wir keinen Einfluss; daf&uuml;r ist immer der
+    jeweilige Anbieter verantwortlich.
+  </p>
 
-      <h2>Verantwortlich für den Inhalt</h2>
-      <p>Fakhria Tokhi, Perlacher Straße 2, 81539 München</p>
+  <h2>Bildnachweis</h2>
+  <p>
+    Alle Fotos stammen aus dem Salon in der Perlacher Stra&szlig;e und zeigen
+    Arbeiten, die dort entstanden sind.
+  </p>
 
-      <h2>Umsatzsteuer</h2>
-      <dl>
-        <dt>Umsatzsteuer-Identifikationsnummer</dt><dd class="zahl">148/156/01115</dd>
-      </dl>
+  <h2>Urheberrecht</h2>
+  <p>
+    Texte, Bilder und Gestaltung dieser Seite sind urheberrechtlich
+    gesch&uuml;tzt. Eine Verwendung au&szlig;erhalb der Grenzen des
+    Urheberrechts bedarf der schriftlichen Zustimmung.
+  </p>
 
-      <h2>Berufsrechtliche Angaben</h2>
-      <dl>
-        <dt>Berufsbezeichnung</dt><dd>Friseurmeisterin (verliehen in der Bundesrepublik Deutschland)</dd>
-        <dt>Zuständige Kammer</dt><dd>Handwerkskammer für München und Oberbayern<br>Max-Joseph-Straße 4, 80333 München</dd>
-        <dt>Berufsrechtliche Regelung</dt><dd><a href="https://www.gesetze-im-internet.de/hwo/" rel="noopener">Handwerksordnung (HwO)</a></dd>
-      </dl>
-
-      <h2>Online-Terminbuchung</h2>
-      <p>
-        Termine lassen sich auf dieser Seite online buchen. Der Kalender dazu
-        wird von <strong>Salonized B.V.</strong> (Niederlande) betrieben; der
-        Salon führt ihn dort. Welche Angaben dabei erhoben werden, wie lange
-        sie bleiben und wie sich das Buchungsfenster verhält, steht in der
-        <a href="datenschutz.html#buchung">Datenschutzerklärung</a>. Ein Termin
-        lässt sich ebenso telefonisch unter
-        <a href="tel:+49896923644">089 692 36 44</a> vereinbaren.
-      </p>
-
-      <h2>Verbraucherstreitbeilegung</h2>
-      <p>
-        Wir sind nicht bereit und nicht verpflichtet, an einem
-        Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle
-        teilzunehmen.
-      </p>
-
-      <h2>Haftung für Inhalte</h2>
-      <p>
-        Die Inhalte dieser Seiten wurden mit Sorgfalt erstellt. Für die
-        Richtigkeit, Vollständigkeit und Aktualität können wir jedoch keine
-        Gewähr übernehmen. Insbesondere Preise und Öffnungszeiten können sich
-        ändern; verbindlich ist immer, was im Salon oder am Telefon gesagt
-        wird.
-      </p>
-
-      <h2>Haftung für Links</h2>
-      <p>
-        Diese Seite verweist an einigen Stellen auf fremde Seiten — auf die
-        Terminbuchung bei Salonized, auf Instagram und auf eine Karte bei
-        OpenStreetMap. Auf deren Inhalte haben wir keinen Einfluss. Für sie
-        ist immer der jeweilige Anbieter verantwortlich.
-      </p>
-
-      <h2>Bildnachweis</h2>
-      <p>
-        Alle Fotos stammen aus dem Salon in der Perlacher Straße und zeigen
-        Arbeiten, die dort entstanden sind.
-      </p>
-
-      <h2>Urheberrecht</h2>
-      <p>
-        Texte, Bilder und Gestaltung dieser Seite sind urheberrechtlich
-        geschützt. Eine Verwendung außerhalb der Grenzen des Urheberrechts
-        bedarf der schriftlichen Zustimmung.
-      </p>
-    </div>
-  </div>
-</section>
-
+</div>
 </main>
 
-<footer class="fusszeile">
-  <div class="bahn mitte">
-    <div class="fusszeile-raster">
-      <div>
-        <p class="marke" style="display:block;margin-bottom:var(--a2)">BaHaar’s<span class="zusatz">styling studio</span></p>
-        <p style="color:var(--tinte-leise);max-width:24rem">
-          Friseursalon in München-Giesing. Inhaberin Fakhria Tokhi,
-          Friseurmeisterin.
-        </p>
-      </div>
-      <div>
-        <h3>Seiten</h3>
-        <ul>
-          <li><a href="index.html">Start</a></li>
-          <li><a href="leistungen.html">Leistungen &amp; Preise</a></li>
-          <li><a href="brautstyling.html">Brautstyling</a></li>
-          <li><a href="salon.html">Der Salon</a></li>
-          <li><a href="termin.html">Termin</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3>Öffnungszeiten</h3>
-        <ul class="zeiten">
-          <li data-tage="1"><span class="tag">Mo</span> <span class="zahl">10–16</span></li>
-          <li data-tage="2,3,4,5"><span class="tag">Di–Fr</span> <span class="zahl">09–19</span></li>
-          <li data-tage="6"><span class="tag">Sa</span> <span class="zahl">09–16</span></li>
-          <li data-tage="0" class="zu"><span class="tag">So</span> <span>zu</span></li>
-        </ul>
-      </div>
-      <div>
-        <h3>Kontakt</h3>
-        <ul>
-          <li><a href="tel:+49896923644">089 692 36 44</a></li>
-          <li><a href="mailto:info@bahaarsstylingstudio.de">info@bahaarsstylingstudio.de</a></li>
-          <li>Perlacher Straße 2<br>81539 München</li>
-          <li><a href="https://www.instagram.com/bahaarsstylingstudio" rel="noopener">Instagram</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="stimmungswahl">
-      <span class="stimmung-titel" id="stimmung-titel">Stimmung</span>
-      <div class="stimmung-reihe" role="group" aria-labelledby="stimmung-titel">
-        <button type="button" class="stimmung" data-stimmung="nacht" aria-pressed="true">
-          <span class="stimmung-probe probe-nacht" aria-hidden="true"></span>Nacht
-        </button>
-        <button type="button" class="stimmung" data-stimmung="tag" aria-pressed="false">
-          <span class="stimmung-probe probe-tag" aria-hidden="true"></span>Tag
-        </button>
-        <button type="button" class="stimmung" data-stimmung="asche" aria-pressed="false">
-          <span class="stimmung-probe probe-asche" aria-hidden="true"></span>Asche
-        </button>
-        <button type="button" class="stimmung" data-stimmung="rose" aria-pressed="false">
-          <span class="stimmung-probe probe-rose" aria-hidden="true"></span>Ros&eacute;
-        </button>
-      </div>
-    </div>
-    <div class="fusszeile-schluss">
-      <span>© <span class="jahr">2026</span> BaHaar’s Styling Studio</span>
+<footer class="fuss">
+  <div class="mitte">
+    <p class="fuss-marke">BaHaar&rsquo;s Styling Studio</p>
+    <nav class="fuss-wege" aria-label="Rechtliches">
+      <a href="index.html">Startseite</a>
+      <a href="leistungen.html">Preisliste</a>
       <a href="impressum.html">Impressum</a>
       <a href="datenschutz.html">Datenschutz</a>
-      <span class="rechts">Diese Seite lädt nichts von fremden Servern.</span>
-    </div>
+    </nav>
+    <p class="fuss-recht">&copy; 2026 BaHaar&rsquo;s Styling Studio &middot; Perlacher Stra&szlig;e 2, 81539 M&uuml;nchen</p>
   </div>
 </footer>
 
-<!-- GSAP liegt im Projekt, nicht auf einem fremden Server (fremd/HERKUNFT.md).
-     defer hält die Reihenfolge ein: erst der Kern, dann ScrollTrigger, dann
-     unser Code. Fehlt eines davon, läuft die Seite ohne Choreografie — und
-     zwar vollständig sichtbar, nicht halb eingeblendet. -->
-<script src="fremd/gsap.min.js" defer></script>
-<script src="fremd/ScrollTrigger.min.js" defer></script>
-<script src="seite.js" defer></script>
+<script src="neu.js" defer></script>
 </body>
 </html>

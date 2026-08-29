@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BaHaar&rsquo;s Styling Studio &mdash; Ihr Friseur in Giesing</title>
-<meta name="description" content="Friseursalon in M&uuml;nchen-Giesing. Bahar, Friseurmeisterin, seit 20 Jahren an der Perlacher Stra&szlig;e. Schnitt, Farbe, Str&auml;hnen, Brautstyling. Telefon 089 692 36 44.">
+<title>BaHaar&rsquo;s Styling Studio &mdash; Ihr Friseur in M&uuml;nchen-Giesing</title>
+<meta name="description" content="Friseursalon an der Perlacher Stra&szlig;e 2 in M&uuml;nchen-Giesing. Bahar ist Friseurmeisterin und steht seit zwanzig Jahren selbst am Stuhl. Schnitt, Farbe, Str&auml;hnen, Brautstyling. Mit und ohne Termin. Telefon 089 692 36 44.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="neu.css">
 <link rel="preload" href="schrift/InstrumentSerif-Regular.woff2" as="font" type="font/woff2" crossorigin>
@@ -15,40 +15,87 @@
 
 <a class="sprung" href="#auftakt-titel">Zum Inhalt springen</a>
 
+<header class="leiste">
+  <a class="marke" href="/">BaHaar&rsquo;s <span>Styling&nbsp;Studio</span></a>
+  <nav class="wege" id="wege" aria-label="Hauptmen&uuml;">
+    <a href="#leistungen">Leistungen</a>
+    <a href="#arbeiten">Arbeiten</a>
+    <a href="#laden">Der Laden</a>
+    <a href="#kontakt">Kontakt</a>
+    <a class="nur-klein" href="leistungen.html">Preisliste</a>
+  </nav>
+  <a class="pille" href="tel:+498969236440">089&nbsp;692&nbsp;36&nbsp;44</a>
+  <button class="klapp" id="klapp" type="button"
+          aria-expanded="false" aria-controls="wege" aria-label="Men&uuml; &ouml;ffnen">
+    <span aria-hidden="true"></span><span aria-hidden="true"></span>
+  </button>
+</header>
+
+<main>
+
+<!-- ══ Auftakt ═══════════════════════════════════════════════════════════
+     Die Person und der Laden auf dem ersten Bildschirm, kein Bild unter
+     dem Text: Bei einem inhabergeführten Betrieb kaufen die Leute die
+     Person, und die Kundin will drei Dinge sofort wissen — kann die das,
+     was kostet es, wann kann ich kommen.                              -->
 <section class="auftakt">
-  <div class="himmel" aria-hidden="true"></div>
-
-  <header class="leiste">
-    <a class="marke" href="/">BaHaar&rsquo;s <span>Styling&nbsp;Studio</span></a>
-    <nav class="wege" aria-label="Hauptmen&uuml;">
-      <a href="leistungen.html">Leistungen</a>
-      <a href="salon.html">Salon</a>
-      <a href="brautstyling.html">Brautstyling</a>
-    </nav>
-    <a class="pille" href="tel:+498969236440">089&nbsp;692&nbsp;36&nbsp;44</a>
-  </header>
-
-  <div class="satz">
+  <div class="auftakt-satz">
+    <p class="braue">Friseursalon in M&uuml;nchen-Giesing</p>
     <h1 class="riesen" id="auftakt-titel">Ihr Friseur in <em>Giesing</em>.</h1>
     <p class="lauf">
-      Friseurmeisterin, seit zwanzig Jahren selbst am Stuhl.
-      Schnitt, Farbe, Str&auml;hnen, Brautstyling.
+      Bahar ist Friseurmeisterin und steht seit zwanzig Jahren selbst am
+      Stuhl. Schnitt, Farbe, Str&auml;hnen, Hochsteckfrisuren, Brautstyling
+      &mdash; die typgerechte Beratung ist inklusive.
     </p>
-    <a class="knopf" href="https://bahaars-styling-studio.salonized.com/widget_bookings/new?widget_id=sNYusRnC1XwjUqnu97LzSfiz" target="_blank" rel="noopener">Termin vereinbaren</a>
+
+    <p class="zeichen">
+      <img src="bilder/bahar-nah.webp" alt="Bahar, Inhaberin und Friseurmeisterin" width="88" height="88" decoding="async">
+      <span><b>Bahar</b>Friseurmeisterin &middot; Inhaberin</span>
+    </p>
+
+    <div class="wahl">
+      <a class="knopf" href="https://bahaars-styling-studio.salonized.com/widget_bookings/new?widget_id=sNYusRnC1XwjUqnu97LzSfiz" target="_blank" rel="noopener">Termin buchen</a>
+      <a class="knopf-still" href="tel:+498969236440">
+        <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M5.2 2.3 6.6 5 5.3 6.4c.7 1.6 2 2.9 3.6 3.6l1.4-1.3 2.7 1.4-.4 2.4c-.1.6-.6 1-1.2 1C6.4 13.3 2.7 9.6 2.5 4.6c0-.6.4-1.1 1-1.2z" fill="currentColor"/></svg>
+        089&nbsp;692&nbsp;36&nbsp;44
+      </a>
+    </div>
+
+    <p class="ort">
+      <span>Perlacher Stra&szlig;e&nbsp;2 &middot; 81539&nbsp;M&uuml;nchen</span>
+      <span class="stand" id="stand"></span>
+    </p>
   </div>
 
-  <!-- ── Die Bühne ──────────────────────────────────────────────────────
-       Hahn, Wasser und Film stehen in einem gemeinsamen Rahmen: Der
-       Scheitel liegt bei 49 % der Filmbreite, dort hängt der Auslauf,
-       und dort fällt das Wasser. Weil der Film waagerecht nicht
-       beschnitten wird, stimmt das ohne Rechnerei — und nichts muss sich
-       bewegen, um es zusammenzuhalten.                                -->
-  <div class="buehne">
+  <figure class="auftakt-bild">
+    <img src="bilder/laden-front.webp" alt="Der Eingang von BaHaar&rsquo;s Styling Studio an der Perlacher Stra&szlig;e 2" width="830" height="548" fetchpriority="high" decoding="async">
+    <figcaption>&bdquo;&hairsp;&hellip; mit und ohne Termine&hairsp;&ldquo; &mdash; steht so am Fenster.</figcaption>
+  </figure>
+</section>
 
-    <!-- Der Strahl ist gezeichnet, nicht gefilmt. In der Aufnahme
-         schwankt er um 20 % der Bildbreite; ihn unter einem festen
-         Auslauf zu halten hiesse, das ganze Bild mitzuschieben, und das
-         sieht man. Also ist er aus dem Film herausgeschnitten. -->
+<!-- ══ Was für sie spricht ══════════════════════════════════════════════ -->
+<section class="belege" aria-label="Auf einen Blick">
+  <p><b>4,8 von 5</b><span>89 Bewertungen auf Treatwell</span></p>
+  <p><b>Meisterbrief</b><span>Friseurmeisterin</span></p>
+  <p><b>20 Jahre</b><span>am selben Ort</span></p>
+  <p><b>Ohne Termin</b><span>geht auch</span></p>
+</section>
+
+<!-- ══ Am Becken ═════════════════════════════════════════════════════════
+     Hier steht die Animation: Sie gehört dorthin, wo eine Behandlung
+     wirklich anfängt, und nicht vor die Preise.                       -->
+<section class="becken" id="becken">
+  <div class="becken-satz">
+    <p class="braue">Am Anfang</p>
+    <h2 class="gross">Jede Behandlung<br>beginnt am <em>Becken</em>.</h2>
+    <p class="lauf">
+      Waschen, Kopfhaut ansehen, Kopfmassage. Erst danach wird geschnitten
+      oder gef&auml;rbt. Drehen Sie den Hebel auf.
+    </p>
+    <p class="hahn-wort" id="hahn-wort">Hebel anheben</p>
+  </div>
+
+  <div class="buehne">
     <div class="strahl" id="strahl" aria-hidden="true">
       <span class="strahl-kern"></span>
       <span class="strahl-saum"></span>
@@ -56,36 +103,221 @@
     </div>
 
     <div class="film" id="bild">
-      <video class="film-lauf" id="film"
-             poster="bilder/kopf-trocken.webp"
+      <video class="film-lauf" id="film" poster="bilder/kopf-trocken.webp"
              muted playsinline preload="none" tabindex="-1" aria-hidden="true"></video>
       <img class="film-halt" src="bilder/kopf-trocken.webp" alt=""
-           width="720" height="880" fetchpriority="high" decoding="async">
+           width="720" height="880" loading="lazy" decoding="async">
     </div>
 
     <div class="hahn">
       <div class="hahn-rohr" aria-hidden="true"></div>
-      <img class="hahn-koerper" src="bilder/hahn-koerper.webp" alt="" width="561" height="540" fetchpriority="high" decoding="async">
-
-      <div class="hebel" id="hebel"
-           role="slider" tabindex="0"
+      <img class="hahn-koerper" src="bilder/hahn-koerper.webp" alt="" width="561" height="540" loading="lazy" decoding="async">
+      <div class="hebel" id="hebel" role="slider" tabindex="0"
            aria-label="Hebel des Wasserhahns"
            aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
            aria-valuetext="zugedreht &ndash; das Haar ist trocken">
-        <img src="bilder/hahn-hebel.webp" alt="" width="561" height="540" decoding="async">
+        <img src="bilder/hahn-hebel.webp" alt="" width="561" height="540" loading="lazy" decoding="async">
       </div>
+      <img class="hahn-nabe" src="bilder/hahn-nabe.webp" alt="" width="561" height="540" loading="lazy" decoding="async">
+    </div>
+  </div>
+</section>
 
-      <img class="hahn-nabe" src="bilder/hahn-nabe.webp" alt="" width="561" height="540" decoding="async">
+<!-- ══ Leistungen ═══════════════════════════════════════════════════════ -->
+<section class="bahn" id="leistungen">
+  <div class="mitte">
+    <p class="braue">Leistungen</p>
+    <h2 class="gross">Was hier gemacht wird</h2>
+    <p class="lauf lese">
+      Die Preise richten sich nach Haarl&auml;nge und Aufwand. Beratung und
+      Kopfhautanalyse geh&ouml;ren dazu, sie werden nicht extra berechnet.
+    </p>
+
+    <div class="karten">
+      <article class="karte">
+        <h3>Schnitt &amp; Styling</h3>
+        <dl>
+          <div><dt>Waschen, Schneiden &amp; F&ouml;hnen</dt><dd>59&ndash;69&nbsp;&euro;</dd></div>
+          <div><dt>Waschen &amp; Schneiden</dt><dd>45&ndash;49&nbsp;&euro;</dd></div>
+          <div><dt>Waschen &amp; F&ouml;hnen</dt><dd>30&ndash;40&nbsp;&euro;</dd></div>
+        </dl>
+      </article>
+
+      <article class="karte">
+        <h3>Farbe &amp; Str&auml;hnen</h3>
+        <dl>
+          <div><dt>Farbe inkl. Schneiden &amp; F&ouml;hnen</dt><dd>85&ndash;115&nbsp;&euro;</dd></div>
+          <div><dt>Foliensträhnen inkl. Schneiden</dt><dd>140&ndash;160&nbsp;&euro;</dd></div>
+          <div><dt>Balayage ganzer Kopf, mit Schnitt</dt><dd>190&ndash;230&nbsp;&euro;</dd></div>
+          <div><dt>Keratin-Gl&auml;ttung</dt><dd>190&ndash;250&nbsp;&euro;</dd></div>
+        </dl>
+      </article>
+
+      <article class="karte">
+        <h3>Herren</h3>
+        <dl>
+          <div><dt>Waschen, Schneiden &amp; Stylen</dt><dd>35&ndash;39&nbsp;&euro;</dd></div>
+          <div><dt>Kontur oder Maschinenschnitt</dt><dd>20&ndash;29&nbsp;&euro;</dd></div>
+          <div><dt>Bart schneiden</dt><dd>10&ndash;20&nbsp;&euro;</dd></div>
+        </dl>
+      </article>
+
+      <article class="karte">
+        <h3>Kinder bis 12</h3>
+        <dl>
+          <div><dt>Jungen, inkl. Waschen</dt><dd>25&nbsp;&euro;</dd></div>
+          <div><dt>M&auml;dchen, inkl. Waschen</dt><dd>30&ndash;40&nbsp;&euro;</dd></div>
+        </dl>
+      </article>
+
+      <article class="karte">
+        <h3>Augenbrauen &amp; Pflege</h3>
+        <dl>
+          <div><dt>Augenbrauen in Fadentechnik</dt><dd>10&nbsp;&euro;</dd></div>
+          <div><dt>Olaplex-Behandlung</dt><dd>30&nbsp;&euro;</dd></div>
+          <div><dt>Intensiv-Haarkur</dt><dd>10&nbsp;&euro;</dd></div>
+          <div><dt>Wimpern f&auml;rben</dt><dd>12&nbsp;&euro;</dd></div>
+        </dl>
+      </article>
+
+      <article class="karte">
+        <h3>Besondere Anl&auml;sse</h3>
+        <dl>
+          <div><dt>Hochsteckfrisur</dt><dd>60&ndash;90&nbsp;&euro;</dd></div>
+          <div><dt>Tages-Make-up</dt><dd>60&nbsp;&euro;</dd></div>
+          <div><dt>Abend-Make-up</dt><dd>80&nbsp;&euro;</dd></div>
+        </dl>
+      </article>
     </div>
 
-    <p class="hahn-wort" id="hahn-wort" aria-hidden="true">Hebel anheben</p>
+    <p class="mehr"><a href="leistungen.html">Die vollst&auml;ndige Preisliste &rarr;</a></p>
   </div>
-
-  <p class="boden">
-    <span>Perlacher Stra&szlig;e&nbsp;2 &middot; 81539&nbsp;M&uuml;nchen</span>
-    <span class="stand" id="stand"></span>
-  </p>
 </section>
+
+<!-- ══ Brautstyling ═════════════════════════════════════════════════════ -->
+<section class="braut" id="brautstyling">
+  <div class="braut-satz">
+    <p class="braue">Brautstyling</p>
+    <h2 class="gross">Haar und Make-up<br>aus <em>einer Hand</em>.</h2>
+    <p class="lauf">
+      Ein Termin, eine Person, kein Abstimmen zwischen zwei Dienstleistern.
+      Auf Wunsch mit Probetermin vorab. Bahar frisiert seit zwanzig Jahren
+      Br&auml;ute &mdash; das ist die Arbeit, auf die dieser Laden am
+      meisten stolz ist.
+    </p>
+    <p class="preis"><b>390&ndash;600&nbsp;&euro;</b> gesamt, Hairstyling und Braut-Make-up</p>
+    <a class="knopf" href="https://bahaars-styling-studio.salonized.com/widget_bookings/new?widget_id=sNYusRnC1XwjUqnu97LzSfiz" target="_blank" rel="noopener">Probetermin anfragen</a>
+  </div>
+  <div class="braut-bilder">
+    <img src="bilder/arbeit-braut-schleier.webp" alt="Braut mit Schleier und dunkler Hochsteckfrisur" width="1000" height="1333" loading="lazy" decoding="async">
+    <img src="bilder/arbeit-braut-perlen.webp" alt="Blonde Hochsteckfrisur mit eingearbeiteten Perlen" width="1000" height="1333" loading="lazy" decoding="async">
+  </div>
+</section>
+
+<!-- ══ Arbeiten ═════════════════════════════════════════════════════════ -->
+<section class="bahn" id="arbeiten">
+  <div class="mitte">
+    <p class="braue">Arbeiten</p>
+    <h2 class="gross">Aus dem Laden</h2>
+    <p class="lauf lese">
+      Alles im Salon an der Perlacher Stra&szlig;e entstanden, an echten
+      Kundinnen und Kunden.
+    </p>
+    <div class="werke">
+      <img src="bilder/arbeit-balayage.webp" alt="Lange Haare mit Balayage, von hinten" width="1000" height="1333" loading="lazy" decoding="async">
+      <img src="bilder/arbeit-locken.webp" alt="Blonde Locken, geföhnt" width="1000" height="1333" loading="lazy" decoding="async">
+      <img src="bilder/arbeit-glatt.webp" alt="Lange glatte Haare mit Stufen" width="1000" height="1333" loading="lazy" decoding="async">
+      <img src="bilder/arbeit-bob.webp" alt="Kurzer blonder Bob mit Locken" width="1000" height="1333" loading="lazy" decoding="async">
+      <img src="bilder/arbeit-straehnen.webp" alt="Str&auml;hnen in mittellangem Haar" width="1000" height="1333" loading="lazy" decoding="async">
+      <img src="bilder/arbeit-kind.webp" alt="Kinderhaarschnitt, Junge" width="1000" height="1333" loading="lazy" decoding="async">
+      <img src="bilder/arbeit-flecht.webp" alt="Eingeflochtene Z&ouml;pfe am Oberkopf" width="1000" height="1333" loading="lazy" decoding="async">
+      <img src="bilder/arbeit-ombre.webp" alt="Langes Haar mit Ombr&eacute;-Verlauf" width="1000" height="1333" loading="lazy" decoding="async">
+    </div>
+  </div>
+</section>
+
+<!-- ══ Der Laden ════════════════════════════════════════════════════════ -->
+<section class="bahn" id="laden">
+  <div class="mitte">
+    <p class="braue">Der Laden</p>
+    <h2 class="gross">Perlacher Stra&szlig;e 2</h2>
+    <p class="lauf lese">
+      Zwei Stühle, ein Waschplatz, ein Regal voll Moroccanoil. Kein
+      Kettenbetrieb, keine Nummer, die aufgerufen wird &mdash; und wenn
+      gerade frei ist, geht es auch ohne Termin.
+    </p>
+    <div class="raeume">
+      <img src="bilder/laden-platz.webp" alt="Zwei Friseurpl&auml;tze mit Spiegeln" width="1170" height="548" loading="lazy" decoding="async">
+      <img src="bilder/laden-regal.webp" alt="Das Produktregal im Salon" width="1170" height="548" loading="lazy" decoding="async">
+      <img src="bilder/laden-raum.webp" alt="Blick in den Salon" width="1170" height="548" loading="lazy" decoding="async">
+    </div>
+    <blockquote class="spruch">
+      Sch&ouml;nheit beginnt in dem Moment, in dem du beschlie&szlig;t, du
+      selbst zu sein.
+      <cite>Coco Chanel</cite>
+    </blockquote>
+  </div>
+</section>
+
+<!-- ══ Kontakt ══════════════════════════════════════════════════════════ -->
+<section class="bahn kontakt" id="kontakt">
+  <div class="mitte">
+    <p class="braue">Kontakt</p>
+    <h2 class="gross">Kommen Sie vorbei</h2>
+
+    <div class="spalten">
+      <div>
+        <h3>&Ouml;ffnungszeiten</h3>
+        <table class="zeiten">
+          <tbody>
+            <tr><th scope="row">Montag</th><td>10:00&ndash;16:00</td></tr>
+            <tr><th scope="row">Dienstag&ndash;Freitag</th><td>09:00&ndash;19:00</td></tr>
+            <tr><th scope="row">Samstag</th><td>09:00&ndash;16:00</td></tr>
+            <tr><th scope="row">Sonntag</th><td>geschlossen</td></tr>
+          </tbody>
+        </table>
+        <p class="stand-gross"><span class="stand" id="stand-2"></span></p>
+      </div>
+
+      <div>
+        <h3>So finden Sie uns</h3>
+        <p class="lauf">
+          Perlacher Stra&szlig;e&nbsp;2<br>81539&nbsp;M&uuml;nchen-Giesing
+        </p>
+        <p class="lauf">
+          <a href="tel:+498969236440">089&nbsp;692&nbsp;36&nbsp;44</a><br>
+          <a href="mailto:info@bahaarsstylingstudio.de">info@bahaarsstylingstudio.de</a><br>
+          <a href="https://www.instagram.com/bahaarsstylingstudio" target="_blank" rel="noopener">@bahaarsstylingstudio</a>
+        </p>
+        <p><a class="knopf-still" href="https://www.google.com/maps/search/?api=1&amp;query=Perlacher+Stra%C3%9Fe+2%2C+81539+M%C3%BCnchen" target="_blank" rel="noopener">Auf der Karte zeigen</a></p>
+      </div>
+
+      <div>
+        <h3>Termin</h3>
+        <p class="lauf">
+          Am schnellsten geht es telefonisch. Online buchen k&ouml;nnen Sie
+          rund um die Uhr &mdash; und wenn gerade ein Stuhl frei ist, geht
+          es auch ohne Termin.
+        </p>
+        <p><a class="knopf" href="https://bahaars-styling-studio.salonized.com/widget_bookings/new?widget_id=sNYusRnC1XwjUqnu97LzSfiz" target="_blank" rel="noopener">Termin buchen</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="fuss">
+  <div class="mitte">
+    <p class="fuss-marke">BaHaar&rsquo;s Styling Studio</p>
+    <nav class="fuss-wege" aria-label="Rechtliches">
+      <a href="leistungen.html">Preisliste</a>
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutz</a>
+    </nav>
+    <p class="fuss-recht">&copy; 2026 BaHaar&rsquo;s Styling Studio &middot; Perlacher Stra&szlig;e 2, 81539 M&uuml;nchen</p>
+  </div>
+</footer>
 
 <script src="neu.js" defer></script>
 </body>
