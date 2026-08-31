@@ -8,16 +8,17 @@
    ═══════════════════════════════════════════════════════════════════════ */
 
 /* ── Der Wasserhahn am Becken ─────────────────────────────────────────
-   Der Hebel ist ein Schalter: auf oder zu, nichts dazwischen. Offen
-   läuft der Film in einer nahtlosen Schleife — nasses Haar unter
-   laufendem Wasser. Vorher wurde der Film am Hebel entlanggespult; dabei
-   stand die Frau bei jedem Halt still, und genau das sollte sie nicht.
+   Der Hebel ist ein Schalter: auf oder zu, nichts dazwischen.
 
-   Der Film ist deshalb neu geschnitten: 2,32 s aus dem Ende der
-   Aufnahme, das Ende in den Anfang geblendet. Gemessen ist die Naht
-   1,28 gegen 1,01 bei einem gewöhnlichen Bildwechsel — man sieht sie
-   nicht. Ohne Spulen braucht die Datei auch keine dichten
-   Schlüsselbilder mehr: 312 kB statt 1,77 MB.                        */
+   Offen wird das Haar Stück für Stück nasser — das ist der echte Verlauf
+   aus der Aufnahme, sieben Sekunden von trocken bis nass. Ist es ganz
+   nass, übernimmt eine nahtlose Schleife, damit weiter Wasser läuft.
+   Zugedreht hält der Film an und behält, wie nass das Haar geworden ist;
+   Wieder-Aufdrehen macht dort weiter. Es trocknet nicht von selbst.
+
+   Vorher wurde der Film am Hebelwert entlanggespult. Bei jedem Halt
+   stand die Frau als Standbild da, und nass war sie sofort oder gar
+   nicht.                                                             */
 
 (() => {
   'use strict';
@@ -26,38 +27,47 @@
   const ZUG     = 26;      // Pixel Bogenweg, ab denen ein Zug zählt
   const TIPP    = 8;       // darunter ist es kein Zug, sondern ein Tippen
 
-  const film   = document.getElementById('film');
-  const bild   = document.getElementById('bild');
-  const hebel  = document.getElementById('hebel');
-  const strahl = document.getElementById('strahl');
-  const wort   = document.getElementById('hahn-wort');
-  if (!film || !hebel) return;
+  const bild     = document.getElementById('bild');
+  const verlauf  = document.getElementById('film');
+  const schleife = document.getElementById('film-schleife');
+  const hebel    = document.getElementById('hebel');
+  const strahl   = document.getElementById('strahl');
+  const wort     = document.getElementById('hahn-wort');
+  if (!verlauf || !schleife || !hebel) return;
 
-  const ruhig = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const ruhig   = window.matchMedia('(prefers-reduced-motion: reduce)');
   const sparsam = navigator.connection && navigator.connection.saveData;
+  const schmal  = window.matchMedia('(max-width: 43rem)').matches;
 
   let offen = false;
   let angefasst = false;
   let nassBild = null;
+  let inSchleife = false;      // der Verlauf ist durch, es läuft die Schleife
+  let geladen = false, imBild = false;
+
+  const film = () => (inSchleife ? schleife : verlauf);
 
   /* ── Der Zustand ─────────────────────────────────────────────────── */
 
   function zeigen() {
     hebel.style.setProperty('--dreh', (offen ? BEREICH : 0) + 'deg');
     hebel.setAttribute('aria-checked', String(offen));
-    hebel.setAttribute('aria-label',
-      offen ? 'Wasser abdrehen' : 'Wasser aufdrehen');
+    hebel.setAttribute('aria-label', offen ? 'Wasser abdrehen' : 'Wasser aufdrehen');
     strahl.classList.toggle('laeuft', offen);
-    bild.classList.toggle('nass', offen);
-    /* Das Winken lädt zum Anfassen ein. Es hat nur Sinn, solange der
-       Hahn zu ist — an einem offenen Hahn zuckt sonst der Hebel, ohne
-       dass es etwas zu holen gäbe. */
+    if (nassBild) nassBild.style.opacity = offen || inSchleife ? 1 : nassBild.style.opacity;
+    /* Das Winken lädt zum Anfassen ein. An einem offenen Hahn zuckt der
+       Hebel sonst, ohne dass es etwas zu holen gäbe. */
     hebel.classList.toggle('wink', !offen && !angefasst);
-    if (nassBild) nassBild.style.opacity = offen ? 1 : 0;
     if (wort) {
-      wort.textContent = offen ? 'Wasser läuft' : 'Hebel anheben';
+      wort.textContent = offen ? 'Wasser läuft' : (naesse() > 0.02 ? 'Zugedreht' : 'Hebel anheben');
       wort.classList.toggle('offen', offen);
     }
+  }
+
+  /* Wie nass ist das Haar gerade — 0 trocken, 1 ganz nass. */
+  function naesse() {
+    if (inSchleife) return 1;
+    return verlauf.duration ? verlauf.currentTime / verlauf.duration : 0;
   }
 
   function schalten(neu, vonHand) {
@@ -68,33 +78,41 @@
     spielen();
   }
 
-  /* ── Der Film ────────────────────────────────────────────────────────
-     Er wird erst geladen, wenn der Abschnitt ins Bild kommt, und er
-     läuft nur, solange er offen und sichtbar ist. Ein Film, der hinter
-     dem Bildrand weiterläuft, kostet Strom und bringt nichts.        */
-
-  let geladen = false, imBild = false;
+  /* ── Die beiden Filme ────────────────────────────────────────────────
+     Geladen wird erst, wenn der Abschnitt ins Bild kommt. Gespielt wird
+     nur, solange offen und sichtbar — ein Film hinter dem Bildrand
+     kostet Strom und bringt nichts.                                   */
 
   function ladeFilm() {
     if (geladen) return;
     geladen = true;
-    const schmal = window.matchMedia('(max-width: 43rem)').matches;
-    film.src = schmal ? 'bilder/becken-lauf-klein.mp4' : 'bilder/becken-lauf.mp4';
-    film.load();
+    verlauf.src  = schmal ? 'bilder/becken-nass-klein.mp4' : 'bilder/becken-nass.mp4';
+    schleife.src = schmal ? 'bilder/becken-lauf-klein.mp4' : 'bilder/becken-lauf.mp4';
+    verlauf.load();
+    schleife.load();
   }
 
   function spielen() {
     if (!geladen) return;
-    if (offen && imBild) {
-      const p = film.play();
-      if (p && p.catch) p.catch(() => {});
-    } else {
-      film.pause();
+    const an = offen && imBild;
+    for (const v of [verlauf, schleife]) {
+      if (v === film() && an) { const p = v.play(); if (p && p.catch) p.catch(() => {}); }
+      else v.pause();
     }
   }
 
-  film.addEventListener('loadeddata', () => { bild.classList.add('laeuft'); spielen(); });
-  film.addEventListener('error', rueckfall);
+  verlauf.addEventListener('loadeddata', () => { bild.classList.add('laeuft'); spielen(); });
+
+  /* Der Verlauf ist durch: Das Haar ist so nass, wie es wird. Von hier
+     an läuft die Schleife weiter, damit das Wasser nicht einfriert. */
+  verlauf.addEventListener('ended', () => {
+    inSchleife = true;
+    bild.classList.add('schleife');
+    spielen();
+    zeigen();
+  });
+
+  verlauf.addEventListener('error', rueckfall);
 
   /* Bleibt der Film aus, übernimmt ein zweites Standbild: Der Hebel
      blendet dann das nasse Haar über das trockene. Ohne Bewegung, aber
@@ -107,6 +125,7 @@
     nassBild.width = 720; nassBild.height = 880;
     nassBild.className = 'film-halt film-nass';
     nassBild.style.opacity = offen ? 1 : 0;
+    nassBild.style.transition = 'opacity 4s linear';
     bild.appendChild(nassBild);
   }
 
@@ -121,8 +140,7 @@
   /* ── Ziehen und Tippen ───────────────────────────────────────────────
      Gerechnet wird der Weg entlang des Bogens, nicht der Winkel: Der
      Hebel ist am Telefon nur siebzig Pixel lang, über den Winkel drehte
-     ihn schon ein kurzer Wisch. Wer kaum bewegt, hat getippt — dann
-     kippt der Schalter um.
+     ihn schon ein kurzer Wisch. Wer kaum bewegt, hat getippt.
 
      Der Drehpunkt wird am Hahn gemessen, nicht am Hebel: Der Hebel ist
      gedreht, und `getBoundingClientRect` gibt dann das umschliessende
@@ -182,9 +200,9 @@
 
   /* ── Von selbst ──────────────────────────────────────────────────────
      Kommt der Abschnitt ins Bild, dreht der Hahn nach kurzer Zeit von
-     allein auf und bleibt offen — sonst stünde dort ein Standbild, und
-     niemand sähe, dass hier Wasser läuft. Bei prefers-reduced-motion
-     und im Datensparmodus bleibt er zu.                              */
+     allein auf — sonst stünde dort ein Standbild, und niemand sähe, dass
+     hier Wasser läuft. Bei prefers-reduced-motion und im Datensparmodus
+     bleibt er zu.                                                     */
 
   hebel.classList.add('wink');
   zeigen();

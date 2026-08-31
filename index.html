@@ -96,17 +96,18 @@
   </div>
 
   <div class="buehne">
-    <div class="strahl" id="strahl" aria-hidden="true">
-      <span class="strahl-kern"></span>
-      <span class="strahl-saum"></span>
-      <span class="strahl-aufschlag"></span>
-    </div>
-
     <div class="film" id="bild">
       <video class="film-lauf" id="film" poster="bilder/kopf-trocken.webp"
+             muted playsinline preload="none" tabindex="-1" aria-hidden="true"></video>
+      <video class="film-lauf film-schleife" id="film-schleife"
              muted loop playsinline preload="none" tabindex="-1" aria-hidden="true"></video>
       <img class="film-halt" src="bilder/kopf-trocken.webp" alt=""
            width="720" height="880" loading="lazy" decoding="async">
+    </div>
+
+    <div class="strahl" id="strahl" aria-hidden="true">
+      <span class="strahl-saeule"><i></i></span>
+      <span class="strahl-krone"></span>
     </div>
 
     <div class="hahn">
