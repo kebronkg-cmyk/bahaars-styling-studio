@@ -8,16 +8,23 @@
    ═══════════════════════════════════════════════════════════════════════ */
 
 /* ── Der Wasserhahn am Becken ─────────────────────────────────────────
-   Der Hebel steuert zweierlei: wie dicht das gezeichnete Wasser läuft
-   und wie weit der Film steht.                                       */
+   Der Hebel ist ein Schalter: auf oder zu, nichts dazwischen. Offen
+   läuft der Film in einer nahtlosen Schleife — nasses Haar unter
+   laufendem Wasser. Vorher wurde der Film am Hebel entlanggespult; dabei
+   stand die Frau bei jedem Halt still, und genau das sollte sie nicht.
+
+   Der Film ist deshalb neu geschnitten: 2,32 s aus dem Ende der
+   Aufnahme, das Ende in den Anfang geblendet. Gemessen ist die Naht
+   1,28 gegen 1,01 bei einem gewöhnlichen Bildwechsel — man sieht sie
+   nicht. Ohne Spulen braucht die Datei auch keine dichten
+   Schlüsselbilder mehr: 312 kB statt 1,77 MB.                        */
 
 (() => {
   'use strict';
 
-  const BEREICH  = 76;     // Grad, um die sich der Hebel hebt
-  const WEG      = 240;    // Pixel Zugweg von zu bis ganz auf
-  const NACHLAUF = 0.13;   // wie träge der Film der Hand folgt
-  const SCHRITT  = 0.07;   // eine Pfeiltaste
+  const BEREICH = 76;      // Grad, um die sich der Hebel hebt
+  const ZUG     = 26;      // Pixel Bogenweg, ab denen ein Zug zählt
+  const TIPP    = 8;       // darunter ist es kein Zug, sondern ein Tippen
 
   const film   = document.getElementById('film');
   const bild   = document.getElementById('bild');
@@ -26,176 +33,80 @@
   const wort   = document.getElementById('hahn-wort');
   if (!film || !hebel) return;
 
-  let soll = 0;            // wohin der Hebel zeigt, 0..1
-  let ist  = 0;            // wo der Film steht, läuft dem Soll nach
+  const ruhig = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const sparsam = navigator.connection && navigator.connection.saveData;
+
+  let offen = false;
   let angefasst = false;
   let nassBild = null;
 
-  const klemme = (v, a, b) => v < a ? a : v > b ? b : v;
-
-  function wortFuer(v) {
-    if (v < 0.02) return 'Hebel anheben';
-    if (v > 0.97) return 'Ganz offen';
-    return 'Läuft · ' + Math.round(v * 100) + ' %';
-  }
-  function textFuer(v) {
-    if (v < 0.02) return 'zugedreht – das Haar ist trocken';
-    if (v > 0.97) return 'ganz offen – das Haar ist nass';
-    return Math.round(v * 100) + ' Prozent offen';
-  }
+  /* ── Der Zustand ─────────────────────────────────────────────────── */
 
   function zeigen() {
-    hebel.style.setProperty('--dreh', (soll * BEREICH).toFixed(2) + 'deg');
-    hebel.setAttribute('aria-valuenow', Math.round(soll * 100));
-    hebel.setAttribute('aria-valuetext', textFuer(soll));
+    hebel.style.setProperty('--dreh', (offen ? BEREICH : 0) + 'deg');
+    hebel.setAttribute('aria-checked', String(offen));
+    hebel.setAttribute('aria-label',
+      offen ? 'Wasser abdrehen' : 'Wasser aufdrehen');
+    strahl.classList.toggle('laeuft', offen);
+    bild.classList.toggle('nass', offen);
+    /* Das Winken lädt zum Anfassen ein. Es hat nur Sinn, solange der
+       Hahn zu ist — an einem offenen Hahn zuckt sonst der Hebel, ohne
+       dass es etwas zu holen gäbe. */
+    hebel.classList.toggle('wink', !offen && !angefasst);
+    if (nassBild) nassBild.style.opacity = offen ? 1 : 0;
     if (wort) {
-      wort.textContent = wortFuer(soll);
-      wort.classList.toggle('offen', soll >= 0.02);
+      wort.textContent = offen ? 'Wasser läuft' : 'Hebel anheben';
+      wort.classList.toggle('offen', offen);
     }
   }
 
-  function setzeSoll(v, vonHand) {
-    soll = klemme(v, 0, 1);
-    zeigen();
+  function schalten(neu, vonHand) {
     if (vonHand) ersteBeruehrung();
+    if (neu === offen) return;
+    offen = neu;
+    zeigen();
+    spielen();
   }
 
-  /* ── Was der Film und das Wasser daraus machen ───────────────────────
-     Der Film folgt nicht hart, sondern zieht nach: Wasser hat Trägheit,
-     und ein Bild, das am Finger klebt, fühlt sich an wie ein
-     Schieberegler und nicht wie eine Armatur.
+  /* ── Der Film ────────────────────────────────────────────────────────
+     Er wird erst geladen, wenn der Abschnitt ins Bild kommt, und er
+     läuft nur, solange er offen und sichtbar ist. Ein Film, der hinter
+     dem Bildrand weiterläuft, kostet Strom und bringt nichts.        */
 
-     Ein Sprung kostet so viel, wie seit dem letzten Schlüsselbild liegt;
-     die Datei hat deshalb alle vier Bilder eines. Gesprungen wird immer
-     nur einmal gleichzeitig — wer schneller zieht, als der Browser
-     springen kann, überschreibt das Ziel, statt eine Schlange
-     anzulegen.                                                        */
-
-  let springt = false;
-  film.addEventListener('seeked', () => { springt = false; });
-
-  function schleife() {
-    const vorher = ist;
-    ist += (soll - ist) * NACHLAUF;
-    if (Math.abs(soll - ist) < 0.0004) ist = soll;
-
-    if (ist !== vorher) {
-      strahl.style.setProperty('--fluss', ist.toFixed(3));
-      strahl.classList.toggle('laeuft', ist > 0.015);
-      if (nassBild) nassBild.style.opacity = ist;
-    }
-
-    if (film.duration && !springt) {
-      /* Nie auf die Dauer selbst springen: Ein Sprung dorthin meldet je
-         nach Browser kein `seeked`, und dann steht der Hahn still. */
-      const ziel = klemme(ist * (film.duration - 1 / 24), 0, film.duration);
-      if (Math.abs(film.currentTime - ziel) > 0.012) {
-        springt = true;
-        film.currentTime = ziel;
-      }
-    }
-    requestAnimationFrame(schleife);
-  }
-  requestAnimationFrame(schleife);
-
-  /* ── Ziehen ──────────────────────────────────────────────────────────
-     Gerechnet wird der zurückgelegte Weg entlang des Bogens, nicht der
-     Winkel. Der Hebel ist am Telefon nur siebzig Pixel lang; über den
-     Winkel gerechnet drehte ihn schon ein kurzer Wisch ganz auf. Über
-     den Weg braucht es immer dieselben dreihundert Pixel — gleich, ob
-     man ihn an der Spitze anfasst oder weit daneben.                  */
-
-  let zeiger = null, letztX = 0, letztY = 0;
-
-  /* Der Drehpunkt wird am Hahn gemessen, nicht am Hebel: Der Hebel ist
-     gedreht, und `getBoundingClientRect` gibt dann das umschliessende
-     Rechteck der gedrehten Fläche zurück — der Punkt wanderte mit dem
-     Ausschlag davon. Der Hebel füllt den Hahn (`inset: 0`), das
-     ungedrehte Rechteck ist also das des Hahns. */
-  const arm = hebel.parentElement;
-  function nabe() {
-    const r = arm.getBoundingClientRect();
-    return [r.left + r.width * 0.672, r.top + r.height * 0.2074];
-  }
-
-  hebel.addEventListener('pointerdown', (ev) => {
-    zeiger = ev.pointerId;
-    letztX = ev.clientX; letztY = ev.clientY;
-    hebel.setPointerCapture(ev.pointerId);
-    ersteBeruehrung();
-    ev.preventDefault();
-  });
-
-  hebel.addEventListener('pointermove', (ev) => {
-    if (ev.pointerId !== zeiger) return;
-    const [cx, cy] = nabe();
-    const rx = ev.clientX - cx, ry = ev.clientY - cy;
-    const r = Math.hypot(rx, ry);
-    if (r < 12) { letztX = ev.clientX; letztY = ev.clientY; return; }
-    /* Der Anteil der Bewegung quer zum Arm — das ist der Bogenweg. */
-    const quer = ((ev.clientX - letztX) * -ry + (ev.clientY - letztY) * rx) / r;
-    letztX = ev.clientX; letztY = ev.clientY;
-    setzeSoll(soll + quer / WEG, true);
-  });
-
-  const loslassen = (ev) => { if (ev.pointerId === zeiger) zeiger = null; };
-  hebel.addEventListener('pointerup', loslassen);
-  hebel.addEventListener('pointercancel', loslassen);
-
-  hebel.addEventListener('keydown', (ev) => {
-    const k = ev.key;
-    let v = null;
-    if (k === 'ArrowRight' || k === 'ArrowUp')        v = soll + SCHRITT;
-    else if (k === 'ArrowLeft' || k === 'ArrowDown')  v = soll - SCHRITT;
-    else if (k === 'PageUp')   v = soll + SCHRITT * 3;
-    else if (k === 'PageDown') v = soll - SCHRITT * 3;
-    else if (k === 'Home')     v = 0;
-    else if (k === 'End')      v = 1;
-    else if (k === ' ' || k === 'Enter') v = soll > 0.02 ? 0 : 0.75;
-    if (v === null) return;
-    ev.preventDefault();
-    setzeSoll(v, true);
-  });
-
-  /* ── Laden ───────────────────────────────────────────────────────────
-     Bis der Film da ist, steht sein erstes Bild als Standbild — und das
-     erste Bild ist genau das, was ein zugedrehter Hahn zeigt: trockenes
-     Haar. Wer mit gedrosselter Datenmenge unterwegs ist, lädt ihn erst
-     beim Anfassen.                                                    */
-
-  let geladen = false;
-  const sparsam = navigator.connection && navigator.connection.saveData;
+  let geladen = false, imBild = false;
 
   function ladeFilm() {
     if (geladen) return;
     geladen = true;
     const schmal = window.matchMedia('(max-width: 43rem)').matches;
-    film.src = schmal ? 'bilder/kopf-klein.mp4' : 'bilder/kopf.mp4';
+    film.src = schmal ? 'bilder/becken-lauf-klein.mp4' : 'bilder/becken-lauf.mp4';
     film.load();
-    /* Auf iOS gibt ein pausiertes Video erst nach einer echten Berührung
-       Bilder heraus. Einmal anspielen und sofort anhalten genügt. */
-    const p = film.play();
-    if (p && p.then) p.then(() => film.pause()).catch(() => {});
   }
 
-  film.addEventListener('loadeddata', () => {
-    film.pause();
-    bild.classList.add('laeuft');
-    if (!angefasst && !sparsam) vorfuehren();
-  });
+  function spielen() {
+    if (!geladen) return;
+    if (offen && imBild) {
+      const p = film.play();
+      if (p && p.catch) p.catch(() => {});
+    } else {
+      film.pause();
+    }
+  }
+
+  film.addEventListener('loadeddata', () => { bild.classList.add('laeuft'); spielen(); });
   film.addEventListener('error', rueckfall);
 
   /* Bleibt der Film aus, übernimmt ein zweites Standbild: Der Hebel
-     blendet dann das nasse Haar über das trockene. */
+     blendet dann das nasse Haar über das trockene. Ohne Bewegung, aber
+     ohne Loch. */
   function rueckfall() {
     if (nassBild) return;
     nassBild = new Image();
     nassBild.src = 'bilder/kopf-nass.webp';
     nassBild.alt = '';
     nassBild.width = 720; nassBild.height = 880;
-    nassBild.className = 'film-halt';
-    nassBild.style.opacity = ist;
-    nassBild.style.transition = 'none';
+    nassBild.className = 'film-halt film-nass';
+    nassBild.style.opacity = offen ? 1 : 0;
     bild.appendChild(nassBild);
   }
 
@@ -207,21 +118,88 @@
     setTimeout(() => { if (!bild.classList.contains('laeuft')) rueckfall(); }, 6000);
   }
 
-  /* Einmal vormachen, wofür der Hebel da ist. Bricht ab, sobald jemand
-     selbst anfasst, und bleibt bei prefers-reduced-motion ganz aus. */
-  function vorfuehren() {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    setTimeout(() => { if (!angefasst) { soll = 0.55; zeigen(); } }, 1100);
-    setTimeout(() => { if (!angefasst) { soll = 0;    zeigen(); } }, 4600);
+  /* ── Ziehen und Tippen ───────────────────────────────────────────────
+     Gerechnet wird der Weg entlang des Bogens, nicht der Winkel: Der
+     Hebel ist am Telefon nur siebzig Pixel lang, über den Winkel drehte
+     ihn schon ein kurzer Wisch. Wer kaum bewegt, hat getippt — dann
+     kippt der Schalter um.
+
+     Der Drehpunkt wird am Hahn gemessen, nicht am Hebel: Der Hebel ist
+     gedreht, und `getBoundingClientRect` gibt dann das umschliessende
+     Rechteck der gedrehten Fläche zurück.                            */
+
+  const arm = hebel.parentElement;
+  let zeiger = null, letztX = 0, letztY = 0, weg = 0, strecke = 0;
+
+  function nabe() {
+    const r = arm.getBoundingClientRect();
+    return [r.left + r.width * 0.672, r.top + r.height * 0.2074];
   }
+
+  hebel.addEventListener('pointerdown', (ev) => {
+    zeiger = ev.pointerId;
+    letztX = ev.clientX; letztY = ev.clientY;
+    weg = 0; strecke = 0;
+    hebel.setPointerCapture(ev.pointerId);
+    ersteBeruehrung();
+    ev.preventDefault();
+  });
+
+  hebel.addEventListener('pointermove', (ev) => {
+    if (ev.pointerId !== zeiger) return;
+    const [cx, cy] = nabe();
+    const rx = ev.clientX - cx, ry = ev.clientY - cy;
+    const r = Math.hypot(rx, ry);
+    const dx = ev.clientX - letztX, dy = ev.clientY - letztY;
+    letztX = ev.clientX; letztY = ev.clientY;
+    strecke += Math.hypot(dx, dy);
+    if (r < 12) return;
+    weg += (dx * -ry + dy * rx) / r;   // der Anteil quer zum Arm
+    if (weg >=  ZUG) { weg = 0; schalten(true,  true); }
+    if (weg <= -ZUG) { weg = 0; schalten(false, true); }
+  });
+
+  /* `setPointerCapture` lenkt das spätere `click` auf das Capture-Ziel
+     um. Deshalb wird hier selbst entschieden, was ein Tippen war. */
+  const loslassen = (ev) => {
+    if (ev.pointerId !== zeiger) return;
+    zeiger = null;
+    if (strecke < TIPP) schalten(!offen, true);
+  };
+  hebel.addEventListener('pointerup', loslassen);
+  hebel.addEventListener('pointercancel', (ev) => { if (ev.pointerId === zeiger) zeiger = null; });
+
+  hebel.addEventListener('keydown', (ev) => {
+    const k = ev.key;
+    let v = null;
+    if (k === ' ' || k === 'Enter') v = !offen;
+    else if (k === 'ArrowRight' || k === 'ArrowUp'   || k === 'End')  v = true;
+    else if (k === 'ArrowLeft'  || k === 'ArrowDown' || k === 'Home') v = false;
+    if (v === null) return;
+    ev.preventDefault();
+    schalten(v, true);
+  });
+
+  /* ── Von selbst ──────────────────────────────────────────────────────
+     Kommt der Abschnitt ins Bild, dreht der Hahn nach kurzer Zeit von
+     allein auf und bleibt offen — sonst stünde dort ein Standbild, und
+     niemand sähe, dass hier Wasser läuft. Bei prefers-reduced-motion
+     und im Datensparmodus bleibt er zu.                              */
 
   hebel.classList.add('wink');
   zeigen();
 
-  if ('IntersectionObserver' in window && !sparsam) {
-    const beobachter = new IntersectionObserver((e) => {
-      for (const x of e) if (x.isIntersecting) { beobachter.disconnect(); ladeFilm(); }
-    }, { rootMargin: '200px' });
+  if ('IntersectionObserver' in window) {
+    const beobachter = new IntersectionObserver((eintraege) => {
+      for (const e of eintraege) {
+        imBild = e.isIntersecting;
+        if (imBild && !geladen && !sparsam && !ruhig.matches) {
+          ladeFilm();
+          setTimeout(() => { if (!angefasst) schalten(true, false); }, 900);
+        }
+        spielen();
+      }
+    }, { rootMargin: '150px 0px', threshold: 0.01 });
     beobachter.observe(bild);
   }
 })();

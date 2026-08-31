@@ -24,6 +24,11 @@
    um 20 % der Bildbreite (Bild für Bild gemessen). Ihn unter einem festen
    Auslauf zu halten hiesse, das ganze Bild mitzuschieben, und das sieht
    man. Der Film beginnt deshalb erst am Scheitel.
+
+   Der Hebel ist ein Schalter, kein Regler: auf oder zu. Offen läuft der
+   Film in einer nahtlosen Schleife weiter. Vorher wurde er am Hebel
+   entlanggespult, und dabei stand die Frau bei jedem Halt still — genau
+   das sollte sie nicht.
    ═══════════════════════════════════════════════════════════════════════ */
 
 @font-face {
@@ -453,10 +458,17 @@ a { color: inherit; }
   width: 100%; height: 100%;
   object-fit: cover; object-position: 50% 0%;
 }
-.film-lauf { opacity: 0; transition: opacity var(--t2) var(--kurve); }
-.film-halt { transition: opacity var(--t2) var(--kurve); }
-.film.laeuft .film-lauf { opacity: 1; }
-.film.laeuft .film-halt { opacity: 0; }
+/* Zu ist trocken, offen ist nass. Der Film zeigt nasses Haar von der
+   ersten Sekunde an — er darf also nur sichtbar sein, wenn der Hahn
+   offen ist, nicht schon wenn er geladen hat. Das Wasser kommt erst
+   an, dann wird das Haar nass: Der Übergang wartet 0,22 s. */
+.film-lauf, .film-halt, .film-nass {
+  opacity: 0;
+  transition: opacity .55s var(--kurve) .22s;
+}
+.film-halt { opacity: 1; }
+.film.laeuft.nass .film-lauf { opacity: 1; }
+.film.nass .film-halt:not(.film-nass) { opacity: 0; }
 
 /* ── Der gezeichnete Strahl ───────────────────────────────────────────── */
 
@@ -465,11 +477,15 @@ a { color: inherit; }
   left: var(--scheitel);
   top: var(--muendung);
   height: calc(var(--buehne-h) - var(--film-h) - var(--muendung) + 2.2rem);
-  width: 40px;
+  width: 46px;
   transform: translateX(-50%);
-  opacity: min(1, calc(var(--fluss, 0) * 7));
+  /* An oder aus. Vorher hing die Deckung am Hebelwert und der Strahl
+     war bei halb offen halb durchsichtig — Wasser ist das nicht. */
+  opacity: 0;
+  transition: opacity .18s var(--kurve);
   pointer-events: none;
 }
+.strahl.laeuft { opacity: 1; }
 /* Die drei Lagen füllen den Strahlkasten. Nicht `.strahl span` — ein
    Typselektor wiegt schwerer als eine zweite Klasse und hebelt dann
    `left` und `bottom` der einzelnen Lagen aus; der Kern stand dadurch
@@ -480,12 +496,12 @@ a { color: inherit; }
 
 .strahl > .strahl-saum {
   background: linear-gradient(to right,
-    transparent 18%,
-    oklch(94% .014 230 / .14) 34%,
-    oklch(97% .010 224 / .36) 50%,
-    oklch(94% .014 230 / .14) 66%,
-    transparent 82%);
-  filter: blur(2.5px);
+    transparent 8%,
+    oklch(94% .014 230 / .12) 28%,
+    oklch(97% .010 224 / .30) 50%,
+    oklch(94% .014 230 / .12) 72%,
+    transparent 92%);
+  filter: blur(3.5px);
   /* Unten darf der Strahl nicht abgeschnitten enden, sonst steht dort ein
      Balken statt Wasser. Er löst sich in den letzten Zentimetern auf. */
   --ende: linear-gradient(to bottom, #000 0%, #000 62%, transparent 100%);
@@ -499,26 +515,46 @@ a { color: inherit; }
    gewinnt die zweite, und die erste sieht trotzdem richtig aus. */
 .strahl > .strahl-kern {
   left: 50%;
-  width: calc(2px + 4px * var(--fluss, 0));
+  width: 11px;
   transform: translateX(-50%);
+  /* Der Strahl wird nach unten schmaler: Wasser zieht sich beim Fallen
+     zusammen, und eine gleich breite Säule sieht aus wie ein Draht. */
+  clip-path: polygon(0 0, 100% 0, 68% 100%, 32% 100%);
+  /* Drei Lagen: die wandernden Bänder, quer die Form einer Wassersäule
+     — aussen hell, in der Mitte durchsichtig, weil Wasser eine Linse ist
+     und kein Stab — und längs das Ausdünnen nach unten. Flach gefüllt
+     sah die Säule aus wie Glas. */
   background-image:
     repeating-linear-gradient(to bottom,
-      oklch(97% .008 222 / 0) 0px,
-      oklch(97% .008 222 / .13) 34px,
-      oklch(97% .008 222 / 0) 74px),
+      oklch(99% .006 222 / 0)   0px,
+      oklch(99% .006 222 / .40) 26px,
+      oklch(99% .006 222 / .04) 52px,
+      oklch(99% .006 222 / .26) 84px,
+      oklch(99% .006 222 / 0)   148px),
+    linear-gradient(to right,
+      oklch(97% .010 224 / 0)   0%,
+      oklch(99% .008 222 / .92) 20%,
+      oklch(96% .012 226 / .30) 50%,
+      oklch(99% .008 222 / .96) 80%,
+      oklch(97% .010 224 / 0)   100%),
     linear-gradient(to bottom,
-      oklch(97% .010 224 / .94) 0%,
-      oklch(96% .010 224 / .84) 46%,
-      oklch(95% .012 226 / .56) 100%);
-  box-shadow: 0 0 12px oklch(92% .022 228 / .60);
-  filter: blur(.4px);
+      oklch(97% .010 224 / .95) 0%,
+      oklch(96% .010 224 / .80) 52%,
+      oklch(95% .012 226 / .48) 100%);
+  box-shadow: 0 0 14px oklch(92% .022 228 / .55);
+  filter: blur(.5px);
   --ende: linear-gradient(to bottom, #000 0%, #000 58%, transparent 96%);
   -webkit-mask-image: var(--ende);
           mask-image: var(--ende);
-  animation: fliessen .9s linear infinite;
+  animation: fliessen .19s linear infinite;
   animation-play-state: paused;
 }
 .strahl.laeuft > .strahl-kern { animation-play-state: running; }
+/* Das Tempo ist gerechnet, nicht geraten: Die Fallhöhe vom Auslauf zum
+   Scheitel sind rund 163 px und im Laden etwa 40 cm — ein Bildpunkt sind
+   also 2,45 mm. Wasser kommt dort mit gut 2 m/s an, das sind 800 px/s.
+   Bei 148 px Musterlänge macht das 0,19 s je Umlauf. Mit den vorherigen
+   0,9 s hing der Strahl wie ein Faden in der Luft. */
 @keyframes fliessen {
   from { background-position-y: 0; }
   to   { background-position-y: 148px; }
@@ -566,6 +602,7 @@ a { color: inherit; }
   position: absolute; inset: 0;
   transform-origin: 67.2% 20.74%;
   transform: rotate(var(--dreh, 0deg));
+  transition: transform .42s var(--kurve);
   cursor: grab;
   touch-action: none;
 }
@@ -940,6 +977,7 @@ a { color: inherit; }
 @media (prefers-reduced-motion: reduce) {
   .hebel.wink { animation: none; }
   .strahl > .strahl-kern { animation: none; }
-  .film-lauf, .film-halt, .leiste, .sprung,
+  .film-lauf, .film-halt, .film-nass, .hebel, .strahl,
+  .leiste, .sprung,
   .knopf, .knopf-still, .wege a, .pille { transition: none; }
 }
