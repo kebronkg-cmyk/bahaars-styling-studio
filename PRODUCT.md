@@ -44,7 +44,7 @@ für ihn ist. Für ihn zählt: nicht zu teuer, nicht zu abgehoben, man wird bera
 ## Product Purpose
 
 Ein Friseursalon in München-Giesing sichtbar machen und Termine auslösen.
-Erfolg ist messbar: ein gebuchter Termin über Salonized, ein Anruf, eine
+Erfolg ist messbar: ein gebuchter Termin über Treatwell, ein Anruf, eine
 Nachricht. Nicht: eine schöne Seite, die niemand anfasst.
 
 Die bestehende Seite läuft auf dem IONOS-Baukasten und sieht danach aus. Sie
@@ -80,9 +80,9 @@ info@bahaarsstylingstudio.de, Instagram
 | Samstag | 09:00 – 16:00 |
 | Sonntag | geschlossen |
 
-**Terminbuchung läuft über Salonized** — ein echter Buchungsdienst für Salons,
+**Terminbuchung läuft über Treatwell** — ein echter Buchungsdienst für Salons,
 der Dienstleistungen, Dauer und Mitarbeiterkalender kennt:
-`https://bahaars-styling-studio.salonized.com/widget_bookings/new?widget_id=sNYusRnC1XwjUqnu97LzSfiz`
+`https://www.treatwell.de/ort/bahaars-styling-studio/`
 Er bleibt der Weg zum Termin. Wir bauen keinen Ersatz, sondern führen sauber
 dorthin, und bieten Telefon und WhatsApp als zweiten Weg für alle, die lieber
 sprechen — bei Brautterminen ist das der Regelfall **(angenommen)**.
@@ -106,7 +106,6 @@ Regal), Revlon, American Crew, CHI, Olaplex.
 - Ob die Preise von 2026 noch aktuell sind. Bei JaSuVi waren sie ein Jahr alt.
 - Ob für die Kundenfotos Einwilligungen vorliegen. Auf der alten Seite zu
   stehen ist kein Nachweis.
-- Ob das Salonized-Widget sich einbetten lässt oder nur verlinkt werden kann.
 - Namen und Gesichter des Teams außer Bahar selbst.
 
 ## Brand Commitments

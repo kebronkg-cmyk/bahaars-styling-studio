@@ -3,6 +3,10 @@
 Die Seite ist gebaut, geprüft und live. Was hier steht, kann nur die
 Inhaberin beantworten. Die ersten drei sind rechtlich, nicht kosmetisch.
 
+Entschieden und eingebaut: Gebucht wird ausschliesslich über **Treatwell**,
+Salonized ist raus. Kein WhatsApp — der Merkzettel schickt eine E-Mail oder
+wird am Telefon durchgegeben.
+
 ## 1. Die Steuernummer im Impressum
 
 Im Impressum steht `148/156/01115` unter „Umsatzsteuer-Identifikationsnummer".
@@ -49,22 +53,8 @@ Die Seite zeigt Dienstag bis Freitag **09:00–19:00**. Treatwell nennt
 **09:00–18:30**. Welche stimmt? Die Zeiten stehen in `neu.js` in der Tabelle
 `ZEITEN`; daraus rechnet die Seite auch den Live-Stand „Jetzt geöffnet".
 
-## 6. Zwei Buchungssysteme
-
-Der Salon ist bei **Salonized** *und* bei **Treatwell** gelistet. Die Seite
-verlinkt Salonized. Soll Treatwell weg, oder mit dazu?
-
-## 7. Preise fürs Kosmetikstudio
+## 6. Preise fürs Kosmetikstudio
 
 Für „BaHaar's Kosmetikstudio" gibt es noch keine Preise. Die Preisliste sagt
 das am Ende offen und verweist aufs Telefon, statt Zahlen zu erfinden. Sobald
 sie feststehen, gehören sie als zehnte Gruppe in `leistungen.html`.
-
-## 8. WhatsApp
-
-Der Merkzettel auf der Preisliste baut aus der Auswahl einen fertigen Text.
-Verschickt wird er per E-Mail oder am Telefon vorgelesen — **nicht** per
-WhatsApp, weil 089 692 36 44 ein Festnetzanschluss ist.
-
-Gibt es eine geschäftliche Mobilnummer mit WhatsApp, ist das ein Zweizeiler
-in `neu.js` (im Block „Der Merkzettel").
