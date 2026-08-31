@@ -93,8 +93,9 @@
      --buehne-h − --film-h. Die Düse muss darüber sitzen, sonst bleibt
      für das Wasser keine Fallhöhe. Und der Hahn ragt 0,98 × seiner Höhe
      über die Düse hinaus — das muss oben hineinpassen. */
-  --buehne-h: 430px;
+  --buehne-h: 522px;
   --film-h:   210px;
+  --schale-h:  92px;
   --hahn-b:   120px;
   --hahn-h:   calc(var(--hahn-b) * 540 / 561);
   --muendung: 132px;
@@ -121,14 +122,16 @@
 @media (min-width: 48rem) {
   :root {
     --t-riesen: 3.2rem; --t-gross: 2.4rem; --rand: 2rem; --leiste: 64px;
-    --buehne-h: 540px; --film-h: 260px; --hahn-b: 148px; --muendung: 166px;
+    --buehne-h: 652px; --film-h: 260px; --hahn-b: 148px; --muendung: 166px;
+    --schale-h: 112px;
     --strahl-b: 150px; --fliess-t: .77s;
   }
 }
 @media (min-width: 64rem) {
   :root {
     --t-riesen: 3.9rem; --t-gross: 2.7rem; --rand: 2.5rem;
-    --buehne-h: 620px; --film-h: 300px; --hahn-b: 170px; --muendung: 192px;
+    --buehne-h: 750px; --film-h: 300px; --hahn-b: 170px; --muendung: 192px;
+    --schale-h: 130px;
     --strahl-b: 180px; --fliess-t: .93s;
   }
 }
@@ -447,7 +450,7 @@ a { color: inherit; }
 .buehne { position: relative; height: var(--buehne-h); }
 
 .film {
-  position: absolute; left: 0; right: 0; bottom: 0;
+  position: absolute; left: 0; right: 0; bottom: var(--schale-h);
   height: var(--film-h);
   overflow: hidden;
   /* Der Film hat keine Kanten: Oben, unten und an beiden Seiten löst er
@@ -482,6 +485,61 @@ a { color: inherit; }
 .film.schleife .film-lauf:not(.film-schleife) { opacity: 0; }
 .film.schleife .film-schleife { opacity: 1; }
 
+/* ── Die Waschschale ──────────────────────────────────────────────────
+   Ein flaches Becken aus dunklem Stein, in das Haar und Wasser laufen.
+   Auch das eine Aufnahme auf schwarzem Grund im Screen-Modus: Der Stein
+   ist fast schwarz, und was von einem dunklen Becken im dunklen Raum
+   übrig bleibt, ist genau das — die Lichtkante des Randes und der
+   Wasserspiegel. Der schwarze Körper verschwindet im Abschnitt.
+
+   Sie steht im Quelltext vor dem Film und liegt damit dahinter: Das Haar
+   hängt in die Schale hinein, es schwimmt nicht darauf. Sichtbar wird
+   sie dort, wo der Film unten ausläuft.                           */
+
+.becken-schale, .becken-spritzer {
+  position: absolute;
+  left: 50%; width: 128%;
+  transform: translateX(-50%);
+  bottom: 0;
+  aspect-ratio: 1400 / 415;
+  background: url("bilder/wasser-becken.webp") no-repeat center / 100% 100%;
+  mix-blend-mode: screen;
+  transform-origin: 50% 78%;
+  animation: kraeuseln 2.6s var(--kurve) infinite alternate;
+  animation-play-state: paused;
+  /* Oben und an den Seiten keine Kante: Der Ausschnitt endet sonst als
+     Rechteck quer im Bild. */
+  --rand:
+    linear-gradient(to bottom, transparent 0%, #000 20%, #000 100%),
+    linear-gradient(to right, transparent 0%, #000 9%, #000 91%, transparent 100%);
+  -webkit-mask-image: var(--rand);
+  -webkit-mask-composite: source-in;
+          mask-image: var(--rand);
+          mask-composite: intersect;
+  pointer-events: none;
+}
+/* Läuft Wasser hinein, steht die Oberfläche nicht still. Zugedreht
+   beruhigt sie sich — die Bewegung hält an, statt zu verschwinden.
+   Nur `transform` und `filter`, niemals `opacity`: Eine laufende
+   Animation schlägt sonst den deklarierten Wert. */
+.becken-schale.laeuft { animation-play-state: running; }
+
+/* Der Aufschlag im Becken ist eine eigene Lage mit derselben Geometrie:
+   Zugedreht fällt nichts hinein, dann darf dort auch kein Spritzer
+   stehen. Vorher war er Teil der Aufnahme und stand eingefroren im
+   stillen Wasser. */
+.becken-spritzer {
+  background-image: url("bilder/wasser-aufschlag.webp");
+  animation: none;
+  opacity: 0;
+  transition: opacity .2s var(--kurve);
+}
+.becken-spritzer.laeuft { opacity: 1; }
+@keyframes kraeuseln {
+  from { transform: translateX(-50%) scale(1);     filter: brightness(.90); }
+  to   { transform: translateX(-50%) scale(1.018); filter: brightness(1.07); }
+}
+
 /* ── Das Wasser ───────────────────────────────────────────────────────
    Nicht mehr gezeichnet. Zwei Aufnahmen echten Wassers auf schwarzem
    Grund, mit `mix-blend-mode: screen` darübergelegt: Schwarz verschwindet
@@ -503,7 +561,7 @@ a { color: inherit; }
   position: absolute;
   left: calc(var(--scheitel) - var(--strahl-b) / 2);
   top: var(--muendung);
-  height: calc(var(--buehne-h) - var(--film-h) - var(--muendung) + 2.6rem);
+  height: calc(var(--buehne-h) - var(--film-h) - var(--schale-h) - var(--muendung) + 2.6rem);
   width: var(--strahl-b);
   pointer-events: none;
 }
@@ -536,14 +594,16 @@ a { color: inherit; }
   background: url("bilder/wasser-strahl.webp") repeat-y top center / 100% var(--kachel);
   animation: fliessen var(--fliess-t) linear infinite;
 }
+/* Zugedreht braucht das Band nicht weiterzulaufen — unsichtbar rechnen
+   kostet Strom. */
+.strahl:not(.laeuft) > .strahl-saeule i { animation-play-state: paused; }
 /* Genau eine Kachel weit — dann steht wieder dasselbe Bild da. */
 @keyframes fliessen {
   from { transform: translateY(0); }
   to   { transform: translateY(calc(-1 * var(--kachel))); }
 }
 
-/* Die Krone am Aufschlag. Sie atmet leicht, sonst klebt ein Standbild
-   auf dem Scheitel. */
+/* Die Krone am Aufschlag. */
 .strahl > .strahl-krone {
   left: 50%; bottom: calc(var(--strahl-b) * -.22);
   width: calc(var(--strahl-b) * 1.9);
@@ -559,16 +619,10 @@ a { color: inherit; }
   -webkit-mask-composite: source-in;
           mask-image: var(--rund);
           mask-composite: intersect;
+  /* Die Krone atmet nicht mehr. Film, Säule und Becken sind schon drei
+     Bewegungen; eine vierte kann das Auge nicht mehr einzeln verfolgen.
+     An dieser Stelle bewegt sich ohnehin am meisten. */
   transform-origin: 50% 100%;
-  animation: kronen 1.15s var(--kurve) infinite alternate;
-}
-/* Nur `transform` und `filter`, niemals `opacity`: Eine laufende Animation
-   schlägt den deklarierten Wert, und dann stand die Krone auch bei
-   zugedrehtem Hahn im Bild — die Deckung gehört allein der Regel
-   `.strahl.laeuft`. */
-@keyframes kronen {
-  from { transform: scaleX(1)    scaleY(1);    filter: brightness(.84); }
-  to   { transform: scaleX(1.06) scaleY(1.12); filter: brightness(1.10); }
 }
 
 /* ── Der Wasserhahn ───────────────────────────────────────────────────
@@ -975,7 +1029,7 @@ a { color: inherit; }
 
 @media (prefers-reduced-motion: reduce) {
   .hebel.wink { animation: none; }
-  .strahl > .strahl-saeule i, .strahl > .strahl-krone { animation: none; }
+  .strahl > .strahl-saeule i, .becken-schale { animation: none; }
   .film-lauf, .film-halt, .film-nass, .hebel,
   .strahl > .strahl-saeule, .strahl > .strahl-krone,
   .leiste, .sprung,

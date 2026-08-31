@@ -32,6 +32,7 @@
   const schleife = document.getElementById('film-schleife');
   const hebel    = document.getElementById('hebel');
   const strahl   = document.getElementById('strahl');
+  const schale   = document.querySelectorAll('.becken-schale, .becken-spritzer');
   const wort     = document.getElementById('hahn-wort');
   if (!verlauf || !schleife || !hebel) return;
 
@@ -54,6 +55,7 @@
     hebel.setAttribute('aria-checked', String(offen));
     hebel.setAttribute('aria-label', offen ? 'Wasser abdrehen' : 'Wasser aufdrehen');
     strahl.classList.toggle('laeuft', offen);
+    for (const el of schale) el.classList.toggle('laeuft', offen);
     if (nassBild) nassBild.style.opacity = offen || inSchleife ? 1 : nassBild.style.opacity;
     /* Das Winken lädt zum Anfassen ein. An einem offenen Hahn zuckt der
        Hebel sonst, ohne dass es etwas zu holen gäbe. */
