@@ -1,34 +1,24 @@
-@charset "utf-8";
-
 /* ═══════════════════════════════════════════════════════════════════════
    BaHaar's Styling Studio
 
    ── Woher die Farben kommen ───────────────────────────────────────────
 
-   Das Blau ist an der Vorlage des Auftraggebers gemessen: oklch(35–41 %
-   .072 237). Es passt zum Laden: Das Banner über der Tür und die Wand im
-   Salon sind türkis gestrichen. Das ist eine eigene Entscheidung des
-   Ladens, nicht das Regal des Lieferanten — der frühere Einwand gegen
-   diesen Farbton galt dem Regal und trifft die Hausfarbe nicht.
+   Türkis ist die Hausfarbe. Sie steht am Laden selbst: Das Banner über
+   der Tür und die Wand im Salon sind türkis gestrichen. Der Ton ist an
+   der Vorlage des Auftraggebers gemessen — Schatten oklch(80 % .136 193),
+   Lichter oklch(94 % .048 177), Papier oklch(98 % .020 178).
 
-   Kupfer ist die zweite Farbe. Sie trägt, was angefasst wird: Preise,
-   Nummer, Termin, Armatur.
+   Dazu nur Tinte: ein tiefes Schwarzgrün, oklch(20 % .028 196). Zwei
+   Farben, mehr nicht. Was Aufmerksamkeit braucht, wird schwarz, nicht
+   bunt — genau wie in der Vorlage, wo die Wortmarke das einzige Dunkle
+   im Bild ist.
 
-   ── Die Animation ─────────────────────────────────────────────────────
+   ── Die Fotos ─────────────────────────────────────────────────────────
 
-   Der Wasserhahn steht im Abschnitt „Am Becken", nicht im Auftakt. Dort
-   fängt eine Behandlung wirklich an, und dort steht er niemandem im Weg,
-   der nur wissen will, was ein Schnitt kostet.
-
-   Der Strahl ist gezeichnet, nicht gefilmt: In der Aufnahme schwankt er
-   um 20 % der Bildbreite (Bild für Bild gemessen). Ihn unter einem festen
-   Auslauf zu halten hiesse, das ganze Bild mitzuschieben, und das sieht
-   man. Der Film beginnt deshalb erst am Scheitel.
-
-   Der Hebel ist ein Schalter, kein Regler: auf oder zu. Offen läuft der
-   Film in einer nahtlosen Schleife weiter. Vorher wurde er am Hebel
-   entlanggespult, und dabei stand die Frau bei jedem Halt still — genau
-   das sollte sie nicht.
+   Aufnahmen von Ort und Stimmung laufen über eine Zweifarben-Rampe:
+   Schatten türkis, Lichter fast weiß. Die Arbeiten bleiben davon
+   ausgenommen — beim Friseur ist das Foto das Produkt, und ein Duoton
+   nähme genau das weg, was verkauft wird: die Haarfarbe.
    ═══════════════════════════════════════════════════════════════════════ */
 
 @font-face {
@@ -48,28 +38,31 @@
 }
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 
-  --grund:      oklch(21% .050 248);
-  --grund-hoch: oklch(26% .054 246);
-  --grund-tief: oklch(16% .045 250);
+  --papier:      oklch(98% .020 178);
+  --papier-warm: oklch(95.5% .028 180);
+  --tuerkis:     oklch(80% .136 193);
+  --tuerkis-tief:oklch(66% .120 196);
+  --tuerkis-hell:oklch(94% .048 177);
 
-  --himmel-hoch: oklch(25% .070 250);
-  --himmel:      oklch(34% .072 242);
-  --himmel-tief: oklch(37.5% .056 243);   /* der Grund des Films, gemessen */
+  --tinte:       oklch(20% .028 196);
+  --tinte-leise: oklch(38% .026 194);
+  --tinte-still: oklch(52% .024 192);
+  --auf-tinte:   oklch(98% .020 178);
 
-  --tinte:       oklch(97% .008 230);
-  --tinte-leise: oklch(84% .014 232);
-  --tinte-still: oklch(72% .020 234);
+  --linie:      oklch(20% .028 196 / .20);
+  --linie-fein: oklch(20% .028 196 / .10);
 
-  --kupfer:       oklch(76% .105 55);
-  --kupfer-hell:  oklch(85% .080 62);
-  --kupfer-glanz: oklch(94% .045 70);
-  --kupfer-tief:  oklch(52% .095 45);
-  --auf-kupfer:   oklch(18% .045 248);
+  --mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
 
-  --linie:      oklch(88% .020 232 / .22);
-  --linie-fein: oklch(88% .020 232 / .12);
+  /* Das Lochblech des türkisen Schranks. Raster am Foto abgezählt:
+     grosse Raute, kleiner Punkt, grosse Raute — dazwischen eine Reihe
+     nur aus Punkten. Die beiden Farben im Bild sind --tuerkis-hell
+     (Lichtkante) und --tuerkis-tief (Loch); eine Daten-URI kennt
+     unsere Token nicht, deshalb stehen sie hier als Hexwert. */
+  --lochblech: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Cg fill='%237be6df'%3E%3Cpath d='M25 18 32 25 25 32 18 25Z'/%3E%3C/g%3E%3Cg fill='%2300a8aa'%3E%3Cpath d='M24 17 31 24 24 31 17 24Z'/%3E%3Cpath d='M0 -3 3 0 0 3 -3 0Z'/%3E%3Cpath d='M48 -3 51 0 48 3 45 0Z'/%3E%3Cpath d='M0 45 3 48 0 51 -3 48Z'/%3E%3Cpath d='M48 45 51 48 48 51 45 48Z'/%3E%3Cpath d='M24 -3 27 0 24 3 21 0Z'/%3E%3Cpath d='M0 21 3 24 0 27 -3 24Z'/%3E%3Cpath d='M48 21 51 24 48 27 45 24Z'/%3E%3Cpath d='M24 45 27 48 24 51 21 48Z'/%3E%3C/g%3E%3C/svg%3E");
+  --loch-raster: 34px;
 
   --t-riesen: 2.35rem;
   --t-gross:  1.9rem;
@@ -87,26 +80,6 @@
 
   --leiste: 56px;
 
-  /* Die Bühne am Becken */
-  /* Die Senkrechte der Bühne hängt zusammen: Der Film steht unten und
-     ist --film-h hoch, sein oberer Rand liegt also bei
-     --buehne-h − --film-h. Die Düse muss darüber sitzen, sonst bleibt
-     für das Wasser keine Fallhöhe. Und der Hahn ragt 0,98 × seiner Höhe
-     über die Düse hinaus — das muss oben hineinpassen. */
-  --buehne-h: 430px;
-  --film-h:   210px;
-  --hahn-b:   120px;
-  --hahn-h:   calc(var(--hahn-b) * 540 / 561);
-  --muendung: 132px;
-  --scheitel: 49%;
-
-  /* Die Wassersäule. Die Kachel ist 340 × 1400; bei --strahl-b Breite ist
-     sie --strahl-b × 1400/340 hoch. Bei den gemessenen 800 px/s Fallgeschwindigkeit
-     ergibt das die Dauer je Umlauf. */
-  --strahl-b: 120px;
-  --kachel:   calc(var(--strahl-b) * 1400 / 340);
-  --fliess-t: .62s;
-
   --kurve: cubic-bezier(.22, .61, .36, 1);
   --t1: .25s; --t2: .5s;
 
@@ -114,22 +87,19 @@
   --kante-voll: 999px;
 
   /* Der Haken der Merkliste. Ein Daten-URI kennt die Token nicht, der
-     Strich trägt --kupfer deshalb als gemessenen Wert: #e59f6f. */
-  --haken: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M2.5 8.4 6.2 12 13.5 4.2' fill='none' stroke='%23e59f6f' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+     Strich trägt --tinte deshalb als gemessenen Wert: #0b2422. */
+  --haken: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M2.5 8.4 6.2 12 13.5 4.2' fill='none' stroke='%230b2422' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
 
 @media (min-width: 48rem) {
   :root {
     --t-riesen: 3.2rem; --t-gross: 2.4rem; --rand: 2rem; --leiste: 64px;
-    --buehne-h: 540px; --film-h: 260px; --hahn-b: 148px; --muendung: 166px;
-    --strahl-b: 150px; --fliess-t: .77s;
+    --loch-raster: 48px;
   }
 }
 @media (min-width: 64rem) {
   :root {
     --t-riesen: 3.9rem; --t-gross: 2.7rem; --rand: 2.5rem;
-    --buehne-h: 620px; --film-h: 300px; --hahn-b: 170px; --muendung: 192px;
-    --strahl-b: 180px; --fliess-t: .93s;
   }
 }
 
@@ -147,7 +117,7 @@ html {
 
 body {
   margin: 0;
-  background: var(--grund);
+  background: var(--papier);
   color: var(--tinte);
   font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
   font-size: var(--t-lauf);
@@ -164,7 +134,7 @@ img, svg, video { display: block; max-width: 100%; height: auto; }
 a { color: inherit; }
 
 :focus-visible {
-  outline: 2px solid var(--kupfer-hell);
+  outline: 2px solid var(--tinte);
   outline-offset: 3px;
   border-radius: var(--kante);
 }
@@ -175,7 +145,7 @@ a { color: inherit; }
 .sprung {
   position: fixed; left: var(--rand); top: -4rem; z-index: 40;
   padding: .6rem 1rem; border-radius: var(--kante);
-  background: var(--kupfer); color: var(--auf-kupfer);
+  background: var(--tinte); color: var(--auf-tinte);
   font-size: var(--t-klein); font-weight: 600; text-decoration: none;
   transition: top var(--t1) var(--kurve);
 }
@@ -200,7 +170,7 @@ a { color: inherit; }
 }
 .riesen { font-size: var(--t-riesen); }
 .gross  { font-size: var(--t-gross); }
-.riesen em, .gross em { font-style: italic; color: var(--kupfer-hell); }
+.riesen em, .gross em { font-style: italic; color: var(--tinte); }
 
 .lauf { margin: 0 0 var(--a3); color: var(--tinte-leise); }
 
@@ -213,7 +183,7 @@ a { color: inherit; }
   height: var(--leiste);
   display: flex; align-items: center; gap: var(--a3);
   padding-inline: var(--rand);
-  background: oklch(21% .050 248 / .82);
+  background: oklch(98% .020 178 / .84);
   -webkit-backdrop-filter: blur(12px);
           backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--linie-fein);
@@ -245,7 +215,7 @@ a { color: inherit; }
   padding: var(--a2) var(--rand) var(--a3);
   /* Deckend, nicht fast deckend: Bei vier Prozent Rest steht die
      Überschrift der Seite als Geist hinter den Wegen. */
-  background: var(--grund);
+  background: var(--papier);
   border-bottom: 1px solid var(--linie-fein);
   font-size: var(--t-klein); color: var(--tinte-leise);
 }
@@ -291,8 +261,8 @@ a { color: inherit; }
 
 @media (hover: hover) and (pointer: fine) {
   .wege a, .pille { transition: color var(--t1) var(--kurve), border-color var(--t1) var(--kurve); }
-  .wege a:hover { color: var(--kupfer-hell); }
-  .pille:hover { border-color: var(--kupfer-hell); color: var(--kupfer-hell); }
+  .wege a:hover { color: var(--tinte); }
+  .pille:hover { border-color: var(--tinte); color: var(--tinte); }
 }
 
 /* ── Knöpfe ───────────────────────────────────────────────────────────── */
@@ -308,7 +278,7 @@ a { color: inherit; }
      mit, und derselbe Knopf sähe neben einem <a> anders aus. */
   background: none; border: 0; cursor: pointer;
 }
-.knopf { background: var(--kupfer); color: var(--auf-kupfer); }
+.knopf { background: var(--tinte); color: var(--auf-tinte); }
 .knopf-still {
   border: 1px solid var(--linie);
   color: var(--tinte);
@@ -319,69 +289,99 @@ a { color: inherit; }
 
 @media (hover: hover) and (pointer: fine) {
   .knopf, .knopf-still { transition: transform var(--t1) var(--kurve), background-color var(--t1) var(--kurve), border-color var(--t1) var(--kurve); }
-  .knopf:hover { transform: translateY(-2px); background: var(--kupfer-hell); }
-  .knopf-still:hover { transform: translateY(-2px); border-color: var(--kupfer-hell); }
+  .knopf:hover { transform: translateY(-2px); background: var(--tuerkis-tief); }
+  .knopf-still:hover { transform: translateY(-2px); border-color: var(--tinte); }
 }
 
-/* ── Auftakt ──────────────────────────────────────────────────────────── */
+/* ── Auftakt ──────────────────────────────────────────────────────────
+   Vollflächig, wie in der Vorlage: eine Aufnahme des Ladens über die
+   Zweifarben-Rampe, darüber die Wortmarke in Tinte. Kein Schleier über
+   der ganzen Fläche — der Duoton hebt die Lichter ohnehin so weit an,
+   dass Schwarz darauf steht. Nur hinter dem Satzblock liegt ein weicher
+   Verlauf aus Papier.                                                 */
 
 .auftakt {
-  display: grid;
-  gap: var(--a4);
-  align-items: center;
-  max-width: var(--spalte);
-  margin-inline: auto;
-  padding: var(--a4) var(--rand) var(--a5);
+  position: relative;
+  isolation: isolate;
+  min-height: min(92svh, 900px);
+  display: grid; align-items: end;
+  padding: calc(var(--leiste) + var(--a5)) var(--rand) var(--a5);
+  overflow: hidden;
 }
-@media (min-width: 62rem) {
-  .auftakt {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
-    gap: var(--a5);
-    padding-block: var(--a5) var(--a6);
-  }
+.auftakt-grund {
+  position: absolute; inset: 0; z-index: -2;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: 50% 38%;
+}
+/* Der Verlauf steht nur dort, wo Text liegt, und nimmt die Grundfarbe
+   der Seite auf. */
+.auftakt::after {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background:
+    /* Von unten dicht in den Abschnittsrand hinein — darauf steht alles. */
+    linear-gradient(to top, var(--papier) 0%, oklch(98% .020 178 / .93) 34%,
+                    oklch(98% .020 178 / .62) 58%, oklch(98% .020 178 / .18) 82%, transparent 100%),
+    /* Ein schmales Band oben. Die Eckzeilen sind gesperrte Kapitälchen in
+       11 px und haben keine Reserve; sie brauchen einen dichten Grund,
+       nicht einen kräftigeren Verlauf über der ganzen Aufnahme. */
+    linear-gradient(to bottom, oklch(98% .020 178 / .88) 0%,
+                    oklch(98% .020 178 / .70) calc(var(--leiste) + 2.6rem),
+                    transparent calc(var(--leiste) + 6rem));
 }
 
-.zeichen {
-  display: flex; align-items: center; gap: .8rem;
-  margin: 0 0 var(--a3);
-  font-size: var(--t-klein);
-  color: var(--tinte-still);
+.auftakt-satz { max-width: var(--spalte); width: 100%; margin-inline: auto; }
+
+/* Die Wortmarke. Das Ladenschild ist eine Didone mit hohem Strichkontrast
+   — Instrument Serif trifft das. Die Grösse folgt der Breite, damit sie
+   auf jedem Schirm die Zeile füllt statt umzubrechen. */
+.auftakt .kennung,
+.auftakt .braue { color: var(--tinte); }
+
+.wortmarke { margin: var(--a2) 0 var(--a3); line-height: .92; }
+.wortmarke-wort {
+  display: block;
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(3.4rem, 15.5vw, 13rem);
+  letter-spacing: -.022em;
+  color: var(--tinte);
 }
-.zeichen img {
-  width: 4rem; height: 4rem;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 1px solid var(--linie);
+.wortmarke-zusatz {
+  display: block;
+  margin-top: .55rem;
+  font-family: var(--mono);
+  font-size: var(--t-marke);
+  letter-spacing: .42em; text-transform: uppercase;
+  color: var(--tinte-leise);
 }
-.zeichen span { display: flex; flex-direction: column; line-height: 1.35; }
-.zeichen b { color: var(--tinte); font-weight: 600; }
+
+/* Die kleinen Kennungen in den Ecken: der technische Gegenpol zur
+   Wortmarke, wie in der Vorlage. Rein dekorativ. */
+.kennung {
+  position: absolute; z-index: 1; margin: 0;
+  top: calc(var(--leiste) + var(--a2));
+  font-family: var(--mono);
+  font-size: .66rem; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--tinte-leise);
+}
+.kennung-links  { left: var(--rand); }
+.kennung-rechts { right: var(--rand); }
+@media (max-width: 40rem) { .kennung-rechts { display: none; } }
 
 .wahl { display: flex; flex-wrap: wrap; gap: var(--a2); margin-bottom: var(--a3); }
 
 .ort {
-  display: flex; flex-wrap: wrap; align-items: center; gap: .4rem var(--a2);
   margin: 0;
-  font-size: var(--t-klein);
-  color: var(--tinte-still);
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--a2) var(--a3);
+  font-size: var(--t-klein); color: var(--tinte-leise);
 }
-.stand { display: inline-flex; align-items: center; gap: .45rem; }
-.stand::before { content: ""; width: .45rem; height: .45rem; border-radius: 50%; background: currentColor; }
-.stand.offen { color: var(--kupfer-hell); }
-
-.auftakt-bild { margin: 0; }
-.auftakt-bild img {
-  width: 100%; height: auto;
-  border-radius: var(--kante);
-  box-shadow: 0 18px 40px oklch(12% .04 250 / .5);
+.zeichen { display: inline-flex; align-items: center; gap: .6rem; }
+.zeichen img {
+  width: 34px; height: 34px; border-radius: 50%;
+  object-fit: cover;
+  outline: 1px solid var(--linie);
 }
-.auftakt-bild figcaption {
-  margin-top: .7rem;
-  font-size: var(--t-klein);
-  color: var(--tinte-still);
-  font-style: italic;
-}
-
-/* ── Belege ───────────────────────────────────────────────────────────── */
+.zeichen b { color: var(--tinte); font-weight: 600; }
 
 .belege {
   display: grid;
@@ -395,7 +395,7 @@ a { color: inherit; }
 @media (min-width: 48rem) { .belege { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 .belege p {
   margin: 0; padding: var(--a3) var(--rand);
-  background: var(--grund);
+  background: var(--papier);
   display: flex; flex-direction: column; gap: .2rem;
   font-size: var(--t-klein);
   color: var(--tinte-still);
@@ -403,225 +403,11 @@ a { color: inherit; }
 .belege b {
   font-family: 'Instrument Serif', Georgia, serif;
   font-size: 1.55rem; font-weight: 400;
-  color: var(--kupfer-hell);
+  color: var(--tinte);
   line-height: 1.1;
 }
 
 /* ── Am Becken ────────────────────────────────────────────────────────── */
-
-.becken {
-  position: relative;
-  overflow: hidden;
-  display: grid;
-  gap: var(--a4);
-  padding: var(--a5) var(--rand) 0;
-  background:
-    radial-gradient(70% 42% at 50% 100%, oklch(44% .060 240 / .40) 0%, transparent 74%),
-    linear-gradient(to bottom,
-      var(--himmel-hoch) 0%,
-      var(--himmel) 46%,
-      var(--himmel-tief) calc(100% - var(--film-h)),
-      var(--himmel-tief) calc(100% - var(--film-h) * .34),
-      var(--grund) 100%);
-}
-@media (min-width: 62rem) {
-  .becken {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    align-items: end;
-    gap: var(--a5);
-    padding-inline: max(var(--rand), calc((100vw - var(--spalte)) / 2 + var(--rand)));
-  }
-  .becken-satz { padding-bottom: var(--a5); }
-}
-.becken-satz { max-width: 30rem; }
-
-.hahn-wort {
-  margin: 0;
-  font-size: var(--t-marke);
-  letter-spacing: .15em; text-transform: uppercase;
-  color: var(--tinte-still);
-  transition: color var(--t1) var(--kurve);
-}
-.hahn-wort.offen { color: var(--kupfer-hell); }
-
-.buehne { position: relative; height: var(--buehne-h); }
-
-.film {
-  position: absolute; left: 0; right: 0; bottom: 0;
-  height: var(--film-h);
-  overflow: hidden;
-  /* Der Film hat keine Kanten: Oben, unten und an beiden Seiten löst er
-     sich in den Abschnitt auf. Unten trifft er dabei auf den Grund der
-     nächsten Bahn — sonst steht dort eine Linie quer durch das Bild. */
-  --schleier:
-    linear-gradient(to bottom, transparent 0%, #000 9%, #000 66%, transparent 99%),
-    linear-gradient(to right,  transparent 0%, #000 14%, #000 86%, transparent 100%);
-  -webkit-mask-image: var(--schleier);
-          mask-image: var(--schleier);
-  -webkit-mask-composite: source-in;
-          mask-composite: intersect;
-}
-.film > * {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover; object-position: 50% 0%;
-}
-/* Zwei Filme übereinander: der Verlauf von trocken nach nass, und
-   danach die Schleife mit dem nassen Haar. Das letzte Bild des einen
-   grenzt an das erste des anderen (gemessen 1,32 gegen 1,04 bei einem
-   gewöhnlichen Bildwechsel), die Übergabe sieht man deshalb nicht.
-   Zugedreht bleibt stehen, wie nass das Haar geworden ist — es trocknet
-   nicht von selbst wieder. */
-.film-lauf, .film-halt, .film-nass {
-  opacity: 0;
-  transition: opacity .45s var(--kurve);
-}
-.film-halt { opacity: 1; }
-.film.laeuft .film-lauf:not(.film-schleife) { opacity: 1; }
-.film.laeuft .film-halt:not(.film-nass) { opacity: 0; }
-.film.schleife .film-lauf:not(.film-schleife) { opacity: 0; }
-.film.schleife .film-schleife { opacity: 1; }
-
-/* ── Das Wasser ───────────────────────────────────────────────────────
-   Nicht mehr gezeichnet. Zwei Aufnahmen echten Wassers auf schwarzem
-   Grund, mit `mix-blend-mode: screen` darübergelegt: Schwarz verschwindet
-   dabei restlos, nur das Wasser bleibt stehen. Gemessen liegt der Median
-   beider Bilder bei 0 — es bleibt kein grauer Schleier.
-
-   Die Säule ist eine senkrecht nahtlose Kachel: Der untere Rand ist in
-   den oberen geblendet, gemessen 3,77 an der Naht gegen 4,21 bei einem
-   gewöhnlichen Zeilenwechsel. Sie wandert per `translateY`, nicht per
-   `background-position` — verschoben wird eine Ebene, nicht neu gemalt.
-
-   Vorher war beides aus Verläufen gebaut. Das sah aus wie Glas.      */
-
-/* Kein z-index und kein transform auf dem Kasten: Beides macht eine
-   eigene Ebene auf, und dann mischt sich das Wasser nur noch mit dem
-   leeren Kasten statt mit Himmel und Haar. Gemittelt wird deshalb über
-   `left`, und die Reihenfolge im Quelltext regelt, was oben liegt. */
-.strahl {
-  position: absolute;
-  left: calc(var(--scheitel) - var(--strahl-b) / 2);
-  top: var(--muendung);
-  height: calc(var(--buehne-h) - var(--film-h) - var(--muendung) + 2.6rem);
-  width: var(--strahl-b);
-  pointer-events: none;
-}
-
-/* Die Deckung sitzt auf den Lagen, nicht auf dem Kasten: Ein Elternteil
-   mit `opacity` kapselt die Gruppe, und dann mischt sich das Wasser nur
-   noch mit sich selbst statt mit dem Bild darunter. */
-.strahl > .strahl-saeule,
-.strahl > .strahl-krone {
-  position: absolute; display: block;
-  opacity: 0;
-  transition: opacity .2s var(--kurve);
-  mix-blend-mode: screen;
-}
-.strahl.laeuft > .strahl-saeule,
-.strahl.laeuft > .strahl-krone { opacity: 1; }
-
-.strahl > .strahl-saeule {
-  inset: 0;
-  overflow: hidden;
-  /* Oben tritt das Wasser aus der Düse, unten geht es in die Krone über
-     — an beiden Enden darf keine Kante stehen. */
-  --ende: linear-gradient(to bottom, transparent 0%, #000 7%, #000 74%, transparent 100%);
-  -webkit-mask-image: var(--ende);
-          mask-image: var(--ende);
-}
-.strahl > .strahl-saeule i {
-  position: absolute; left: 0; right: 0; top: 0;
-  height: calc(2 * var(--kachel));
-  background: url("bilder/wasser-strahl.webp") repeat-y top center / 100% var(--kachel);
-  animation: fliessen var(--fliess-t) linear infinite;
-}
-/* Genau eine Kachel weit — dann steht wieder dasselbe Bild da. */
-@keyframes fliessen {
-  from { transform: translateY(0); }
-  to   { transform: translateY(calc(-1 * var(--kachel))); }
-}
-
-/* Die Krone am Aufschlag. Sie atmet leicht, sonst klebt ein Standbild
-   auf dem Scheitel. */
-.strahl > .strahl-krone {
-  left: 50%; bottom: calc(var(--strahl-b) * -.22);
-  width: calc(var(--strahl-b) * 1.9);
-  height: calc(var(--strahl-b) * 1.9 * 360 / 1400);
-  margin-left: calc(var(--strahl-b) * -.95);
-  background: url("bilder/wasser-krone.webp") no-repeat center bottom / 100% 100%;
-  /* Ohne Rand an allen vier Seiten: Der Ausschnitt der Aufnahme endet
-     sonst als Rechteck mitten im Haar. */
-  --rund:
-    linear-gradient(to bottom, #000 0%, #000 52%, transparent 100%),
-    linear-gradient(to right, transparent 0%, #000 13%, #000 87%, transparent 100%);
-  -webkit-mask-image: var(--rund);
-  -webkit-mask-composite: source-in;
-          mask-image: var(--rund);
-          mask-composite: intersect;
-  transform-origin: 50% 100%;
-  animation: kronen 1.15s var(--kurve) infinite alternate;
-}
-/* Nur `transform` und `filter`, niemals `opacity`: Eine laufende Animation
-   schlägt den deklarierten Wert, und dann stand die Krone auch bei
-   zugedrehtem Hahn im Bild — die Deckung gehört allein der Regel
-   `.strahl.laeuft`. */
-@keyframes kronen {
-  from { transform: scaleX(1)    scaleY(1);    filter: brightness(.84); }
-  to   { transform: scaleX(1.06) scaleY(1.12); filter: brightness(1.10); }
-}
-
-/* ── Der Wasserhahn ───────────────────────────────────────────────────
-   Drei Schichten aus einer Aufnahme: Körper, Hebel, Nabe. Der Hebel
-   dreht um die Nabe, die Nabe liegt darüber und verdeckt die Naht. Die
-   Düse sitzt bei 14,08 % der Bildbreite und 98,15 % der Höhe, gemessen. */
-
-.hahn {
-  position: absolute; z-index: 3;
-  width: var(--hahn-b); height: var(--hahn-h);
-  left: calc(var(--scheitel) - .1408 * var(--hahn-b));
-  top:  calc(var(--muendung) - .9815 * var(--hahn-h));
-  filter: drop-shadow(0 14px 26px oklch(15% .05 244 / .5));
-}
-.hahn > img { position: absolute; inset: 0; width: 100%; height: 100%; }
-
-/* Das Rohr läuft nach rechts aus dem Bild, fortgesetzt mit einer acht
-   Pixel breiten Scheibe seiner eigenen Kante, und löst sich dann auf. */
-.hahn-rohr {
-  position: absolute; top: 0; bottom: 0; left: 100%;
-  width: 100vw;
-  background: url("bilder/hahn-rohr.webp") repeat-x left top;
-  background-size: auto 100%;
-  --aus: linear-gradient(to right, #000 0%, #000 20%, transparent 72%);
-  -webkit-mask-image: var(--aus);
-          mask-image: var(--aus);
-}
-
-.hebel {
-  position: absolute; inset: 0;
-  transform-origin: 67.2% 20.74%;
-  transform: rotate(var(--dreh, 0deg));
-  transition: transform .42s var(--kurve);
-  cursor: grab;
-  touch-action: none;
-}
-.hebel:active { cursor: grabbing; }
-.hebel img { width: 100%; height: 100%; }
-.hebel:focus-visible { outline: none; }
-.hebel:focus-visible::after {
-  content: "";
-  position: absolute;
-  left: 43.5%; top: 24.5%; width: 30%; height: 42.5%;
-  border: 2px solid var(--kupfer-hell);
-  border-radius: var(--kante-voll);
-}
-.hahn-nabe { pointer-events: none; }
-
-@keyframes wink {
-  0%, 62%, 100% { transform: rotate(var(--dreh, 0deg)); }
-  78%           { transform: rotate(calc(var(--dreh, 0deg) + 9deg)); }
-}
-.hebel.wink { animation: wink 5.5s var(--kurve) infinite; }
 
 /* ── Bahnen ───────────────────────────────────────────────────────────── */
 
@@ -642,7 +428,7 @@ a { color: inherit; }
   border-radius: var(--kante);
   overflow: hidden;
 }
-.karte { margin: 0; padding: var(--a3); background: var(--grund); }
+.karte { margin: 0; padding: var(--a3); background: var(--papier); }
 @media (min-width: 40rem) { .karten { grid-template-columns: 1fr 1fr; } }
 @media (min-width: 64rem) { .karten { grid-template-columns: 1fr 1fr 1fr; } }
 .karte h3 {
@@ -657,14 +443,14 @@ a { color: inherit; }
 .karte dt { color: var(--tinte-leise); font-size: var(--t-klein); }
 .karte dd {
   margin: 0;
-  color: var(--kupfer-hell);
+  color: var(--tinte);
   font-variant-numeric: tabular-nums;
   font-size: var(--t-klein); font-weight: 600;
   white-space: nowrap;
 }
 
 .mehr { margin: var(--a3) 0 0; font-size: var(--t-klein); }
-.mehr a { color: var(--kupfer-hell); text-decoration: none; }
+.mehr a { color: var(--tinte); text-decoration: none; }
 @media (hover: hover) and (pointer: fine) { .mehr a:hover { text-decoration: underline; } }
 
 /* ── Brautstyling ─────────────────────────────────────────────────────── */
@@ -674,7 +460,7 @@ a { color: inherit; }
   gap: var(--a4);
   align-items: center;
   padding: var(--a5) var(--rand);
-  background: var(--grund-hoch);
+  background: var(--tuerkis-hell);
   border-block: 1px solid var(--linie-fein);
 }
 @media (min-width: 62rem) {
@@ -690,7 +476,7 @@ a { color: inherit; }
   display: block;
   font-family: 'Instrument Serif', Georgia, serif;
   font-size: 1.7rem; font-weight: 400;
-  color: var(--kupfer-hell);
+  color: var(--tinte);
 }
 .braut-bilder { display: grid; grid-template-columns: 1fr 1fr; gap: var(--a2); }
 .braut-bilder img {
@@ -715,11 +501,14 @@ a { color: inherit; }
 
 /* ── Der Laden ────────────────────────────────────────────────────────── */
 
+/* Vier Aufnahmen: eine Spalte am schmalen Schirm, sonst zwei. `auto-fit`
+   hätte hier drei Spalten gelegt und die vierte allein gelassen. */
 .raeume {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  grid-template-columns: 1fr;
   gap: var(--a2);
 }
+@media (min-width: 48rem) { .raeume { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .raeume img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: var(--kante); }
 
 .spruch {
@@ -762,13 +551,76 @@ a { color: inherit; }
 .stand-gross { margin: var(--a2) 0 0; font-size: var(--t-klein); color: var(--tinte-still); }
 .kontakt a { color: var(--tinte-leise); }
 
+/* ── Die Wand ─────────────────────────────────────────────────────────
+   Der Preisabschnitt steht vor dem türkisen Schrank aus dem Laden —
+   aber nicht als Foto. Die Aufnahme trägt viermal das Schild des
+   Lieferanten, und der Ausschnitt ohne Schild ist 460 px breit, zu
+   wenig für eine Fläche. Genommen ist deshalb die Sache selbst: das
+   Lochblech des Schranks, Raster am Foto abgezählt, Farben aus
+   unseren Token. So ist die Wand in jeder Breite scharf und trägt
+   keinen fremden Namen.                                              */
+
+.wand {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: calc(var(--leiste) + var(--a5)) 0 var(--a5);
+  background-color: var(--tuerkis);
+  background-image: var(--lochblech);
+  background-size: var(--loch-raster) var(--loch-raster);
+}
+
+/* Das Licht fällt im Laden von der Fensterseite ein, links oben. Unten
+   läuft die Wand ins Papier aus, damit die Preisliste daraus hervorgeht
+   statt an einer Kante anzustossen. */
+.wand::after {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background:
+    linear-gradient(to top, var(--papier) 0%, oklch(98% .020 178 / .58) 11%,
+                    oklch(98% .020 178 / .10) 26%, transparent 40%),
+    radial-gradient(130% 100% at 10% -10%, oklch(98% .020 178 / .42), transparent 64%),
+    linear-gradient(oklch(98% .020 178 / .34), oklch(98% .020 178 / .34));
+}
+
+/* Sobald Platz neben dem Text ist, wird nur noch der Textblock
+   beruhigt: ein senkrechtes Band, keine Ellipse — bei einem radialen
+   Verlauf zählt der Abstand in beiden Achsen zusammen, und die Enden
+   einer breiten Zeile lägen schon am Rand. Rechts bleibt die Wand
+   offen. */
+@media (min-width: 48rem) {
+  .wand::after {
+    background:
+      linear-gradient(to top, var(--papier) 0%, oklch(98% .020 178 / .58) 11%,
+                      oklch(98% .020 178 / .10) 26%, transparent 40%),
+      radial-gradient(130% 100% at 10% -10%, oklch(98% .020 178 / .42), transparent 64%),
+      linear-gradient(to right, oklch(98% .020 178 / .38) 0%,
+                      oklch(98% .020 178 / .34) 44%, transparent 72%);
+  }
+}
+
+/* Auf der Wand steht die Schrift dunkler als auf Papier: Türkis ist
+   hell, aber nicht weiss, und die leiseste Stufe hätte hier keine
+   Reserve mehr. */
+.wand .braue,
+.wand .lauf,
+.wand .kennung { color: var(--tinte); }
+
+.wand-titel {
+  margin: var(--a1) 0 var(--a3);
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(2.8rem, 9.5vw, 6.5rem);
+  line-height: .96; letter-spacing: -.02em;
+  color: var(--tinte);
+}
+
 /* ── Preisliste ───────────────────────────────────────────────────────
    Der Navigator klebt unter der Leiste und weicht mit ihr aus. Am
    schmalen Schirm ist er eine Zeile, die man schiebt. */
 
 .navigator {
   position: sticky; top: var(--leiste); z-index: 20;
-  background: oklch(21% .050 248 / .92);
+  background: oklch(98% .020 178 / .92);
   -webkit-backdrop-filter: blur(12px);
           backdrop-filter: blur(12px);
   border-block: 1px solid var(--linie-fein);
@@ -796,8 +648,8 @@ a { color: inherit; }
   white-space: nowrap;
 }
 .navigator-bahn a[aria-current="location"] {
-  color: var(--kupfer-hell);
-  border-bottom-color: var(--kupfer);
+  color: var(--tinte);
+  border-bottom-color: var(--tinte);
 }
 
 .liste { padding-block: var(--a5) var(--a6); }
@@ -853,10 +705,10 @@ a { color: inherit; }
    er bei jedem Gerät ein paar Pixel woanders, und aus zwei Verläufen
    zusammengesetzt wird er zum Dach statt zum Haken. */
 .posten input:checked {
-  border-color: var(--kupfer);
+  border-color: var(--tinte);
   background: var(--haken) no-repeat center / 72% 72%;
 }
-.posten input:focus-visible { outline: 2px solid var(--kupfer-hell); outline-offset: 2px; }
+.posten input:focus-visible { outline: 2px solid var(--tinte); outline-offset: 2px; }
 
 .posten-name { font-size: var(--t-klein); }
 .posten-name em {
@@ -870,7 +722,7 @@ a { color: inherit; }
   text-align: right;
   white-space: nowrap;
 }
-.posten-preis b { font-weight: 600; font-size: var(--t-klein); color: var(--kupfer-hell); font-variant-numeric: tabular-nums; }
+.posten-preis b { font-weight: 600; font-size: var(--t-klein); color: var(--tinte); font-variant-numeric: tabular-nums; }
 .posten-preis i {
   font-style: normal; font-size: var(--t-klein);
   color: var(--tinte-still); font-variant-numeric: tabular-nums;
@@ -881,13 +733,13 @@ a { color: inherit; }
 }
 
 .schluss { margin-top: var(--a5); color: var(--tinte-still); }
-.schluss a { color: var(--kupfer-hell); }
+.schluss a { color: var(--tinte); }
 
 /* Der Merkzettel steht unten und nimmt nur so viel Platz, wie er
    braucht; ohne Auswahl ist er gar nicht da. */
 .merk {
   position: sticky; bottom: 0; z-index: 25;
-  background: oklch(21% .050 248 / .94);
+  background: oklch(98% .020 178 / .94);
   -webkit-backdrop-filter: blur(14px);
           backdrop-filter: blur(14px);
   border-top: 1px solid var(--linie);
@@ -901,7 +753,7 @@ a { color: inherit; }
 }
 .merk-stand { margin: 0; font-size: var(--t-klein); color: var(--tinte-leise); }
 .merk-stand b { color: var(--tinte); }
-.merk-summe { color: var(--kupfer-hell); font-variant-numeric: tabular-nums; }
+.merk-summe { color: var(--tinte); font-variant-numeric: tabular-nums; }
 .merk-summe::before { content: "·"; margin-inline: .4rem; color: var(--tinte-still); }
 .merk-tasten { margin-left: auto; display: flex; flex-wrap: wrap; gap: var(--a2); }
 .merk-tasten .knopf, .merk-tasten .knopf-still { padding-block: .5rem; }
@@ -925,14 +777,14 @@ a { color: inherit; }
 .recht p, .recht ul { margin: 0 0 var(--a2); color: var(--tinte-leise); line-height: 1.65; }
 .recht ul { padding-left: 1.1rem; }
 .recht li { margin-bottom: .3rem; }
-.recht a { color: var(--kupfer-hell); }
+.recht a { color: var(--tinte); }
 .recht strong { color: var(--tinte); font-weight: 600; }
 .recht code {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: .88em;
   padding: .1em .35em;
   border-radius: var(--kante);
-  background: var(--grund-hoch);
+  background: var(--tuerkis-hell);
   color: var(--tinte);
 }
 
@@ -945,7 +797,7 @@ a { color: inherit; }
 .daten > div:last-child { border-bottom: 1px solid var(--linie-fein); }
 .daten dt { font-size: var(--t-marke); letter-spacing: .07em; text-transform: uppercase; color: var(--tinte-still); }
 .daten dd { margin: 0; color: var(--tinte-leise); }
-.daten a { color: var(--kupfer-hell); }
+.daten a { color: var(--tinte); }
 @media (min-width: 34rem) {
   .daten > div { grid-template-columns: 11rem minmax(0, 1fr); align-items: baseline; }
 }
@@ -954,7 +806,7 @@ a { color: inherit; }
 
 .fuss {
   padding-block: var(--a4);
-  background: var(--grund-tief);
+  background: var(--papier-warm);
   border-top: 1px solid var(--linie-fein);
   font-size: var(--t-klein);
   color: var(--tinte-still);
@@ -970,14 +822,10 @@ a { color: inherit; }
 .fuss-recht { margin: 0; margin-left: auto; }
 @media (hover: hover) and (pointer: fine) {
   .fuss-wege a { transition: color var(--t1) var(--kurve); }
-  .fuss-wege a:hover { color: var(--kupfer-hell); }
+  .fuss-wege a:hover { color: var(--tinte); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hebel.wink { animation: none; }
-  .strahl > .strahl-saeule i, .strahl > .strahl-krone { animation: none; }
-  .film-lauf, .film-halt, .film-nass, .hebel,
-  .strahl > .strahl-saeule, .strahl > .strahl-krone,
   .leiste, .sprung,
   .knopf, .knopf-still, .wege a, .pille { transition: none; }
 }
