@@ -195,3 +195,35 @@
   standSetzen();
   setInterval(standSetzen, 60000);
 })();
+
+/* ── Auftritt beim Scrollen ─────────────────────────────────────────────
+   Text und Bilder kommen von unten herein, sobald sie ins Bild rücken.
+   Die Klassen setzt erst dieses Skript: bleibt es aus, steht alles da.
+   Höchstens drei Bewegungen gleichzeitig, der Rest 90 ms später — mehr
+   kann das Auge nicht einzeln verfolgen. Der Auftakt bleibt aussen vor,
+   er steht schon im Bild, wenn die Seite kommt. */
+
+(function () {
+  if (!('IntersectionObserver' in window)) return;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const ZIELE = '.braue, .gross, .lauf, .karte, .werke img, .raeume img, ' +
+                '.spruch, .belege p, .braut-preis, .wahl, .spalten > div, ' +
+                '.wand-titel, .posten';
+
+  const stuecke = Array.from(document.querySelectorAll(ZIELE))
+    .filter(el => !el.closest('.auftakt'));
+  if (!stuecke.length) return;
+
+  for (const el of stuecke) el.classList.add('auftritt');
+
+  const beob = new IntersectionObserver((eintraege) => {
+    const dran = eintraege.filter(e => e.isIntersecting).map(e => e.target);
+    dran.forEach((el, i) => {
+      setTimeout(() => el.classList.add('auftritt-da'), Math.floor(i / 3) * 90);
+      beob.unobserve(el);
+    });
+  }, { rootMargin: '0px 0px -10% 0px' });
+
+  for (const el of stuecke) beob.observe(el);
+})();
