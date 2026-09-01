@@ -1,6 +1,6 @@
 # Offene Punkte für die Inhaberin
 
-Die Seite ist gebaut, geprüft und live. Was hier steht, kann nur die
+Die Seite ist gebaut und geprüft. Was hier steht, kann nur die
 Inhaberin beantworten. Die ersten drei sind rechtlich, nicht kosmetisch.
 
 Entschieden und eingebaut: Gebucht wird ausschliesslich über **Treatwell**,
@@ -53,7 +53,14 @@ Die Seite zeigt Dienstag bis Freitag **09:00–19:00**. Treatwell nennt
 **09:00–18:30**. Welche stimmt? Die Zeiten stehen in `neu.js` in der Tabelle
 `ZEITEN`; daraus rechnet die Seite auch den Live-Stand „Jetzt geöffnet".
 
-## 6. Preise fürs Kosmetikstudio
+## 6. Die Telefonnummer
+
+In allen Links stand `tel:+498969236440` — eine Null zu viel. Korrigiert auf
+`tel:+49896923644`, passend zur angezeigten Nummer **089 692 36 44** und zum
+Schild am Laden („Tel. 692 36 44"). **Bitte einmal anrufen und bestätigen**,
+dass die Nummer stimmt; ein Tippfehler an dieser Stelle kostet Termine.
+
+## 7. Preise fürs Kosmetikstudio
 
 Für „BaHaar's Kosmetikstudio" gibt es noch keine Preise. Die Preisliste sagt
 das am Ende offen und verweist aufs Telefon, statt Zahlen zu erfinden. Sobald
