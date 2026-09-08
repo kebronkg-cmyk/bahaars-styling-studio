@@ -4,8 +4,8 @@ Die Seite ist gebaut und geprüft. Was hier steht, kann nur die
 Inhaberin beantworten. Die ersten drei sind rechtlich, nicht kosmetisch.
 
 Entschieden und eingebaut: Gebucht wird ausschliesslich über **Treatwell**,
-Salonized ist raus. Kein WhatsApp — der Merkzettel schickt eine E-Mail oder
-wird am Telefon durchgegeben.
+Salonized ist raus. Kein WhatsApp, kein Merkzettel, keine Anfrage per E-Mail —
+wer einen Termin will, geht zu Treatwell oder ruft an.
 
 ## 1. Die Steuernummer im Impressum
 
@@ -44,23 +44,45 @@ stellte sich heraus, dass solche Listen über ein Jahr alt waren.
 **Bitte einmal durchgehen.**
 
 Zwei Zahlen widersprechen sich schon jetzt: Die Preisliste nennt Balayage mit
-**190–230 €**, am Schaufenster steht **140 €**. Angebot oder veralteter
-Aushang?
+**190–230 €**, am Schaufenster steht **190 € / 140 €**. Angebot oder veralteter
+Aushang? Das ist inzwischen sichtbar geworden: Der Aushang steht auf der
+Aufnahme im Auftakt und ist dort lesbar. Solange beides nebeneinander steht,
+fragt sich die Kundin, welcher Preis gilt.
 
-## 5. Öffnungszeiten
+## 5. Öffnungszeiten — hier weichen zwei Quellen an vier Tagen ab
 
-Die Seite zeigt Dienstag bis Freitag **09:00–19:00**. Treatwell nennt
-**09:00–18:30**. Welche stimmt? Die Zeiten stehen in `neu.js` in der Tabelle
-`ZEITEN`; daraus rechnet die Seite auch den Live-Stand „Jetzt geöffnet".
+Die Seite übernimmt die Zeiten Ihrer alten Website. Treatwell nennt andere.
+Am 8. September 2026 aus dem Treatwell-Eintrag gelesen:
 
-## 6. Die Telefonnummer
+| Tag | Diese Seite | Treatwell |
+|---|---|---|
+| Montag | 10:00–16:00 | 10:00–18:00 |
+| Dienstag | 09:00–19:00 | 09:00–18:00 |
+| Mittwoch–Freitag | 09:00–19:00 | 09:00–18:30 |
+| Samstag | 09:00–16:00 | 09:00–16:00 |
+| Sonntag | geschlossen | geschlossen |
+
+**Das ist der dringlichste Punkt hier.** Aus diesen Zeiten rechnet die Seite
+auch den Live-Stand („Jetzt geöffnet · bis 19 Uhr"). Stimmen sie nicht, steht
+jemand um 18:45 vor einer verschlossenen Tür. Die Tabelle steht in `neu.js`
+unter `ZEITEN`; sagen Sie, welche Fassung gilt, dann ziehe ich beide Seiten
+gleich.
+
+## 6. Die Bewertung auf Treatwell
+
+Auf der Startseite steht „4,8 von 5 aus über 90 Bewertungen". Am
+8. September 2026 waren es 4,8 bei 92 Bewertungen. „Über 90" ist bewusst
+gewählt, damit die Angabe nicht mit der nächsten Bewertung falsch wird —
+sie sollte trotzdem einmal im Jahr nachgesehen werden.
+
+## 7. Die Telefonnummer
 
 In allen Links stand `tel:+498969236440` — eine Null zu viel. Korrigiert auf
 `tel:+49896923644`, passend zur angezeigten Nummer **089 692 36 44** und zum
 Schild am Laden („Tel. 692 36 44"). **Bitte einmal anrufen und bestätigen**,
 dass die Nummer stimmt; ein Tippfehler an dieser Stelle kostet Termine.
 
-## 7. Preise fürs Kosmetikstudio
+## 8. Preise fürs Kosmetikstudio
 
 Für „BaHaar's Kosmetikstudio" gibt es noch keine Preise. Die Preisliste sagt
 das am Ende offen und verweist aufs Telefon, statt Zahlen zu erfinden. Sobald

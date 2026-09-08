@@ -3,22 +3,24 @@
 
    ── Woher die Farben kommen ───────────────────────────────────────────
 
-   Türkis ist die Hausfarbe. Sie steht am Laden selbst: Das Banner über
-   der Tür und die Wand im Salon sind türkis gestrichen. Der Ton ist an
-   der Vorlage des Auftraggebers gemessen — Schatten oklch(80 % .136 193),
-   Lichter oklch(94 % .048 177), Papier oklch(98 % .020 178).
+   Türkis steht am Laden selbst: das Schild über der Tür ist türkis.
+   Es ist deshalb die Hausfarbe — aber es tritt nur als Ornament auf,
+   nie als Fläche und nie als Textfarbe. Im Salon hängt dasselbe Türkis
+   auch an den Regalen des Lieferanten; würde man das zur Leitfarbe
+   machen, verschwände die Handschrift des Ladens beim nächsten
+   Lieferantenwechsel.
 
-   Dazu nur Tinte: ein tiefes Schwarzgrün, oklch(20 % .028 196). Zwei
-   Farben, mehr nicht. Was Aufmerksamkeit braucht, wird schwarz, nicht
-   bunt — genau wie in der Vorlage, wo die Wortmarke das einzige Dunkle
-   im Bild ist.
+   Der Grund ist Papier: fast weiss, nur einen Hauch kühl. Alles, was
+   Aufmerksamkeit braucht, wird Tinte — ein tiefes Schwarzgrün. Zwei
+   Farben, mehr nicht.
 
    ── Die Fotos ─────────────────────────────────────────────────────────
 
-   Aufnahmen von Ort und Stimmung laufen über eine Zweifarben-Rampe:
-   Schatten türkis, Lichter fast weiß. Die Arbeiten bleiben davon
-   ausgenommen — beim Friseur ist das Foto das Produkt, und ein Duoton
-   nähme genau das weg, was verkauft wird: die Haarfarbe.
+   Aufnahmen laufen unbehandelt. Ein Zweifarben-Duoton hatte den ganzen
+   Laden blass gemacht: beim Friseur ist das Foto das Produkt, und ein
+   Farbfilter nimmt genau das weg, was verkauft wird. Was ein Bild
+   ruhig macht, ist der Schleier hinter dem Text — nicht über der
+   ganzen Fläche.
    ═══════════════════════════════════════════════════════════════════════ */
 
 @font-face {
@@ -40,19 +42,27 @@
 :root {
   color-scheme: light;
 
-  --papier:      oklch(98% .020 178);
-  --papier-warm: oklch(95.5% .028 180);
-  --tuerkis:     oklch(80% .136 193);
-  --tuerkis-tief:oklch(66% .120 196);
-  --tuerkis-hell:oklch(94% .048 177);
+  /* Papier ist fast weiss, nur einen Hauch kühl. Ein durchgehend
+     mintfarbener Grund lässt jede Aufnahme darauf blass wirken — die
+     Seite sah verwaschen aus, weil der Grund selbst schon Farbe hatte. */
+  --papier:      oklch(98.6% .004 200);
+  --papier-warm: oklch(96.8% .008 200);
 
-  --tinte:       oklch(20% .028 196);
-  --tinte-leise: oklch(38% .026 194);
-  --tinte-still: oklch(52% .024 192);
-  --auf-tinte:   oklch(98% .020 178);
+  /* Türkis ist Ornament, keine Fläche und keine Textfarbe: ein Strich
+     unter der offenen Gruppe, eine Marke am Rand. Deutlich ruhiger als
+     das Regalgrün des Lieferanten — die Farbe steht am eigenen Schild
+     über der Tür, und dort ist sie tief, nicht grell. */
+  --tuerkis:     oklch(70% .085 197);
+  --tuerkis-tief:oklch(52% .078 200);
+  --tuerkis-hell:oklch(95.5% .020 195);
 
-  --linie:      oklch(20% .028 196 / .20);
-  --linie-fein: oklch(20% .028 196 / .10);
+  --tinte:       oklch(19% .018 205);
+  --tinte-leise: oklch(38% .014 205);
+  --tinte-still: oklch(48% .013 205);
+  --auf-tinte:   oklch(98.6% .004 200);
+
+  --linie:      oklch(19% .018 205 / .18);
+  --linie-fein: oklch(19% .018 205 / .08);
 
   --mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
 
@@ -61,7 +71,7 @@
      nur aus Punkten. Die beiden Farben im Bild sind --tuerkis-hell
      (Lichtkante) und --tuerkis-tief (Loch); eine Daten-URI kennt
      unsere Token nicht, deshalb stehen sie hier als Hexwert. */
-  --lochblech: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Cg fill='%237be6df'%3E%3Cpath d='M25 18 32 25 25 32 18 25Z'/%3E%3C/g%3E%3Cg fill='%2300a8aa'%3E%3Cpath d='M24 17 31 24 24 31 17 24Z'/%3E%3Cpath d='M0 -3 3 0 0 3 -3 0Z'/%3E%3Cpath d='M48 -3 51 0 48 3 45 0Z'/%3E%3Cpath d='M0 45 3 48 0 51 -3 48Z'/%3E%3Cpath d='M48 45 51 48 48 51 45 48Z'/%3E%3Cpath d='M24 -3 27 0 24 3 21 0Z'/%3E%3Cpath d='M0 21 3 24 0 27 -3 24Z'/%3E%3Cpath d='M48 21 51 24 48 27 45 24Z'/%3E%3Cpath d='M24 45 27 48 24 51 21 48Z'/%3E%3C/g%3E%3C/svg%3E");
+  --lochblech: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Cg fill='%2382bebe'%3E%3Cpath d='M25 18 32 25 25 32 18 25Z'/%3E%3C/g%3E%3Cg fill='%2321767b'%3E%3Cpath d='M24 17 31 24 24 31 17 24Z'/%3E%3Cpath d='M0 -3 3 0 0 3 -3 0Z'/%3E%3Cpath d='M48 -3 51 0 48 3 45 0Z'/%3E%3Cpath d='M0 45 3 48 0 51 -3 48Z'/%3E%3Cpath d='M48 45 51 48 48 51 45 48Z'/%3E%3Cpath d='M24 -3 27 0 24 3 21 0Z'/%3E%3Cpath d='M0 21 3 24 0 27 -3 24Z'/%3E%3Cpath d='M48 21 51 24 48 27 45 24Z'/%3E%3Cpath d='M24 45 27 48 24 51 21 48Z'/%3E%3C/g%3E%3C/svg%3E");
   --loch-raster: 34px;
 
   --t-riesen: 2.35rem;
@@ -86,9 +96,6 @@
   --kante: 3px;
   --kante-voll: 999px;
 
-  /* Der Haken der Merkliste. Ein Daten-URI kennt die Token nicht, der
-     Strich trägt --tinte deshalb als gemessenen Wert: #0b2422. */
-  --haken: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M2.5 8.4 6.2 12 13.5 4.2' fill='none' stroke='%230b2422' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
 
 @media (min-width: 48rem) {
@@ -183,7 +190,7 @@ a { color: inherit; }
   height: var(--leiste);
   display: flex; align-items: center; gap: var(--a3);
   padding-inline: var(--rand);
-  background: oklch(98% .020 178 / .84);
+  background: oklch(98.6% .004 200 / .84);
   -webkit-backdrop-filter: blur(12px);
           backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--linie-fein);
@@ -317,16 +324,32 @@ a { color: inherit; }
    der Seite auf. */
 .auftakt::after {
   content: ""; position: absolute; inset: 0; z-index: -1;
+  /* Am schmalen Schirm liegt der Text über der ganzen Breite. Deshalb
+     hier von unten herauf, nicht seitlich — ein seitlicher Verlauf
+     griffe genau in die Zeile. */
   background:
-    /* Von unten dicht in den Abschnittsrand hinein — darauf steht alles. */
-    linear-gradient(to top, var(--papier) 0%, oklch(98% .020 178 / .93) 34%,
-                    oklch(98% .020 178 / .62) 58%, oklch(98% .020 178 / .18) 82%, transparent 100%),
-    /* Ein schmales Band oben. Die Eckzeilen sind gesperrte Kapitälchen in
-       11 px und haben keine Reserve; sie brauchen einen dichten Grund,
-       nicht einen kräftigeren Verlauf über der ganzen Aufnahme. */
-    linear-gradient(to bottom, oklch(98% .020 178 / .88) 0%,
-                    oklch(98% .020 178 / .70) calc(var(--leiste) + 2.6rem),
-                    transparent calc(var(--leiste) + 6rem));
+    linear-gradient(to top, var(--papier) 0%, oklch(98.6% .004 200 / .92) 30%,
+                    oklch(98.6% .004 200 / .74) 56%, oklch(98.6% .004 200 / .30) 80%,
+                    transparent 100%),
+    linear-gradient(to bottom, oklch(98.6% .004 200 / .82) 0%,
+                    oklch(98.6% .004 200 / .58) calc(var(--leiste) + 2.4rem),
+                    transparent calc(var(--leiste) + 5.5rem));
+}
+
+/* Sobald neben dem Text Platz ist, bleibt die Aufnahme rechts offen und
+   der Schleier steht nur hinter der Schrift. Ein Schleier über der
+   ganzen Fläche macht aus einem Foto eine Milchscheibe. */
+@media (min-width: 48rem) {
+  .auftakt::after {
+    background:
+      linear-gradient(to right, oklch(98.6% .004 200 / .96) 0%,
+                      oklch(98.6% .004 200 / .93) 38%,
+                      oklch(98.6% .004 200 / .45) 58%, transparent 74%),
+      linear-gradient(to top, var(--papier) 0%, oklch(98.6% .004 200 / .55) 12%,
+                      transparent 30%),
+      linear-gradient(to bottom, oklch(98.6% .004 200 / .70) 0%,
+                      transparent calc(var(--leiste) + 5rem));
+  }
 }
 
 .auftakt-satz { max-width: var(--spalte); width: 100%; margin-inline: auto; }
@@ -336,6 +359,12 @@ a { color: inherit; }
    auf jedem Schirm die Zeile füllt statt umzubrechen. */
 .auftakt .kennung,
 .auftakt .braue { color: var(--tinte); }
+
+/* Braue und Wortmarke sind Blöcke; ihr Kasten lief bis in den offenen
+   Teil der Aufnahme, wo der Grund dunkel ist. Auf das Wort gekürzt
+   steht die Schrift nur dort, wo der Schleier dicht ist. */
+.auftakt .braue,
+.auftakt .wortmarke { width: max-content; max-width: 100%; }
 
 .wortmarke { margin: var(--a2) 0 var(--a3); line-height: .92; }
 .wortmarke-wort {
@@ -584,10 +613,9 @@ a { color: inherit; }
 .wand::after {
   content: ""; position: absolute; inset: 0; z-index: -1;
   background:
-    linear-gradient(to top, var(--papier) 0%, oklch(98% .020 178 / .58) 11%,
-                    oklch(98% .020 178 / .10) 26%, transparent 40%),
-    radial-gradient(130% 100% at 10% -10%, oklch(98% .020 178 / .42), transparent 64%),
-    linear-gradient(oklch(98% .020 178 / .62), oklch(98% .020 178 / .62));
+    linear-gradient(to top, var(--papier) 0%, oklch(98.6% .004 200 / .58) 11%,
+                    oklch(98.6% .004 200 / .10) 26%, transparent 40%),
+    linear-gradient(oklch(98.6% .004 200 / .70), oklch(98.6% .004 200 / .70));
 }
 
 /* Sobald Platz neben dem Text ist, wird nur noch der Textblock
@@ -598,11 +626,11 @@ a { color: inherit; }
 @media (min-width: 48rem) {
   .wand::after {
     background:
-      linear-gradient(to top, var(--papier) 0%, oklch(98% .020 178 / .58) 11%,
-                      oklch(98% .020 178 / .10) 26%, transparent 40%),
-      radial-gradient(130% 100% at 10% -10%, oklch(98% .020 178 / .42), transparent 64%),
-      linear-gradient(to right, oklch(98% .020 178 / .74) 0%,
-                      oklch(98% .020 178 / .68) 46%, transparent 76%);
+      linear-gradient(to top, var(--papier) 0%, oklch(98.6% .004 200 / .58) 11%,
+                      oklch(98.6% .004 200 / .10) 26%, transparent 40%),
+      linear-gradient(to right, oklch(98.6% .004 200 / .92) 0%,
+                      oklch(98.6% .004 200 / .88) 44%,
+                      oklch(98.6% .004 200 / .50) 60%, transparent 76%);
   }
 }
 
@@ -615,7 +643,8 @@ a { color: inherit; }
 /* Die Braue ist ein Block und reichte bis in den offenen Teil der Wand
    hinein, obwohl das Wort links steht. Der Kasten wird auf das Wort
    gekürzt — sonst misst man Grund, auf dem gar keine Schrift liegt. */
-.wand .braue { width: max-content; max-width: 100%; }
+.wand .braue,
+.wand-titel { width: max-content; max-width: 100%; }
 
 /* Die knappe Wand: gleich nach dem Auftakt, nur so hoch wie die vier
    Belege. Der Schleier ist hier gleichmässig statt von unten — auf einem
@@ -632,14 +661,23 @@ a { color: inherit; }
   background:
     linear-gradient(to bottom, var(--papier) 0%, transparent 16%,
                     transparent 84%, var(--papier) 100%),
-    linear-gradient(oklch(98% .020 178 / .12), oklch(98% .020 178 / .12));
+    linear-gradient(oklch(98.6% .004 200 / .12), oklch(98.6% .004 200 / .12));
 }
-.wand-knapp .belege { background: transparent; border-block: 0; gap: var(--a1); }
-.wand-knapp .belege p {
-  background: oklch(98% .020 178 / .90);
-  -webkit-backdrop-filter: blur(8px);
-          backdrop-filter: blur(8px);
+.wand-knapp .belege {
+  background: transparent; border-block: 0;
+  gap: 1px;
+  align-items: stretch;
+  border: 1px solid oklch(98.6% .004 200 / .55);
   border-radius: var(--kante);
+  overflow: hidden;
+}
+/* Deckend statt durchscheinend: eine milchige Karte über einem bunten
+   Regal wird trüb, eine weisse Karte bleibt eine weisse Karte. Alle
+   vier gleich hoch, sonst steht die Reihe schief. */
+.wand-knapp .belege p {
+  background: var(--papier);
+  display: flex; flex-direction: column; justify-content: center;
+  gap: .25rem;
 }
 
 .wand-titel {
@@ -655,97 +693,111 @@ a { color: inherit; }
    Der Navigator klebt unter der Leiste und weicht mit ihr aus. Am
    schmalen Schirm ist er eine Zeile, die man schiebt. */
 
-.navigator {
-  position: sticky; top: var(--leiste); z-index: 20;
-  background: oklch(98% .020 178 / .92);
-  -webkit-backdrop-filter: blur(12px);
-          backdrop-filter: blur(12px);
-  border-block: 1px solid var(--linie-fein);
-  transition: transform var(--t2) var(--kurve);
-}
-.navigator.weg { transform: translateY(calc(-1 * var(--leiste))); }
-
-.navigator-bahn {
-  max-width: var(--spalte);
-  margin-inline: auto;
-  padding-inline: var(--rand);
-  display: flex; gap: var(--a3);
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-.navigator-bahn::-webkit-scrollbar { display: none; }
-.navigator-bahn a {
-  flex: none;
-  padding: .85rem 0;
-  font-size: var(--t-marke);
-  letter-spacing: .07em; text-transform: uppercase;
-  color: var(--tinte-still);
-  text-decoration: none;
-  border-bottom: 2px solid transparent;
-  white-space: nowrap;
-}
-.navigator-bahn a[aria-current="location"] {
-  color: var(--tinte);
-  border-bottom-color: var(--tinte);
-}
+/* ── Die Preisliste als Mini-Navi ─────────────────────────────────────
+   Neun Zeilen, eine je Gruppe, mit dem niedrigsten Preis am Rand. Wer
+   nur wissen will, was ein Herrenschnitt kostet, liest neun Zeilen
+   statt sechzig. Getragen von `<details>`: ohne Skript, mit Tastatur,
+   und der Browser übernimmt das Auf- und Zuklappen selbst.          */
 
 .liste { padding-block: var(--a5) var(--a6); }
-.gruppe + .gruppe { margin-top: var(--a5); }
-.gruppe h2 { margin: 0; }
-.gruppe { scroll-margin-top: calc(var(--leiste) + 4rem); }
-.gruppe-wort {
-  margin: var(--a1) 0 0;
-  max-width: var(--lese);
-  font-size: var(--t-klein); color: var(--tinte-still);
-}
 
-/* Wo zwei Preise stehen, sagt eine Zeile darüber, welcher welcher ist.
-   Sie trägt dasselbe Raster wie eine Zeile der Liste und darin dasselbe
-   Preisfeld — sonst steht das Wort neben der Spalte statt darüber. */
-.spalten-wort {
-  display: grid;
-  grid-template-columns: 1.15rem minmax(0, 1fr) auto;
-  gap: var(--a2);
-  margin: var(--a3) 0 0;
-  font-size: var(--t-marke);
-  letter-spacing: .07em; text-transform: uppercase;
-  color: var(--tinte-still);
-}
-.spalten-wort .posten-preis { grid-column: 3; }
-.spalten-wort .posten-preis b,
-.spalten-wort .posten-preis i {
-  font: inherit; font-size: var(--t-marke);
-  color: var(--tinte-still);
-}
-.spalten-wort + .posten { margin-top: var(--a1); }
+.fach { border-bottom: 1px solid var(--linie-fein); }
+.fach:first-of-type { border-top: 1px solid var(--linie-fein); }
+.fach { scroll-margin-top: calc(var(--leiste) + 1rem); }
 
-.posten { list-style: none; margin: var(--a3) 0 0; padding: 0; }
-.posten li + li { border-top: 1px solid var(--linie-fein); }
-.posten label {
+.fach-kopf {
   display: grid;
-  grid-template-columns: 1.15rem minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) auto 1.5rem;
   align-items: baseline;
   gap: var(--a2);
-  padding: .85rem 0;
+  padding: 1.15rem .25rem;
   cursor: pointer;
+  list-style: none;
+  transition: background var(--t1) var(--kurve);
 }
-.posten input {
-  appearance: none;
-  width: 1.15rem; height: 1.15rem;
-  margin: 0; align-self: center;
-  border: 1px solid var(--linie);
-  border-radius: var(--kante);
-  background: none;
-  cursor: pointer;
+.fach-kopf::-webkit-details-marker { display: none; }
+.fach-kopf:focus-visible { outline: 2px solid var(--tinte); outline-offset: -2px; }
+
+.fach-wort {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: var(--t-mittel);
+  color: var(--tinte);
 }
-/* Der Haken ist gezeichnet, nicht geschrieben: als Schriftzeichen säße
-   er bei jedem Gerät ein paar Pixel woanders, und aus zwei Verläufen
-   zusammengesetzt wird er zum Dach statt zum Haken. */
-.posten input:checked {
-  border-color: var(--tinte);
-  background: var(--haken) no-repeat center / 72% 72%;
+.fach-ab {
+  font-size: var(--t-marke);
+  letter-spacing: .04em;
+  color: var(--tinte-still);
+  font-variant-numeric: tabular-nums;
 }
-.posten input:focus-visible { outline: 2px solid var(--tinte); outline-offset: 2px; }
+
+/* Das Zeichen ist ein gezeichnetes Kreuz, das sich beim Öffnen zum
+   Strich dreht — zwei Balken, kein Schriftzeichen: ein Pfeil aus der
+   Schrift säße auf jedem Gerät ein paar Pixel woanders. */
+.fach-zeichen {
+  position: relative;
+  align-self: center;
+  width: 1.5rem; height: 1.5rem;
+}
+.fach-zeichen::before,
+.fach-zeichen::after {
+  content: "";
+  position: absolute; left: 50%; top: 50%;
+  width: .7rem; height: 1px;
+  margin: -.5px 0 0 -.35rem;
+  background: var(--tuerkis-tief);
+  transition: transform var(--t1) var(--kurve);
+}
+.fach-zeichen::after { transform: rotate(90deg); }
+.fach[open] .fach-zeichen::after { transform: rotate(0deg); }
+
+/* Die offene Gruppe bekommt einen türkisen Strich an die Seite — das
+   ist der eine Ort, an dem die Hausfarbe auf dieser Seite auftritt. */
+.fach[open] { background: var(--papier-warm); }
+.fach[open] .fach-kopf { box-shadow: inset 2px 0 0 var(--tuerkis); }
+.fach[open] .fach-wort { font-style: italic; }
+
+.fach-inhalt { padding: 0 .25rem var(--a3); }
+
+@media (hover: hover) and (pointer: fine) {
+  .fach-kopf:hover { background: var(--papier-warm); }
+}
+
+@media (min-width: 48rem) {
+  .fach-kopf { padding-inline: var(--a2); }
+  .fach-inhalt { padding-inline: var(--a2); }
+  .fach-wort { font-size: 1.35rem; }
+}
+
+.gruppe-wort {
+  margin: 0 0 var(--a2);
+  font-size: var(--t-klein);
+  color: var(--tinte-still);
+}
+
+.spalten-wort {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  margin: 0;
+  padding-bottom: .4rem;
+  border-bottom: 1px solid var(--linie-fein);
+}
+.spalten-wort .posten-preis { grid-column: 2; }
+.spalten-wort .posten-preis b,
+.spalten-wort .posten-preis i {
+  font-weight: 400; font-size: var(--t-marke);
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--tinte-still);
+}
+
+.posten { list-style: none; margin: 0; padding: 0; }
+.posten li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: var(--a2);
+  padding: .8rem 0;
+}
+.posten li + li { border-top: 1px solid var(--linie-fein); }
 
 .posten-name { font-size: var(--t-klein); }
 .posten-name em {
@@ -771,29 +823,6 @@ a { color: inherit; }
 
 .schluss { margin-top: var(--a5); color: var(--tinte-still); }
 .schluss a { color: var(--tinte); }
-
-/* Der Merkzettel steht unten und nimmt nur so viel Platz, wie er
-   braucht; ohne Auswahl ist er gar nicht da. */
-.merk {
-  position: sticky; bottom: 0; z-index: 25;
-  background: oklch(98% .020 178 / .94);
-  -webkit-backdrop-filter: blur(14px);
-          backdrop-filter: blur(14px);
-  border-top: 1px solid var(--linie);
-}
-.merk-mitte {
-  max-width: var(--spalte);
-  margin-inline: auto;
-  padding: var(--a2) var(--rand);
-  display: flex; flex-wrap: wrap; align-items: center;
-  gap: var(--a2) var(--a3);
-}
-.merk-stand { margin: 0; font-size: var(--t-klein); color: var(--tinte-leise); }
-.merk-stand b { color: var(--tinte); }
-.merk-summe { color: var(--tinte); font-variant-numeric: tabular-nums; }
-.merk-summe::before { content: "·"; margin-inline: .4rem; color: var(--tinte-still); }
-.merk-tasten { margin-left: auto; display: flex; flex-wrap: wrap; gap: var(--a2); }
-.merk-tasten .knopf, .merk-tasten .knopf-still { padding-block: .5rem; }
 
 /* ── Rechtliches ──────────────────────────────────────────────────────
    Impressum und Datenschutz: eine Spalte, Lesebreite, sonst nichts. */
@@ -879,3 +908,32 @@ a { color: inherit; }
   }
   .auftritt-da { opacity: 1; transform: none; }
 }
+
+/* ── Der Abschluss der Preisliste ─────────────────────────────────────
+   Wo vorher der Merkzettel klebte, steht jetzt ein ruhiger Block: die
+   Entscheidung fällt am Ende der Liste, nicht in einer Leiste, die die
+   ganze Zeit im Weg steht. */
+
+.abschluss {
+  margin-top: var(--a5);
+  padding: var(--a4) var(--a3);
+  background: var(--papier-warm);
+  border: 1px solid var(--linie-fein);
+  border-radius: var(--kante);
+}
+.abschluss .lauf { max-width: var(--lese); margin-bottom: var(--a3); }
+.abschluss .wahl { margin-bottom: 0; }
+
+/* ── Der stille Kopf der Preisliste ───────────────────────────────────
+   Ohne Aufnahme darunter braucht es weder Lochblech noch Schleier: nur
+   Papier, ein Strich unten, und darüber die Schrift. */
+
+.wand-still {
+  background: var(--papier);
+  border-bottom: 1px solid var(--linie-fein);
+  padding-bottom: var(--a4);
+}
+.wand-still::after { display: none; }
+.wand-still .braue { color: var(--tinte-still); }
+.wand-still .lauf { color: var(--tinte-leise); }
+.wand-still .kennung { color: var(--tinte-still); }
