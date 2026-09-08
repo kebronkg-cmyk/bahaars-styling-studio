@@ -1,0 +1,86 @@
+<!DOCTYPE html><html lang="de"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Hell — geteilter Auftakt</title>
+<style>
+@font-face{font-family:'Anzeige';src:url('schrift/GildaDisplay.woff2')format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Lauf';src:url('schrift/Mulish.woff2')format('woff2');font-weight:300 800;font-display:swap}
+:root{
+  --papier:oklch(99% .003 200); --papier-warm:oklch(96.5% .006 195);
+  --tinte:oklch(21% .020 205); --tinte-leise:oklch(42% .016 205); --tinte-still:oklch(56% .012 205);
+  --tuerkis:oklch(58% .085 197); --tuerkis-hell:oklch(94% .028 195);
+  --linie:oklch(21% .020 205/.16); --linie-fein:oklch(21% .020 205/.08);
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--papier);color:var(--tinte);
+  font-family:'Lauf',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%;height:auto}
+.leiste{position:relative;z-index:3;display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  padding:1.05rem clamp(1.25rem,4vw,3rem);border-bottom:1px solid var(--linie-fein);background:var(--papier)}
+.marke{font-family:'Anzeige',serif;font-size:1.15rem;letter-spacing:.2em;text-transform:uppercase}
+.wege{display:flex;gap:1.7rem;font-size:.86rem;color:var(--tinte-leise)}
+@media(max-width:52rem){.wege{display:none}}
+.tel{border:1px solid var(--linie);border-radius:2px;padding:.5rem 1rem;font-size:.84rem;
+  font-variant-numeric:tabular-nums}
+
+/* Kein Schleier. Die Seite ist links Papier und rechts Foto, mit einer
+   harten Kante dazwischen — dann muss keine Milchscheibe über die
+   Aufnahme, damit Schrift darauf lesbar wird, und das Haar behält seine
+   Farbe. Genau das war am hellen Entwurf vorher verwaschen. */
+.buehne{display:grid;grid-template-columns:1fr 1fr;min-height:min(88svh,860px)}
+@media(max-width:60rem){.buehne{grid-template-columns:1fr;min-height:0}}
+
+.satz{display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(2.5rem,5vw,4.5rem) clamp(1.5rem,4vw,4rem)}
+.stand{align-self:flex-start;display:inline-flex;align-items:center;gap:.5rem;margin:0 0 1.8rem;
+  padding:.36rem .8rem .36rem .62rem;border:1px solid var(--linie);border-radius:999px;
+  font-size:.74rem;letter-spacing:.05em;color:var(--tinte-leise)}
+.stand::before{content:"";width:.42rem;height:.42rem;border-radius:50%;background:var(--tuerkis)}
+h1{margin:0 0 1.2rem;font-family:'Anzeige',serif;font-weight:400;
+  font-size:clamp(2.7rem,5.6vw,4.4rem);line-height:1.06;letter-spacing:.004em}
+h1 .zwei{display:block;color:var(--tuerkis)}
+.lauf{margin:0 0 2.1rem;font-size:1.02rem;line-height:1.62;color:var(--tinte-leise);max-width:30rem}
+.wahl{display:flex;flex-wrap:wrap;gap:.75rem;margin-bottom:2.6rem}
+.knopf{display:inline-flex;padding:.9rem 1.6rem;border-radius:2px;background:var(--tinte);
+  color:var(--papier);font-weight:700;font-size:.9rem;text-decoration:none;
+  transition:transform .22s cubic-bezier(.22,.61,.36,1)}
+.knopf-still{display:inline-flex;padding:.9rem 1.6rem;border-radius:2px;border:1px solid var(--linie);
+  color:var(--tinte);font-size:.9rem;text-decoration:none;font-variant-numeric:tabular-nums;
+  transition:transform .22s cubic-bezier(.22,.61,.36,1),background .22s}
+.knopf:active,.knopf-still:active{transform:scale(.97)}
+.belege{display:flex;flex-wrap:wrap;gap:.5rem 2rem;padding-top:1.2rem;border-top:1px solid var(--linie-fein);
+  font-size:.84rem;color:var(--tinte-still)}
+.belege b{color:var(--tinte);font-weight:700}
+
+/* Das Foto läuft bis an die Kante und wird nicht angefasst: keine
+   Helligkeit, kein Filter, keine Sättigung. Bei rund 720 px Breite aus
+   einer 1000er Vorlage wird es verkleinert, nicht gezogen — deshalb ist
+   es scharf. */
+.bild{position:relative;overflow:hidden;background:var(--papier-warm)}
+@media(max-width:60rem){.bild{aspect-ratio:4/3;order:-1}}
+.bild img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:52% 42%}
+/* Eine schmale Kante in Türkis an der Naht: der einzige Farbeinsatz,
+   der eine Fläche berührt. */
+.bild::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--tuerkis);z-index:2}
+@media(max-width:60rem){.bild::before{left:0;right:0;bottom:auto;width:auto;height:3px}}
+</style></head><body>
+<header class="leiste">
+  <span class="marke">BaHaar&rsquo;s</span>
+  <nav class="wege"><span>Leistungen</span><span>Arbeiten</span><span>Der Laden</span><span>Kontakt</span></nav>
+  <span class="tel">089 692 36 44</span>
+</header>
+<section class="buehne">
+  <div class="satz">
+    <p class="stand">Heute ab 09 Uhr</p>
+    <h1>Licht an,<span class="zwei">T&uuml;r offen.</span></h1>
+    <p class="lauf">Perlacher Stra&szlig;e&nbsp;2 in Giesing. Bahar ist Friseurmeisterin und arbeitet
+      seit zwanzig Jahren in M&uuml;nchen. Schnitt, Farbe, Str&auml;hnen, Hochsteckfrisuren,
+      Brautstyling &mdash; mit und ohne Termin.</p>
+    <div class="wahl">
+      <a class="knopf" href="#">Termin buchen</a>
+      <a class="knopf-still" href="#">089 692 36 44</a>
+    </div>
+    <p class="belege"><span><b>4,8 von 5</b> &middot; &uuml;ber 90 Bewertungen</span>
+      <span><b>Meisterbrief</b></span><span><b>20 Jahre</b> &middot; in M&uuml;nchen</span></p>
+  </div>
+  <div class="bild"><img src="bilder/arbeit-bob.webp" alt="Blonder Bob mit Locken, im Salon geföhnt"></div>
+</section>
+</body></html>
