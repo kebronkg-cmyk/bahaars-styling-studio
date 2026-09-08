@@ -7,6 +7,10 @@
 <meta name="description" content="Friseursalon an der Perlacher Stra&szlig;e 2 in M&uuml;nchen-Giesing. Bahar ist Friseurmeisterin und arbeitet seit zwanzig Jahren in M&uuml;nchen. Schnitt, Farbe, Str&auml;hnen, Hochsteckfrisuren, Brautstyling &mdash; mit und ohne Termin. Telefon 089 692 36 44.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="neu.css">
+<!-- Verhindert, dass der Auftakt kurz steht und dann von vorn beginnt.
+     Die Klasse nimmt sich selbst zurück, falls das Skript nie ankommt —
+     dann steht die Seite einfach da, statt unsichtbar zu bleiben. -->
+<script>var d=document.documentElement;d.className+=' vorlauf';setTimeout(function(){d.classList.remove('vorlauf')},1600)</script>
 <link rel="preload" href="schrift/InstrumentSerif-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="schrift/InstrumentSerif-Italic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="schrift/Inter.woff2" as="font" type="font/woff2" crossorigin>
@@ -45,11 +49,15 @@
   <img class="auftakt-grund" src="bilder/front-tuer.webp" alt="" width="1280" height="632"
        fetchpriority="high" decoding="async" aria-hidden="true">
 
+  <div class="raster" aria-hidden="true"></div>
+
   <p class="kennung kennung-links" aria-hidden="true">BHR&middot;STUDIO &mdash; Perlacher Str.&nbsp;2</p>
   <p class="kennung kennung-rechts" aria-hidden="true">81539 M&Uuml;NCHEN&thinsp;/&thinsp;GIESING</p>
 
+  <!-- Der Stand steht jetzt oben, nicht unten: „Kann ich jetzt kommen?"
+       ist die dritte Frage der Kundin, und sie soll sie nicht suchen. -->
   <div class="auftakt-satz">
-    <p class="braue">Friseursalon in M&uuml;nchen-Giesing</p>
+    <p class="stand-chip"><span class="stand" id="stand"></span></p>
     <h1 class="wortmarke" id="auftakt-titel">
       <span class="wortmarke-wort">BaHaar&rsquo;s</span>
       <span class="wortmarke-zusatz">Styling Studio</span>
@@ -72,9 +80,8 @@
     <p class="ort">
       <span class="zeichen">
         <img src="bilder/bahar-nah.webp" alt="Bahar, Inhaberin und Friseurmeisterin" width="88" height="88" decoding="async">
-        <b>Bahar</b> Friseurmeisterin
+        <b>Bahar</b> Friseurmeisterin &middot; Perlacher&nbsp;Stra&szlig;e&nbsp;2, Giesing
       </span>
-      <span class="stand" id="stand"></span>
     </p>
   </div>
 </section>
@@ -97,7 +104,6 @@
 <!-- ══ Leistungen ═══════════════════════════════════════════════════════ -->
 <section class="bahn" id="leistungen">
   <div class="mitte">
-    <p class="braue">Leistungen</p>
     <h2 class="gross">Was hier gemacht wird</h2>
     <p class="lauf lese">
       Was ein Termin kostet, h&auml;ngt an der Haarl&auml;nge und am
@@ -173,7 +179,6 @@
 <!-- ══ Brautstyling ═════════════════════════════════════════════════════ -->
 <section class="braut" id="brautstyling">
   <div class="braut-satz">
-    <p class="braue">Brautstyling</p>
     <h2 class="gross">Haar und Make-up<br>aus <em>einer Hand</em>.</h2>
     <p class="lauf">
       Frisur und Make-up macht dieselbe Person, an einem Termin. Sie
@@ -193,7 +198,6 @@
 <!-- ══ Arbeiten ═════════════════════════════════════════════════════════ -->
 <section class="bahn" id="arbeiten">
   <div class="mitte">
-    <p class="braue">Arbeiten</p>
     <h2 class="gross">Aus dem Laden</h2>
     <p class="lauf lese">
       Acht Aufnahmen aus dem Salon an der Perlacher Stra&szlig;e. Keine
@@ -216,7 +220,6 @@
 <!-- ══ Der Laden ════════════════════════════════════════════════════════ -->
 <section class="bahn" id="laden">
   <div class="mitte">
-    <p class="braue">Der Laden</p>
     <h2 class="gross">Perlacher Stra&szlig;e 2</h2>
     <p class="lauf lese">
       Ein inhabergef&uuml;hrter Salon in Giesing, gleich an der
@@ -241,7 +244,6 @@
 <!-- ══ Kontakt ══════════════════════════════════════════════════════════ -->
 <section class="bahn kontakt" id="kontakt">
   <div class="mitte">
-    <p class="braue">Kontakt</p>
     <h2 class="gross">Kommen Sie vorbei</h2>
 
     <div class="spalten">

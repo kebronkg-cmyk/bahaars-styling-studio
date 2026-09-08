@@ -57,12 +57,13 @@
   --tuerkis-hell:oklch(95.5% .020 195);
 
   --tinte:       oklch(19% .018 205);
-  --tinte-leise: oklch(38% .014 205);
+  --tinte-leise: oklch(35% .015 205);
   --tinte-still: oklch(48% .013 205);
   --auf-tinte:   oklch(98.6% .004 200);
 
   --linie:      oklch(19% .018 205 / .18);
   --linie-fein: oklch(19% .018 205 / .08);
+  --linie-raster: oklch(19% .018 205 / .14);
 
   --mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
 
@@ -160,12 +161,6 @@ a { color: inherit; }
 
 /* ── Schriftbilder ────────────────────────────────────────────────────── */
 
-.braue {
-  margin: 0 0 var(--a2);
-  font-size: var(--t-marke);
-  letter-spacing: .17em; text-transform: uppercase;
-  color: var(--tinte-still);
-}
 
 .riesen, .gross {
   margin: 0 0 var(--a3);
@@ -205,13 +200,18 @@ a { color: inherit; }
   letter-spacing: -.005em; font-kerning: normal;
   text-decoration: none;
 }
-.marke span {
+/* Nur der Zusatz, nicht jedes span in der Marke: `.marke span` hatte
+   auch „BaHaar's" erwischt und ihm die Serife genommen — und am schmalen
+   Schirm beide ausgeblendet, sodass in der Leiste gar kein Name mehr
+   stand. Der Name geht nie weg, nur der Zusatz. */
+.marke-wort { font-family: inherit; }
+.marke-zusatz {
   font-family: 'Inter', system-ui, sans-serif;
   font-size: .6rem; font-weight: 500;
   letter-spacing: .19em; text-transform: uppercase;
   color: var(--tinte-still);
 }
-@media (max-width: 26rem) { .marke span { display: none; } }
+@media (max-width: 26rem) { .marke-zusatz { display: none; } }
 
 /* Am schmalen Schirm klappt das Menü unter der Leiste auf; ab 62rem
    steht es als Zeile in der Leiste und der Klappknopf verschwindet.
@@ -318,7 +318,7 @@ a { color: inherit; }
 .auftakt-grund {
   position: absolute; inset: 0; z-index: -2;
   width: 100%; height: 100%;
-  object-fit: cover; object-position: 50% 62%;
+  object-fit: cover; object-position: 38% 62%;
 }
 /* Der Verlauf steht nur dort, wo Text liegt, und nimmt die Grundfarbe
    der Seite auf. */
@@ -358,12 +358,9 @@ a { color: inherit; }
    — Instrument Serif trifft das. Die Grösse folgt der Breite, damit sie
    auf jedem Schirm die Zeile füllt statt umzubrechen. */
 .auftakt .kennung,
-.auftakt .braue { color: var(--tinte); }
-
-/* Braue und Wortmarke sind Blöcke; ihr Kasten lief bis in den offenen
-   Teil der Aufnahme, wo der Grund dunkel ist. Auf das Wort gekürzt
-   steht die Schrift nur dort, wo der Schleier dicht ist. */
-.auftakt .braue,
+/* Die Wortmarke ist ein Block; ihr Kasten lief bis in den offenen Teil
+   der Aufnahme, wo der Grund dunkel ist. Auf das Wort gekürzt steht die
+   Schrift nur dort, wo der Schleier dicht ist. */
 .auftakt .wortmarke { width: max-content; max-width: 100%; }
 
 .wortmarke { margin: var(--a2) 0 var(--a3); line-height: .92; }
@@ -371,7 +368,7 @@ a { color: inherit; }
   display: block;
   font-family: 'Instrument Serif', Georgia, serif;
   font-weight: 400;
-  font-size: clamp(3.4rem, 15.5vw, 13rem);
+  font-size: clamp(3rem, 11vw, 8.5rem);
   letter-spacing: -.022em;
   color: var(--tinte);
 }
@@ -387,8 +384,9 @@ a { color: inherit; }
 /* Die kleinen Kennungen in den Ecken: der technische Gegenpol zur
    Wortmarke, wie in der Vorlage. Rein dekorativ. */
 .kennung {
-  position: absolute; z-index: 1; margin: 0;
+  position: absolute; z-index: 2; margin: 0;
   top: calc(var(--leiste) + var(--a2));
+
   font-family: var(--mono);
   font-size: .66rem; letter-spacing: .14em; text-transform: uppercase;
   color: var(--tinte-leise);
@@ -396,6 +394,11 @@ a { color: inherit; }
 .kennung-links  { left: var(--rand); }
 .kennung-rechts { right: var(--rand); }
 @media (max-width: 40rem) { .kennung-rechts { display: none; } }
+/* Auf dem Raster unterbricht die Zeile die Messlinie — dafür braucht sie
+   den Papiergrund. Ohne Raster wäre er nur ein Kasten im Bild. */
+@media (min-width: 48rem) {
+  .raster ~ .kennung { padding: 0 .55rem; background: var(--papier); }
+}
 
 .wahl { display: flex; flex-wrap: wrap; gap: var(--a2); margin-bottom: var(--a3); }
 
@@ -637,14 +640,8 @@ a { color: inherit; }
 /* Auf der Wand steht die Schrift dunkler als auf Papier: Türkis ist
    hell, aber nicht weiss, und die leiseste Stufe hätte hier keine
    Reserve mehr. */
-.wand .braue,
 .wand .lauf,
 .wand .kennung { color: var(--tinte); }
-/* Die Braue ist ein Block und reichte bis in den offenen Teil der Wand
-   hinein, obwohl das Wort links steht. Der Kasten wird auf das Wort
-   gekürzt — sonst misst man Grund, auf dem gar keine Schrift liegt. */
-.wand .braue,
-.wand-titel { width: max-content; max-width: 100%; }
 
 /* Die knappe Wand: gleich nach dem Auftakt, nur so hoch wie die vier
    Belege. Der Schleier ist hier gleichmässig statt von unten — auf einem
@@ -902,11 +899,26 @@ a { color: inherit; }
    `prefers-reduced-motion` gibt es die Regeln gar nicht erst.        */
 
 @media (prefers-reduced-motion: no-preference) {
-  .auftritt {
-    opacity: 0; transform: translateY(14px);
-    transition: opacity .55s var(--kurve), transform .55s var(--kurve);
+  /* Der Auftakt: der eine gestaltete Moment. Aus der Unschärfe heraus,
+     eine Spur länger und eine Spur weiter als alles Übrige. `vorlauf`
+     steht schon im Kopf der Seite, damit nichts kurz aufblitzt, bevor
+     das Skript greift. */
+  .vorlauf .auftakt-satz > * { opacity: 0; }
+  .auftritt-gross {
+    opacity: 0; transform: translateY(16px); filter: blur(6px);
+    transition: opacity .75s var(--kurve),
+                transform .75s var(--kurve),
+                filter .75s var(--kurve);
   }
-  .auftritt-da { opacity: 1; transform: none; }
+
+  /* Alles Weitere: dieselbe Kurve, aber leiser und ohne Unschärfe —
+     sonst hätte jeder Abschnitt denselben grossen Auftritt. */
+  .auftritt {
+    opacity: 0; transform: translateY(10px);
+    transition: opacity .5s var(--kurve), transform .5s var(--kurve);
+  }
+
+  .auftritt-da { opacity: 1; transform: none; filter: none; }
 }
 
 /* ── Der Abschluss der Preisliste ─────────────────────────────────────
@@ -934,6 +946,145 @@ a { color: inherit; }
   padding-bottom: var(--a4);
 }
 .wand-still::after { display: none; }
-.wand-still .braue { color: var(--tinte-still); }
-.wand-still .lauf { color: var(--tinte-leise); }
+.wand-still .wand-still .lauf { color: var(--tinte-leise); }
 .wand-still .kennung { color: var(--tinte-still); }
+
+/* ── Das Raster über dem Auftakt ──────────────────────────────────────
+   Vier Haarlinien im festen Abstand vom Rand, an ihren Kreuzungen ein
+   Fadenkreuz in Türkis. Aus der Architekturzeichnung geborgt: es sagt
+   „hier ist vermessen worden", ohne ein Ornament zu sein, und es gibt
+   der Aufnahme einen Rahmen, den sie selbst nicht hat. Alles in einem
+   Element, ohne Bild und ohne zusätzliche Auszeichnung. */
+
+.raster {
+  position: absolute; inset: 0; z-index: 0;
+  pointer-events: none;
+  --ein: 2rem;                       /* Abstand der Linien vom Rand */
+  --oben: calc(var(--leiste) + var(--a2) + .52rem);   /* Mitte der Eckzeile */
+  --unten: 3.5rem;
+}
+@media (min-width: 64rem) { .raster { --ein: 3.5rem; } }
+
+/* Die vier Linien. Ein Element, vier Verläufe — kein weiteres Markup. */
+.raster::before {
+  content: ""; position: absolute; inset: 0;
+  background-image:
+    linear-gradient(var(--linie-raster), var(--linie-raster)),
+    linear-gradient(var(--linie-raster), var(--linie-raster)),
+    linear-gradient(var(--linie-raster), var(--linie-raster)),
+    linear-gradient(var(--linie-raster), var(--linie-raster));
+  background-repeat: no-repeat;
+  background-size:
+    100% 1px,  100% 1px,          /* waagerecht oben, unten */
+    1px 100%,  1px 100%;          /* senkrecht links, rechts */
+  background-position:
+    0 var(--oben),  0 calc(100% - var(--unten)),
+    var(--ein) 0,   calc(100% - var(--ein)) 0;
+}
+
+/* Die Fadenkreuze an den vier Kreuzungen. Acht Striche, wieder ein
+   Element: je Kreuzung ein waagerechter und ein senkrechter. */
+.raster::after {
+  content: ""; position: absolute; inset: 0;
+  --kreuz: 13px;
+  background-image:
+    linear-gradient(var(--tuerkis-tief), var(--tuerkis-tief)), linear-gradient(var(--tuerkis-tief), var(--tuerkis-tief)),
+    linear-gradient(var(--tuerkis-tief), var(--tuerkis-tief)), linear-gradient(var(--tuerkis-tief), var(--tuerkis-tief)),
+    linear-gradient(var(--tuerkis-tief), var(--tuerkis-tief)), linear-gradient(var(--tuerkis-tief), var(--tuerkis-tief)),
+    linear-gradient(var(--tuerkis-tief), var(--tuerkis-tief)), linear-gradient(var(--tuerkis-tief), var(--tuerkis-tief));
+  background-repeat: no-repeat;
+  background-size:
+    var(--kreuz) 1px, 1px var(--kreuz),
+    var(--kreuz) 1px, 1px var(--kreuz),
+    var(--kreuz) 1px, 1px var(--kreuz),
+    var(--kreuz) 1px, 1px var(--kreuz);
+  background-position:
+    calc(var(--ein) - var(--kreuz) / 2) var(--oben),
+    var(--ein) calc(var(--oben) - var(--kreuz) / 2),
+    calc(100% - var(--ein) + var(--kreuz) / 2) var(--oben),
+    calc(100% - var(--ein)) calc(var(--oben) - var(--kreuz) / 2),
+    calc(var(--ein) - var(--kreuz) / 2) calc(100% - var(--unten)),
+    var(--ein) calc(100% - var(--unten) - var(--kreuz) / 2),
+    calc(100% - var(--ein) + var(--kreuz) / 2) calc(100% - var(--unten)),
+    calc(100% - var(--ein)) calc(100% - var(--unten) - var(--kreuz) / 2);
+}
+
+/* Am schmalen Schirm ist zwischen den Linien kein Platz für Text —
+   dort bleibt das Raster weg, statt sich hindurchzudrängen. */
+@media (max-width: 48rem) { .raster { display: none; } }
+
+/* Der Text steht über dem Raster. */
+.auftakt-satz { position: relative; z-index: 1; }
+
+/* ── Der Stand als Marke ──────────────────────────────────────────────
+   Kein Etikett über der Überschrift, sondern eine Auskunft: ist gerade
+   offen? Der Punkt trägt die Antwort, das Wort erklärt sie. */
+
+.stand-chip {
+  margin: 0 0 var(--a3);
+  display: inline-flex; align-items: center; gap: .55rem;
+  padding: .42rem .85rem .42rem .7rem;
+  border: 1px solid var(--linie);
+  border-radius: var(--kante-voll);
+  background: oklch(98.6% .004 200 / .72);
+  -webkit-backdrop-filter: blur(6px);
+          backdrop-filter: blur(6px);
+  font-family: var(--mono);
+  font-size: .72rem; letter-spacing: .06em;
+  color: var(--tinte);
+}
+.stand-chip::before {
+  content: ""; flex: none;
+  width: .45rem; height: .45rem; border-radius: 50%;
+  background: var(--tinte-still);
+}
+.stand-chip:has(.offen)::before { background: var(--tuerkis-tief); }
+
+/* ── Browser-Oberflächen ──────────────────────────────────────────────
+   Auswahl, Schreibmarke, Fokusrahmen, Bildlaufleiste und der Abstand
+   der Unterlängen gehören zum Entwurf. Ungesetzt tragen sie die Farben
+   des Betriebssystems und nicht die des Ladens. */
+
+::selection { background: var(--tuerkis-hell); color: var(--tinte); }
+:root {
+  accent-color: var(--tuerkis-tief);
+  caret-color: var(--tuerkis-tief);
+  scrollbar-color: var(--tuerkis) transparent;
+  scrollbar-width: thin;
+}
+:focus-visible {
+  outline: 2px solid var(--tuerkis-tief);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+a { text-underline-offset: .17em; text-decoration-thickness: 1px; }
+
+/* ── Druckgefühl ──────────────────────────────────────────────────────
+   Ein Knopf, der beim Antippen nicht nachgibt, fühlt sich wie ein Bild
+   an. 3 % reichen; mehr wirkt wie ein Spielzeug. */
+
+.knopf, .knopf-still, .pille, .fach-kopf {
+  -webkit-tap-highlight-color: transparent;
+}
+.knopf:active, .knopf-still:active, .pille:active {
+  transform: scale(.97);
+}
+.knopf, .knopf-still, .pille {
+  transition: transform var(--t1) var(--kurve),
+              background var(--t1) var(--kurve),
+              border-color var(--t1) var(--kurve);
+}
+
+/* ── Die Arbeiten heben sich beim Zeigen ──────────────────────────────
+   Nur mit einer Maus: am Finger gibt es kein Darüberfahren, und ein
+   Bild, das beim Tippen kurz wächst, sieht nach Fehler aus. */
+
+@media (hover: hover) and (pointer: fine) {
+  .werke img, .raeume img {
+    transition: transform var(--t2) var(--kurve), box-shadow var(--t2) var(--kurve);
+  }
+  .werke img:hover, .raeume img:hover {
+    transform: scale(1.025);
+    box-shadow: 0 12px 28px -12px oklch(19% .018 205 / .35);
+  }
+}

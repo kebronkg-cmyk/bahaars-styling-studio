@@ -95,33 +95,54 @@
   setInterval(standSetzen, 60000);
 })();
 
-/* ── Auftritt beim Scrollen ─────────────────────────────────────────────
-   Text und Bilder kommen von unten herein, sobald sie ins Bild rücken.
-   Die Klassen setzt erst dieses Skript: bleibt es aus, steht alles da.
-   Höchstens drei Bewegungen gleichzeitig, der Rest 90 ms später — mehr
-   kann das Auge nicht einzeln verfolgen. Der Auftakt bleibt aussen vor,
-   er steht schon im Bild, wenn die Seite kommt. */
+/* ── Der Auftritt ───────────────────────────────────────────────────────
+   Ein einziger gestalteter Moment: der Auftakt baut sich beim Laden auf,
+   aus der Unschärfe heraus, in Gruppen zu dritt. Alles Weitere kommt
+   beim Scrollen nach — aber leiser und ohne Unschärfe, damit es dem
+   Auftakt nicht die Bühne nimmt.
+
+   Die Klassen setzt in beiden Fällen das Skript. Ohne Skript steht die
+   Seite vollständig da; die Klasse `vorlauf` im Kopf der Seite nimmt
+   sich nach 1,6 s selbst zurück, falls diese Datei gar nicht ankommt. */
 
 (function () {
-  if (!('IntersectionObserver' in window)) return;
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const ruhig = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const wurzel = document.documentElement;
 
-  const ZIELE = '.braue, .gross, .lauf, .karte, .werke img, .raeume img, ' +
-                '.spruch, .belege p, .preis, .wahl, .spalten > div, ' +
-                '.wand-titel, .fach, .abschluss';
+  /* ── Der Auftakt ─────────────────────────────────────────────────── */
+
+  const satz = document.querySelector('.auftakt-satz');
+  if (satz && !ruhig) {
+    const teile = [...satz.children];
+    for (const el of teile) el.classList.add('auftritt-gross');
+    wurzel.classList.remove('vorlauf');
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      teile.forEach((el, i) => {
+        setTimeout(() => el.classList.add('auftritt-da'), Math.floor(i / 3) * 90);
+      });
+    }));
+  } else {
+    wurzel.classList.remove('vorlauf');
+  }
+
+  /* ── Der Rest beim Scrollen ──────────────────────────────────────── */
+
+  if (ruhig || !('IntersectionObserver' in window)) return;
+
+  const ZIELE = '.gross, .wand-titel, .belege p, .fach, .werke img, ' +
+                '.raeume img, .spruch, .abschluss, .spalten > div, .karte';
 
   /* Nichts aus einem geschlossenen Fach: was `display: none` trägt,
      meldet der Beobachter nie — es bliebe beim Aufklappen unsichtbar
-     stehen. Der Auftakt bleibt ebenfalls aussen vor, er steht schon im
-     Bild, wenn die Seite kommt. */
-  const stuecke = Array.from(document.querySelectorAll(ZIELE))
-    .filter(el => !el.closest('.auftakt') && !el.closest('.fach-inhalt'));
+     stehen. Und nichts aus dem Auftakt, der hat seinen eigenen Auftritt. */
+  const stuecke = [...document.querySelectorAll(ZIELE)]
+    .filter((el) => !el.closest('.auftakt') && !el.closest('.fach-inhalt'));
   if (!stuecke.length) return;
 
   for (const el of stuecke) el.classList.add('auftritt');
 
   const beob = new IntersectionObserver((eintraege) => {
-    const dran = eintraege.filter(e => e.isIntersecting).map(e => e.target);
+    const dran = eintraege.filter((e) => e.isIntersecting).map((e) => e.target);
     dran.forEach((el, i) => {
       setTimeout(() => el.classList.add('auftritt-da'), Math.floor(i / 3) * 90);
       beob.unobserve(el);
