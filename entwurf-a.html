@@ -1,0 +1,94 @@
+<!DOCTYPE html><html lang="de"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>A — Spiegelplatz</title>
+<style>
+@font-face{font-family:'Bodoni Moda';src:url('schrift/BodoniModa.woff2')format('woff2');font-weight:400 700;font-display:swap}
+@font-face{font-family:'Karla';src:url('schrift/Karla.woff2')format('woff2');font-weight:300 700;font-display:swap}
+:root{
+  /* Am dunklen Rand neu gemessen, nicht umgedreht: der Grund geht tiefer
+     als das helle Papier hoch war, und das Türkis wird heller, weil es
+     auf Dunkel sonst als Loch steht. */
+  --grund:oklch(14% .012 200); --grund-tief:oklch(10% .010 200);
+  --spiegel:oklch(19% .014 200);
+  --licht:oklch(95% .006 200); --licht-leise:oklch(72% .010 200);
+  --tuerkis:oklch(80% .095 195); --tuerkis-tief:oklch(58% .085 197);
+  --linie:oklch(95% .006 200/.14);
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--grund);color:var(--licht);font-family:'Karla',system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%;height:auto}
+.leiste{position:relative;z-index:3;display:flex;align-items:center;justify-content:space-between;
+  gap:1rem;padding:1.1rem clamp(1.25rem,4vw,3rem);border-bottom:1px solid var(--linie)}
+.marke{font-family:'Bodoni Moda',serif;font-size:1.35rem;letter-spacing:.01em}
+.wege{display:flex;gap:1.6rem;font-size:.82rem;letter-spacing:.02em;color:var(--licht-leise)}
+@media(max-width:52rem){.wege{display:none}}
+.tel{border:1px solid var(--linie);border-radius:999px;padding:.5rem 1rem;font-size:.84rem;
+  font-variant-numeric:tabular-nums}
+.buehne{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,5vw,5rem);
+  align-items:center;padding:clamp(3rem,7vw,6rem) clamp(1.25rem,4vw,3rem) clamp(3rem,6vw,5rem);
+  min-height:min(88svh,860px)}
+@media(max-width:52rem){.buehne{grid-template-columns:1fr;min-height:0;padding-top:2.5rem}}
+/* Der Spiegelplatz: ein hoher Rahmen mit gerundetem Scheitel, oben die
+   Lichtkante der Spiegellampe. Das ist der Ort, an dem im Laden alles
+   passiert — und die einzige Form, die die Seite trägt. */
+.spiegel{position:relative;border-radius:min(48%,220px) min(48%,220px) 8px 8px;overflow:hidden;
+  background:var(--spiegel);box-shadow:0 40px 90px -40px #000, 0 0 0 1px var(--linie);
+  aspect-ratio:4/5}
+.spiegel img{width:100%;height:100%;object-fit:cover;object-position:52% 40%;filter:saturate(.82) contrast(1.06) brightness(.86)}
+.spiegel::after{content:"";position:absolute;inset:0;
+  background:radial-gradient(120% 55% at 50% -8%, oklch(95% .006 200/.30), transparent 62%),
+             linear-gradient(to top, oklch(10% .010 200/.72), transparent 46%)}
+.lampe{position:absolute;left:50%;top:-14px;transform:translateX(-50%);width:min(62%,320px);height:28px;
+  border-radius:999px;background:radial-gradient(60% 100% at 50% 100%, oklch(92% .04 92/.55), transparent 70%);
+  filter:blur(6px);z-index:2}
+.satz{max-width:34rem}
+.stand{display:inline-flex;align-items:center;gap:.55rem;margin:0 0 2rem;padding:.4rem .85rem .4rem .7rem;
+  border:1px solid var(--linie);border-radius:999px;font-size:.74rem;letter-spacing:.05em;color:var(--licht)}
+.stand::before{content:"";width:.4rem;height:.4rem;border-radius:50%;background:var(--tuerkis);
+  box-shadow:0 0 0 3px oklch(80% .095 195/.18)}
+h1{margin:0 0 1.15rem;font-family:'Bodoni Moda',serif;font-weight:400;
+  font-size:clamp(3.2rem,8.6vw,6.4rem);line-height:.94;letter-spacing:-.02em}
+h1 em{font-style:italic}
+.unter{margin:0 0 2rem;font-size:.78rem;letter-spacing:.36em;text-transform:uppercase;color:var(--tuerkis)}
+.lauf{margin:0 0 2.2rem;font-size:1.02rem;line-height:1.62;color:var(--licht-leise);max-width:33rem}
+.wahl{display:flex;flex-wrap:wrap;gap:.9rem;margin-bottom:2.4rem}
+.knopf{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.5rem;border-radius:999px;
+  background:var(--licht);color:var(--grund-tief);font-weight:600;font-size:.92rem;text-decoration:none;
+  transition:transform .22s cubic-bezier(.22,.61,.36,1)}
+.knopf-still{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.5rem;border-radius:999px;
+  border:1px solid var(--linie);color:var(--licht);font-size:.92rem;text-decoration:none;
+  font-variant-numeric:tabular-nums;transition:transform .22s cubic-bezier(.22,.61,.36,1),background .22s}
+.knopf:active,.knopf-still:active{transform:scale(.97)}
+.belege{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1px solid var(--linie);
+  padding-top:1.3rem}
+.belege div{padding-right:1rem}
+.belege b{display:block;font-family:'Bodoni Moda',serif;font-weight:400;font-size:1.35rem;margin-bottom:.15rem}
+.belege span{font-size:.76rem;color:var(--licht-leise);line-height:1.4;display:block}
+</style></head><body>
+<header class="leiste">
+  <span class="marke">BaHaar&rsquo;s</span>
+  <nav class="wege"><a style="color:inherit;text-decoration:none">Leistungen</a><a style="color:inherit;text-decoration:none">Arbeiten</a><a style="color:inherit;text-decoration:none">Der Laden</a><a style="color:inherit;text-decoration:none">Kontakt</a></nav>
+  <span class="tel">089 692 36 44</span>
+</header>
+<section class="buehne">
+  <div class="satz">
+    <p class="stand">Heute ab 09 Uhr</p>
+    <h1>Der Platz<br>am <em>Spiegel</em></h1>
+    <p class="unter">BaHaar&rsquo;s Styling Studio</p>
+    <p class="lauf">Bahar ist Friseurmeisterin und arbeitet seit zwanzig Jahren in M&uuml;nchen.
+      Schnitt, Farbe, Str&auml;hnen, Hochsteckfrisuren, Brautstyling. Beraten wird vorher und in Ruhe.</p>
+    <div class="wahl">
+      <a class="knopf" href="#">Termin bei Treatwell</a>
+      <a class="knopf-still" href="#">089 692 36 44</a>
+    </div>
+    <div class="belege">
+      <div><b>4,8</b><span>von 5, &uuml;ber 90&nbsp;Bewertungen</span></div>
+      <div><b>Meisterin</b><span>Friseurhandwerk</span></div>
+      <div><b>20 Jahre</b><span>in M&uuml;nchen</span></div>
+    </div>
+  </div>
+  <div class="spiegel"><span class="lampe"></span>
+    <img src="bilder/laden-platz.webp" alt="">
+  </div>
+</section>
+</body></html>
