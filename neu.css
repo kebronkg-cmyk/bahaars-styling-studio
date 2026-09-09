@@ -911,6 +911,18 @@ body { background: transparent; }
   object-fit: cover; object-position: 50% 34%;
   pointer-events: none;
 }
+/* Verweigert iOS das selbsttätige Abspielen — im Stromsparmodus tut es
+   das immer —, legt Safari von sich aus einen grossen Abspielknopf
+   mitten auf den Film. Der gehört nicht zur Seite. Beide Regeln
+   getrennt, sonst verwirft ein Browser, der das eine Pseudo-Element
+   nicht kennt, gleich die ganze Auswahl. */
+.raum-film::-webkit-media-controls-start-playback-button {
+  display: none !important;
+  -webkit-appearance: none;
+}
+.raum-film::-webkit-media-controls {
+  display: none !important;
+}
 main, .fuss { position: relative; z-index: 1; }
 @media (prefers-reduced-motion: reduce) {
   .raum-film { display: none; }
@@ -921,16 +933,27 @@ main, .fuss { position: relative; z-index: 1; }
 
 /* Die Scheibe. `--durch` steuert, wie viel Rauch ein Abschnitt
    durchlässt — das ist der einzige Regler, den die Seite für Tiefe
-   braucht. */
+   braucht.
+
+   Der Wert ist gemessen, nicht geschätzt. Der Film schwankt an einem
+   Bildpunkt im Mittel um 20,8 sRGB-Stufen; hinter einer Scheibe bleibt
+   davon `(1 - --durch) × 20,8`. Bei .955 waren das 0,9 Stufen — unter
+   der Schwelle, deshalb stand der Rauch überall still ausser im Band.
+   Ab rund 2 Stufen liest das Auge Bewegung. Nach oben begrenzt das
+   nicht der Kontrast (der Plattenton ist sRGB 2,5,6; selbst bei .86
+   hält die leiseste Schrift noch 5,6:1 gegen die hellste Stelle des
+   Films), sondern die Ruhe: über einem langen Text darf sich nur so
+   viel regen, dass man es merkt, ohne hinzusehen. */
 .band, .stufe, .werk, .laden, .kontakt, .fuss, .kopf-tief, .recht {
   position: relative;
-  --durch: .955;
+  --durch: .90;                 /* 2,1 Stufen — spürbar, nicht laut */
   background: oklch(11% .012 200 / var(--durch));
   color: var(--auf-tiefe);
 }
-.band  { --durch: .90; }
-.werk  { --durch: .975; }
-.fuss  { --durch: .99; }
+.band  { --durch: .87; }        /* 2,7 — die schmale Zeile darf leben */
+.werk  { --durch: .88; }        /* 2,5 — zwischen den Bildern viel Rauch */
+.fuss  { --durch: .93; }        /* 1,5 — unten wird es ruhig */
+.recht { --durch: .93; }        /* 1,5 — Impressum liest man am Stück */
 
 /* ── Die Zeile unter dem Auftakt ──────────────────────────────────── */
 

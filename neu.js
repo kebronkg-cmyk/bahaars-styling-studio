@@ -109,17 +109,22 @@
   setInterval(standSetzen, 60000);
 })();
 
-/* ── Der Film im Auftakt ────────────────────────────────────────────────
+/* ── Der Film im Raum ───────────────────────────────────────────────────
    Safari auf dem iPhone startet einen Film von sich aus nur, wenn er
    stumm ist, `playsinline` trägt — und der Stromsparmodus aus ist. Im
    Stromsparmodus verweigert es den Start grundsätzlich, egal wie das
    Video ausgezeichnet ist. Deshalb: erst selbst anstossen, und wenn das
    abgelehnt wird, beim ersten Antippen oder Scrollen noch einmal. Kommt
    er nie, bleibt das Standbild stehen — das ist kein Fehlerbild,
-   sondern der geplante Zustand. */
+   sondern der geplante Zustand.
+
+   Der Film hiess einmal `.auftakt-film` und liegt seit dem Umbau als
+   `.raum-film` hinter der ganzen Seite. Der Anstoss suchte weiter den
+   alten Namen, fand nichts und tat nichts — auf dem iPhone blieb
+   dadurch der Abspielknopf von Safari mitten im Bild stehen. */
 
 (function () {
-  const film = document.querySelector('.auftakt-film');
+  const film = document.querySelector('.raum-film');
   if (!film) return;
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
