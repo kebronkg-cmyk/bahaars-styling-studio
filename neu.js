@@ -109,6 +109,39 @@
   setInterval(standSetzen, 60000);
 })();
 
+/* ── Der Film im Auftakt ────────────────────────────────────────────────
+   Safari auf dem iPhone startet einen Film von sich aus nur, wenn er
+   stumm ist, `playsinline` trägt — und der Stromsparmodus aus ist. Im
+   Stromsparmodus verweigert es den Start grundsätzlich, egal wie das
+   Video ausgezeichnet ist. Deshalb: erst selbst anstossen, und wenn das
+   abgelehnt wird, beim ersten Antippen oder Scrollen noch einmal. Kommt
+   er nie, bleibt das Standbild stehen — das ist kein Fehlerbild,
+   sondern der geplante Zustand. */
+
+(function () {
+  const film = document.querySelector('.auftakt-film');
+  if (!film) return;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  let versucht = false;
+  function anstossen() {
+    const p = film.play();
+    if (p && typeof p.catch === 'function') p.catch(() => {});
+  }
+  function beiBeruehrung() {
+    if (versucht) return;
+    versucht = true;
+    anstossen();
+    for (const art of ['pointerdown', 'touchstart', 'scroll', 'keydown'])
+      removeEventListener(art, beiBeruehrung);
+  }
+
+  anstossen();
+  film.addEventListener('canplay', anstossen, { once: true });
+  for (const art of ['pointerdown', 'touchstart', 'scroll', 'keydown'])
+    addEventListener(art, beiBeruehrung, { passive: true, once: false });
+})();
+
 /* ── Der Auftritt ───────────────────────────────────────────────────────
    Ein einziger gestalteter Moment: der Auftakt baut sich beim Laden auf,
    aus der Unschärfe heraus, in Gruppen zu dritt. Alles Weitere kommt
