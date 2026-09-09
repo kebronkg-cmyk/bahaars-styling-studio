@@ -23,20 +23,25 @@
    ganzen Fläche.
    ═══════════════════════════════════════════════════════════════════════ */
 
+/* Bodoni Moda für die Anzeige: eine Didone mit hohem Strichkontrast —
+   die Sprache von Mode und Kosmetik, und die Schrift, die dem Schild
+   über der Tür am nächsten kommt. Mulish für den Lauf: weich, rund und
+   still genug, um der Anzeige nicht ins Wort zu fallen. Beide liegen im
+   Repository; es wird nichts von einem fremden Server geladen. */
 @font-face {
-  font-family: 'Instrument Serif';
-  src: url('schrift/InstrumentSerif-Regular.woff2') format('woff2');
-  font-weight: 400; font-style: normal; font-display: swap;
+  font-family: 'Bodoni Moda';
+  src: url('schrift/BodoniModa.woff2') format('woff2');
+  font-weight: 400 700; font-style: normal; font-display: swap;
 }
 @font-face {
-  font-family: 'Instrument Serif';
-  src: url('schrift/InstrumentSerif-Italic.woff2') format('woff2');
-  font-weight: 400; font-style: italic; font-display: swap;
+  font-family: 'Bodoni Moda';
+  src: url('schrift/BodoniModa-Italic.woff2') format('woff2');
+  font-weight: 400 700; font-style: italic; font-display: swap;
 }
 @font-face {
-  font-family: 'Inter';
-  src: url('schrift/Inter.woff2') format('woff2');
-  font-weight: 100 900; font-style: normal; font-display: swap;
+  font-family: 'Mulish';
+  src: url('schrift/Mulish.woff2') format('woff2');
+  font-weight: 300 800; font-style: normal; font-display: swap;
 }
 
 :root {
@@ -67,13 +72,16 @@
 
   --mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
 
-  /* Das Lochblech des türkisen Schranks. Raster am Foto abgezählt:
-     grosse Raute, kleiner Punkt, grosse Raute — dazwischen eine Reihe
-     nur aus Punkten. Die beiden Farben im Bild sind --tuerkis-hell
-     (Lichtkante) und --tuerkis-tief (Loch); eine Daten-URI kennt
-     unsere Token nicht, deshalb stehen sie hier als Hexwert. */
-  --lochblech: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Cg fill='%2382bebe'%3E%3Cpath d='M25 18 32 25 25 32 18 25Z'/%3E%3C/g%3E%3Cg fill='%2321767b'%3E%3Cpath d='M24 17 31 24 24 31 17 24Z'/%3E%3Cpath d='M0 -3 3 0 0 3 -3 0Z'/%3E%3Cpath d='M48 -3 51 0 48 3 45 0Z'/%3E%3Cpath d='M0 45 3 48 0 51 -3 48Z'/%3E%3Cpath d='M48 45 51 48 48 51 45 48Z'/%3E%3Cpath d='M24 -3 27 0 24 3 21 0Z'/%3E%3Cpath d='M0 21 3 24 0 27 -3 24Z'/%3E%3Cpath d='M48 21 51 24 48 27 45 24Z'/%3E%3Cpath d='M24 45 27 48 24 51 21 48Z'/%3E%3C/g%3E%3C/svg%3E");
-  --loch-raster: 34px;
+  /* Die Bühne des Auftakts. Am dunklen Rand neu gemessen, nicht
+     umgedreht: der Grund geht tiefer als das Papier hell ist, und das
+     Türkis wird heller — auf Schwarz steht ein dunkles Türkis als Loch,
+     nicht als Farbe. Der Ton ist der des Rauchs im Film. */
+  --buehne:           oklch(11% .012 200);
+  --auf-buehne:       oklch(97% .006 200);
+  --auf-buehne-leise: oklch(80% .010 200);
+  --auf-buehne-still: oklch(62% .012 200);
+  --tuerkis-leucht:   oklch(82% .105 195);
+
 
   --t-riesen: 2.35rem;
   --t-gross:  1.9rem;
@@ -102,7 +110,6 @@
 @media (min-width: 48rem) {
   :root {
     --t-riesen: 3.2rem; --t-gross: 2.4rem; --rand: 2rem; --leiste: 64px;
-    --loch-raster: 48px;
   }
 }
 @media (min-width: 64rem) {
@@ -127,7 +134,7 @@ body {
   margin: 0;
   background: var(--papier);
   color: var(--tinte);
-  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-family: 'Mulish', system-ui, -apple-system, 'Segoe UI', sans-serif;
   font-size: var(--t-lauf);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -139,6 +146,12 @@ body {
    Originalhöhe, und ein daneben gesetztes `aspect-ratio` greift nie —
    die Kacheln der Arbeiten waren dadurch 1333 px hohe Streifen. */
 img, svg, video { display: block; max-width: 100%; height: auto; }
+
+/* Lange, unteilbare Zeichenketten — E-Mail-Adressen, Steuernummern —
+   schieben am schmalen Schirm über den Rand hinaus, ohne dass ihr
+   Kasten mitwächst; man sieht es erst an `scrollWidth`. */
+body { overflow-wrap: break-word; }
+a, code, dd { overflow-wrap: anywhere; }
 a { color: inherit; }
 
 :focus-visible {
@@ -164,7 +177,7 @@ a { color: inherit; }
 
 .riesen, .gross {
   margin: 0 0 var(--a3);
-  font-family: 'Instrument Serif', Georgia, serif;
+  font-family: 'Bodoni Moda', Didot, Georgia, serif;
   font-weight: 400;
   line-height: 1.05;
   letter-spacing: -.015em;
@@ -193,9 +206,38 @@ a { color: inherit; }
 }
 .leiste.weg { transform: translateY(-100%); }
 
+/* Über der schwarzen Bühne ist die Leiste durchsichtig und hell — eine
+   weisse Schiene über dem Film sähe aus wie ein Fremdkörper. Sobald der
+   Auftakt durchgelaufen ist, kommt sie zurück auf Papier. Umgeschaltet
+   wird per Klasse aus dem Skript, nicht per Verlauf: die Leiste hat nur
+   zwei Zustände, keinen Zwischenzustand. */
+.leiste-buehne {
+  background: transparent;
+  border-bottom-color: transparent;
+  -webkit-backdrop-filter: none;
+          backdrop-filter: none;
+  color: var(--auf-buehne);
+  transition: transform var(--t2) var(--kurve),
+              background var(--t2) var(--kurve),
+              border-color var(--t2) var(--kurve),
+              color var(--t2) var(--kurve);
+}
+.leiste-buehne .marke-zusatz,
+.leiste-buehne .wege a { color: var(--auf-buehne-leise); }
+.leiste-buehne .pille {
+  border-color: oklch(97% .006 200 / .30); color: var(--auf-buehne);
+}
+/* Der Klappknopf ist aus zwei Strichen gezeichnet; auf Schwarz müssen
+   auch sie hell werden, sonst steht oben rechts nichts. */
+.leiste-buehne .klapp span { background: var(--auf-buehne); }
+@media (hover: hover) and (pointer: fine) {
+  .leiste-buehne .wege a:hover { color: var(--auf-buehne); }
+  .leiste-buehne .pille:hover { background: oklch(97% .006 200 / .10); }
+}
+
 .marke {
   display: inline-flex; align-items: baseline; gap: .5rem; flex-wrap: wrap;
-  font-family: 'Instrument Serif', Georgia, serif;
+  font-family: 'Bodoni Moda', Didot, Georgia, serif;
   font-size: 1.28rem; line-height: 1.1;
   letter-spacing: -.005em; font-kerning: normal;
   text-decoration: none;
@@ -206,7 +248,7 @@ a { color: inherit; }
    stand. Der Name geht nie weg, nur der Zusatz. */
 .marke-wort { font-family: inherit; }
 .marke-zusatz {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Mulish', system-ui, sans-serif;
   font-size: .6rem; font-weight: 500;
   letter-spacing: .19em; text-transform: uppercase;
   color: var(--tinte-still);
@@ -307,79 +349,151 @@ a { color: inherit; }
    dass Schwarz darauf steht. Nur hinter dem Satzblock liegt ein weicher
    Verlauf aus Papier.                                                 */
 
+/* ── Der Auftakt ──────────────────────────────────────────────────────
+   Schwarze Bühne, darauf der Film und mittig die Wortmarke. Der Film
+   ist quadratisch (960 × 960) — am breiten Schirm schneidet `cover`
+   oben und unten ab, am hohen Schirm links und rechts. Beides trifft
+   nur Rauch, die Schere bleibt in der Mitte.
+
+   Der Schleier liegt nicht über der ganzen Fläche: er ist eine weiche
+   Ellipse hinter dem Textblock plus je ein Rand oben und unten. Vier
+   Fünftel des Films bleiben offen.                                   */
+
 .auftakt {
   position: relative;
   isolation: isolate;
-  min-height: min(92svh, 900px);
-  display: grid; align-items: end;
+  /* Die Leiste klebt oben und liegt darüber, statt einen weissen
+     Streifen über den Film zu legen: der Auftakt wird um ihre Höhe nach
+     oben gezogen und beginnt an der Kante des Fensters. */
+  margin-top: calc(-1 * var(--leiste));
+  min-height: min(100svh, 980px);
+  display: grid; place-items: center;
   padding: calc(var(--leiste) + var(--a5)) var(--rand) var(--a5);
   overflow: hidden;
-}
-.auftakt-grund {
-  position: absolute; inset: 0; z-index: -2;
-  width: 100%; height: 100%;
-  object-fit: cover; object-position: 38% 62%;
-}
-/* Der Verlauf steht nur dort, wo Text liegt, und nimmt die Grundfarbe
-   der Seite auf. */
-.auftakt::after {
-  content: ""; position: absolute; inset: 0; z-index: -1;
-  /* Am schmalen Schirm liegt der Text über der ganzen Breite. Deshalb
-     hier von unten herauf, nicht seitlich — ein seitlicher Verlauf
-     griffe genau in die Zeile. */
-  background:
-    linear-gradient(to top, var(--papier) 0%, oklch(98.6% .004 200 / .92) 30%,
-                    oklch(98.6% .004 200 / .74) 56%, oklch(98.6% .004 200 / .30) 80%,
-                    transparent 100%),
-    linear-gradient(to bottom, oklch(98.6% .004 200 / .82) 0%,
-                    oklch(98.6% .004 200 / .58) calc(var(--leiste) + 2.4rem),
-                    transparent calc(var(--leiste) + 5.5rem));
+  background: var(--buehne);
+  color: var(--auf-buehne);
 }
 
-/* Sobald neben dem Text Platz ist, bleibt die Aufnahme rechts offen und
-   der Schleier steht nur hinter der Schrift. Ein Schleier über der
-   ganzen Fläche macht aus einem Foto eine Milchscheibe. */
-@media (min-width: 48rem) {
-  .auftakt::after {
+.auftakt-film {
+  position: absolute; inset: 0; z-index: -2;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: 50% 50%;
+}
+
+.auftakt-schleier {
+  position: absolute; inset: 0; z-index: -1;
+  background:
+    radial-gradient(58% 42% at 50% 52%, oklch(6% .008 200 / .90) 12%,
+                    oklch(6% .008 200 / .62) 48%, transparent 78%),
+    linear-gradient(to bottom, oklch(8% .010 200 / .78) 0%, transparent 22%),
+    linear-gradient(to top, var(--buehne) 0%, oklch(8% .010 200 / .74) 12%, transparent 34%);
+}
+
+/* Am schmalen Schirm liegt die blanke Schere genau hinter der
+   Wortmarke — dort hat weisse Schrift keine Reserve. Statt am Verlauf
+   zu drehen, wird der Kern des Schleiers dichter; seitlich bliebe der
+   Text trotzdem auf der Klinge stehen. */
+@media (max-width: 48rem) {
+  .auftakt-schleier {
     background:
-      linear-gradient(to right, oklch(98.6% .004 200 / .96) 0%,
-                      oklch(98.6% .004 200 / .93) 38%,
-                      oklch(98.6% .004 200 / .45) 58%, transparent 74%),
-      linear-gradient(to top, var(--papier) 0%, oklch(98.6% .004 200 / .55) 12%,
-                      transparent 30%),
-      linear-gradient(to bottom, oklch(98.6% .004 200 / .70) 0%,
-                      transparent calc(var(--leiste) + 5rem));
+      radial-gradient(76% 40% at 50% 44%, oklch(6% .008 200 / .94) 20%,
+                      oklch(6% .008 200 / .74) 60%, transparent 88%),
+      linear-gradient(to bottom, oklch(6% .008 200 / .80) 0%, transparent 20%),
+      linear-gradient(to top, var(--buehne) 0%, oklch(6% .008 200 / .78) 14%, transparent 38%);
   }
 }
 
-.auftakt-satz { max-width: var(--spalte); width: 100%; margin-inline: auto; }
+.auftakt-satz {
+  position: relative; z-index: 1;
+  max-width: 46rem; width: 100%;
+  text-align: center;
+}
 
-/* Die Wortmarke. Das Ladenschild ist eine Didone mit hohem Strichkontrast
-   — Instrument Serif trifft das. Die Grösse folgt der Breite, damit sie
-   auf jedem Schirm die Zeile füllt statt umzubrechen. */
-.auftakt .kennung,
-/* Die Wortmarke ist ein Block; ihr Kasten lief bis in den offenen Teil
-   der Aufnahme, wo der Grund dunkel ist. Auf das Wort gekürzt steht die
-   Schrift nur dort, wo der Schleier dicht ist. */
-.auftakt .wortmarke { width: max-content; max-width: 100%; }
-
-.wortmarke { margin: var(--a2) 0 var(--a3); line-height: .92; }
+/* Die Wortmarke. Bodoni setzt hohe Kontraste; bei dieser Grösse braucht
+   sie eine engere Laufweite, sonst fällt die Zeile auseinander. */
+.wortmarke {
+  margin: 0 0 var(--a3);
+  line-height: .95;
+  font-family: 'Bodoni Moda', Didot, Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -.018em;
+  color: var(--auf-buehne);
+}
 .wortmarke-wort {
   display: block;
-  font-family: 'Instrument Serif', Georgia, serif;
-  font-weight: 400;
-  font-size: clamp(3rem, 11vw, 8.5rem);
-  letter-spacing: -.022em;
-  color: var(--tinte);
+  font-size: clamp(3rem, 11vw, 7.5rem);
 }
-.wortmarke-zusatz {
+.wortmarke-kursiv {
   display: block;
-  margin-top: .55rem;
-  font-family: var(--mono);
-  font-size: var(--t-marke);
-  letter-spacing: .42em; text-transform: uppercase;
-  color: var(--tinte-leise);
+  font-style: italic;
+  font-size: clamp(2.1rem, 7.6vw, 5.2rem);
+  letter-spacing: -.01em;
+  color: var(--auf-buehne-leise);
 }
+
+.auftakt-lauf {
+  margin: 0 auto var(--a4);
+  max-width: 34rem;
+  font-size: var(--t-lauf); line-height: 1.6;
+  color: var(--auf-buehne-leise);
+}
+
+.wahl-mitte { justify-content: center; }
+
+/* Auf der Bühne kehren sich die Knöpfe um: gefüllt ist hell, weil auf
+   Schwarz das Helle vorn steht. */
+.auftakt .knopf {
+  background: var(--auf-buehne); color: var(--buehne);
+}
+.auftakt .knopf-still {
+  border-color: oklch(97% .006 200 / .28); color: var(--auf-buehne);
+}
+@media (hover: hover) and (pointer: fine) {
+  .auftakt .knopf-still:hover { background: oklch(97% .006 200 / .10); }
+}
+
+/* Die Standmarke sitzt unter den Knöpfen, wie der kleine Knopf in der
+   Vorlage. Der Punkt trägt die Auskunft, das Wort erklärt sie. */
+.stand-chip {
+  display: inline-flex; align-items: center; gap: .55rem;
+  margin: var(--a4) 0 0;
+  padding: .42rem .95rem .42rem .75rem;
+  border: 1px solid oklch(97% .006 200 / .22);
+  border-radius: var(--kante-voll);
+  /* Eigener Grund: die Marke steht sonst mal auf Schwarz und mal auf
+     hellem Rauch, und in der hellen Lage reicht die Reserve nicht. */
+  background: oklch(6% .008 200 / .58);
+  -webkit-backdrop-filter: blur(8px);
+          backdrop-filter: blur(8px);
+  font-family: var(--mono);
+  font-size: .72rem; letter-spacing: .06em;
+  color: var(--auf-buehne);
+}
+.stand-chip::before {
+  content: ""; flex: none;
+  width: .4rem; height: .4rem; border-radius: 50%;
+  background: oklch(97% .006 200 / .35);
+}
+.stand-chip:has(.offen)::before {
+  background: var(--tuerkis-leucht);
+  box-shadow: 0 0 0 3px oklch(80% .10 195 / .20);
+}
+
+/* Die Eckzeilen bleiben, aber in der Helligkeit der Bühne. */
+.auftakt .kennung { color: var(--auf-buehne-still); }
+@media (max-width: 48rem) { .auftakt .kennung { display: none; } }
+
+/* Wer Bewegung abbestellt hat, bekommt das Standbild. Ein eingefrorener
+   Film ist kein Standbild — er hört einfach auf, und das sieht nach
+   Fehler aus. */
+@media (prefers-reduced-motion: reduce) {
+  .auftakt-film { display: none; }
+  .auftakt {
+    background: var(--buehne) url('bilder/schere-rauch-standbild.webp') center / cover no-repeat;
+  }
+}
+
+.wortmarke { margin: var(--a2) 0 var(--a3); line-height: .92; }
 
 /* Die kleinen Kennungen in den Ecken: der technische Gegenpol zur
    Wortmarke, wie in der Vorlage. Rein dekorativ. */
@@ -433,7 +547,7 @@ a { color: inherit; }
   color: var(--tinte-still);
 }
 .belege b {
-  font-family: 'Instrument Serif', Georgia, serif;
+  font-family: 'Bodoni Moda', Didot, Georgia, serif;
   font-size: 1.55rem; font-weight: 400;
   color: var(--tinte);
   line-height: 1.1;
@@ -506,7 +620,7 @@ a { color: inherit; }
 .preis { margin: 0 0 var(--a3); font-size: var(--t-klein); color: var(--tinte-still); }
 .preis b {
   display: block;
-  font-family: 'Instrument Serif', Georgia, serif;
+  font-family: 'Bodoni Moda', Didot, Georgia, serif;
   font-size: 1.7rem; font-weight: 400;
   color: var(--tinte);
 }
@@ -548,14 +662,14 @@ a { color: inherit; }
   max-width: 34rem;
   padding: 0;
   text-align: center;
-  font-family: 'Instrument Serif', Georgia, serif;
+  font-family: 'Bodoni Moda', Didot, Georgia, serif;
   font-size: 1.5rem; line-height: 1.35;
   color: var(--tinte-leise);
 }
 .spruch cite {
   display: block;
   margin-top: var(--a2);
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Mulish', system-ui, sans-serif;
   font-size: var(--t-marke); font-style: normal;
   letter-spacing: .17em; text-transform: uppercase;
   color: var(--tinte-still);
@@ -597,163 +711,26 @@ a { color: inherit; }
   isolation: isolate;
   overflow: hidden;
   padding: calc(var(--leiste) + var(--a5)) 0 var(--a5);
-  /* Das Lochblech steht darunter: solange die Aufnahme lädt — und falls
-     sie nie kommt — trägt es den Abschnitt allein. Der Ladezustand ist
-     die Rückfallebene, kein Zwischenbild. */
-  background-color: var(--tuerkis);
-  background-image: var(--lochblech);
-  background-size: var(--loch-raster) var(--loch-raster);
 }
-.wand-grund {
-  position: absolute; inset: 0; z-index: -2;
-  width: 100%; height: 100%;
-  object-fit: cover; object-position: 50% 46%;
-}
-
-/* Das Licht fällt im Laden von der Fensterseite ein, links oben. Unten
-   läuft die Wand ins Papier aus, damit die Preisliste daraus hervorgeht
-   statt an einer Kante anzustossen. */
-.wand::after {
-  content: ""; position: absolute; inset: 0; z-index: -1;
-  background:
-    linear-gradient(to top, var(--papier) 0%, oklch(98.6% .004 200 / .58) 11%,
-                    oklch(98.6% .004 200 / .10) 26%, transparent 40%),
-    linear-gradient(oklch(98.6% .004 200 / .70), oklch(98.6% .004 200 / .70));
-}
-
-/* Sobald Platz neben dem Text ist, wird nur noch der Textblock
-   beruhigt: ein senkrechtes Band, keine Ellipse — bei einem radialen
-   Verlauf zählt der Abstand in beiden Achsen zusammen, und die Enden
-   einer breiten Zeile lägen schon am Rand. Rechts bleibt die Wand
-   offen. */
-@media (min-width: 48rem) {
-  .wand::after {
-    background:
-      linear-gradient(to top, var(--papier) 0%, oklch(98.6% .004 200 / .58) 11%,
-                      oklch(98.6% .004 200 / .10) 26%, transparent 40%),
-      linear-gradient(to right, oklch(98.6% .004 200 / .92) 0%,
-                      oklch(98.6% .004 200 / .88) 44%,
-                      oklch(98.6% .004 200 / .50) 60%, transparent 76%);
-  }
-}
-
-/* Auf der Wand steht die Schrift dunkler als auf Papier: Türkis ist
-   hell, aber nicht weiss, und die leiseste Stufe hätte hier keine
-   Reserve mehr. */
 .wand .lauf,
 .wand .kennung { color: var(--tinte); }
 
-/* Die knappe Wand: gleich nach dem Auftakt, nur so hoch wie die vier
-   Belege. Der Schleier ist hier gleichmässig statt von unten — auf einem
-   Streifen dieser Höhe hätte ein Verlauf keinen Weg. */
-.wand-knapp {
-  padding: var(--a5) 0;
-  min-height: min(58svh, 540px);
-  display: grid; align-items: center;
-}
-/* Hier soll man die Aufnahme sehen, nicht den Schleier: nur ein Hauch
-   über der Fläche, dazu Ränder oben und unten in die Seite hinein. Die
-   Belege bringen ihren eigenen Grund mit. */
-.wand-knapp::after {
-  background:
-    linear-gradient(to bottom, var(--papier) 0%, transparent 16%,
-                    transparent 84%, var(--papier) 100%),
-    linear-gradient(oklch(98.6% .004 200 / .12), oklch(98.6% .004 200 / .12));
-}
-.wand-knapp .belege {
-  background: transparent; border-block: 0;
+/* Die Belegzeile: vier Karten auf Papier, direkt nach der Bühne. Kein
+   Bild — der Auftakt hat gerade den ganzen Schirm gehabt. */
+.belege-bahn { padding: var(--a5) var(--rand); }
+.belege-bahn .belege {
   gap: 1px;
   align-items: stretch;
-  border: 1px solid oklch(98.6% .004 200 / .55);
+  background: var(--linie-fein);
+  border: 1px solid var(--linie-fein);
   border-radius: var(--kante);
   overflow: hidden;
 }
-/* Deckend statt durchscheinend: eine milchige Karte über einem bunten
-   Regal wird trüb, eine weisse Karte bleibt eine weisse Karte. Alle
-   vier gleich hoch, sonst steht die Reihe schief. */
-.wand-knapp .belege p {
+.belege-bahn .belege p {
   background: var(--papier);
   display: flex; flex-direction: column; justify-content: center;
   gap: .25rem;
 }
-
-.wand-titel {
-  margin: var(--a1) 0 var(--a3);
-  font-family: 'Instrument Serif', Georgia, serif;
-  font-weight: 400;
-  font-size: clamp(2.8rem, 9.5vw, 6.5rem);
-  line-height: .96; letter-spacing: -.02em;
-  color: var(--tinte);
-}
-
-/* ── Preisliste ───────────────────────────────────────────────────────
-   Der Navigator klebt unter der Leiste und weicht mit ihr aus. Am
-   schmalen Schirm ist er eine Zeile, die man schiebt. */
-
-/* ── Die Preisliste als Mini-Navi ─────────────────────────────────────
-   Neun Zeilen, eine je Gruppe, mit dem niedrigsten Preis am Rand. Wer
-   nur wissen will, was ein Herrenschnitt kostet, liest neun Zeilen
-   statt sechzig. Getragen von `<details>`: ohne Skript, mit Tastatur,
-   und der Browser übernimmt das Auf- und Zuklappen selbst.          */
-
-.liste { padding-block: var(--a5) var(--a6); }
-
-.fach { border-bottom: 1px solid var(--linie-fein); }
-.fach:first-of-type { border-top: 1px solid var(--linie-fein); }
-.fach { scroll-margin-top: calc(var(--leiste) + 1rem); }
-
-.fach-kopf {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto 1.5rem;
-  align-items: baseline;
-  gap: var(--a2);
-  padding: 1.15rem .25rem;
-  cursor: pointer;
-  list-style: none;
-  transition: background var(--t1) var(--kurve);
-}
-.fach-kopf::-webkit-details-marker { display: none; }
-.fach-kopf:focus-visible { outline: 2px solid var(--tinte); outline-offset: -2px; }
-
-.fach-wort {
-  font-family: 'Instrument Serif', Georgia, serif;
-  font-size: var(--t-mittel);
-  color: var(--tinte);
-}
-.fach-ab {
-  font-size: var(--t-marke);
-  letter-spacing: .04em;
-  color: var(--tinte-still);
-  font-variant-numeric: tabular-nums;
-}
-
-/* Das Zeichen ist ein gezeichnetes Kreuz, das sich beim Öffnen zum
-   Strich dreht — zwei Balken, kein Schriftzeichen: ein Pfeil aus der
-   Schrift säße auf jedem Gerät ein paar Pixel woanders. */
-.fach-zeichen {
-  position: relative;
-  align-self: center;
-  width: 1.5rem; height: 1.5rem;
-}
-.fach-zeichen::before,
-.fach-zeichen::after {
-  content: "";
-  position: absolute; left: 50%; top: 50%;
-  width: .7rem; height: 1px;
-  margin: -.5px 0 0 -.35rem;
-  background: var(--tuerkis-tief);
-  transition: transform var(--t1) var(--kurve);
-}
-.fach-zeichen::after { transform: rotate(90deg); }
-.fach[open] .fach-zeichen::after { transform: rotate(0deg); }
-
-/* Die offene Gruppe bekommt einen türkisen Strich an die Seite — das
-   ist der eine Ort, an dem die Hausfarbe auf dieser Seite auftritt. */
-.fach[open] { background: var(--papier-warm); }
-.fach[open] .fach-kopf { box-shadow: inset 2px 0 0 var(--tuerkis); }
-.fach[open] .fach-wort { font-style: italic; }
-
-.fach-inhalt { padding: 0 .25rem var(--a3); }
 
 @media (hover: hover) and (pointer: fine) {
   .fach-kopf:hover { background: var(--papier-warm); }
@@ -829,7 +806,7 @@ a { color: inherit; }
 .recht h1 { margin: var(--a1) 0 var(--a4); }
 .recht h2 {
   margin: var(--a4) 0 var(--a2);
-  font-family: 'Instrument Serif', Georgia, serif;
+  font-family: 'Bodoni Moda', Didot, Georgia, serif;
   font-size: var(--t-gross); font-weight: 400;
   letter-spacing: -.01em; line-height: 1.15;
 }
@@ -877,7 +854,7 @@ a { color: inherit; }
 .fuss .mitte { display: flex; flex-wrap: wrap; align-items: center; gap: var(--a2) var(--a3); }
 .fuss-marke {
   margin: 0;
-  font-family: 'Instrument Serif', Georgia, serif;
+  font-family: 'Bodoni Moda', Didot, Georgia, serif;
   font-size: 1.1rem; color: var(--tinte);
 }
 .fuss-wege { display: flex; flex-wrap: wrap; gap: var(--a3); }
@@ -946,99 +923,8 @@ a { color: inherit; }
   padding-bottom: var(--a4);
 }
 .wand-still::after { display: none; }
-.wand-still .wand-still .lauf { color: var(--tinte-leise); }
+.wand-still .lauf { color: var(--tinte-leise); }
 .wand-still .kennung { color: var(--tinte-still); }
-
-/* ── Das Raster über dem Auftakt ──────────────────────────────────────
-   Vier Haarlinien im festen Abstand vom Rand, an ihren Kreuzungen ein
-   Fadenkreuz in Türkis. Aus der Architekturzeichnung geborgt: es sagt
-   „hier ist vermessen worden", ohne ein Ornament zu sein, und es gibt
-   der Aufnahme einen Rahmen, den sie selbst nicht hat. Alles in einem
-   Element, ohne Bild und ohne zusätzliche Auszeichnung. */
-
-.raster {
-  position: absolute; inset: 0; z-index: 0;
-  pointer-events: none;
-  --ein: 2rem;                       /* Abstand der Linien vom Rand */
-  --oben: calc(var(--leiste) + var(--a2) + .52rem);   /* Mitte der Eckzeile */
-  --unten: 3.5rem;
-}
-@media (min-width: 64rem) { .raster { --ein: 3.5rem; } }
-
-/* Die vier Linien. Ein Element, vier Verläufe — kein weiteres Markup. */
-.raster::before {
-  content: ""; position: absolute; inset: 0;
-  background-image:
-    linear-gradient(var(--linie-raster), var(--linie-raster)),
-    linear-gradient(var(--linie-raster), var(--linie-raster)),
-    linear-gradient(var(--linie-raster), var(--linie-raster)),
-    linear-gradient(var(--linie-raster), var(--linie-raster));
-  background-repeat: no-repeat;
-  background-size:
-    100% 1px,  100% 1px,          /* waagerecht oben, unten */
-    1px 100%,  1px 100%;          /* senkrecht links, rechts */
-  background-position:
-    0 var(--oben),  0 calc(100% - var(--unten)),
-    var(--ein) 0,   calc(100% - var(--ein)) 0;
-}
-
-/* Die Fadenkreuze an den vier Kreuzungen. Acht Striche, wieder ein
-   Element: je Kreuzung ein waagerechter und ein senkrechter. */
-.raster::after {
-  content: ""; position: absolute; inset: 0;
-  --kreuz: 13px;
-  background-image:
-    linear-gradient(var(--tuerkis-tief), var(--tuerkis-tief)), linear-gradient(var(--tuerkis-tief), var(--tuerkis-tief)),
-    linear-gradient(var(--tuerkis-tief), var(--tuerkis-tief)), linear-gradient(var(--tuerkis-tief), var(--tuerkis-tief)),
-    linear-gradient(var(--tuerkis-tief), var(--tuerkis-tief)), linear-gradient(var(--tuerkis-tief), var(--tuerkis-tief)),
-    linear-gradient(var(--tuerkis-tief), var(--tuerkis-tief)), linear-gradient(var(--tuerkis-tief), var(--tuerkis-tief));
-  background-repeat: no-repeat;
-  background-size:
-    var(--kreuz) 1px, 1px var(--kreuz),
-    var(--kreuz) 1px, 1px var(--kreuz),
-    var(--kreuz) 1px, 1px var(--kreuz),
-    var(--kreuz) 1px, 1px var(--kreuz);
-  background-position:
-    calc(var(--ein) - var(--kreuz) / 2) var(--oben),
-    var(--ein) calc(var(--oben) - var(--kreuz) / 2),
-    calc(100% - var(--ein) + var(--kreuz) / 2) var(--oben),
-    calc(100% - var(--ein)) calc(var(--oben) - var(--kreuz) / 2),
-    calc(var(--ein) - var(--kreuz) / 2) calc(100% - var(--unten)),
-    var(--ein) calc(100% - var(--unten) - var(--kreuz) / 2),
-    calc(100% - var(--ein) + var(--kreuz) / 2) calc(100% - var(--unten)),
-    calc(100% - var(--ein)) calc(100% - var(--unten) - var(--kreuz) / 2);
-}
-
-/* Am schmalen Schirm ist zwischen den Linien kein Platz für Text —
-   dort bleibt das Raster weg, statt sich hindurchzudrängen. */
-@media (max-width: 48rem) { .raster { display: none; } }
-
-/* Der Text steht über dem Raster. */
-.auftakt-satz { position: relative; z-index: 1; }
-
-/* ── Der Stand als Marke ──────────────────────────────────────────────
-   Kein Etikett über der Überschrift, sondern eine Auskunft: ist gerade
-   offen? Der Punkt trägt die Antwort, das Wort erklärt sie. */
-
-.stand-chip {
-  margin: 0 0 var(--a3);
-  display: inline-flex; align-items: center; gap: .55rem;
-  padding: .42rem .85rem .42rem .7rem;
-  border: 1px solid var(--linie);
-  border-radius: var(--kante-voll);
-  background: oklch(98.6% .004 200 / .72);
-  -webkit-backdrop-filter: blur(6px);
-          backdrop-filter: blur(6px);
-  font-family: var(--mono);
-  font-size: .72rem; letter-spacing: .06em;
-  color: var(--tinte);
-}
-.stand-chip::before {
-  content: ""; flex: none;
-  width: .45rem; height: .45rem; border-radius: 50%;
-  background: var(--tinte-still);
-}
-.stand-chip:has(.offen)::before { background: var(--tuerkis-tief); }
 
 /* ── Browser-Oberflächen ──────────────────────────────────────────────
    Auswahl, Schreibmarke, Fokusrahmen, Bildlaufleiste und der Abstand

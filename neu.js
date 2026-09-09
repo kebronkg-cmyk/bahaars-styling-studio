@@ -33,6 +33,20 @@
     });
   }
 
+  /* Über der schwarzen Bühne trägt die Leiste keine Fläche. Umgeschaltet
+     wird an der Unterkante des Auftakts, minus der eigenen Höhe — sonst
+     wechselte sie die Farbe, während sie noch über dem Film steht. */
+  const buehne = document.querySelector('.auftakt');
+  if (leiste && buehne) {
+    const buehnenstand = () => {
+      const grenze = buehne.offsetHeight - leiste.offsetHeight - 8;
+      leiste.classList.toggle('leiste-buehne', window.scrollY < grenze);
+    };
+    buehnenstand();
+    addEventListener('scroll', buehnenstand, { passive: true });
+    addEventListener('resize', buehnenstand);
+  }
+
   if (leiste) {
     let letzt = window.scrollY, weg = false;
     const setzen = (w) => {

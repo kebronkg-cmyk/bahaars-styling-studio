@@ -11,9 +11,9 @@
      Die Klasse nimmt sich selbst zurück, falls das Skript nie ankommt —
      dann steht die Seite einfach da, statt unsichtbar zu bleiben. -->
 <script>var d=document.documentElement;d.className+=' vorlauf';setTimeout(function(){d.classList.remove('vorlauf')},1600)</script>
-<link rel="preload" href="schrift/InstrumentSerif-Regular.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="schrift/InstrumentSerif-Italic.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="schrift/Inter.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="schrift/BodoniModa.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="schrift/BodoniModa-Italic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="schrift/Mulish.woff2" as="font" type="font/woff2" crossorigin>
 </head>
 <body>
 
@@ -41,35 +41,33 @@
 <main>
 
 <!-- ══ Auftakt ═══════════════════════════════════════════════════════════
-     Die Person und der Laden auf dem ersten Bildschirm, kein Bild unter
-     dem Text: Bei einem inhabergeführten Betrieb kaufen die Leute die
-     Person, und die Kundin will drei Dinge sofort wissen — kann die das,
-     was kostet es, wann kann ich kommen.                              -->
+     Der Film trägt den ersten Bildschirm: eine Friseurschere im
+     türkisen Rauch, schwarz drumherum. Er ist zur Schleife geschnitten
+     (7,0 s, die letzte Sekunde blendet in die erste über), läuft ohne
+     Ton und ohne Bedienleiste. Das Standbild darunter ist die
+     Rückfallebene — was steht, solange der Film lädt, steht auch dann,
+     wenn er nie kommt.                                                -->
 <section class="auftakt">
-  <img class="auftakt-grund" src="bilder/front-tuer.webp" alt="" width="1280" height="632"
-       fetchpriority="high" decoding="async" aria-hidden="true">
+  <video class="auftakt-film" autoplay muted loop playsinline preload="auto"
+         poster="bilder/schere-rauch-standbild.webp" aria-hidden="true" tabindex="-1"
+         width="960" height="960">
+    <source src="bilder/schere-rauch.webm" type="video/webm">
+    <source src="bilder/schere-rauch.mp4" type="video/mp4">
+  </video>
+  <div class="auftakt-schleier" aria-hidden="true"></div>
 
-  <div class="raster" aria-hidden="true"></div>
-
-  <p class="kennung kennung-links" aria-hidden="true">BHR&middot;STUDIO &mdash; Perlacher Str.&nbsp;2</p>
-  <p class="kennung kennung-rechts" aria-hidden="true">81539 M&Uuml;NCHEN&thinsp;/&thinsp;GIESING</p>
-
-  <!-- Der Stand steht jetzt oben, nicht unten: „Kann ich jetzt kommen?"
-       ist die dritte Frage der Kundin, und sie soll sie nicht suchen. -->
   <div class="auftakt-satz">
-    <p class="stand-chip"><span class="stand" id="stand"></span></p>
     <h1 class="wortmarke" id="auftakt-titel">
       <span class="wortmarke-wort">BaHaar&rsquo;s</span>
-      <span class="wortmarke-zusatz">Styling Studio</span>
+      <em class="wortmarke-kursiv">Styling Studio</em>
     </h1>
-    <p class="lauf lese">
-      Bahar ist Friseurmeisterin und arbeitet seit zwanzig Jahren in
-      M&uuml;nchen. Schnitt, Farbe, Str&auml;hnen, Hochsteckfrisuren,
-      Brautstyling. Beraten wird vorher und in Ruhe &mdash; das steht in
-      keiner Preiszeile.
+    <p class="auftakt-lauf">
+      Friseurmeisterin in M&uuml;nchen-Giesing. Schnitt, Farbe,
+      Str&auml;hnen, Hochsteckfrisuren und Brautstyling &mdash; seit
+      zwanzig Jahren, mit und ohne Termin.
     </p>
 
-    <div class="wahl">
+    <div class="wahl wahl-mitte">
       <a class="knopf" href="https://www.treatwell.de/ort/bahaars-styling-studio/" target="_blank" rel="noopener">Termin buchen</a>
       <a class="knopf-still" href="tel:+49896923644">
         <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M5.2 2.3 6.6 5 5.3 6.4c.7 1.6 2 2.9 3.6 3.6l1.4-1.3 2.7 1.4-.4 2.4c-.1.6-.6 1-1.2 1C6.4 13.3 2.7 9.6 2.5 4.6c0-.6.4-1.1 1-1.2z" fill="currentColor"/></svg>
@@ -77,26 +75,23 @@
       </a>
     </div>
 
-    <p class="ort">
-      <span class="zeichen">
-        <img src="bilder/bahar-nah.webp" alt="Bahar, Inhaberin und Friseurmeisterin" width="88" height="88" decoding="async">
-        <b>Bahar</b> Friseurmeisterin &middot; Perlacher&nbsp;Stra&szlig;e&nbsp;2, Giesing
-      </span>
-    </p>
+    <p class="stand-chip"><span class="stand" id="stand"></span></p>
   </div>
+
+  <p class="kennung kennung-links" aria-hidden="true">Perlacher Str.&nbsp;2 &mdash; 81539 M&uuml;nchen</p>
+  <p class="kennung kennung-rechts" aria-hidden="true">4,8 &#9733; &uuml;ber 90 Bewertungen</p>
 </section>
 
-<!-- ══ Was für sie spricht ══════════════════════════════════════════════ -->
-<!-- Gleich nach dem Auftakt die zweite Aufnahme: das türkise Regal
-     trägt die vier Belege. -->
-<section class="wand wand-knapp" aria-label="Auf einen Blick">
-  <img class="wand-grund" src="bilder/regal-wand.webp" alt="" width="1170" height="724"
-       loading="lazy" decoding="async" aria-hidden="true">
+<!-- ══ Was für sie spricht ══════════════════════════════════════════════
+     Nach der schwarzen Bühne eine ruhige Zeile auf Papier. Ein zweites
+     vollflächiges Bild direkt danach nähme dem Auftakt die Wirkung und
+     stiesse hart gegen ihn. -->
+<section class="belege-bahn" aria-label="Auf einen Blick">
   <div class="belege">
     <p><b>4,8 von 5</b><span>aus &uuml;ber 90&nbsp;Bewertungen</span></p>
     <p><b>Meisterbrief</b><span>Bahar ist Friseurmeisterin</span></p>
     <p><b>Seit 20 Jahren</b><span>in M&uuml;nchen am Stuhl</span></p>
-    <p><b>Auch ohne Termin</b><span>wenn gerade ein Stuhl frei ist</span></p>
+    <p><b>Auch ohne Termin</b><span>wenn ein Stuhl frei ist</span></p>
   </div>
 </section>
 
