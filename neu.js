@@ -176,8 +176,11 @@
 
   if (ruhig || !('IntersectionObserver' in window)) return;
 
-  const ZIELE = '.gross, .wand-titel, .belege p, .fach, .werke img, ' +
-                '.raeume img, .spruch, .abschluss, .spalten > div, .karte';
+  /* Nicht die Bilder im Zug einzeln: die wandern, treten dem Beobachter
+     nie richtig ins Bild und blieben unsichtbar stehen. Der Zug tritt
+     als Ganzes ein. */
+  const ZIELE = '.gross, .wand-titel, .belege p, .fach, .werke-bahn, ' +
+                '.laden figure, .spruch, .abschluss, .spalten > div, .karte';
 
   /* Nichts aus einem geschlossenen Fach: was `display: none` trägt,
      meldet der Beobachter nie — es bliebe beim Aufklappen unsichtbar

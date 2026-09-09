@@ -1044,13 +1044,60 @@ main, .fuss { position: relative; z-index: 1; }
 }
 .werk-kopf .gross { color: var(--auf-tiefe); }
 .werk-kopf .lauf { color: var(--auf-tiefe-leise); max-width: var(--lese); margin-bottom: 0; }
-.werke {
-  display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px;
+/* Der Zug. Er läuft von rechts herein und weiter durch, gleichmässig
+   und langsam: 8 Aufnahmen je Satz, eine Runde in 72 s. Bewegt wird nur
+   `transform` — eine Bahn, die Breiten oder Ränder animiert, ruckelt.
+
+   Zwei gleiche Sätze im Zug, verschoben um genau eine Satzbreite
+   (-50 % der Zugbreite): damit trifft das Ende exakt auf den Anfang und
+   die Schleife hat keine Naht. Linear ist hier richtig — ein Förderband
+   beschleunigt nicht, und eine ease-Kurve würde bei jeder Runde
+   sichtbar stocken.                                                  */
+
+.werke-bahn { overflow: hidden; }
+
+.werke-zug {
+  display: flex;
+  width: max-content;
+  animation: werke-zug 72s linear infinite;
+  will-change: transform;
 }
-@media (min-width: 48rem) { .werke { grid-template-columns: repeat(4, 1fr); } }
-.werke img {
-  width: 100%; aspect-ratio: 3 / 4; object-fit: cover;
+@keyframes werke-zug {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+
+.werke-satz {
+  display: flex; gap: 2px;
+  margin: 0; padding: 0 0 0 2px; list-style: none;
+}
+.werke-satz li { flex: none; }
+.werke-satz img {
+  width: clamp(9.5rem, 30vw, 17rem);
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
   border-radius: 0;
+}
+
+/* Unter der Maus hält der Zug an — wer hinsehen will, soll hinsehen
+   können, ohne dem Bild nachzulaufen. */
+@media (hover: hover) and (pointer: fine) {
+  .werke-bahn:hover .werke-zug,
+  .werke-bahn:focus-within .werke-zug { animation-play-state: paused; }
+}
+
+/* Ein stehender Zug ist kein Zug. Wer Bewegung abbestellt hat, bekommt
+   deshalb keinen eingefrorenen Streifen, sondern eine Reihe, die man
+   selbst schiebt — mit Rasterpunkten, damit sie sauber einrastet. */
+@media (prefers-reduced-motion: reduce) {
+  .werke-zug { animation: none; width: auto; }
+  .werke-satz[aria-hidden="true"] { display: none; }
+  .werke-bahn {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+  }
+  .werke-satz li { scroll-snap-align: start; }
 }
 
 /* ── Der Laden: eine grosse Aufnahme, Text daneben ────────────────── */
