@@ -158,6 +158,44 @@
     addEventListener(art, beiBeruehrung, { passive: true, once: false });
 })();
 
+/* ── Der Vorhang ────────────────────────────────────────────────────────
+   Er geht, sobald der Film wirklich das erste Bild zeigt — dadurch
+   beginnt der Rauch für die Besucherin von vorn und nicht mittendrin.
+   Zwei Grenzen: nach 2,2 s geht er auch ohne Film (niemand wartet auf
+   eine Kulisse), und die CSS-Animation holt ihn nach 5 s weg, falls
+   diese Datei gar nicht ankommt. */
+
+(function () {
+  const vorhang = document.querySelector('.vorhang');
+  if (!vorhang) return;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    vorhang.remove();
+    return;
+  }
+
+  const film = document.querySelector('.raum-film');
+  let fort = false;
+
+  function heben() {
+    if (fort) return;
+    fort = true;
+    vorhang.classList.add('geht');
+    /* Erst nach dem Ausblenden aus dem Weg räumen, sonst springt es. */
+    vorhang.addEventListener('transitionend', () => vorhang.classList.add('fort'), { once: true });
+    setTimeout(() => vorhang.classList.add('fort'), 1200);
+    document.documentElement.dispatchEvent(new CustomEvent('vorhang-weg'));
+  }
+
+  if (film) {
+    const laeuft = () => { if (film.currentTime > 0 && !film.paused) heben(); };
+    film.addEventListener('playing', laeuft);
+    film.addEventListener('timeupdate', laeuft);
+  }
+  /* Der Vorhang soll nicht länger stehen als nötig — auch dann nicht,
+     wenn der Film hängt oder gar nicht kommt. */
+  setTimeout(heben, 2200);
+})();
+
 /* ── Der Auftritt ───────────────────────────────────────────────────────
    Ein einziger gestalteter Moment: der Auftakt baut sich beim Laden auf,
    aus der Unschärfe heraus, in Gruppen zu dritt. Alles Weitere kommt
@@ -179,11 +217,25 @@
     const teile = [...satz.children];
     for (const el of teile) el.classList.add('auftritt-gross');
     wurzel.classList.remove('vorlauf');
-    requestAnimationFrame(() => requestAnimationFrame(() => {
+
+    /* Hinter dem Vorhang aufzubauen hiesse, den einen gestalteten
+       Moment an eine schwarze Fläche zu verschenken. Also erst, wenn
+       der Vorhang geht — und ohne Vorhang sofort. */
+    const vorhang = document.querySelector('.vorhang');
+    let begonnen = false;
+    const anfangen = () => { if (begonnen) return; begonnen = true;
+      requestAnimationFrame(() => requestAnimationFrame(() => {
       teile.forEach((el, i) => {
         setTimeout(() => el.classList.add('auftritt-da'), Math.floor(i / 3) * 90);
       });
-    }));
+    })); };
+    if (vorhang && !vorhang.classList.contains('geht')) {
+      wurzel.addEventListener('vorhang-weg', anfangen, { once: true });
+      /* Nichts darf am Vorhang hängen bleiben, falls er anders geht. */
+      setTimeout(anfangen, 2600);
+    } else {
+      anfangen();
+    }
   } else {
     wurzel.classList.remove('vorlauf');
   }

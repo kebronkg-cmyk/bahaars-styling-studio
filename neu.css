@@ -128,6 +128,9 @@
   --leiste: 56px;
 
   --kurve: cubic-bezier(.22, .61, .36, 1);
+  /* Auftritt bremst aus, Abgang beschleunigt — andersherum sieht es
+     aus, als würde etwas weggezogen und dann hingeworfen. */
+  --kurve-fort: cubic-bezier(.55, 0, .78, .4);
   --t1: .25s; --t2: .5s;
 
   --kante: 3px;
@@ -197,7 +200,9 @@ a { color: inherit; }
 .lese { max-width: var(--lese); }
 
 .sprung {
-  position: fixed; left: var(--rand); top: -4rem; z-index: 40;
+  /* Über dem Vorhang: wer sofort tabbt, soll den Sprunglink sehen und
+     nicht hinter einem Ladeschirm ins Leere fokussieren. */
+  position: fixed; left: var(--rand); top: -4rem; z-index: 95;
   padding: .6rem 1rem; border-radius: var(--kante);
   background: var(--tinte); color: var(--auf-tinte);
   font-size: var(--t-klein); font-weight: 600; text-decoration: none;
@@ -444,13 +449,21 @@ body:has(.stufe-liste) .wege {
   background:
     /* Von unten herauf, dicht dort, wo die Schrift steht, und oberhalb
        der Schere restlos offen. */
+    /* Die Wortmarke steht gemessen zwischen 44 % und 65 % der
+       Auftakthöhe — also genau dort, wo der Schleier vorher schon
+       dünn wurde (.58 bei 54 %, .20 bei 64 %). Die grösste Schrift
+       der Seite lag im schwächsten Teil des Verlaufs. Jetzt hält er
+       bis über ihre Oberkante und lässt erst darüber los; ab 84 % ist
+       die Aufnahme wieder ganz offen, und das ist der Teil mit der
+       Schere und dem hellen Rauch. */
     linear-gradient(to top,
       var(--nacht) 0%,
-      oklch(7% .010 200 / .95) 20%,
-      oklch(7% .010 200 / .88) 40%,
-      oklch(7% .010 200 / .58) 54%,
-      oklch(7% .010 200 / .20) 64%,
-      transparent 74%),
+      oklch(7% .010 200 / .96) 24%,
+      oklch(7% .010 200 / .92) 46%,
+      oklch(7% .010 200 / .84) 58%,
+      oklch(7% .010 200 / .50) 68%,
+      oklch(7% .010 200 / .18) 76%,
+      transparent 84%),
     /* Ein schmales Band oben, damit die Leiste und die Eckzeilen einen
        Grund haben. */
     linear-gradient(to bottom, oklch(7% .010 200 / .62) 0%, transparent 16%);
@@ -461,12 +474,14 @@ body:has(.stufe-liste) .wege {
 @media (max-width: 48rem) {
   .auftakt-schleier {
     background:
+      /* Am schmalen Schirm steht die Wortmarke zwischen 50 % und 59 %. */
       linear-gradient(to top,
         var(--nacht) 0%,
-        oklch(7% .010 200 / .96) 22%,
-        oklch(7% .010 200 / .86) 40%,
-        oklch(7% .010 200 / .46) 54%,
-        transparent 68%),
+        oklch(7% .010 200 / .97) 26%,
+        oklch(7% .010 200 / .93) 48%,
+        oklch(7% .010 200 / .82) 61%,
+        oklch(7% .010 200 / .42) 70%,
+        transparent 80%),
       linear-gradient(to bottom, oklch(7% .010 200 / .70) 0%, transparent 14%);
   }
 }
@@ -663,24 +678,86 @@ body:has(.stufe-liste) .wege {
 .mehr a { color: var(--lagune); text-decoration: none; }
 @media (hover: hover) and (pointer: fine) { .mehr a:hover { text-decoration: underline; } }
 
-/* ── Brautstyling ─────────────────────────────────────────────────────── */
+/* ── Der Vorhang ──────────────────────────────────────────────────────
+   Rauch, bevor die Seite kommt. Drei Bewegungen, nicht mehr: zwei
+   Schwaden, die auf geschlossenen Bahnen ziehen, und die Wortmarke,
+   die auftaucht. Die Bahnen sind geschlossen und laufen `linear` —
+   eine Schwade, die am Wendepunkt kurz stehen bleibt, verrät sich
+   sofort als Schleife. Beide Dauern sind teilerfremd, damit sich das
+   Bild nicht sichtbar wiederholt.                                    */
 
-.braut {
-  display: grid;
-  gap: var(--a4);
-  align-items: center;
-  padding: var(--a5) var(--rand);
-  /* Kein Grund hier: weiter unten steht derselbe Selektor noch einmal
-     und setzt `--nacht`. Die Zeile wäre wirkungslos und irreführend. */
-  border-block: 1px solid var(--linie-fein);
+.vorhang {
+  position: fixed; inset: 0; z-index: 90;
+  display: grid; place-items: center;
+  overflow: hidden;
+  background: var(--nacht);
+  /* Notausgang, falls das Skript nie ankommt. */
+  animation: vorhang-notaus .9s var(--kurve-fort) 5s forwards;
 }
-@media (min-width: 62rem) {
-  .braut {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: var(--a5);
-    padding-inline: max(var(--rand), calc((100vw - var(--spalte)) / 2 + var(--rand)));
-  }
+.vorhang-rauch {
+  position: absolute; inset: -25%;
+  background:
+    radial-gradient(38% 30% at 30% 44%,
+      oklch(74% .13 194 / .38) 0%, oklch(74% .13 194 / .12) 46%, transparent 100%),
+    radial-gradient(32% 42% at 70% 60%,
+      oklch(80% .12 196 / .28) 0%, oklch(80% .12 196 / .08) 50%, transparent 100%);
+  animation: vorhang-zug-a 19s linear infinite;
 }
+.vorhang-rauch::after {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(34% 26% at 56% 28%,
+    oklch(86% .10 192 / .24) 0%, oklch(86% .10 192 / .06) 52%, transparent 100%);
+  animation: vorhang-zug-b 23s linear infinite;
+}
+.vorhang-marke {
+  position: relative;
+  margin: 0;
+  font-family: 'Bodoni Moda', Didot, Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(2rem, 7vw, 3.4rem);
+  letter-spacing: -.01em;
+  color: var(--auf-tiefe);
+  animation: vorhang-marke .9s var(--kurve) both;
+}
+
+/* Der Abgang: das Skript setzt die Klasse, sobald der Film läuft. */
+.vorhang.geht {
+  animation: none;
+  opacity: 0;
+  transform: scale(1.05);
+  pointer-events: none;
+  transition: opacity .75s var(--kurve-fort), transform .75s var(--kurve-fort);
+}
+.vorhang.fort { display: none; }
+
+@keyframes vorhang-zug-a {
+  0%   { transform: translate3d(-4%,  3%, 0) scale(1.06); }
+  25%  { transform: translate3d( 3%, -3%, 0) scale(1.13); }
+  50%  { transform: translate3d( 5%,  4%, 0) scale(1.04); }
+  75%  { transform: translate3d(-2%,  6%, 0) scale(1.11); }
+  100% { transform: translate3d(-4%,  3%, 0) scale(1.06); }
+}
+@keyframes vorhang-zug-b {
+  0%   { transform: translate3d( 4%, -2%, 0) scale(1.10); }
+  33%  { transform: translate3d(-5%,  3%, 0) scale(1.02); }
+  66%  { transform: translate3d(-1%, -5%, 0) scale(1.14); }
+  100% { transform: translate3d( 4%, -2%, 0) scale(1.10); }
+}
+@keyframes vorhang-marke {
+  from { opacity: 0; transform: translate3d(0, 8px, 0); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes vorhang-notaus {
+  to { opacity: 0; visibility: hidden; }
+}
+
+/* Wer Bewegung abbestellt hat, bekommt keinen Ladeschirm: ein Vorhang
+   ohne Zug ist nur Wartezeit. */
+@media (prefers-reduced-motion: reduce) {
+  .vorhang { display: none; }
+}
+
+/* ── Brautstyling ─────────────────────────────────────────────────────── */
 
 .preis { margin: 0 0 var(--a3); font-size: var(--t-klein); color: var(--tinte-still); }
 .preis b {
@@ -689,13 +766,6 @@ body:has(.stufe-liste) .wege {
   font-size: 1.7rem; font-weight: 400;
   color: var(--tinte);
 }
-.braut-bilder { display: grid; grid-template-columns: 1fr 1fr; gap: var(--a2); }
-.braut-bilder img {
-  width: 100%; height: 100%;
-  aspect-ratio: 3 / 4; object-fit: cover;
-  border-radius: var(--kante);
-}
-
 /* ── Arbeiten ─────────────────────────────────────────────────────────── */
 
 .werke {
@@ -943,6 +1013,10 @@ body { background: transparent; }
 }
 .raum-film {
   object-fit: cover; object-position: 50% 34%;
+  /* Der Rauch ist im Film ein Hauch grauer, als er im Laden wirkt.
+     Ein Sechstel mehr Buntheit holt ihn dorthin zurück, ohne die
+     Helligkeit anzufassen — die Kontraste bleiben, wie gemessen. */
+  filter: saturate(1.16);
   transition: opacity .7s var(--kurve);
 }
 /* Die Klasse setzt das Skript selbst — ohne Skript bleibt der Film
@@ -968,14 +1042,14 @@ main, .fuss { position: relative; z-index: 1; }
    viel regen, dass man es merkt, ohne hinzusehen. */
 .band, .stufe, .werk, .laden, .kontakt, .fuss, .kopf-tief, .recht {
   position: relative;
-  --durch: .90;                 /* 2,1 Stufen — spürbar, nicht laut */
+  --durch: .86;                 /* 2,9 Stufen — deutlich, nicht laut */
   background: oklch(11% .012 200 / var(--durch));
   color: var(--auf-tiefe);
 }
-.band  { --durch: .87; }        /* 2,7 — die schmale Zeile darf leben */
-.werk  { --durch: .88; }        /* 2,5 — zwischen den Bildern viel Rauch */
-.fuss  { --durch: .93; }        /* 1,5 — unten wird es ruhig */
-.recht { --durch: .93; }        /* 1,5 — Impressum liest man am Stück */
+.band  { --durch: .83; }        /* 3,5 — die schmale Zeile darf leben */
+.werk  { --durch: .84; }        /* 3,3 — zwischen den Bildern viel Rauch */
+.fuss  { --durch: .90; }        /* 2,1 — unten wird es ruhiger */
+.recht { --durch: .90; }        /* 2,1 — Impressum liest man am Stück */
 
 /* ── Die Zeile unter dem Auftakt ──────────────────────────────────── */
 
@@ -1031,36 +1105,38 @@ main, .fuss { position: relative; z-index: 1; }
 }
 @media (min-width: 48rem) { .stufe .fach-wort { font-size: 1.9rem; } }
 
-/* ── Brautstyling: die Aufnahme trägt den Abschnitt ───────────────── */
+/* ── Brautstyling: die Aufnahme ist das Angebot ───────────────────── */
+
+/* Die Aufnahme ist ein sehr hohes Hochformat, 899 × 1750. Sie lag
+   bisher als vollflächiger Grund hinter dem Text, und `cover` machte
+   daraus im Querband einen Ausschnitt Haar — kein Kopf, keine Form,
+   die Perlenranke angeschnitten. Der Rahmen gab das Format vor statt
+   umgekehrt. Jetzt steht sie in einer eigenen Spalte, ungeschleiert
+   und in einem Ausschnitt, der die Frisur ganz zeigt; der Text steht
+   daneben auf dem dunklen Grund. Damit braucht keine Zeile mehr einen
+   Schleier, und das Bild ist das, was es sein soll: das Angebot. */
 
 .braut {
-  position: relative; isolation: isolate;
-  display: grid; align-items: end;
-  min-height: min(92svh, 900px);
-  padding: var(--a6) var(--rand);
-  overflow: hidden;
+  position: relative;
+  display: grid;
+  grid-template-areas: "bild" "satz";
+  gap: var(--a4);
+  padding: 0 0 var(--a6);
   background: var(--nacht);
   color: var(--auf-tiefe);
+  border-block: 1px solid var(--linie-tiefe-fein);
 }
 .braut-grund {
-  position: absolute; inset: 0; z-index: -2;
-  width: 100%; height: 100%;
-  object-fit: cover; object-position: 74% 42%;
+  grid-area: bild;
+  width: 100%; height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover; object-position: 50% 24%;
 }
-/* Von links dicht, nach rechts offen: der Text steht im Dunkeln, das
-   Haar bleibt unangetastet. */
-.braut::after {
-  content: ""; position: absolute; inset: 0; z-index: -1;
-  background:
-    linear-gradient(to right, oklch(8% .012 200 / .94) 0%,
-                    oklch(8% .012 200 / .86) 34%,
-                    oklch(8% .012 200 / .30) 62%, transparent 82%),
-    linear-gradient(to top, var(--nacht) 0%, transparent 26%),
-    linear-gradient(to bottom, oklch(8% .012 200 / .55) 0%, transparent 18%);
+.braut-satz {
+  grid-area: satz;
+  padding-inline: var(--rand);
+  max-width: 34rem;
 }
-/* Eine Regel, nicht zwei: weiter oben stand dieselbe Auswahl schon
-   einmal mit 30rem und war wirkungslos. */
-.braut-satz { position: relative; z-index: 1; max-width: 32rem; }
 .braut-marke {
   margin: 0 0 var(--a2);
   font-family: var(--mono);
@@ -1072,35 +1148,26 @@ main, .fuss { position: relative; z-index: 1; }
 .braut .preis { color: var(--auf-tiefe-still); }
 .braut .preis b { color: var(--auf-tiefe); }
 .braut .knopf { background: var(--lagune); color: var(--nacht); }
-@media (max-width: 60rem) {
-  .braut { min-height: min(96svh, 820px); align-items: end; }
-  .braut-grund { object-position: 60% 32%; }
-  .braut::after {
-    background:
-      linear-gradient(to top, var(--nacht) 4%, oklch(8% .012 200 / .92) 30%,
-                      oklch(8% .012 200 / .55) 54%, transparent 76%);
-  }
-  /* Am schmalen Schirm endet der Schleier bei 76 % der Höhe — und die
-     Marke BRAUTSTYLING sitzt bei 66 %, also genau dort, wo er schon
-     dünn ist. Gemessen stand sie mit 1,2:1 auf hellem Haar, die
-     kleinste und gesperrteste Zeile der Seite ohne jede Reserve.
 
-     Den ganzen Schleier höher zu ziehen wäre der falsche Griff: dort
-     liegt die Perlenkette, das Beste an der Aufnahme. Stattdessen
-     bekommt nur der Textblock einen weichen Schatten hinter sich. Er
-     wächst nach oben über die Marke hinaus und läuft nach beiden
-     Seiten aus, sodass keine Kante entsteht — vier Fünftel des Bildes
-     bleiben offen. */
-  .braut-satz::before {
-    content: ""; position: absolute; z-index: -1;
-    inset: -2.6rem -50vw -1rem;
-    background: linear-gradient(to bottom,
-      transparent 0%,
-      oklch(8% .012 200 / .55) 5%,
-      oklch(8% .012 200 / .82) 12%,
-      oklch(8% .012 200 / .72) 62%,
-      transparent 100%);
+@media (min-width: 62rem) {
+  /* Text links, Aufnahme rechts bis an den Rand. Die Höhe gibt der
+     Abschnitt vor, die Breite die Spalte — daraus ergibt sich ein
+     Ausschnitt um 1:1,2, in dem Krone, Ranke und Locken zusammen
+     stehen. Kein `aspect-ratio` hier: es würde mit der Höhe streiten. */
+  .braut {
+    grid-template-areas: "satz bild";
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    align-items: stretch;
+    min-height: min(86svh, 860px);
+    gap: var(--a5);
+    padding: 0 0 0 max(var(--rand), calc((100vw - var(--spalte)) / 2 + var(--rand)));
   }
+  .braut-grund {
+    aspect-ratio: auto;
+    height: 100%;
+    object-position: 50% 26%;
+  }
+  .braut-satz { align-self: center; padding-inline: 0; padding-block: var(--a6); }
 }
 
 /* ── Arbeiten: die Bilder sind der Abschnitt ──────────────────────── */
