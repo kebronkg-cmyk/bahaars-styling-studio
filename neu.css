@@ -1,26 +1,31 @@
 /* ═══════════════════════════════════════════════════════════════════════
    BaHaar's Styling Studio
 
+   ── Ein Raum ──────────────────────────────────────────────────────────
+
+   Die Seite ist ein einziger dunkler Raum. Der Film — eine Friseurschere
+   im türkisen Rauch — steht fest im Fenster hinter allem; jeder
+   Abschnitt legt sich als fast deckende Scheibe darüber und lässt einen
+   Rest durch. Beim Scrollen zieht deshalb dieselbe Bewegung durch die
+   ganze Seite.
+
+   Vorher hatte jeder Abschnitt eine eigene Grundfarbe. Auf Seitenlänge
+   las sich das als Zufall, nicht als Aufbau. Abschnitte unterscheiden
+   sich jetzt durch ihre Form, nicht durch ihre Farbe.
+
    ── Woher die Farben kommen ───────────────────────────────────────────
 
-   Türkis steht am Laden selbst: das Schild über der Tür ist türkis.
-   Es ist deshalb die Hausfarbe — aber es tritt nur als Ornament auf,
-   nie als Fläche und nie als Textfarbe. Im Salon hängt dasselbe Türkis
-   auch an den Regalen des Lieferanten; würde man das zur Leitfarbe
-   machen, verschwände die Handschrift des Ladens beim nächsten
-   Lieferantenwechsel.
-
-   Der Grund ist Papier: fast weiss, nur einen Hauch kühl. Alles, was
-   Aufmerksamkeit braucht, wird Tinte — ein tiefes Schwarzgrün. Zwei
-   Farben, mehr nicht.
+   Der Farbwinkel (200) kommt aus dem Rauch des Films, die Tiefe aus den
+   beiden gestrichenen Wänden der Vorlage, der Akzent aus dem Plakat:
+   oklch(80 % .136 193). Türkis ist Akzent — ein Strich, ein Punkt, ein
+   Zeichen —, nie eine Fläche und nie Fliesstext.
 
    ── Die Fotos ─────────────────────────────────────────────────────────
 
-   Aufnahmen laufen unbehandelt. Ein Zweifarben-Duoton hatte den ganzen
-   Laden blass gemacht: beim Friseur ist das Foto das Produkt, und ein
-   Farbfilter nimmt genau das weg, was verkauft wird. Was ein Bild
-   ruhig macht, ist der Schleier hinter dem Text — nicht über der
-   ganzen Fläche.
+   Aufnahmen laufen unbehandelt. Beim Friseur ist das Foto das Produkt;
+   ein Farbfilter nimmt genau das weg, was verkauft wird. Auf dem dunklen
+   Grund leuchten sie von selbst — das ist der Grund, warum die Farbe der
+   Seite aus den Bildern kommt und nicht aus Flächen.
    ═══════════════════════════════════════════════════════════════════════ */
 
 /* Bodoni Moda für die Anzeige: eine Didone mit hohem Strichkontrast —
@@ -45,43 +50,47 @@
 }
 
 :root {
-  color-scheme: light;
+  /* Dunkel: davon hängen Bildlaufleisten, Auswahlfelder und die
+     Voreinstellungen des Browsers ab. */
+  color-scheme: dark;
 
   /* Papier ist fast weiss, nur einen Hauch kühl. Ein durchgehend
      mintfarbener Grund lässt jede Aufnahme darauf blass wirken — die
      Seite sah verwaschen aus, weil der Grund selbst schon Farbe hatte. */
-  --papier:      oklch(97.8% .012 189);
-  --papier-warm: oklch(96.2% .018 189);   /* Nebel */
+  /* ── Ein Raum, eine Palette ─────────────────────────────────────────
+     Die Seite ist durchgehend dunkel; deshalb ist die Palette dunkel
+     gedacht und nicht umgedreht. Grund und Schrift sind am Film und an
+     den beiden türkisen Vorlagen gemessen: der Rauch gibt den Farbwinkel
+     (200), die Wand die Tiefe, das Plakat den Akzent.
 
-  /* Türkis ist Ornament, keine Fläche und keine Textfarbe: ein Strich
-     unter der offenen Gruppe, eine Marke am Rand. Deutlich ruhiger als
-     das Regalgrün des Lieferanten — die Farbe steht am eigenen Schild
-     über der Tür, und dort ist sie tief, nicht grell. */
-  --tuerkis:     oklch(70% .085 197);
-  --tuerkis-tief:oklch(52% .078 200);
-  --tuerkis-hell:oklch(95.5% .020 195);
+     Die alten hellen Namen bleiben als Verweise stehen. Damit greift der
+     Wechsel überall auf einmal — in der Leiste, in der Preisliste, auf
+     den Rechtsseiten —, statt Regel für Regel nachgezogen zu werden. */
 
-  --tinte:       oklch(19% .018 205);
-  --tinte-leise: oklch(35% .015 205);
-  --tinte-still: oklch(48% .013 205);
-  --auf-tinte:   oklch(98.6% .004 200);
+  --nacht:      oklch(11% .012 200);
+  --nacht-tief: oklch(8% .010 200);
 
-  --linie:      oklch(19% .018 205 / .18);
-  --linie-fein: oklch(19% .018 205 / .08);
-  --linie-raster: oklch(19% .018 205 / .14);
+  --auf-tiefe:       oklch(96.5% .012 190);
+  --auf-tiefe-leise: oklch(84% .022 195);
+  --auf-tiefe-still: oklch(70% .026 200);
 
-  /* ── Der Putz ───────────────────────────────────────────────────────
-     Zwei gestrichene Wände als Vorlage. Was übernommen wird, ist nur
-     die Struktur: die Kacheln sind entfärbt und auf Mittelgrau gezogen,
-     512 × 512, nahtlos (Halbversatz-Überblendung; die Naht misst 13,9
-     gegen 11,2 im Feld — im feinen Korn nicht zu sehen).
+  --lagune:     oklch(80% .136 193);
 
-     Den Ton gibt immer der Abschnitt, die Kachel moduliert ihn nur.
-     Genau daraus entsteht die Einheit: Es ist überall dieselbe Wand,
-     nur anders gestrichen — vom Nachtblau bis zum Nebel. */
-  --putz:      url('bilder/putz-fein.webp');
-  --putz-grob: url('bilder/putz-grob.webp');
-  --putz-mass: 320px;
+  --linie-tiefe:      oklch(96.5% .012 190 / .18);
+  --linie-tiefe-fein: oklch(96.5% .012 190 / .09);
+
+  /* Verweise, damit kein Abschnitt zurückfällt */
+  --papier:      var(--nacht);
+  --papier-warm: var(--nacht-tief);
+  --tinte:       var(--auf-tiefe);
+  --tinte-leise: var(--auf-tiefe-leise);
+  --tinte-still: var(--auf-tiefe-still);
+  --auf-tinte:   var(--nacht);
+  --tuerkis:     var(--lagune);
+  --tuerkis-tief:var(--lagune);
+  --tuerkis-hell:var(--lagune);
+  --linie:       var(--linie-tiefe);
+  --linie-fein:  var(--linie-tiefe-fein);
 
   --mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
 
@@ -89,46 +98,6 @@
      umgedreht: der Grund geht tiefer als das Papier hell ist, und das
      Türkis wird heller — auf Schwarz steht ein dunkles Türkis als Loch,
      nicht als Farbe. Der Ton ist der des Rauchs im Film. */
-  /* ── Die Leiter ─────────────────────────────────────────────────────
-     Zwei Vorlagen, an ihnen gemessen, nicht geschätzt:
-
-     Die gestrichene Wand — Kern oklch(61.1 % .094 207), Tiefen
-     oklch(50.6 % .077 209), Lichter oklch(78.1 % .072 201). Ein
-     Material: satt, aber nicht grell.
-
-     Das Plakat — Kern oklch(80.1 % .136 193), Lichter
-     oklch(89.6 % .083 187) bis oklch(95.2 % .034 169). Reines Licht.
-
-     Daraus eine Leiter, die beim Film anfängt und nach oben läuft:
-     Nacht, Tiefe, Wand, Lagune, Schaum, Nebel. Der Ton der Wand liefert
-     die dunklen Sprossen (Farbwinkel 207 gehalten, Buntheit
-     mitgezogen), das Plakat die hellen. Jeder Abschnitt sitzt auf einer
-     Sprosse — so wächst die Seite aus dem Auftakt heraus statt neben
-     ihm anzufangen.                                                   */
-
-  --nacht:      oklch(11% .012 200);
-  --tiefe:      oklch(16.5% .026 207);
-  --tiefe-hoch: oklch(22% .036 207);
-  --wand:       oklch(31% .050 206);
-  --lagune:     oklch(80% .136 193);
-  --schaum:     oklch(91% .050 189);
-  --nebel:      oklch(96.2% .018 189);
-
-  /* Schrift auf den dunklen Sprossen. Aus dem Nebel heruntergezogen,
-     damit sie zur Leiter gehört und nicht kalkweiss darauf liegt. */
-  --auf-tiefe:       oklch(96.5% .012 190);
-  --auf-tiefe-leise: oklch(82% .022 195);
-  --auf-tiefe-still: oklch(72% .026 200);
-  --linie-tiefe:     oklch(96.5% .012 190 / .16);
-  --linie-tiefe-fein:oklch(96.5% .012 190 / .09);
-
-  /* Alte Namen der Bühne bleiben als Alias: der Auftakt heisst weiter
-     Bühne, sitzt aber auf derselben Sprosse. */
-  --buehne:           var(--nacht);
-  --auf-buehne:       var(--auf-tiefe);
-  --auf-buehne-leise: var(--auf-tiefe-leise);
-  --auf-buehne-still: var(--auf-tiefe-still);
-  --tuerkis-leucht:   var(--lagune);
 
 
   --t-riesen: 2.35rem;
@@ -181,7 +150,7 @@ html {
 /* Der Bereich unter dem Fuss und hinter dem Überziehen gehört dem
    Fuss, nicht dem Papier: sonst blitzt am Seitenende ein heller
    Streifen auf. */
-html { background: var(--tiefe); }
+html { background: var(--nacht); }
 
 body {
   margin: 0;
@@ -251,10 +220,10 @@ a { color: inherit; }
   height: var(--leiste);
   display: flex; align-items: center; gap: var(--a3);
   padding-inline: var(--rand);
-  background: oklch(98.6% .004 200 / .84);
-  -webkit-backdrop-filter: blur(12px);
-          backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--linie-fein);
+  background: oklch(9% .012 200 / .78);
+  -webkit-backdrop-filter: blur(14px);
+          backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--linie-tiefe-fein);
   transition: transform var(--t2) var(--kurve);
 }
 .leiste.weg { transform: translateY(-100%); }
@@ -449,7 +418,9 @@ body:has(.stufe-liste) .wege {
   display: grid; align-items: end; justify-items: center;
   padding: calc(var(--leiste) + var(--a4)) var(--rand) var(--a5);
   overflow: hidden;
-  background: var(--nacht);
+  /* Durchsichtig: hier soll der Film aus dem Raum dahinter voll zu
+     sehen sein. Ein eigener Grund würde ihn zudecken. */
+  background: transparent;
   color: var(--auf-tiefe);
 }
 
@@ -563,7 +534,7 @@ body:has(.stufe-liste) .wege {
   background: oklch(97% .006 200 / .35);
 }
 .stand-chip:has(.offen)::before {
-  background: var(--tuerkis-leucht);
+  background: var(--lagune);
   box-shadow: 0 0 0 3px oklch(80% .10 195 / .20);
 }
 
@@ -914,42 +885,71 @@ body:has(.stufe-liste) .wege {
 }
 
 
-/* ═══ Die Leiter der Abschnitte ════════════════════════════════════════
-   Der Auftakt ist Nacht. Von dort steigt die Seite Sprosse für Sprosse
-   ins Licht: Band und Leistungen bleiben dunkel und nehmen den Ton der
-   gestrichenen Wand auf, das Brautstyling bricht als volle Lagune
-   heraus — das ist das Plakat —, danach liegen Arbeiten, Laden und
-   Kontakt im Nebel, damit die Haarfarbe auf den Fotos stimmt. Der Fuss
-   schliesst den Bogen und geht zurück in die Tiefe.
+/* ═══ Ein Raum, keine Platten ══════════════════════════════════════════
+   Die Seite hatte sieben verschiedenfarbige Abschnitte übereinander —
+   auf Seitenlänge las sich das als Zufall, nicht als Aufbau. Jetzt gibt
+   es nur noch einen Grund: den dunklen Raum, in dem der Film steht.
+
+   Der Film liegt fest im Fenster hinter allem. Jeder Abschnitt legt
+   sich als fast deckende Scheibe darüber und lässt einen Rest Rauch
+   durch — im Auftakt viel, weiter unten wenig. Dadurch zieht beim
+   Scrollen dieselbe Bewegung durch die ganze Seite, und die Abschnitte
+   unterscheiden sich nicht mehr durch Farbe, sondern durch Form.
+
+   Farbe kommt aus den Fotos. Türkis ist Akzent, keine Fläche.
    ═══════════════════════════════════════════════════════════════════ */
+
+/* Nicht hinter den Seitengrund, sondern davor: ein Element mit
+   negativer Ebene liegt hinter der Grundfarbe des Dokuments und wäre
+   unsichtbar. Der dunkle Grund gehört deshalb an `html`, der Film liegt
+   darüber, und alles Sichtbare wieder über ihm. */
+html { background: var(--nacht); }
+body { background: transparent; }
+.raum-film {
+  position: fixed; inset: 0; z-index: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: 50% 34%;
+  pointer-events: none;
+}
+main, .fuss { position: relative; z-index: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .raum-film { display: none; }
+  html {
+    background: var(--nacht) url('bilder/schere-rauch-standbild.webp') center / cover fixed no-repeat;
+  }
+}
+
+/* Die Scheibe. `--durch` steuert, wie viel Rauch ein Abschnitt
+   durchlässt — das ist der einzige Regler, den die Seite für Tiefe
+   braucht. */
+.band, .stufe, .werk, .laden, .kontakt, .fuss, .kopf-tief, .recht {
+  position: relative;
+  --durch: .955;
+  background: oklch(11% .012 200 / var(--durch));
+  color: var(--auf-tiefe);
+}
+.band  { --durch: .90; }
+.werk  { --durch: .975; }
+.fuss  { --durch: .99; }
 
 /* ── Die Zeile unter dem Auftakt ──────────────────────────────────── */
 
-.band {
-  background: var(--tiefe);
-  color: var(--auf-tiefe-leise);
-  padding: var(--a3) var(--rand);
-}
+.band { padding: var(--a3) var(--rand); }
 .band-zeile {
   max-width: var(--spalte); margin-inline: auto;
-  display: grid; grid-template-columns: 1fr; gap: 0;
+  display: grid; grid-template-columns: 1fr;
 }
 .band-zeile p {
-  margin: 0;
-  padding: .85rem 0;
+  margin: 0; padding: .85rem 0;
   display: flex; flex-wrap: wrap; align-items: baseline; gap: .1rem .6rem;
-  font-size: var(--t-klein);
+  font-size: var(--t-klein); color: var(--auf-tiefe-leise);
 }
 .band-zeile p + p { border-top: 1px solid var(--linie-tiefe-fein); }
 .band-zeile b {
   font-family: 'Bodoni Moda', Didot, Georgia, serif;
-  font-weight: 400; font-size: 1.25rem;
-  color: var(--auf-tiefe);
+  font-weight: 400; font-size: 1.25rem; color: var(--auf-tiefe);
 }
 .band-zeile span { color: var(--auf-tiefe-still); }
-
-/* Ab dem mittleren Schirm eine echte Zeile: vier Angaben nebeneinander,
-   getrennt durch Haarlinien statt durch Kästen. */
 @media (min-width: 52rem) {
   .band-zeile { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .band-zeile p {
@@ -961,30 +961,20 @@ body:has(.stufe-liste) .wege {
   .band-zeile b { display: block; margin-bottom: .1rem; }
 }
 
-/* ── Eine dunkle Sprosse ──────────────────────────────────────────── */
+/* ── Leistungen: fünf Zeilen, gross ───────────────────────────────── */
 
-.stufe {
-  padding-block: var(--a6);
-  padding-inline: var(--rand);
-  background: var(--tiefe-hoch);
-  color: var(--auf-tiefe);
-}
-.stufe .gross { color: var(--auf-tiefe); }
-.stufe .gross em { color: var(--auf-tiefe); }
-.stufe .lauf  { color: var(--auf-tiefe-leise); }
+.stufe { padding: var(--a6) var(--rand); }
+.stufe .gross, .stufe .gross em { color: var(--auf-tiefe); }
+.stufe .lauf { color: var(--auf-tiefe-leise); }
 .stufe .mehr a { color: var(--auf-tiefe); }
-
-/* Die Fächer auf der dunklen Sprosse. Grössere Zeilen als in der
-   vollen Preisliste: hier sind es fünf, und sie sind das Angebot. */
-.faecher { margin-top: var(--a4); max-width: 56rem; }
+.faecher { margin-top: var(--a4); max-width: 60rem; }
 .stufe .fach { border-bottom: 1px solid var(--linie-tiefe-fein); }
 .stufe .fach:first-child { border-top: 1px solid var(--linie-tiefe-fein); }
-.stufe .fach-kopf { padding-block: 1.35rem; }
+.stufe .fach-kopf { padding-block: 1.5rem; }
 .stufe .fach-wort { color: var(--auf-tiefe); font-size: 1.35rem; }
 .stufe .fach-ab { color: var(--auf-tiefe-still); }
 .stufe .fach-zeichen::before,
 .stufe .fach-zeichen::after { background: var(--lagune); }
-.stufe .fach[open] { background: oklch(96.5% .012 190 / .045); }
 .stufe .fach[open] .fach-kopf { box-shadow: inset 2px 0 0 var(--lagune); }
 .stufe .posten li + li { border-top: 1px solid var(--linie-tiefe-fein); }
 .stufe .posten-name { color: var(--auf-tiefe-leise); }
@@ -992,40 +982,127 @@ body:has(.stufe-liste) .wege {
 .stufe .posten-preis b { color: var(--auf-tiefe); }
 .stufe .fach-kopf:focus-visible { outline-color: var(--lagune); }
 @media (hover: hover) and (pointer: fine) {
-  .stufe .fach-kopf:hover { background: oklch(96.5% .012 190 / .06); }
+  .stufe .fach-kopf:hover { background: oklch(96.5% .012 190 / .05); }
 }
-@media (min-width: 48rem) {
-  .stufe .fach-wort { font-size: 1.7rem; }
-}
+@media (min-width: 48rem) { .stufe .fach-wort { font-size: 1.9rem; } }
 
-/* ── Die Lagune: das Brautstyling ─────────────────────────────────────
-   Der eine laute Abschnitt. Volle Fläche in der Farbe des Plakats,
-   Schrift in Tinte darauf — das teuerste Angebot des Ladens bekommt
-   den auffälligsten Platz.                                          */
+/* ── Brautstyling: die Aufnahme trägt den Abschnitt ───────────────── */
 
 .braut {
-  background: var(--lagune);
-  color: var(--tinte);
-  border-block: 0;
+  position: relative; isolation: isolate;
+  display: grid; align-items: end;
+  min-height: min(92svh, 900px);
+  padding: var(--a6) var(--rand);
+  overflow: hidden;
+  background: var(--nacht);
+  color: var(--auf-tiefe);
 }
-.braut .gross,
-.braut .gross em { color: var(--tinte); }
-.braut .lauf { color: oklch(19% .030 200 / .78); }
-.braut .preis { color: oklch(19% .030 200 / .70); }
-.braut .preis b { color: var(--tinte); }
-.braut .knopf { background: var(--tinte); color: var(--lagune); }
-
-/* ── Die hellen Sprossen ─────────────────────────────────────────── */
-
-.bahn { background: var(--nebel); }
-.bahn + .bahn { border-top: 1px solid var(--linie-fein); }
-.kontakt { background: var(--schaum); border-top: 0; }
-
-.fuss {
-  background: var(--tiefe);
-  border-top: 0;
-  color: var(--auf-tiefe-still);
+.braut-grund {
+  position: absolute; inset: 0; z-index: -2;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: 74% 42%;
 }
+/* Von links dicht, nach rechts offen: der Text steht im Dunkeln, das
+   Haar bleibt unangetastet. */
+.braut::after {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background:
+    linear-gradient(to right, oklch(8% .012 200 / .94) 0%,
+                    oklch(8% .012 200 / .86) 34%,
+                    oklch(8% .012 200 / .30) 62%, transparent 82%),
+    linear-gradient(to top, var(--nacht) 0%, transparent 26%),
+    linear-gradient(to bottom, oklch(8% .012 200 / .55) 0%, transparent 18%);
+}
+.braut-satz { position: relative; z-index: 1; max-width: 32rem; }
+.braut-marke {
+  margin: 0 0 var(--a2);
+  font-family: var(--mono);
+  font-size: .72rem; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--lagune);
+}
+.braut .gross, .braut .gross em { color: var(--auf-tiefe); }
+.braut .lauf { color: var(--auf-tiefe-leise); }
+.braut .preis { color: var(--auf-tiefe-still); }
+.braut .preis b { color: var(--auf-tiefe); }
+.braut .knopf { background: var(--auf-tiefe); color: var(--nacht); }
+@media (max-width: 60rem) {
+  .braut { min-height: min(96svh, 820px); align-items: end; }
+  .braut-grund { object-position: 60% 32%; }
+  .braut::after {
+    background:
+      linear-gradient(to top, var(--nacht) 4%, oklch(8% .012 200 / .92) 30%,
+                      oklch(8% .012 200 / .55) 54%, transparent 76%);
+  }
+}
+
+/* ── Arbeiten: die Bilder sind der Abschnitt ──────────────────────── */
+
+.werk { padding: var(--a6) 0 0; }
+.werk-kopf {
+  max-width: var(--spalte); margin-inline: auto;
+  padding-inline: var(--rand); margin-bottom: var(--a4);
+}
+.werk-kopf .gross { color: var(--auf-tiefe); }
+.werk-kopf .lauf { color: var(--auf-tiefe-leise); max-width: var(--lese); margin-bottom: 0; }
+.werke {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px;
+}
+@media (min-width: 48rem) { .werke { grid-template-columns: repeat(4, 1fr); } }
+.werke img {
+  width: 100%; aspect-ratio: 3 / 4; object-fit: cover;
+  border-radius: 0;
+}
+
+/* ── Der Laden: eine grosse Aufnahme, Text daneben ────────────────── */
+
+.laden { padding: var(--a6) var(--rand); }
+.laden-bau {
+  max-width: var(--spalte); margin-inline: auto;
+  display: grid; grid-template-columns: 1fr; gap: var(--a2);
+}
+.laden figure { margin: 0; }
+.laden img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--kante); }
+.laden-gross img { aspect-ratio: 4 / 3; }
+.laden-klein img { aspect-ratio: 16 / 10; }
+.laden-satz { align-self: center; padding-block: var(--a2); }
+.laden-satz .gross { color: var(--auf-tiefe); }
+.laden-satz .lauf { color: var(--auf-tiefe-leise); margin-bottom: 0; }
+@media (min-width: 60rem) {
+  .laden-bau {
+    grid-template-columns: 1.25fr 1fr;
+    grid-template-areas: "gross satz" "klein1 klein2";
+    gap: var(--a2);
+  }
+  .laden-gross { grid-area: gross; }
+  .laden-satz  { grid-area: satz; padding-left: var(--a3); }
+  .laden-klein:nth-of-type(3) { grid-area: klein1; }
+  .laden-klein:nth-of-type(4) { grid-area: klein2; }
+  .laden-gross img { aspect-ratio: 5 / 4; }
+}
+.laden .spruch {
+  max-width: 42rem; margin: var(--a6) auto 0;
+  color: var(--auf-tiefe-leise);
+}
+.laden .spruch cite { color: var(--auf-tiefe-still); }
+
+/* ── Kontakt ──────────────────────────────────────────────────────── */
+
+.kontakt { padding: var(--a6) var(--rand); }
+.kontakt .gross { color: var(--auf-tiefe); }
+.kontakt h3 { color: var(--auf-tiefe); }
+.kontakt .lauf { color: var(--auf-tiefe-leise); }
+.kontakt a { color: var(--auf-tiefe); }
+.kontakt .zeiten th { color: var(--auf-tiefe-still); }
+.kontakt .zeiten td { color: var(--auf-tiefe); }
+.kontakt .zeiten tr + tr th,
+.kontakt .zeiten tr + tr td { border-top-color: var(--linie-tiefe-fein); }
+.kontakt .stand-gross { color: var(--auf-tiefe-still); }
+.kontakt .knopf { background: var(--auf-tiefe); color: var(--nacht); }
+.kontakt .knopf-still { border-color: var(--linie-tiefe); color: var(--auf-tiefe); }
+
+/* ── Fuss ─────────────────────────────────────────────────────────── */
+
+.fuss { border-top: 1px solid var(--linie-tiefe-fein); color: var(--auf-tiefe-still); }
 .fuss-marke { color: var(--auf-tiefe); }
 .fuss-wege a, .fuss-recht { color: var(--auf-tiefe-still); }
 @media (hover: hover) and (pointer: fine) {
@@ -1039,7 +1116,7 @@ body:has(.stufe-liste) .wege {
 
 .kopf-tief {
   position: relative;
-  background: var(--tiefe);
+  background: oklch(11% .012 200 / .90);
   color: var(--auf-tiefe);
   margin-top: calc(-1 * var(--leiste));
   padding: calc(var(--leiste) + var(--a5)) 0 var(--a5);
@@ -1060,7 +1137,7 @@ body:has(.stufe-liste) .wege {
   background: none;
   color: var(--auf-tiefe);
 }
-body:has(.stufe-liste) { background: var(--tiefe-hoch); }
+
 .stufe-liste .fach { border-bottom-color: var(--linie-tiefe-fein); }
 .stufe-liste .fach:first-of-type { border-top-color: var(--linie-tiefe-fein); }
 .stufe-liste .fach-wort { color: var(--auf-tiefe); }
@@ -1090,62 +1167,16 @@ body:has(.stufe-liste) { background: var(--tiefe-hoch); }
   border-color: var(--linie-tiefe-fein);
 }
 .stufe-liste .abschluss .lauf { color: var(--auf-tiefe-leise); }
-.stufe-liste .abschluss .knopf { background: var(--lagune); color: var(--tinte); }
+/* Auf dem Akzent steht die Schrift dunkel — hell auf Lagune sind 1,6:1. */
+.stufe-liste .abschluss .knopf { background: var(--lagune); color: var(--nacht); }
 .stufe-liste .abschluss .knopf-still {
   border-color: var(--linie-tiefe); color: var(--auf-tiefe);
 }
 
 
-/* ═══ Der Putz auf allen Flächen ═══════════════════════════════════════
-   Eine Regel, überall dieselbe: Grundfarbe aus dem Token, Struktur aus
-   der Kachel, verrechnet mit `soft-light`. Weil die Kachel auf
-   Mittelgrau liegt, hellt sie nichts auf und dunkelt nichts ab — sie
-   gibt der Fläche nur ihr Korn. Deshalb bleibt jeder gemessene Ton
-   exakt der, der er war.
-   ═══════════════════════════════════════════════════════════════════ */
-
-/* Zwei Lagen, wie an einer wirklich gestrichenen Wand: die Kachel gibt
-   das feine Korn, ein grosser weicher Verlauf die Unebenheit des
-   Auftrags. Der Verlauf wiederholt sich nie — er nimmt der Kachel die
-   Regelmässigkeit, die man sonst als Raster wiedererkennt. */
-.band, .stufe, .braut, .bahn, .kontakt, .fuss, .kopf-tief, .recht {
-  background-image:
-    radial-gradient(120% 90% at 22% 8%, oklch(100% 0 0 / .05), transparent 58%),
-    radial-gradient(90% 70% at 82% 88%, oklch(0% 0 0 / .06), transparent 62%),
-    var(--putz);
-  background-size: auto, auto, var(--putz-mass);
-  background-repeat: no-repeat, no-repeat, repeat;
-  background-blend-mode: normal, normal, soft-light;
-}
-
-/* Die Lagune ist die lauteste Fläche der Seite und verträgt das gröbere
-   Korn — dieselbe Wand, dickerer Auftrag. */
-.braut {
-  background-image:
-    radial-gradient(120% 90% at 18% 6%, oklch(100% 0 0 / .12), transparent 60%),
-    radial-gradient(90% 70% at 86% 92%, oklch(0% 0 0 / .07), transparent 64%),
-    var(--putz-grob);
-  background-size: auto, auto, 420px;
-  background-repeat: no-repeat, no-repeat, repeat;
-  background-blend-mode: normal, normal, soft-light;
-}
-
-/* Auf den hellen Sprossen wird der Putz zurückgenommen: dort steht der
-   Text direkt auf der Fläche, und Korn unter Fliesstext ermüdet. Nicht
-   über den Mischmodus — `luminosity` nimmt die Farbe des Grundes weg
-   und macht aus dem Nebel Grau —, sondern über ein grösseres Mass und
-   einen helleren Auftrag. */
-.bahn, .kontakt, .recht {
-  background-color: var(--nebel);
-  --putz-mass: 620px;
-  background-image:
-    radial-gradient(120% 90% at 22% 8%, oklch(100% 0 0 / .55), transparent 60%),
-    radial-gradient(90% 70% at 82% 92%, oklch(60% .06 200 / .05), transparent 64%),
-    var(--putz);
-}
-
-/* Grosse Flächen bekommen ein grösseres Mass, sonst wird aus Struktur
-   ein Muster. */
-@media (min-width: 64rem) {
-  :root { --putz-mass: 420px; }
-}
+/* Die Rechtsseiten stehen im selben Raum. */
+.recht { padding-block: var(--a5) var(--a6); }
+.recht h2, .recht h3, .recht dt { color: var(--auf-tiefe); }
+.recht p, .recht li, .recht dd { color: var(--auf-tiefe-leise); }
+.recht a { color: var(--auf-tiefe); }
+.riesen { color: var(--auf-tiefe); }

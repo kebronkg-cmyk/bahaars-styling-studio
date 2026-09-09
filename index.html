@@ -19,6 +19,20 @@
 
 <a class="sprung" href="#auftakt-titel">Zum Inhalt springen</a>
 
+<!-- ══ Der Raum ══════════════════════════════════════════════════════════
+     Der Film steht nicht im Auftakt, er steht hinter der ganzen Seite.
+     Fest im Fenster verankert, alles Weitere liegt darüber. Im Auftakt
+     ist er voll zu sehen; darunter lassen die Abschnitte nur noch einen
+     Rest durch, und der Rauch zieht beim Scrollen weiter durch den
+     Raum. Eine Kulisse, kein Deckblatt — deshalb zerfällt die Seite
+     nicht mehr in Platten.                                            -->
+<video class="raum-film" autoplay muted loop playsinline preload="auto"
+       poster="bilder/schere-rauch-standbild.webp" aria-hidden="true" tabindex="-1"
+       width="960" height="960">
+  <source src="bilder/schere-rauch.mp4" type="video/mp4">
+  <source src="bilder/schere-rauch.webm" type="video/webm">
+</video>
+
 <header class="leiste">
   <a class="marke" href="/" aria-label="BaHaar&rsquo;s Styling Studio, zur Startseite">
     <span class="marke-wort">BaHaar&rsquo;s</span>
@@ -48,12 +62,6 @@
      Rückfallebene — was steht, solange der Film lädt, steht auch dann,
      wenn er nie kommt.                                                -->
 <section class="auftakt">
-  <video class="auftakt-film" autoplay muted loop playsinline preload="auto"
-         poster="bilder/schere-rauch-standbild.webp" aria-hidden="true" tabindex="-1"
-         width="960" height="960">
-    <source src="bilder/schere-rauch.mp4" type="video/mp4">
-    <source src="bilder/schere-rauch.webm" type="video/webm">
-  </video>
   <div class="auftakt-schleier" aria-hidden="true"></div>
 
   <div class="auftakt-satz">
@@ -189,72 +197,85 @@
 </section>
 
 <!-- ══ Brautstyling ═════════════════════════════════════════════════════ -->
+<!-- ══ Brautstyling ═════════════════════════════════════════════════════
+     Die beste Aufnahme im Bestand trägt den Abschnitt in voller Breite.
+     Der Text steht links auf der dunklen Seite des Bildes, das Haar
+     bleibt rechts frei — kein Schleier über der Arbeit.               -->
 <section class="braut" id="brautstyling">
+  <img class="braut-grund" src="bilder/arbeit-braut-perlen.webp" alt=""
+       width="899" height="1750" loading="lazy" decoding="async" aria-hidden="true">
   <div class="braut-satz">
+    <p class="braut-marke">Brautstyling</p>
     <h2 class="gross">Haar und Make-up<br>aus <em>einer Hand</em>.</h2>
     <p class="lauf">
       Frisur und Make-up macht dieselbe Person, an einem Termin. Sie
       m&uuml;ssen nichts zwischen zwei Dienstleistern abstimmen, und
       niemand sieht das fertige Bild zum ersten Mal am Hochzeitsmorgen.
-      Rufen Sie an, dann besprechen wir den Ablauf.
     </p>
     <p class="preis"><b>390&ndash;600&nbsp;&euro;</b> gesamt, Hairstyling und Braut-Make-up</p>
     <a class="knopf" href="https://www.treatwell.de/ort/bahaars-styling-studio/" target="_blank" rel="noopener">Termin buchen</a>
   </div>
-  <div class="braut-bilder">
-    <img src="bilder/arbeit-braut-schleier.webp" alt="Braut mit Schleier und dunkler Hochsteckfrisur" width="1000" height="1333" loading="lazy" decoding="async">
-    <img src="bilder/arbeit-braut-perlen.webp" alt="Blonde Hochsteckfrisur mit eingearbeiteten Perlen" width="1000" height="1333" loading="lazy" decoding="async">
-  </div>
 </section>
 
-<!-- ══ Arbeiten ═════════════════════════════════════════════════════════ -->
-<section class="bahn" id="arbeiten">
-  <div class="mitte">
+<!-- ══ Arbeiten ═════════════════════════════════════════════════════════
+     Randlos: die Aufnahmen bilden den Abschnitt selbst, statt in einem
+     Kasten mit Rand darin zu liegen. Auf Schwarz leuchtet das Haar
+     heraus — genau das ist hier das Produkt.                          -->
+<section class="werk" id="arbeiten">
+  <div class="werk-kopf">
     <h2 class="gross">Aus dem Laden</h2>
-    <p class="lauf lese">
+    <p class="lauf">
       Acht Aufnahmen aus dem Salon an der Perlacher Stra&szlig;e. Keine
       Katalogbilder &mdash; im Hintergrund steht der Laden, in dem sie
       entstanden sind.
     </p>
-    <div class="werke">
-      <img src="bilder/arbeit-balayage.webp" alt="Lange Haare mit Balayage, von hinten" width="1000" height="1333" loading="lazy" decoding="async">
-      <img src="bilder/arbeit-locken.webp" alt="Blonde Locken, geföhnt" width="1000" height="1333" loading="lazy" decoding="async">
-      <img src="bilder/arbeit-glatt.webp" alt="Lange glatte Haare mit Stufen" width="1000" height="1333" loading="lazy" decoding="async">
-      <img src="bilder/arbeit-bob.webp" alt="Kurzer blonder Bob mit Locken" width="1000" height="1333" loading="lazy" decoding="async">
-      <img src="bilder/arbeit-straehnen.webp" alt="Str&auml;hnen in mittellangem Haar" width="1000" height="1333" loading="lazy" decoding="async">
-      <img src="bilder/arbeit-kind.webp" alt="Kinderhaarschnitt, Junge" width="1000" height="1333" loading="lazy" decoding="async">
-      <img src="bilder/arbeit-flecht.webp" alt="Eingeflochtene Z&ouml;pfe am Oberkopf" width="1000" height="1333" loading="lazy" decoding="async">
-      <img src="bilder/arbeit-ombre.webp" alt="Langes Haar mit Ombr&eacute;-Verlauf" width="1000" height="1333" loading="lazy" decoding="async">
-    </div>
+  </div>
+  <div class="werke">
+    <img src="bilder/arbeit-balayage.webp" alt="Lange Haare mit Balayage, von hinten" width="1000" height="1333" loading="lazy" decoding="async">
+    <img src="bilder/arbeit-locken.webp" alt="Blonde Locken, gef&ouml;hnt" width="1000" height="1333" loading="lazy" decoding="async">
+    <img src="bilder/arbeit-glatt.webp" alt="Lange glatte Haare mit Stufen" width="1000" height="1333" loading="lazy" decoding="async">
+    <img src="bilder/arbeit-bob.webp" alt="Kurzer blonder Bob mit Locken" width="1000" height="1333" loading="lazy" decoding="async">
+    <img src="bilder/arbeit-straehnen.webp" alt="Str&auml;hnen in mittellangem Haar" width="1000" height="1333" loading="lazy" decoding="async">
+    <img src="bilder/arbeit-kind.webp" alt="Kinderhaarschnitt, Junge" width="1000" height="1333" loading="lazy" decoding="async">
+    <img src="bilder/arbeit-flecht.webp" alt="Eingeflochtene Z&ouml;pfe am Oberkopf" width="1000" height="1333" loading="lazy" decoding="async">
+    <img src="bilder/arbeit-ombre.webp" alt="Langes Haar mit Ombr&eacute;-Verlauf" width="1000" height="1333" loading="lazy" decoding="async">
   </div>
 </section>
 
-<!-- ══ Der Laden ════════════════════════════════════════════════════════ -->
-<section class="bahn" id="laden">
-  <div class="mitte">
-    <h2 class="gross">Perlacher Stra&szlig;e 2</h2>
-    <p class="lauf lese">
-      Ein inhabergef&uuml;hrter Salon in Giesing, gleich an der
-      Perlacher&nbsp;Stra&szlig;e. Kein Kettenbetrieb und keine Nummer, die
-      aufgerufen wird &mdash; wer hier schneidet, steht auch morgen wieder
-      da. Und wenn gerade ein Stuhl frei ist, geht es ohne Termin.
-    </p>
-    <div class="raeume">
+<!-- ══ Der Laden ════════════════════════════════════════════════════════
+     Andere Form als die Abschnitte davor: eine grosse Aufnahme links,
+     der Text rechts daneben, darunter zwei kleinere. Kein drittes
+     gleichmässiges Raster hintereinander.                             -->
+<section class="laden" id="laden">
+  <div class="laden-bau">
+    <figure class="laden-gross">
       <img src="bilder/laden-front.webp" alt="Der Eingang an der Perlacher Stra&szlig;e mit dem t&uuml;rkisen Schild" width="830" height="548" loading="lazy" decoding="async">
-      <img src="bilder/laden-platz.webp" alt="Zwei Friseurpl&auml;tze mit Spiegeln" width="1170" height="548" loading="lazy" decoding="async">
-      <img src="bilder/laden-regal.webp" alt="Das Produktregal im Salon" width="1170" height="548" loading="lazy" decoding="async">
-      <img src="bilder/laden-raum.webp" alt="Blick in den Salon" width="1170" height="548" loading="lazy" decoding="async">
+    </figure>
+    <div class="laden-satz">
+      <h2 class="gross">Perlacher<br>Stra&szlig;e&nbsp;2</h2>
+      <p class="lauf">
+        Ein inhabergef&uuml;hrter Salon in Giesing. Kein Kettenbetrieb und
+        keine Nummer, die aufgerufen wird &mdash; wer hier schneidet, steht
+        auch morgen wieder da. Und wenn gerade ein Stuhl frei ist, geht es
+        ohne Termin.
+      </p>
     </div>
-    <blockquote class="spruch">
-      Sch&ouml;nheit beginnt in dem Moment, in dem du beschlie&szlig;t, du
-      selbst zu sein.
-      <cite>Coco Chanel</cite>
-    </blockquote>
+    <figure class="laden-klein">
+      <img src="bilder/laden-platz.webp" alt="Zwei Friseurpl&auml;tze mit Spiegeln" width="1170" height="548" loading="lazy" decoding="async">
+    </figure>
+    <figure class="laden-klein">
+      <img src="bilder/laden-raum.webp" alt="Blick in den Salon" width="1170" height="548" loading="lazy" decoding="async">
+    </figure>
   </div>
+  <blockquote class="spruch">
+    Sch&ouml;nheit beginnt in dem Moment, in dem du beschlie&szlig;t, du
+    selbst zu sein.
+    <cite>Coco Chanel</cite>
+  </blockquote>
 </section>
 
 <!-- ══ Kontakt ══════════════════════════════════════════════════════════ -->
-<section class="bahn kontakt" id="kontakt">
+<section class="kontakt" id="kontakt">
   <div class="mitte">
     <h2 class="gross">Kommen Sie vorbei</h2>
 
