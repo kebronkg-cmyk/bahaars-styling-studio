@@ -128,11 +128,22 @@
   if (!film) return;
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  let versucht = false;
+  /* Sofort wegblenden: solange nicht bewiesen ist, dass der Film läuft,
+     zeigt das Videofeld nichts — und damit auch keinen Knopf von
+     Safari. Darunter liegt das Standbild. */
+  film.classList.add('wartet');
+  function zeigen() {
+    if (film.currentTime > 0 && !film.paused && !film.ended)
+      film.classList.remove('wartet');
+  }
+  film.addEventListener('playing', zeigen);
+  film.addEventListener('timeupdate', zeigen);
+
   function anstossen() {
     const p = film.play();
     if (p && typeof p.catch === 'function') p.catch(() => {});
   }
+  let versucht = false;
   function beiBeruehrung() {
     if (versucht) return;
     versucht = true;

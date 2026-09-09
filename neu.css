@@ -74,10 +74,21 @@
   --auf-tiefe-leise: oklch(84% .022 195);
   --auf-tiefe-still: oklch(70% .026 200);
 
-  --lagune:     oklch(80% .136 193);
+  /* Die Lagune ist aus dem Rauch gemessen, nicht gewählt. Im
+     kräftigsten Hundertstel der türkisen Bildpunkte liegt der Film bei
+     L 84 %, C .143, H 196; der hellste einzelne Punkt bei L 86 %,
+     C .148. Der Grundton sitzt genau dort. Mehr Buntheit gäbe es im
+     Film nicht mehr — was fehlte, war nicht die Farbe, sondern wie oft
+     sie vorkommt. Deshalb ein zweiter Wert für die Lichter: derselbe
+     Ton am oberen Ende dessen, was der Rauch hergibt. */
+  --lagune:      oklch(80% .136 193);
+  --lagune-hell: oklch(87% .132 194);
 
-  --linie-tiefe:      oklch(96.5% .012 190 / .18);
-  --linie-tiefe-fein: oklch(96.5% .012 190 / .09);
+  /* Auch die Striche tragen den Ton. Einzeln sieht man es nicht, aber
+     es sind Dutzende über die Seite — zusammen färben sie den ganzen
+     Raster, ohne dass irgendwo eine Fläche türkis würde. */
+  --linie-tiefe:      oklch(80% .075 193 / .26);
+  --linie-tiefe-fein: oklch(80% .065 193 / .14);
 
   /* Verweise, damit kein Abschnitt zurückfällt */
   --papier:      var(--nacht);
@@ -88,7 +99,7 @@
   --auf-tinte:   var(--nacht);
   --tuerkis:     var(--lagune);
   --tuerkis-tief:var(--lagune);
-  --tuerkis-hell:var(--lagune);
+  --tuerkis-hell:var(--lagune-hell);
   --linie:       var(--linie-tiefe);
   --linie-fein:  var(--linie-tiefe-fein);
 
@@ -372,7 +383,11 @@ body:has(.stufe-liste) .wege {
      mit, und derselbe Knopf sähe neben einem <a> anders aus. */
   background: none; border: 0; cursor: pointer;
 }
-.knopf { background: var(--tinte); color: var(--auf-tinte); }
+/* Der gefüllte Knopf trägt die Hausfarbe. Er ist der eine Ort, an dem
+   die Seite etwas von der Besucherin will, und der einzige, an dem
+   Türkis als Fläche auftritt — überall sonst bleibt es Strich, Zeichen
+   oder Zeile. Dunkle Schrift darauf steht mit 11,4:1. */
+.knopf { background: var(--lagune); color: var(--nacht); }
 .knopf-still {
   border: 1px solid var(--linie);
   color: var(--tinte);
@@ -383,7 +398,7 @@ body:has(.stufe-liste) .wege {
 
 @media (hover: hover) and (pointer: fine) {
   .knopf, .knopf-still { transition: transform var(--t1) var(--kurve), background-color var(--t1) var(--kurve), border-color var(--t1) var(--kurve); }
-  .knopf:hover { transform: translateY(-2px); background: var(--tuerkis-tief); }
+  .knopf:hover { transform: translateY(-2px); background: var(--lagune-hell); }
   .knopf-still:hover { transform: translateY(-2px); border-color: var(--tinte); }
 }
 
@@ -422,12 +437,6 @@ body:has(.stufe-liste) .wege {
      sehen sein. Ein eigener Grund würde ihn zudecken. */
   background: transparent;
   color: var(--auf-tiefe);
-}
-
-.auftakt-film {
-  position: absolute; inset: 0; z-index: -2;
-  width: 100%; height: 100%;
-  object-fit: cover; object-position: 50% 34%;
 }
 
 .auftakt-schleier {
@@ -502,7 +511,7 @@ body:has(.stufe-liste) .wege {
 /* Auf der Bühne kehren sich die Knöpfe um: gefüllt ist hell, weil auf
    Schwarz das Helle vorn steht. */
 .auftakt .knopf {
-  background: var(--auf-buehne); color: var(--buehne);
+  background: var(--lagune); color: var(--nacht);
 }
 .auftakt .knopf-still {
   border-color: oklch(97% .006 200 / .28); color: var(--auf-buehne);
@@ -542,15 +551,11 @@ body:has(.stufe-liste) .wege {
 .auftakt .kennung { color: var(--auf-buehne-still); }
 @media (max-width: 48rem) { .auftakt .kennung { display: none; } }
 
-/* Wer Bewegung abbestellt hat, bekommt das Standbild. Ein eingefrorener
-   Film ist kein Standbild — er hört einfach auf, und das sieht nach
-   Fehler aus. */
-@media (prefers-reduced-motion: reduce) {
-  .auftakt-film { display: none; }
-  .auftakt {
-    background: var(--buehne) url('bilder/schere-rauch-standbild.webp') center / cover no-repeat;
-  }
-}
+/* Wer Bewegung abbestellt hat, bekommt das Standbild — darum kümmert
+   sich `.raum-grund` für die ganze Seite, der Auftakt bleibt
+   durchsichtig. Die Regeln, die hier einmal ein eigenes Video im
+   Auftakt versorgt haben, sind mit dem Umbau auf den durchgehenden
+   Raum gegenstandslos geworden. */
 
 .wortmarke { margin: var(--a2) 0 var(--a3); line-height: .92; }
 
@@ -655,7 +660,7 @@ body:has(.stufe-liste) .wege {
 }
 
 .mehr { margin: var(--a3) 0 0; font-size: var(--t-klein); }
-.mehr a { color: var(--tinte); text-decoration: none; }
+.mehr a { color: var(--lagune); text-decoration: none; }
 @media (hover: hover) and (pointer: fine) { .mehr a:hover { text-decoration: underline; } }
 
 /* ── Brautstyling ─────────────────────────────────────────────────────── */
@@ -665,7 +670,8 @@ body:has(.stufe-liste) .wege {
   gap: var(--a4);
   align-items: center;
   padding: var(--a5) var(--rand);
-  background: var(--tuerkis-hell);
+  /* Kein Grund hier: weiter unten steht derselbe Selektor noch einmal
+     und setzt `--nacht`. Die Zeile wäre wirkungslos und irreführend. */
   border-block: 1px solid var(--linie-fein);
 }
 @media (min-width: 62rem) {
@@ -675,7 +681,7 @@ body:has(.stufe-liste) .wege {
     padding-inline: max(var(--rand), calc((100vw - var(--spalte)) / 2 + var(--rand)));
   }
 }
-.braut-satz { max-width: 30rem; }
+
 .preis { margin: 0 0 var(--a3); font-size: var(--t-klein); color: var(--tinte-still); }
 .preis b {
   display: block;
@@ -741,11 +747,15 @@ body:has(.stufe-liste) .wege {
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
   gap: var(--a4);
 }
+/* Die gesperrten Marken über den Spalten sagen, wo man ist. Sie in der
+   Hausfarbe zu setzen gibt der Seite einen Takt, ohne dass irgendwo
+   eine Fläche dazukommt — dasselbe Mittel wie schon bei BRAUTSTYLING,
+   jetzt durchgehend. */
 .spalten h3 {
   margin: 0 0 var(--a2);
   font-size: var(--t-marke);
   letter-spacing: .17em; text-transform: uppercase;
-  color: var(--tinte-still);
+  color: var(--lagune);
   font-weight: 500;
 }
 .zeiten { width: 100%; border-collapse: collapse; font-size: var(--t-klein); }
@@ -789,7 +799,7 @@ body:has(.stufe-liste) .wege {
 .fach-ab {
   font-size: var(--t-marke);
   letter-spacing: .04em;
-  color: var(--tinte-still);
+  color: var(--lagune);
   font-variant-numeric: tabular-nums;
 }
 
@@ -905,30 +915,42 @@ body:has(.stufe-liste) .wege {
    darüber, und alles Sichtbare wieder über ihm. */
 html { background: var(--nacht); }
 body { background: transparent; }
+
+/* Zwei Ebenen, nicht eine: unten das Standbild, darüber der Film.
+
+   Der Abspielknopf, den man mitten im Bild sah, kam nicht aus der
+   Aufnahme, sondern von Safari: verweigert iOS den selbsttätigen Start
+   — im Stromsparmodus tut es das immer —, legt es seinen eigenen
+   Knopf über das Videofeld. Ihn wegzublenden ist ein Wettlauf, den man
+   nicht gewinnt; jede Safari-Fassung baut die Bedienelemente anders.
+   Deshalb bekommt das Videofeld gar keine Gelegenheit: es ist
+   unsichtbar, bis der Film wirklich läuft. Was man solange sieht, ist
+   das Standbild darunter — und wenn der Film nie kommt, bleibt es
+   dabei. Der Ladezustand ist die Rückfallebene.
+
+   Das Standbild liegt auf einem eigenen festen Element, nicht als
+   `background-attachment: fixed` am Dokument: das ignoriert Safari auf
+   dem iPhone, und die Aufnahme würde über die ganze Seitenlänge
+   gezogen. */
+.raum-grund,
 .raum-film {
   position: fixed; inset: 0; z-index: 0;
   width: 100%; height: 100%;
-  object-fit: cover; object-position: 50% 34%;
   pointer-events: none;
 }
-/* Verweigert iOS das selbsttätige Abspielen — im Stromsparmodus tut es
-   das immer —, legt Safari von sich aus einen grossen Abspielknopf
-   mitten auf den Film. Der gehört nicht zur Seite. Beide Regeln
-   getrennt, sonst verwirft ein Browser, der das eine Pseudo-Element
-   nicht kennt, gleich die ganze Auswahl. */
-.raum-film::-webkit-media-controls-start-playback-button {
-  display: none !important;
-  -webkit-appearance: none;
+.raum-grund {
+  background: var(--nacht) url('bilder/schere-rauch-standbild.webp') 50% 34% / cover no-repeat;
 }
-.raum-film::-webkit-media-controls {
-  display: none !important;
+.raum-film {
+  object-fit: cover; object-position: 50% 34%;
+  transition: opacity .7s var(--kurve);
 }
+/* Die Klasse setzt das Skript selbst — ohne Skript bleibt der Film
+   sichtbar wie bisher, statt für immer wegzublenden. */
+.raum-film.wartet { opacity: 0; }
 main, .fuss { position: relative; z-index: 1; }
 @media (prefers-reduced-motion: reduce) {
   .raum-film { display: none; }
-  html {
-    background: var(--nacht) url('bilder/schere-rauch-standbild.webp') center / cover fixed no-repeat;
-  }
 }
 
 /* Die Scheibe. `--durch` steuert, wie viel Rauch ein Abschnitt
@@ -995,7 +1017,7 @@ main, .fuss { position: relative; z-index: 1; }
 .stufe .fach:first-child { border-top: 1px solid var(--linie-tiefe-fein); }
 .stufe .fach-kopf { padding-block: 1.5rem; }
 .stufe .fach-wort { color: var(--auf-tiefe); font-size: 1.35rem; }
-.stufe .fach-ab { color: var(--auf-tiefe-still); }
+.stufe .fach-ab { color: var(--lagune); }
 .stufe .fach-zeichen::before,
 .stufe .fach-zeichen::after { background: var(--lagune); }
 .stufe .fach[open] .fach-kopf { box-shadow: inset 2px 0 0 var(--lagune); }
@@ -1036,6 +1058,8 @@ main, .fuss { position: relative; z-index: 1; }
     linear-gradient(to top, var(--nacht) 0%, transparent 26%),
     linear-gradient(to bottom, oklch(8% .012 200 / .55) 0%, transparent 18%);
 }
+/* Eine Regel, nicht zwei: weiter oben stand dieselbe Auswahl schon
+   einmal mit 30rem und war wirkungslos. */
 .braut-satz { position: relative; z-index: 1; max-width: 32rem; }
 .braut-marke {
   margin: 0 0 var(--a2);
@@ -1047,7 +1071,7 @@ main, .fuss { position: relative; z-index: 1; }
 .braut .lauf { color: var(--auf-tiefe-leise); }
 .braut .preis { color: var(--auf-tiefe-still); }
 .braut .preis b { color: var(--auf-tiefe); }
-.braut .knopf { background: var(--auf-tiefe); color: var(--nacht); }
+.braut .knopf { background: var(--lagune); color: var(--nacht); }
 @media (max-width: 60rem) {
   .braut { min-height: min(96svh, 820px); align-items: end; }
   .braut-grund { object-position: 60% 32%; }
@@ -1055,6 +1079,27 @@ main, .fuss { position: relative; z-index: 1; }
     background:
       linear-gradient(to top, var(--nacht) 4%, oklch(8% .012 200 / .92) 30%,
                       oklch(8% .012 200 / .55) 54%, transparent 76%);
+  }
+  /* Am schmalen Schirm endet der Schleier bei 76 % der Höhe — und die
+     Marke BRAUTSTYLING sitzt bei 66 %, also genau dort, wo er schon
+     dünn ist. Gemessen stand sie mit 1,2:1 auf hellem Haar, die
+     kleinste und gesperrteste Zeile der Seite ohne jede Reserve.
+
+     Den ganzen Schleier höher zu ziehen wäre der falsche Griff: dort
+     liegt die Perlenkette, das Beste an der Aufnahme. Stattdessen
+     bekommt nur der Textblock einen weichen Schatten hinter sich. Er
+     wächst nach oben über die Marke hinaus und läuft nach beiden
+     Seiten aus, sodass keine Kante entsteht — vier Fünftel des Bildes
+     bleiben offen. */
+  .braut-satz::before {
+    content: ""; position: absolute; z-index: -1;
+    inset: -2.6rem -50vw -1rem;
+    background: linear-gradient(to bottom,
+      transparent 0%,
+      oklch(8% .012 200 / .55) 5%,
+      oklch(8% .012 200 / .82) 12%,
+      oklch(8% .012 200 / .72) 62%,
+      transparent 100%);
   }
 }
 
@@ -1159,24 +1204,25 @@ main, .fuss { position: relative; z-index: 1; }
 
 .kontakt { padding: var(--a6) var(--rand); }
 .kontakt .gross { color: var(--auf-tiefe); }
-.kontakt h3 { color: var(--auf-tiefe); }
+.kontakt h3 { color: var(--lagune); }
 .kontakt .lauf { color: var(--auf-tiefe-leise); }
-.kontakt a { color: var(--auf-tiefe); }
+.kontakt a { color: var(--lagune); }
 .kontakt .zeiten th { color: var(--auf-tiefe-still); }
 .kontakt .zeiten td { color: var(--auf-tiefe); }
 .kontakt .zeiten tr + tr th,
 .kontakt .zeiten tr + tr td { border-top-color: var(--linie-tiefe-fein); }
 .kontakt .stand-gross { color: var(--auf-tiefe-still); }
-.kontakt .knopf { background: var(--auf-tiefe); color: var(--nacht); }
+.kontakt .knopf { background: var(--lagune); color: var(--nacht); }
 .kontakt .knopf-still { border-color: var(--linie-tiefe); color: var(--auf-tiefe); }
 
 /* ── Fuss ─────────────────────────────────────────────────────────── */
 
 .fuss { border-top: 1px solid var(--linie-tiefe-fein); color: var(--auf-tiefe-still); }
 .fuss-marke { color: var(--auf-tiefe); }
-.fuss-wege a, .fuss-recht { color: var(--auf-tiefe-still); }
+.fuss-wege a { color: var(--lagune); }
+.fuss-recht { color: var(--auf-tiefe-still); }
 @media (hover: hover) and (pointer: fine) {
-  .fuss-wege a:hover { color: var(--auf-tiefe); }
+  .fuss-wege a:hover { color: var(--lagune-hell); }
 }
 
 /* ── Die Preisliste in derselben Welt ─────────────────────────────────
@@ -1211,7 +1257,7 @@ main, .fuss { position: relative; z-index: 1; }
 .stufe-liste .fach { border-bottom-color: var(--linie-tiefe-fein); }
 .stufe-liste .fach:first-of-type { border-top-color: var(--linie-tiefe-fein); }
 .stufe-liste .fach-wort { color: var(--auf-tiefe); }
-.stufe-liste .fach-ab { color: var(--auf-tiefe-still); }
+.stufe-liste .fach-ab { color: var(--lagune); }
 .stufe-liste .fach-zeichen::before,
 .stufe-liste .fach-zeichen::after { background: var(--lagune); }
 .stufe-liste .fach[open] { background: oklch(96.5% .012 190 / .045); }
