@@ -1013,15 +1013,38 @@ body { background: transparent; }
 }
 .raum-film {
   object-fit: cover; object-position: 50% 34%;
-  /* Der Rauch ist im Film ein Hauch grauer, als er im Laden wirkt.
-     Ein Sechstel mehr Buntheit holt ihn dorthin zurück, ohne die
-     Helligkeit anzufassen — die Kontraste bleiben, wie gemessen. */
-  filter: saturate(1.16);
+  /* Hier stand einmal `filter: saturate(1.16)`. Gemessen an dem, was
+     der Browser wirklich malt, kostete die Zeile 3,5 % Kantenschärfe —
+     bei einfacher wie bei doppelter Punktdichte gleich: ein CSS-Filter
+     schiebt das Videofeld in eine eigene Rasterung, und die tastet
+     weicher ab. Die Buntheit steckt jetzt in der Datei selbst, wo sie
+     nichts kostet. Kein Filter, kein `will-change`, keine
+     `transform` auf diesem Element — jede davon holt denselben
+     Umweg zurück. */
   transition: opacity .7s var(--kurve);
 }
 /* Die Klasse setzt das Skript selbst — ohne Skript bleibt der Film
    sichtbar wie bisher, statt für immer wegzublenden. */
 .raum-film.wartet { opacity: 0; }
+/* Ein Hauch Korn über dem Film. Die Vorlage ist 960 × 960 und wird auf
+   jedem heutigen Schirm um das Zwei- bis Dreifache vergrössert; das
+   lässt sich nicht zurückrechnen, aber es lässt sich anders lesbar
+   machen. Eine glatte Vergrösserung wirkt matschig, dieselbe Fläche
+   mit feinem Korn wirkt fotografisch. Das Korn steht still — Korn, das
+   sich bewegt, wäre eine vierte Bewegung im Bild, und es sind schon
+   drei. Mittelgraues Rauschen über `overlay` lässt die Farbe
+   unangetastet, `stitchTiles` setzt die Kacheln ohne Naht aneinander. */
+.raum-korn {
+  position: fixed; inset: 0; z-index: 0;
+  pointer-events: none;
+  opacity: .28;
+  mix-blend-mode: overlay;
+  background-repeat: repeat;
+  background-size: 180px 180px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='k'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.86' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23k)'/%3E%3C/svg%3E");
+}
+@media (prefers-reduced-motion: reduce) { .raum-korn { opacity: .2; } }
+
 main, .fuss { position: relative; z-index: 1; }
 @media (prefers-reduced-motion: reduce) {
   .raum-film { display: none; }
