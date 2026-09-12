@@ -62,18 +62,43 @@ Am 8. September 2026 aus dem Treatwell-Eintrag gelesen:
 | Samstag | 09:00–16:00 | 09:00–16:00 |
 | Sonntag | geschlossen | geschlossen |
 
-**Das ist der dringlichste Punkt hier.** Aus diesen Zeiten rechnet die Seite
-auch den Live-Stand („Jetzt geöffnet · bis 19 Uhr"). Stimmen sie nicht, steht
-jemand um 18:45 vor einer verschlossenen Tür. Die Tabelle steht in `neu.js`
-unter `ZEITEN`; sagen Sie, welche Fassung gilt, dann ziehe ich beide Seiten
-gleich.
+Am 12. September 2026 noch einmal nachgesehen: **Ihre eigene Seite
+bahaarsstylingstudio.de nennt genau die Zeiten, die hier stehen** —
+Montag 10:00–16:00, Dienstag bis Freitag 09:00–19:00, Samstag 09:00–16:00,
+Sonntag geschlossen. Damit stimmen zwei von drei Quellen überein, und diese
+Seite folgt der richtigen.
 
-## 6. Die Bewertung auf Treatwell
+Zwei Quellen weichen weiterhin ab und sollten korrigiert werden:
+**Treatwell** (siehe Tabelle) und die Branchenverzeichnisse (dasoertliche,
+golocal, cylex u. a.), die durchweg „Mo–Fr 08:30–18:00, Sa 08:30–14:30"
+führen — offenbar ein alter Stand.
+
+**Das bleibt der dringlichste Punkt hier.** Aus diesen Zeiten rechnet die
+Seite auch den Live-Stand („Jetzt geöffnet · bis 19 Uhr"). Stimmen sie nicht,
+steht jemand um 18:45 vor einer verschlossenen Tür. Die Tabelle steht in
+`neu.js` unter `ZEITEN`; bestätigen Sie einmal kurz, dass die Zeiten Ihrer
+eigenen Seite gelten, dann ist der Punkt erledigt — und Treatwell sollte
+angeglichen werden, weil dort gebucht wird.
+
+## 6. Die Bewertung — und woher sie stammt
 
 Auf der Startseite steht „4,8 von 5 aus über 90 Bewertungen". Am
 8. September 2026 waren es 4,8 bei 92 Bewertungen. „Über 90" ist bewusst
 gewählt, damit die Angabe nicht mit der nächsten Bewertung falsch wird —
 sie sollte trotzdem einmal im Jahr nachgesehen werden.
+
+**Diese Zahl stammt von Treatwell, nicht von Google.** Der neue Abschnitt
+„Bewertungen" ist nach dem Vorbild einer Google-Bewertungstafel gebaut und
+verlinkt auch dorthin, nennt die Zahl aber bewusst ohne Quelle: eine
+Treatwell-Note als Google-Note auszugeben wäre falsch. Eine öffentlich
+auffindbare Google-Bewertung gibt es zu diesem Salon nicht (gesucht am
+12. September 2026, auch die eigene Seite bahaarsstylingstudio.de nennt
+keine).
+
+**Bitte nachsehen und durchgeben:** Wie viele Google-Bewertungen gibt es,
+und welchen Schnitt zeigen sie? Dann trage ich beides ein und schreibe
+„aus N Google-Bewertungen" darüber. Solange die Zahlen fehlen, bleibt die
+Angabe quellenlos — das ist richtig, aber schwächer, als es sein müsste.
 
 ## 7. Die Telefonnummer
 

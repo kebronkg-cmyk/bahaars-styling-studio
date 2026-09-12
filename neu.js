@@ -128,16 +128,27 @@
   if (!film) return;
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  /* Sofort wegblenden: solange nicht bewiesen ist, dass der Film läuft,
-     zeigt das Videofeld nichts — und damit auch keinen Knopf von
-     Safari. Darunter liegt das Standbild. */
-  film.classList.add('wartet');
+  /* Das Videofeld bleibt sichtbar. Es einfach wegzublenden war der
+     Fehler: Safari auf dem iPhone hält ein Feld mit `opacity: 0` für
+     nicht sichtbar und startet einen Film dann gar nicht erst von
+     selbst — man musste den Schirm berühren, damit sich etwas rührte.
+     Den Abspielknopf hält jetzt der Vorhang ab, der ohnehin über allem
+     liegt, solange geladen wird.
+
+     Nur wenn nach der Wartezeit immer noch nichts läuft, wird das Feld
+     weggeblendet — dann steht das Standbild darunter, und ein Knopf
+     kann nicht auftauchen. Kommt der Film später doch (etwa nach der
+     ersten Berührung), blendet er sich wieder ein. */
+  const WARTE = 2200;
   function zeigen() {
     if (film.currentTime > 0 && !film.paused && !film.ended)
       film.classList.remove('wartet');
   }
   film.addEventListener('playing', zeigen);
   film.addEventListener('timeupdate', zeigen);
+  setTimeout(() => {
+    if (!(film.currentTime > 0 && !film.paused)) film.classList.add('wartet');
+  }, WARTE);
 
   function anstossen() {
     const p = film.play();
@@ -248,7 +259,8 @@
      nie richtig ins Bild und blieben unsichtbar stehen. Der Zug tritt
      als Ganzes ein. */
   const ZIELE = '.gross, .wand-titel, .belege p, .fach, .werke-bahn, ' +
-                '.laden figure, .spruch, .abschluss, .spalten > div, .karte';
+                '.laden figure, .spruch, .abschluss, .spalten > div, .karte, ' +
+                '.urteil-note, .urteil-satz, .kontakt-satz, .zeiten-karte';
 
   /* Nichts aus einem geschlossenen Fach: was `display: none` trägt,
      meldet der Beobachter nie — es bliebe beim Aufklappen unsichtbar

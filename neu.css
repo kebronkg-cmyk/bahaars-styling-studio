@@ -458,12 +458,11 @@ body:has(.stufe-liste) .wege {
        Schere und dem hellen Rauch. */
     linear-gradient(to top,
       var(--nacht) 0%,
-      oklch(7% .010 200 / .96) 24%,
-      oklch(7% .010 200 / .92) 46%,
-      oklch(7% .010 200 / .84) 58%,
-      oklch(7% .010 200 / .50) 68%,
-      oklch(7% .010 200 / .18) 76%,
-      transparent 84%),
+      oklch(7% .010 200 / .92) 18%,
+      oklch(7% .010 200 / .52) 34%,
+      oklch(7% .010 200 / .22) 50%,
+      oklch(7% .010 200 / .06) 64%,
+      transparent 74%),
     /* Ein schmales Band oben, damit die Leiste und die Eckzeilen einen
        Grund haben. */
     linear-gradient(to bottom, oklch(7% .010 200 / .62) 0%, transparent 16%);
@@ -477,11 +476,11 @@ body:has(.stufe-liste) .wege {
       /* Am schmalen Schirm steht die Wortmarke zwischen 50 % und 59 %. */
       linear-gradient(to top,
         var(--nacht) 0%,
-        oklch(7% .010 200 / .97) 26%,
-        oklch(7% .010 200 / .93) 48%,
-        oklch(7% .010 200 / .82) 61%,
-        oklch(7% .010 200 / .42) 70%,
-        transparent 80%),
+        oklch(7% .010 200 / .94) 20%,
+        oklch(7% .010 200 / .56) 38%,
+        oklch(7% .010 200 / .24) 54%,
+        oklch(7% .010 200 / .07) 68%,
+        transparent 78%),
       linear-gradient(to bottom, oklch(7% .010 200 / .70) 0%, transparent 14%);
   }
 }
@@ -490,6 +489,30 @@ body:has(.stufe-liste) .wege {
   position: relative; z-index: 1;
   max-width: 46rem; width: 100%;
   text-align: center;
+}
+/* Der Schatten hinter dem Wort, nicht über dem Bild.
+
+   Vorher hielt ein Schleier über die halbe Auftakthöhe die Schrift
+   lesbar — und deckte dabei genau die Schere zu, die den ersten
+   Bildschirm trägt. Jetzt ist der Schleier licht und nur der Textblock
+   bringt seinen eigenen Grund mit. Vier Fünftel der Aufnahme bleiben
+   offen, und die Schere steht frei.
+
+   Ein senkrechtes Band, keine Ellipse: bei einem radialen Verlauf
+   zählt der Abstand in beiden Achsen zusammen, und an den Enden einer
+   so breiten Zeile wie „BaHaar's" läge der Punkt schon fast am Rand
+   des Radius. Seitlich läuft es über den Textblock hinaus aus, damit
+   nirgends eine Kante steht. */
+.auftakt-satz::before {
+  content: ""; position: absolute; z-index: -1;
+  inset: -5rem -24vw -2.5rem;
+  background: linear-gradient(to bottom,
+    transparent 0%,
+    oklch(6% .010 200 / .50) 9%,
+    oklch(6% .010 200 / .88) 22%,
+    oklch(6% .010 200 / .88) 58%,
+    oklch(6% .010 200 / .62) 82%,
+    transparent 100%);
 }
 
 /* Die Wortmarke. Bodoni setzt hohe Kontraste; bei dieser Grösse braucht
@@ -828,13 +851,11 @@ body:has(.stufe-liste) .wege {
   color: var(--lagune);
   font-weight: 500;
 }
-.zeiten { width: 100%; border-collapse: collapse; font-size: var(--t-klein); }
-.zeiten th, .zeiten td { padding: .42rem 0; text-align: left; font-weight: 400; }
-.zeiten th { color: var(--tinte-leise); }
-.zeiten td { text-align: right; font-variant-numeric: tabular-nums; }
-.zeiten tr + tr th, .zeiten tr + tr td { border-top: 1px solid var(--linie-fein); }
-.stand-gross { margin: var(--a2) 0 0; font-size: var(--t-klein); color: var(--tinte-still); }
-.kontakt a { color: var(--tinte-leise); }
+/* Die Zeitentabelle und `.kontakt a` standen hier aus der Zeit, als der
+   Kontakt drei Spalten mit einer Tabelle war. Die Zeiten sind jetzt
+   eine Karte aus `dl`, und die Linkfarbe steht beim Abschnitt selbst —
+   von hier aus überschrieb sie sogar die Schrift auf dem gefüllten
+   Knopf, der dann leer aussah. */
 
 /* ── Die Preisliste als Mini-Navi ─────────────────────────────────────
    Neun Zeilen, eine je Gruppe, mit dem niedrigsten Preis am Rand. Wer
@@ -1009,10 +1030,10 @@ body { background: transparent; }
   pointer-events: none;
 }
 .raum-grund {
-  background: var(--nacht) url('bilder/schere-rauch-standbild.webp') 50% 34% / cover no-repeat;
+  background: var(--nacht) url('bilder/schere-rauch-standbild.webp') 50% 30% / cover no-repeat;
 }
 .raum-film {
-  object-fit: cover; object-position: 50% 34%;
+  object-fit: cover; object-position: 50% 30%;
   /* Hier stand einmal `filter: saturate(1.16)`. Gemessen an dem, was
      der Browser wirklich malt, kostete die Zeile 3,5 % Kantenschärfe —
      bei einfacher wie bei doppelter Punktdichte gleich: ein CSS-Filter
@@ -1023,8 +1044,11 @@ body { background: transparent; }
      Umweg zurück. */
   transition: opacity .7s var(--kurve);
 }
-/* Die Klasse setzt das Skript selbst — ohne Skript bleibt der Film
-   sichtbar wie bisher, statt für immer wegzublenden. */
+/* Der Film ist von Anfang an sichtbar — ein weggeblendetes Videofeld
+   gilt Safari auf dem iPhone als unsichtbar, und dann startet es den
+   Film nicht von selbst. Weggeblendet wird erst, wenn nach der
+   Wartezeit nachweislich nichts läuft; dann steht das Standbild
+   darunter. Die Klasse setzt allein das Skript. */
 .raum-film.wartet { opacity: 0; }
 /* Ein Hauch Korn über dem Film. Die Vorlage ist 960 × 960 und wird auf
    jedem heutigen Schirm um das Zwei- bis Dreifache vergrössert; das
@@ -1063,7 +1087,7 @@ main, .fuss { position: relative; z-index: 1; }
    hält die leiseste Schrift noch 5,6:1 gegen die hellste Stelle des
    Films), sondern die Ruhe: über einem langen Text darf sich nur so
    viel regen, dass man es merkt, ohne hinzusehen. */
-.band, .stufe, .werk, .laden, .kontakt, .fuss, .kopf-tief, .recht {
+.band, .stufe, .werk, .urteil, .laden, .kontakt, .fuss, .kopf-tief, .recht {
   position: relative;
   --durch: .86;                 /* 2,9 Stufen — deutlich, nicht laut */
   background: oklch(11% .012 200 / var(--durch));
@@ -1290,20 +1314,160 @@ main, .fuss { position: relative; z-index: 1; }
 }
 .laden .spruch cite { color: var(--auf-tiefe-still); }
 
-/* ── Kontakt ──────────────────────────────────────────────────────── */
+
+/* ── Nur für Vorleseprogramme ─────────────────────────────────────── */
+.nurlesen {
+  position: absolute; width: 1px; height: 1px;
+  margin: -1px; padding: 0; border: 0;
+  clip-path: inset(50%); overflow: hidden; white-space: nowrap;
+}
+
+/* ── Die Augenzeile ───────────────────────────────────────────────────
+   Der kleine Punkt davor ist der einzige Ort, an dem Türkis als Fläche
+   auftritt, ohne ein Knopf zu sein — er markiert den Anfang eines
+   Abschnitts, so wie ein Absatzzeichen. */
+.augenzeile {
+  display: flex; align-items: center; gap: .6rem;
+  margin: 0 0 var(--a2);
+  font-family: var(--mono);
+  font-size: var(--t-marke); letter-spacing: .22em; text-transform: uppercase;
+  color: var(--lagune);
+}
+.augenzeile::before {
+  content: ""; flex: none;
+  width: .4rem; height: .4rem; border-radius: 50%;
+  background: var(--lagune);
+  box-shadow: 0 0 0 3px oklch(80% .10 195 / .18);
+}
+
+/* ── Das Urteil ───────────────────────────────────────────────────────
+   Aufbau wie bei Google: links die Note als eigene Tafel, rechts der
+   Satz und die zwei Wege. */
+
+.urteil { padding: var(--a6) var(--rand); }
+.urteil-bau {
+  display: grid; gap: var(--a4);
+  align-items: center;
+}
+@media (min-width: 56rem) {
+  .urteil-bau {
+    grid-template-columns: minmax(0, 17rem) minmax(0, 1fr);
+    gap: var(--a5);
+  }
+}
+.urteil-note {
+  padding: var(--a3) var(--a2);
+  text-align: center;
+  border: 1px solid var(--linie-tiefe);
+  border-radius: var(--kante);
+  background: oklch(80% .075 193 / .045);
+}
+.urteil-wert {
+  margin: 0;
+  font-family: 'Bodoni Moda', Didot, Georgia, serif;
+  font-weight: 400; font-size: 4.2rem; line-height: 1;
+  letter-spacing: -.02em;
+  color: var(--auf-tiefe);
+}
+/* Zwei Sternreihen übereinander: unten die leeren, darüber die vollen,
+   beschnitten auf 4,8 von 5. `grid-area: 1 / 1` stapelt sie — zwei
+   Kinder in einem Raster ergäben sonst zwei Zeilen. */
+.urteil-sterne {
+  display: grid; justify-content: center;
+  margin: .7rem 0 .55rem;
+}
+.urteil-grund, .urteil-fuell {
+  grid-area: 1 / 1;
+  display: flex; gap: .18rem;
+  line-height: 0;
+}
+.urteil-grund { color: oklch(80% .075 193 / .30); }
+.urteil-fuell {
+  color: var(--lagune);
+  width: var(--voll, 100%);
+  overflow: hidden;
+}
+.urteil-sterne svg { flex: none; fill: currentColor; }
+.urteil-mass {
+  margin: 0;
+  font-size: var(--t-marke); letter-spacing: .04em;
+  color: var(--auf-tiefe-still);
+}
+.urteil-satz .gross { color: var(--auf-tiefe); margin-bottom: var(--a2); }
+.urteil-satz .gross em { color: var(--lagune); font-style: normal; }
+.urteil-satz .lauf { color: var(--auf-tiefe-leise); max-width: 34rem; }
+.urteil-satz .wahl { margin-top: var(--a3); }
+
+/* ── Wo Sie mich finden ───────────────────────────────────────────────
+   Anschrift und Nummer links, die Zeiten als Karte rechts. */
 
 .kontakt { padding: var(--a6) var(--rand); }
+.kontakt-bau { display: grid; gap: var(--a4); align-items: start; }
+@media (min-width: 56rem) {
+  .kontakt-bau {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 24rem);
+    gap: var(--a5);
+  }
+}
 .kontakt .gross { color: var(--auf-tiefe); }
-.kontakt h3 { color: var(--lagune); }
-.kontakt .lauf { color: var(--auf-tiefe-leise); }
-.kontakt a { color: var(--lagune); }
-.kontakt .zeiten th { color: var(--auf-tiefe-still); }
-.kontakt .zeiten td { color: var(--auf-tiefe); }
-.kontakt .zeiten tr + tr th,
-.kontakt .zeiten tr + tr td { border-top-color: var(--linie-tiefe-fein); }
-.kontakt .stand-gross { color: var(--auf-tiefe-still); }
-.kontakt .knopf { background: var(--lagune); color: var(--nacht); }
+.kontakt .gross em { color: var(--lagune); font-style: normal; }
+.kontakt .lauf { color: var(--auf-tiefe-leise); max-width: 32rem; }
+/* Nicht einfach `.kontakt a`: das ist spezifischer als `.knopf` und
+   färbte dessen Schrift türkis — auf türkisem Grund stand der Knopf
+   dann leer da. Die Knöpfe werden ausgenommen, statt sie mit
+   `!important` zurückzuholen. */
+.kontakt a:not(.knopf):not(.knopf-still) { color: var(--lagune); }
 .kontakt .knopf-still { border-color: var(--linie-tiefe); color: var(--auf-tiefe); }
+.anschrift {
+  margin: 0 0 var(--a3);
+  font-style: normal; font-size: var(--t-lauf); line-height: 1.7;
+  color: var(--auf-tiefe-leise);
+}
+/* Die Nummer ist auf dem Telefon der kürzeste Weg zum Termin — sie
+   darf so gross sein, dass man sie ohne Zielen trifft. */
+.rufnummer {
+  display: inline-block; margin-top: .4rem;
+  font-family: 'Bodoni Moda', Didot, Georgia, serif;
+  font-size: 1.85rem; letter-spacing: .01em;
+  color: var(--auf-tiefe); text-decoration: none;
+  border-bottom: 2px solid var(--lagune);
+  padding-bottom: .12rem;
+  font-variant-numeric: tabular-nums;
+}
+.kontakt .wahl { margin-top: var(--a3); }
+.kontakt-fuss { margin: var(--a3) 0 0; font-size: var(--t-klein); }
+.kontakt-fuss a { color: var(--lagune); }
+
+.zeiten-karte {
+  padding: var(--a3);
+  border: 1px solid var(--linie-tiefe);
+  border-radius: var(--kante);
+  background: oklch(80% .075 193 / .045);
+}
+.zeiten-karte h3 {
+  margin: 0 0 var(--a2);
+  font-family: 'Bodoni Moda', Didot, Georgia, serif;
+  font-weight: 400; font-size: 1.4rem;
+  color: var(--auf-tiefe);
+}
+.zeiten-liste { margin: 0; }
+.zeiten-zeile {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: var(--a2);
+  padding: .62rem 0;
+  font-size: var(--t-klein);
+}
+.zeiten-zeile + .zeiten-zeile { border-top: 1px solid var(--linie-tiefe-fein); }
+.zeiten-zeile dt { color: var(--auf-tiefe-leise); }
+.zeiten-zeile dd {
+  margin: 0; text-align: right;
+  color: var(--auf-tiefe); font-variant-numeric: tabular-nums;
+}
+.zeiten-stand {
+  margin: var(--a2) 0 0; padding-top: var(--a2);
+  border-top: 1px solid var(--linie-tiefe-fein);
+  font-size: var(--t-marke); color: var(--auf-tiefe-still);
+}
 
 /* ── Fuss ─────────────────────────────────────────────────────────── */
 
