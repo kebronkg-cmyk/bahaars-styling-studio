@@ -111,62 +111,83 @@
 
 /* ── Der Film im Raum ───────────────────────────────────────────────────
    Safari auf dem iPhone startet einen Film von sich aus nur, wenn er
-   stumm ist, `playsinline` trägt — und der Stromsparmodus aus ist. Im
-   Stromsparmodus verweigert es den Start grundsätzlich, egal wie das
-   Video ausgezeichnet ist. Deshalb: erst selbst anstossen, und wenn das
-   abgelehnt wird, beim ersten Antippen oder Scrollen noch einmal. Kommt
-   er nie, bleibt das Standbild stehen — das ist kein Fehlerbild,
-   sondern der geplante Zustand.
+   stumm ist und `playsinline` trägt. Zwei Dinge standen dem hier im
+   Weg, beide selbst gebaut:
 
-   Der Film hiess einmal `.auftakt-film` und liegt seit dem Umbau als
-   `.raum-film` hinter der ganzen Seite. Der Anstoss suchte weiter den
-   alten Namen, fand nichts und tat nichts — auf dem iPhone blieb
-   dadurch der Abspielknopf von Safari mitten im Bild stehen. */
+   Erstens hat ein Zeitgeber das Videofeld nach 2,2 s auf `opacity: 0`
+   gesetzt, falls bis dahin nichts lief. Ein weggeblendetes Feld gilt
+   Safari als unsichtbar, und einen unsichtbaren Film startet es nicht
+   mehr — auf einer langsamen Verbindung war der Film also jedes Mal
+   ausgesperrt, bis jemand den Schirm berührte. Es wird jetzt gar nichts
+   mehr weggeblendet. Darunter liegt ohnehin dasselbe Standbild; solange
+   der Film nicht läuft, sieht man es durch das Videofeld hindurch als
+   dessen Vorschaubild, und es sieht gleich aus.
+
+   Zweitens reicht das Attribut `muted` im Quelltext nicht überall aus.
+   WebKit prüft beim Start die Eigenschaft am Element, und die muss
+   gesetzt sein, bevor `play()` gerufen wird. Dasselbe gilt für
+   `playsInline`. Beides wird deshalb hier noch einmal von Hand gesetzt.
+
+   Drittens: ein einziger Anlauf genügt nicht. Der Film wird bei jedem
+   Ladeschritt neu angestossen und danach noch ein paar Mal in kurzem
+   Abstand — WebKit nimmt `play()` oft erst an, wenn genug im Puffer
+   liegt. Die Berührung bleibt als letzter Ausweg, aber sie sollte nie
+   nötig sein. Im Stromsparmodus verweigert iOS den Start grundsätzlich;
+   dann bleibt das Standbild stehen, und das ist der geplante Zustand,
+   kein Fehlerbild. */
 
 (function () {
   const film = document.querySelector('.raum-film');
   if (!film) return;
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  /* Das Videofeld bleibt sichtbar. Es einfach wegzublenden war der
-     Fehler: Safari auf dem iPhone hält ein Feld mit `opacity: 0` für
-     nicht sichtbar und startet einen Film dann gar nicht erst von
-     selbst — man musste den Schirm berühren, damit sich etwas rührte.
-     Den Abspielknopf hält jetzt der Vorhang ab, der ohnehin über allem
-     liegt, solange geladen wird.
+  /* Vor jedem play(): WebKit liest die Eigenschaften, nicht die
+     Attribute. */
+  film.muted = true;
+  film.defaultMuted = true;
+  film.playsInline = true;
+  film.setAttribute('playsinline', '');
+  film.setAttribute('webkit-playsinline', '');
 
-     Nur wenn nach der Wartezeit immer noch nichts läuft, wird das Feld
-     weggeblendet — dann steht das Standbild darunter, und ein Knopf
-     kann nicht auftauchen. Kommt der Film später doch (etwa nach der
-     ersten Berührung), blendet er sich wieder ein. */
-  const WARTE = 2200;
-  function zeigen() {
-    if (film.currentTime > 0 && !film.paused && !film.ended)
-      film.classList.remove('wartet');
-  }
-  film.addEventListener('playing', zeigen);
-  film.addEventListener('timeupdate', zeigen);
-  setTimeout(() => {
-    if (!(film.currentTime > 0 && !film.paused)) film.classList.add('wartet');
-  }, WARTE);
+  const laeuft = () => film.currentTime > 0 && !film.paused && !film.ended;
 
   function anstossen() {
+    if (laeuft()) return;
+    film.muted = true;
     const p = film.play();
     if (p && typeof p.catch === 'function') p.catch(() => {});
   }
-  let versucht = false;
-  function beiBeruehrung() {
-    if (versucht) return;
-    versucht = true;
+
+  /* Bei jedem Ladeschritt neu versuchen. */
+  for (const art of ['loadedmetadata', 'loadeddata', 'canplay', 'canplaythrough', 'suspend'])
+    film.addEventListener(art, anstossen);
+
+  /* Und ein paar Mal kurz hintereinander: oft nimmt WebKit erst an,
+     wenn genug im Puffer liegt. Danach ist Schluss — endloses Pochen
+     kostet nur Strom. */
+  let anlauf = 0;
+  const takt = setInterval(() => {
+    if (laeuft() || ++anlauf > 12) { clearInterval(takt); return; }
     anstossen();
-    for (const art of ['pointerdown', 'touchstart', 'scroll', 'keydown'])
-      removeEventListener(art, beiBeruehrung);
+  }, 400);
+
+  /* Kommt der Schirm aus dem Hintergrund zurück, hält iOS den Film oft
+     angehalten. */
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) anstossen();
+  });
+
+  /* Letzter Ausweg, falls iOS den Start rundheraus verweigert. */
+  function beiBeruehrung() {
+    anstossen();
+    if (laeuft())
+      for (const art of ['pointerdown', 'touchstart', 'scroll', 'keydown'])
+        removeEventListener(art, beiBeruehrung);
   }
+  for (const art of ['pointerdown', 'touchstart', 'scroll', 'keydown'])
+    addEventListener(art, beiBeruehrung, { passive: true });
 
   anstossen();
-  film.addEventListener('canplay', anstossen, { once: true });
-  for (const art of ['pointerdown', 'touchstart', 'scroll', 'keydown'])
-    addEventListener(art, beiBeruehrung, { passive: true, once: false });
 })();
 
 /* ── Der Vorhang ────────────────────────────────────────────────────────

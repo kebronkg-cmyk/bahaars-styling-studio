@@ -508,18 +508,20 @@ body:has(.stufe-liste) .wege {
   inset: -5rem -24vw -2.5rem;
   background: linear-gradient(to bottom,
     transparent 0%,
-    oklch(6% .010 200 / .50) 9%,
-    oklch(6% .010 200 / .88) 22%,
-    oklch(6% .010 200 / .88) 58%,
-    oklch(6% .010 200 / .62) 82%,
+    oklch(6% .010 200 / .30) 9%,
+    oklch(6% .010 200 / .56) 22%,
+    oklch(6% .010 200 / .56) 58%,
+    oklch(6% .010 200 / .38) 82%,
     transparent 100%);
 }
 
 /* Die Wortmarke. Bodoni setzt hohe Kontraste; bei dieser Grösse braucht
    sie eine engere Laufweite, sonst fällt die Zeile auseinander. */
+/* Eine Regel, nicht zwei: weiter unten stand dieselbe Auswahl noch
+   einmal und überschrieb Rand und Zeilenabstand. */
 .wortmarke {
-  margin: 0 0 var(--a3);
-  line-height: .95;
+  margin: var(--a2) 0 var(--a3);
+  line-height: .92;
   font-family: 'Bodoni Moda', Didot, Georgia, serif;
   font-weight: 400;
   letter-spacing: -.018em;
@@ -556,6 +558,57 @@ body:has(.stufe-liste) .wege {
 }
 @media (hover: hover) and (pointer: fine) {
   .auftakt .knopf-still:hover { background: oklch(97% .006 200 / .10); }
+}
+
+/* ── Der Auftakt in der Breite: Schrift links, Schere frei ───────────
+   Gemessen steckt das Metall der Schere bei 1440 px fast vollständig in
+   der mittleren Zone der Breite — links und rechts davon ist die
+   Aufnahme leer. Ein mittig gesetzter Textblock steht also zwangsläufig
+   genau darauf, egal wie licht der Schleier ist. Deshalb rückt die
+   Schrift auf breiten Schirmen an die linke Kante, dorthin, wo ohnehin
+   nichts steht, und bündig mit der Wortmarke in der Leiste. Die Schere
+   bekommt die Bühne, und der Schatten hinter dem Text darf leichter
+   werden, weil dort auch weniger Rauch liegt.
+
+   Am schmalen Schirm füllt die Schere die ganze Breite; dort hilft nur
+   die Höhe, und der Block bleibt mittig unten. */
+@media (min-width: 62rem) {
+  .auftakt { justify-items: start; }
+  .auftakt-satz {
+    max-width: 30rem;
+    text-align: left;
+  }
+  .auftakt .wahl-mitte { justify-content: flex-start; }
+  .auftakt .stand-chip { margin-inline: 0; }
+  /* Etwas kleiner, damit die Zeile in die freie Zone passt, statt in
+     die Schere hineinzuwachsen. */
+  .auftakt .wortmarke-wort { font-size: clamp(3rem, 11vw, 6.6rem); }
+  .auftakt .wortmarke-kursiv { font-size: clamp(2.1rem, 7.6vw, 4.6rem); }
+  /* Der Schatten spannt sich links über den Rand hinaus und muss nach
+     rechts auslaufen — sonst steht eine senkrechte Kante quer im
+     Rauch. Ein Verlauf allein tut das nicht: die Deckung kommt von
+     oben nach unten, also blendet eine Maske die rechte Seite aus. */
+  .auftakt-satz::before {
+    inset: -4rem -10rem -2rem -14rem;
+    -webkit-mask-image: linear-gradient(to right, #000 0 52%, transparent 100%);
+            mask-image: linear-gradient(to right, #000 0 52%, transparent 100%);
+  }
+}
+
+/* ── Der Auftakt am schmalen Schirm: die Schere oben, die Schrift tief
+   Am Telefon füllt die Schere die ganze Breite — zur Seite ausweichen
+   geht nicht, also nach unten. Gemessen liegt ihr Metall vor allem
+   zwischen einem Fünftel und vier Fünfteln der Höhe, am dichtesten im
+   oberen Drittel. Der Textblock rückt deshalb so weit nach unten, wie
+   er kann, und wird dafür enger gesetzt: die Luft zwischen Knöpfen und
+   Standmarke war der grösste Posten, dazu die Ränder um Wortmarke und
+   Knopfzeile. Nichts davon wird kleiner, nur die Abstände. */
+@media (max-width: 61.99rem) {
+  .auftakt { padding-bottom: var(--a4); }
+  .auftakt .wortmarke { margin-bottom: var(--a2); }
+  .auftakt-lauf { margin-bottom: var(--a3); }
+  .auftakt .wahl { margin-bottom: 0; }
+  .auftakt .stand-chip { margin-top: var(--a3); }
 }
 
 /* Die Standmarke sitzt unter den Knöpfen, wie der kleine Knopf in der
@@ -595,7 +648,6 @@ body:has(.stufe-liste) .wege {
    Auftakt versorgt haben, sind mit dem Umbau auf den durchgehenden
    Raum gegenstandslos geworden. */
 
-.wortmarke { margin: var(--a2) 0 var(--a3); line-height: .92; }
 
 /* Die kleinen Kennungen in den Ecken: der technische Gegenpol zur
    Wortmarke, wie in der Vorlage. Rein dekorativ. */
@@ -714,6 +766,10 @@ body:has(.stufe-liste) .wege {
   display: grid; place-items: center;
   overflow: hidden;
   background: var(--nacht);
+  /* Er fängt nichts ab: reine Kulisse. Ohne diese Zeile blieb er
+     während des Ausblendens anklickbar — und ohne Skript blendet ihn
+     nur die Notaus-Animation weg, die eine knappe Sekunde braucht. */
+  pointer-events: none;
   /* Notausgang, falls das Skript nie ankommt. */
   animation: vorhang-notaus .9s var(--kurve-fort) 5s forwards;
 }
@@ -1044,12 +1100,23 @@ body { background: transparent; }
      Umweg zurück. */
   transition: opacity .7s var(--kurve);
 }
-/* Der Film ist von Anfang an sichtbar — ein weggeblendetes Videofeld
-   gilt Safari auf dem iPhone als unsichtbar, und dann startet es den
-   Film nicht von selbst. Weggeblendet wird erst, wenn nach der
-   Wartezeit nachweislich nichts läuft; dann steht das Standbild
-   darunter. Die Klasse setzt allein das Skript. */
-.raum-film.wartet { opacity: 0; }
+/* Das Videofeld wird nie weggeblendet. Ein Feld mit `opacity: 0` gilt
+   Safari auf dem iPhone als unsichtbar, und einen unsichtbaren Film
+   startet es nicht von selbst — die Zeile, die den Abspielknopf
+   verstecken sollte, hat dadurch den Film ausgesperrt. Solange er nicht
+   läuft, zeigt das Feld sein Vorschaubild, und das ist dasselbe
+   Standbild wie darunter.
+
+   Die Bedienelemente von WebKit bleiben ausgeblendet, in zwei
+   getrennten Regeln, damit ein Browser ohne das eine Pseudo-Element
+   nicht gleich beide verwirft. */
+.raum-film::-webkit-media-controls-start-playback-button {
+  display: none !important;
+  -webkit-appearance: none;
+}
+.raum-film::-webkit-media-controls {
+  display: none !important;
+}
 /* Ein Hauch Korn über dem Film. Die Vorlage ist 960 × 960 und wird auf
    jedem heutigen Schirm um das Zwei- bis Dreifache vergrössert; das
    lässt sich nicht zurückrechnen, aber es lässt sich anders lesbar
