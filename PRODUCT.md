@@ -133,7 +133,10 @@ Regal), Revlon, American Crew, CHI, Olaplex.
 - **Ein Portrait** (624×1024), warmes Licht, das einzige Bild, das für sich steht.
 - **Ein Logo** des Kosmetikstudios (499×122).
 
-**Nicht vorhanden und nicht zu erfinden:** Bewertungen, Kundenstimmen,
+**Kundenstimmen:** seit 24.09.2026 fünf echte 5-Sterne-Bewertungen aus dem
+Treatwell-Eintrag, wörtlich übernommen (siehe `index.html`, Abschnitt Stimmen).
+
+**Nicht vorhanden und nicht zu erfinden:** weitere Kundenstimmen,
 Auszeichnungen, Zahlen wie „500 zufriedene Kundinnen", ein Portrait von Bahar
 bei der Arbeit, Fotos vom Kosmetikstudio.
 

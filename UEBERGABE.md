@@ -5,6 +5,50 @@ die Dateien: `CLAUDE.md` (Arbeitsweise, Fallen) und `ABNAHME.md` (offene
 Punkte für den Auftraggeber) liegen im Projekt und gelten weiter. Hier steht
 nur, was sonst verloren ginge.
 
+## Zwei Fassungen — „Video" heisst: zurück zum Film
+
+Seit dem 24.09.2026 läuft eine **Testfassung ohne Film**. Die Fassung mit dem
+Film ist unverändert gesichert unter `fassungen/video/` (Stand `b86d438`).
+Sagt der Auftraggeber **„Video"**, wird genau diese Fassung zurückgeholt:
+
+```bash
+cp fassungen/video/{index.html,neu.css,neu.js,leistungen.html,impressum.html,datenschutz.html} .
+```
+
+Die Filmdateien in `bilder/` sind nie angefasst worden. Ein Git-Tag
+`video-fassung` liess sich über den Zugang der Sitzung nicht pushen, deshalb
+der Ordner.
+
+**Was die Testfassung ausmacht:**
+
+- Auftakt: `bilder/grund-glanz.webp` (Petrol-Glanz mit Lichtband und
+  Staub) vollflächig, davor `bilder/schere-frei.webp` — die Schere aus der
+  Vorlage des Auftraggebers, mit einem Segmentierungsmodell (BiRefNet)
+  freigestellt, echte Alphamaske. Schwebt langsam (14 s), kommt mit der
+  ersten Auftrittsgruppe.
+- Hinter der ganzen Seite `bilder/grund-wand.webp` (Pinselputz, auf L 30 %
+  gesenkt), Abschnitte als Scheiben mit `--durch` .60–.86.
+- Stimmen auf hellem Putz (`bilder/grund-licht.webp`): fünf **echte**
+  5-Sterne-Bewertungen, wörtlich aus dem Treatwell-Eintrag (JSON-LD der
+  Seite, gelesen am 24.09.2026), mit Vorname und Datum. Ersetzt den
+  früheren Abschnitt „Urteil".
+- Logo: `logo-siegel.svg` (Ring, kursives Bodoni-B, Umschrift in Mulish —
+  alles als Pfade, keine Schrift nötig), `logo-zeichen.svg` für die Leiste,
+  `logo-favicon.svg`. Siegel im Vorhang (Anfang) und im Fuss (Ende).
+- Die drei Vorlagen wurden in OKLab auf den Farbwinkel der Seite gedreht:
+  Glanz 201→198, heller Putz 192→195 (Buntheit ×0,7, L 88 %), Pinselputz
+  209→200 (L 55→30 %, Kontrast der Pinselzüge ×1,25).
+- Vorhang wartet nicht mehr auf den Film, sondern auf `decode()` des
+  Glanzes: frühestens 1 s, spätestens 2 s (gemessen: 1,1 s).
+- `--auf-buehne*` und die CSS zu `.auftritt-gross` fehlten in der
+  Filmfassung, obwohl Markup und Skript sie benutzten — jetzt gesetzt.
+
+Gemessen (kontrast3.mjs): alle Zeilen über der Grenze, Minimum 4,99:1
+(Wortmarke kursiv, 390 px, Grossschrift). Detektor mit Parsern: 21 Hinweise,
+die Filmfassung hatte 23 — die frühere Angabe `[]` kam aus dem Rückfallmodus
+ohne Parser (`npm i --no-save htmlparser2 css-select css-tree domutils` im
+Skill-Ordner, dann ist er vollständig).
+
 ## Stand
 
 - Repo `kebronkg-cmyk/bahaars-styling-studio`, Zweig `main` = Zweig

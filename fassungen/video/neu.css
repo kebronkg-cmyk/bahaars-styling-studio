@@ -3,21 +3,22 @@
 
    ── Ein Raum ──────────────────────────────────────────────────────────
 
-   Die Seite ist ein einziger dunkler Raum: eine Wand aus Pinselputz in
-   tiefem Petrol steht fest im Fenster hinter allem; jeder Abschnitt
-   legt sich als Scheibe darüber. Den ersten Bildschirm trägt ein Glanz
-   aus Petrol und Licht, davor steht die freigestellte Schere. Die
-   Stimmen der Kundinnen stehen als einziger Abschnitt auf hellem Putz.
+   Die Seite ist ein einziger dunkler Raum. Der Film — eine Friseurschere
+   im türkisen Rauch — steht fest im Fenster hinter allem; jeder
+   Abschnitt legt sich als fast deckende Scheibe darüber und lässt einen
+   Rest durch. Beim Scrollen zieht deshalb dieselbe Bewegung durch die
+   ganze Seite.
 
-   (Die Fassung mit dem Film liegt unter `fassungen/video/`.)
+   Vorher hatte jeder Abschnitt eine eigene Grundfarbe. Auf Seitenlänge
+   las sich das als Zufall, nicht als Aufbau. Abschnitte unterscheiden
+   sich jetzt durch ihre Form, nicht durch ihre Farbe.
 
    ── Woher die Farben kommen ───────────────────────────────────────────
 
-   Der Farbwinkel (200) und der Akzent oklch(80 % .136 193) stammen aus
-   der Filmfassung; die drei Putz- und Glanzvorlagen sind auf genau
-   diesen Winkel gedreht worden (198, 195, 200), damit sie eine Familie
-   bilden. Türkis ist Akzent — ein Strich, ein Punkt, ein Zeichen —,
-   nie Fliesstext.
+   Der Farbwinkel (200) kommt aus dem Rauch des Films, die Tiefe aus den
+   beiden gestrichenen Wänden der Vorlage, der Akzent aus dem Plakat:
+   oklch(80 % .136 193). Türkis ist Akzent — ein Strich, ein Punkt, ein
+   Zeichen —, nie eine Fläche und nie Fliesstext.
 
    ── Die Fotos ─────────────────────────────────────────────────────────
 
@@ -35,12 +36,12 @@
 @font-face {
   font-family: 'Bodoni Moda';
   src: url('schrift/BodoniModa.woff2') format('woff2');
-  font-weight: 400 900; font-style: normal; font-display: swap;
+  font-weight: 400 700; font-style: normal; font-display: swap;
 }
 @font-face {
   font-family: 'Bodoni Moda';
   src: url('schrift/BodoniModa-Italic.woff2') format('woff2');
-  font-weight: 400 900; font-style: italic; font-display: swap;
+  font-weight: 400 700; font-style: italic; font-display: swap;
 }
 @font-face {
   font-family: 'Mulish';
@@ -71,22 +72,7 @@
 
   --auf-tiefe:       oklch(96.5% .012 190);
   --auf-tiefe-leise: oklch(84% .022 195);
-  --auf-tiefe-still: oklch(75% .026 200);
-
-  /* Schrift über dem Glanz des Auftakts. Diese Namen waren in der Leiste
-     und im Auftakt längst in Gebrauch, aber nirgends gesetzt — die
-     Schrift erbte dort bloss zufällig das Richtige. */
-  --auf-buehne:       oklch(97.5% .008 195);
-  --auf-buehne-leise: oklch(90% .022 195);
-  --auf-buehne-still: oklch(80% .03 198);
-
-  /* Der helle Putz der Stimmen. Die Schrift darauf ist Petrol, nicht
-     Schwarz: aus demselben Farbwinkel, nur ganz unten auf der Leiter.
-     Die Sterne sind eine Sprosse heller — Zeichen, keine Schrift. */
-  --putz-tinte:       oklch(21% .04 212);
-  --putz-tinte-leise: oklch(31% .045 210);
-  --putz-stern:       oklch(47% .095 199);
-  --putz-linie:       oklch(30% .05 205 / .22);
+  --auf-tiefe-still: oklch(70% .026 200);
 
   /* Die Lagune ist aus dem Rauch gemessen, nicht gewählt. Im
      kräftigsten Hundertstel der türkisen Bildpunkte liegt der Film bei
@@ -299,13 +285,8 @@ body:has(.stufe-liste) .wege {
 }
 .leiste-buehne .marke-zusatz,
 .leiste-buehne .wege a { color: var(--auf-buehne-leise); }
-/* Über dem Lichtband des Glanzes stand die Nummer mit 3,6:1 — die
-   Pille bringt deshalb ihren eigenen dunklen Grund mit. */
 .leiste-buehne .pille {
   border-color: oklch(97% .006 200 / .30); color: var(--auf-buehne);
-  background: oklch(9% .012 200 / .52);
-  -webkit-backdrop-filter: blur(8px);
-          backdrop-filter: blur(8px);
 }
 /* Der Klappknopf ist aus zwei Strichen gezeichnet; auf Schwarz müssen
    auch sie hell werden, sonst steht oben rechts nichts. */
@@ -316,7 +297,7 @@ body:has(.stufe-liste) .wege {
 }
 
 .marke {
-  display: inline-flex; align-items: baseline; gap: .55rem; flex-wrap: nowrap;
+  display: inline-flex; align-items: baseline; gap: .5rem; flex-wrap: wrap;
   font-family: 'Bodoni Moda', Didot, Georgia, serif;
   font-size: 1.28rem; line-height: 1.1;
   letter-spacing: -.005em; font-kerning: normal;
@@ -326,16 +307,7 @@ body:has(.stufe-liste) .wege {
    auch „BaHaar's" erwischt und ihm die Serife genommen — und am schmalen
    Schirm beide ausgeblendet, sodass in der Leiste gar kein Name mehr
    stand. Der Name geht nie weg, nur der Zusatz. */
-/* Der Name bricht nie um: `a` darf sonst überall trennen, und am
-   Telefon stand „BaHaa / r's" in zwei Zeilen. */
-.marke-wort { font-family: inherit; white-space: nowrap; overflow-wrap: normal; }
-/* Das kleine Zeichen vor dem Namen: der Ring des Siegels mit dem B,
-   in einer Fassung mit kräftigeren Haarstrichen, die bei 30 px nicht
-   verschwinden. */
-.marke-zeichen {
-  flex: none; align-self: center;
-  width: 30px; height: 30px;
-}
+.marke-wort { font-family: inherit; }
 .marke-zusatz {
   font-family: 'Mulish', system-ui, sans-serif;
   font-size: .6rem; font-weight: 500;
@@ -443,111 +415,74 @@ body:has(.stufe-liste) .wege {
    Verlauf aus Papier.                                                 */
 
 /* ── Der Auftakt ──────────────────────────────────────────────────────
-   Der Glanz trägt den ersten Bildschirm, davor steht die freigestellte
-   Schere. Der Schleier liegt nicht über der ganzen Fläche: nur die
-   Ränder oben und unten, dazu der Schatten hinter dem Textblock. Vier
-   Fünftel des Bildes bleiben offen.                                  */
+   Schwarze Bühne, darauf der Film und mittig die Wortmarke. Der Film
+   ist quadratisch (960 × 960) — am breiten Schirm schneidet `cover`
+   oben und unten ab, am hohen Schirm links und rechts. Beides trifft
+   nur Rauch, die Schere bleibt in der Mitte.
+
+   Der Schleier liegt nicht über der ganzen Fläche: er ist eine weiche
+   Ellipse hinter dem Textblock plus je ein Rand oben und unten. Vier
+   Fünftel des Films bleiben offen.                                   */
 
 .auftakt {
   position: relative;
   isolation: isolate;
   /* Die Leiste klebt oben und liegt darüber, statt einen weissen
-     Streifen über das Bild zu legen: der Auftakt wird um ihre Höhe nach
+     Streifen über den Film zu legen: der Auftakt wird um ihre Höhe nach
      oben gezogen und beginnt an der Kante des Fensters. */
   margin-top: calc(-1 * var(--leiste));
   min-height: min(100svh, 980px);
   /* Die Schere steht oben und bleibt frei, die Schrift sitzt unten. Ein
-     Schleier mitten im Bild hätte genau das verdeckt, wofür das Bild
-     da ist. */
+     Schleier mitten im Bild hätte genau das verdeckt, wofür der Film da
+     ist. */
   display: grid; align-items: end; justify-items: center;
   padding: calc(var(--leiste) + var(--a4)) var(--rand) var(--a5);
   overflow: hidden;
-  background: var(--nacht);
+  /* Durchsichtig: hier soll der Film aus dem Raum dahinter voll zu
+     sehen sein. Ein eigener Grund würde ihn zudecken. */
+  background: transparent;
   color: var(--auf-tiefe);
 }
 
-/* Der Glanz: ein Hochformat aus Petrol, einem Lichtband und
-   funkelndem Staub. Am Telefon passt das Format fast genau; am breiten
-   Schirm schneidet `cover` oben und unten, und der Ausschnitt sitzt so,
-   dass die Welle aus Staub unten durchs Bild läuft. Das Bild ist
-   unscharf gemacht — eine Vergrösserung um ein Viertel sieht man ihm
-   nicht an. */
-.auftakt-grund {
-  position: absolute; inset: 0; z-index: -2;
-  width: 100%; height: 100%;
-  object-fit: cover; object-position: 50% 44%;
-}
-
-/* Der Schleier nimmt nur die Ränder: unten in den Grund der Seite
-   hinein, oben ein schmales Band für die Leiste. Hinter der Schrift
-   sorgt ihr eigener Schatten für Ruhe — die Fläche bleibt offen. */
 .auftakt-schleier {
   position: absolute; inset: 0; z-index: -1;
   background:
+    /* Von unten herauf, dicht dort, wo die Schrift steht, und oberhalb
+       der Schere restlos offen. */
+    /* Die Wortmarke steht gemessen zwischen 44 % und 65 % der
+       Auftakthöhe — also genau dort, wo der Schleier vorher schon
+       dünn wurde (.58 bei 54 %, .20 bei 64 %). Die grösste Schrift
+       der Seite lag im schwächsten Teil des Verlaufs. Jetzt hält er
+       bis über ihre Oberkante und lässt erst darüber los; ab 84 % ist
+       die Aufnahme wieder ganz offen, und das ist der Teil mit der
+       Schere und dem hellen Rauch. */
     linear-gradient(to top,
       var(--nacht) 0%,
-      oklch(11% .012 200 / .78) 9%,
-      oklch(11% .012 200 / .30) 22%,
-      transparent 38%),
-    linear-gradient(to bottom, oklch(9% .012 200 / .55) 0%, transparent 15%);
+      oklch(7% .010 200 / .92) 18%,
+      oklch(7% .010 200 / .52) 34%,
+      oklch(7% .010 200 / .22) 50%,
+      oklch(7% .010 200 / .06) 64%,
+      transparent 74%),
+    /* Ein schmales Band oben, damit die Leiste und die Eckzeilen einen
+       Grund haben. */
+    linear-gradient(to bottom, oklch(7% .010 200 / .62) 0%, transparent 16%);
 }
 
-/* Die Schere, aus der Aufnahme gelöst. Sie steht rechts, wo am breiten
-   Schirm keine Schrift steht, und wirft einen weichen Schatten mit
-   Versatz nach unten auf den Glanz — so schwebt sie davor, statt
-   aufgeklebt zu wirken. Sie wird nie grösser gezeigt als ihre Vorlage
-   (867 px hoch). */
-.auftakt-schere {
-  position: absolute; z-index: 0;
-  pointer-events: none;
-  right: max(var(--rand), calc((100vw - var(--spalte)) / 2 + var(--rand)));
-  top: 50%;
-  height: min(74svh, 620px);
-  aspect-ratio: 521 / 867;
-  translate: 0 -46%;
-}
-.auftakt-schere img {
-  width: 100%; height: 100%;
-  rotate: -7deg;
-  filter: drop-shadow(0 26px 30px oklch(8% .03 205 / .55))
-          drop-shadow(0 4px 6px oklch(8% .03 205 / .35));
-  animation: schere-schweben 14s cubic-bezier(.33, 0, .2, 1) infinite;
-}
-/* Ein langsames Schweben, damit das Metall im Licht lebt. Jede Hälfte
-   bremst in ihren Umkehrpunkt hinein; bei acht Pixeln in sieben
-   Sekunden ist die Umkehr nicht zu sehen. */
-@keyframes schere-schweben {
-  0%, 100% { transform: translate3d(0, 0, 0); }
-  50%      { transform: translate3d(0, -9px, 0); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .auftakt-schere img { animation: none; }
-}
-
-/* Am Telefon steht die Schere oben, die Schrift darunter. */
-@media (max-width: 61.99rem) {
-  .auftakt-schere {
-    right: 50%; top: calc(var(--leiste) + 1rem);
-    height: min(38svh, 340px);
-    translate: 50% 0;
+/* Am schmalen Schirm steht weniger Bild zur Verfügung; der Übergang
+   muss deshalb früher dicht sein, sonst rückt die Klinge in die Zeile. */
+@media (max-width: 48rem) {
+  .auftakt-schleier {
+    background:
+      /* Am schmalen Schirm steht die Wortmarke zwischen 50 % und 59 %. */
+      linear-gradient(to top,
+        var(--nacht) 0%,
+        oklch(7% .010 200 / .94) 20%,
+        oklch(7% .010 200 / .56) 38%,
+        oklch(7% .010 200 / .24) 54%,
+        oklch(7% .010 200 / .07) 68%,
+        transparent 78%),
+      linear-gradient(to bottom, oklch(7% .010 200 / .70) 0%, transparent 14%);
   }
-  .auftakt-schere img { rotate: -18deg; }
-}
-
-/* Der Auftritt: ein gestalteter Moment, in Gruppen zu dritt. Die
-   Schere kommt mit der ersten Gruppe. Solange das Skript noch nicht
-   gelaufen ist (`vorlauf`), bleibt der Auftakt leer; die Klasse nimmt
-   sich nach 1,6 s selbst zurück. */
-.vorlauf .auftakt-satz > *, .vorlauf .auftakt-schere { opacity: 0; }
-.auftritt-gross {
-  opacity: 0;
-  transform: translate3d(0, 18px, 0);
-  filter: blur(8px);
-}
-.auftakt-schere.auftritt-gross { transform: translate3d(0, 34px, 0) rotate(-3deg); }
-.auftritt-gross.auftritt-da {
-  opacity: 1; transform: none; filter: none;
-  transition: opacity .9s var(--kurve), transform .9s var(--kurve), filter .9s var(--kurve);
 }
 
 .auftakt-satz {
@@ -661,26 +596,19 @@ body:has(.stufe-liste) .wege {
 }
 
 /* ── Der Auftakt am schmalen Schirm: die Schere oben, die Schrift tief
-   Am Telefon steht die Schere oben in der Mitte; der Textblock rückt so
-   weit nach unten, wie er kann, und wird dafür enger gesetzt. Nichts
-   davon wird kleiner, nur die Abstände. Sein Schatten ist hier dichter
-   als am breiten Schirm, weil unter ihm das Lichtband des Glanzes
-   durchläuft. */
+   Am Telefon füllt die Schere die ganze Breite — zur Seite ausweichen
+   geht nicht, also nach unten. Gemessen liegt ihr Metall vor allem
+   zwischen einem Fünftel und vier Fünfteln der Höhe, am dichtesten im
+   oberen Drittel. Der Textblock rückt deshalb so weit nach unten, wie
+   er kann, und wird dafür enger gesetzt: die Luft zwischen Knöpfen und
+   Standmarke war der grösste Posten, dazu die Ränder um Wortmarke und
+   Knopfzeile. Nichts davon wird kleiner, nur die Abstände. */
 @media (max-width: 61.99rem) {
   .auftakt { padding-bottom: var(--a4); }
   .auftakt .wortmarke { margin-bottom: var(--a2); }
   .auftakt-lauf { margin-bottom: var(--a3); }
   .auftakt .wahl { margin-bottom: 0; }
   .auftakt .stand-chip { margin-top: var(--a3); }
-  .auftakt-satz::before {
-    background: linear-gradient(to bottom,
-      transparent 0%,
-      oklch(6% .010 200 / .42) 10%,
-      oklch(6% .010 200 / .66) 24%,
-      oklch(6% .010 200 / .66) 70%,
-      oklch(6% .010 200 / .40) 88%,
-      transparent 100%);
-  }
 }
 
 /* Die Standmarke sitzt unter den Knöpfen, wie der kleine Knopf in der
@@ -860,14 +788,18 @@ body:has(.stufe-liste) .wege {
     oklch(86% .10 192 / .24) 0%, oklch(86% .10 192 / .06) 52%, transparent 100%);
   animation: vorhang-zug-b 23s linear infinite;
 }
-/* Das Siegel eröffnet die Seite, dasselbe Siegel schliesst sie im Fuss. */
-.vorhang-siegel {
+.vorhang-marke {
   position: relative;
-  width: clamp(9rem, 34vw, 13rem); height: auto;
+  margin: 0;
+  font-family: 'Bodoni Moda', Didot, Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(2rem, 7vw, 3.4rem);
+  letter-spacing: -.01em;
+  color: var(--auf-tiefe);
   animation: vorhang-marke .9s var(--kurve) both;
 }
 
-/* Der Abgang: das Skript setzt die Klasse, sobald der Glanz bereit ist. */
+/* Der Abgang: das Skript setzt die Klasse, sobald der Film läuft. */
 .vorhang.geht {
   animation: none;
   opacity: 0;
@@ -1113,68 +1045,125 @@ body:has(.stufe-liste) .wege {
 /* ═══ Ein Raum, keine Platten ══════════════════════════════════════════
    Die Seite hatte sieben verschiedenfarbige Abschnitte übereinander —
    auf Seitenlänge las sich das als Zufall, nicht als Aufbau. Jetzt gibt
-   es nur noch einen Grund: die gestrichene Wand hinter allem.
+   es nur noch einen Grund: den dunklen Raum, in dem der Film steht.
 
-   Jeder Abschnitt legt sich als Scheibe darüber und lässt die
-   Pinselzüge durch. Die Abschnitte unterscheiden sich durch Form, nicht
-   durch Farbe — mit einer Ausnahme: die Stimmen stehen auf hellem Putz.
+   Der Film liegt fest im Fenster hinter allem. Jeder Abschnitt legt
+   sich als fast deckende Scheibe darüber und lässt einen Rest Rauch
+   durch — im Auftakt viel, weiter unten wenig. Dadurch zieht beim
+   Scrollen dieselbe Bewegung durch die ganze Seite, und die Abschnitte
+   unterscheiden sich nicht mehr durch Farbe, sondern durch Form.
 
    Farbe kommt aus den Fotos. Türkis ist Akzent, keine Fläche.
    ═══════════════════════════════════════════════════════════════════ */
 
 /* Nicht hinter den Seitengrund, sondern davor: ein Element mit
    negativer Ebene liegt hinter der Grundfarbe des Dokuments und wäre
-   unsichtbar. Der dunkle Grund gehört deshalb an `html`, die Wand liegt
+   unsichtbar. Der dunkle Grund gehört deshalb an `html`, der Film liegt
    darüber, und alles Sichtbare wieder über ihm. */
 html { background: var(--nacht); }
 body { background: transparent; }
 
-/* Die Wand. Pinselputz in tiefem Petrol, fest im Fenster hinter der
-   ganzen Seite. Aus einer mittleren Türkis-Vorlage gewonnen: Farbwinkel
-   von 209 auf 200 gedreht (der Winkel der Seite), Helligkeit von 55 %
-   auf 30 % gesenkt und die Pinselzüge dabei um ein Viertel gespreizt,
-   damit sie in der Tiefe nicht absaufen.
+/* Zwei Ebenen, nicht eine: unten das Standbild, darüber der Film.
 
-   Ein eigenes festes Element, nicht `background-attachment: fixed` am
-   Dokument: das ignoriert Safari auf dem iPhone, und die Aufnahme würde
-   über die ganze Seitenlänge gezogen. */
-.raum-grund {
+   Der Abspielknopf, den man mitten im Bild sah, kam nicht aus der
+   Aufnahme, sondern von Safari: verweigert iOS den selbsttätigen Start
+   — im Stromsparmodus tut es das immer —, legt es seinen eigenen
+   Knopf über das Videofeld. Ihn wegzublenden ist ein Wettlauf, den man
+   nicht gewinnt; jede Safari-Fassung baut die Bedienelemente anders.
+   Deshalb bekommt das Videofeld gar keine Gelegenheit: es ist
+   unsichtbar, bis der Film wirklich läuft. Was man solange sieht, ist
+   das Standbild darunter — und wenn der Film nie kommt, bleibt es
+   dabei. Der Ladezustand ist die Rückfallebene.
+
+   Das Standbild liegt auf einem eigenen festen Element, nicht als
+   `background-attachment: fixed` am Dokument: das ignoriert Safari auf
+   dem iPhone, und die Aufnahme würde über die ganze Seitenlänge
+   gezogen. */
+.raum-grund,
+.raum-film {
   position: fixed; inset: 0; z-index: 0;
+  width: 100%; height: 100%;
   pointer-events: none;
-  background: var(--nacht) url('bilder/grund-wand.webp') 50% 50% / cover no-repeat;
 }
-/* Ein Hauch Korn über der Wand. Die Vorlage ist gut 1100 px breit und
-   wird am breiten Schirm etwas vergrössert; feines, stehendes Korn
-   liest sich dann als Putz statt als Unschärfe. Mittelgraues Rauschen
-   über `overlay` lässt die Farbe unangetastet. */
+.raum-grund {
+  background: var(--nacht) url('bilder/schere-rauch-standbild.webp') 50% 30% / cover no-repeat;
+}
+.raum-film {
+  object-fit: cover; object-position: 50% 30%;
+  /* Hier stand einmal `filter: saturate(1.16)`. Gemessen an dem, was
+     der Browser wirklich malt, kostete die Zeile 3,5 % Kantenschärfe —
+     bei einfacher wie bei doppelter Punktdichte gleich: ein CSS-Filter
+     schiebt das Videofeld in eine eigene Rasterung, und die tastet
+     weicher ab. Die Buntheit steckt jetzt in der Datei selbst, wo sie
+     nichts kostet. Kein Filter, kein `will-change`, keine
+     `transform` auf diesem Element — jede davon holt denselben
+     Umweg zurück. */
+  transition: opacity .7s var(--kurve);
+}
+/* Das Videofeld wird nie weggeblendet. Ein Feld mit `opacity: 0` gilt
+   Safari auf dem iPhone als unsichtbar, und einen unsichtbaren Film
+   startet es nicht von selbst — die Zeile, die den Abspielknopf
+   verstecken sollte, hat dadurch den Film ausgesperrt. Solange er nicht
+   läuft, zeigt das Feld sein Vorschaubild, und das ist dasselbe
+   Standbild wie darunter.
+
+   Die Bedienelemente von WebKit bleiben ausgeblendet, in zwei
+   getrennten Regeln, damit ein Browser ohne das eine Pseudo-Element
+   nicht gleich beide verwirft. */
+.raum-film::-webkit-media-controls-start-playback-button {
+  display: none !important;
+  -webkit-appearance: none;
+}
+.raum-film::-webkit-media-controls {
+  display: none !important;
+}
+/* Ein Hauch Korn über dem Film. Die Vorlage ist 960 × 960 und wird auf
+   jedem heutigen Schirm um das Zwei- bis Dreifache vergrössert; das
+   lässt sich nicht zurückrechnen, aber es lässt sich anders lesbar
+   machen. Eine glatte Vergrösserung wirkt matschig, dieselbe Fläche
+   mit feinem Korn wirkt fotografisch. Das Korn steht still — Korn, das
+   sich bewegt, wäre eine vierte Bewegung im Bild, und es sind schon
+   drei. Mittelgraues Rauschen über `overlay` lässt die Farbe
+   unangetastet, `stitchTiles` setzt die Kacheln ohne Naht aneinander. */
 .raum-korn {
   position: fixed; inset: 0; z-index: 0;
   pointer-events: none;
-  opacity: .22;
+  opacity: .28;
   mix-blend-mode: overlay;
   background-repeat: repeat;
   background-size: 180px 180px;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='k'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.86' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23k)'/%3E%3C/svg%3E");
 }
+@media (prefers-reduced-motion: reduce) { .raum-korn { opacity: .2; } }
 
 main, .fuss { position: relative; z-index: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .raum-film { display: none; }
+}
 
-/* Die Scheibe. `--durch` steuert, wie viel Wand ein Abschnitt
-   durchlässt — der einzige Regler, den die Seite für Tiefe braucht.
-   Beim Film lag er bei .86, weil Bewegung schon in kleinen Resten
-   sichtbar ist. Eine stehende Wand braucht mehr Durchlass, damit man
-   die Pinselzüge überhaupt als Material liest; die Schrift hält dabei
-   trotzdem über 7:1 (gemessen, siehe UEBERGABE.md). */
+/* Die Scheibe. `--durch` steuert, wie viel Rauch ein Abschnitt
+   durchlässt — das ist der einzige Regler, den die Seite für Tiefe
+   braucht.
+
+   Der Wert ist gemessen, nicht geschätzt. Der Film schwankt an einem
+   Bildpunkt im Mittel um 20,8 sRGB-Stufen; hinter einer Scheibe bleibt
+   davon `(1 - --durch) × 20,8`. Bei .955 waren das 0,9 Stufen — unter
+   der Schwelle, deshalb stand der Rauch überall still ausser im Band.
+   Ab rund 2 Stufen liest das Auge Bewegung. Nach oben begrenzt das
+   nicht der Kontrast (der Plattenton ist sRGB 2,5,6; selbst bei .86
+   hält die leiseste Schrift noch 5,6:1 gegen die hellste Stelle des
+   Films), sondern die Ruhe: über einem langen Text darf sich nur so
+   viel regen, dass man es merkt, ohne hinzusehen. */
 .band, .stufe, .werk, .urteil, .laden, .kontakt, .fuss, .kopf-tief, .recht {
   position: relative;
-  --durch: .72;
+  --durch: .86;                 /* 2,9 Stufen — deutlich, nicht laut */
   background: oklch(11% .012 200 / var(--durch));
   color: var(--auf-tiefe);
 }
-.band  { --durch: .60; }        /* die schmale Zeile zeigt am meisten Wand */
-.werk  { --durch: .66; }
-.fuss  { --durch: .82; }        /* unten wird es ruhiger */
-.recht { --durch: .86; }        /* Impressum liest man am Stück */
+.band  { --durch: .83; }        /* 3,5 — die schmale Zeile darf leben */
+.werk  { --durch: .84; }        /* 3,3 — zwischen den Bildern viel Rauch */
+.fuss  { --durch: .90; }        /* 2,1 — unten wird es ruhiger */
+.recht { --durch: .90; }        /* 2,1 — Impressum liest man am Stück */
 
 /* ── Die Zeile unter dem Auftakt ──────────────────────────────────── */
 
@@ -1247,9 +1236,7 @@ main, .fuss { position: relative; z-index: 1; }
   grid-template-areas: "bild" "satz";
   gap: var(--a4);
   padding: 0 0 var(--a6);
-  /* Eine Scheibe wie die übrigen, nicht deckend: sonst stand das
-     Brautbild neben einem schwarzen Loch mitten in der Wand. */
-  background: oklch(11% .012 200 / .78);
+  background: var(--nacht);
   color: var(--auf-tiefe);
   border-block: 1px solid var(--linie-tiefe-fein);
 }
@@ -1478,99 +1465,6 @@ main, .fuss { position: relative; z-index: 1; }
 .urteil-satz .lauf { color: var(--auf-tiefe-leise); max-width: 34rem; }
 .urteil-satz .wahl { margin-top: var(--a3); }
 
-/* ── Stimmen ──────────────────────────────────────────────────────────
-   Der eine helle Abschnitt: heller Putz, aus einer grellen Türkis-
-   Vorlage auf 88 % Helligkeit und gut zwei Drittel der Buntheit
-   zurückgenommen, Farbwinkel 195. Darauf steht Petrol-Schrift — der
-   stärkste Kontrast der Seite liegt da, wo die Kundinnen sprechen.
-
-   Kein Raster aus gleichen Kärtchen: eine Stimme gross und kursiv,
-   die übrigen laufen in Spalten, jede so lang, wie sie geschrieben
-   wurde. */
-
-.stimmen {
-  position: relative;
-  padding: var(--a6) var(--rand);
-  background:
-    linear-gradient(oklch(93% .03 195 / .38), oklch(93% .03 195 / .38)),
-    oklch(88% .06 195) url('bilder/grund-licht.webp') 50% 50% / cover no-repeat;
-  color: var(--putz-tinte);
-  border-block: 1px solid oklch(80% .075 193 / .35);
-}
-.stimmen-bau { display: grid; gap: var(--a5); }
-@media (min-width: 62rem) {
-  .stimmen-bau {
-    grid-template-columns: minmax(0, 23rem) minmax(0, 1fr);
-    gap: var(--a5) clamp(3rem, 6vw, 6rem);
-    align-items: start;
-  }
-  .stimmen-kopf { position: sticky; top: calc(var(--leiste) + var(--a3)); }
-}
-.stimmen .gross { color: var(--putz-tinte); }
-.stimmen .gross em { font-style: italic; color: var(--putz-tinte); }
-.stimmen .lauf { color: var(--putz-tinte-leise); max-width: 30rem; }
-
-.stimmen-note {
-  display: flex; align-items: center; gap: var(--a2);
-  margin: 0 0 var(--a3);
-  padding-block: var(--a2);
-  border-block: 1px solid var(--putz-linie);
-}
-.stimmen-wert {
-  margin: 0;
-  font-family: 'Bodoni Moda', Didot, Georgia, serif;
-  font-size: 3.4rem; line-height: 1; letter-spacing: -.02em;
-  color: var(--putz-tinte);
-}
-.stimmen-note .urteil-sterne { justify-content: start; margin: 0 0 .3rem; }
-.stimmen-note .urteil-grund { color: oklch(47% .095 199 / .28); }
-.stimmen-note .urteil-fuell { color: var(--putz-stern); }
-.stimmen-mass { margin: 0; font-size: var(--t-klein); color: var(--putz-tinte-leise); }
-
-/* Auf hellem Grund ist der stille Knopf dunkel umrandet. */
-.stimmen .knopf-still { border-color: oklch(30% .05 205 / .45); color: var(--putz-tinte); }
-@media (hover: hover) and (pointer: fine) {
-  .stimmen .knopf-still:hover { border-color: var(--putz-tinte); }
-}
-.stimmen :focus-visible { outline-color: var(--putz-tinte); }
-
-.stimmen-liste {
-  columns: 1;
-  column-gap: var(--a4);
-}
-@media (min-width: 44rem) { .stimmen-liste { columns: 2; } }
-.stimme {
-  break-inside: avoid;
-  margin: 0 0 var(--a4);
-  padding-top: var(--a3);
-  border-top: 1px solid var(--putz-linie);
-}
-.stimme blockquote { margin: 0 0 var(--a2); }
-.stimme p {
-  margin: 0;
-  font-family: 'Bodoni Moda', Didot, Georgia, serif;
-  font-size: 1.22rem; line-height: 1.42;
-  color: var(--putz-tinte);
-  text-wrap: pretty;
-}
-.stimme p::before { content: "\201E"; }
-.stimme p::after  { content: "\201C"; }
-/* Die grosse Stimme geht über beide Spalten. */
-.stimme-gross { column-span: all; border-top: 0; padding-top: 0; margin-bottom: var(--a5); }
-.stimme-gross p {
-  font-style: italic;
-  font-size: clamp(1.7rem, 3.4vw, 2.6rem); line-height: 1.3;
-  letter-spacing: -.012em;
-}
-.stimme figcaption {
-  display: flex; flex-wrap: wrap; align-items: center; gap: .3rem .75rem;
-  font-size: .8125rem;
-  color: var(--putz-tinte-leise);
-}
-.stimme-sterne { display: inline-flex; gap: 2px; line-height: 0; color: var(--putz-stern); }
-.stimme-sterne svg { width: 13px; height: 12px; fill: currentColor; }
-.stimme-wer { font-weight: 700; letter-spacing: .04em; color: var(--putz-tinte); }
-
 /* ── Wo Sie mich finden ───────────────────────────────────────────────
    Anschrift und Nummer links, die Zeiten als Karte rechts. */
 
@@ -1644,27 +1538,10 @@ main, .fuss { position: relative; z-index: 1; }
 
 /* ── Fuss ─────────────────────────────────────────────────────────── */
 
-.fuss {
-  border-top: 1px solid var(--linie-tiefe-fein);
-  padding: var(--a5) 0 var(--a4);
-  text-align: center;
-  font-size: var(--t-klein);
-  color: var(--auf-tiefe-still);
-}
-.fuss-siegel { width: 11rem; height: auto; margin: 0 auto var(--a3); }
-.fuss-marke {
-  margin: 0 0 var(--a3);
-  font-family: 'Bodoni Moda', Didot, Georgia, serif;
-  font-size: 1.35rem;
-  color: var(--auf-tiefe);
-}
-.fuss-wege { display: flex; flex-wrap: wrap; justify-content: center; gap: .4rem var(--a3); }
-.fuss-wege a { padding-block: .35rem; color: var(--lagune); }
-.fuss-recht {
-  margin: var(--a3) 0 0;
-  font-size: var(--t-marke); letter-spacing: .02em;
-  color: var(--auf-tiefe-still);
-}
+.fuss { border-top: 1px solid var(--linie-tiefe-fein); color: var(--auf-tiefe-still); }
+.fuss-marke { color: var(--auf-tiefe); }
+.fuss-wege a { color: var(--lagune); }
+.fuss-recht { color: var(--auf-tiefe-still); }
 @media (hover: hover) and (pointer: fine) {
   .fuss-wege a:hover { color: var(--lagune-hell); }
 }
