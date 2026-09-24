@@ -109,13 +109,93 @@
   setInterval(standSetzen, 60000);
 })();
 
+/* ── Der Film im Raum ───────────────────────────────────────────────────
+   Safari auf dem iPhone startet einen Film von sich aus nur, wenn er
+   stumm ist und `playsinline` trägt. Zwei Dinge standen dem hier im
+   Weg, beide selbst gebaut:
+
+   Erstens hat ein Zeitgeber das Videofeld nach 2,2 s auf `opacity: 0`
+   gesetzt, falls bis dahin nichts lief. Ein weggeblendetes Feld gilt
+   Safari als unsichtbar, und einen unsichtbaren Film startet es nicht
+   mehr — auf einer langsamen Verbindung war der Film also jedes Mal
+   ausgesperrt, bis jemand den Schirm berührte. Es wird jetzt gar nichts
+   mehr weggeblendet. Darunter liegt ohnehin dasselbe Standbild; solange
+   der Film nicht läuft, sieht man es durch das Videofeld hindurch als
+   dessen Vorschaubild, und es sieht gleich aus.
+
+   Zweitens reicht das Attribut `muted` im Quelltext nicht überall aus.
+   WebKit prüft beim Start die Eigenschaft am Element, und die muss
+   gesetzt sein, bevor `play()` gerufen wird. Dasselbe gilt für
+   `playsInline`. Beides wird deshalb hier noch einmal von Hand gesetzt.
+
+   Drittens: ein einziger Anlauf genügt nicht. Der Film wird bei jedem
+   Ladeschritt neu angestossen und danach noch ein paar Mal in kurzem
+   Abstand — WebKit nimmt `play()` oft erst an, wenn genug im Puffer
+   liegt. Die Berührung bleibt als letzter Ausweg, aber sie sollte nie
+   nötig sein. Im Stromsparmodus verweigert iOS den Start grundsätzlich;
+   dann bleibt das Standbild stehen, und das ist der geplante Zustand,
+   kein Fehlerbild. */
+
+(function () {
+  const film = document.querySelector('.raum-film');
+  if (!film) return;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  /* Vor jedem play(): WebKit liest die Eigenschaften, nicht die
+     Attribute. */
+  film.muted = true;
+  film.defaultMuted = true;
+  film.playsInline = true;
+  film.setAttribute('playsinline', '');
+  film.setAttribute('webkit-playsinline', '');
+
+  const laeuft = () => film.currentTime > 0 && !film.paused && !film.ended;
+
+  function anstossen() {
+    if (laeuft()) return;
+    film.muted = true;
+    const p = film.play();
+    if (p && typeof p.catch === 'function') p.catch(() => {});
+  }
+
+  /* Bei jedem Ladeschritt neu versuchen. */
+  for (const art of ['loadedmetadata', 'loadeddata', 'canplay', 'canplaythrough', 'suspend'])
+    film.addEventListener(art, anstossen);
+
+  /* Und ein paar Mal kurz hintereinander: oft nimmt WebKit erst an,
+     wenn genug im Puffer liegt. Danach ist Schluss — endloses Pochen
+     kostet nur Strom. */
+  let anlauf = 0;
+  const takt = setInterval(() => {
+    if (laeuft() || ++anlauf > 12) { clearInterval(takt); return; }
+    anstossen();
+  }, 400);
+
+  /* Kommt der Schirm aus dem Hintergrund zurück, hält iOS den Film oft
+     angehalten. */
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) anstossen();
+  });
+
+  /* Letzter Ausweg, falls iOS den Start rundheraus verweigert. */
+  function beiBeruehrung() {
+    anstossen();
+    if (laeuft())
+      for (const art of ['pointerdown', 'touchstart', 'scroll', 'keydown'])
+        removeEventListener(art, beiBeruehrung);
+  }
+  for (const art of ['pointerdown', 'touchstart', 'scroll', 'keydown'])
+    addEventListener(art, beiBeruehrung, { passive: true });
+
+  anstossen();
+})();
+
 /* ── Der Vorhang ────────────────────────────────────────────────────────
-   Er geht, sobald das Bild des Auftakts dekodiert ist — dann steht der
-   Glanz schon da, wenn der Vorhang aufgeht, und nicht halb geladen.
-   Zwei Grenzen: frühestens nach 1 s, damit das Siegel nicht nur
-   aufblitzt, spätestens nach 2 s, denn niemand wartet auf eine
-   Kulisse. Kommt diese Datei gar nicht an, holt ihn die CSS-Animation
-   nach 5 s weg. */
+   Er geht, sobald der Film wirklich das erste Bild zeigt — dadurch
+   beginnt der Rauch für die Besucherin von vorn und nicht mittendrin.
+   Zwei Grenzen: nach 2,2 s geht er auch ohne Film (niemand wartet auf
+   eine Kulisse), und die CSS-Animation holt ihn nach 5 s weg, falls
+   diese Datei gar nicht ankommt. */
 
 (function () {
   const vorhang = document.querySelector('.vorhang');
@@ -125,7 +205,9 @@
     return;
   }
 
+  const film = document.querySelector('.raum-film');
   let fort = false;
+
   function heben() {
     if (fort) return;
     fort = true;
@@ -136,11 +218,14 @@
     document.documentElement.dispatchEvent(new CustomEvent('vorhang-weg'));
   }
 
-  const beginn = performance.now();
-  const bild = document.querySelector('.auftakt-grund');
-  const bereit = bild && bild.decode ? bild.decode().catch(() => {}) : Promise.resolve();
-  bereit.then(() => setTimeout(heben, Math.max(0, 1000 - (performance.now() - beginn))));
-  setTimeout(heben, 2000);
+  if (film) {
+    const laeuft = () => { if (film.currentTime > 0 && !film.paused) heben(); };
+    film.addEventListener('playing', laeuft);
+    film.addEventListener('timeupdate', laeuft);
+  }
+  /* Der Vorhang soll nicht länger stehen als nötig — auch dann nicht,
+     wenn der Film hängt oder gar nicht kommt. */
+  setTimeout(heben, 2200);
 })();
 
 /* ── Der Auftritt ───────────────────────────────────────────────────────
@@ -161,9 +246,7 @@
 
   const satz = document.querySelector('.auftakt-satz');
   if (satz && !ruhig) {
-    /* Die Schere kommt mit der ersten Gruppe. */
-    const schere = document.querySelector('.auftakt-schere');
-    const teile = [...(schere ? [schere] : []), ...satz.children];
+    const teile = [...satz.children];
     for (const el of teile) el.classList.add('auftritt-gross');
     wurzel.classList.remove('vorlauf');
 
@@ -198,7 +281,7 @@
      als Ganzes ein. */
   const ZIELE = '.gross, .wand-titel, .belege p, .fach, .werke-bahn, ' +
                 '.laden figure, .spruch, .abschluss, .spalten > div, .karte, ' +
-                '.stimme, .stimmen-kopf, .kontakt-satz, .zeiten-karte';
+                '.urteil-note, .urteil-satz, .kontakt-satz, .zeiten-karte';
 
   /* Nichts aus einem geschlossenen Fach: was `display: none` trägt,
      meldet der Beobachter nie — es bliebe beim Aufklappen unsichtbar

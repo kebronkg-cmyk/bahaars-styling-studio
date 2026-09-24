@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>BaHaar&rsquo;s Styling Studio &mdash; Ihr Friseur in M&uuml;nchen-Giesing</title>
 <meta name="description" content="Friseursalon an der Perlacher Stra&szlig;e 2 in M&uuml;nchen-Giesing. Bahar ist Friseurmeisterin und arbeitet seit zwanzig Jahren in M&uuml;nchen. Schnitt, Farbe, Str&auml;hnen, Hochsteckfrisuren, Brautstyling &mdash; mit und ohne Termin. Telefon 089 692 36 44.">
-<link rel="icon" href="logo-favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="neu.css">
 <!-- Verhindert, dass der Auftakt kurz steht und dann von vorn beginnt.
      Die Klasse nimmt sich selbst zurück, falls das Skript nie ankommt —
@@ -14,35 +14,41 @@
 <link rel="preload" href="schrift/BodoniModa.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="schrift/BodoniModa-Italic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="schrift/Mulish.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="bilder/grund-glanz.webp" as="image" fetchpriority="high">
 </head>
 <body>
 
 <!-- ══ Der Vorhang ═══════════════════════════════════════════════════════
-     Beim Betreten steht zuerst das Siegel, dann kommt die Seite. Er
-     geht, sobald das Bild des Auftakts dekodiert ist — frühestens nach
-     einer Sekunde, damit das Siegel nicht nur aufblitzt, spätestens
-     nach zwei. Kommt das Skript gar nicht an, holt ihn die Animation
-     nach 5 s von selbst weg. Er darf niemanden einsperren.            -->
+     Beim Betreten steht zuerst Rauch, dann kommt die Seite. Er geht,
+     sobald der Film wirklich läuft — so sieht die Besucherin ihn vom
+     ersten Bild an und nicht mittendrin. Kommt der Film nicht, geht der
+     Vorhang nach 2,2 s trotzdem; kommt das Skript gar nicht an, holt
+     ihn die Animation nach 5 s von selbst weg. Er darf niemanden
+     einsperren.                                                       -->
 <div class="vorhang" aria-hidden="true">
   <div class="vorhang-rauch"></div>
-  <img class="vorhang-siegel" src="logo-siegel.svg" alt="" width="200" height="200">
+  <p class="vorhang-marke">BaHaar&rsquo;s</p>
 </div>
 
 <a class="sprung" href="#auftakt-titel">Zum Inhalt springen</a>
 
 <!-- ══ Der Raum ══════════════════════════════════════════════════════════
-     Hinter der ganzen Seite steht eine gestrichene Wand: Pinselputz in
-     tiefem Petrol, fest im Fenster. Die Abschnitte legen sich als
-     Scheiben darüber und lassen die Pinselzüge durch. Der Film dieser
-     Stelle liegt unter `fassungen/video/` und kommt mit einem Befehl
-     zurück (siehe UEBERGABE.md).                                     -->
+     Der Film steht nicht im Auftakt, er steht hinter der ganzen Seite.
+     Fest im Fenster verankert, alles Weitere liegt darüber. Im Auftakt
+     ist er voll zu sehen; darunter lassen die Abschnitte nur noch einen
+     Rest durch, und der Rauch zieht beim Scrollen weiter durch den
+     Raum. Eine Kulisse, kein Deckblatt — deshalb zerfällt die Seite
+     nicht mehr in Platten.                                            -->
 <div class="raum-grund" aria-hidden="true"></div>
+<video class="raum-film" autoplay muted loop playsinline preload="auto"
+       poster="bilder/schere-rauch-standbild.webp" aria-hidden="true" tabindex="-1"
+       width="1440" height="1440">
+  <source src="bilder/schere-rauch.mp4" type="video/mp4">
+  <source src="bilder/schere-rauch.webm" type="video/webm">
+</video>
 <div class="raum-korn" aria-hidden="true"></div>
 
 <header class="leiste">
   <a class="marke" href="/" aria-label="BaHaar&rsquo;s Styling Studio, zur Startseite">
-    <img class="marke-zeichen" src="logo-zeichen.svg" alt="" width="30" height="30">
     <span class="marke-wort">BaHaar&rsquo;s</span>
     <span class="marke-zusatz">Styling&nbsp;Studio</span>
   </a>
@@ -63,17 +69,14 @@
 <main>
 
 <!-- ══ Auftakt ═══════════════════════════════════════════════════════════
-     Ein Glanz aus Petrol und Licht trägt den ersten Bildschirm, darauf
-     steht die Schere frei — aus der Aufnahme gelöst, nicht in einen
-     Kreis gestanzt. Am breiten Schirm rechts, die Schrift links; am
-     Telefon oben, die Schrift darunter.                                -->
+     Der Film trägt den ersten Bildschirm: eine Friseurschere im
+     türkisen Rauch, schwarz drumherum. Er ist zur Schleife geschnitten
+     (7,0 s, die letzte Sekunde blendet in die erste über), läuft ohne
+     Ton und ohne Bedienleiste. Das Standbild darunter ist die
+     Rückfallebene — was steht, solange der Film lädt, steht auch dann,
+     wenn er nie kommt.                                                -->
 <section class="auftakt">
-  <img class="auftakt-grund" src="bilder/grund-glanz.webp" alt=""
-       width="1138" height="1910" fetchpriority="high" decoding="async" aria-hidden="true">
   <div class="auftakt-schleier" aria-hidden="true"></div>
-  <div class="auftakt-schere" aria-hidden="true">
-    <img src="bilder/schere-frei.webp" alt="" width="521" height="867" decoding="async">
-  </div>
 
   <div class="auftakt-satz">
     <h1 class="wortmarke" id="auftakt-titel">
@@ -272,60 +275,33 @@
   </div>
 </section>
 
-<!-- ══ Stimmen ═══════════════════════════════════════════════════════════
-     Der eine helle Abschnitt der Seite: heller Putz, dunkle Schrift.
-     Die Stimmen sind echt — wörtlich aus dem Treatwell-Eintrag des
-     Salons übernommen (gelesen am 24.09.2026), mit Vorname, wie er dort
-     steht, und dem Datum. Kürzungen sind mit […] markiert, sonst ist
-     nichts geglättet, auch die Schreibweise nicht. Die Note bleibt als
-     Tafel stehen; der fünfte Stern ist zu 96 % gefüllt, weil 4,8 nicht
-     fünf ist.                                                           -->
-<section class="stimmen" id="bewertungen">
-  <div class="mitte stimmen-bau">
-    <div class="stimmen-kopf">
+<!-- ══ Das Urteil ════════════════════════════════════════════════════════
+     Aufbau wie bei Google: links die Note mit Sternen und der Zahl der
+     Bewertungen, rechts der Satz und die zwei Wege — lesen oder selbst
+     schreiben. Der fünfte Stern ist zu 80 % gefüllt, weil 4,8 nicht
+     fünf ist; eine gerundete Reihe wäre eine kleine Lüge.          -->
+<section class="urteil" id="bewertungen">
+  <div class="mitte urteil-bau">
+    <div class="urteil-note">
+      <p class="urteil-wert">4,8<span class="nurlesen"> von 5 Sternen</span></p>
+      <p class="urteil-sterne" style="--voll: 96%">
+        <span class="urteil-grund" aria-hidden="true"><svg viewBox="0 0 20 19" width="20" height="19" aria-hidden="true"><path d="M10 0l2.47 6.18 6.65.4-5.12 4.26 1.66 6.46L10 13.7l-5.66 3.6 1.66-6.46L.88 6.58l6.65-.4z"/></svg><svg viewBox="0 0 20 19" width="20" height="19" aria-hidden="true"><path d="M10 0l2.47 6.18 6.65.4-5.12 4.26 1.66 6.46L10 13.7l-5.66 3.6 1.66-6.46L.88 6.58l6.65-.4z"/></svg><svg viewBox="0 0 20 19" width="20" height="19" aria-hidden="true"><path d="M10 0l2.47 6.18 6.65.4-5.12 4.26 1.66 6.46L10 13.7l-5.66 3.6 1.66-6.46L.88 6.58l6.65-.4z"/></svg><svg viewBox="0 0 20 19" width="20" height="19" aria-hidden="true"><path d="M10 0l2.47 6.18 6.65.4-5.12 4.26 1.66 6.46L10 13.7l-5.66 3.6 1.66-6.46L.88 6.58l6.65-.4z"/></svg><svg viewBox="0 0 20 19" width="20" height="19" aria-hidden="true"><path d="M10 0l2.47 6.18 6.65.4-5.12 4.26 1.66 6.46L10 13.7l-5.66 3.6 1.66-6.46L.88 6.58l6.65-.4z"/></svg></span>
+        <span class="urteil-fuell" aria-hidden="true"><svg viewBox="0 0 20 19" width="20" height="19" aria-hidden="true"><path d="M10 0l2.47 6.18 6.65.4-5.12 4.26 1.66 6.46L10 13.7l-5.66 3.6 1.66-6.46L.88 6.58l6.65-.4z"/></svg><svg viewBox="0 0 20 19" width="20" height="19" aria-hidden="true"><path d="M10 0l2.47 6.18 6.65.4-5.12 4.26 1.66 6.46L10 13.7l-5.66 3.6 1.66-6.46L.88 6.58l6.65-.4z"/></svg><svg viewBox="0 0 20 19" width="20" height="19" aria-hidden="true"><path d="M10 0l2.47 6.18 6.65.4-5.12 4.26 1.66 6.46L10 13.7l-5.66 3.6 1.66-6.46L.88 6.58l6.65-.4z"/></svg><svg viewBox="0 0 20 19" width="20" height="19" aria-hidden="true"><path d="M10 0l2.47 6.18 6.65.4-5.12 4.26 1.66 6.46L10 13.7l-5.66 3.6 1.66-6.46L.88 6.58l6.65-.4z"/></svg><svg viewBox="0 0 20 19" width="20" height="19" aria-hidden="true"><path d="M10 0l2.47 6.18 6.65.4-5.12 4.26 1.66 6.46L10 13.7l-5.66 3.6 1.66-6.46L.88 6.58l6.65-.4z"/></svg></span>
+      </p>
+      <p class="urteil-mass">aus &uuml;ber 90 Bewertungen</p>
+    </div>
+    <div class="urteil-satz">
+      <p class="augenzeile">Bewertungen</p>
       <h2 class="gross">Das Urteil schreiben<br>die <em>Kundinnen</em>.</h2>
-      <div class="stimmen-note">
-        <p class="stimmen-wert">4,8<span class="nurlesen"> von 5 Sternen</span></p>
-        <div>
-          <p class="urteil-sterne" style="--voll: 96%">
-            <span class="urteil-grund" aria-hidden="true"><svg viewBox="0 0 20 19" width="20" height="19" aria-hidden="true"><path d="M10 0l2.47 6.18 6.65.4-5.12 4.26 1.66 6.46L10 13.7l-5.66 3.6 1.66-6.46L.88 6.58l6.65-.4z"/></svg><svg viewBox="0 0 20 19" width="20" height="19" aria-hidden="true"><path d="M10 0l2.47 6.18 6.65.4-5.12 4.26 1.66 6.46L10 13.7l-5.66 3.6 1.66-6.46L.88 6.58l6.65-.4z"/></svg><svg viewBox="0 0 20 19" width="20" height="19" aria-hidden="true"><path d="M10 0l2.47 6.18 6.65.4-5.12 4.26 1.66 6.46L10 13.7l-5.66 3.6 1.66-6.46L.88 6.58l6.65-.4z"/></svg><svg viewBox="0 0 20 19" width="20" height="19" aria-hidden="true"><path d="M10 0l2.47 6.18 6.65.4-5.12 4.26 1.66 6.46L10 13.7l-5.66 3.6 1.66-6.46L.88 6.58l6.65-.4z"/></svg><svg viewBox="0 0 20 19" width="20" height="19" aria-hidden="true"><path d="M10 0l2.47 6.18 6.65.4-5.12 4.26 1.66 6.46L10 13.7l-5.66 3.6 1.66-6.46L.88 6.58l6.65-.4z"/></svg></span>
-            <span class="urteil-fuell" aria-hidden="true"><svg viewBox="0 0 20 19" width="20" height="19" aria-hidden="true"><path d="M10 0l2.47 6.18 6.65.4-5.12 4.26 1.66 6.46L10 13.7l-5.66 3.6 1.66-6.46L.88 6.58l6.65-.4z"/></svg><svg viewBox="0 0 20 19" width="20" height="19" aria-hidden="true"><path d="M10 0l2.47 6.18 6.65.4-5.12 4.26 1.66 6.46L10 13.7l-5.66 3.6 1.66-6.46L.88 6.58l6.65-.4z"/></svg><svg viewBox="0 0 20 19" width="20" height="19" aria-hidden="true"><path d="M10 0l2.47 6.18 6.65.4-5.12 4.26 1.66 6.46L10 13.7l-5.66 3.6 1.66-6.46L.88 6.58l6.65-.4z"/></svg><svg viewBox="0 0 20 19" width="20" height="19" aria-hidden="true"><path d="M10 0l2.47 6.18 6.65.4-5.12 4.26 1.66 6.46L10 13.7l-5.66 3.6 1.66-6.46L.88 6.58l6.65-.4z"/></svg><svg viewBox="0 0 20 19" width="20" height="19" aria-hidden="true"><path d="M10 0l2.47 6.18 6.65.4-5.12 4.26 1.66 6.46L10 13.7l-5.66 3.6 1.66-6.46L.88 6.58l6.65-.4z"/></svg></span>
-          </p>
-          <p class="stimmen-mass">&uuml;ber 90 Bewertungen bei Treatwell</p>
-        </div>
-      </div>
       <p class="lauf">
-        Die j&uuml;ngsten Bewertungen im Wortlaut, alle mit f&uuml;nf
-        Sternen. Wenn Sie schon einmal auf meinem Stuhl sassen, freue ich
-        mich &uuml;ber Ihre.
+        Bei Google steht jede einzelne Bewertung mit Datum und Namen &mdash;
+        auch die kritischen, und die bleiben stehen. Wenn Sie schon einmal
+        auf meinem Stuhl sassen, freue ich mich &uuml;ber Ihre.
       </p>
       <div class="wahl">
-        <a class="knopf" href="https://www.treatwell.de/ort/bahaars-styling-studio/" target="_blank" rel="noopener">Alle Bewertungen lesen</a>
+        <a class="knopf" href="https://www.google.com/maps/search/?api=1&amp;query=BaHaar%27s%20Styling%20Studio%20Perlacher%20Stra%C3%9Fe%202%2081539%20M%C3%BCnchen" target="_blank" rel="noopener">Bewertungen ansehen</a>
         <a class="knopf-still" href="https://www.google.com/search?q=BaHaar%27s+Styling+Studio+Perlacher+Stra%C3%9Fe+2+81539+M%C3%BCnchen" target="_blank" rel="noopener">Bewertung schreiben</a>
       </div>
-    </div>
-
-    <div class="stimmen-liste">
-      <figure class="stimme stimme-gross">
-        <blockquote><p>Eine Friseurin mit viel K&ouml;nnen und einem guten Gef&uuml;hl, welcher Schnitt zu einem passt.</p></blockquote>
-        <figcaption><span class="stimme-sterne" role="img" aria-label="5 von 5 Sternen"><svg viewBox="0 0 20 19" width="20" height="19" aria-hidden="true"><path d="M10 0l2.47 6.18 6.65.4-5.12 4.26 1.66 6.46L10 13.7l-5.66 3.6 1.66-6.46L.88 6.58l6.65-.4z"/></svg><svg viewBox="0 0 20 19" width="20" height="19" aria-hidden="true"><path d="M10 0l2.47 6.18 6.65.4-5.12 4.26 1.66 6.46L10 13.7l-5.66 3.6 1.66-6.46L.88 6.58l6.65-.4z"/></svg><svg viewBox="0 0 20 19" width="20" height="19" aria-hidden="true"><path d="M10 0l2.47 6.18 6.65.4-5.12 4.26 1.66 6.46L10 13.7l-5.66 3.6 1.66-6.46L.88 6.58l6.65-.4z"/></svg><svg viewBox="0 0 20 19" width="20" height="19" aria-hidden="true"><path d="M10 0l2.47 6.18 6.65.4-5.12 4.26 1.66 6.46L10 13.7l-5.66 3.6 1.66-6.46L.88 6.58l6.65-.4z"/></svg><svg viewBox="0 0 20 19" width="20" height="19" aria-hidden="true"><path d="M10 0l2.47 6.18 6.65.4-5.12 4.26 1.66 6.46L10 13.7l-5.66 3.6 1.66-6.46L.88 6.58l6.65-.4z"/></svg></span><span class="stimme-wer">Horst</span><span class="stimme-wann"><time datetime="2026-09-02">2. September 2026</time> &middot; Treatwell</span></figcaption>
-      </figure>
-      <figure class="stimme">
-        <blockquote><p>Wieder einmal bin ich sehr zufrieden aus dem Salon gegangen. Wurde &uuml;berzeugt mutiger zu Ver&auml;nderungen - passend zu meinem Typ - zu sein und mich &uuml;berraschen zu lassen. Habe es nicht bereut. [&hellip;] Kundenorientiert - freundlich - empathisch</p></blockquote>
-        <figcaption><span class="stimme-sterne" role="img" aria-label="5 von 5 Sternen"><svg viewBox="0 0 20 19" width="20" height="19" aria-hidden="true"><path d="M10 0l2.47 6.18 6.65.4-5.12 4.26 1.66 6.46L10 13.7l-5.66 3.6 1.66-6.46L.88 6.58l6.65-.4z"/></svg><svg viewBox="0 0 20 19" width="20" height="19" aria-hidden="true"><path d="M10 0l2.47 6.18 6.65.4-5.12 4.26 1.66 6.46L10 13.7l-5.66 3.6 1.66-6.46L.88 6.58l6.65-.4z"/></svg><svg viewBox="0 0 20 19" width="20" height="19" aria-hidden="true"><path d="M10 0l2.47 6.18 6.65.4-5.12 4.26 1.66 6.46L10 13.7l-5.66 3.6 1.66-6.46L.88 6.58l6.65-.4z"/></svg><svg viewBox="0 0 20 19" width="20" height="19" aria-hidden="true"><path d="M10 0l2.47 6.18 6.65.4-5.12 4.26 1.66 6.46L10 13.7l-5.66 3.6 1.66-6.46L.88 6.58l6.65-.4z"/></svg><svg viewBox="0 0 20 19" width="20" height="19" aria-hidden="true"><path d="M10 0l2.47 6.18 6.65.4-5.12 4.26 1.66 6.46L10 13.7l-5.66 3.6 1.66-6.46L.88 6.58l6.65-.4z"/></svg></span><span class="stimme-wer">Lechner</span><span class="stimme-wann"><time datetime="2026-07-21">21. Juli 2026</time> &middot; Treatwell</span></figcaption>
-      </figure>
-      <figure class="stimme">
-        <blockquote><p>Termin online, netter Empfang, sch&ouml;ne Hochsteckfrisur und Kaffee gratis. Top!</p></blockquote>
-        <figcaption><span class="stimme-sterne" role="img" aria-label="5 von 5 Sternen"><svg viewBox="0 0 20 19" width="20" height="19" aria-hidden="true"><path d="M10 0l2.47 6.18 6.65.4-5.12 4.26 1.66 6.46L10 13.7l-5.66 3.6 1.66-6.46L.88 6.58l6.65-.4z"/></svg><svg viewBox="0 0 20 19" width="20" height="19" aria-hidden="true"><path d="M10 0l2.47 6.18 6.65.4-5.12 4.26 1.66 6.46L10 13.7l-5.66 3.6 1.66-6.46L.88 6.58l6.65-.4z"/></svg><svg viewBox="0 0 20 19" width="20" height="19" aria-hidden="true"><path d="M10 0l2.47 6.18 6.65.4-5.12 4.26 1.66 6.46L10 13.7l-5.66 3.6 1.66-6.46L.88 6.58l6.65-.4z"/></svg><svg viewBox="0 0 20 19" width="20" height="19" aria-hidden="true"><path d="M10 0l2.47 6.18 6.65.4-5.12 4.26 1.66 6.46L10 13.7l-5.66 3.6 1.66-6.46L.88 6.58l6.65-.4z"/></svg><svg viewBox="0 0 20 19" width="20" height="19" aria-hidden="true"><path d="M10 0l2.47 6.18 6.65.4-5.12 4.26 1.66 6.46L10 13.7l-5.66 3.6 1.66-6.46L.88 6.58l6.65-.4z"/></svg></span><span class="stimme-wer">Maria</span><span class="stimme-wann"><time datetime="2026-09-06">6. September 2026</time> &middot; Treatwell</span></figcaption>
-      </figure>
-      <figure class="stimme">
-        <blockquote><p>Ich war jetzt zum dritten Mal da und ich muss sagen, bis jetzt war es immer eine gute Erfahrung. Ich hab zwischendurch auch andere Friseurinnen ausprobiert, aber zu diesem gehe ich doch am Liebsten. [&hellip;]</p></blockquote>
-        <figcaption><span class="stimme-sterne" role="img" aria-label="5 von 5 Sternen"><svg viewBox="0 0 20 19" width="20" height="19" aria-hidden="true"><path d="M10 0l2.47 6.18 6.65.4-5.12 4.26 1.66 6.46L10 13.7l-5.66 3.6 1.66-6.46L.88 6.58l6.65-.4z"/></svg><svg viewBox="0 0 20 19" width="20" height="19" aria-hidden="true"><path d="M10 0l2.47 6.18 6.65.4-5.12 4.26 1.66 6.46L10 13.7l-5.66 3.6 1.66-6.46L.88 6.58l6.65-.4z"/></svg><svg viewBox="0 0 20 19" width="20" height="19" aria-hidden="true"><path d="M10 0l2.47 6.18 6.65.4-5.12 4.26 1.66 6.46L10 13.7l-5.66 3.6 1.66-6.46L.88 6.58l6.65-.4z"/></svg><svg viewBox="0 0 20 19" width="20" height="19" aria-hidden="true"><path d="M10 0l2.47 6.18 6.65.4-5.12 4.26 1.66 6.46L10 13.7l-5.66 3.6 1.66-6.46L.88 6.58l6.65-.4z"/></svg><svg viewBox="0 0 20 19" width="20" height="19" aria-hidden="true"><path d="M10 0l2.47 6.18 6.65.4-5.12 4.26 1.66 6.46L10 13.7l-5.66 3.6 1.66-6.46L.88 6.58l6.65-.4z"/></svg></span><span class="stimme-wer">Johanna</span><span class="stimme-wann"><time datetime="2026-07-27">27. Juli 2026</time> &middot; Treatwell</span></figcaption>
-      </figure>
-      <figure class="stimme">
-        <blockquote><p>Heute bei Maria, hat genau so geschnitten wie ich wollte, alles super!</p></blockquote>
-        <figcaption><span class="stimme-sterne" role="img" aria-label="5 von 5 Sternen"><svg viewBox="0 0 20 19" width="20" height="19" aria-hidden="true"><path d="M10 0l2.47 6.18 6.65.4-5.12 4.26 1.66 6.46L10 13.7l-5.66 3.6 1.66-6.46L.88 6.58l6.65-.4z"/></svg><svg viewBox="0 0 20 19" width="20" height="19" aria-hidden="true"><path d="M10 0l2.47 6.18 6.65.4-5.12 4.26 1.66 6.46L10 13.7l-5.66 3.6 1.66-6.46L.88 6.58l6.65-.4z"/></svg><svg viewBox="0 0 20 19" width="20" height="19" aria-hidden="true"><path d="M10 0l2.47 6.18 6.65.4-5.12 4.26 1.66 6.46L10 13.7l-5.66 3.6 1.66-6.46L.88 6.58l6.65-.4z"/></svg><svg viewBox="0 0 20 19" width="20" height="19" aria-hidden="true"><path d="M10 0l2.47 6.18 6.65.4-5.12 4.26 1.66 6.46L10 13.7l-5.66 3.6 1.66-6.46L.88 6.58l6.65-.4z"/></svg><svg viewBox="0 0 20 19" width="20" height="19" aria-hidden="true"><path d="M10 0l2.47 6.18 6.65.4-5.12 4.26 1.66 6.46L10 13.7l-5.66 3.6 1.66-6.46L.88 6.58l6.65-.4z"/></svg></span><span class="stimme-wer">Julius</span><span class="stimme-wann"><time datetime="2026-08-24">24. August 2026</time> &middot; Treatwell</span></figcaption>
-      </figure>
     </div>
   </div>
 </section>
@@ -408,7 +384,6 @@
 
 <footer class="fuss">
   <div class="mitte">
-    <img class="fuss-siegel" src="logo-siegel.svg" alt="" width="200" height="200" loading="lazy" decoding="async">
     <p class="fuss-marke">BaHaar&rsquo;s Styling Studio</p>
     <nav class="fuss-wege" aria-label="Rechtliches">
       <a href="leistungen.html">Preisliste</a>
