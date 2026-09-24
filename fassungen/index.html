@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fassungen &mdash; BaHaar&rsquo;s Styling Studio</title>
+<link rel="icon" href="hell/logo-favicon.svg" type="image/svg+xml">
+<style>
+  /* Übersicht der Entwurfsfassungen. Jede liegt vollständig in ihrem
+     eigenen Ordner, mit eigenen Bildern und Schriften — keine hängt an
+     einer anderen, und keine ändert sich, wenn die Hauptseite weiterzieht. */
+  @font-face { font-family: 'Gilda Display'; src: url('hell/schrift/GildaDisplay.woff2') format('woff2'); font-display: swap; }
+  @font-face { font-family: 'Gilda Display'; font-style: italic; src: url('hell/schrift/Rosarivo-Italic.woff2') format('woff2'); font-display: swap; }
+  @font-face { font-family: 'Mulish'; src: url('hell/schrift/Mulish.woff2') format('woff2'); font-weight: 300 800; font-display: swap; }
+  :root {
+    --grund: oklch(96.5% .014 196);
+    --karte: oklch(99% .006 196);
+    --schrift: oklch(24% .045 215);
+    --schrift-leise: oklch(38% .045 212);
+    --akzent-schrift: oklch(45% .095 200);
+    --linie: oklch(34% .05 208 / .16);
+    --kurve: cubic-bezier(.22, .61, .36, 1);
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  body {
+    margin: 0; padding: 3.5rem 1rem 4rem;
+    background: var(--grund); color: var(--schrift);
+    font: 1rem/1.6 'Mulish', system-ui, sans-serif;
+  }
+  main { max-width: 52rem; margin-inline: auto; }
+  h1 {
+    margin: 0 0 .4rem;
+    font: 400 3.4rem/1.05 'Gilda Display', Georgia, serif;
+  }
+  @media (max-width: 30rem) { h1 { font-size: 2.5rem; } }
+  h1 em { font-style: italic; }
+  .lauf { margin: 0 0 2.5rem; color: var(--schrift-leise); max-width: 36rem; }
+  ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; }
+  a.fassung {
+    display: grid; grid-template-columns: 1fr auto; gap: .2rem 1rem; align-items: baseline;
+    padding: 1.3rem 1.4rem;
+    background: var(--karte); border: 1px solid var(--linie); border-radius: 4px;
+    color: inherit; text-decoration: none;
+  }
+  .name { font: 400 1.9rem/1.2 'Gilda Display', Georgia, serif; }
+  .stand { font-size: .8125rem; color: var(--schrift-leise); white-space: nowrap; }
+  .was { grid-column: 1 / -1; color: var(--schrift-leise); font-size: .9375rem; }
+  .pfad { grid-column: 1 / -1; font-size: .8125rem; color: var(--akzent-schrift); }
+  a.fassung:focus-visible { outline: 2px solid var(--schrift); outline-offset: 3px; }
+  @media (hover: hover) and (pointer: fine) {
+    a.fassung { transition: transform .3s var(--kurve), border-color .3s var(--kurve); }
+    a.fassung:hover { transform: translateY(-2px); border-color: var(--akzent-schrift); }
+  }
+  .fuss { margin-top: 2.5rem; font-size: .8125rem; color: var(--schrift-leise); }
+  .fuss a { color: var(--akzent-schrift); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Die <em>Fassungen</em></h1>
+  <p class="lauf">
+    Alle Entwürfe der Seite, jeder vollständig und jederzeit aufrufbar.
+    Keine davon ist von Suchmaschinen erfasst; öffentlich ist nur die
+    Hauptseite.
+  </p>
+  <ol>
+    <li><a class="fassung" href="hell/">
+      <span class="name">Hell</span><span class="stand">24.09.2026 &middot; neu</span>
+      <span class="was">Heller Grund, selbst gerechnete Strähnen statt fremder Bilder, freigestellte Schere, Überschriften in Gilda Display, echte Bewertungen, Siegel.</span>
+      <span class="pfad">fassungen/hell/</span>
+    </a></li>
+    <li><a class="fassung" href="dunkel/">
+      <span class="name">Dunkel</span><span class="stand">24.09.2026</span>
+      <span class="was">Ohne Film: dunkler Petrol-Glanz, Pinselputz, freigestellte Schere, Bodoni, echte Bewertungen, Siegel. Hintergründe aus Pinterest-Vorlagen &mdash; Rechte ungeklärt.</span>
+      <span class="pfad">fassungen/dunkel/</span>
+    </a></li>
+    <li><a class="fassung" href="video/">
+      <span class="name">Mit Film</span><span class="stand">bis 24.09.2026</span>
+      <span class="was">Die Schere im türkisen Rauch als Film hinter der ganzen Seite, Bodoni, dunkler Raum.</span>
+      <span class="pfad">fassungen/video/</span>
+    </a></li>
+  </ol>
+  <p class="fuss"><a href="../">Zur Hauptseite</a></p>
+</main>
+</body>
+</html>

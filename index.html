@@ -11,9 +11,10 @@
      Die Klasse nimmt sich selbst zurück, falls das Skript nie ankommt —
      dann steht die Seite einfach da, statt unsichtbar zu bleiben. -->
 <script>var d=document.documentElement;d.className+=' vorlauf';setTimeout(function(){d.classList.remove('vorlauf')},1600)</script>
-<link rel="preload" href="schrift/GildaDisplay.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="schrift/Rosarivo-Italic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="schrift/BodoniModa.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="schrift/BodoniModa-Italic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="schrift/Mulish.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="bilder/grund-glanz.webp" as="image" fetchpriority="high">
 </head>
 <body>
 
@@ -31,9 +32,9 @@
 <a class="sprung" href="#auftakt-titel">Zum Inhalt springen</a>
 
 <!-- ══ Der Raum ══════════════════════════════════════════════════════════
-     Hinter der ganzen Seite steht eine helle Wand aus feinen Strähnen,
-     fest im Fenster. Die Abschnitte legen sich als Scheiben darüber und
-     lassen die Züge durch. Der Film dieser
+     Hinter der ganzen Seite steht eine gestrichene Wand: Pinselputz in
+     tiefem Petrol, fest im Fenster. Die Abschnitte legen sich als
+     Scheiben darüber und lassen die Pinselzüge durch. Der Film dieser
      Stelle liegt unter `fassungen/video/` und kommt mit einem Befehl
      zurück (siehe UEBERGABE.md).                                     -->
 <div class="raum-grund" aria-hidden="true"></div>
@@ -62,17 +63,13 @@
 <main>
 
 <!-- ══ Auftakt ═══════════════════════════════════════════════════════════
-     Eine helle, gekämmte Strähne mit Glanz trägt den ersten Bildschirm,
-     darauf steht die Schere frei — aus der Aufnahme gelöst, nicht in einen
+     Ein Glanz aus Petrol und Licht trägt den ersten Bildschirm, darauf
+     steht die Schere frei — aus der Aufnahme gelöst, nicht in einen
      Kreis gestanzt. Am breiten Schirm rechts, die Schrift links; am
      Telefon oben, die Schrift darunter.                                -->
 <section class="auftakt">
-  <!-- Zwei Zuschnitte, beide für ihr Format gerechnet: quer für den
-       breiten Schirm, hochkant fürs Telefon. Nichts wird beschnitten. -->
-  <picture class="auftakt-grund" aria-hidden="true">
-    <source media="(orientation: portrait)" srcset="bilder/straehne-glanz-hoch.webp" width="1000" height="1800">
-    <img src="bilder/straehne-glanz-quer.webp" alt="" width="2000" height="1250" fetchpriority="high" decoding="async">
-  </picture>
+  <img class="auftakt-grund" src="bilder/grund-glanz.webp" alt=""
+       width="1138" height="1910" fetchpriority="high" decoding="async" aria-hidden="true">
   <div class="auftakt-schleier" aria-hidden="true"></div>
   <div class="auftakt-schere" aria-hidden="true">
     <img src="bilder/schere-frei.webp" alt="" width="521" height="867" decoding="async">
@@ -276,7 +273,7 @@
 </section>
 
 <!-- ══ Stimmen ═══════════════════════════════════════════════════════════
-     Der kräftigste Grund der Seite: eine Aqua-Strähne, dunkle Schrift.
+     Der eine helle Abschnitt der Seite: heller Putz, dunkle Schrift.
      Die Stimmen sind echt — wörtlich aus dem Treatwell-Eintrag des
      Salons übernommen (gelesen am 24.09.2026), mit Vorname, wie er dort
      steht, und dem Datum. Kürzungen sind mit […] markiert, sonst ist
@@ -411,7 +408,7 @@
 
 <footer class="fuss">
   <div class="mitte">
-    <img class="fuss-siegel" src="logo-siegel-hell.svg" alt="" width="200" height="200" loading="lazy" decoding="async">
+    <img class="fuss-siegel" src="logo-siegel.svg" alt="" width="200" height="200" loading="lazy" decoding="async">
     <p class="fuss-marke">BaHaar&rsquo;s Styling Studio</p>
     <nav class="fuss-wege" aria-label="Rechtliches">
       <a href="leistungen.html">Preisliste</a>

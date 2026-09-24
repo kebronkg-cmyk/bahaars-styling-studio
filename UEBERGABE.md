@@ -5,19 +5,34 @@ die Dateien: `CLAUDE.md` (Arbeitsweise, Fallen) und `ABNAHME.md` (offene
 Punkte für den Auftraggeber) liegen im Projekt und gelten weiter. Hier steht
 nur, was sonst verloren ginge.
 
-## Zwei Fassungen — „Video" heisst: zurück zum Film
+## Fassungen — alle jederzeit abrufbar
 
-Seit dem 24.09.2026 läuft eine **Testfassung ohne Film**. Die Fassung mit dem
-Film ist unverändert gesichert unter `fassungen/video/` (Stand `b86d438`).
-Sagt der Auftraggeber **„Video"**, wird genau diese Fassung zurückgeholt:
+Jede Fassung liegt **vollständig und lauffähig** in ihrem eigenen Ordner,
+mit eigenen Kopien aller Bilder, Schriften und Skripte. Keine hängt an einer
+anderen oder an der Hauptseite. Übersicht: `fassungen/index.html`.
+
+| Fassung | Ordner | Live |
+|---|---|---|
+| Hell (neu) | `fassungen/hell/` | https://kebronkg-cmyk.github.io/bahaars-styling-studio/fassungen/hell/ |
+| Dunkel, ohne Film | `fassungen/dunkel/` | …/fassungen/dunkel/ |
+| Mit Film | `fassungen/video/` | …/fassungen/video/ |
+
+Die **Hauptseite** (Wurzel) ist derzeit die dunkle Fassung. Alle Fassungen
+tragen `noindex` und verlinken ihre Marke auf die eigene `index.html`.
+
+Eine Fassung zur Hauptseite machen (Beispiel „Video"):
 
 ```bash
-cp fassungen/video/{index.html,neu.css,neu.js,leistungen.html,impressum.html,datenschutz.html} .
+cp -r fassungen/video/. .
+sed -i '/<meta name="robots" content="noindex">/d' index.html leistungen.html impressum.html datenschutz.html
 ```
 
-Die Filmdateien in `bilder/` sind nie angefasst worden. Ein Git-Tag
-`video-fassung` liess sich über den Zugang der Sitzung nicht pushen, deshalb
-der Ordner.
+Eine neue Fassung aus einem Git-Stand ablegen:
+`python3 recherche/fassung.py <commit> <name> <titel>` — sammelt alle
+Verweise aus HTML und CSS und kopiert genau das, was die Seite braucht.
+
+Ein Git-Tag liess sich über den Zugang der Sitzung nicht pushen, deshalb
+Ordner.
 
 **Was die Testfassung ausmacht (Stand 24.09.2026, helle Fassung):**
 
