@@ -19,35 +19,43 @@ Die Filmdateien in `bilder/` sind nie angefasst worden. Ein Git-Tag
 `video-fassung` liess sich über den Zugang der Sitzung nicht pushen, deshalb
 der Ordner.
 
-**Was die Testfassung ausmacht:**
+**Was die Testfassung ausmacht (Stand 24.09.2026, helle Fassung):**
 
-- Auftakt: `bilder/grund-glanz.webp` (Petrol-Glanz mit Lichtband und
-  Staub) vollflächig, davor `bilder/schere-frei.webp` — die Schere aus der
-  Vorlage des Auftraggebers, mit einem Segmentierungsmodell (BiRefNet)
-  freigestellt, echte Alphamaske. Schwebt langsam (14 s), kommt mit der
-  ersten Auftrittsgruppe.
-- Hinter der ganzen Seite `bilder/grund-wand.webp` (Pinselputz, auf L 30 %
-  gesenkt), Abschnitte als Scheiben mit `--durch` .60–.86.
-- Stimmen auf hellem Putz (`bilder/grund-licht.webp`): fünf **echte**
-  5-Sterne-Bewertungen, wörtlich aus dem Treatwell-Eintrag (JSON-LD der
-  Seite, gelesen am 24.09.2026), mit Vorname und Datum. Ersetzt den
-  früheren Abschnitt „Urteil".
-- Logo: `logo-siegel.svg` (Ring, kursives Bodoni-B, Umschrift in Mulish —
-  alles als Pfade, keine Schrift nötig), `logo-zeichen.svg` für die Leiste,
-  `logo-favicon.svg`. Siegel im Vorhang (Anfang) und im Fuss (Ende).
-- Die drei Vorlagen wurden in OKLab auf den Farbwinkel der Seite gedreht:
-  Glanz 201→198, heller Putz 192→195 (Buntheit ×0,7, L 88 %), Pinselputz
-  209→200 (L 55→30 %, Kontrast der Pinselzüge ×1,25).
-- Vorhang wartet nicht mehr auf den Film, sondern auf `decode()` des
-  Glanzes: frühestens 1 s, spätestens 2 s (gemessen: 1,1 s).
-- `--auf-buehne*` und die CSS zu `.auftritt-gross` fehlten in der
-  Filmfassung, obwohl Markup und Skript sie benutzten — jetzt gesetzt.
+- **Hell.** Grund `--grund` L 96,5 %, Schrift Petrol in drei Stufen
+  (`--schrift`, `-leise`, `-still`). Akzent getrennt: `--akzent` (das
+  Türkis des Ladenschilds) nur für Flächen und Zeichen, `--akzent-schrift`
+  (L 45 %) für Verweise. Gefüllter Knopf: tiefes Petrol, helle Schrift.
+  Die alten dunklen Namen (`--auf-tiefe`, `--nacht`, `--lagune` …) gibt es
+  nicht mehr — sie trugen zwei Aufgaben.
+- **Hintergründe selbst gerechnet** — keine fremden Bildrechte.
+  `recherche/straehne.py` (Linienintegral-Faltung über ein Wirbelfeld):
+  gekämmte Strähnen, das eigene Material eines Friseurs.
+  - Auftakt: `straehne-glanz-quer.webp` (2000 × 1250) und `-hoch.webp`
+    (1000 × 1800) per `<picture>` — jeder Zuschnitt für sein Format.
+  - Wand hinter allem: `straehne-wand.webp` (L 95 %), Scheiben `--durch`
+    .22–.82.
+  - Stimmen: `straehne-aqua.webp`. Fuss als dunkler Anker:
+    `straehne-tief.webp`, dort sind die Schrifttokens lokal hell gesetzt.
+  - Die Pinterest-Vorlagen sind aus dem Repository entfernt.
+- **Schrift der Überschriften:** Gilda Display, Kursive aus Rosarivo, beide
+  unter dem Familiennamen `'Gilda Display'` (OFL, `schrift/`). Fraunces war
+  kurz drin und flog wieder raus: der Detektor führt sie als Modeschrift
+  generischer Seiten.
+- Auftakt: freigestellte Schere (`schere-frei.webp`, BiRefNet-Maske) vor
+  dem Glanz, schwebt langsam. **Herkunft der Schere-Vorlage offen**
+  (ABNAHME Punkt 9).
+- Stimmen: fünf echte 5-Sterne-Bewertungen aus dem Treatwell-Eintrag,
+  wörtlich, gelesen am 24.09.2026.
+- Logo: `logo-siegel.svg` (dunkel, für hellen Grund), `logo-siegel-hell.svg`
+  (Fuss), `logo-zeichen.svg`, `logo-favicon.svg` — B aus der Rosarivo-Kursive,
+  Umschrift Mulish, alles als Pfade. Erzeugt mit `recherche/`-Skripten nicht
+  nötig; die SVGs sind fertig.
 
-Gemessen (kontrast3.mjs): alle Zeilen über der Grenze, Minimum 4,99:1
-(Wortmarke kursiv, 390 px, Grossschrift). Detektor mit Parsern: 21 Hinweise,
-die Filmfassung hatte 23 — die frühere Angabe `[]` kam aus dem Rückfallmodus
-ohne Parser (`npm i --no-save htmlparser2 css-select css-tree domutils` im
-Skill-Ordner, dann ist er vollständig).
+Gemessen (kontrast3.mjs, 1440 und 390): alles über der Grenze, schwächste
+Zeile 5,6:1. Detektor mit Parsern: 22 Hinweise, alle aus Mustern, die schon
+in der Filmfassung standen (Filmfassung: 23). Die frühere Angabe `[]` kam aus
+dem Rückfallmodus ohne Parser (`npm i --no-save htmlparser2 css-select
+css-tree domutils` im Skill-Ordner).
 
 ## Stand
 

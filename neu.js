@@ -137,7 +137,7 @@
   }
 
   const beginn = performance.now();
-  const bild = document.querySelector('.auftakt-grund');
+  const bild = document.querySelector('.auftakt-grund img');
   const bereit = bild && bild.decode ? bild.decode().catch(() => {}) : Promise.resolve();
   bereit.then(() => setTimeout(heben, Math.max(0, 1000 - (performance.now() - beginn))));
   setTimeout(heben, 2000);

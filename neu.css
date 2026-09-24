@@ -1,46 +1,51 @@
 /* ═══════════════════════════════════════════════════════════════════════
    BaHaar's Styling Studio
 
-   ── Ein Raum ──────────────────────────────────────────────────────────
+   ── Ein heller Raum ───────────────────────────────────────────────────
 
-   Die Seite ist ein einziger dunkler Raum: eine Wand aus Pinselputz in
-   tiefem Petrol steht fest im Fenster hinter allem; jeder Abschnitt
-   legt sich als Scheibe darüber. Den ersten Bildschirm trägt ein Glanz
-   aus Petrol und Licht, davor steht die freigestellte Schere. Die
-   Stimmen der Kundinnen stehen als einziger Abschnitt auf hellem Putz.
+   Die Seite ist hell. Hinter allem steht eine Wand aus feinen, fast
+   weissen Strähnen — das eigene Material eines Friseurs: Haar, im Licht
+   gekämmt. Den ersten Bildschirm trägt dieselbe Strähne grösser und mit
+   Glanz, davor die freigestellte Schere. Die Stimmen der Kundinnen
+   stehen auf einer kräftigeren Aqua-Strähne, der Fuss auf einer tiefen
+   Petrol-Strähne als Anker.
+
+   Alle Hintergründe sind selbst gerechnet (Linienintegral-Faltung über
+   ein Wirbelfeld, `recherche/straehne.py`) — keine fremden Bildrechte.
 
    (Die Fassung mit dem Film liegt unter `fassungen/video/`.)
 
    ── Woher die Farben kommen ───────────────────────────────────────────
 
-   Der Farbwinkel (200) und der Akzent oklch(80 % .136 193) stammen aus
-   der Filmfassung; die drei Putz- und Glanzvorlagen sind auf genau
-   diesen Winkel gedreht worden (198, 195, 200), damit sie eine Familie
-   bilden. Türkis ist Akzent — ein Strich, ein Punkt, ein Zeichen —,
-   nie Fliesstext.
+   Farbwinkel 196 und Akzent oklch(80 % .136 193) stammen aus dem
+   türkisen Schild über der Ladentür. Auf hellem Grund taugt das
+   Türkis nicht als Schrift (1,6:1) — deshalb zwei Akzente: `--akzent`
+   für Flächen, Punkte und Zeichen, `--akzent-schrift` (L 45 %) für
+   Verweise und Marken. Die Schrift ist Petrol, nicht Schwarz.
 
    ── Die Fotos ─────────────────────────────────────────────────────────
 
    Aufnahmen laufen unbehandelt. Beim Friseur ist das Foto das Produkt;
-   ein Farbfilter nimmt genau das weg, was verkauft wird. Auf dem dunklen
-   Grund leuchten sie von selbst — das ist der Grund, warum die Farbe der
-   Seite aus den Bildern kommt und nicht aus Flächen.
+   ein Farbfilter nimmt genau das weg, was verkauft wird.
    ═══════════════════════════════════════════════════════════════════════ */
 
-/* Bodoni Moda für die Anzeige: eine Didone mit hohem Strichkontrast —
-   die Sprache von Mode und Kosmetik, und die Schrift, die dem Schild
-   über der Tür am nächsten kommt. Mulish für den Lauf: weich, rund und
-   still genug, um der Anzeige nicht ins Wort zu fallen. Beide liegen im
-   Repository; es wird nichts von einem fremden Server geladen. */
+/* Gilda Display für die Anzeige: eine Antiqua aus der Welt der
+   Modetitel — feine Serifen, ruhiger Kontrast, elegant, ohne laut zu
+   werden. Sie hat keine Kursive; die kommt von Rosarivo, einer
+   Renaissance-Kursiven mit demselben alten Duktus, die sich wie ein
+   gelegter Schwung liest. Beide unter einem Familiennamen, damit `em`
+   von selbst die richtige Kursive greift. SIL Open Font License
+   (schrift/*-OFL.txt). Mulish für den Lauf. Alles liegt im Repository;
+   es wird nichts von einem fremden Server geladen. */
 @font-face {
-  font-family: 'Bodoni Moda';
-  src: url('schrift/BodoniModa.woff2') format('woff2');
-  font-weight: 400 900; font-style: normal; font-display: swap;
+  font-family: 'Gilda Display';
+  src: url('schrift/GildaDisplay.woff2') format('woff2');
+  font-weight: 400; font-style: normal; font-display: swap;
 }
 @font-face {
-  font-family: 'Bodoni Moda';
-  src: url('schrift/BodoniModa-Italic.woff2') format('woff2');
-  font-weight: 400 900; font-style: italic; font-display: swap;
+  font-family: 'Gilda Display';
+  src: url('schrift/Rosarivo-Italic.woff2') format('woff2');
+  font-weight: 400; font-style: italic; font-display: swap;
 }
 @font-face {
   font-family: 'Mulish';
@@ -49,73 +54,34 @@
 }
 
 :root {
-  /* Dunkel: davon hängen Bildlaufleisten, Auswahlfelder und die
-     Voreinstellungen des Browsers ab. */
-  color-scheme: dark;
+  color-scheme: light;
 
-  /* Papier ist fast weiss, nur einen Hauch kühl. Ein durchgehend
-     mintfarbener Grund lässt jede Aufnahme darauf blass wirken — die
-     Seite sah verwaschen aus, weil der Grund selbst schon Farbe hatte. */
-  /* ── Ein Raum, eine Palette ─────────────────────────────────────────
-     Die Seite ist durchgehend dunkel; deshalb ist die Palette dunkel
-     gedacht und nicht umgedreht. Grund und Schrift sind am Film und an
-     den beiden türkisen Vorlagen gemessen: der Rauch gibt den Farbwinkel
-     (200), die Wand die Tiefe, das Plakat den Akzent.
+  /* ── Grund ──────────────────────────────────────────────────────── */
+  --grund:      oklch(96.5% .014 196);
+  --grund-tief: oklch(92.5% .024 196);
+  /* Die Scheibe, die sich über die Wand legt; `--durch` steuert, wie
+     viel Strähne durchkommt. */
+  --scheibe:    97.5% .012 196;
 
-     Die alten hellen Namen bleiben als Verweise stehen. Damit greift der
-     Wechsel überall auf einmal — in der Leiste, in der Preisliste, auf
-     den Rechtsseiten —, statt Regel für Regel nachgezogen zu werden. */
+  /* ── Schrift: Petrol, drei Stufen ───────────────────────────────── */
+  --schrift:       oklch(24% .045 215);
+  --schrift-leise: oklch(34% .045 212);
+  --schrift-still: oklch(43% .04 210);
 
-  --nacht:      oklch(11% .012 200);
-  --nacht-tief: oklch(8% .010 200);
+  /* ── Akzent: Fläche und Schrift getrennt ────────────────────────── */
+  --akzent:          oklch(80% .136 193);
+  --akzent-schrift:  oklch(45% .095 200);
 
-  --auf-tiefe:       oklch(96.5% .012 190);
-  --auf-tiefe-leise: oklch(84% .022 195);
-  --auf-tiefe-still: oklch(75% .026 200);
+  /* Der gefüllte Knopf: tiefes Petrol, helle Schrift — der stärkste
+     Kontrast der Seite liegt dort, wo sie etwas will. */
+  --knopf-grund:  oklch(32% .07 207);
+  --knopf-hell:   oklch(40% .085 204);
+  --knopf-schrift: oklch(98.5% .008 195);
 
-  /* Schrift über dem Glanz des Auftakts. Diese Namen waren in der Leiste
-     und im Auftakt längst in Gebrauch, aber nirgends gesetzt — die
-     Schrift erbte dort bloss zufällig das Richtige. */
-  --auf-buehne:       oklch(97.5% .008 195);
-  --auf-buehne-leise: oklch(90% .022 195);
-  --auf-buehne-still: oklch(80% .03 198);
+  --linie:      oklch(34% .05 208 / .24);
+  --linie-fein: oklch(34% .05 208 / .13);
 
-  /* Der helle Putz der Stimmen. Die Schrift darauf ist Petrol, nicht
-     Schwarz: aus demselben Farbwinkel, nur ganz unten auf der Leiter.
-     Die Sterne sind eine Sprosse heller — Zeichen, keine Schrift. */
-  --putz-tinte:       oklch(21% .04 212);
-  --putz-tinte-leise: oklch(31% .045 210);
-  --putz-stern:       oklch(47% .095 199);
-  --putz-linie:       oklch(30% .05 205 / .22);
-
-  /* Die Lagune ist aus dem Rauch gemessen, nicht gewählt. Im
-     kräftigsten Hundertstel der türkisen Bildpunkte liegt der Film bei
-     L 84 %, C .143, H 196; der hellste einzelne Punkt bei L 86 %,
-     C .148. Der Grundton sitzt genau dort. Mehr Buntheit gäbe es im
-     Film nicht mehr — was fehlte, war nicht die Farbe, sondern wie oft
-     sie vorkommt. Deshalb ein zweiter Wert für die Lichter: derselbe
-     Ton am oberen Ende dessen, was der Rauch hergibt. */
-  --lagune:      oklch(80% .136 193);
-  --lagune-hell: oklch(87% .132 194);
-
-  /* Auch die Striche tragen den Ton. Einzeln sieht man es nicht, aber
-     es sind Dutzende über die Seite — zusammen färben sie den ganzen
-     Raster, ohne dass irgendwo eine Fläche türkis würde. */
-  --linie-tiefe:      oklch(80% .075 193 / .26);
-  --linie-tiefe-fein: oklch(80% .065 193 / .14);
-
-  /* Verweise, damit kein Abschnitt zurückfällt */
-  --papier:      var(--nacht);
-  --papier-warm: var(--nacht-tief);
-  --tinte:       var(--auf-tiefe);
-  --tinte-leise: var(--auf-tiefe-leise);
-  --tinte-still: var(--auf-tiefe-still);
-  --auf-tinte:   var(--nacht);
-  --tuerkis:     var(--lagune);
-  --tuerkis-tief:var(--lagune);
-  --tuerkis-hell:var(--lagune-hell);
-  --linie:       var(--linie-tiefe);
-  --linie-fein:  var(--linie-tiefe-fein);
+  --schatten: 32% .06 210;
 
   --mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
 
@@ -178,12 +144,12 @@ html {
 /* Der Bereich unter dem Fuss und hinter dem Überziehen gehört dem
    Fuss, nicht dem Papier: sonst blitzt am Seitenende ein heller
    Streifen auf. */
-html { background: var(--nacht); }
+html { background: var(--grund); }
 
 body {
   margin: 0;
-  background: var(--papier);
-  color: var(--tinte);
+  background: var(--grund);
+  color: var(--schrift);
   font-family: 'Mulish', system-ui, -apple-system, 'Segoe UI', sans-serif;
   font-size: var(--t-lauf);
   line-height: 1.6;
@@ -205,7 +171,7 @@ a, code, dd { overflow-wrap: anywhere; }
 a { color: inherit; }
 
 :focus-visible {
-  outline: 2px solid var(--tinte);
+  outline: 2px solid var(--schrift);
   outline-offset: 3px;
   border-radius: var(--kante);
 }
@@ -218,7 +184,7 @@ a { color: inherit; }
      nicht hinter einem Ladeschirm ins Leere fokussieren. */
   position: fixed; left: var(--rand); top: -4rem; z-index: 95;
   padding: .6rem 1rem; border-radius: var(--kante);
-  background: var(--tinte); color: var(--auf-tinte);
+  background: var(--schrift); color: var(--grund);
   font-size: var(--t-klein); font-weight: 600; text-decoration: none;
   transition: top var(--t1) var(--kurve);
 }
@@ -229,7 +195,7 @@ a { color: inherit; }
 
 .riesen, .gross {
   margin: 0 0 var(--a3);
-  font-family: 'Bodoni Moda', Didot, Georgia, serif;
+  font-family: 'Gilda Display', Georgia, serif;
   font-weight: 400;
   line-height: 1.05;
   letter-spacing: -.015em;
@@ -237,9 +203,9 @@ a { color: inherit; }
 }
 .riesen { font-size: var(--t-riesen); }
 .gross  { font-size: var(--t-gross); }
-.riesen em, .gross em { font-style: italic; color: var(--tinte); }
+.riesen em, .gross em { font-style: italic; color: var(--schrift); }
 
-.lauf { margin: 0 0 var(--a3); color: var(--tinte-leise); }
+.lauf { margin: 0 0 var(--a3); color: var(--schrift-leise); }
 
 /* ── Die Leiste ───────────────────────────────────────────────────────
    Sie weicht beim Runterscrollen aus und kommt beim Hochscrollen zurück.
@@ -250,10 +216,10 @@ a { color: inherit; }
   height: var(--leiste);
   display: flex; align-items: center; gap: var(--a3);
   padding-inline: var(--rand);
-  background: oklch(9% .012 200 / .78);
+  background: oklch(97.5% .012 196 / .86);
   -webkit-backdrop-filter: blur(14px);
           backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--linie-tiefe-fein);
+  border-bottom: 1px solid var(--linie-fein);
   transition: transform var(--t2) var(--kurve);
 }
 .leiste.weg { transform: translateY(-100%); }
@@ -262,23 +228,23 @@ a { color: inherit; }
    Papier: eine helle Schiene über einer dunklen Liste liest sich wie
    ein Fremdkörper. */
 body:has(.stufe-liste) .leiste {
-  background: oklch(16.5% .026 207 / .86);
-  border-bottom-color: var(--linie-tiefe-fein);
-  color: var(--auf-tiefe);
+  background: oklch(97.5% .012 196 / .9);
+  border-bottom-color: var(--linie-fein);
+  color: var(--schrift);
 }
 body:has(.stufe-liste) .marke-zusatz,
-body:has(.stufe-liste) .wege a { color: var(--auf-tiefe-leise); }
+body:has(.stufe-liste) .wege a { color: var(--schrift-leise); }
 body:has(.stufe-liste) .pille {
-  border-color: var(--linie-tiefe); color: var(--auf-tiefe);
+  border-color: var(--linie); color: var(--schrift);
 }
-body:has(.stufe-liste) .klapp span { background: var(--auf-tiefe); }
+body:has(.stufe-liste) .klapp span { background: var(--schrift); }
 body:has(.stufe-liste) .wege {
-  background: oklch(16.5% .026 207 / .96);
-  border-color: var(--linie-tiefe-fein);
+  background: oklch(97.5% .012 196 / .97);
+  border-color: var(--linie-fein);
 }
 @media (hover: hover) and (pointer: fine) {
-  body:has(.stufe-liste) .wege a:hover { color: var(--auf-tiefe); }
-  body:has(.stufe-liste) .pille:hover { background: oklch(96.5% .012 190 / .08); }
+  body:has(.stufe-liste) .wege a:hover { color: var(--schrift); }
+  body:has(.stufe-liste) .pille:hover { background: oklch(34% .05 208 / .06); }
 }
 
 /* Über der schwarzen Bühne ist die Leiste durchsichtig und hell — eine
@@ -291,33 +257,33 @@ body:has(.stufe-liste) .wege {
   border-bottom-color: transparent;
   -webkit-backdrop-filter: none;
           backdrop-filter: none;
-  color: var(--auf-buehne);
+  color: var(--schrift);
   transition: transform var(--t2) var(--kurve),
               background var(--t2) var(--kurve),
               border-color var(--t2) var(--kurve),
               color var(--t2) var(--kurve);
 }
 .leiste-buehne .marke-zusatz,
-.leiste-buehne .wege a { color: var(--auf-buehne-leise); }
+.leiste-buehne .wege a { color: var(--schrift-leise); }
 /* Über dem Lichtband des Glanzes stand die Nummer mit 3,6:1 — die
    Pille bringt deshalb ihren eigenen dunklen Grund mit. */
 .leiste-buehne .pille {
-  border-color: oklch(97% .006 200 / .30); color: var(--auf-buehne);
-  background: oklch(9% .012 200 / .52);
+  border-color: oklch(34% .05 208 / .30); color: var(--schrift);
+  background: oklch(97.5% .012 196 / .62);
   -webkit-backdrop-filter: blur(8px);
           backdrop-filter: blur(8px);
 }
 /* Der Klappknopf ist aus zwei Strichen gezeichnet; auf Schwarz müssen
    auch sie hell werden, sonst steht oben rechts nichts. */
-.leiste-buehne .klapp span { background: var(--auf-buehne); }
+.leiste-buehne .klapp span { background: var(--schrift); }
 @media (hover: hover) and (pointer: fine) {
-  .leiste-buehne .wege a:hover { color: var(--auf-buehne); }
-  .leiste-buehne .pille:hover { background: oklch(97% .006 200 / .10); }
+  .leiste-buehne .wege a:hover { color: var(--schrift); }
+  .leiste-buehne .pille:hover { background: oklch(34% .05 208 / .06); }
 }
 
 .marke {
   display: inline-flex; align-items: baseline; gap: .55rem; flex-wrap: nowrap;
-  font-family: 'Bodoni Moda', Didot, Georgia, serif;
+  font-family: 'Gilda Display', Georgia, serif;
   font-size: 1.28rem; line-height: 1.1;
   letter-spacing: -.005em; font-kerning: normal;
   text-decoration: none;
@@ -340,7 +306,7 @@ body:has(.stufe-liste) .wege {
   font-family: 'Mulish', system-ui, sans-serif;
   font-size: .6rem; font-weight: 500;
   letter-spacing: .19em; text-transform: uppercase;
-  color: var(--tinte-still);
+  color: var(--schrift-still);
 }
 @media (max-width: 26rem) { .marke-zusatz { display: none; } }
 
@@ -353,9 +319,9 @@ body:has(.stufe-liste) .wege {
   padding: var(--a2) var(--rand) var(--a3);
   /* Deckend, nicht fast deckend: Bei vier Prozent Rest steht die
      Überschrift der Seite als Geist hinter den Wegen. */
-  background: var(--papier);
+  background: var(--grund);
   border-bottom: 1px solid var(--linie-fein);
-  font-size: var(--t-klein); color: var(--tinte-leise);
+  font-size: var(--t-klein); color: var(--schrift-leise);
 }
 .wege.auf { display: flex; }
 .wege a { padding: .7rem 0; text-decoration: none; }
@@ -369,7 +335,7 @@ body:has(.stufe-liste) .wege {
 }
 .klapp span {
   display: block; width: 20px; height: 1.5px;
-  background: var(--tinte);
+  background: var(--schrift);
   transition: transform var(--t1) var(--kurve), opacity var(--t1) var(--kurve);
 }
 .klapp[aria-expanded="true"] span:first-child { transform: translateY(3.75px) rotate(45deg); }
@@ -399,8 +365,8 @@ body:has(.stufe-liste) .wege {
 
 @media (hover: hover) and (pointer: fine) {
   .wege a, .pille { transition: color var(--t1) var(--kurve), border-color var(--t1) var(--kurve); }
-  .wege a:hover { color: var(--tinte); }
-  .pille:hover { border-color: var(--tinte); color: var(--tinte); }
+  .wege a:hover { color: var(--schrift); }
+  .pille:hover { border-color: var(--schrift); color: var(--schrift); }
 }
 
 /* ── Knöpfe ───────────────────────────────────────────────────────────── */
@@ -420,10 +386,10 @@ body:has(.stufe-liste) .wege {
    die Seite etwas von der Besucherin will, und der einzige, an dem
    Türkis als Fläche auftritt — überall sonst bleibt es Strich, Zeichen
    oder Zeile. Dunkle Schrift darauf steht mit 11,4:1. */
-.knopf { background: var(--lagune); color: var(--nacht); }
+.knopf { background: var(--knopf-grund); color: var(--knopf-schrift); }
 .knopf-still {
   border: 1px solid var(--linie);
-  color: var(--tinte);
+  color: var(--schrift);
   font-weight: 500;
   font-variant-numeric: tabular-nums;
 }
@@ -431,8 +397,8 @@ body:has(.stufe-liste) .wege {
 
 @media (hover: hover) and (pointer: fine) {
   .knopf, .knopf-still { transition: transform var(--t1) var(--kurve), background-color var(--t1) var(--kurve), border-color var(--t1) var(--kurve); }
-  .knopf:hover { transform: translateY(-2px); background: var(--lagune-hell); }
-  .knopf-still:hover { transform: translateY(-2px); border-color: var(--tinte); }
+  .knopf:hover { transform: translateY(-2px); background: var(--knopf-hell); }
+  .knopf-still:hover { transform: translateY(-2px); border-color: var(--schrift); }
 }
 
 /* ── Auftakt ──────────────────────────────────────────────────────────
@@ -462,20 +428,19 @@ body:has(.stufe-liste) .wege {
   display: grid; align-items: end; justify-items: center;
   padding: calc(var(--leiste) + var(--a4)) var(--rand) var(--a5);
   overflow: hidden;
-  background: var(--nacht);
-  color: var(--auf-tiefe);
+  background: var(--grund);
+  color: var(--schrift);
 }
 
-/* Der Glanz: ein Hochformat aus Petrol, einem Lichtband und
-   funkelndem Staub. Am Telefon passt das Format fast genau; am breiten
-   Schirm schneidet `cover` oben und unten, und der Ausschnitt sitzt so,
-   dass die Welle aus Staub unten durchs Bild läuft. Das Bild ist
-   unscharf gemacht — eine Vergrösserung um ein Viertel sieht man ihm
-   nicht an. */
+/* Der Glanz: eine gekämmte Strähne, über die breit ein Licht läuft.
+   Zwei eigene Zuschnitte (2000 × 1250 quer, 1000 × 1800 hochkant), jeder
+   für sein Format gerechnet — `cover` schneidet deshalb fast nichts. */
 .auftakt-grund {
   position: absolute; inset: 0; z-index: -2;
+}
+.auftakt-grund img {
   width: 100%; height: 100%;
-  object-fit: cover; object-position: 50% 44%;
+  object-fit: cover; object-position: 50% 50%;
 }
 
 /* Der Schleier nimmt nur die Ränder: unten in den Grund der Seite
@@ -485,11 +450,11 @@ body:has(.stufe-liste) .wege {
   position: absolute; inset: 0; z-index: -1;
   background:
     linear-gradient(to top,
-      var(--nacht) 0%,
-      oklch(11% .012 200 / .78) 9%,
-      oklch(11% .012 200 / .30) 22%,
+      var(--grund) 0%,
+      oklch(97.5% .012 196 / .8) 9%,
+      oklch(97.5% .012 196 / .3) 22%,
       transparent 38%),
-    linear-gradient(to bottom, oklch(9% .012 200 / .55) 0%, transparent 15%);
+    linear-gradient(to bottom, oklch(97.5% .012 196 / .55) 0%, transparent 15%);
 }
 
 /* Die Schere, aus der Aufnahme gelöst. Sie steht rechts, wo am breiten
@@ -509,8 +474,8 @@ body:has(.stufe-liste) .wege {
 .auftakt-schere img {
   width: 100%; height: 100%;
   rotate: -7deg;
-  filter: drop-shadow(0 26px 30px oklch(8% .03 205 / .55))
-          drop-shadow(0 4px 6px oklch(8% .03 205 / .35));
+  filter: drop-shadow(0 26px 30px oklch(32% .06 210 / .34))
+          drop-shadow(0 4px 6px oklch(32% .06 210 / .28));
   animation: schere-schweben 14s cubic-bezier(.33, 0, .2, 1) infinite;
 }
 /* Ein langsames Schweben, damit das Metall im Licht lebt. Jede Hälfte
@@ -573,24 +538,24 @@ body:has(.stufe-liste) .wege {
   inset: -5rem -24vw -2.5rem;
   background: linear-gradient(to bottom,
     transparent 0%,
-    oklch(6% .010 200 / .30) 9%,
-    oklch(6% .010 200 / .56) 22%,
-    oklch(6% .010 200 / .56) 58%,
-    oklch(6% .010 200 / .38) 82%,
+    oklch(97.5% .012 196 / .34) 9%,
+    oklch(97.5% .012 196 / .62) 22%,
+    oklch(97.5% .012 196 / .62) 58%,
+    oklch(97.5% .012 196 / .4) 82%,
     transparent 100%);
 }
 
-/* Die Wortmarke. Bodoni setzt hohe Kontraste; bei dieser Grösse braucht
+/* Die Wortmarke. Bei dieser Grösse braucht die Anzeige
    sie eine engere Laufweite, sonst fällt die Zeile auseinander. */
 /* Eine Regel, nicht zwei: weiter unten stand dieselbe Auswahl noch
    einmal und überschrieb Rand und Zeilenabstand. */
 .wortmarke {
   margin: var(--a2) 0 var(--a3);
   line-height: .92;
-  font-family: 'Bodoni Moda', Didot, Georgia, serif;
+  font-family: 'Gilda Display', Georgia, serif;
   font-weight: 400;
   letter-spacing: -.018em;
-  color: var(--auf-buehne);
+  color: var(--schrift);
 }
 .wortmarke-wort {
   display: block;
@@ -601,14 +566,14 @@ body:has(.stufe-liste) .wege {
   font-style: italic;
   font-size: clamp(2.1rem, 7.6vw, 5.2rem);
   letter-spacing: -.01em;
-  color: var(--auf-buehne-leise);
+  color: var(--schrift-leise);
 }
 
 .auftakt-lauf {
   margin: 0 auto var(--a4);
   max-width: 34rem;
   font-size: var(--t-lauf); line-height: 1.6;
-  color: var(--auf-buehne-leise);
+  color: var(--schrift-leise);
 }
 
 .wahl-mitte { justify-content: center; }
@@ -616,13 +581,13 @@ body:has(.stufe-liste) .wege {
 /* Auf der Bühne kehren sich die Knöpfe um: gefüllt ist hell, weil auf
    Schwarz das Helle vorn steht. */
 .auftakt .knopf {
-  background: var(--lagune); color: var(--nacht);
+  background: var(--knopf-grund); color: var(--knopf-schrift);
 }
 .auftakt .knopf-still {
-  border-color: oklch(97% .006 200 / .28); color: var(--auf-buehne);
+  border-color: oklch(34% .05 208 / .4); color: var(--schrift);
 }
 @media (hover: hover) and (pointer: fine) {
-  .auftakt .knopf-still:hover { background: oklch(97% .006 200 / .10); }
+  .auftakt .knopf-still:hover { background: oklch(34% .05 208 / .06); }
 }
 
 /* ── Der Auftakt in der Breite: Schrift links, Schere frei ───────────
@@ -675,10 +640,10 @@ body:has(.stufe-liste) .wege {
   .auftakt-satz::before {
     background: linear-gradient(to bottom,
       transparent 0%,
-      oklch(6% .010 200 / .42) 10%,
-      oklch(6% .010 200 / .66) 24%,
-      oklch(6% .010 200 / .66) 70%,
-      oklch(6% .010 200 / .40) 88%,
+      oklch(97.5% .012 196 / .45) 10%,
+      oklch(97.5% .012 196 / .72) 24%,
+      oklch(97.5% .012 196 / .72) 70%,
+      oklch(97.5% .012 196 / .45) 88%,
       transparent 100%);
   }
 }
@@ -689,29 +654,29 @@ body:has(.stufe-liste) .wege {
   display: inline-flex; align-items: center; gap: .55rem;
   margin: var(--a4) 0 0;
   padding: .42rem .95rem .42rem .75rem;
-  border: 1px solid oklch(97% .006 200 / .22);
+  border: 1px solid oklch(34% .05 208 / .22);
   border-radius: var(--kante-voll);
   /* Eigener Grund: die Marke steht sonst mal auf Schwarz und mal auf
      hellem Rauch, und in der hellen Lage reicht die Reserve nicht. */
-  background: oklch(6% .008 200 / .58);
+  background: oklch(97.5% .012 196 / .72);
   -webkit-backdrop-filter: blur(8px);
           backdrop-filter: blur(8px);
   font-family: var(--mono);
   font-size: .72rem; letter-spacing: .06em;
-  color: var(--auf-buehne);
+  color: var(--schrift);
 }
 .stand-chip::before {
   content: ""; flex: none;
   width: .4rem; height: .4rem; border-radius: 50%;
-  background: oklch(97% .006 200 / .35);
+  background: oklch(34% .05 208 / .35);
 }
 .stand-chip:has(.offen)::before {
-  background: var(--lagune);
+  background: var(--akzent);
   box-shadow: 0 0 0 3px oklch(80% .10 195 / .20);
 }
 
 /* Die Eckzeilen bleiben, aber in der Helligkeit der Bühne. */
-.auftakt .kennung { color: var(--auf-buehne-still); }
+.auftakt .kennung { color: var(--schrift-still); }
 @media (max-width: 48rem) { .auftakt .kennung { display: none; } }
 
 /* Wer Bewegung abbestellt hat, bekommt das Standbild — darum kümmert
@@ -729,7 +694,7 @@ body:has(.stufe-liste) .wege {
 
   font-family: var(--mono);
   font-size: .66rem; letter-spacing: .14em; text-transform: uppercase;
-  color: var(--tinte-leise);
+  color: var(--schrift-leise);
 }
 .kennung-links  { left: var(--rand); }
 .kennung-rechts { right: var(--rand); }
@@ -737,7 +702,7 @@ body:has(.stufe-liste) .wege {
 /* Auf dem Raster unterbricht die Zeile die Messlinie — dafür braucht sie
    den Papiergrund. Ohne Raster wäre er nur ein Kasten im Bild. */
 @media (min-width: 48rem) {
-  .raster ~ .kennung { padding: 0 .55rem; background: var(--papier); }
+  .raster ~ .kennung { padding: 0 .55rem; background: var(--grund); }
 }
 
 .wahl { display: flex; flex-wrap: wrap; gap: var(--a2); margin-bottom: var(--a3); }
@@ -745,7 +710,7 @@ body:has(.stufe-liste) .wege {
 .ort {
   margin: 0;
   display: flex; flex-wrap: wrap; align-items: center; gap: var(--a2) var(--a3);
-  font-size: var(--t-klein); color: var(--tinte-leise);
+  font-size: var(--t-klein); color: var(--schrift-leise);
 }
 .zeichen { display: inline-flex; align-items: center; gap: .6rem; }
 .zeichen img {
@@ -753,7 +718,7 @@ body:has(.stufe-liste) .wege {
   object-fit: cover;
   outline: 1px solid var(--linie);
 }
-.zeichen b { color: var(--tinte); font-weight: 600; }
+.zeichen b { color: var(--schrift); font-weight: 600; }
 
 .belege {
   display: grid;
@@ -767,15 +732,15 @@ body:has(.stufe-liste) .wege {
 @media (min-width: 48rem) { .belege { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 .belege p {
   margin: 0; padding: var(--a3) var(--rand);
-  background: var(--papier);
+  background: var(--grund);
   display: flex; flex-direction: column; gap: .2rem;
   font-size: var(--t-klein);
-  color: var(--tinte-still);
+  color: var(--schrift-still);
 }
 .belege b {
-  font-family: 'Bodoni Moda', Didot, Georgia, serif;
+  font-family: 'Gilda Display', Georgia, serif;
   font-size: 1.55rem; font-weight: 400;
-  color: var(--tinte);
+  color: var(--schrift);
   line-height: 1.1;
 }
 
@@ -800,7 +765,7 @@ body:has(.stufe-liste) .wege {
   border-radius: var(--kante);
   overflow: hidden;
 }
-.karte { margin: 0; padding: var(--a3); background: var(--papier); }
+.karte { margin: 0; padding: var(--a3); background: var(--grund); }
 @media (min-width: 40rem) { .karten { grid-template-columns: 1fr 1fr; } }
 @media (min-width: 64rem) { .karten { grid-template-columns: 1fr 1fr 1fr; } }
 .karte h3 {
@@ -812,17 +777,17 @@ body:has(.stufe-liste) .wege {
 .karte dl > div {
   display: flex; align-items: baseline; justify-content: space-between; gap: var(--a2);
 }
-.karte dt { color: var(--tinte-leise); font-size: var(--t-klein); }
+.karte dt { color: var(--schrift-leise); font-size: var(--t-klein); }
 .karte dd {
   margin: 0;
-  color: var(--tinte);
+  color: var(--schrift);
   font-variant-numeric: tabular-nums;
   font-size: var(--t-klein); font-weight: 600;
   white-space: nowrap;
 }
 
 .mehr { margin: var(--a3) 0 0; font-size: var(--t-klein); }
-.mehr a { color: var(--lagune); text-decoration: none; }
+.mehr a { color: var(--akzent-schrift); text-decoration: none; }
 @media (hover: hover) and (pointer: fine) { .mehr a:hover { text-decoration: underline; } }
 
 /* ── Der Vorhang ──────────────────────────────────────────────────────
@@ -837,7 +802,7 @@ body:has(.stufe-liste) .wege {
   position: fixed; inset: 0; z-index: 90;
   display: grid; place-items: center;
   overflow: hidden;
-  background: var(--nacht);
+  background: var(--grund);
   /* Er fängt nichts ab: reine Kulisse. Ohne diese Zeile blieb er
      während des Ausblendens anklickbar — und ohne Skript blendet ihn
      nur die Notaus-Animation weg, die eine knappe Sekunde braucht. */
@@ -906,12 +871,12 @@ body:has(.stufe-liste) .wege {
 
 /* ── Brautstyling ─────────────────────────────────────────────────────── */
 
-.preis { margin: 0 0 var(--a3); font-size: var(--t-klein); color: var(--tinte-still); }
+.preis { margin: 0 0 var(--a3); font-size: var(--t-klein); color: var(--schrift-still); }
 .preis b {
   display: block;
-  font-family: 'Bodoni Moda', Didot, Georgia, serif;
+  font-family: 'Gilda Display', Georgia, serif;
   font-size: 1.7rem; font-weight: 400;
-  color: var(--tinte);
+  color: var(--schrift);
 }
 /* ── Arbeiten ─────────────────────────────────────────────────────────── */
 
@@ -944,9 +909,9 @@ body:has(.stufe-liste) .wege {
   max-width: 34rem;
   padding: 0;
   text-align: center;
-  font-family: 'Bodoni Moda', Didot, Georgia, serif;
+  font-family: 'Gilda Display', Georgia, serif;
   font-size: 1.5rem; line-height: 1.35;
-  color: var(--tinte-leise);
+  color: var(--schrift-leise);
 }
 .spruch cite {
   display: block;
@@ -954,7 +919,7 @@ body:has(.stufe-liste) .wege {
   font-family: 'Mulish', system-ui, sans-serif;
   font-size: var(--t-marke); font-style: normal;
   letter-spacing: .17em; text-transform: uppercase;
-  color: var(--tinte-still);
+  color: var(--schrift-still);
 }
 
 /* ── Kontakt ──────────────────────────────────────────────────────────── */
@@ -972,7 +937,7 @@ body:has(.stufe-liste) .wege {
   margin: 0 0 var(--a2);
   font-size: var(--t-marke);
   letter-spacing: .17em; text-transform: uppercase;
-  color: var(--lagune);
+  color: var(--akzent-schrift);
   font-weight: 500;
 }
 /* Die Zeitentabelle und `.kontakt a` standen hier aus der Zeit, als der
@@ -1004,17 +969,17 @@ body:has(.stufe-liste) .wege {
   transition: background var(--t1) var(--kurve);
 }
 .fach-kopf::-webkit-details-marker { display: none; }
-.fach-kopf:focus-visible { outline: 2px solid var(--tinte); outline-offset: -2px; }
+.fach-kopf:focus-visible { outline: 2px solid var(--schrift); outline-offset: -2px; }
 
 .fach-wort {
-  font-family: 'Bodoni Moda', Didot, Georgia, serif;
+  font-family: 'Gilda Display', Georgia, serif;
   font-size: var(--t-mittel);
-  color: var(--tinte);
+  color: var(--schrift);
 }
 .fach-ab {
   font-size: var(--t-marke);
   letter-spacing: .04em;
-  color: var(--lagune);
+  color: var(--akzent-schrift);
   font-variant-numeric: tabular-nums;
 }
 
@@ -1032,7 +997,7 @@ body:has(.stufe-liste) .wege {
   position: absolute; left: 50%; top: 50%;
   width: .7rem; height: 1px;
   margin: -.5px 0 0 -.35rem;
-  background: var(--tuerkis-tief);
+  background: var(--akzent-schrift);
   transition: transform var(--t1) var(--kurve);
 }
 .fach-zeichen::after { transform: rotate(90deg); }
@@ -1040,14 +1005,14 @@ body:has(.stufe-liste) .wege {
 
 /* Die offene Gruppe bekommt einen türkisen Strich an die Seite — das
    ist der eine Ort, an dem die Hausfarbe auf dieser Seite auftritt. */
-.fach[open] { background: var(--papier-warm); }
-.fach[open] .fach-kopf { box-shadow: inset 2px 0 0 var(--tuerkis); }
+.fach[open] { background: var(--grund-tief); }
+.fach[open] .fach-kopf { box-shadow: inset 2px 0 0 var(--akzent-schrift); }
 .fach[open] .fach-wort { font-style: italic; }
 
 .fach-inhalt { padding: 0 .25rem var(--a3); }
 
 @media (hover: hover) and (pointer: fine) {
-  .fach-kopf:hover { background: var(--papier-warm); }
+  .fach-kopf:hover { background: var(--grund-tief); }
 }
 
 @media (min-width: 48rem) {
@@ -1059,7 +1024,7 @@ body:has(.stufe-liste) .wege {
 .gruppe-wort {
   margin: 0 0 var(--a2);
   font-size: var(--t-klein);
-  color: var(--tinte-still);
+  color: var(--schrift-still);
 }
 
 .spalten-wort {
@@ -1074,7 +1039,7 @@ body:has(.stufe-liste) .wege {
 .spalten-wort .posten-preis i {
   font-weight: 400; font-size: var(--t-marke);
   letter-spacing: .1em; text-transform: uppercase;
-  color: var(--tinte-still);
+  color: var(--schrift-still);
 }
 
 .posten { list-style: none; margin: 0; padding: 0; }
@@ -1092,17 +1057,17 @@ body:has(.stufe-liste) .wege {
   display: block;
   margin-top: .18rem;
   font-style: normal; font-size: var(--t-marke);
-  color: var(--tinte-still);
+  color: var(--schrift-still);
 }
 .posten-preis {
   display: grid; grid-template-columns: auto; gap: 0 var(--a2);
   text-align: right;
   white-space: nowrap;
 }
-.posten-preis b { font-weight: 600; font-size: var(--t-klein); color: var(--tinte); font-variant-numeric: tabular-nums; }
+.posten-preis b { font-weight: 600; font-size: var(--t-klein); color: var(--schrift); font-variant-numeric: tabular-nums; }
 .posten-preis i {
   font-style: normal; font-size: var(--t-klein);
-  color: var(--tinte-still); font-variant-numeric: tabular-nums;
+  color: var(--schrift-still); font-variant-numeric: tabular-nums;
 }
 @media (min-width: 34rem) {
   .posten-preis { grid-template-columns: auto auto; }
@@ -1126,14 +1091,11 @@ body:has(.stufe-liste) .wege {
    negativer Ebene liegt hinter der Grundfarbe des Dokuments und wäre
    unsichtbar. Der dunkle Grund gehört deshalb an `html`, die Wand liegt
    darüber, und alles Sichtbare wieder über ihm. */
-html { background: var(--nacht); }
+html { background: var(--grund); }
 body { background: transparent; }
 
-/* Die Wand. Pinselputz in tiefem Petrol, fest im Fenster hinter der
-   ganzen Seite. Aus einer mittleren Türkis-Vorlage gewonnen: Farbwinkel
-   von 209 auf 200 gedreht (der Winkel der Seite), Helligkeit von 55 %
-   auf 30 % gesenkt und die Pinselzüge dabei um ein Viertel gespreizt,
-   damit sie in der Tiefe nicht absaufen.
+/* Die Wand. Feine, fast weisse Strähnen (L 95 %), fest im Fenster hinter
+   der ganzen Seite — selbst gerechnet, siehe `recherche/straehne.py`.
 
    Ein eigenes festes Element, nicht `background-attachment: fixed` am
    Dokument: das ignoriert Safari auf dem iPhone, und die Aufnahme würde
@@ -1141,16 +1103,15 @@ body { background: transparent; }
 .raum-grund {
   position: fixed; inset: 0; z-index: 0;
   pointer-events: none;
-  background: var(--nacht) url('bilder/grund-wand.webp') 50% 50% / cover no-repeat;
+  background: var(--grund) url('bilder/straehne-wand.webp') 50% 50% / cover no-repeat;
 }
-/* Ein Hauch Korn über der Wand. Die Vorlage ist gut 1100 px breit und
-   wird am breiten Schirm etwas vergrössert; feines, stehendes Korn
-   liest sich dann als Putz statt als Unschärfe. Mittelgraues Rauschen
-   über `overlay` lässt die Farbe unangetastet. */
+/* Ein Hauch Korn über der Wand, damit die glatten Strähnen nicht nach
+   Rechner aussehen. Mittelgraues Rauschen über `overlay` lässt die
+   Farbe unangetastet; auf hellem Grund reicht die Hälfte. */
 .raum-korn {
   position: fixed; inset: 0; z-index: 0;
   pointer-events: none;
-  opacity: .22;
+  opacity: .12;
   mix-blend-mode: overlay;
   background-repeat: repeat;
   background-size: 180px 180px;
@@ -1161,20 +1122,17 @@ main, .fuss { position: relative; z-index: 1; }
 
 /* Die Scheibe. `--durch` steuert, wie viel Wand ein Abschnitt
    durchlässt — der einzige Regler, den die Seite für Tiefe braucht.
-   Beim Film lag er bei .86, weil Bewegung schon in kleinen Resten
-   sichtbar ist. Eine stehende Wand braucht mehr Durchlass, damit man
-   die Pinselzüge überhaupt als Material liest; die Schrift hält dabei
-   trotzdem über 7:1 (gemessen, siehe UEBERGABE.md). */
-.band, .stufe, .werk, .urteil, .laden, .kontakt, .fuss, .kopf-tief, .recht {
+   Wand und Scheibe sind beide hell; die Strähnen sollen als Material
+   zu lesen sein, und die Schrift hält trotzdem über 7:1 (gemessen). */
+.band, .stufe, .werk, .urteil, .laden, .kontakt, .kopf-tief, .recht {
   position: relative;
-  --durch: .72;
-  background: oklch(11% .012 200 / var(--durch));
-  color: var(--auf-tiefe);
+  --durch: .46;
+  background: oklch(var(--scheibe) / var(--durch));
+  color: var(--schrift);
 }
-.band  { --durch: .60; }        /* die schmale Zeile zeigt am meisten Wand */
-.werk  { --durch: .66; }
-.fuss  { --durch: .82; }        /* unten wird es ruhiger */
-.recht { --durch: .86; }        /* Impressum liest man am Stück */
+.band  { --durch: .22; }        /* die schmale Zeile zeigt am meisten Wand */
+.werk  { --durch: .34; }
+.recht { --durch: .82; }        /* Impressum liest man am Stück */
 
 /* ── Die Zeile unter dem Auftakt ──────────────────────────────────── */
 
@@ -1186,19 +1144,19 @@ main, .fuss { position: relative; z-index: 1; }
 .band-zeile p {
   margin: 0; padding: .85rem 0;
   display: flex; flex-wrap: wrap; align-items: baseline; gap: .1rem .6rem;
-  font-size: var(--t-klein); color: var(--auf-tiefe-leise);
+  font-size: var(--t-klein); color: var(--schrift-leise);
 }
-.band-zeile p + p { border-top: 1px solid var(--linie-tiefe-fein); }
+.band-zeile p + p { border-top: 1px solid var(--linie-fein); }
 .band-zeile b {
-  font-family: 'Bodoni Moda', Didot, Georgia, serif;
-  font-weight: 400; font-size: 1.25rem; color: var(--auf-tiefe);
+  font-family: 'Gilda Display', Georgia, serif;
+  font-weight: 400; font-size: 1.25rem; color: var(--schrift);
 }
-.band-zeile span { color: var(--auf-tiefe-still); }
+.band-zeile span { color: var(--schrift-still); }
 @media (min-width: 52rem) {
   .band-zeile { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .band-zeile p {
     display: block; padding: 0 var(--a3);
-    border-left: 1px solid var(--linie-tiefe-fein);
+    border-left: 1px solid var(--linie-fein);
   }
   .band-zeile p:first-child { padding-left: 0; border-left: 0; }
   .band-zeile p + p { border-top: 0; }
@@ -1208,25 +1166,25 @@ main, .fuss { position: relative; z-index: 1; }
 /* ── Leistungen: fünf Zeilen, gross ───────────────────────────────── */
 
 .stufe { padding: var(--a6) var(--rand); }
-.stufe .gross, .stufe .gross em { color: var(--auf-tiefe); }
-.stufe .lauf { color: var(--auf-tiefe-leise); }
-.stufe .mehr a { color: var(--auf-tiefe); }
+.stufe .gross, .stufe .gross em { color: var(--schrift); }
+.stufe .lauf { color: var(--schrift-leise); }
+.stufe .mehr a { color: var(--schrift); }
 .faecher { margin-top: var(--a4); max-width: 60rem; }
-.stufe .fach { border-bottom: 1px solid var(--linie-tiefe-fein); }
-.stufe .fach:first-child { border-top: 1px solid var(--linie-tiefe-fein); }
+.stufe .fach { border-bottom: 1px solid var(--linie-fein); }
+.stufe .fach:first-child { border-top: 1px solid var(--linie-fein); }
 .stufe .fach-kopf { padding-block: 1.5rem; }
-.stufe .fach-wort { color: var(--auf-tiefe); font-size: 1.35rem; }
-.stufe .fach-ab { color: var(--lagune); }
+.stufe .fach-wort { color: var(--schrift); font-size: 1.35rem; }
+.stufe .fach-ab { color: var(--akzent-schrift); }
 .stufe .fach-zeichen::before,
-.stufe .fach-zeichen::after { background: var(--lagune); }
-.stufe .fach[open] .fach-kopf { box-shadow: inset 2px 0 0 var(--lagune); }
-.stufe .posten li + li { border-top: 1px solid var(--linie-tiefe-fein); }
-.stufe .posten-name { color: var(--auf-tiefe-leise); }
-.stufe .posten-name em { color: var(--auf-tiefe-still); }
-.stufe .posten-preis b { color: var(--auf-tiefe); }
-.stufe .fach-kopf:focus-visible { outline-color: var(--lagune); }
+.stufe .fach-zeichen::after { background: var(--akzent); }
+.stufe .fach[open] .fach-kopf { box-shadow: inset 2px 0 0 var(--akzent-schrift); }
+.stufe .posten li + li { border-top: 1px solid var(--linie-fein); }
+.stufe .posten-name { color: var(--schrift-leise); }
+.stufe .posten-name em { color: var(--schrift-still); }
+.stufe .posten-preis b { color: var(--schrift); }
+.stufe .fach-kopf:focus-visible { outline-color: var(--akzent-schrift); }
 @media (hover: hover) and (pointer: fine) {
-  .stufe .fach-kopf:hover { background: oklch(96.5% .012 190 / .05); }
+  .stufe .fach-kopf:hover { background: oklch(34% .05 208 / .05); }
 }
 @media (min-width: 48rem) { .stufe .fach-wort { font-size: 1.9rem; } }
 
@@ -1249,9 +1207,9 @@ main, .fuss { position: relative; z-index: 1; }
   padding: 0 0 var(--a6);
   /* Eine Scheibe wie die übrigen, nicht deckend: sonst stand das
      Brautbild neben einem schwarzen Loch mitten in der Wand. */
-  background: oklch(11% .012 200 / .78);
-  color: var(--auf-tiefe);
-  border-block: 1px solid var(--linie-tiefe-fein);
+  background: oklch(var(--scheibe) / .8);
+  color: var(--schrift);
+  border-block: 1px solid var(--linie-fein);
 }
 .braut-grund {
   grid-area: bild;
@@ -1268,13 +1226,13 @@ main, .fuss { position: relative; z-index: 1; }
   margin: 0 0 var(--a2);
   font-family: var(--mono);
   font-size: .72rem; letter-spacing: .22em; text-transform: uppercase;
-  color: var(--lagune);
+  color: var(--akzent-schrift);
 }
-.braut .gross, .braut .gross em { color: var(--auf-tiefe); }
-.braut .lauf { color: var(--auf-tiefe-leise); }
-.braut .preis { color: var(--auf-tiefe-still); }
-.braut .preis b { color: var(--auf-tiefe); }
-.braut .knopf { background: var(--lagune); color: var(--nacht); }
+.braut .gross, .braut .gross em { color: var(--schrift); }
+.braut .lauf { color: var(--schrift-leise); }
+.braut .preis { color: var(--schrift-still); }
+.braut .preis b { color: var(--schrift); }
+.braut .knopf { background: var(--knopf-grund); color: var(--knopf-schrift); }
 
 @media (min-width: 62rem) {
   /* Text links, Aufnahme rechts bis an den Rand. Die Höhe gibt der
@@ -1304,8 +1262,8 @@ main, .fuss { position: relative; z-index: 1; }
   max-width: var(--spalte); margin-inline: auto;
   padding-inline: var(--rand); margin-bottom: var(--a4);
 }
-.werk-kopf .gross { color: var(--auf-tiefe); }
-.werk-kopf .lauf { color: var(--auf-tiefe-leise); max-width: var(--lese); margin-bottom: 0; }
+.werk-kopf .gross { color: var(--schrift); }
+.werk-kopf .lauf { color: var(--schrift-leise); max-width: var(--lese); margin-bottom: 0; }
 /* Der Zug. Er läuft von rechts herein und weiter durch, gleichmässig
    und langsam: 8 Aufnahmen je Satz, eine Runde in 72 s. Bewegt wird nur
    `transform` — eine Bahn, die Breiten oder Ränder animiert, ruckelt.
@@ -1374,8 +1332,8 @@ main, .fuss { position: relative; z-index: 1; }
 .laden-gross img { aspect-ratio: 4 / 3; }
 .laden-klein img { aspect-ratio: 16 / 10; }
 .laden-satz { align-self: center; padding-block: var(--a2); }
-.laden-satz .gross { color: var(--auf-tiefe); }
-.laden-satz .lauf { color: var(--auf-tiefe-leise); margin-bottom: 0; }
+.laden-satz .gross { color: var(--schrift); }
+.laden-satz .lauf { color: var(--schrift-leise); margin-bottom: 0; }
 @media (min-width: 60rem) {
   .laden-bau {
     grid-template-columns: 1.25fr 1fr;
@@ -1390,9 +1348,9 @@ main, .fuss { position: relative; z-index: 1; }
 }
 .laden .spruch {
   max-width: 42rem; margin: var(--a6) auto 0;
-  color: var(--auf-tiefe-leise);
+  color: var(--schrift-leise);
 }
-.laden .spruch cite { color: var(--auf-tiefe-still); }
+.laden .spruch cite { color: var(--schrift-still); }
 
 
 /* ── Nur für Vorleseprogramme ─────────────────────────────────────── */
@@ -1411,12 +1369,12 @@ main, .fuss { position: relative; z-index: 1; }
   margin: 0 0 var(--a2);
   font-family: var(--mono);
   font-size: var(--t-marke); letter-spacing: .22em; text-transform: uppercase;
-  color: var(--lagune);
+  color: var(--akzent-schrift);
 }
 .augenzeile::before {
   content: ""; flex: none;
   width: .4rem; height: .4rem; border-radius: 50%;
-  background: var(--lagune);
+  background: var(--akzent);
   box-shadow: 0 0 0 3px oklch(80% .10 195 / .18);
 }
 
@@ -1438,16 +1396,16 @@ main, .fuss { position: relative; z-index: 1; }
 .urteil-note {
   padding: var(--a3) var(--a2);
   text-align: center;
-  border: 1px solid var(--linie-tiefe);
+  border: 1px solid var(--linie);
   border-radius: var(--kante);
-  background: oklch(80% .075 193 / .045);
+  background: oklch(99% .006 196 / .7);
 }
 .urteil-wert {
   margin: 0;
-  font-family: 'Bodoni Moda', Didot, Georgia, serif;
+  font-family: 'Gilda Display', Georgia, serif;
   font-weight: 400; font-size: 4.2rem; line-height: 1;
   letter-spacing: -.02em;
-  color: var(--auf-tiefe);
+  color: var(--schrift);
 }
 /* Zwei Sternreihen übereinander: unten die leeren, darüber die vollen,
    beschnitten auf 4,8 von 5. `grid-area: 1 / 1` stapelt sie — zwei
@@ -1461,9 +1419,9 @@ main, .fuss { position: relative; z-index: 1; }
   display: flex; gap: .18rem;
   line-height: 0;
 }
-.urteil-grund { color: oklch(80% .075 193 / .30); }
+.urteil-grund { color: oklch(34% .05 208 / .2); }
 .urteil-fuell {
-  color: var(--lagune);
+  color: var(--akzent-schrift);
   width: var(--voll, 100%);
   overflow: hidden;
 }
@@ -1471,11 +1429,11 @@ main, .fuss { position: relative; z-index: 1; }
 .urteil-mass {
   margin: 0;
   font-size: var(--t-marke); letter-spacing: .04em;
-  color: var(--auf-tiefe-still);
+  color: var(--schrift-still);
 }
-.urteil-satz .gross { color: var(--auf-tiefe); margin-bottom: var(--a2); }
-.urteil-satz .gross em { color: var(--lagune); font-style: normal; }
-.urteil-satz .lauf { color: var(--auf-tiefe-leise); max-width: 34rem; }
+.urteil-satz .gross { color: var(--schrift); margin-bottom: var(--a2); }
+.urteil-satz .gross em { color: var(--akzent-schrift); font-style: normal; }
+.urteil-satz .lauf { color: var(--schrift-leise); max-width: 34rem; }
 .urteil-satz .wahl { margin-top: var(--a3); }
 
 /* ── Stimmen ──────────────────────────────────────────────────────────
@@ -1491,11 +1449,11 @@ main, .fuss { position: relative; z-index: 1; }
 .stimmen {
   position: relative;
   padding: var(--a6) var(--rand);
-  background:
-    linear-gradient(oklch(93% .03 195 / .38), oklch(93% .03 195 / .38)),
-    oklch(88% .06 195) url('bilder/grund-licht.webp') 50% 50% / cover no-repeat;
-  color: var(--putz-tinte);
-  border-block: 1px solid oklch(80% .075 193 / .35);
+  background: oklch(86.5% .07 194) url('bilder/straehne-aqua.webp') 50% 50% / cover no-repeat;
+  color: var(--schrift);
+  /* Auf Aqua reicht die stillste Stufe nicht — eine Sprosse dunkler. */
+  --schrift-still: var(--schrift-leise);
+  --linie: oklch(30% .06 208 / .28);
 }
 .stimmen-bau { display: grid; gap: var(--a5); }
 @media (min-width: 62rem) {
@@ -1506,33 +1464,33 @@ main, .fuss { position: relative; z-index: 1; }
   }
   .stimmen-kopf { position: sticky; top: calc(var(--leiste) + var(--a3)); }
 }
-.stimmen .gross { color: var(--putz-tinte); }
-.stimmen .gross em { font-style: italic; color: var(--putz-tinte); }
-.stimmen .lauf { color: var(--putz-tinte-leise); max-width: 30rem; }
+.stimmen .gross { color: var(--schrift); }
+.stimmen .gross em { font-style: italic; color: var(--schrift); }
+.stimmen .lauf { color: var(--schrift-leise); max-width: 30rem; }
 
 .stimmen-note {
   display: flex; align-items: center; gap: var(--a2);
   margin: 0 0 var(--a3);
   padding-block: var(--a2);
-  border-block: 1px solid var(--putz-linie);
+  border-block: 1px solid var(--linie);
 }
 .stimmen-wert {
   margin: 0;
-  font-family: 'Bodoni Moda', Didot, Georgia, serif;
+  font-family: 'Gilda Display', Georgia, serif;
   font-size: 3.4rem; line-height: 1; letter-spacing: -.02em;
-  color: var(--putz-tinte);
+  color: var(--schrift);
 }
 .stimmen-note .urteil-sterne { justify-content: start; margin: 0 0 .3rem; }
 .stimmen-note .urteil-grund { color: oklch(47% .095 199 / .28); }
-.stimmen-note .urteil-fuell { color: var(--putz-stern); }
-.stimmen-mass { margin: 0; font-size: var(--t-klein); color: var(--putz-tinte-leise); }
+.stimmen-note .urteil-fuell { color: var(--akzent-schrift); }
+.stimmen-mass { margin: 0; font-size: var(--t-klein); color: var(--schrift-leise); }
 
 /* Auf hellem Grund ist der stille Knopf dunkel umrandet. */
-.stimmen .knopf-still { border-color: oklch(30% .05 205 / .45); color: var(--putz-tinte); }
+.stimmen .knopf-still { border-color: oklch(30% .05 205 / .45); color: var(--schrift); }
 @media (hover: hover) and (pointer: fine) {
-  .stimmen .knopf-still:hover { border-color: var(--putz-tinte); }
+  .stimmen .knopf-still:hover { border-color: var(--schrift); }
 }
-.stimmen :focus-visible { outline-color: var(--putz-tinte); }
+.stimmen :focus-visible { outline-color: var(--schrift); }
 
 .stimmen-liste {
   columns: 1;
@@ -1543,14 +1501,14 @@ main, .fuss { position: relative; z-index: 1; }
   break-inside: avoid;
   margin: 0 0 var(--a4);
   padding-top: var(--a3);
-  border-top: 1px solid var(--putz-linie);
+  border-top: 1px solid var(--linie);
 }
 .stimme blockquote { margin: 0 0 var(--a2); }
 .stimme p {
   margin: 0;
-  font-family: 'Bodoni Moda', Didot, Georgia, serif;
+  font-family: 'Gilda Display', Georgia, serif;
   font-size: 1.22rem; line-height: 1.42;
-  color: var(--putz-tinte);
+  color: var(--schrift);
   text-wrap: pretty;
 }
 .stimme p::before { content: "\201E"; }
@@ -1565,11 +1523,11 @@ main, .fuss { position: relative; z-index: 1; }
 .stimme figcaption {
   display: flex; flex-wrap: wrap; align-items: center; gap: .3rem .75rem;
   font-size: .8125rem;
-  color: var(--putz-tinte-leise);
+  color: var(--schrift-leise);
 }
-.stimme-sterne { display: inline-flex; gap: 2px; line-height: 0; color: var(--putz-stern); }
+.stimme-sterne { display: inline-flex; gap: 2px; line-height: 0; color: var(--akzent-schrift); }
 .stimme-sterne svg { width: 13px; height: 12px; fill: currentColor; }
-.stimme-wer { font-weight: 700; letter-spacing: .04em; color: var(--putz-tinte); }
+.stimme-wer { font-weight: 700; letter-spacing: .04em; color: var(--schrift); }
 
 /* ── Wo Sie mich finden ───────────────────────────────────────────────
    Anschrift und Nummer links, die Zeiten als Karte rechts. */
@@ -1582,46 +1540,46 @@ main, .fuss { position: relative; z-index: 1; }
     gap: var(--a5);
   }
 }
-.kontakt .gross { color: var(--auf-tiefe); }
-.kontakt .gross em { color: var(--lagune); font-style: normal; }
-.kontakt .lauf { color: var(--auf-tiefe-leise); max-width: 32rem; }
+.kontakt .gross { color: var(--schrift); }
+.kontakt .gross em { color: var(--akzent-schrift); font-style: normal; }
+.kontakt .lauf { color: var(--schrift-leise); max-width: 32rem; }
 /* Nicht einfach `.kontakt a`: das ist spezifischer als `.knopf` und
    färbte dessen Schrift türkis — auf türkisem Grund stand der Knopf
    dann leer da. Die Knöpfe werden ausgenommen, statt sie mit
    `!important` zurückzuholen. */
-.kontakt a:not(.knopf):not(.knopf-still) { color: var(--lagune); }
-.kontakt .knopf-still { border-color: var(--linie-tiefe); color: var(--auf-tiefe); }
+.kontakt a:not(.knopf):not(.knopf-still) { color: var(--akzent-schrift); }
+.kontakt .knopf-still { border-color: var(--linie); color: var(--schrift); }
 .anschrift {
   margin: 0 0 var(--a3);
   font-style: normal; font-size: var(--t-lauf); line-height: 1.7;
-  color: var(--auf-tiefe-leise);
+  color: var(--schrift-leise);
 }
 /* Die Nummer ist auf dem Telefon der kürzeste Weg zum Termin — sie
    darf so gross sein, dass man sie ohne Zielen trifft. */
 .rufnummer {
   display: inline-block; margin-top: .4rem;
-  font-family: 'Bodoni Moda', Didot, Georgia, serif;
+  font-family: 'Gilda Display', Georgia, serif;
   font-size: 1.85rem; letter-spacing: .01em;
-  color: var(--auf-tiefe); text-decoration: none;
-  border-bottom: 2px solid var(--lagune);
+  color: var(--schrift); text-decoration: none;
+  border-bottom: 2px solid var(--akzent);
   padding-bottom: .12rem;
   font-variant-numeric: tabular-nums;
 }
 .kontakt .wahl { margin-top: var(--a3); }
 .kontakt-fuss { margin: var(--a3) 0 0; font-size: var(--t-klein); }
-.kontakt-fuss a { color: var(--lagune); }
+.kontakt-fuss a { color: var(--akzent-schrift); }
 
 .zeiten-karte {
   padding: var(--a3);
-  border: 1px solid var(--linie-tiefe);
+  border: 1px solid var(--linie);
   border-radius: var(--kante);
-  background: oklch(80% .075 193 / .045);
+  background: oklch(99% .006 196 / .7);
 }
 .zeiten-karte h3 {
   margin: 0 0 var(--a2);
-  font-family: 'Bodoni Moda', Didot, Georgia, serif;
+  font-family: 'Gilda Display', Georgia, serif;
   font-weight: 400; font-size: 1.4rem;
-  color: var(--auf-tiefe);
+  color: var(--schrift);
 }
 .zeiten-liste { margin: 0; }
 .zeiten-zeile {
@@ -1630,43 +1588,51 @@ main, .fuss { position: relative; z-index: 1; }
   padding: .62rem 0;
   font-size: var(--t-klein);
 }
-.zeiten-zeile + .zeiten-zeile { border-top: 1px solid var(--linie-tiefe-fein); }
-.zeiten-zeile dt { color: var(--auf-tiefe-leise); }
+.zeiten-zeile + .zeiten-zeile { border-top: 1px solid var(--linie-fein); }
+.zeiten-zeile dt { color: var(--schrift-leise); }
 .zeiten-zeile dd {
   margin: 0; text-align: right;
-  color: var(--auf-tiefe); font-variant-numeric: tabular-nums;
+  color: var(--schrift); font-variant-numeric: tabular-nums;
 }
 .zeiten-stand {
   margin: var(--a2) 0 0; padding-top: var(--a2);
-  border-top: 1px solid var(--linie-tiefe-fein);
-  font-size: var(--t-marke); color: var(--auf-tiefe-still);
+  border-top: 1px solid var(--linie-fein);
+  font-size: var(--t-marke); color: var(--schrift-still);
 }
 
 /* ── Fuss ─────────────────────────────────────────────────────────── */
 
+/* Der Fuss ist der Anker: die einzige tiefe Fläche der Seite, eine
+   Petrol-Strähne. Hier drehen sich die Schrifttokens um — neu gemessen,
+   nicht gespiegelt: der Akzent wird wieder das helle Türkis des Schilds. */
 .fuss {
-  border-top: 1px solid var(--linie-tiefe-fein);
+  position: relative;
   padding: var(--a5) 0 var(--a4);
   text-align: center;
   font-size: var(--t-klein);
-  color: var(--auf-tiefe-still);
+  background: oklch(29% .055 206) url('bilder/straehne-tief.webp') 50% 50% / cover no-repeat;
+  --schrift:       oklch(97% .01 195);
+  --schrift-leise: oklch(88% .025 195);
+  --schrift-still: oklch(80% .03 198);
+  --akzent-schrift: oklch(84% .12 193);
+  color: var(--schrift-still);
 }
 .fuss-siegel { width: 11rem; height: auto; margin: 0 auto var(--a3); }
 .fuss-marke {
   margin: 0 0 var(--a3);
-  font-family: 'Bodoni Moda', Didot, Georgia, serif;
+  font-family: 'Gilda Display', Georgia, serif;
   font-size: 1.35rem;
-  color: var(--auf-tiefe);
+  color: var(--schrift);
 }
 .fuss-wege { display: flex; flex-wrap: wrap; justify-content: center; gap: .4rem var(--a3); }
-.fuss-wege a { padding-block: .35rem; color: var(--lagune); }
+.fuss-wege a { padding-block: .35rem; color: var(--akzent-schrift); }
 .fuss-recht {
   margin: var(--a3) 0 0;
   font-size: var(--t-marke); letter-spacing: .02em;
-  color: var(--auf-tiefe-still);
+  color: var(--schrift-still);
 }
 @media (hover: hover) and (pointer: fine) {
-  .fuss-wege a:hover { color: var(--lagune-hell); }
+  .fuss-wege a:hover { color: var(--knopf-hell); }
 }
 
 /* ── Die Preisliste in derselben Welt ─────────────────────────────────
@@ -1676,67 +1642,67 @@ main, .fuss { position: relative; z-index: 1; }
 
 .kopf-tief {
   position: relative;
-  background: oklch(11% .012 200 / .90);
-  color: var(--auf-tiefe);
+  background: oklch(var(--scheibe) / .9);
+  color: var(--schrift);
   margin-top: calc(-1 * var(--leiste));
   padding: calc(var(--leiste) + var(--a5)) 0 var(--a5);
 }
-.kopf-tief .kennung { color: var(--auf-tiefe-still); }
-.kopf-tief .lauf { color: var(--auf-tiefe-leise); }
+.kopf-tief .kennung { color: var(--schrift-still); }
+.kopf-tief .lauf { color: var(--schrift-leise); }
 .wand-titel {
   margin: 0 0 var(--a3);
-  font-family: 'Bodoni Moda', Didot, Georgia, serif;
+  font-family: 'Gilda Display', Georgia, serif;
   font-weight: 400;
   font-size: clamp(2.6rem, 8vw, 5.4rem);
   line-height: .98; letter-spacing: -.02em;
-  color: var(--auf-tiefe);
+  color: var(--schrift);
 }
 @media (max-width: 48rem) { .kopf-tief .kennung { display: none; } }
 
 .stufe-liste {
   background: none;
-  color: var(--auf-tiefe);
+  color: var(--schrift);
 }
 
-.stufe-liste .fach { border-bottom-color: var(--linie-tiefe-fein); }
-.stufe-liste .fach:first-of-type { border-top-color: var(--linie-tiefe-fein); }
-.stufe-liste .fach-wort { color: var(--auf-tiefe); }
-.stufe-liste .fach-ab { color: var(--lagune); }
+.stufe-liste .fach { border-bottom-color: var(--linie-fein); }
+.stufe-liste .fach:first-of-type { border-top-color: var(--linie-fein); }
+.stufe-liste .fach-wort { color: var(--schrift); }
+.stufe-liste .fach-ab { color: var(--akzent-schrift); }
 .stufe-liste .fach-zeichen::before,
-.stufe-liste .fach-zeichen::after { background: var(--lagune); }
-.stufe-liste .fach[open] { background: oklch(96.5% .012 190 / .045); }
-.stufe-liste .fach[open] .fach-kopf { box-shadow: inset 2px 0 0 var(--lagune); }
-.stufe-liste .fach-kopf:focus-visible { outline-color: var(--lagune); }
+.stufe-liste .fach-zeichen::after { background: var(--akzent); }
+.stufe-liste .fach[open] { background: oklch(34% .05 208 / .045); }
+.stufe-liste .fach[open] .fach-kopf { box-shadow: inset 2px 0 0 var(--akzent-schrift); }
+.stufe-liste .fach-kopf:focus-visible { outline-color: var(--akzent-schrift); }
 .stufe-liste .gruppe-wort,
 .stufe-liste .posten-name em,
 .stufe-liste .posten-preis i,
 .stufe-liste .spalten-wort .posten-preis b,
-.stufe-liste .spalten-wort .posten-preis i { color: var(--auf-tiefe-still); }
-.stufe-liste .posten-name { color: var(--auf-tiefe-leise); }
-.stufe-liste .posten-preis b { color: var(--auf-tiefe); }
+.stufe-liste .spalten-wort .posten-preis i { color: var(--schrift-still); }
+.stufe-liste .posten-name { color: var(--schrift-leise); }
+.stufe-liste .posten-preis b { color: var(--schrift); }
 .stufe-liste .posten li + li,
-.stufe-liste .spalten-wort { border-color: var(--linie-tiefe-fein); }
-.stufe-liste .schluss { color: var(--auf-tiefe-still); }
-.stufe-liste .schluss a { color: var(--auf-tiefe); }
+.stufe-liste .spalten-wort { border-color: var(--linie-fein); }
+.stufe-liste .schluss { color: var(--schrift-still); }
+.stufe-liste .schluss a { color: var(--schrift); }
 @media (hover: hover) and (pointer: fine) {
-  .stufe-liste .fach-kopf:hover { background: oklch(96.5% .012 190 / .06); }
+  .stufe-liste .fach-kopf:hover { background: oklch(34% .05 208 / .05); }
 }
 
 .stufe-liste .abschluss {
-  background: oklch(96.5% .012 190 / .05);
-  border-color: var(--linie-tiefe-fein);
+  background: oklch(99% .006 196 / .7);
+  border-color: var(--linie-fein);
 }
-.stufe-liste .abschluss .lauf { color: var(--auf-tiefe-leise); }
+.stufe-liste .abschluss .lauf { color: var(--schrift-leise); }
 /* Auf dem Akzent steht die Schrift dunkel — hell auf Lagune sind 1,6:1. */
-.stufe-liste .abschluss .knopf { background: var(--lagune); color: var(--nacht); }
+.stufe-liste .abschluss .knopf { background: var(--knopf-grund); color: var(--knopf-schrift); }
 .stufe-liste .abschluss .knopf-still {
-  border-color: var(--linie-tiefe); color: var(--auf-tiefe);
+  border-color: var(--linie); color: var(--schrift);
 }
 
 
 /* Die Rechtsseiten stehen im selben Raum. */
 .recht { padding-block: var(--a5) var(--a6); }
-.recht h2, .recht h3, .recht dt { color: var(--auf-tiefe); }
-.recht p, .recht li, .recht dd { color: var(--auf-tiefe-leise); }
-.recht a { color: var(--auf-tiefe); }
-.riesen { color: var(--auf-tiefe); }
+.recht h2, .recht h3, .recht dt { color: var(--schrift); }
+.recht p, .recht li, .recht dd { color: var(--schrift-leise); }
+.recht a { color: var(--schrift); }
+.riesen { color: var(--schrift); }
