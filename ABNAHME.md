@@ -113,12 +113,14 @@ Für „BaHaar's Kosmetikstudio" gibt es noch keine Preise. Die Preisliste sagt
 das am Ende offen und verweist aufs Telefon, statt Zahlen zu erfinden. Sobald
 sie feststehen, gehören sie als zehnte Gruppe in `leistungen.html`.
 
-## 9. Testfassung: Bildrechte der neuen Hintergründe
+## 9. Testfassung: Herkunft der Scheren-Aufnahme
 
-Die drei Hintergründe der Testfassung (Glanz, heller Putz, Pinselputz) und die
-Aufnahme der Schere stammen aus Vorlagen, die der Auftraggeber geschickt hat —
-zwei davon sichtbar als Bildschirmfotos aus Pinterest. **Woher sie ursprünglich
-kommen und ob sie genutzt werden dürfen, ist nicht geklärt.** Für eine
-Testfassung unkritisch; bevor sie dauerhaft live bleibt, bitte die Quelle
-nennen oder eine Lizenz nachweisen. Sonst ersetzen wir sie durch eigene oder
-lizenzfreie Aufnahmen — der Aufbau bleibt derselbe.
+Die Hintergründe der Testfassung sind inzwischen **selbst gerechnet** — die
+Pinterest-Vorlagen sind raus, dort gibt es keine Rechtefrage mehr.
+
+Offen ist nur noch die **Aufnahme der Schere**, die im Auftakt freigestellt
+steht. Sie kam als Bild vom Auftraggeber; woher sie stammt, ist nicht
+bekannt (die Gravur auf der Klinge ist unleserlich, was auf ein
+KI-erzeugtes Bild hindeutet). Bitte kurz bestätigen, dass sie genutzt
+werden darf — sonst ersetzen wir sie durch ein eigenes Foto einer Schere
+aus dem Salon; der Aufbau bleibt derselbe.
