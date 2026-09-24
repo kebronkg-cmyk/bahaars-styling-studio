@@ -13,7 +13,8 @@ anderen oder an der Hauptseite. Übersicht: `fassungen/index.html`.
 
 | Fassung | Ordner | Live |
 |---|---|---|
-| Hell (neu) | `fassungen/hell/` | https://kebronkg-cmyk.github.io/bahaars-styling-studio/fassungen/hell/ |
+| Hell II (neu) | `fassungen/hell-2/` | https://kebronkg-cmyk.github.io/bahaars-styling-studio/fassungen/hell-2/ |
+| Hell | `fassungen/hell/` | https://kebronkg-cmyk.github.io/bahaars-styling-studio/fassungen/hell/ |
 | Dunkel, ohne Film | `fassungen/dunkel/` | …/fassungen/dunkel/ |
 | Mit Film | `fassungen/video/` | …/fassungen/video/ |
 
@@ -26,6 +27,13 @@ Eine Fassung zur Hauptseite machen (Beispiel „Video"):
 cp -r fassungen/video/. .
 sed -i '/<meta name="robots" content="noindex">/d' index.html leistungen.html impressum.html datenschutz.html
 ```
+
+**Hell II** (24.09.2026): wie Hell, dazu die Glanz-Strähne des Auftakts in
+derselben Farbvariante hinter Leistungen (`straehne-glanz-leistungen.webp`)
+und Kontakt (`straehne-glanz-kontakt.webp`), eigens gerechnet mit anderem
+Verlauf. Dort sind `--schrift-still` und `--akzent-schrift` lokal eine Sprosse
+dunkler. Knöpfe: `--knopf-grund` oklch(50 % .105 192) statt Petrol — gemessen
+5,3:1. Schwächste Zeile der Seite 5,3:1.
 
 Eine neue Fassung aus einem Git-Stand ablegen:
 `python3 recherche/fassung.py <commit> <name> <titel>` — sammelt alle
