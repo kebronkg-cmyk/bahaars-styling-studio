@@ -13,7 +13,8 @@ anderen oder an der Hauptseite. Übersicht: `fassungen/index.html`.
 
 | Fassung | Ordner | Live |
 |---|---|---|
-| Hell II (neu) | `fassungen/hell-2/` | https://kebronkg-cmyk.github.io/bahaars-styling-studio/fassungen/hell-2/ |
+| Hell III (neu) | `fassungen/hell-3/` | https://kebronkg-cmyk.github.io/bahaars-styling-studio/fassungen/hell-3/ |
+| Hell II | `fassungen/hell-2/` | https://kebronkg-cmyk.github.io/bahaars-styling-studio/fassungen/hell-2/ |
 | Hell | `fassungen/hell/` | https://kebronkg-cmyk.github.io/bahaars-styling-studio/fassungen/hell/ |
 | Dunkel, ohne Film | `fassungen/dunkel/` | …/fassungen/dunkel/ |
 | Mit Film | `fassungen/video/` | …/fassungen/video/ |
@@ -34,6 +35,15 @@ und Kontakt (`straehne-glanz-kontakt.webp`), eigens gerechnet mit anderem
 Verlauf. Dort sind `--schrift-still` und `--akzent-schrift` lokal eine Sprosse
 dunkler. Knöpfe: `--knopf-grund` oklch(50 % .105 192) statt Petrol — gemessen
 5,3:1. Schwächste Zeile der Seite 5,3:1.
+
+**Hell III** (17.10.2026): wie Hell II, angeregt von der Irmonhair-Fassung
+„Spiegel" (deren Spiegelrahmen bewusst nicht übernommen). Bewertungen als
+Karten auf dunkler Petrol-Strähne (`straehne-tief.webp`, Schrifttokens dort
+lokal hell), Leistungen ab 62rem zweispaltig mit `.fach-was`-Zeile, kursive
+Wörter in Überschriften in `--akzent-schrift`, neue Zierfarbe `--zier`
+(Champagner, nur Sterne und Anführungszeichen auf dunkel), Unterzeilen unter
+den Ladenbildern (`figure` als Flex-Spalte, sonst rutscht die Zeile aufs
+nächste Bild — gemessen 1,1:1 vor der Korrektur).
 
 Eine neue Fassung aus einem Git-Stand ablegen:
 `python3 recherche/fassung.py <commit> <name> <titel>` — sammelt alle
