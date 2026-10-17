@@ -1,0 +1,600 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   BaHaar's Styling Studio — Fassung „Himmel"
+
+   „Bahār" heisst Frühling. Auf dieser Seite wird der Name der Inhaberin
+   zu einem Himmel aus blauen Orchideen, der beim Scrollen aufblüht.
+
+   ── Woher die Farben kommen ───────────────────────────────────────────
+   Grund: ein heller Himmel, kühl und fast weiss. Schrift: das Nachtblau
+   aus dem Schlund der Orchidee. Aktion: das Türkis des Ladenschilds,
+   eine Sprosse tiefer, damit Weiss darauf hält — der einzige Ort, an dem
+   es Fläche wird. Felder: Orchideenblau für die Kachel am Laden,
+   Nachtblau für den Fuss. Die Orchideen sind echte Aufnahmen (Pixabay),
+   freigestellt und auf einen Blauton gebracht; die Seide ist gerechnet
+   (recherche/himmel/); die Arbeiten sind Fotos aus dem Salon.
+
+   ── Glas ──────────────────────────────────────────────────────────────
+   Glas kommt dreimal vor und jedes Mal mit Grund: über der schimmernden
+   Seide der Stimmen (dort ist hinter dem Glas etwas zu sehen), als
+   Papier auf dem Ladenfoto und als Leiste, sobald sie über Inhalt
+   steht. Sonst nicht.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+@font-face {
+  font-family: 'Work Sans';
+  src: url('schrift/WorkSans.woff2') format('woff2');
+  font-weight: 250 600; font-style: normal; font-display: swap;
+}
+
+:root {
+  color-scheme: light;
+
+  --himmel:       oklch(97.6% .012 252);
+  --himmel-oben:  oklch(90.5% .05 246);
+  --feld:         oklch(94.4% .026 252);
+  --tinte:        oklch(24% .07 262);
+  --tinte-leise:  oklch(39% .055 258);
+  --orchidee:     oklch(55% .17 259);
+  --nacht:        oklch(20.5% .06 264);
+  --nacht-tinte:  oklch(96% .015 250);
+  --nacht-leise:  oklch(80% .04 252);
+  --aktion:       oklch(50% .1 197);
+  --aktion-tief:  oklch(43% .095 199);
+  --aktion-tinte: oklch(99% .006 200);
+  --stiel:        #3f6b55;
+
+  /* Glas: drei Lagen — Tönung, Glanzkante oben, weicher Schatten nach unten. */
+  --glas-grund:   linear-gradient(140deg, oklch(100% 0 0 / .62), oklch(100% 0 0 / .26));
+  --glas-kante:   oklch(100% 0 0 / .7);
+  --glas-schatten: 0 24px 48px -28px oklch(30% .035 262 / .45), inset 0 1px 0 oklch(100% 0 0 / .85), inset 0 -1px 0 oklch(100% 0 0 / .25);
+
+  /* Fünf Grössen, nicht mehr. */
+  --s-klein: clamp(.8125rem, .79rem + .1vw, .875rem);
+  --s-text:  clamp(1.0625rem, 1rem + .25vw, 1.1875rem);
+  --s-lead:  clamp(1.25rem, 1.1rem + .7vw, 1.625rem);
+  --s-kopf:  clamp(2rem, 1.3rem + 3.2vw, 4rem);
+  --s-wort:  clamp(5rem, 22.5vw, 26rem);
+
+  --rand: max(1.25rem, 6vw);
+  --spalte: calc((100vw - 2 * var(--rand)) / 12);
+
+  --kurve: cubic-bezier(.16, 1, .3, 1);
+  --kurve-fort: cubic-bezier(.55, 0, .78, .4);
+  --leiste: 64px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-behavior: smooth; background: var(--himmel); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0;
+  font: 400 var(--s-text)/1.55 'Work Sans', system-ui, sans-serif;
+  color: var(--tinte);
+  background: var(--himmel);
+}
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; font-weight: 300; letter-spacing: -.035em; line-height: 1; text-wrap: balance; }
+p { margin: 0; }
+::selection { background: oklch(80% .1 250); color: var(--tinte); }
+:focus-visible { outline: 2px solid var(--aktion); outline-offset: 3px; border-radius: 2px; }
+.nurlesen { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+.sprung {
+  position: fixed; left: var(--rand); top: -4rem; z-index: 60;
+  padding: .7rem 1.1rem; background: var(--tinte); color: var(--himmel);
+  text-decoration: none; transition: top .3s var(--kurve);
+}
+.sprung:focus-visible { top: 1rem; }
+
+/* ── Knöpfe: ein Form, ganz rund, eine Farbe ───────────────────────── */
+.knopf {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 48px; padding: 0 1.6rem;
+  border-radius: 999px;
+  background: var(--aktion); color: var(--aktion-tinte);
+  font-weight: 500; font-size: var(--s-klein); letter-spacing: .01em;
+  text-decoration: none; white-space: nowrap;
+  transition: transform .4s var(--kurve), background-color .4s var(--kurve);
+}
+.knopf-klein { min-height: 42px; padding: 0 1.2rem; }
+.knopf:active { transform: scale(.97); }
+@media (hover: hover) and (pointer: fine) {
+  .knopf:not(.knopf-glas):hover { background: var(--aktion-tief); transform: translateY(-2px); }
+}
+.verweis {
+  color: var(--tinte); text-decoration: underline;
+  text-decoration-color: oklch(55% .17 259 / .45);
+  text-underline-offset: .22em; text-decoration-thickness: 1.5px;
+  transition: text-decoration-color .3s var(--kurve);
+}
+@media (hover: hover) and (pointer: fine) {
+  .verweis:hover { text-decoration-color: var(--orchidee); }
+}
+
+/* ── Glas ──────────────────────────────────────────────────────────── */
+.glas {
+  position: relative;
+  background: var(--glas-grund);
+  -webkit-backdrop-filter: blur(18px) saturate(1.6);
+          backdrop-filter: blur(18px) saturate(1.6);
+  box-shadow: var(--glas-schatten);
+}
+/* Die Glanzkante: ein schmales Licht, das oben links über die Fläche fällt. */
+.glas::before {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  background: linear-gradient(115deg, oklch(100% 0 0 / .55) 0%, oklch(100% 0 0 / 0) 32%);
+  mix-blend-mode: soft-light;
+}
+
+/* ── Die Leiste ────────────────────────────────────────────────────────
+   Eine schwebende Glaskapsel. Über den Orchideen bleibt alles darunter
+   sichtbar und die Schrift trotzdem lesbar; über Inhalt wird das Glas
+   dichter. Beim Runterscrollen weicht sie aus, beim Hochscrollen kommt
+   sie zurück (6 px Hysterese). */
+.leiste {
+  position: fixed; z-index: 50;
+  top: 10px; left: calc(var(--rand) - 1.1rem); right: calc(var(--rand) - 1.1rem);
+  height: 58px;
+  display: flex; align-items: center; gap: 2rem;
+  padding: 0 .5rem 0 1.1rem;
+  border-radius: 999px;
+  background: oklch(98.5% .008 250 / .5);
+  -webkit-backdrop-filter: blur(22px) saturate(1.7);
+          backdrop-filter: blur(22px) saturate(1.7);
+  box-shadow: 0 18px 40px -26px oklch(30% .035 262 / .45), inset 0 1px 0 oklch(100% 0 0 / .9);
+  transition: transform .6s var(--kurve), background-color .5s var(--kurve);
+}
+.leiste.ueber { background: oklch(98.5% .008 250 / .74); }
+.leiste.weg { transform: translateY(calc(-100% - 14px)); transition: transform .45s var(--kurve-fort); }
+.marke { display: inline-flex; align-items: center; gap: .6rem; text-decoration: none; font-size: var(--s-text); font-weight: 450; letter-spacing: -.01em; }
+.marke img { width: 28px; height: 28px; }
+.wege { display: flex; gap: 1.6rem; font-size: var(--s-klein); }
+.wege a { text-decoration: none; color: var(--tinte-leise); transition: color .3s var(--kurve); }
+@media (hover: hover) and (pointer: fine) { .wege a:hover { color: var(--tinte); } }
+.leiste-tel { margin-left: auto; font-size: var(--s-klein); font-variant-numeric: tabular-nums; text-decoration: none; white-space: nowrap; }
+@media (max-width: 52rem) {
+  .wege { display: none; }
+  .leiste { gap: 1rem; left: 10px; right: 10px; padding-left: .8rem; }
+}
+@media (max-width: 26rem) {
+  .marke span { display: none; }
+}
+
+/* ══ Auftakt ═══════════════════════════════════════════════════════════
+   Die Bühne bleibt stehen, solange man durch den Auftakt scrollt; --auf
+   läuft dabei von 0 bis 1 und öffnet den Busch. Ohne Skript und bei
+   reduzierter Bewegung steht er geschlossen da — so ist er gesetzt. */
+.auftakt {
+  --auf: 0;
+  position: relative;
+  height: 185svh;
+}
+.buehne {
+  position: sticky; top: 0;
+  height: 100svh; min-height: 34rem;
+  overflow: hidden; isolation: isolate;
+  background:
+    radial-gradient(70% 60% at 58% 34%, oklch(99% .008 250 / .9), oklch(99% .008 250 / 0) 70%),
+    linear-gradient(to bottom, var(--himmel-oben) 0%, oklch(94% .03 248) 48%, var(--himmel) 100%);
+}
+
+/* Die Orchideen: freigestellte Aufnahmen. Jede Rispe dreht sich um den
+   Punkt, an dem ihr Stiel aus dem Bild geht. Der Schatten ist weich und
+   fällt nach unten — Licht von oben, wie unter einem Glasdach. */
+.blume {
+  position: absolute; max-width: none; height: auto;
+  pointer-events: none; user-select: none;
+  --unschaerfe: 0px; --satt: 1;
+  --schatten: drop-shadow(0 22px 26px oklch(32% .035 262 / .16));
+  filter: blur(var(--unschaerfe)) var(--schatten) saturate(var(--satt));
+}
+.b-krone {
+  z-index: 1;
+  left: 37vw; top: -6svh; width: min(44vw, 731px);
+  transform-origin: 50% 100%;
+  transform: translate3d(0, calc(var(--auf) * -9svh), 0) scale(calc(1 + var(--auf) * .06));
+  --satt: .92; --schatten: drop-shadow(0 18px 22px oklch(32% .035 262 / .12));
+}
+.b-links {
+  z-index: 3;
+  left: 24vw; top: 7svh; width: min(31vw, 982px);
+  transform-origin: 46% 100%;
+  transform: translate3d(calc(var(--auf) * -21vw), calc(var(--auf) * -11svh), 0) rotate(calc(var(--auf) * -8deg)) scale(calc(.94 + var(--auf) * .06));
+}
+.b-rechts {
+  z-index: 3;
+  /* am Begleittext verankert, damit sie auch auf flachen Schirmen darüber bleibt */
+  left: 63vw; bottom: calc(9svh + 13.5rem); width: min(35vw, 1000px);
+  transform-origin: 100% 60%;
+  transform: translate3d(calc(var(--auf) * 17vw), calc(var(--auf) * 3svh), 0) rotate(calc(var(--auf) * 6deg));
+}
+.b-zweig {
+  z-index: 3;
+  left: 41vw; top: 63svh; width: min(21vw, 552px);
+  transform-origin: 20% 100%;
+  transform: translate3d(calc(var(--auf) * 5vw), calc(var(--auf) * 16svh), 0) rotate(calc(var(--auf) * 9deg));
+}
+/* Die nächste Blüte, ganz nah und darum unscharf. Sie zieht beim
+   Öffnen an der Kamera vorbei. */
+.b-nah {
+  z-index: 5;
+  left: 85vw; top: -26svh; width: min(34vw, 982px);
+  transform-origin: 30% 80%;
+  transform: translate3d(calc(var(--auf) * 14vw), calc(var(--auf) * -16svh), 0) scale(calc(1 + var(--auf) * .45));
+  opacity: calc(.95 - var(--auf) * 1.1);
+  --unschaerfe: 7px; --satt: .9; --schatten: drop-shadow(0 0 0 transparent);
+}
+
+/* Auftritt beim Laden: aus der Unschärfe in die Schärfe, in zwei
+   Gruppen zu höchstens drei. Es wird nur `scale` und Filter bewegt —
+   die Öffnung beim Scrollen hängt an `transform` und läuft unberührt. */
+@keyframes aufgehen {
+  from { opacity: 0; scale: .9; filter: blur(calc(var(--unschaerfe) + 12px)) var(--schatten) saturate(var(--satt)); }
+}
+@keyframes heranziehen {
+  from { opacity: 0; scale: .82; filter: blur(calc(var(--unschaerfe) + 14px)) var(--schatten) saturate(var(--satt)); }
+}
+.js .b-krone, .js .b-links, .js .b-rechts { animation: aufgehen 1.6s var(--kurve) both; }
+.js .b-krone { animation-delay: .06s; }
+.js .b-links { animation-delay: .15s; }
+.js .b-rechts { animation-delay: .24s; }
+.js .b-zweig { animation: aufgehen 1.6s var(--kurve) .5s both; }
+.js .b-nah { animation: heranziehen 1.8s var(--kurve) .59s both; }
+
+/* Der Abzug: echte Arbeit, im Busch stehend. Beim Öffnen tritt er vor. */
+.abzug-gross {
+  position: absolute; z-index: 2; margin: 0;
+  left: calc(var(--rand) + 5 * var(--spalte));
+  top: 14svh;
+  width: min(32vw, 60svh);
+  aspect-ratio: 4 / 5;
+  transform: translate3d(0, calc(var(--auf) * -3svh), 0) scale(calc(.97 + var(--auf) * .05));
+  box-shadow: 0 40px 80px -48px oklch(28% .035 262 / .6);
+}
+.abzug-gross img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 18%; }
+
+.auftakt-titel {
+  position: absolute; z-index: 4;
+  left: var(--rand); bottom: 8svh;
+  font-size: clamp(2.6rem, 6vw, 6rem);
+  line-height: .98;
+  letter-spacing: -.045em;
+}
+.auftakt-ort { display: block; font-weight: 500; color: var(--tinte); margin-bottom: .2rem; }
+.auftakt-satz {
+  position: absolute; z-index: 4;
+  right: var(--rand); bottom: 9svh;
+  width: min(24ch, calc(3 * var(--spalte)));
+  display: grid; gap: 1.1rem;
+  font-size: var(--s-klein); line-height: 1.5;
+  color: var(--tinte-leise);
+}
+.glas-chip {
+  justify-self: start;
+  padding: .55rem 1rem .55rem .85rem;
+  border-radius: 999px;
+  display: inline-flex; align-items: center; gap: .55rem;
+  color: var(--tinte); font-variant-numeric: tabular-nums;
+}
+.stand::before {
+  content: ""; display: inline-block; width: .5rem; height: .5rem; margin-right: .55rem;
+  border-radius: 50%; background: oklch(70% .02 250); vertical-align: .08em;
+}
+.stand.offen::before { background: var(--aktion); box-shadow: 0 0 0 3px oklch(50% .1 197 / .18); }
+
+/* Hochkant: der Abzug oben rechts, der Busch rahmt ihn von links und
+   oben, darunter Name und Satz. Zwei Rispen weniger. */
+@media (max-width: 62rem) {
+  .auftakt { height: 170svh; }
+  .abzug-gross { left: auto; right: var(--rand); top: 13svh; width: min(64vw, 44svh); }
+  .b-krone { left: 18vw; top: 2svh; width: min(96vw, 731px); }
+  .b-links { left: -9vw; top: 17svh; width: min(52vw, 982px); }
+  .b-zweig { left: auto; right: 1vw; top: calc(13svh + min(64vw, 44svh) * 1.25 - 26vw); width: min(38vw, 552px); }
+  .b-nah { display: none; }
+  /* Die Bogenrispe füllt die Luft zwischen Titel und Satz und zieht beim
+     Öffnen nach rechts hinaus. */
+  .b-rechts { left: auto; right: -6vw; bottom: auto; top: calc(13svh + min(64vw, 44svh) * 1.25 + 1.6rem + 2.2 * clamp(2.4rem, 11vw, 4.5rem)); width: min(72vw, 1000px); transform-origin: 100% 50%; }
+  .b-links { transform: translate3d(calc(var(--auf) * -26vw), calc(var(--auf) * -3svh), 0) rotate(calc(var(--auf) * -9deg)) scale(calc(.94 + var(--auf) * .06)); }
+  .b-zweig { transform: translate3d(calc(var(--auf) * 16vw), calc(var(--auf) * -3svh), 0) rotate(calc(var(--auf) * 12deg)); }
+  .b-rechts { transform: translate3d(calc(var(--auf) * 34vw), 0, 0) rotate(calc(var(--auf) * 4deg)); }
+  .auftakt-titel { font-size: clamp(2.4rem, 11vw, 4.5rem); bottom: auto; top: calc(13svh + min(64vw, 44svh) * 1.25 + 1.6rem); right: var(--rand); }
+  .auftakt-satz { left: var(--rand); right: var(--rand); width: auto; max-width: 60ch; bottom: 4svh; }
+}
+@media (max-width: 62rem) and (max-height: 760px) {
+  .b-rechts { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auftakt { height: auto; }
+  .buehne { position: relative; }
+  .blume, .abzug-gross { animation: none !important; }
+}
+
+/* ══ Arbeiten: eine Reihe Abzüge, einer gehoben ════════════════════════ */
+.arbeiten {
+  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: 0;
+  padding: clamp(7rem, 14vw, 13rem) 0 clamp(6rem, 10vw, 10rem) var(--rand);
+}
+.arbeiten-kopf {
+  grid-column: 1 / 4; padding-right: 2rem;
+  display: flex; flex-direction: column;
+}
+.arbeiten-kopf h2 { font-size: var(--s-kopf); margin-bottom: 1.2rem; }
+.arbeiten-kopf p { max-width: 30ch; }
+.arbeiten-notiz { margin-top: auto; padding-top: 3rem; font-size: var(--s-klein); color: var(--tinte-leise); }
+.reihe {
+  grid-column: 4 / -1;
+  display: flex; align-items: flex-end; gap: 6px;
+  overflow-x: auto; overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity; scrollbar-width: thin;
+  scrollbar-color: oklch(55% .17 259 / .4) transparent;
+  padding: 0 var(--rand) 1.2rem 0;
+}
+.abzug { flex: none; margin: 0; scroll-snap-align: start; }
+.abzug img { height: max(220px, 30vh); width: auto; aspect-ratio: auto; object-fit: cover; }
+.abzug.gehoben img { height: max(460px, 64vh); }
+.abzug figcaption {
+  display: flex; justify-content: space-between; gap: 1rem;
+  padding-top: .6rem; font-size: var(--s-klein); white-space: nowrap;
+}
+.abzug figcaption span:last-child { color: var(--tinte-leise); font-variant-numeric: tabular-nums; }
+@media (max-width: 52rem) {
+  .arbeiten { display: block; padding-right: 0; }
+  .arbeiten-kopf { padding-right: var(--rand); margin-bottom: 2rem; }
+  .arbeiten-notiz { padding-top: 1rem; }
+  .abzug img { height: 52vw; }
+  .abzug.gehoben img { height: 120vw; }
+}
+
+/* ══ Preise: wie eine Speisekarte ══════════════════════════════════════ */
+.preise {
+  background: var(--feld);
+  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr));
+  padding: 7rem 6vw;
+}
+.preise-kopf { grid-column: 1 / 4; align-self: start; position: sticky; top: calc(var(--leiste) + 2rem); }
+.preise-kopf h2 { font-size: var(--s-kopf); margin-bottom: 1.4rem; }
+.preise-kopf p { margin-bottom: 2rem; max-width: 30ch; }
+.karte { grid-column: 5 / -1; columns: 2; column-gap: 4rem; }
+.gruppe { break-inside: avoid; padding-bottom: 3rem; }
+.gruppe h3 { font-size: 1.5rem; font-weight: 450; letter-spacing: -.015em; line-height: 1.2; margin-bottom: .4rem; }
+.gruppe-hinweis { font-size: var(--s-klein); color: var(--tinte-leise); margin-bottom: .9rem; }
+.gruppe ul { list-style: none; margin: .9rem 0 0; padding: 0; display: grid; gap: 1.05rem; }
+.gruppe li { display: flex; justify-content: space-between; align-items: baseline; gap: 1.5rem; }
+.posten { max-width: 36ch; }
+.posten em { display: block; font-style: normal; font-size: var(--s-klein); color: var(--tinte-leise); margin-top: .1rem; }
+.preis { white-space: nowrap; font-variant-numeric: tabular-nums; }
+@media (max-width: 62rem) {
+  .preise { display: block; }
+  .preise-kopf { position: static; margin-bottom: 3.5rem; }
+  .karte { columns: 1; }
+}
+
+@media (min-width: 70rem) { .preise { padding-block: 10rem; } }
+
+/* ══ Braut: lose gesetzt, mit Luft ═════════════════════════════════════ */
+.braut {
+  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr));
+  padding: clamp(7rem, 14vw, 13rem) var(--rand);
+  row-gap: 0;
+}
+.braut h2 { grid-column: 1 / -1; font-size: var(--s-kopf); margin-bottom: 4rem; }
+.lose { margin: 0; }
+.lose img { width: 100%; object-fit: cover; }
+.lose-name { font-size: var(--s-klein); color: var(--tinte-leise); margin-bottom: .6rem; }
+.lose-satz { margin-top: .8rem; max-width: 34ch; }
+.lose-2 { grid-column: 1 / 6; grid-row: 2; }
+.lose-2 img { aspect-ratio: 4 / 5; object-position: 50% 30%; }
+.lose-3 { grid-column: 8 / 13; grid-row: 2 / 4; margin-top: 18vh; }
+.lose-3 img { aspect-ratio: 4 / 5; object-position: 50% 25%; }
+.lose-1 { display: none; }
+/* Eine einzelne Blüte auf dem Abzug, wie angesteckt — die einzige
+   Orchidee nach dem Auftakt ausser der am Kontakt. */
+.lose-3 { position: relative; }
+.lose-3 .lose-bluete {
+  aspect-ratio: auto; height: auto; object-fit: contain;
+  position: absolute; z-index: 1; pointer-events: none;
+  left: -3.2rem; top: 4.5rem;
+  width: clamp(6.5rem, 10vw, 9.5rem);
+  rotate: -14deg;
+  filter: drop-shadow(0 16px 18px oklch(32% .035 262 / .22));
+}
+.braut-satz {
+  grid-column: 2 / 6; grid-row: 3; align-self: start;
+  margin-top: 14vh;
+  font-size: var(--s-lead); line-height: 1.35; max-width: 22ch;
+}
+.braut-knopf { grid-column: 2 / 6; grid-row: 4; margin-top: 2rem; }
+@media (max-width: 52rem) {
+  .braut { display: block; }
+  .lose-2 { width: 82%; }
+  .lose-3 { width: 82%; margin: 4.5rem 0 0 auto; }
+  .lose-3 .lose-bluete { left: -2.2rem; }
+  .braut-satz { margin-top: 4rem; }
+}
+
+/* ══ Stimmen: Seide und Glas ═══════════════════════════════════════════ */
+.stimmen {
+  position: relative;
+  min-height: 100svh;
+  padding: clamp(6rem, 10vw, 9rem) var(--rand);
+  background: var(--feld) url('bilder/seide-quer.webp') 50% 50% / cover no-repeat;
+  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-rows: auto 1fr auto;
+  gap: 2rem 1.5rem;
+}
+@media (orientation: portrait) { .stimmen { background-image: url('bilder/seide-hoch.webp'); } }
+.stimme-haupt {
+  grid-column: 2 / 12; grid-row: 1;
+  margin: 0; text-align: center;
+  display: grid; gap: 1.6rem; justify-items: center;
+  padding-block: 4vh 6vh;
+}
+.stimme-haupt blockquote { margin: 0; }
+.stimme-haupt p { font-size: clamp(1.5rem, 1rem + 1.5vw, 2.25rem); font-weight: 300; line-height: 1.3; letter-spacing: -.02em; max-width: 30ch; }
+.stimme-haupt figcaption { font-size: var(--s-klein); color: var(--tinte-leise); }
+.ecke {
+  margin: 0; padding: 1.4rem 1.5rem 1.3rem;
+  border-radius: 22px;
+  display: grid; gap: .8rem; align-content: start;
+  font-size: var(--s-klein);
+}
+.ecke blockquote { margin: 0; }
+.ecke p { font-size: var(--s-text); line-height: 1.45; }
+.ecke figcaption { color: var(--tinte-leise); display: flex; flex-wrap: wrap; align-items: center; gap: .3rem .6rem; }
+.ecke-1 { grid-column: 1 / 5; grid-row: 2; align-self: start; }
+.ecke-2 { grid-column: 10 / 13; grid-row: 2; align-self: start; margin-top: 6vh; }
+.ecke-3 { grid-column: 2 / 7; grid-row: 3; align-self: end; }
+.ecke-4 { grid-column: 8 / 12; grid-row: 3; align-self: end; margin-bottom: 4vh; }
+.sterne { display: inline-flex; gap: 3px; color: var(--orchidee); }
+.sterne svg { width: 14px; height: 13px; fill: currentColor; }
+.stimmen-wege {
+  grid-column: 5 / 9; grid-row: 2; align-self: center; justify-self: center;
+  display: flex; flex-direction: column; align-items: center; gap: 1rem;
+  font-size: var(--s-klein);
+}
+.knopf-glas {
+  background: var(--glas-grund);
+  -webkit-backdrop-filter: blur(18px) saturate(1.6); backdrop-filter: blur(18px) saturate(1.6);
+  box-shadow: var(--glas-schatten);
+  color: var(--tinte);
+}
+@media (hover: hover) and (pointer: fine) {
+  .knopf-glas:hover { background: linear-gradient(140deg, oklch(100% 0 0 / .8), oklch(100% 0 0 / .4)); }
+}
+@media (max-width: 62rem) {
+  .stimmen { display: flex; flex-direction: column; gap: 1rem; }
+  .stimme-haupt { padding-block: 0 2rem; }
+  .ecke { margin: 0 !important; }
+  /* Lose gelehnt, nicht gestapelt: jede Scheibe eigen breit. */
+  .ecke-1 { width: 90%; }
+  .ecke-2 { width: 80%; align-self: flex-end; }
+  .ecke-3 { width: 100%; }
+  .ecke-4 { width: 86%; align-self: flex-end; }
+  .stimmen-wege { margin-top: 1.5rem; }
+}
+
+/* ══ Der Laden ═════════════════════════════════════════════════════════ */
+.laden { padding: clamp(7rem, 14vw, 13rem) var(--rand) clamp(5rem, 8vw, 8rem); }
+.laden h2 { font-size: clamp(2.5rem, 4vw, 3.75rem); margin-bottom: 1.5rem; }
+.laden-lead { font-size: var(--s-lead); line-height: 1.38; max-width: 36ch; margin-bottom: 4.5rem; }
+.laden-mosaik { display: grid; grid-template-columns: 8fr 4fr; gap: 16px; align-items: start; }
+.laden-bild { position: relative; margin: 0; }
+.laden-bild img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; }
+.laden-papier {
+  position: absolute; top: 0; right: 0; width: min(330px, 46%);
+  padding: 1.25rem 1.3rem;
+  font-size: var(--s-klein); line-height: 1.5;
+  background: var(--glas-grund);
+  -webkit-backdrop-filter: blur(20px) saturate(1.5); backdrop-filter: blur(20px) saturate(1.5);
+}
+.laden-kachel {
+  background: var(--orchidee); color: var(--nacht-tinte);
+  aspect-ratio: 4 / 3.9;
+  padding: 2rem;
+  display: grid; place-items: center;
+  position: relative;
+}
+.laden-kachel img { width: 46%; }
+.fakten {
+  grid-column: 2; margin: 1.4rem 0 0;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem 1.5rem;
+}
+.laden-mosaik .fakten { grid-column: 2; }
+.fakten dt { font-weight: 500; }
+.fakten dd { margin: 0; font-size: var(--s-klein); color: var(--tinte-leise); }
+.laden-kachel .fakten { display: none; }
+.spruch { margin: clamp(6rem, 10vw, 9rem) auto 0; max-width: 32ch; text-align: center; }
+.spruch p { font-size: var(--s-lead); line-height: 1.35; }
+.spruch footer { margin-top: .8rem; font-size: var(--s-klein); color: var(--tinte-leise); }
+@media (max-width: 52rem) {
+  .laden-mosaik { grid-template-columns: 1fr; }
+  .laden-papier { position: static; width: auto; padding: 1rem 0 0; background: none; border: 0; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .laden-bild img { aspect-ratio: 4 / 3; }
+  .laden-kachel { aspect-ratio: 3 / 2; }
+}
+
+/* ══ Kontakt ═══════════════════════════════════════════════════════════ */
+.kontakt {
+  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 0 1.5rem; align-items: start;
+  padding: clamp(6rem, 11vw, 10rem) var(--rand) clamp(6rem, 9vw, 8rem);
+  background: var(--himmel);
+}
+.kontakt-satz { grid-column: 1 / 7; font-size: clamp(1.5rem, 1rem + 1.5vw, 2.25rem); line-height: 1.3; letter-spacing: -.02em; font-weight: 300; }
+.kontakt-bild { grid-column: 7 / 9; margin: 0; }
+.kontakt-bild img { aspect-ratio: 1; object-fit: cover; width: 100%; max-width: 190px; }
+.kontakt-wege { grid-column: 9 / -1; display: grid; gap: .55rem; }
+.kontakt-stand { display: flex; align-items: center; gap: .9rem; margin-bottom: 1rem; }
+.stand-bluete { display: grid; width: 64px; height: 76px; flex: none; place-items: end center; }
+.stand-bluete img { grid-area: 1 / 1; transition: opacity .9s var(--kurve), scale .9s var(--kurve); filter: drop-shadow(0 8px 10px oklch(32% .035 262 / .18)); }
+.sb-bluete { width: 64px; opacity: 0; scale: .55; transform-origin: 50% 90%; }
+.sb-knospe { width: 34px; margin-bottom: 6px; rotate: -18deg; }
+.stand-bluete.offen .sb-bluete { opacity: 1; scale: 1; }
+.stand-bluete.offen .sb-knospe { opacity: 0; scale: .7; }
+.kontakt-stand .stand::before { content: none; }
+.kontakt-frage { font-weight: 500; margin-top: .4rem; }
+.kontakt-ort { font-size: var(--s-klein); color: var(--tinte-leise); margin-top: .4rem; }
+.zeiten { margin: 1.4rem 0 0; display: grid; gap: .3rem; font-size: var(--s-klein); max-width: 22rem; }
+.zeiten div { display: flex; justify-content: space-between; gap: 1rem; }
+.zeiten dd { margin: 0; font-variant-numeric: tabular-nums; }
+@media (max-width: 52rem) {
+  .kontakt { display: block; }
+  .kontakt-bild { margin: 2.5rem 0 1.5rem; }
+  .kontakt-bild img { max-width: 120px; }
+}
+
+/* ══ Fuss: der Name über die ganze Breite ══════════════════════════════
+   Nachtblau, wie der Schlund der Orchidee; der Name steht frei darin. */
+main { position: relative; z-index: 1; background: var(--himmel); }
+.fuss {
+  position: relative; z-index: 0;
+  display: grid; grid-template-rows: auto auto auto;
+  padding: 2.5rem var(--rand) 1.5rem;
+  background: var(--nacht); color: var(--nacht-leise);
+  font-size: var(--s-klein);
+}
+.fuss a { color: inherit; text-decoration: none; }
+@media (hover: hover) and (pointer: fine) { .fuss a:hover { color: var(--nacht-tinte); } }
+.fuss-spalten { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2rem; }
+.fuss-spalten p { line-height: 1.7; }
+.fuss-erst { color: var(--nacht-tinte); }
+.fuss-wort {
+  grid-row: 2; align-self: end; margin-top: clamp(5rem, 12vw, 11rem);
+  display: flex; align-items: flex-end; gap: 2.5vw;
+  color: var(--nacht-tinte);
+}
+.fuss-wort span { font-size: clamp(4rem, 19.5vw, 24rem); font-weight: 300; letter-spacing: -.055em; line-height: .78; white-space: nowrap; }
+.fuss-wort img { width: clamp(4rem, 12vw, 13rem); margin-bottom: 1vw; }
+.fuss-recht { grid-row: 3; margin-top: 1.6rem; color: var(--nacht-leise); }
+@media (max-width: 52rem) {
+  .fuss-spalten { grid-template-columns: 1fr 1fr; row-gap: 2rem; }
+  .fuss-wort { flex-direction: column; align-items: flex-start; }
+  .fuss-wort span { font-size: 23vw; }
+}
+
+/* ══ Rechtsseiten ══════════════════════════════════════════════════════ */
+.recht { padding: calc(var(--leiste) + 5rem) var(--rand) 7rem; max-width: calc(46rem + 2 * var(--rand)); }
+.recht h1 { font-size: var(--s-kopf); margin-bottom: 2.5rem; }
+.recht h2 { font-size: 1.5rem; font-weight: 450; margin: 2.8rem 0 .8rem; letter-spacing: -.015em; }
+.recht h3 { font-size: var(--s-text); font-weight: 500; margin: 1.8rem 0 .5rem; letter-spacing: 0; }
+.recht p, .recht li, .recht dd { line-height: 1.6; }
+.recht p + p { margin-top: .9rem; }
+.recht dl div { display: grid; grid-template-columns: 12rem 1fr; gap: 1rem; padding: .4rem 0; }
+.recht dt { color: var(--tinte-leise); }
+.recht dd { margin: 0; }
+.recht code { font-family: inherit; }
+
+/* ══ Auftritte: Überschrift, dann Text, dann Bild — einmal, beim Eintritt ══ */
+.js .tritt { opacity: 0; transform: translate3d(0, 26px, 0); }
+.js .tritt.da { opacity: 1; transform: none; transition: opacity .9s var(--kurve), transform .9s var(--kurve); }
+
+@media (prefers-reduced-motion: reduce) {
+  .blume, .abzug-gross { transform: none !important; }
+  .b-links { transform: scale(.94) !important; }
+  .stand-bluete img { transition: none; }
+  .js .tritt { opacity: 1; transform: none; }
+}

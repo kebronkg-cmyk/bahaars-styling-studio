@@ -1,0 +1,293 @@
+[
+ {
+  "id": "schnitt",
+  "name": "Waschen, Schneiden, Föhnen",
+  "satz": "Womit fast jeder Termin anfängt.",
+  "spalten": [
+   "kurz/mittel",
+   "lang"
+  ],
+  "posten": [
+   [
+    "Waschen, Schneiden & Föhnen",
+    "ca. 60 min",
+    "59 €",
+    "69 €"
+   ],
+   [
+    "Waschen & Schneiden",
+    "ca. 45 min",
+    "45 €",
+    "49 €"
+   ],
+   [
+    "Waschen & Föhnen",
+    "ca. 45 min",
+    "30 €",
+    "40 €"
+   ]
+  ]
+ },
+ {
+  "id": "farbe",
+  "name": "Farbe & Tönung",
+  "satz": "\n      Mit Beratung und Kopfhautanalyse. Auf Wunsch mit ammoniakfreier,\n      allergiefreier Farbe.\n    ",
+  "spalten": [
+   "kurz/mittel",
+   "lang"
+  ],
+  "posten": [
+   [
+    "Farbe oder Tönung, Waschen und Trocknen",
+    "ca. 90 min",
+    "43 €",
+    "59 €"
+   ],
+   [
+    "… mit ammoniakfreier Farbe",
+    "",
+    "49 €",
+    "69 €"
+   ],
+   [
+    "Farbe inkl. Schneiden & Föhnen",
+    "ca. 120 min",
+    "85 €",
+    "115 €"
+   ],
+   [
+    "… mit ammoniakfreier Farbe",
+    "",
+    "91 €",
+    "120 €"
+   ],
+   [
+    "Glossing oder Abmattierung",
+    "Korrektur unerwünschter Farbpigmente",
+    "30 €",
+    ""
+   ]
+  ]
+ },
+ {
+  "id": "straehnen",
+  "name": "Strähnen & Balayage",
+  "satz": "",
+  "spalten": [
+   "kurz/mittel",
+   "lang"
+  ],
+  "posten": [
+   [
+    "Foliensträhnen & Trocknen",
+    "ca. 120 min",
+    "69 €",
+    "120 €"
+   ],
+   [
+    "Foliensträhnen inkl. Schneiden & Föhnen",
+    "ca. 165 min",
+    "140 €",
+    "160 €"
+   ],
+   [
+    "Balayage ganzer Kopf, Glossing, inkl. Schneiden & Föhnen",
+    "ca. 180 min",
+    "190 €",
+    "230 €"
+   ]
+  ]
+ },
+ {
+  "id": "umformen",
+  "name": "Umformen & Glätten",
+  "satz": "",
+  "spalten": [
+   "kurz/mittel",
+   "lang"
+  ],
+  "posten": [
+   [
+    "Dauerwelle",
+    "ca. 120 min",
+    "69 €",
+    "95 €"
+   ],
+   [
+    "Dauerwelle inkl. Schneiden & Föhnen",
+    "ca. 180 min",
+    "95 €",
+    "140 €"
+   ],
+   [
+    "Keratin-Glättung",
+    "ca. 180 min",
+    "190 €",
+    "250 €"
+   ]
+  ]
+ },
+ {
+  "id": "pflege",
+  "name": "Pflege",
+  "satz": "Einzelpreise, unabhängig von der Haarlänge.",
+  "spalten": [
+   "",
+   ""
+  ],
+  "posten": [
+   [
+    "Olaplex-Behandlung",
+    "",
+    "30 €",
+    ""
+   ],
+   [
+    "Intensiv-Haarkur",
+    "",
+    "10 €",
+    ""
+   ],
+   [
+    "Conditioner",
+    "",
+    "5 €",
+    ""
+   ]
+  ]
+ },
+ {
+  "id": "brauen",
+  "name": "Augenbrauen & Wimpern",
+  "satz": "",
+  "spalten": [
+   "",
+   ""
+  ],
+  "posten": [
+   [
+    "Augenbrauen zupfen mit Fadentechnik",
+    "",
+    "10 €",
+    ""
+   ],
+   [
+    "Augenbrauenfarbe",
+    "",
+    "10 €",
+    ""
+   ],
+   [
+    "Wimpern färben",
+    "",
+    "12 €",
+    ""
+   ]
+  ]
+ },
+ {
+  "id": "anlass",
+  "name": "Besondere Anlässe",
+  "satz": "\n      Für ein Brautstyling wird ein eigener Termin vereinbart, auf Wunsch mit\n      Probetermin vorab.\n    ",
+  "spalten": [
+   "",
+   ""
+  ],
+  "posten": [
+   [
+    "Hochsteckfrisur",
+    "",
+    "60–90 €",
+    ""
+   ],
+   [
+    "Tages-Make-up",
+    "",
+    "60 €",
+    ""
+   ],
+   [
+    "Abend-Make-up",
+    "",
+    "80 €",
+    ""
+   ],
+   [
+    "Braut-Make-up mit Braut-Hochsteckfrisur",
+    "",
+    "180–390 €",
+    ""
+   ],
+   [
+    "Brautstyling gesamt",
+    "Hairstyling und Braut-Make-up",
+    "390–600 €",
+    ""
+   ]
+  ]
+ },
+ {
+  "id": "herren",
+  "name": "Herren",
+  "satz": "\n      Zum Schnitt gehören Beratung, Waschen, der Schnitt, erneutes Waschen\n      und das Finish.\n    ",
+  "spalten": [
+   "",
+   ""
+  ],
+  "posten": [
+   [
+    "Waschen, Schneiden & Stylen",
+    "ca. 45 min",
+    "35–39 €",
+    ""
+   ],
+   [
+    "Kontur oder Maschinenschnitt",
+    "ca. 30 min",
+    "20–29 €",
+    ""
+   ],
+   [
+    "Bart schneiden, trocken",
+    "ca. 10 min",
+    "10 €",
+    ""
+   ],
+   [
+    "Bart mit Rasierschaum und Messer",
+    "",
+    "10–20 €",
+    ""
+   ],
+   [
+    "Kopfmassage",
+    "ca. 5 min",
+    "10 €",
+    ""
+   ]
+  ]
+ },
+ {
+  "id": "kinder",
+  "name": "Kinder bis 12 Jahre",
+  "satz": "",
+  "spalten": [
+   "",
+   ""
+  ],
+  "posten": [
+   [
+    "Jungen, inkl. Waschen",
+    "ca. 30 min",
+    "25 €",
+    ""
+   ],
+   [
+    "Mädchen, inkl. Waschen",
+    "ca. 30 min",
+    "30–40 €",
+    ""
+   ]
+  ]
+ }
+]
