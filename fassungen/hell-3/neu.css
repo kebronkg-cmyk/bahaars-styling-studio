@@ -1750,7 +1750,7 @@ main, .fuss { position: relative; z-index: 1; }
 /* Was in einer Gruppe steckt, steht unter ihrem Namen — wer „Pflege"
    liest, weiss sonst nicht, dass die Fadentechnik dort wohnt. */
 .fach-was {
-  display: block; margin-top: .3rem;
+  grid-column: 1 / -1; margin-top: -.55rem;
   font-family: 'Mulish', system-ui, sans-serif;
   font-size: .8125rem; line-height: 1.45;
   color: var(--schrift-still);
