@@ -13,7 +13,8 @@ anderen oder an der Hauptseite. Übersicht: `fassungen/index.html`.
 
 | Fassung | Ordner | Live |
 |---|---|---|
-| Hell III (neu) | `fassungen/hell-3/` | https://kebronkg-cmyk.github.io/bahaars-styling-studio/fassungen/hell-3/ |
+| Himmel (neu) | `fassungen/himmel/` | https://kebronkg-cmyk.github.io/bahaars-styling-studio/fassungen/himmel/ |
+| Hell III | `fassungen/hell-3/` | https://kebronkg-cmyk.github.io/bahaars-styling-studio/fassungen/hell-3/ |
 | Hell II | `fassungen/hell-2/` | https://kebronkg-cmyk.github.io/bahaars-styling-studio/fassungen/hell-2/ |
 | Hell | `fassungen/hell/` | https://kebronkg-cmyk.github.io/bahaars-styling-studio/fassungen/hell/ |
 | Dunkel, ohne Film | `fassungen/dunkel/` | …/fassungen/dunkel/ |
@@ -44,6 +45,24 @@ Wörter in Überschriften in `--akzent-schrift`, neue Zierfarbe `--zier`
 (Champagner, nur Sterne und Anführungszeichen auf dunkel), Unterzeilen unter
 den Ladenbildern (`figure` als Flex-Spalte, sonst rutscht die Zeile aufs
 nächste Bild — gemessen 1,1:1 vor der Korrektur).
+
+**Himmel** (17.10.2026): komplett neu, eigenes Stylesheet `himmel.css`,
+Schrift Work Sans (selbst gehostet). Idee: „Bahār" heisst Frühling — ein
+Busch blauer Orchideen um einen Abzug echter Arbeit. Der Auftakt ist 185svh
+hoch, die `.buehne` klebt, `--auf` läuft über den Klebeweg von 0 bis 1 und
+öffnet den Busch (nur `transform`; der Ladeauftritt nur `scale`, `opacity`,
+`filter`, damit sich beides nicht überschreibt). Die Orchideen sind
+**Pixabay-Aufnahmen** aus den Bildschirmfotos des Auftraggebers, mit rembg
+(birefnet) freigestellt und in OKLab auf einen Blauton (h 261) gebracht —
+`recherche/himmel/zuschnitt.py`, `freistellen.py` (ein Bild je Prozess, sonst
+Speicher), `veredeln.py`. Die TikTok-Aufnahmen sind bewusst **nicht**
+verwendet: Rechte unklar. Nichts wird grösser gezeigt als aufgenommen.
+Leiste: schwebende Glaskapsel, immer Glas. Kontakt: Knospe oder offene Blüte
+je nach Öffnungszeit (`.stand-bluete.offen`). Seite gebaut mit
+`recherche/himmel/bau.py fassungen/himmel recherche/himmel/preise.json`.
+Geprüft: impeccable `[]`, taste-skill inspect 0 FAIL (Glas, Verlauf, Schatten,
+Kapsel per `--allow`, weil das Briefing sie verlangt), Kontrast schwächste
+Zeile 5,4:1, Telefonnummer über den Blüten 8,3:1, kein Querüberlauf.
 
 Eine neue Fassung aus einem Git-Stand ablegen:
 `python3 recherche/fassung.py <commit> <name> <titel>` — sammelt alle
